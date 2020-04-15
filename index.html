@@ -18,20 +18,21 @@
 	    
         let filesInput = document.getElementById('files');
 
-        let files = [];
-
-        let users = [];
+        const files = {};
+        const users = [];
 
         let parsedMessages;
-
+        let parsedFiles;
         
         filesInput.addEventListener("change", async () => {
-                files = await readFiles(filesInput);
-                
-                for(file of files) {
+                const tempFiles = await readFiles(filesInput);
+ 
+                for(file of tempFiles) {
                     if(file.file.type === 'text/plain') {
                         parsedMessages = parseMessages(file.fileContent);
-                        console.log(parsedMessages);
+                        //console.log(parsedMessages);
+                    } else {
+                        files[`${file.file.name}`] = {type: file.file.type, data: file.fileContent};
                     }
                 }
 
@@ -39,6 +40,24 @@
                     let chatContainer = document.getElementById('chat-container');
                     let divChat = document.createElement('div');
                     divChat.innerText = parsedMessage.text;
+
+                    for(file of parsedMessage.files) {
+
+                        if(files[file].type.includes('audio')) {
+                            const audio = document.createElement('audio');
+                            audio.setAttribute('controls', true);
+
+                            const source = document.createElement('source');
+                            source.setAttribute('src', files[file].data);
+                            source.setAttribute('type', files[file].type);
+
+                            audio.appendChild(source);
+                            
+                            divChat.appendChild(audio);
+                        }
+
+
+                    }
 
                     for(user of users) {
                         if(user.name == parsedMessage.user)
@@ -103,7 +122,7 @@
                     if(file.type === 'text/plain') {
                         fileReader.readAsText(file);
                     } else {
-                    fileReader.readAsArrayBuffer(file); 
+                        fileReader.readAsDataURL(file); 
                     }
                     
                 });
