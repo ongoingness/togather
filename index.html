@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <label for="myfile">Select files:</label>
+        <input type="file" id="files" name="files" multiple>
+        <div id="chat-container">
+
+
+        </div>
+    </div>
+    <script>
+	    
+        let filesInput = document.getElementById('files');
+
+        let files = [];
+
+        let users = [];
+
+        let parsedMessages;
+
+        
+        filesInput.addEventListener("change", async () => {
+                files = await readFiles(filesInput);
+                
+                for(file of files) {
+                    if(file.file.type === 'text/plain') {
+                        parsedMessages = parseMessages(file.fileContent);
+                        console.log(parsedMessages);
+                    }
+                }
+
+                for(parsedMessage of parsedMessages) {
+                    let chatContainer = document.getElementById('chat-container');
+                    let divChat = document.createElement('div');
+                    divChat.innerText = parsedMessage.text;
+
+                    for(user of users) {
+                        if(user.name == parsedMessage.user)
+                            divChat.style = `background-color: ${user.color}`;
+                    }
+                    
+                    chatContainer.appendChild(divChat);
+                
+                }
+
+                //setThumbnail(`fileInput${fileInput.getAttribute('data-id')}`, `image${fileInput.getAttribute('data-id')}`);
+			});
+  /*
+        function readFiles(fileInput) {
+
+            for(let i = 0; i < fileInput.files.length; i++) {
+                console.log(fileInput.files[i]);
+            }
+
+          
+            var file = document.getElementById(fileForUpload).files[0];
+
+            let reader = new FileReader();
+
+            reader.onload = (event) => {
+
+                let imageThumbnail = document.getElementById(imgId);
+                imageThumbnail.src = reader.result;
+
+                imageThumbnail.style.display = "block";
+                document.getElementById(fileForUpload).style.display = "none";
+
+            }
+
+            reader.onerror = (event) => {
+                console.log("error");
+            }
+
+            reader.readAsDataURL(file);
+          
+
+        };
+        */
+
+        const readFiles = async(fileInput) => {
+
+            let files = [];
+
+            const readFile = (file) => {
+                const fileReader = new FileReader();
+
+                return new Promise((resolve, reject) => {
+                    fileReader.onerror = () => {
+                        fileReader.abort();
+                        reject(new DOMException("Problem parsing input file."));
+                    };
+
+                    fileReader.onload = () => {
+                        resolve({file, fileContent: fileReader.result});
+                    };
+
+                    if(file.type === 'text/plain') {
+                        fileReader.readAsText(file);
+                    } else {
+                    fileReader.readAsArrayBuffer(file); 
+                    }
+                    
+                });
+            }
+
+            for(let i = 0; i < fileInput.files.length; i++) {
+                let result = await readFile(fileInput.files[i]);
+                files.push(result);
+            }
+
+            return files;
+        }
+
+
+
+        /*
+            Message structure
+            {
+                id: int
+                date: string
+                time: string 
+                timestamp: long
+                user: string
+                text: string
+                files: []
+            }
+        */
+
+        const parseMessages = (messages) => {
+
+            const result = [];
+
+            const messageStartRegex = RegExp('([0-9][0-9]\/[0-9][0-9]\/[0-9][0-9]\, [0-9][0-9]\:[0-9][0-9] - .+\:)');
+            const fileRegex = RegExp('([A-Z]){3}\-[0-9]{8}\-[A-Z]{2}[0-9]{4}\..* \(.*\)');
+
+            const parseMessageBody = (text) => {
+
+                let array;
+                if(array = fileRegex.exec(text)) {
+                    const filename = array[0].split(' ')[0];
+                    const newText = text.replace(array[0], ''); 
+                    return {filename, newText};
+
+                }
+                return {};
+            
+            };
+
+            const parseDateToTimestamp = (date, time) => {
+                const day = date.substring(0,2);
+                const month = date.substring(3,5);
+                const year = date.substring(6,8);
+                
+                return new Date(`20${year}/${month}/${day} ${time}:00`).getTime();
+            };
+
+            const parseUser = (name) => {
+
+                let foundUser = false;
+
+                const getRandomColor = () => {
+                    var letters = '0123456789ABCDEF';
+                    var color = '#';
+                    for (var i = 0; i < 6; i++) {
+                        color += letters[Math.floor(Math.random() * 16)];
+                    }
+                    return color;
+                }
+
+                for(user of users) {
+                    if(user.name === name) {
+                        foundUser = true;
+                        break;
+                    }
+                }
+                if(foundUser == false)
+                    users.push({name, color: getRandomColor()});
+
+            }
+
+            const rawMessages = messages.split('\n');
+
+            let currentMessage = null;
+
+            for([index, rawMessage] of rawMessages.entries()) {
+
+                //new message found
+                if(messageStartRegex.exec(rawMessage) != null) {
+
+                    if(currentMessage != null)
+                        result.push({...currentMessage});
+                    
+                    currentMessage = {};
+                    currentMessage.id = index;
+                    currentMessage.date = rawMessage.substring(0, 8);
+                    currentMessage.time = rawMessage.substring(10,15);
+                    currentMessage.timestamp = parseDateToTimestamp(currentMessage.date, currentMessage.time);
+
+                    const userPlusBody = rawMessage.substring(18, rawMessage.length);
+
+                    const twoDotsIndex = userPlusBody.indexOf(':');
+
+                    currentMessage.user = userPlusBody.slice(0, twoDotsIndex);
+
+                    parseUser(currentMessage.user);
+
+                    const messageBody = userPlusBody.slice(twoDotsIndex +2);
+
+                    const {filename, newText} = parseMessageBody(messageBody);
+
+                    if(filename != undefined) {
+                        currentMessage.files = [filename];
+                        currentMessage.text = newText;
+                    } else {
+                        currentMessage.files = [];
+                        currentMessage.text = messageBody;
+                    }
+                    
+
+                } else {
+                    if(currentMessage != null) {
+                        currentMessage.text += ` ${rawMessage}`;
+                        const {filename, newText} = parseMessageBody(rawMessage);
+                        if(filename != undefined) {
+                            currentMessage.files = [filename];
+                            currentMessage.text = currentMessage.text === '' ? newText : ` ${newText}`;
+                        } else
+                            currentMessage.text = currentMessage.text === '' ? rawMessage : ` ${rawMessage}`;
+                    }
+                }
+            
+            }
+
+            return result;
+
+        }
+
+    </script>
+
+    <!--script type="text/javascript" src="lib/zip.js"></script-->
+    <!--script>
+        zip.workerScriptsPath = "/lib/";
+                // use a BlobReader to read the zip from a Blob object
+        zip.createReader(new zip.BlobReader(blob), function(reader) {
+
+        // get all entries from the zip
+        reader.getEntries(function(entries) {
+        if (entries.length) {
+
+            // get first entry content as text
+            entries[0].getData(new zip.TextWriter(), function(text) {
+            // text contains the entry data as a String
+            console.log(text);
+
+            // close the zip reader
+            reader.close(function() {
+                // onclose callback
+            });
+
+            }, function(current, total) {
+            // onprogress callback
+            });
+        }
+        });
+        }, function(error) {
+        // onerror callback
+        });
+
+
+    </script-->
+</body>
+</html>
