@@ -30,7 +30,6 @@
                 for(file of tempFiles) {
                     if(file.file.type === 'text/plain') {
                         parsedMessages = parseMessages(file.fileContent);
-                        //console.log(parsedMessages);
                     } else {
                         files[`${file.file.name}`] = {type: file.file.type, data: file.fileContent};
                     }
@@ -52,10 +51,29 @@
                             source.setAttribute('type', files[file].type);
 
                             audio.appendChild(source);
-                            
                             divChat.appendChild(audio);
-                        }
 
+                        } else if(files[file].type.includes('video')) {
+                            const video = document.createElement('video');
+                            video.width = 320;
+                            video.height = 240;
+                            video.controls = true;
+                            video.autoplay = true;
+                            video.loop = true;
+                            video.muted = true;
+
+                            const source = document.createElement('source');
+                            source.src = files[file].data;
+                            source.type = files[file].type;
+
+                            video.appendChild(source);
+                            divChat.appendChild(video);
+                        } else if(files[file].type.includes('image')) {
+                            const image = document.createElement('img');
+                            image.src = files[file].data;
+                            image.width = 320;
+                            image.height = 240;
+                        }
 
                     }
 
@@ -68,39 +86,7 @@
                 
                 }
 
-                //setThumbnail(`fileInput${fileInput.getAttribute('data-id')}`, `image${fileInput.getAttribute('data-id')}`);
 			});
-  /*
-        function readFiles(fileInput) {
-
-            for(let i = 0; i < fileInput.files.length; i++) {
-                console.log(fileInput.files[i]);
-            }
-
-          
-            var file = document.getElementById(fileForUpload).files[0];
-
-            let reader = new FileReader();
-
-            reader.onload = (event) => {
-
-                let imageThumbnail = document.getElementById(imgId);
-                imageThumbnail.src = reader.result;
-
-                imageThumbnail.style.display = "block";
-                document.getElementById(fileForUpload).style.display = "none";
-
-            }
-
-            reader.onerror = (event) => {
-                console.log("error");
-            }
-
-            reader.readAsDataURL(file);
-          
-
-        };
-        */
 
         const readFiles = async(fileInput) => {
 
@@ -155,7 +141,8 @@
 
             const result = [];
 
-            const messageStartRegex = RegExp('([0-9][0-9]\/[0-9][0-9]\/[0-9][0-9]\, [0-9][0-9]\:[0-9][0-9] - .+\:)');
+            const messageStartRegex = RegExp('(([0-9]{2})\/([0-9]{2})\/([0-9]{2,4}))\, (([0-9]{2})\:([0-9]{2})) - (.+)\: (.*)');
+
             const fileRegex = RegExp('([A-Z]){3}\-[0-9]{8}\-[A-Z]{2}[0-9]{4}\..* \(.*\)');
 
             const parseMessageBody = (text) => {
@@ -171,12 +158,9 @@
             
             };
 
-            const parseDateToTimestamp = (date, time) => {
-                const day = date.substring(0,2);
-                const month = date.substring(3,5);
-                const year = date.substring(6,8);
-                
-                return new Date(`20${year}/${month}/${day} ${time}:00`).getTime();
+            const parseDateToTimestamp = (day, month, year, time) => {
+                const formattedYear = year.length === 2 ? `20${year}` : year;
+                return new Date(`${formattedYear}/${month}/${day} ${time}:00`).getTime();
             };
 
             const parseUser = (name) => {
@@ -209,39 +193,32 @@
 
             for([index, rawMessage] of rawMessages.entries()) {
 
+                const messageStart = messageStartRegex.exec(rawMessage);
+
                 //new message found
-                if(messageStartRegex.exec(rawMessage) != null) {
+                if(messageStart != null) {
+
+                    const [fullLine, fullDate, day, month, year, fullTime, hours, minutes, username, body] = messageStart;
 
                     if(currentMessage != null)
                         result.push({...currentMessage});
                     
                     currentMessage = {};
                     currentMessage.id = index;
-                    currentMessage.date = rawMessage.substring(0, 8);
-                    currentMessage.time = rawMessage.substring(10,15);
-                    currentMessage.timestamp = parseDateToTimestamp(currentMessage.date, currentMessage.time);
-
-                    const userPlusBody = rawMessage.substring(18, rawMessage.length);
-
-                    const twoDotsIndex = userPlusBody.indexOf(':');
-
-                    currentMessage.user = userPlusBody.slice(0, twoDotsIndex);
-
-                    parseUser(currentMessage.user);
-
-                    const messageBody = userPlusBody.slice(twoDotsIndex +2);
-
-                    const {filename, newText} = parseMessageBody(messageBody);
-
+                    currentMessage.date = fullDate;
+                    currentMessage.time = fullTime;
+                    currentMessage.timestamp = parseDateToTimestamp(day, month, year, fullTime);
+                    currentMessage.user = username;
+                    parseUser(username);
+                    const {filename, newText} = parseMessageBody(body);
                     if(filename != undefined) {
                         currentMessage.files = [filename];
                         currentMessage.text = newText;
                     } else {
                         currentMessage.files = [];
-                        currentMessage.text = messageBody;
+                        currentMessage.text = body;
                     }
                     
-
                 } else {
                     if(currentMessage != null) {
                         currentMessage.text += ` ${rawMessage}`;
