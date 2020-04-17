@@ -1,0 +1,37 @@
+#chat-container {
+    max-width: 700px;
+    margin: auto;
+    border-style: solid;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.chat-message {
+    color: black;
+    margin: 10px;
+    padding: 10px;
+    border-style: inset;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+.chat-message-name {
+    font-weight: bold;
+}
+
+.chat-message-time {
+    float: right;
+    font-size: 15px;
+    padding-top: 10px;
+}
+
+.chat-date-divider {
+    border: solid;
+    text-align: center;
+    margin: 0px 300px 0px 300px;
+    border-radius: 10px;
+    border-width: 1px;
+    background: rgba(225, 245, 254, 0.92);
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

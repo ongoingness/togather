@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="style/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div>
@@ -31,15 +32,42 @@
                 console.log(whatsAppChat);
                 const {messages, users, files} = whatsAppChat;
 
+                const chatContainer = document.getElementById('chat-container');
+
+                let lastDate;
+
                 for(parsedMessage of messages) {
-                    let chatContainer = document.getElementById('chat-container');
-                    let divChat = document.createElement('div');
-                    divChat.innerText = parsedMessage.text;
+                    
+                    if(lastDate == null || parsedMessage.date != lastDate) {
+
+                        const chatDateDivider = document.createElement('div');
+                        chatDateDivider.classList.add('chat-date-divider');
+                        chatDateDivider.innerText = parsedMessage.date;
+                        chatContainer.appendChild(chatDateDivider);
+
+                        lastDate = parsedMessage.date;
+                    }
+
+                    const chatMessage = document.createElement('div');
+                    chatMessage.classList.add('chat-message');
+                    chatContainer.appendChild(chatMessage);
+      
+                    const chatMessageUser = document.createElement('div');
+                    chatMessageUser.innerText = parsedMessage.user;
+                    chatMessageUser.classList.add('chat-message-name');
+
+                    for(user of users) {
+                        if(user.name == parsedMessage.user)
+                            chatMessageUser.style = `color: ${user.color}`;
+                    }
+
+                    chatMessage.appendChild(chatMessageUser);
+
+                    const chatMessageBody = document.createElement('div');
+                    chatMessageBody.innerText = parsedMessage.text;
+                    chatMessage.appendChild(chatMessageBody);
 
                     for(file of parsedMessage.files) {
-                        console.log(file);
-                        console.log(files);
-                        console.log(files[file]);
                         if(files[file].type.includes('audio')) {
                             const audio = document.createElement('audio');
                             audio.setAttribute('controls', true);
@@ -49,7 +77,7 @@
                             source.setAttribute('type', files[file].type);
 
                             audio.appendChild(source);
-                            divChat.appendChild(audio);
+                            chatMessageBody.appendChild(audio);
 
                         } else if(files[file].type.includes('video')) {
                             const video = document.createElement('video');
@@ -65,23 +93,22 @@
                             source.type = files[file].type;
 
                             video.appendChild(source);
-                            divChat.appendChild(video);
+                            chatMessageBody.appendChild(video);
                         } else if(files[file].type.includes('image')) {
                             const image = document.createElement('img');
                             image.src = files[file].data;
                             image.width = 320;
                             image.height = 240;
+                            chatMessageBody.appendChild(image);
                         }
 
                     }
 
-                    for(user of users) {
-                        if(user.name == parsedMessage.user)
-                            divChat.style = `background-color: ${user.color}`;
-                    }
-                    
-                    chatContainer.appendChild(divChat);
-                
+                    const chatMessageTime = document.createElement('div');
+                    chatMessageTime.innerText = parsedMessage.time;
+                    chatMessageTime.classList.add('chat-message-time');
+                    chatMessageBody.appendChild(chatMessageTime);
+
                 }
 
 			});
