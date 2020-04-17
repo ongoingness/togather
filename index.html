@@ -10,10 +10,10 @@
         <label for="myfile">Select files:</label>
         <input type="file" id="files" name="files" multiple>
         <div id="chat-container">
-
-
+        
         </div>
     </div>
+    <script src='lib/whatapp-chat-parser.js'></script>
     <script>
 	    
         let filesInput = document.getElementById('files');
@@ -25,23 +25,21 @@
         let parsedFiles;
         
         filesInput.addEventListener("change", async () => {
-                const tempFiles = await readFiles(filesInput);
- 
-                for(file of tempFiles) {
-                    if(file.file.type === 'text/plain') {
-                        parsedMessages = parseMessages(file.fileContent);
-                    } else {
-                        files[`${file.file.name}`] = {type: file.file.type, data: file.fileContent};
-                    }
-                }
 
-                for(parsedMessage of parsedMessages) {
+                const parser = WhatsAppChatParser();
+                const whatsAppChat = await parser.start(filesInput);                
+                console.log(whatsAppChat);
+                const {messages, users, files} = whatsAppChat;
+
+                for(parsedMessage of messages) {
                     let chatContainer = document.getElementById('chat-container');
                     let divChat = document.createElement('div');
                     divChat.innerText = parsedMessage.text;
 
                     for(file of parsedMessage.files) {
-
+                        console.log(file);
+                        console.log(files);
+                        console.log(files[file]);
                         if(files[file].type.includes('audio')) {
                             const audio = document.createElement('audio');
                             audio.setAttribute('controls', true);
@@ -88,187 +86,7 @@
 
 			});
 
-        const readFiles = async(fileInput) => {
-
-            let files = [];
-
-            const readFile = (file) => {
-                const fileReader = new FileReader();
-
-                return new Promise((resolve, reject) => {
-                    fileReader.onerror = () => {
-                        fileReader.abort();
-                        reject(new DOMException("Problem parsing input file."));
-                    };
-
-                    fileReader.onload = () => {
-                        resolve({file, fileContent: fileReader.result});
-                    };
-
-                    if(file.type === 'text/plain') {
-                        fileReader.readAsText(file);
-                    } else {
-                        fileReader.readAsDataURL(file); 
-                    }
-                    
-                });
-            }
-
-            for(let i = 0; i < fileInput.files.length; i++) {
-                let result = await readFile(fileInput.files[i]);
-                files.push(result);
-            }
-
-            return files;
-        }
-
-
-
-        /*
-            Message structure
-            {
-                id: int
-                date: string
-                time: string 
-                timestamp: long
-                user: string
-                text: string
-                files: []
-            }
-        */
-
-        const parseMessages = (messages) => {
-
-            const result = [];
-
-            const messageStartRegex = RegExp('(([0-9]{2})\/([0-9]{2})\/([0-9]{2,4}))\, (([0-9]{2})\:([0-9]{2})) - (.+)\: (.*)');
-
-            const fileRegex = RegExp('([A-Z]){3}\-[0-9]{8}\-[A-Z]{2}[0-9]{4}\..* \(.*\)');
-
-            const parseMessageBody = (text) => {
-
-                let array;
-                if(array = fileRegex.exec(text)) {
-                    const filename = array[0].split(' ')[0];
-                    const newText = text.replace(array[0], ''); 
-                    return {filename, newText};
-
-                }
-                return {};
-            
-            };
-
-            const parseDateToTimestamp = (day, month, year, time) => {
-                const formattedYear = year.length === 2 ? `20${year}` : year;
-                return new Date(`${formattedYear}/${month}/${day} ${time}:00`).getTime();
-            };
-
-            const parseUser = (name) => {
-
-                let foundUser = false;
-
-                const getRandomColor = () => {
-                    var letters = '0123456789ABCDEF';
-                    var color = '#';
-                    for (var i = 0; i < 6; i++) {
-                        color += letters[Math.floor(Math.random() * 16)];
-                    }
-                    return color;
-                }
-
-                for(user of users) {
-                    if(user.name === name) {
-                        foundUser = true;
-                        break;
-                    }
-                }
-                if(foundUser == false)
-                    users.push({name, color: getRandomColor()});
-
-            }
-
-            const rawMessages = messages.split('\n');
-
-            let currentMessage = null;
-
-            for([index, rawMessage] of rawMessages.entries()) {
-
-                const messageStart = messageStartRegex.exec(rawMessage);
-
-                //new message found
-                if(messageStart != null) {
-
-                    const [fullLine, fullDate, day, month, year, fullTime, hours, minutes, username, body] = messageStart;
-
-                    if(currentMessage != null)
-                        result.push({...currentMessage});
-                    
-                    currentMessage = {};
-                    currentMessage.id = index;
-                    currentMessage.date = fullDate;
-                    currentMessage.time = fullTime;
-                    currentMessage.timestamp = parseDateToTimestamp(day, month, year, fullTime);
-                    currentMessage.user = username;
-                    parseUser(username);
-                    const {filename, newText} = parseMessageBody(body);
-                    if(filename != undefined) {
-                        currentMessage.files = [filename];
-                        currentMessage.text = newText;
-                    } else {
-                        currentMessage.files = [];
-                        currentMessage.text = body;
-                    }
-                    
-                } else {
-                    if(currentMessage != null) {
-                        currentMessage.text += ` ${rawMessage}`;
-                        const {filename, newText} = parseMessageBody(rawMessage);
-                        if(filename != undefined) {
-                            currentMessage.files = [filename];
-                            currentMessage.text = currentMessage.text === '' ? newText : ` ${newText}`;
-                        } else
-                            currentMessage.text = currentMessage.text === '' ? rawMessage : ` ${rawMessage}`;
-                    }
-                }
-            
-            }
-
-            return result;
-
-        }
-
     </script>
 
-    <!--script type="text/javascript" src="lib/zip.js"></script-->
-    <!--script>
-        zip.workerScriptsPath = "/lib/";
-                // use a BlobReader to read the zip from a Blob object
-        zip.createReader(new zip.BlobReader(blob), function(reader) {
-
-        // get all entries from the zip
-        reader.getEntries(function(entries) {
-        if (entries.length) {
-
-            // get first entry content as text
-            entries[0].getData(new zip.TextWriter(), function(text) {
-            // text contains the entry data as a String
-            console.log(text);
-
-            // close the zip reader
-            reader.close(function() {
-                // onclose callback
-            });
-
-            }, function(current, total) {
-            // onprogress callback
-            });
-        }
-        });
-        }, function(error) {
-        // onerror callback
-        });
-
-
-    </script-->
 </body>
 </html>
