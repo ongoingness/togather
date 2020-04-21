@@ -7,6 +7,13 @@
     background-image: url('background_pattern.png');
     background-repeat: repeat-y;
     background-size: 1200px 900px;
+ 
+    height: 600px;
+}
+
+#chat-messages {
+    overflow-y: auto;
+    height: 100%;
 }
 
 .chat-message {

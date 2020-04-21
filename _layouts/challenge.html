@@ -8,9 +8,8 @@
     <title>Document</title>
 </head>
 <body>
-    <script>
-        let challenge = Math.floor(Math.random() * 5) + 1
-        location.replace(`{{ site.url }}/challenges/${challenge}`);
-    </script>
+    <h1> {{ page.name }} </h1>
+    <h1> {{ page.title }} </h1>
+    <h1> {{ page.description }} </h1>
 </body>
 </html>

@@ -1,0 +1,203 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>While you were fighting</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <link href="style/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <section>
+        <div>
+            <label for="myfile">Select files:</label>
+            <input type="file" id="files" name="files" multiple>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="level">
+                <div class="level-item">
+                    <nav class="pagination" role="navigation" aria-label="pagination">
+                        <ul id="day-list" class="pagination-list">
+                            <li>
+                                <a class="pagination-link" aria-label="Goto page 1">1</a>
+                            </li>
+                            <li>
+                                <span class="pagination-ellipsis">&hellip;</span>
+                            </li>
+                            <li>
+                                <a class="pagination-link" aria-label="Goto page 45">45</a>
+                            </li>
+                            <li>
+                                <a class="pagination-link is-current" aria-label="Page 46" aria-current="page">46</a>
+                            </li>
+                            <li>
+                                <a class="pagination-link" aria-label="Goto page 47">47</a>
+                            </li>
+                            <li>
+                                <span class="pagination-ellipsis">&hellip;</span>
+                            </li>
+                            <li>
+                                <a class="pagination-link" aria-label="Goto page 86">86</a>
+                            </li>
+                        </ul>
+                      </nav>
+                </div>
+            </div>
+            <div class="level">
+                <div class="level-item">
+                    <div id="chat-container">
+                        <div id="chat-messages">
+            
+                        </div>
+                        <button> Done </button>
+                    </div>
+                </div>
+                <div class="level-item" style="max-width: 700px;">
+                    <div id="template">
+                        <div x-data="{ open: false }" x-init="$watch('open', value => console.log(value))">
+                            <button @click="open = ! open">Toggle Open</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+           
+        </div>
+
+
+    </section>
+
+    <script src='lib/whatapp-chat-parser.js'></script>
+    <script>
+	    
+        let open = true;
+
+        let filesInput = document.getElementById('files');
+
+        const files = {};
+        const users = [];
+
+        let parsedMessages;
+        let parsedFiles;
+
+        const messagesSortedByDay = {};
+        const tasks = [];
+
+        filesInput.addEventListener("change", async () => {
+
+                const parser = WhatsAppChatParser();
+                const whatsAppChat = await parser.start(filesInput);                
+                console.log(whatsAppChat);
+                const {messages, users, files} = whatsAppChat;
+
+                const chatContainer = document.getElementById('chat-messages');
+
+                let lastDate;
+
+                for(parsedMessage of messages) {
+                    
+                    if(lastDate == null || parsedMessage.date != lastDate) {
+
+                        const chatDateDivider = document.createElement('div');
+                        chatDateDivider.classList.add('chat-date-divider');
+                        chatDateDivider.innerText = parsedMessage.date;
+                        chatContainer.appendChild(chatDateDivider);
+
+                        lastDate = parsedMessage.date;
+
+                        messagesSortedByDay[lastDate] = [parsedMessage];
+                    } else {
+                        messagesSortedByDay[lastDate].push(parsedMessage);
+                    }
+
+                    const chatMessage = document.createElement('div');
+                    chatMessage.classList.add('chat-message');
+                    chatContainer.appendChild(chatMessage);
+      
+                    const chatMessageUser = document.createElement('div');
+                    chatMessageUser.innerText = parsedMessage.user;
+                    chatMessageUser.classList.add('chat-message-name');
+
+                    for(user of users) {
+                        if(user.name == parsedMessage.user)
+                            chatMessageUser.style = `color: ${user.color}`;
+                    }
+
+                    chatMessage.appendChild(chatMessageUser);
+
+                    const chatMessageBody = document.createElement('div');
+                    chatMessageBody.innerText = parsedMessage.text;
+                    chatMessage.appendChild(chatMessageBody);
+
+                    if(parsedMessage.file != '') {
+                        if(files[parsedMessage.file].type.includes('audio')) {
+                            const audio = document.createElement('audio');
+                            audio.setAttribute('controls', true);
+
+                            const source = document.createElement('source');
+                            source.setAttribute('src', files[parsedMessage.file].data);
+                            source.setAttribute('type', files[parsedMessage.file].type);
+
+                            audio.appendChild(source);
+                            chatMessageBody.appendChild(audio);
+
+                        } else if(files[parsedMessage.file].type.includes('video')) {
+                            const video = document.createElement('video');
+                            video.width = 320;
+                            video.height = 240;
+                            video.controls = true;
+                            video.autoplay = true;
+                            video.loop = true;
+                            video.muted = true;
+
+                            const source = document.createElement('source');
+                            source.src = files[parsedMessage.file].data;
+                            source.type = files[parsedMessage.file].type;
+
+                            video.appendChild(source);
+                            chatMessageBody.appendChild(video);
+                        } else if(files[parsedMessage.file].type.includes('image')) {
+                            const image = document.createElement('img');
+                            image.src = files[parsedMessage.file].data;
+                            image.width = 320;
+                            image.height = 240;
+                            chatMessageBody.appendChild(image);
+                        }
+
+                    }
+
+                    const chatMessageTime = document.createElement('div');
+                    chatMessageTime.innerText = parsedMessage.time;
+                    chatMessageTime.classList.add('chat-message-time');
+                    chatMessageBody.appendChild(chatMessageTime);
+
+                }
+
+                let dateList = document.getElementById('day-list');
+
+                for(day in messagesSortedByDay) {
+                    /*
+                    
+                    <li>
+                                <a class="pagination-link" aria-label="Goto page 45">45</a>
+                            </li> */
+                }
+
+                
+
+			});
+
+
+
+
+    </script>
+
+</body>
+</html>
