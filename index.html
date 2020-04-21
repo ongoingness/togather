@@ -10,7 +10,7 @@
 <body>
     <script>
         let challenge = Math.floor(Math.random() * 5) + 1
-        location.replace(`{{ site.url }}/challenges/${challenge}`);
+        location.replace(`{{ site.url }}/{{ site.baseurl }}/challenges/${challenge}`);
     </script>
 </body>
 </html>
