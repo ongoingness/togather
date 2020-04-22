@@ -42,7 +42,7 @@
             window.location.href = `{{ site.url }}{{ site.baseurl }}/challenges/${challenge}`;
         }
         const shareChallenge = () => {
-            let link = `https://wa.me/?text=${encodeURI("{{ site.url }}{{ site.baseurl }}{{page.url}}")}`
+            let link = `https://wa.me/?text=${encodeURI(window.location.href)}`
             window.open(link, '_blank');
         }
     </script>
