@@ -1,0 +1,44 @@
+html, body {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+#challenge-description {
+    border-style: solid;
+    border-radius: 20px;
+    border-width: thick;
+    padding: 40px;
+    border-color: #ffc241;
+    width: 100%;
+}
+
+#challenge-button {
+    background: #ffc241;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+#challenge-button:focus {
+    outline: none;
+    background: #00c241;
+}
+
+#share-button {
+    background: #00c241;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+#share-button:focus {
+    outline: none;
+    background: #00c241;
+}
