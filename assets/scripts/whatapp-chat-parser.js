@@ -10,17 +10,19 @@ const WhatsAppChatParser = () => {
             }
         }
 
-        let messages;
+        let messageMap;
+        let orderedMessages;
         let users;
         for(file of tempFiles) {
             if(file.file.type === 'text/plain') {
                 const parsedResult = parseMessages(file.fileContent, files);
-                messages = parsedResult.messages;
+                messageMap = parsedResult.messageMap;
+                orderedMessages = parsedResult.orderedMessages;
                 users = parsedResult.users;
             }
         }
     
-        return { messages, files, users }
+        return { messageMap, orderedMessages, files, users }
     }
 
     const readFiles = async(fileInput) => {
@@ -76,14 +78,13 @@ const WhatsAppChatParser = () => {
 
     const parseMessages = (messages, files) => {
 
-        const result = [];
         const users = [];
+        const messageMap = {};
+        const orderedMessages = [];
 
         const messageStartRegex = RegExp('(([0-9]{2})\/([0-9]{2})\/([0-9]{2,4}))\, (([0-9]{2})\:([0-9]{2})) - ([^:]+)\: (.*)');
 
         const fileRegex = RegExp('(([A-Z]{3}\-[0-9]{8}\-[A-Z]{2}[0-9]{4}\..[^ ]*) \(.*\))');
-
-        const linkRegex = RegExp('https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)');
 
         const parseMessageBody = (body) => {
 
@@ -149,8 +150,9 @@ const WhatsAppChatParser = () => {
                 const [fullLine, fullDate, day, month, year, fullTime, hours, minutes, username, body] = messageStart;
 
                 if(currentMessage != null) {
-                currentMessage.hash = hashCode(`${currentMessage.fullTime}${currentMessage.username}${currentMessage.rawText}`);
-                    result.push({...currentMessage});
+                    currentMessage.hash = hashCode(`${currentMessage.fullTime}${currentMessage.username}${currentMessage.rawText}`);
+                    messageMap[currentMessage.hash] = {...currentMessage};
+                    orderedMessages.push(currentMessage.hash);
                 }
                 
                 currentMessage = {};
@@ -185,11 +187,12 @@ const WhatsAppChatParser = () => {
 
         if(currentMessage != null) {
             currentMessage.hash = hashCode(`${currentMessage.fullTime}${currentMessage.username}${currentMessage.rawText}`);
-            result.push({...currentMessage});
+            messageMap[currentMessage.hash] = {...currentMessage};
+            orderedMessages.push(currentMessage.hash);
             currentMessage = null;
         }
 
-        return ({messages: result, users});
+        return ({messageMap, orderedMessages, users});
 
     };
 
@@ -201,5 +204,5 @@ const WhatsAppChatParser = () => {
         return h;
     }
  
-    return ({ start});
+    return ({ start });
 }

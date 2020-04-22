@@ -1,4 +1,5 @@
 ---
+permalink: /diary/
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +10,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-    <link href="style/style.css" rel="stylesheet" type="text/css">
+    <link href="{{ '/assets/css/diary.css' | prepend: site.baseurl }}" rel="stylesheet" type="text/css">
+    <script src="{{ '/assets/scripts/whatapp-chat-parser.js' | prepend: site.baseurl }}"></script>
+    <script src="{{ '/assets/scripts/dairy.js' | prepend: site.baseurl }}"></script>
 </head>
 <body>
     <section>
@@ -20,36 +23,7 @@
     </section>
     <section>
         <div class="container">
-            <div class="level">
-                <div class="level-item">
-                    <nav class="pagination" role="navigation" aria-label="pagination">
-                        <ul id="day-list" class="pagination-list">
-                            <li>
-                                <a class="pagination-link" aria-label="Goto page 1">1</a>
-                            </li>
-                            <li>
-                                <span class="pagination-ellipsis">&hellip;</span>
-                            </li>
-                            <li>
-                                <a class="pagination-link" aria-label="Goto page 45">45</a>
-                            </li>
-                            <li>
-                                <a class="pagination-link is-current" aria-label="Page 46" aria-current="page">46</a>
-                            </li>
-                            <li>
-                                <a class="pagination-link" aria-label="Goto page 47">47</a>
-                            </li>
-                            <li>
-                                <span class="pagination-ellipsis">&hellip;</span>
-                            </li>
-                            <li>
-                                <a class="pagination-link" aria-label="Goto page 86">86</a>
-                            </li>
-                        </ul>
-                      </nav>
-                </div>
-            </div>
-            <div class="level">
+            <!--div class="level">
                 <div class="level-item">
                     <div id="chat-container">
                         <div id="chat-messages">
@@ -66,7 +40,7 @@
                     </div>
                 </div>
 
-            </div>
+            </div-->
 
            
         </div>
@@ -74,7 +48,7 @@
 
     </section>
 
-    <script src='lib/whatapp-chat-parser.js'></script>
+    
     <script>
 	    
         let open = true;
@@ -95,13 +69,20 @@
                 const parser = WhatsAppChatParser();
                 const whatsAppChat = await parser.start(filesInput);                
                 console.log(whatsAppChat);
-                const {messages, users, files} = whatsAppChat;
+                const {messageMap, orderedMessages, users, files} = whatsAppChat;
+
+                const dairy = Dairy();
+                dairy.setWhatsAppChat(whatsAppChat);
+                const topics = dairy.findTopics();
+                console.log(topics);
 
                 const chatContainer = document.getElementById('chat-messages');
 
                 let lastDate;
 
-                for(parsedMessage of messages) {
+                for(message of orderedMessages) {
+
+                    let parsedMessage = messageMap[message];
                     
                     if(lastDate == null || parsedMessage.date != lastDate) {
 
@@ -195,7 +176,67 @@
 			});
 
 
+            const startTopicUI = () => {
 
+                const section = document.createElement('section');
+                
+                const container = document.createElement('div');
+                container.classList.add('container')
+                section.appendChild(container);
+
+                const level = document.createElement('div');
+                level.classList.add('level')
+                container.appendChild(level);
+
+                const levelItem = document.createElement('div');
+                levelItem.classList.add('level-item')
+                level.appendChild(levelItem);
+
+                const topicContainer = document.createElement('div');
+                topicContainer.id = 'topic-container';
+                levelItem.appendChild(topicContainer);
+
+                const topicContainerHeader = document.createElement('div');
+                topicContainerHeader.classList.add('level');
+                topicContainerHeader.classList.add('is-marginless');
+                topicContainer.appendChild(topicContainerHeader);
+
+                const topicContainerHeaderItem = document.createElement('div');
+                topicContainerHeaderItem.id = 'topic-container-header';
+                topicContainerHeaderItem.classList.add('level-item')
+                topicContainerHeader.appendChild(topicContainerHeaderItem);
+
+                const topicContainerListLevel = document.createElement('div');
+                topicContainerListLevel.classList.add('level')
+                topicContainerListLevel.classList.add('is-marginless');
+                topicContainer.appendChild(topicContainerListLevel);
+
+                const topicContainerListLevelItem = document.createElement('div');
+                topicContainerListLevelItem.id = 'topic-container-list';
+                topicContainerListLevelItem.classList.add('level-item')
+                topicContainerListLevel.appendChild(topicContainerListLevelItem);
+
+                const topicContainerFooter = document.createElement('div');
+                topicContainerFooter.classList.add('level')
+                topicContainerFooter.classList.add('is-marginless');
+                topicContainer.appendChild(topicContainerFooter);
+
+                const topicContainerFooterItem = document.createElement('div');
+                topicContainerFooterItem.id = 'topic-container-footer';
+                topicContainerFooterItem.classList.add('level-item')
+                topicContainerFooter.appendChild(topicContainerFooterItem);
+
+
+                document.body.appendChild(section);
+
+            }
+
+            const showTopics = () => {
+
+
+            }
+
+            startTopicUI();
 
     </script>
 
