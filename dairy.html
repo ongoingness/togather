@@ -10,6 +10,7 @@ permalink: /diary/
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
     <link href="{{ '/assets/css/diary.css' | prepend: site.baseurl }}" rel="stylesheet" type="text/css">
     <script src="{{ '/assets/scripts/whatapp-chat-parser.js' | prepend: site.baseurl }}"></script>
     <script src="{{ '/assets/scripts/dairy.js' | prepend: site.baseurl }}"></script>
@@ -77,6 +78,8 @@ permalink: /diary/
         const messagesSortedByDay = {};
         const challenges = [];
 
+        
+
         /*
         filesInput.addEventListener("change", async () => {
 
@@ -89,7 +92,10 @@ permalink: /diary/
                 dairy.setWhatsAppChat(whatsAppChat);
                 const topics = dairy.findTopics();
                 console.log(topics);
-
+                
+                startTopicUI();
+                renderTopics(topics);
+                
                 const chatContainer = document.getElementById('chat-messages');
 
                 let lastDate;
@@ -176,11 +182,11 @@ permalink: /diary/
                 }
 
                 let dateList = document.getElementById('day-list');
+                
+              
 
-      
-
-            });
-            */
+            });*/
+            
 
 
             const startTopicUI = () => {
@@ -252,7 +258,8 @@ permalink: /diary/
                 topicContainerHeader.appendChild(headerText);
 
                 const topicContainerList = document.createElement('div');
-                topicContainerList.classList.add('topic-container__level');
+                topicContainerList.id = 'topicList';
+                //topicContainerList.classList.add('topic-container__level');
                 topicContainerList.classList.add('topic-container__list');
                 topicContainer.appendChild(topicContainerList);
 
@@ -261,16 +268,88 @@ permalink: /diary/
                 topicContainerFooter.classList.add('topic-container__footer');
                 topicContainer.appendChild(topicContainerFooter);
 
+                const footerLeft =  document.createElement('div');
+                footerLeft.classList.add('topic-container__footer__item');
+                topicContainerFooter.appendChild(footerLeft);
+
+                const addTopicButton  = document.createElement('button');
+                addTopicButton.classList.add('topic-button');
+                addTopicButton.classList.add('topic-container__footer__item__button');
+                addTopicButton.innerText = 'ADD TOPICS';
+                footerLeft.appendChild(addTopicButton);
+
+                const footerRight =  document.createElement('div');
+                footerRight.classList.add('topic-container__footer__item');
+                topicContainerFooter.appendChild(footerRight);
+
+                const thatsAllButton  = document.createElement('button');
+                thatsAllButton.classList.add('topic-button');
+                thatsAllButton.classList.add('topic-container__footer__item__button');
+                thatsAllButton.innerText = 'THAT\'S All';
+                footerRight.appendChild(thatsAllButton);
+     
                 document.body.appendChild(topicContainer);
 
             }
 
-            const showTopics = () => {
+            const renderTopics = (topics) => {
 
+                
+                const topicList = document.getElementById('topicList');
+
+
+                for(topic of topics) {
+
+                    for(let i = 0; i < 20; i++) {
+                        const topic =  document.createElement('div');
+                        topic.classList.add('topic');
+    
+                        const topicHeader = document.createElement('div');
+                        topicHeader.classList.add('topic__header');
+                        topic.appendChild(topicHeader);
+
+                        const topicHeaderDay =  document.createElement('div');
+                        topicHeaderDay.innerText = `Day ${i + 1}`;
+                        topicHeader.appendChild(topicHeaderDay);
+
+                        const topicHeaderDate =  document.createElement('div');
+                        topicHeaderDate.innerText = `2020/20/01`;
+                        topicHeader.appendChild(topicHeaderDate);
+
+                        const topicHeaderEditButton = document.createElement('button');
+                        topicHeaderEditButton.classList.add('topic__header__edit-button');
+                        topicHeader.appendChild(topicHeaderEditButton);
+
+                        const editButtonImage = document.createElement('img');
+                        editButtonImage.src = "{{ '/assets/images/edit.svg' | prepend: site.baseurl }}";
+                        editButtonImage.width = '32';
+                        editButtonImage.height = '32';
+                        topicHeaderEditButton.appendChild(editButtonImage);
+
+                        const topicHeaderDeleteButton = document.createElement('button');
+                        topicHeaderDeleteButton.classList.add('topic__header__delete-button');
+                        topicHeader.appendChild(topicHeaderDeleteButton);
+
+                        const deleteButtonImage = document.createElement('img');
+                        deleteButtonImage.src = "{{ '/assets/images/delete.svg' | prepend: site.baseurl }}";
+                        deleteButtonImage.width = '32';
+                        deleteButtonImage.height = '32';
+                        topicHeaderDeleteButton.appendChild(deleteButtonImage);
+
+                        const topicText = document.createElement('div');
+                        topicText.innerText = `I am a TOPIC ${i}`;
+                        topic.appendChild(topicText);
+
+                        topicList.appendChild(topic);
+                    }
+
+                }
 
             }
 
             startTopicUI();
+             renderTopics(["dsds"]);
+                
 
     </script>
 

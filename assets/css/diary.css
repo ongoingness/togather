@@ -1,5 +1,15 @@
 ---
 ---
+
+@font-face {
+    font-family: 'Ostrich Sans Black';
+    src: url("{{ '/assets/fonts/ostrich-sans/OstrichSans-Black.oft' | prepend: site.baseurl }}"),
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
 #topic-container {
     max-width: 700px;
     width: 100%;
@@ -111,11 +121,61 @@
     height: 70%;
     background-image: url("{{ '/assets/images/background_pattern_topics.svg' | prepend: site.baseurl }}");
     background-repeat: repeat-y;
-    background-size: 1400px 880px;
+    background-size: 150%;
+    padding: 2vh;
+    overflow-y: scroll;
 }
 
 .topic-container__footer {
+    position: relative;
     height: 15%;
     background: white;
+}
+
+.topic-container__footer__item {
+    width: 50%;
+    height: 100%;
+    position: relative;
+}
+
+.topic-button {
+    border-style: solid;
+    border-radius: 25px;
+    background: white;
+}
+
+.topic-container__footer__item__button {
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    font-family: 'Ostrich Sans Black';
+}
+
+.topic {
+    border-style: none;
+    border-radius: 25px;
+    background: white;
+    padding: 10px;
+    margin-bottom: 2vh;
+}
+
+.topic__header {
+    display: flex;
+    position: relative;
+    height: 6vh;
+}
+
+.topic__header__delete-button {
+    position: absolute;
+    right: 0;
+    background: none;
+    border: none;
+}
+
+.topic__header__edit-button {
+    position: absolute;
+    right: 8vh;
+    background: none;
+    border: none;
 }
   
