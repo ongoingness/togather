@@ -77,3 +77,37 @@
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
+
+
+.topic-container {
+    height: 100vh; /* Use vh as a fallback for browsers that do not support Custom Properties */
+    height: calc(var(--vh, 1vh) * 100);
+    margin: 0 auto;
+    max-width: 95vh;
+    width: 100%;
+}
+  
+.topic-container__level {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.topic-container__header {
+    height: 15%;
+    background: white;
+}
+
+.topic-container__list {
+    height: 70%;
+    background-image: url("{{ '/assets/images/background_pattern_topics.svg' | prepend: site.baseurl }}");
+    background-repeat: repeat-y;
+    background-size: 1400px 880px;
+}
+
+.topic-container__footer {
+    height: 15%;
+    background: white;
+}
+  
