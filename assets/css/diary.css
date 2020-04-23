@@ -99,6 +99,14 @@
     background: white;
 }
 
+.topic-container__header__text {
+    padding: 20px;
+    padding-top: -10px;
+    font-size: x-small;
+    text-align: center;
+    font-weight: bold;
+}
+
 .topic-container__list {
     height: 70%;
     background-image: url("{{ '/assets/images/background_pattern_topics.svg' | prepend: site.baseurl }}");
