@@ -21,36 +21,10 @@ permalink: /diary/
             <label for="myfile">Select files:</label>
             <input type="file" id="files" name="files" multiple>
         </div>
-    </section>
-    <section>
-        <div class="container">
-            <div class="level">
-                <div class="level-item">
-                    <div id="chat-container">
-                        <div id="header">
+    </section-->
+   
 
-                        </div>
-                        <div id="chat-messages">
-                        
-                        </div>
-                        <div id="footer">
-
-                        </div>
-                    </div>
-                </div>
-            </div> 
-        </div-->
-        <!--div class="module">
-            <div class="module__item">20%</div>
-            <div class="module__item">40%</div>
-            <div class="module__item">60%</div>
-            <div class="module__item">80%</div>
-            <div class="module__item">100%</div>
-        </div-->
-
-    </section>
-
-    
+ 
     <script>
         
         // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
@@ -199,59 +173,6 @@ permalink: /diary/
 
             const startTopicUI = () => {
 
-                /*
-                const section = document.createElement('section');
-                
-                const container = document.createElement('div');
-                container.classList.add('container')
-                section.appendChild(container);
-
-                const level = document.createElement('div');
-                level.classList.add('level')
-                container.appendChild(level);
-
-                const levelItem = document.createElement('div');
-                levelItem.classList.add('level-item')
-                level.appendChild(levelItem);
-
-                const topicContainer = document.createElement('div');
-                topicContainer.id = 'topic-container';
-                levelItem.appendChild(topicContainer);
-
-                const topicContainerHeader = document.createElement('div');
-                topicContainerHeader.classList.add('level');
-                topicContainerHeader.classList.add('is-marginless');
-                topicContainer.appendChild(topicContainerHeader);
-
-                const topicContainerHeaderItem = document.createElement('div');
-                topicContainerHeaderItem.id = 'topic-container-header';
-                topicContainerHeaderItem.classList.add('level-item')
-                topicContainerHeader.appendChild(topicContainerHeaderItem);
-
-                const topicContainerListLevel = document.createElement('div');
-                topicContainerListLevel.classList.add('level')
-                topicContainerListLevel.classList.add('is-marginless');
-                topicContainer.appendChild(topicContainerListLevel);
-
-                const topicContainerListLevelItem = document.createElement('div');
-                topicContainerListLevelItem.id = 'topic-container-list';
-                topicContainerListLevelItem.classList.add('level-item')
-                topicContainerListLevel.appendChild(topicContainerListLevelItem);
-
-                const topicContainerFooter = document.createElement('div');
-                topicContainerFooter.classList.add('level')
-                topicContainerFooter.classList.add('is-marginless');
-                topicContainer.appendChild(topicContainerFooter);
-
-                const topicContainerFooterItem = document.createElement('div');
-                topicContainerFooterItem.id = 'topic-container-footer';
-                topicContainerFooterItem.classList.add('level-item')
-                topicContainerFooter.appendChild(topicContainerFooterItem);
-
-
-                //document.body.appendChild(section);
-                */
-
                 const topicContainer = document.createElement('div');
                 topicContainer.classList.add('topic-container');
 
@@ -261,8 +182,8 @@ permalink: /diary/
                 topicContainer.appendChild(topicContainerHeader);
 
                 const headerText = document.createElement('div');
+                headerText.id = 'topic-container-header-text';
                 headerText.classList.add('topic-container__header__text');
-                headerText.innerText = 'We found the following daily topics you have been messaging about. Is this set complete? Or are there any topics you want to add tho this list?'
                 topicContainerHeader.appendChild(headerText);
 
                 const topicContainerList = document.createElement('div');
@@ -276,9 +197,10 @@ permalink: /diary/
                 topicContainer.appendChild(topicContainerFooter);
 
                 const footerLeft =  document.createElement('div');
+                footerLeft.id='topic-container-footer-left';
                 footerLeft.classList.add('topic-container__footer__item');
                 topicContainerFooter.appendChild(footerLeft);
-
+/*
                 const addTopicButton  = document.createElement('button');
                 addTopicButton.classList.add('topic-button');
                 addTopicButton.classList.add('topic-container__footer__item__button');
@@ -287,11 +209,13 @@ permalink: /diary/
                     console.log('Add Topic Button');
                 });                
                 footerLeft.appendChild(addTopicButton);
-
+*/
                 const footerRight =  document.createElement('div');
+                footerRight.id='topic-container-footer-right';
                 footerRight.classList.add('topic-container__footer__item');
                 topicContainerFooter.appendChild(footerRight);
 
+                /*
                 const thatsAllButton  = document.createElement('button');
                 thatsAllButton.classList.add('topic-button');
                 thatsAllButton.classList.add('topic-container__footer__item__button');
@@ -302,8 +226,45 @@ permalink: /diary/
                 });
 
                 footerRight.appendChild(thatsAllButton);
-     
+     */
                 document.body.appendChild(topicContainer);
+
+            }
+
+            const clearTopicUI = () => {
+
+                document.getElementById('topic-container-header-text').innerText = '';
+                removeChildren('topicList');
+                removeChildren('topic-container-footer-left');
+                removeChildren('topic-container-footer-right');
+              
+            }
+
+            const renderTopicsFound = (topics) => {
+
+                document.getElementById('topic-container-header-text').innerText = 'We found the following daily topics you have been messaging about. Is this set complete? Or are there any topics you want to add tho this list?';
+                
+                renderTopics(topics);
+
+                const addTopicButton  = document.createElement('button');
+                addTopicButton.classList.add('topic-button');
+                addTopicButton.classList.add('topic-container__footer__item__button');
+                addTopicButton.innerText = 'ADD TOPICS';
+                addTopicButton.addEventListener('click', () => {
+                    console.log('Add Topic Button');
+                    clearTopicUI();
+                    renderAddTopicOptions();
+                });                
+                document.getElementById('topic-container-footer-left').appendChild(addTopicButton);
+
+                const thatsAllButton  = document.createElement('button');
+                thatsAllButton.classList.add('topic-button');
+                thatsAllButton.classList.add('topic-container__footer__item__button');
+                thatsAllButton.innerText = 'THAT\'S All';
+                thatsAllButton.addEventListener('click', () => {
+                    console.log('Thats All Button');
+                });
+                document.getElementById('topic-container-footer-right').appendChild(thatsAllButton);
 
             }
 
@@ -377,8 +338,62 @@ permalink: /diary/
 
             }
 
+            const removeChildren = (id) => {
+
+                const myNode = document.getElementById(id);
+                while (myNode.firstChild) {
+                    myNode.removeChild(myNode.lastChild);
+                }
+
+            }
+
+            const renderAddTopicOptions = () => {
+
+                const headerText = document.getElementById('topic-container-header-text');
+                headerText.innerText = 'New Topic From Where';
+
+                const topicList = document.getElementById('topicList');
+
+                const optionsContainer = document.createElement('div');
+                optionsContainer.classList.add('topic__add-topic__options');
+
+                const buttonsContainer = document.createElement('div');
+                buttonsContainer.classList.add('topic__add-topic__buttons-container');
+                optionsContainer.appendChild(buttonsContainer);
+
+                const writeTopic = document.createElement('button');
+                writeTopic.classList.add('topic-button');
+                writeTopic.innerText = 'Write Topic';
+                buttonsContainer.appendChild(writeTopic);
+
+                const orText = document.createElement('div');
+                orText.innerText = 'or';
+                buttonsContainer.appendChild(orText);
+
+                const selectTopic = document.createElement('button');
+                selectTopic.classList.add('topic-button');
+                selectTopic.innerText = 'Select from chat';
+                buttonsContainer.appendChild(selectTopic);
+                
+                topicList.appendChild(optionsContainer);
+
+                const backButton = document.createElement('button');
+                backButton.classList.add('topic-button');
+                backButton.classList.add('topic-container__footer__item__button');
+                backButton.innerText = 'BACK';
+                backButton.addEventListener('click', () => {
+                    console.log('Back Button');
+                    clearTopicUI();
+                    renderTopicsFound(['topics']);
+                });                
+                document.getElementById('topic-container-footer-left').appendChild(backButton);
+
+            }
+
             startTopicUI();
-            renderTopics(["dsds"]);
+            renderTopicsFound(['but']);
+            //renderAddTopicOptions();
+            //renderTopics(["dsds"]);
                 
 
     </script>

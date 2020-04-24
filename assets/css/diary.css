@@ -140,6 +140,11 @@ body {
 }
 
 .topic-button {
+    font-family: 'Ostrich Sans Black';
+    margin: auto;
+    font-size: x-large;
+    padding-left: 2vh;
+    padding-right: 2vh;
     border-style: solid;
     border-radius: 25px;
     background: white;
@@ -151,6 +156,9 @@ body {
     font-size: x-large;
     padding-left: 2vh;
     padding-right: 2vh;
+    border-style: solid;
+    border-radius: 25px;
+    background: white;
 }
 
 .topic {
@@ -192,4 +200,14 @@ body {
     background: none;
     border: none;
 }
-  
+
+.topic__add-topic__options {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.topic__add-topic__buttons-container {
+    text-align: center;
+    margin: auto;
+}
