@@ -15,6 +15,7 @@ permalink: /diary/
     <script src="{{ '/assets/scripts/whatapp-chat-parser.js' | prepend: site.baseurl }}"></script>
     <script src="{{ '/assets/scripts/diary.js' | prepend: site.baseurl }}"></script>
     <script src="{{ '/assets/scripts/diary-ui.js' | prepend: site.baseurl }}"></script>
+    <script src="{{ '/assets/scripts/diary-controller.js' | prepend: site.baseurl }}"></script>
 </head>
 <body>
     <!--section>
@@ -53,9 +54,14 @@ permalink: /diary/
         const messagesSortedByDay = {};
         const challenges = [];
 
+        /*
         const ui = DiaryUI();
         ui.startTopicUI();
         ui.renderTopicsFound(['topic']);
+        */
+
+        const diaryController = DiaryController();
+
 
         /*
         filesInput.addEventListener("change", async () => {

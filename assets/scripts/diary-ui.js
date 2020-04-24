@@ -1,7 +1,7 @@
 ---
 ---
 
-const DiaryUI = () => {
+const DiaryUI = (eventHandler) => {
 
     const startTopicUI = () => {
 
@@ -61,20 +61,14 @@ const DiaryUI = () => {
         addTopicButton.classList.add('topic-button');
         addTopicButton.classList.add('topic-container__footer__item__button');
         addTopicButton.innerText = 'ADD TOPICS';
-        addTopicButton.addEventListener('click', () => {
-            console.log('Add Topic Button');
-            clearTopicUI();
-            renderAddTopicOptions();
-        });                
+        addTopicButton.addEventListener('click', (e) => eventHandler(e, {type: 'add-topic'}));              
         document.getElementById('topic-container-footer-left').appendChild(addTopicButton);
 
         const thatsAllButton  = document.createElement('button');
         thatsAllButton.classList.add('topic-button');
         thatsAllButton.classList.add('topic-container__footer__item__button');
         thatsAllButton.innerText = 'THAT\'S All';
-        thatsAllButton.addEventListener('click', () => {
-            console.log('Thats All Button');
-        });
+        thatsAllButton.addEventListener('click', (e) => eventHandler(e, {type: 'thats-all'}));  
         document.getElementById('topic-container-footer-right').appendChild(thatsAllButton);
 
     }
@@ -175,6 +169,59 @@ const DiaryUI = () => {
         const writeTopic = document.createElement('button');
         writeTopic.classList.add('topic-button');
         writeTopic.innerText = 'Write Topic';
+        writeTopic.addEventListener('click', () => {
+            clearTopicUI();
+            renderWriteTopic();
+        });
+
+        buttonsContainer.appendChild(writeTopic);
+
+        const orText = document.createElement('div');
+        orText.innerText = 'or';
+        buttonsContainer.appendChild(orText);
+
+        const selectTopic = document.createElement('button');
+        selectTopic.classList.add('topic-button');
+        selectTopic.innerText = 'Select from chat';
+        buttonsContainer.appendChild(selectTopic);
+        
+        topicList.appendChild(optionsContainer);
+
+        const backButton = document.createElement('button');
+        backButton.classList.add('topic-button');
+        backButton.classList.add('topic-container__footer__item__button');
+        backButton.innerText = 'BACK';
+        backButton.addEventListener('click', (e) => eventHandler(e, {type: 'back'})); 
+        document.getElementById('topic-container-footer-left').appendChild(backButton);
+
+    }
+
+    const getRandomColor = () => {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    const renderWriteTopic = () => {
+
+        const headerText = document.getElementById('topic-container-header-text');
+        headerText.innerText = 'Write your own topic and assign it to a date.';
+
+        const topicList = document.getElementById('topicList');
+
+        const optionsContainer = document.createElement('div');
+        optionsContainer.classList.add('topic__add-topic__options');
+
+        const buttonsContainer = document.createElement('div');
+        buttonsContainer.classList.add('topic__add-topic__buttons-container');
+        optionsContainer.appendChild(buttonsContainer);
+
+        const writeTopic = document.createElement('button');
+        writeTopic.classList.add('topic-button');
+        writeTopic.innerText = 'Write Topic';
         buttonsContainer.appendChild(writeTopic);
 
         const orText = document.createElement('div');
@@ -199,15 +246,6 @@ const DiaryUI = () => {
         });                
         document.getElementById('topic-container-footer-left').appendChild(backButton);
 
-    }
-
-    const getRandomColor = () => {
-        var letters = '0123456789ABCDEF';
-        var color = '#';
-        for (var i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
     }
 
     return{
