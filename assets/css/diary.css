@@ -164,7 +164,8 @@ body {
 .topic__header {
     display: flex;
     position: relative;
-    height: 6vh;
+    height: 4vh;
+    margin-bottom: 2vh;
 }
 
 .topic__header__day {
@@ -187,7 +188,7 @@ body {
 
 .topic__header__edit-button {
     position: absolute;
-    right: 8vh;
+    right: 7vh;
     background: none;
     border: none;
 }

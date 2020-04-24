@@ -267,7 +267,6 @@ permalink: /diary/
 
                 const topicContainerList = document.createElement('div');
                 topicContainerList.id = 'topicList';
-                //topicContainerList.classList.add('topic-container__level');
                 topicContainerList.classList.add('topic-container__list');
                 topicContainer.appendChild(topicContainerList);
 
@@ -284,6 +283,9 @@ permalink: /diary/
                 addTopicButton.classList.add('topic-button');
                 addTopicButton.classList.add('topic-container__footer__item__button');
                 addTopicButton.innerText = 'ADD TOPICS';
+                addTopicButton.addEventListener('click', () => {
+                    console.log('Add Topic Button');
+                });                
                 footerLeft.appendChild(addTopicButton);
 
                 const footerRight =  document.createElement('div');
@@ -294,72 +296,89 @@ permalink: /diary/
                 thatsAllButton.classList.add('topic-button');
                 thatsAllButton.classList.add('topic-container__footer__item__button');
                 thatsAllButton.innerText = 'THAT\'S All';
+
+                thatsAllButton.addEventListener('click', () => {
+                    console.log('Thats All Button');
+                });
+
                 footerRight.appendChild(thatsAllButton);
      
                 document.body.appendChild(topicContainer);
 
             }
 
-            const renderTopics = (topics) => {
-
+            const renderTopic = (day, topicData) => {
                 
                 const topicList = document.getElementById('topicList');
 
+                const topic =  document.createElement('div');
+                topic.classList.add('topic');
+
+                const topicHeader = document.createElement('div');
+                topicHeader.classList.add('topic__header');
+                topic.appendChild(topicHeader);
+
+                const color = getRandomColor();
+
+                const topicHeaderDay =  document.createElement('div');
+                topicHeaderDay.classList.add('topic__header__day');
+                topicHeaderDay.innerText = `DAY ${day + 1}`;
+                topicHeaderDay.style = `color: ${color};`
+                topicHeader.appendChild(topicHeaderDay);
+
+                const topicHeaderDate =  document.createElement('div');
+                topicHeaderDate.classList.add('topic__header__date');
+                topicHeaderDate.innerText = `2020/20/01`;
+                topicHeaderDate.style = `color: ${color};`
+                topicHeader.appendChild(topicHeaderDate);
+
+                const topicHeaderEditButton = document.createElement('button');
+                topicHeaderEditButton.classList.add('topic__header__edit-button');
+                topicHeaderEditButton.addEventListener('click', () => {
+                    console.log('Topic Edit Button');
+                });
+                topicHeader.appendChild(topicHeaderEditButton);
+
+                const editButtonImage = document.createElement('img');
+                editButtonImage.src = "{{ '/assets/images/edit.svg' | prepend: site.baseurl }}";
+                editButtonImage.width = '25';
+                editButtonImage.height = '25';
+                topicHeaderEditButton.appendChild(editButtonImage);
+
+                const topicHeaderDeleteButton = document.createElement('button');
+                topicHeaderDeleteButton.classList.add('topic__header__delete-button');
+                topicHeaderDeleteButton.addEventListener('click', () => {
+                    console.log('Topic Delete Button');
+                });
+                topicHeader.appendChild(topicHeaderDeleteButton);
+
+                const deleteButtonImage = document.createElement('img');
+                deleteButtonImage.src = "{{ '/assets/images/delete.svg' | prepend: site.baseurl }}";
+                deleteButtonImage.width = '25';
+                deleteButtonImage.height = '25';
+                topicHeaderDeleteButton.appendChild(deleteButtonImage);
+
+                const topicText = document.createElement('div');
+                topicText.innerText = `I am a TOPIC ${day}`;
+                topic.appendChild(topicText);
+
+                topicList.appendChild(topic);          
+            }
+
+            const renderTopics = (topics) => {
 
                 for(topic of topics) {
 
                     for(let i = 0; i < 20; i++) {
-                        const topic =  document.createElement('div');
-                        topic.classList.add('topic');
-    
-                        const topicHeader = document.createElement('div');
-                        topicHeader.classList.add('topic__header');
-                        topic.appendChild(topicHeader);
-
-                        const topicHeaderDay =  document.createElement('div');
-                        topicHeaderDay.classList.add('topic__header__day');
-                        topicHeaderDay.innerText = `DAY ${i + 1}`;
-                        topicHeaderDay.style = `color: ${getRandomColor()};`
-                        topicHeader.appendChild(topicHeaderDay);
-
-                        const topicHeaderDate =  document.createElement('div');
-                        topicHeaderDate.classList.add('topic__header__date');
-                        topicHeaderDate.innerText = `2020/20/01`;
-                        topicHeader.appendChild(topicHeaderDate);
-
-                        const topicHeaderEditButton = document.createElement('button');
-                        topicHeaderEditButton.classList.add('topic__header__edit-button');
-                        topicHeader.appendChild(topicHeaderEditButton);
-
-                        const editButtonImage = document.createElement('img');
-                        editButtonImage.src = "{{ '/assets/images/edit.svg' | prepend: site.baseurl }}";
-                        editButtonImage.width = '32';
-                        editButtonImage.height = '32';
-                        topicHeaderEditButton.appendChild(editButtonImage);
-
-                        const topicHeaderDeleteButton = document.createElement('button');
-                        topicHeaderDeleteButton.classList.add('topic__header__delete-button');
-                        topicHeader.appendChild(topicHeaderDeleteButton);
-
-                        const deleteButtonImage = document.createElement('img');
-                        deleteButtonImage.src = "{{ '/assets/images/delete.svg' | prepend: site.baseurl }}";
-                        deleteButtonImage.width = '32';
-                        deleteButtonImage.height = '32';
-                        topicHeaderDeleteButton.appendChild(deleteButtonImage);
-
-                        const topicText = document.createElement('div');
-                        topicText.innerText = `I am a TOPIC ${i}`;
-                        topic.appendChild(topicText);
-
-                        topicList.appendChild(topic);
+                        renderTopic(i, topic);
                     }
-
+     
                 }
 
             }
 
             startTopicUI();
-             renderTopics(["dsds"]);
+            renderTopics(["dsds"]);
                 
 
     </script>
