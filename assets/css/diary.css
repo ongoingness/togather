@@ -3,7 +3,7 @@
 
 @font-face {
     font-family: 'Ostrich Sans Black';
-    src: url("{{ '/assets/fonts/ostrich-sans/OstrichSans-Black.oft' | prepend: site.baseurl }}"),
+    src: url('../fonts/ostrich-sans/OstrichSans-Black.otf');
 }
 
 body {
@@ -133,6 +133,7 @@ body {
 }
 
 .topic-container__footer__item {
+    display: flex;
     width: 50%;
     height: 100%;
     position: relative;
@@ -145,10 +146,11 @@ body {
 }
 
 .topic-container__footer__item__button {
-    position: absolute;
-    top: 40%;
-    left: 40%;
     font-family: 'Ostrich Sans Black';
+    margin: auto;
+    font-size: x-large;
+    padding-left: 2vh;
+    padding-right: 2vh;
 }
 
 .topic {
@@ -163,6 +165,17 @@ body {
     display: flex;
     position: relative;
     height: 6vh;
+}
+
+.topic__header__day {
+    align-self: center;
+    padding-right: 2vh;
+    font-weight: 600;
+}
+
+.topic__header__date {
+    align-self: center;
+    font-weight: 100;
 }
 
 .topic__header__delete-button {

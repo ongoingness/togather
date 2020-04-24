@@ -187,6 +187,14 @@ permalink: /diary/
 
             });*/
             
+            const getRandomColor = () => {
+                var letters = '0123456789ABCDEF';
+                var color = '#';
+                for (var i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+                return color;
+            }
 
 
             const startTopicUI = () => {
@@ -309,10 +317,13 @@ permalink: /diary/
                         topic.appendChild(topicHeader);
 
                         const topicHeaderDay =  document.createElement('div');
-                        topicHeaderDay.innerText = `Day ${i + 1}`;
+                        topicHeaderDay.classList.add('topic__header__day');
+                        topicHeaderDay.innerText = `DAY ${i + 1}`;
+                        topicHeaderDay.style = `color: ${getRandomColor()};`
                         topicHeader.appendChild(topicHeaderDay);
 
                         const topicHeaderDate =  document.createElement('div');
+                        topicHeaderDate.classList.add('topic__header__date');
                         topicHeaderDate.innerText = `2020/20/01`;
                         topicHeader.appendChild(topicHeaderDate);
 
