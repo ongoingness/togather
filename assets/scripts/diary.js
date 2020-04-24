@@ -1,4 +1,4 @@
-const Dairy = () => {
+const Diary = () => {
 
     const stateWaitForParams = 0;
     const stateFindTopics = 1;
