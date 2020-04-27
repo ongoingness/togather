@@ -1,16 +1,8 @@
 const Diary = () => {
 
-    const stateWaitForParams = 0;
-    const stateFindTopics = 1;
-    const stateCheckTopics = 2;
-    const stateAddTopics = 3;
-    
-    let state = stateWaitForParams;
-
     let whatsAppChat;
 
     let topics = [];
-    let currentTopic;
 
     const setWhatsAppChat = (tempWhatsAppChat) => whatsAppChat = tempWhatsAppChat;
 

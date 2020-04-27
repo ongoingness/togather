@@ -169,11 +169,7 @@ const DiaryUI = (eventHandler) => {
         const writeTopic = document.createElement('button');
         writeTopic.classList.add('topic-button');
         writeTopic.innerText = 'Write Topic';
-        writeTopic.addEventListener('click', () => {
-            clearTopicUI();
-            renderWriteTopic();
-        });
-
+        writeTopic.addEventListener('click', (e) => eventHandler(e, {type: 'write-topic'})); 
         buttonsContainer.appendChild(writeTopic);
 
         const orText = document.createElement('div');
@@ -183,6 +179,7 @@ const DiaryUI = (eventHandler) => {
         const selectTopic = document.createElement('button');
         selectTopic.classList.add('topic-button');
         selectTopic.innerText = 'Select from chat';
+        selectTopic.addEventListener('click', (e) => eventHandler(e, {type: 'select-from-chat'})); 
         buttonsContainer.appendChild(selectTopic);
         
         topicList.appendChild(optionsContainer);
@@ -212,39 +209,100 @@ const DiaryUI = (eventHandler) => {
 
         const topicList = document.getElementById('topicList');
 
-        const optionsContainer = document.createElement('div');
-        optionsContainer.classList.add('topic__add-topic__options');
+        const container = document.createElement('div');
+        container.classList.add('topic__write-topic__container');
 
-        const buttonsContainer = document.createElement('div');
-        buttonsContainer.classList.add('topic__add-topic__buttons-container');
-        optionsContainer.appendChild(buttonsContainer);
+        const topicTextArea = document.createElement('textarea');
+        topicTextArea.classList.add('topic__write-topic__textarea');
+        topicTextArea.placeholder = 'Type your own topic here';
+        container.appendChild(topicTextArea);
 
-        const writeTopic = document.createElement('button');
-        writeTopic.classList.add('topic-button');
-        writeTopic.innerText = 'Write Topic';
-        buttonsContainer.appendChild(writeTopic);
-
-        const orText = document.createElement('div');
-        orText.innerText = 'or';
-        buttonsContainer.appendChild(orText);
-
-        const selectTopic = document.createElement('button');
-        selectTopic.classList.add('topic-button');
-        selectTopic.innerText = 'Select from chat';
-        buttonsContainer.appendChild(selectTopic);
+        const datePhotoContainer = document.createElement('div');
+        datePhotoContainer.classList.add('topic__write-topic__date-photo-container');
+        container.appendChild(datePhotoContainer);
         
-        topicList.appendChild(optionsContainer);
+        const topicDate = document.createElement('input');
+        topicDate.type = 'date';
+        topicDate.name = 'topicDate';
+        topicDate.id = 'topicDate';
+        topicDate.classList.add('topic__write-topic__date');
+        datePhotoContainer.appendChild(topicDate);
+
+        const addPhotoLabel = document.createElement('label');
+        addPhotoLabel.classList.add('topic__write-topic__add-photo-label');
+        datePhotoContainer.appendChild(addPhotoLabel);
+
+        const addPhotoInput = document.createElement('input');
+        addPhotoInput.classList.add('topic__write-topic__add-photo-input');
+        addPhotoInput.type = 'file';
+        addPhotoLabel.appendChild(addPhotoInput);
+
+        const uploadedPhotos = document.createElement('div');
+        uploadedPhotos.classList.add('topic__write-topic__uploaded-photos');
+        container.appendChild(uploadedPhotos);
+     
+        const uploadedPhotosRow = document.createElement('div');
+        uploadedPhotosRow.classList.add('topic__write-topic__uploaded-photos__row');
+        uploadedPhotos.appendChild(uploadedPhotosRow);
+
+        const uploadedPhotosColumn1 = document.createElement('div');
+        uploadedPhotosColumn1.id = 'uploadedPhotosColumn1';
+        uploadedPhotosColumn1.classList.add('topic__write-topic__uploaded-photos__column');
+        uploadedPhotosRow.appendChild(uploadedPhotosColumn1);
+
+        const uploadedPhotosColumn2 = document.createElement('div');
+        uploadedPhotosColumn2.id = 'uploadedPhotosColumn2';
+        uploadedPhotosColumn2.classList.add('topic__write-topic__uploaded-photos__column');
+        uploadedPhotosRow.appendChild(uploadedPhotosColumn2);
+
+        //////////////////////
+        renderAddedPhoto("{{ '/assets/images/test1.jpg' | prepend: site.baseurl }}", uploadedPhotosColumn1); 
+        renderAddedPhoto("{{ '/assets/images/test2.jpg' | prepend: site.baseurl }}", uploadedPhotosColumn1); 
+        renderAddedPhoto("{{ '/assets/images/test3.jpg' | prepend: site.baseurl }}", uploadedPhotosColumn2); 
+        renderAddedPhoto("{{ '/assets/images/test4.jpg' | prepend: site.baseurl }}", uploadedPhotosColumn2); 
+        ///////////////////////
+
+        topicList.appendChild(container);
 
         const backButton = document.createElement('button');
         backButton.classList.add('topic-button');
         backButton.classList.add('topic-container__footer__item__button');
         backButton.innerText = 'BACK';
-        backButton.addEventListener('click', () => {
-            console.log('Back Button');
-            clearTopicUI();
-            renderTopicsFound(['topics']);
-        });                
+        backButton.addEventListener('click', (e) => eventHandler(e, {type: 'back'}))    
         document.getElementById('topic-container-footer-left').appendChild(backButton);
+
+        const doneButton = document.createElement('button');
+        doneButton.classList.add('topic-button');
+        doneButton.classList.add('topic-container__footer__item__button');
+        doneButton.innerText = 'DONE';
+        doneButton.addEventListener('click', (e) => eventHandler(e, {type: 'done'}));   
+        document.getElementById('topic-container-footer-right').appendChild(doneButton);
+
+    }
+
+    const renderAddedPhoto = (photoData, parent) => {
+
+        console.log(parent)
+    
+        const photoContainer = document.createElement('div');
+        photoContainer.classList.add('topic__write-topic__photo-container');
+        parent.appendChild(photoContainer);
+
+        const photo = document.createElement('img');
+        photo.classList.add('topic__write-topic__uploaded-photos__image');
+        photo.src = photoData;
+        photoContainer.appendChild(photo);
+
+        const deleteButton = document.createElement('button');
+        deleteButton.classList.add('topic__write-topic__uploaded-photos__delete-button');
+        deleteButton.addEventListener('click', (e) => eventHandler(e, {type: 'delete-photo'}));   
+        photoContainer.appendChild(deleteButton);
+
+        const deleteButtonImage = document.createElement('img');
+        deleteButtonImage.src = "{{ '/assets/images/delete.svg' | prepend: site.baseurl }}";
+        deleteButtonImage.width = '25';
+        deleteButtonImage.height = '25';
+        deleteButton.appendChild(deleteButtonImage);
 
     }
 
@@ -253,5 +311,6 @@ const DiaryUI = (eventHandler) => {
         clearTopicUI,
         renderTopicsFound,
         renderAddTopicOptions,
+        renderWriteTopic,
     }
 }

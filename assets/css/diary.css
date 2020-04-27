@@ -6,7 +6,7 @@
     src: url('../fonts/ostrich-sans/OstrichSans-Black.otf');
 }
 
-body {
+body, textarea, button, input, select {
     font-family: 'Open Sans', sans-serif;
 }
 
@@ -210,4 +210,91 @@ body {
 .topic__add-topic__buttons-container {
     text-align: center;
     margin: auto;
+}
+
+.topic__write-topic__container {
+    height: 100%;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;   
+}
+
+.topic__write-topic__textarea {
+    width: 100%;
+    max-width: 95vh;
+    resize: none;
+    border-style: groove;
+    text-align: center;
+    height: 20vh;
+    padding: 1vh;
+    margin-bottom: 1vh;
+}
+
+.topic__write-topic__date-photo-container {
+    width: 100%;
+}
+
+.topic__write-topic__add-photo-label {
+    float: right;
+    background: white;
+    background-image: url("{{ '/assets/images/photo.svg' | prepend: site.baseurl }}");
+    width: 8vh;
+    height: 6vh;
+    background-size: contain;
+    background-repeat: round;
+    border: none;
+    margin-right: 1vh;
+}
+
+.topic__write-topic__add-photo-input {
+    display: none;
+}
+
+.topic__write-topic__date {
+    text-align: center;
+    border-style: groove;
+    padding: 1vh;
+    height: 100%;
+}
+
+.topic__write-topic__uploaded-photos {
+    height: 35vh;
+    width: 100%;
+    overflow-y: auto;
+    margin-top: 2vh;
+}
+
+.topic__write-topic__uploaded-photos__row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 4px;
+}
+  
+.topic__write-topic__uploaded-photos__column {
+    flex: 25%;
+    padding: 0 4px;
+}
+  
+.topic__write-topic__uploaded-photos__image {
+    margin-top: 8px;
+    vertical-align: middle;
+    width: 100%;
+}
+
+.topic__write-topic__photo-container {
+    position: relative;
+}
+
+.topic__write-topic__uploaded-photos__delete-button {
+    position: absolute;
+    height: 3vh;
+    width: 3vh;
+    background: white;
+    right: 0.1vh;
+    top: 1.2vh;
+    border: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 15vh;
 }
