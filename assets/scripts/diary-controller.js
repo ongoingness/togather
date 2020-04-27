@@ -35,6 +35,7 @@ const DiaryController = () => {
                         break;
 
                     case 'select-from-chat':
+                        updateState(STATES.selectTopicFromChat);
                         break;
 
                     case 'back': 
@@ -66,6 +67,29 @@ const DiaryController = () => {
 
             }
         },
+        selectTopicFromChat: {
+            render: () => {
+                ui.removeTopicUI();
+                ui.startChatUI();
+            },
+            eventHandler: (e, params) => {
+
+                switch(params.type) {
+                    
+                    case 'delete-photo':
+                        break;
+
+                    case 'done':
+                        updateState(STATES.topicsFound);
+                        break;
+                    
+                    case 'back': 
+                        updateState(STATES.topicsOptions);
+                        break;
+                }
+
+            }
+        }
     }
 
     let currentState = STATES.topicsFound;
@@ -84,7 +108,7 @@ const DiaryController = () => {
 
 
     const ui = DiaryUI(handleEvent);
-    
+
     ui.startTopicUI();
     updateState(STATES.writeTopic);
 

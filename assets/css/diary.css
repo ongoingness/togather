@@ -37,7 +37,6 @@ body, textarea, button, input, select {
     background: white;
 }
 
-
 #chat-container {
     max-width: 700px;
     width: 100%;
@@ -88,9 +87,7 @@ body, textarea, button, input, select {
     padding-bottom: 10px;
 }
 
-
-
-.topic-container {
+.topic-container, .chat-container {
     height: 100vh; /* Use vh as a fallback for browsers that do not support Custom Properties */
     height: calc(var(--vh, 1vh) * 100);
     margin: 0 auto;
@@ -98,18 +95,18 @@ body, textarea, button, input, select {
     width: 100%;
 }
   
-.topic-container__level {
+.topic-container__level, .chat-container__level {
     align-items: center;
     display: flex;
     justify-content: center;
 }
 
-.topic-container__header {
+.topic-container__header, .chat-container__header {
     height: 15%;
     background: white;
 }
 
-.topic-container__header__text {
+.topic-container__header__text, .chat-container__header__text {
     padding: 20px;
     padding-top: -10px;
     font-size: x-small;
@@ -126,20 +123,20 @@ body, textarea, button, input, select {
     overflow-y: scroll;
 }
 
-.topic-container__footer {
+.topic-container__footer, .chat-container__footer {
     position: relative;
     height: 15%;
     background: white;
 }
 
-.topic-container__footer__item {
+.topic-container__footer__item, .chat-container__footer__item{
     display: flex;
     width: 50%;
     height: 100%;
     position: relative;
 }
 
-.topic-button {
+.topic-button, .chat-button {
     font-family: 'Ostrich Sans Black';
     margin: auto;
     font-size: x-large;
@@ -150,7 +147,7 @@ body, textarea, button, input, select {
     background: white;
 }
 
-.topic-container__footer__item__button {
+.topic-container__footer__item__button, .chat-container__footer__item__button {
     font-family: 'Ostrich Sans Black';
     margin: auto;
     font-size: x-large;
@@ -297,4 +294,13 @@ body, textarea, button, input, select {
     padding: 0;
     margin: 0;
     border-radius: 15vh;
+}
+
+.chat-container__list{
+    height: 70%;
+    background-image: url("{{ '/assets/images/background_pattern_chat.svg' | prepend: site.baseurl }}");
+    background-repeat: repeat-y;
+    background-size: 150%;
+    padding: 2vh;
+    overflow-y: scroll;
 }

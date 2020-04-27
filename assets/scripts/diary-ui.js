@@ -6,6 +6,7 @@ const DiaryUI = (eventHandler) => {
     const startTopicUI = () => {
 
         const topicContainer = document.createElement('div');
+        topicContainer.id = 'topicContainer';
         topicContainer.classList.add('topic-container');
 
         const topicContainerHeader = document.createElement('div');
@@ -49,6 +50,11 @@ const DiaryUI = (eventHandler) => {
         removeChildren('topic-container-footer-left');
         removeChildren('topic-container-footer-right');
       
+    }
+
+    const removeTopicUI = () => {
+        removeChildren('topicContainer');
+        document.body.removeChild(document.getElementById('topicContainer'));
     }
 
     const renderTopicsFound = (topics) => {
@@ -306,11 +312,71 @@ const DiaryUI = (eventHandler) => {
 
     }
 
+    const startChatUI = () => {
+
+        const chatContainer = document.createElement('div');
+        chatContainer.id = 'chatContainer';
+        chatContainer.classList.add('chat-container');
+
+        const chatContainerHeader = document.createElement('div');
+        chatContainerHeader.classList.add('chat-container__level');
+        chatContainerHeader.classList.add('chat-container__header');
+        chatContainer.appendChild(chatContainerHeader);
+
+        const headerText = document.createElement('div');
+        headerText.id = 'chat-container-header-text';
+        headerText.classList.add('chat-container__header__text');
+        chatContainerHeader.appendChild(headerText);
+
+        const chatContainerList = document.createElement('div');
+        chatContainerList.id = 'chatList';
+        chatContainerList.classList.add('chat-container__list');
+        chatContainer.appendChild(chatContainerList);
+
+        const chatContainerFooter = document.createElement('div');
+        chatContainerFooter.classList.add('chat-container__level');
+        chatContainerFooter.classList.add('chat-container__footer');
+        chatContainer.appendChild(chatContainerFooter);
+
+        const footerLeft =  document.createElement('div');
+        footerLeft.id='chat-container-footer-left';
+        footerLeft.classList.add('chat-container__footer__item');
+        chatContainerFooter.appendChild(footerLeft);
+
+        const footerRight =  document.createElement('div');
+        footerRight.id='chat-container-footer-right';
+        footerRight.classList.add('chat-container__footer__item');
+        chatContainerFooter.appendChild(footerRight);
+
+        document.body.appendChild(chatContainer);
+
+        console.log("eys")
+
+    }
+
+    const clearChatUI = () => {
+
+        document.getElementById('chat-container-header-text').innerText = '';
+        removeChildren('chatList');
+        removeChildren('chat-container-footer-left');
+        removeChildren('chat-container-footer-right');
+      
+    }
+
+    const removeChatUI = () => {
+        removeChildren('chatContainer');
+    }
+
     return{
         startTopicUI,
         clearTopicUI,
+        removeTopicUI,
         renderTopicsFound,
         renderAddTopicOptions,
         renderWriteTopic,
+
+        startChatUI,
+        clearChatUI,
+        removeChatUI,
     }
 }
