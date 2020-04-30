@@ -3,85 +3,102 @@
 
 const DiaryUI = (eventHandler) => {
 
-    const startTopicUI = () => {
+    const renderBaseUI = () => {
 
-        const topicContainer = document.createElement('div');
-        topicContainer.id = 'topicContainer';
-        topicContainer.classList.add('topic-container');
+        const baseContainer = document.createElement('div');
+        baseContainer.id = 'baseContainer';
+        baseContainer.classList.add('base-container');
 
-        const topicContainerHeader = document.createElement('div');
-        topicContainerHeader.classList.add('topic-container__level');
-        topicContainerHeader.classList.add('topic-container__header');
-        topicContainer.appendChild(topicContainerHeader);
+        const baseContainerHeader = document.createElement('div');
+        baseContainerHeader.classList.add('base-container__level');
+        baseContainerHeader.classList.add('base-container__header');
+        baseContainer.appendChild(baseContainerHeader);
 
         const headerText = document.createElement('div');
-        headerText.id = 'topic-container-header-text';
-        headerText.classList.add('topic-container__header__text');
-        topicContainerHeader.appendChild(headerText);
+        headerText.id = 'base-container-header-text';
+        headerText.classList.add('base-container__header__text');
+        baseContainerHeader.appendChild(headerText);
 
-        const topicContainerList = document.createElement('div');
-        topicContainerList.id = 'topicList';
-        topicContainerList.classList.add('topic-container__list');
-        topicContainer.appendChild(topicContainerList);
+        const baseContainerList = document.createElement('div');
+        baseContainerList.id = 'baseList';
+        baseContainerList.classList.add('base-container__list');
+        baseContainer.appendChild(baseContainerList);
 
-        const topicContainerFooter = document.createElement('div');
-        topicContainerFooter.classList.add('topic-container__level');
-        topicContainerFooter.classList.add('topic-container__footer');
-        topicContainer.appendChild(topicContainerFooter);
+        const baseContainerFooter = document.createElement('div');
+        baseContainerFooter.classList.add('base-container__level');
+        baseContainerFooter.classList.add('base-container__footer');
+        baseContainer.appendChild(baseContainerFooter);
 
         const footerLeft =  document.createElement('div');
-        footerLeft.id='topic-container-footer-left';
-        footerLeft.classList.add('topic-container__footer__item');
-        topicContainerFooter.appendChild(footerLeft);
+        footerLeft.id='base-container-footer-left';
+        footerLeft.classList.add('base-container__footer__item');
+        baseContainerFooter.appendChild(footerLeft);
 
         const footerRight =  document.createElement('div');
-        footerRight.id='topic-container-footer-right';
-        footerRight.classList.add('topic-container__footer__item');
-        topicContainerFooter.appendChild(footerRight);
+        footerRight.id='base-container-footer-right';
+        footerRight.classList.add('base-container__footer__item');
+        baseContainerFooter.appendChild(footerRight);
 
-        document.body.appendChild(topicContainer);
+        document.body.appendChild(baseContainer);
 
     }
 
-    const clearTopicUI = () => {
+    const clearBaseUI = () => {
 
-        document.getElementById('topic-container-header-text').innerText = '';
-        removeChildren('topicList');
-        removeChildren('topic-container-footer-left');
-        removeChildren('topic-container-footer-right');
+        document.getElementById('baseList').classList.remove('chat__list__background');
+        document.getElementById('baseList').classList.remove('topic__list__background');
+
+        removeChildren('base-container-header-text');
+        removeChildren('baseList');
+        removeChildren('base-container-footer-left');
+        removeChildren('base-container-footer-right');
       
     }
 
+    const removeBaseUI = () => {
+
+        removeChildren('baseContainer');
+        document.body.removeChild(document.getElementById('baseContainer'));
+
+    }
+
+    const startTopicUI = () => {
+
+        document.getElementById('baseList').classList.add('topic__list__background');
+    
+    }
+
     const removeTopicUI = () => {
-        removeChildren('topicContainer');
-        document.body.removeChild(document.getElementById('topicContainer'));
+
+        document.getElementById('baseList').classList.remove('topic__list__background');
+
     }
 
     const renderTopicsFound = (topics) => {
-
-        document.getElementById('topic-container-header-text').innerText = 'We found the following daily topics you have been messaging about. Is this set complete? Or are there any topics you want to add tho this list?';
+     
+        document.getElementById('base-container-header-text').innerText = 'We found the following daily topics you have been messaging about. Is this set complete? Or are there any topics you want to add tho this list?';
         
         renderTopics(topics);
 
         const addTopicButton  = document.createElement('button');
         addTopicButton.classList.add('topic-button');
-        addTopicButton.classList.add('topic-container__footer__item__button');
+        addTopicButton.classList.add('base-container__footer__item__button');
         addTopicButton.innerText = 'ADD TOPICS';
         addTopicButton.addEventListener('click', (e) => eventHandler(e, {type: 'add-topic'}));              
-        document.getElementById('topic-container-footer-left').appendChild(addTopicButton);
+        document.getElementById('base-container-footer-left').appendChild(addTopicButton);
 
         const thatsAllButton  = document.createElement('button');
         thatsAllButton.classList.add('topic-button');
-        thatsAllButton.classList.add('topic-container__footer__item__button');
+        thatsAllButton.classList.add('base-container__footer__item__button');
         thatsAllButton.innerText = 'THAT\'S All';
         thatsAllButton.addEventListener('click', (e) => eventHandler(e, {type: 'thats-all'}));  
-        document.getElementById('topic-container-footer-right').appendChild(thatsAllButton);
+        document.getElementById('base-container-footer-right').appendChild(thatsAllButton);
 
     }
 
     const renderTopic = (day, topicData) => {
                 
-        const topicList = document.getElementById('topicList');
+        const topicList = document.getElementById('baseList');
 
         const topic =  document.createElement('div');
         topic.classList.add('topic');
@@ -106,8 +123,9 @@ const DiaryUI = (eventHandler) => {
 
         const topicHeaderEditButton = document.createElement('button');
         topicHeaderEditButton.classList.add('topic__header__edit-button');
-        topicHeaderEditButton.addEventListener('click', () => {
-            console.log('Topic Edit Button');
+        topicHeaderEditButton.addEventListener('click', (e) => {
+           
+            eventHandler(e, {type: 'edit-topic', data: '111'});
         });
         topicHeader.appendChild(topicHeaderEditButton);
 
@@ -160,10 +178,10 @@ const DiaryUI = (eventHandler) => {
 
     const renderAddTopicOptions = () => {
 
-        const headerText = document.getElementById('topic-container-header-text');
+        const headerText = document.getElementById('base-container-header-text');
         headerText.innerText = 'New Topic From Where';
 
-        const topicList = document.getElementById('topicList');
+        const topicList = document.getElementById('baseList');
 
         const optionsContainer = document.createElement('div');
         optionsContainer.classList.add('topic__add-topic__options');
@@ -192,10 +210,10 @@ const DiaryUI = (eventHandler) => {
 
         const backButton = document.createElement('button');
         backButton.classList.add('topic-button');
-        backButton.classList.add('topic-container__footer__item__button');
+        backButton.classList.add('base-container__footer__item__button');
         backButton.innerText = 'BACK';
         backButton.addEventListener('click', (e) => eventHandler(e, {type: 'back'})); 
-        document.getElementById('topic-container-footer-left').appendChild(backButton);
+        document.getElementById('base-container-footer-left').appendChild(backButton);
 
     }
 
@@ -208,12 +226,12 @@ const DiaryUI = (eventHandler) => {
         return color;
     }
 
-    const renderWriteTopic = () => {
+    const renderWriteTopic = (topicData) => {
 
-        const headerText = document.getElementById('topic-container-header-text');
+        const headerText = document.getElementById('base-container-header-text');
         headerText.innerText = 'Write your own topic and assign it to a date.';
 
-        const topicList = document.getElementById('topicList');
+        const topicList = document.getElementById('baseList');
 
         const container = document.createElement('div');
         container.classList.add('topic__write-topic__container');
@@ -272,24 +290,22 @@ const DiaryUI = (eventHandler) => {
 
         const backButton = document.createElement('button');
         backButton.classList.add('topic-button');
-        backButton.classList.add('topic-container__footer__item__button');
+        backButton.classList.add('base-container__footer__item__button');
         backButton.innerText = 'BACK';
         backButton.addEventListener('click', (e) => eventHandler(e, {type: 'back'}))    
-        document.getElementById('topic-container-footer-left').appendChild(backButton);
+        document.getElementById('base-container-footer-left').appendChild(backButton);
 
         const doneButton = document.createElement('button');
         doneButton.classList.add('topic-button');
-        doneButton.classList.add('topic-container__footer__item__button');
+        doneButton.classList.add('base-container__footer__item__button');
         doneButton.innerText = 'DONE';
         doneButton.addEventListener('click', (e) => eventHandler(e, {type: 'done'}));   
-        document.getElementById('topic-container-footer-right').appendChild(doneButton);
+        document.getElementById('base-container-footer-right').appendChild(doneButton);
 
     }
 
     const renderAddedPhoto = (photoData, parent) => {
-
-        console.log(parent)
-    
+  
         const photoContainer = document.createElement('div');
         photoContainer.classList.add('topic__write-topic__photo-container');
         parent.appendChild(photoContainer);
@@ -314,69 +330,145 @@ const DiaryUI = (eventHandler) => {
 
     const startChatUI = () => {
 
-        const chatContainer = document.createElement('div');
-        chatContainer.id = 'chatContainer';
-        chatContainer.classList.add('chat-container');
-
-        const chatContainerHeader = document.createElement('div');
-        chatContainerHeader.classList.add('chat-container__level');
-        chatContainerHeader.classList.add('chat-container__header');
-        chatContainer.appendChild(chatContainerHeader);
-
-        const headerText = document.createElement('div');
-        headerText.id = 'chat-container-header-text';
-        headerText.classList.add('chat-container__header__text');
-        chatContainerHeader.appendChild(headerText);
-
-        const chatContainerList = document.createElement('div');
-        chatContainerList.id = 'chatList';
-        chatContainerList.classList.add('chat-container__list');
-        chatContainer.appendChild(chatContainerList);
-
-        const chatContainerFooter = document.createElement('div');
-        chatContainerFooter.classList.add('chat-container__level');
-        chatContainerFooter.classList.add('chat-container__footer');
-        chatContainer.appendChild(chatContainerFooter);
-
-        const footerLeft =  document.createElement('div');
-        footerLeft.id='chat-container-footer-left';
-        footerLeft.classList.add('chat-container__footer__item');
-        chatContainerFooter.appendChild(footerLeft);
-
-        const footerRight =  document.createElement('div');
-        footerRight.id='chat-container-footer-right';
-        footerRight.classList.add('chat-container__footer__item');
-        chatContainerFooter.appendChild(footerRight);
-
-        document.body.appendChild(chatContainer);
-
-        console.log("eys")
-
-    }
-
-    const clearChatUI = () => {
-
-        document.getElementById('chat-container-header-text').innerText = '';
-        removeChildren('chatList');
-        removeChildren('chat-container-footer-left');
-        removeChildren('chat-container-footer-right');
-      
+        document.getElementById('baseList').classList.add('chat__list__background');
+    
     }
 
     const removeChatUI = () => {
-        removeChildren('chatContainer');
+
+        document.getElementById('baseList').classList.remove('chat__list__background');
+
+    }
+
+    const renderSelectTopicFromChat = () => {
+
+        document.getElementById('base-container-header-text').innerText = 'Select missing topics from your chat.';
+
+        for(let i = 0; i < 100; i++) {
+            renderChatMessage(i, 'baseList');
+        }
+
+        const backButton = document.createElement('button');
+        backButton.classList.add('topic-button');
+        backButton.classList.add('base-container__footer__item__button');
+        backButton.innerText = 'BACK';
+        backButton.addEventListener('click', (e) => eventHandler(e, {type: 'back'}))    
+        document.getElementById('base-container-footer-left').appendChild(backButton);
+
+        const doneButton = document.createElement('button');
+        doneButton.classList.add('topic-button');
+        doneButton.classList.add('base-container__footer__item__button');
+        doneButton.innerText = 'DONE';
+        doneButton.addEventListener('click', (e) => eventHandler(e, {type: 'done'}));   
+        document.getElementById('base-container-footer-right').appendChild(doneButton);
+
+    }
+
+    const renderChatMessage = (messageData, messageListId) => {
+
+        const chatMessage = document.createElement('div');
+        chatMessage.classList.add('chat-message');
+        chatMessage.addEventListener('click', (e) => {
+
+            if(chatMessage.classList.contains('selected')) {
+                chatMessage.classList.remove('selected');
+                eventHandler(e, {type: 'deselected-message', hash: '123'})
+            } else {
+                chatMessage.classList.add('selected');
+                eventHandler(e, {type: 'selected-message', hash: '123'})
+            }
+            
+        }); 
+
+        document.getElementById(messageListId).appendChild(chatMessage);
+
+        const header = document.createElement('div');
+        header.classList.add('chat-message__header');
+        chatMessage.appendChild(header);
+      
+        const colour = getRandomColor();
+
+        const chatMessageUser = document.createElement('div');
+        chatMessageUser.innerText = 'User';
+        chatMessageUser.classList.add('chat-message__name');
+        chatMessageUser.style = `color: ${colour}`;
+        header.appendChild(chatMessageUser);
+
+        const chatMessageTime = document.createElement('div');
+        chatMessageTime.innerText = '2002/20/22';
+        chatMessageTime.classList.add('chat-message__date');
+        chatMessageTime.style = `color: ${colour}`;
+        header.appendChild(chatMessageTime);
+
+
+        const chatMessageBody = document.createElement('div');
+        chatMessageBody.classList.add('chat-message__text');
+        chatMessageBody.innerText = 'Text message Test dsfsdfsdfdsfds fsdfsdfsdfsdfsdfsd fsd fsd fsdf ds fdsfsdf sdf sd fsdf sf ';
+        chatMessage.appendChild(chatMessageBody);
+
+
+        /*
+        if(parsedMessage.file != '') {
+            if(files[parsedMessage.file].type.includes('audio')) {
+                const audio = document.createElement('audio');
+                audio.setAttribute('controls', true);
+
+                const source = document.createElement('source');
+                source.setAttribute('src', files[parsedMessage.file].data);
+                source.setAttribute('type', files[parsedMessage.file].type);
+
+                audio.appendChild(source);
+                chatMessageBody.appendChild(audio);
+
+            } else if(files[parsedMessage.file].type.includes('video')) {
+                const video = document.createElement('video');
+                video.width = 320;
+                video.height = 240;
+                video.controls = true;
+                video.autoplay = true;
+                video.loop = true;
+                video.muted = true;
+
+                const source = document.createElement('source');
+                source.src = files[parsedMessage.file].data;
+                source.type = files[parsedMessage.file].type;
+
+                video.appendChild(source);
+                chatMessageBody.appendChild(video);
+            } else if(files[parsedMessage.file].type.includes('image')) {
+                const image = document.createElement('img');
+                image.src = files[parsedMessage.file].data;
+                image.width = 320;
+                image.height = 240;
+                chatMessageBody.appendChild(image);
+            }
+
+        }*/
+
+    }
+
+    const renderEditTopic = (topicData) => {
+        renderWriteTopic(topicData);
+        const headerText = document.getElementById('base-container-header-text');
+        headerText.innerText = 'Make changes to this topic';
     }
 
     return{
+
+        renderBaseUI,
+        clearBaseUI,
+        removeBaseUI,
+
         startTopicUI,
-        clearTopicUI,
         removeTopicUI,
         renderTopicsFound,
         renderAddTopicOptions,
         renderWriteTopic,
+        renderEditTopic,
 
         startChatUI,
-        clearChatUI,
         removeChatUI,
+        renderSelectTopicFromChat,
+
     }
 }

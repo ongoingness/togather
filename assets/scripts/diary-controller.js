@@ -4,7 +4,8 @@ const DiaryController = () => {
         waitForFiles: 0,
         topicsFound: {
             render: () => {
-                ui.clearTopicUI();
+                ui.clearBaseUI();
+                ui.startTopicUI();
                 ui.renderTopicsFound(['topic']);
             },
             eventHandler: (e, params) => {
@@ -18,12 +19,17 @@ const DiaryController = () => {
                     case 'thats-all':
 
                         break;
+
+                    case 'edit-topic':
+                        updateState(STATES.editTopic);
+                        break;
                 }
             }
         },
         topicsOptions: {
             render: () => {
-                ui.clearTopicUI();
+                ui.clearBaseUI();
+                ui.startTopicUI();
                 ui.renderAddTopicOptions();
             },
             eventHandler: (e, params) => {
@@ -46,7 +52,8 @@ const DiaryController = () => {
         },
         writeTopic: {
             render: () => {
-                ui.clearTopicUI();
+                ui.clearBaseUI();
+                ui.startTopicUI();
                 ui.renderWriteTopic();
             },
             eventHandler: (e, params) => {
@@ -69,8 +76,9 @@ const DiaryController = () => {
         },
         selectTopicFromChat: {
             render: () => {
-                ui.removeTopicUI();
+                ui.clearBaseUI();
                 ui.startChatUI();
+                ui.renderSelectTopicFromChat();
             },
             eventHandler: (e, params) => {
 
@@ -85,6 +93,27 @@ const DiaryController = () => {
                     
                     case 'back': 
                         updateState(STATES.topicsOptions);
+                        break;
+                }
+
+            }
+        },
+        editTopic: {
+            render: () => {
+                ui.clearBaseUI();
+                ui.startTopicUI();
+                ui.renderEditTopic();
+            },
+            eventHandler: (e, params) => {
+
+                switch(params.type) {
+
+                    case 'done':
+                        updateState(STATES.topicsFound);
+                        break;
+                    
+                    case 'back': 
+                        updateState(STATES.topicsFound);
                         break;
                 }
 
@@ -106,11 +135,10 @@ const DiaryController = () => {
         currentState.render();
     }
 
-
     const ui = DiaryUI(handleEvent);
 
-    ui.startTopicUI();
-    updateState(STATES.writeTopic);
+    ui.renderBaseUI();
+    updateState(STATES.selectTopicFromChat);
 
 
 }
