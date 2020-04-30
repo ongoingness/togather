@@ -1,7 +1,14 @@
 const DiaryController = () => {
 
     const STATES = {
-        waitForFiles: 0,
+        waitForFiles: {
+            render: () => {
+
+            },
+            eventHandler: (e, params) => {
+
+            }
+        },
         topicsFound: {
             render: () => {
                 ui.clearBaseUI();
@@ -118,6 +125,16 @@ const DiaryController = () => {
                 }
 
             }
+        },
+        selectMessages: {
+            render: () => {
+                ui.clearBaseUI();
+                ui.startChatUI();
+                ui.renderSelectMessages();
+            },
+            eventHandler: (e, params) => {
+            
+            }   
         }
     }
 
@@ -138,7 +155,7 @@ const DiaryController = () => {
     const ui = DiaryUI(handleEvent);
 
     ui.renderBaseUI();
-    updateState(STATES.selectTopicFromChat);
+    updateState(STATES.selectMessages);
 
 
 }

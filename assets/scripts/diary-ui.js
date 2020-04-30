@@ -449,8 +449,67 @@ const DiaryUI = (eventHandler) => {
 
     const renderEditTopic = (topicData) => {
         renderWriteTopic(topicData);
+        document.getElementById('base-container-header-text').innerText  = 'Make changes to this topic';
+    }
+
+    const renderSelectMessages = () => {
+
         const headerText = document.getElementById('base-container-header-text');
-        headerText.innerText = 'Make changes to this topic';
+        headerText.classList.add('base-container__header__text__override');
+
+        const dayScrollerContainer = document.createElement('div');
+        dayScrollerContainer.classList.add('day-scroller__container');
+        headerText.appendChild(dayScrollerContainer);
+
+        const days = document.createElement('div');
+        days.classList.add('day-scroller__day-buttons-container');
+        dayScrollerContainer.appendChild(days);
+
+        const daysLeft = document.createElement('div');
+        daysLeft.classList.add('day-scroller__day-buttons-container__left');
+        days.appendChild(daysLeft);
+
+        const prevDay = document.createElement('button');
+        prevDay.classList.add('day-scroller__prev');
+        prevDay.innerHTML = '&#10094;'
+        daysLeft.appendChild(prevDay);
+
+        const daysCenter = document.createElement('div');
+        daysCenter.classList.add('day-scroller__day-buttons-container__center');
+        days.appendChild(daysCenter);
+
+        const dayDisplay1 = document.createElement('div');
+        dayDisplay1.classList.add('day-scroller__day-display');
+        dayDisplay1.innerText = 'Day 1';
+        daysCenter.appendChild(dayDisplay1);
+
+        const daysRight = document.createElement('div');
+        daysRight.classList.add('day-scroller__day-buttons-container__right');
+        days.appendChild(daysRight);
+
+        const nextDay = document.createElement('button');
+        nextDay.classList.add('day-scroller__next');
+        nextDay.innerHTML = '&#10095;'
+        daysRight.appendChild(nextDay);
+
+        const dotContainer = document.createElement('div');
+        dotContainer.id = 'dotContainer';
+        dotContainer.classList.add('day-scroller__dot-container');
+        dayScrollerContainer.appendChild(dotContainer);
+
+        renderDay('test', 'test', 'dotContainer');
+        renderDay('test', 'test', 'dotContainer');
+        renderDay('test', 'test', 'dotContainer');
+        renderDay('test', 'test', 'dotContainer');
+    
+    }
+
+    const renderDay = (dayData, dayContainerId, dotContainerId) => {
+
+        const dot = document.createElement('span');
+        dot.classList.add('day-scroller__dot');
+        document.getElementById('dotContainer').appendChild(dot);
+
     }
 
     return{
@@ -469,6 +528,7 @@ const DiaryUI = (eventHandler) => {
         startChatUI,
         removeChatUI,
         renderSelectTopicFromChat,
+        renderSelectMessages,
 
     }
 }

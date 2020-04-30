@@ -263,13 +263,96 @@ body, textarea, button, input, select {
     color: black;
 }
 
-.chat-date-divider {
-    border: solid;
+.base-container__header__text__override {
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.day-scroller__container {
+    width: 100%;
+    height: 100%;
+}
+
+.day-scroller__day-buttons-container {
+    display: flex;
+}
+
+.day-scroller__day-buttons-container__left, .day-scroller__day-buttons-container__right{
+    width: 25%;
+}
+
+.day-scroller__day-buttons-container__left {
+    text-align: left;
+}
+
+.day-scroller__day-buttons-container__right{
+    text-align: right;
+}
+
+.day-scroller__day-buttons-container__center {
+    width: 50%;
+}
+
+.day-scroller__day-display {
+    font-family: 'Ostrich Sans Black';
+    font-size: x-large;
+    color: black;
+    padding-left: 2vh;
+    padding-right: 2vh;
+    border-style: solid;
+    border-color: black;
+    border-width: thin;
+}
+
+.day-scroller__prev, .day-scroller__next {
+    cursor: pointer;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: black;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+  
+  /* Position the "next button" to the right */
+.day-scroller__next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.day-scroller__prev {
+    left: 0;
+    border-radius: 3px 0 0 3px;
+}
+  
+  /* On hover, add a black background color with a little bit see-through */
+.day-scroller__prev:hover, .day-scroller__next:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+
+.day-scroller__dot-container {
     text-align: center;
-    margin: 0px 300px 0px 300px;
-    border-radius: 10px;
+}
+
+.day-scroller__dot {
+    cursor: pointer;
+    height: 10px;
+    width: 10px;
+    margin: 0 2px;
+    background-color: white;
+    border-radius: 50%;
+    border-style: solid;
     border-width: 1px;
-    background: rgba(225, 245, 254, 0.92);
-    padding-top: 10px;
-    padding-bottom: 10px;
+    color: black;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.day-scroller__dot:hover {
+    background-color: black;
 }
