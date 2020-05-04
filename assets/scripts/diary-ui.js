@@ -400,7 +400,6 @@ const DiaryUI = (eventHandler) => {
         chatMessageTime.style = `color: ${colour}`;
         header.appendChild(chatMessageTime);
 
-
         const chatMessageBody = document.createElement('div');
         chatMessageBody.classList.add('chat-message__text');
         chatMessageBody.innerText = 'Text message Test dsfsdfsdfdsfds fsdfsdfsdfsdfsdfsd fsd fsd fsdf ds fdsfsdf sdf sd fsdf sf ';
@@ -501,7 +500,45 @@ const DiaryUI = (eventHandler) => {
         renderDay('test', 'test', 'dotContainer');
         renderDay('test', 'test', 'dotContainer');
         renderDay('test', 'test', 'dotContainer');
-    
+
+        const baseList = document.getElementById('baseList');
+        baseList.classList.add('no-padding');
+
+        const topicDisplay = document.createElement('div');
+        topicDisplay.classList.add('select-messages__topic-display');
+        topicDisplay.innerText = 'This is the challenge that we selected we were gonna write something about today. Now wer are gonna select every message that is send for today.'
+        baseList.appendChild(topicDisplay);
+
+        const actionText = document.createElement('div');
+        actionText.classList.add('select-messages__action-text');
+        actionText.innerText = 'Select all the messages to go in the diary for this day.'
+        topicDisplay.appendChild(actionText);
+        
+        
+        /*
+        const messagesContainer = document.createElement('div');
+        messagesContainer.id = 'messagesContainer';
+        messagesContainer.classList.add('select-messages__messages-container');
+        baseList.appendChild(messagesContainer);*/
+
+        for(let i = 0; i < 100; i++) {
+            renderChatMessage(i, 'baseList');
+        }
+
+        const topicsButton = document.createElement('button');
+        topicsButton.classList.add('topic-button');
+        topicsButton.classList.add('base-container__footer__item__button');
+        topicsButton.innerText = 'TOPICS';
+        topicsButton.addEventListener('click', (e) => eventHandler(e, {type: 'topics'}))    
+        document.getElementById('base-container-footer-left').appendChild(topicsButton);
+
+        const finishDiaryButton = document.createElement('button');
+        finishDiaryButton.classList.add('topic-button');
+        finishDiaryButton.classList.add('base-container__footer__item__button');
+        finishDiaryButton.innerText = 'FINISH DIARY';
+        finishDiaryButton.addEventListener('click', (e) => eventHandler(e, {type: 'finish-diary'}));   
+        document.getElementById('base-container-footer-right').appendChild(finishDiaryButton);
+  
     }
 
     const renderDay = (dayData, dayContainerId, dotContainerId) => {
