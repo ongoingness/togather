@@ -496,17 +496,12 @@ const DiaryUI = (eventHandler) => {
         dotContainer.classList.add('day-scroller__dot-container');
         dayScrollerContainer.appendChild(dotContainer);
 
-        renderDay('test', 'test', 'dotContainer');
-        renderDay('test', 'test', 'dotContainer');
-        renderDay('test', 'test', 'dotContainer');
-        renderDay('test', 'test', 'dotContainer');
-
         const baseList = document.getElementById('baseList');
         baseList.classList.add('no-padding');
 
         const topicDisplay = document.createElement('div');
+        topicDisplay.id = 'topicDisplay';
         topicDisplay.classList.add('select-messages__topic-display');
-        topicDisplay.innerText = 'This is the challenge that we selected we were gonna write something about today. Now wer are gonna select every message that is send for today.'
         baseList.appendChild(topicDisplay);
 
         const actionText = document.createElement('div');
@@ -514,17 +509,6 @@ const DiaryUI = (eventHandler) => {
         actionText.innerText = 'Select all the messages to go in the diary for this day.'
         topicDisplay.appendChild(actionText);
         
-        
-        /*
-        const messagesContainer = document.createElement('div');
-        messagesContainer.id = 'messagesContainer';
-        messagesContainer.classList.add('select-messages__messages-container');
-        baseList.appendChild(messagesContainer);*/
-
-        for(let i = 0; i < 100; i++) {
-            renderChatMessage(i, 'baseList');
-        }
-
         const topicsButton = document.createElement('button');
         topicsButton.classList.add('topic-button');
         topicsButton.classList.add('base-container__footer__item__button');
@@ -538,14 +522,26 @@ const DiaryUI = (eventHandler) => {
         finishDiaryButton.innerText = 'FINISH DIARY';
         finishDiaryButton.addEventListener('click', (e) => eventHandler(e, {type: 'finish-diary'}));   
         document.getElementById('base-container-footer-right').appendChild(finishDiaryButton);
+
+        renderDay('1', 'topicDisplay', 'baseList');
   
     }
 
-    const renderDay = (dayData, dayContainerId, dotContainerId) => {
+    const clearDay = () => {
+ß
+    }
+
+    const renderDay = (dayData, topicDisplayId, messageListId) => {
 
         const dot = document.createElement('span');
         dot.classList.add('day-scroller__dot');
         document.getElementById('dotContainer').appendChild(dot);
+
+        document.getElementById(topicDisplayId).insertAdjacentText('afterbegin', 'This is the challenge that we selected we were gonna write something about today. Now wer are gonna select every message that is send for today.');
+
+        for(let i = 0; i < 100; i++) {
+            renderChatMessage(i, messageListId);
+        }
 
     }
 

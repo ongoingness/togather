@@ -24,7 +24,7 @@ const DiaryController = () => {
                         break;
 
                     case 'thats-all':
-
+                        updateState(STATES.selectMessages);
                         break;
 
                     case 'edit-topic':
@@ -133,6 +133,18 @@ const DiaryController = () => {
                 ui.renderSelectMessages();
             },
             eventHandler: (e, params) => {
+
+                switch(params.type) {
+
+                    case 'topics':
+                        updateState(STATES.topicsFound);
+                        break;
+                    
+                    case '': 
+                        updateState(STATES.topicsFound);
+                        break;
+
+                }
             
             }   
         }
@@ -155,7 +167,7 @@ const DiaryController = () => {
     const ui = DiaryUI(handleEvent);
 
     ui.renderBaseUI();
-    updateState(STATES.selectMessages);
+    updateState(STATES.topicsFound);
 
 
 }
