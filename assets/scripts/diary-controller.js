@@ -136,11 +136,21 @@ const DiaryController = () => {
 
                 switch(params.type) {
 
+                    case 'read-more':
+                        ui.renderFullTopic('This is the challenge that we selected we were gonna write something about today. Now wer are gonna select every message that is send for today.');
+                        break;
+
+                    case 'read-less':
+                        let longTopic = 'This is the challenge that we selected we were gonna write something about today. Now wer are gonna select every message that is send for today.';
+
+                        ui.renderShortTopic(longTopic.substring(0, 90));
+                        break;
+
                     case 'topics':
                         updateState(STATES.topicsFound);
                         break;
                     
-                    case '': 
+                    case 'finish-diary': 
                         updateState(STATES.topicsFound);
                         break;
 
@@ -155,6 +165,7 @@ const DiaryController = () => {
 
     const handleEvent = (e, params) => {
         e.stopPropagation();
+        console.log(params.type);
         currentState.eventHandler(e, params);
     }
 

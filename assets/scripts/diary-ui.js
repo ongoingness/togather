@@ -47,6 +47,7 @@ const DiaryUI = (eventHandler) => {
 
         document.getElementById('baseList').classList.remove('chat__list__background');
         document.getElementById('baseList').classList.remove('topic__list__background');
+        document.getElementById('base-container-header-text').classList.remove('base-container__header__text__override');
 
         removeChildren('base-container-header-text');
         removeChildren('baseList');
@@ -504,6 +505,29 @@ const DiaryUI = (eventHandler) => {
         topicDisplay.classList.add('select-messages__topic-display');
         baseList.appendChild(topicDisplay);
 
+        const topicDisplayText = document.createElement('span');
+        topicDisplayText.id = 'topicDisplayText';
+        topicDisplay.appendChild(topicDisplayText);
+
+        //Check topic description size
+
+        /////////////////////////////
+
+        const readMoreButton = document.createElement('button');
+        readMoreButton.id = 'readMoreButton';
+        readMoreButton.classList.add('select-messages__read-more-button');
+        readMoreButton.innerText = 'Read More';
+        readMoreButton.addEventListener('click', (e) => eventHandler(e, {type: 'read-more'}));     
+        topicDisplay.appendChild(readMoreButton);
+
+        const readLessButton = document.createElement('button');
+        readLessButton.id = 'readLessButton';
+        readLessButton.classList.add('select-messages__read-less-button');
+        readLessButton.classList.add('hidden');
+        readLessButton.innerText = 'Read Less';
+        readLessButton.addEventListener('click', (e) => eventHandler(e, {type: 'read-less'}));     
+        topicDisplay.appendChild(readLessButton);
+
         const actionText = document.createElement('div');
         actionText.classList.add('select-messages__action-text');
         actionText.innerText = 'Select all the messages to go in the diary for this day.'
@@ -537,13 +561,25 @@ const DiaryUI = (eventHandler) => {
         dot.classList.add('day-scroller__dot');
         document.getElementById('dotContainer').appendChild(dot);
 
-        document.getElementById(topicDisplayId).insertAdjacentText('afterbegin', 'This is the challenge that we selected we were gonna write something about today. Now wer are gonna select every message that is send for today.');
+        renderShortTopic('This is the challenge that we selected we were gonna write something about today. Now wer are gonna select every message that is send for today.');        
 
         for(let i = 0; i < 100; i++) {
             renderChatMessage(i, messageListId);
         }
 
     }
+
+    const renderFullTopic = (text) => {
+        document.getElementById('topicDisplayText').innerText = text;
+        document.getElementById('readMoreButton').classList.add('hidden');
+        document.getElementById('readLessButton').classList.remove('hidden');
+    } 
+
+    const renderShortTopic = (text) => {
+        document.getElementById('topicDisplayText').innerText = text;
+        document.getElementById('readLessButton').classList.add('hidden');
+        document.getElementById('readMoreButton').classList.remove('hidden');
+    } 
 
     return{
 
@@ -562,6 +598,9 @@ const DiaryUI = (eventHandler) => {
         removeChatUI,
         renderSelectTopicFromChat,
         renderSelectMessages,
+        renderFullTopic,
+        renderShortTopic,
+        renderDay,
 
     }
 }

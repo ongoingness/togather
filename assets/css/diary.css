@@ -101,7 +101,6 @@ body, textarea, button, input, select {
     display: flex;
     position: relative;
     height: 4vh;
-    /*margin-bottom: 2vh;*/
 }
 
 .topic__header__day {
@@ -284,7 +283,7 @@ body, textarea, button, input, select {
 
 .day-scroller__day-buttons-container {
     display: flex;
-    margin-top: 5vh;
+    margin-top: 2.7vh;
 }
 
 .day-scroller__day-buttons-container__left, .day-scroller__day-buttons-container__right{
@@ -301,6 +300,7 @@ body, textarea, button, input, select {
 
 .day-scroller__day-buttons-container__center {
     width: 50%;
+    align-self: center;
 }
 
 .day-scroller__day-display {
@@ -394,4 +394,15 @@ body, textarea, button, input, select {
 .select-messages__messages-container {
     overflow-y: scroll;
     height: 100%;
+}
+
+.select-messages__read-more-button, .select-messages__read-less-button  {
+    background: none;
+    border: none;
+    color: blue;
+    cursor: pointer;
+}
+
+.select-messages__read-more-button.hidden, .select-messages__read-less-button.hidden {
+    display: none;
 }
