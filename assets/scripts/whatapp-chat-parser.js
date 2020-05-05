@@ -4,7 +4,7 @@ const WhatsAppChatParser = () => {
         const tempFiles = await readFiles(filesInput);
         const files = {}; 
 
-        for(file of tempFiles) {
+        for(let file of tempFiles) {
             if(file.file.type != 'text/plain') {
                 files[`${file.file.name}`] = {type: file.file.type, data: file.fileContent};
             }
@@ -13,7 +13,7 @@ const WhatsAppChatParser = () => {
         let messageMap;
         let orderedMessages;
         let users;
-        for(file of tempFiles) {
+        for(let file of tempFiles) {
             if(file.file.type === 'text/plain') {
                 const parsedResult = parseMessages(file.fileContent, files);
                 messageMap = parsedResult.messageMap;
@@ -127,7 +127,7 @@ const WhatsAppChatParser = () => {
                 return color;
             }
 
-            for(user of users) {
+            for(let user of users) {
                 if(user.name === name) {
                     foundUser = true;
                     break;
@@ -142,7 +142,7 @@ const WhatsAppChatParser = () => {
 
         let currentMessage = null;
 
-        for([index, rawMessage] of rawMessages.entries()) {
+        for(let [index, rawMessage] of rawMessages.entries()) {
 
             const messageStart = messageStartRegex.exec(rawMessage);
             if(messageStart != null) {

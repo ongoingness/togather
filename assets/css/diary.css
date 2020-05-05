@@ -174,7 +174,7 @@ body, textarea, button, input, select {
     margin-right: 1vh;
 }
 
-.topic__write-topic__add-photo-input {
+.topic__write-topic__add-photo-input, .upload-files__input {
     display: none;
 }
 
@@ -417,4 +417,13 @@ body, textarea, button, input, select {
 
 .select-messages__read-more-button.hidden, .select-messages__read-less-button.hidden {
     display: none;
+}
+
+.upload-files__label {
+    background: white;
+    padding: 3vh;
+    border-style: solid;
+    border-radius: 20vh;
+    border-width: medium;
+    cursor: pointer;
 }

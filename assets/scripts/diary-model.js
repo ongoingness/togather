@@ -24,12 +24,12 @@ const DiaryModel = () => {
         let previousTopic;
         let currentTopic;
 
-        for(hash of whatsAppChat.orderedMessages) {
+        for(let hash of whatsAppChat.orderedMessages) {
 
             let message = whatsAppChat.messageMap[hash];
 
             let isTopic = false;
-            for(link of message.links) {
+            for(let link of message.links) {
                 if(topicRegex.exec(link) != null) {
                     isTopic = true;
                     break;
@@ -42,7 +42,7 @@ const DiaryModel = () => {
                     tempTopics.push({...currentTopic});
                 }
                 currentTopic = {
-                    timestamp: message.timestamp,
+                    timestamp: message.datetimestamp,
                     hash,
                     messages: [],
                     selectedMessages: [],
@@ -74,7 +74,29 @@ const DiaryModel = () => {
     }
 
     const getTopics = () => {
-        return topics;
+
+        const resultTopics = [];
+
+        for(let topic of topics) {
+            console.log(topic);
+            resultTopics.push({
+                hash: topic.hash,
+                timestamp: topic.timestamp,
+                text: whatsAppChat.messageMap[topic.hash].text,
+            });
+        }
+        return resultTopics;
+    }
+
+    const getFullMessagesInOrder = () => {
+
+        const messages = [];
+
+        for(let hash of whatsAppChat.orderedMessages) {
+            messages.push(whatsAppChat.messageMap[hash]);
+        }
+
+        return messages;
     }
 
     return {
@@ -82,6 +104,7 @@ const DiaryModel = () => {
         findTopics,
         addTopic,
         getTopics,
+        getFullMessagesInOrder,
     };
 }
 

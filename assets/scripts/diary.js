@@ -16,14 +16,12 @@ const Diary = () => {
                 switch(params.type) {
                   
                     case 'upload-files': 
-
-                        const parser = WhatsAppChatParser();
-                        const whatsAppChat = await parser.start(params.input);                
-                        console.log(whatsAppChat);
-                        const {messageMap, orderedMessages, users, files} = whatsAppChat;
-
-
+                        const whatsAppChat = await WhatsAppChatParser().start(params.input);              
+                        model.setWhatsAppChat(whatsAppChat);
+                        model.findTopics();
+                        updateState(STATES.topicsFound);
                         break;
+
                 }
 
             }
@@ -32,7 +30,7 @@ const Diary = () => {
             render: () => {
                 ui.clearBaseUI();
                 ui.startTopicUI();
-                ui.renderTopicsFound(['topic']);
+                ui.renderTopicsFound(model.getTopics());
             },
             eventHandler: (e, params) => {
                 console.log(params.type);
@@ -104,7 +102,7 @@ const Diary = () => {
             render: () => {
                 ui.clearBaseUI();
                 ui.startChatUI();
-                ui.renderSelectTopicFromChat();
+                ui.renderSelectTopicFromChat(model.getFullMessagesInOrder());
             },
             eventHandler: (e, params) => {
 

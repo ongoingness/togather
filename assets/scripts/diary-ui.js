@@ -78,7 +78,7 @@ const DiaryUI = (eventHandler) => {
     const renderUploadFiles = () => {
 
         const headerText = document.getElementById('base-container-header-text');
-        headerText.innerText = 'New Topic From Where';
+        headerText.innerText = 'Create Diary';
 
         const topicList = document.getElementById('baseList');
 
@@ -90,12 +90,13 @@ const DiaryUI = (eventHandler) => {
         optionsContainer.appendChild(buttonsContainer);
 
         const uploadFilesLabel = document.createElement('label');
-        uploadFilesLabel.classList.add('topic__write-topic__add-photo-label');
-        optionsContainer.appendChild(uploadFilesLabel);
+        uploadFilesLabel.classList.add('upload-files__label');
+        uploadFilesLabel.innerText = 'Upload Files';
+        buttonsContainer.appendChild(uploadFilesLabel);
 
         const uploadFilesInput = document.createElement('input');
         uploadFilesInput.id = 'uploadFilesInput';
-        uploadFilesInput.classList.add('topic__write-topic__add-photo-input');
+        uploadFilesInput.classList.add('upload-files__input');
         uploadFilesInput.type = 'file';
         uploadFilesInput.multiple = true;
         uploadFilesInput.addEventListener('change', (e) => eventHandler(e, {type: 'upload-files', input: uploadFilesInput}))
@@ -146,18 +147,16 @@ const DiaryUI = (eventHandler) => {
         topicHeaderDay.style = `color: ${color};`
         topicHeader.appendChild(topicHeaderDay);
 
+        const date = new Date(topicData.timestamp);
         const topicHeaderDate =  document.createElement('div');
         topicHeaderDate.classList.add('topic__header__date');
-        topicHeaderDate.innerText = `2020/20/01`;
+        topicHeaderDate.innerText = `${date.toLocaleDateString()}`;
         topicHeaderDate.style = `color: ${color};`
         topicHeader.appendChild(topicHeaderDate);
 
         const topicHeaderEditButton = document.createElement('button');
         topicHeaderEditButton.classList.add('topic__header__edit-button');
-        topicHeaderEditButton.addEventListener('click', (e) => {
-           
-            eventHandler(e, {type: 'edit-topic', data: '111'});
-        });
+        topicHeaderEditButton.addEventListener('click', (e) => eventHandler(e, {type: 'edit-topic', hash: topicData.hash}));
         topicHeader.appendChild(topicHeaderEditButton);
 
         const editButtonImage = document.createElement('img');
@@ -180,7 +179,7 @@ const DiaryUI = (eventHandler) => {
         topicHeaderDeleteButton.appendChild(deleteButtonImage);
 
         const topicText = document.createElement('div');
-        topicText.innerText = `I am a TOPIC ${day}`;
+        topicText.innerText = `${topicData.text}`;
         topic.appendChild(topicText);
 
         topicList.appendChild(topic);          
@@ -188,12 +187,9 @@ const DiaryUI = (eventHandler) => {
 
     const renderTopics = (topics) => {
 
-        for(topic of topics) {
-
-            for(let i = 0; i < 20; i++) {
-                renderTopic(i, topic);
-            }
-
+        for(let i = 0; i < topics.length; i++) {
+            console.log(topics[i]);
+            renderTopic(i, topics[i]);
         }
 
     }
