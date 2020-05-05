@@ -12,10 +12,10 @@ permalink: /diary/
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
     <link href="{{ '/assets/css/diary.css' | prepend: site.baseurl }}" rel="stylesheet" type="text/css">
-    <script src="{{ '/assets/scripts/whatapp-chat-parser.js' | prepend: site.baseurl }}"></script>
-    <script src="{{ '/assets/scripts/diary.js' | prepend: site.baseurl }}"></script>
-    <script src="{{ '/assets/scripts/diary-ui.js' | prepend: site.baseurl }}"></script>
-    <script src="{{ '/assets/scripts/diary-controller.js' | prepend: site.baseurl }}"></script>
+    <!--script src="{{ '/assets/scripts/whatapp-chat-parser.js' | prepend: site.baseurl }}"></script-->
+    <!--script src="{{ '/assets/scripts/diary.js' | prepend: site.baseurl }}" type="module"></script-->
+    <!--script src="{{ '/assets/scripts/diary-ui.js' | prepend: site.baseurl }}"></script-->
+    <!--script src="{{ '/assets/scripts/diary-controller.js' | prepend: site.baseurl }}" ></script-->
 </head>
 <body>
     <!--section>
@@ -27,7 +27,7 @@ permalink: /diary/
    
 
  
-    <script>
+    <script type="module">
         
         // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
         let vh = window.innerHeight * 0.01;
@@ -41,6 +41,11 @@ permalink: /diary/
             document.documentElement.style.setProperty('--vh', `${vh}px`);
         });
 
+    
+      import Diary from "{{ '/assets/scripts/diary.js' | prepend: site.baseurl }}"; // Or it could be simply `hello.js`
+        Diary();
+
+        /*
         let open = true;
 
         let filesInput = document.getElementById('files');
@@ -53,6 +58,7 @@ permalink: /diary/
 
         const messagesSortedByDay = {};
         const challenges = [];
+        */
 
         /*
         const ui = DiaryUI();
@@ -60,7 +66,7 @@ permalink: /diary/
         ui.renderTopicsFound(['topic']);
         */
 
-        const diaryController = DiaryController();
+       // const diaryController = DiaryController();
 
 
         /*

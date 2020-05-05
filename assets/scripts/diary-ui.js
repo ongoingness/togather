@@ -75,6 +75,36 @@ const DiaryUI = (eventHandler) => {
 
     }
 
+    const renderUploadFiles = () => {
+
+        const headerText = document.getElementById('base-container-header-text');
+        headerText.innerText = 'New Topic From Where';
+
+        const topicList = document.getElementById('baseList');
+
+        const optionsContainer = document.createElement('div');
+        optionsContainer.classList.add('topic__add-topic__options');
+
+        const buttonsContainer = document.createElement('div');
+        buttonsContainer.classList.add('topic__add-topic__buttons-container');
+        optionsContainer.appendChild(buttonsContainer);
+
+        const uploadFilesLabel = document.createElement('label');
+        uploadFilesLabel.classList.add('topic__write-topic__add-photo-label');
+        optionsContainer.appendChild(uploadFilesLabel);
+
+        const uploadFilesInput = document.createElement('input');
+        uploadFilesInput.id = 'uploadFilesInput';
+        uploadFilesInput.classList.add('topic__write-topic__add-photo-input');
+        uploadFilesInput.type = 'file';
+        uploadFilesInput.multiple = true;
+        uploadFilesInput.addEventListener('change', (e) => eventHandler(e, {type: 'upload-files', input: uploadFilesInput}))
+        uploadFilesLabel.appendChild(uploadFilesInput);
+        
+        topicList.appendChild(optionsContainer);
+
+    }
+
     const renderTopicsFound = (topics) => {
      
         document.getElementById('base-container-header-text').innerText = 'We found the following daily topics you have been messaging about. Is this set complete? Or are there any topics you want to add tho this list?';
@@ -513,12 +543,16 @@ const DiaryUI = (eventHandler) => {
 
         /////////////////////////////
 
+        const buttonContainer = document.createElement('div');
+        buttonContainer.classList.add('select-messages__button-container');
+        topicDisplay.appendChild(buttonContainer);
+
         const readMoreButton = document.createElement('button');
         readMoreButton.id = 'readMoreButton';
         readMoreButton.classList.add('select-messages__read-more-button');
         readMoreButton.innerText = 'Read More';
         readMoreButton.addEventListener('click', (e) => eventHandler(e, {type: 'read-more'}));     
-        topicDisplay.appendChild(readMoreButton);
+        buttonContainer.appendChild(readMoreButton);
 
         const readLessButton = document.createElement('button');
         readLessButton.id = 'readLessButton';
@@ -526,7 +560,7 @@ const DiaryUI = (eventHandler) => {
         readLessButton.classList.add('hidden');
         readLessButton.innerText = 'Read Less';
         readLessButton.addEventListener('click', (e) => eventHandler(e, {type: 'read-less'}));     
-        topicDisplay.appendChild(readLessButton);
+        buttonContainer.appendChild(readLessButton);
 
         const actionText = document.createElement('div');
         actionText.classList.add('select-messages__action-text');
@@ -589,6 +623,7 @@ const DiaryUI = (eventHandler) => {
 
         startTopicUI,
         removeTopicUI,
+        renderUploadFiles,
         renderTopicsFound,
         renderAddTopicOptions,
         renderWriteTopic,
@@ -604,3 +639,5 @@ const DiaryUI = (eventHandler) => {
 
     }
 }
+
+export default DiaryUI;

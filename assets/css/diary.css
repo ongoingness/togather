@@ -252,6 +252,7 @@ body, textarea, button, input, select {
 }
 
 .chat-message__name {
+    font-family: 'Ostrich Sans Black';
     font-weight: bold;
     width: 50%;
     align-self: center;
@@ -279,6 +280,8 @@ body, textarea, button, input, select {
 .day-scroller__container {
     width: 100%;
     height: 100%;
+    padding-left: 1vh;
+    padding-right: 1vh;
 }
 
 .day-scroller__day-buttons-container {
@@ -344,6 +347,7 @@ body, textarea, button, input, select {
 
 .day-scroller__dot-container {
     text-align: center;
+    padding-top: 0.5vh;
 }
 
 .day-scroller__dot {
@@ -368,6 +372,7 @@ body, textarea, button, input, select {
     background: white;
     border-style: solid;
     border-width: 1px;
+    border-top-style: none;
     padding: 1vh 2vh 1vh 2vh;
     font-size: small;
     text-align: center;
@@ -401,6 +406,13 @@ body, textarea, button, input, select {
     border: none;
     color: blue;
     cursor: pointer;
+    float: right;
+}
+
+.select-messages__button-container {
+    overflow: hidden;
+    padding-bottom: 1vh;
+    padding-top: 0.5vh;
 }
 
 .select-messages__read-more-button.hidden, .select-messages__read-less-button.hidden {

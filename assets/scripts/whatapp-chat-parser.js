@@ -206,3 +206,5 @@ const WhatsAppChatParser = () => {
  
     return ({ start });
 }
+
+export default WhatsAppChatParser;
