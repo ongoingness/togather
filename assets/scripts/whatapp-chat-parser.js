@@ -157,10 +157,14 @@ const WhatsAppChatParser = () => {
 
             } else {
                 if(currentMessage != null) {
-                    const {text, filename} = parseMessageBody(rawMessage);
+                    const {text, filename, links, atUser} = parseMessageBody(body);
                     currentMessage.text += currentMessage.text === '' ? text : ` ${text}`;
-                    if( filename != undefined )
-                        currentMessage.files.push(filename);
+                    currentMessage.file = filename != undefined ? filename : '';
+                    currentMessage.links = links;
+                    currentMessage.atUser = atUser;
+                    for(let number of atUser) {
+                        if(!users.numbers.includes(number)) users.numbers.push(number);
+                    }
                 }
             }
         
