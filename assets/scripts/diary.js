@@ -178,6 +178,7 @@ const Diary = () => {
             variables: {
                 topic: 0,
                 totalOfTopics: 0,
+                text: '',
             },
             render: () => {
                 ui.clearBaseUI();
@@ -193,27 +194,37 @@ const Diary = () => {
                     case 'next-day':
                         if(STATES.selectMessages.variables.topic < STATES.selectMessages.variables.totalOfTopics-1) {
                             STATES.selectMessages.variables.topic += 1;
+                            const fullTopic = model.getFullTopic(STATES.selectMessages.variables.topic);
+                            STATES.selectMessages.variables.text = fullTopic.text;
                             ui.clearDay();
-                            ui.renderDay(model.getFullTopic(STATES.selectMessages.variables.topic));
+                            ui.renderDay(fullTopic);
                         }
                         break;
 
                     case 'prev-day':
                         if(STATES.selectMessages.variables.topic > 0) {
                             STATES.selectMessages.variables.topic -= 1;
+                            const fullTopic = model.getFullTopic(STATES.selectMessages.variables.topic);
+                            STATES.selectMessages.variables.text = fullTopic.text;
                             ui.clearDay();
-                            ui.renderDay(model.getFullTopic(STATES.selectMessages.variables.topic));
+                            ui.renderDay(fullTopic);
                         }
                         break;
 
+                    case 'goto-topic':
+                        STATES.selectMessages.variables.topic = params.topic;
+                        const fullTopic = model.getFullTopic(STATES.selectMessages.variables.topic);
+                        STATES.selectMessages.variables.text = fullTopic.text;
+                        ui.clearDay();
+                        ui.renderDay(fullTopic);
+                        break;
+
                     case 'read-more':
-                        ui.renderFullTopic('This is the challenge that we selected we were gonna write something about today. Now wer are gonna select every message that is send for today.');
+                        ui.renderFullTopic(STATES.selectMessages.variables.text);
                         break;
 
                     case 'read-less':
-                        let longTopic = 'This is the challenge that we selected we were gonna write something about today. Now wer are gonna select every message that is send for today.';
-
-                        ui.renderShortTopic(longTopic.substring(0, 90));
+                        ui.renderShortTopic(STATES.selectMessages.variables.text);
                         break;
 
                     case 'selected-message':

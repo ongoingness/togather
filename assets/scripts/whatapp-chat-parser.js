@@ -62,10 +62,7 @@ const WhatsAppChatParser = () => {
     /*
         Message structure
         {
-            id: int
-            date: string
-            time: string 
-            datetimestamp: long
+            index: int
             fulltimestamp: long
             user: string
             text: string
@@ -82,7 +79,7 @@ const WhatsAppChatParser = () => {
         const messageMap = {};
         const orderedMessages = [];
 
-        const messageStartRegex = RegExp('(([0-9]{2})\/([0-9]{2})\/([0-9]{2,4}))\, (([0-9]{2})\:([0-9]{2})) - ([^:]+)\: (.*)');
+        const messageStartRegex = RegExp('[\[]?([0-9]{2})\/([0-9]{2})\/([0-9]{2,4})\, ([0-9]{2}\:[0-9]{2}(?:\:[0-9]{2})?)\]? (?:- )?([^:]+)\: (.*)');
 
         const fileRegex = RegExp('(([A-Z]{3}\-[0-9]{8}\-[A-Z]{2}[0-9]{4}\..[^ ]*) \(.*\))');
 
@@ -108,10 +105,7 @@ const WhatsAppChatParser = () => {
 
         const parseDateToTimestamp = (day, month, year, time) => {
             const formattedYear = year.length === 2 ? `20${year}` : year;
-            return {
-                datetimestamp: new Date(`${formattedYear}/${month}/${day} 00:00:00`).getTime() ,
-                fulltimestamp: new Date(`${formattedYear}/${month}/${day} ${time}:00`).getTime()
-            };
+            return new Date(`${formattedYear}/${month}/${day} ${time}:00`).getTime();
         };
 
         const parseUser = (name) => {
@@ -147,7 +141,9 @@ const WhatsAppChatParser = () => {
             const messageStart = messageStartRegex.exec(rawMessage);
             if(messageStart != null) {
 
-                const [fullLine, fullDate, day, month, year, fullTime, hours, minutes, username, body] = messageStart;
+                console.log(messageStart);
+
+                const [fullLine, day, month, year, fullTime, username, body] = messageStart;
 
                 if(currentMessage != null) {
                     currentMessage.hash = hashCode(`${index}${currentMessage.fulltimestamp}${currentMessage.username}${currentMessage.rawText}`);
@@ -156,13 +152,9 @@ const WhatsAppChatParser = () => {
                 }
                 
                 currentMessage = {};
-                currentMessage.id = index;
-                currentMessage.date = fullDate;
-                currentMessage.time = fullTime;
+                currentMessage.index = index;
                 
-                const {fulltimestamp, datetimestamp} = parseDateToTimestamp(day, month, year, fullTime);
-                currentMessage.fulltimestamp = fulltimestamp;
-                currentMessage.datetimestamp = datetimestamp; 
+                currentMessage.fulltimestamp = parseDateToTimestamp(day, month, year, fullTime);
 
                 currentMessage.user = username;
                 parseUser(username);

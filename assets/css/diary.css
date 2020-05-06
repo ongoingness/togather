@@ -368,6 +368,10 @@ body, textarea, button, input, select {
     background-color: black;
 }
 
+.day-scroller__dot.selected {
+    background-color: black;
+}
+
 .select-messages__topic-display {
     background: white;
     border-style: solid;

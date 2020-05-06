@@ -505,6 +505,7 @@ const DiaryUI = (eventHandler) => {
         days.appendChild(daysLeft);
 
         const prevDay = document.createElement('button');
+        prevDay.id = 'prevDay';
         prevDay.classList.add('day-scroller__prev');
         prevDay.innerHTML = '&#10094;'
         prevDay.addEventListener('click', (e) => eventHandler(e, {type: 'prev-day'}));  
@@ -524,6 +525,7 @@ const DiaryUI = (eventHandler) => {
         days.appendChild(daysRight);
 
         const nextDay = document.createElement('button');
+        nextDay.id = 'nextDay';
         nextDay.classList.add('day-scroller__next');
         nextDay.innerHTML = '&#10095;'
         nextDay.addEventListener('click', (e) => eventHandler(e, {type: 'next-day'}));  
@@ -545,10 +547,6 @@ const DiaryUI = (eventHandler) => {
         const topicDisplayText = document.createElement('span');
         topicDisplayText.id = 'topicDisplayText';
         topicDisplay.appendChild(topicDisplayText);
-
-        //Check topic description size
-
-        /////////////////////////////
 
         const buttonContainer = document.createElement('div');
         buttonContainer.classList.add('select-messages__button-container');
@@ -611,9 +609,24 @@ const DiaryUI = (eventHandler) => {
 
         document.getElementById('dayDisplay').innerText = `Day ${dayData.index + 1}`;
 
+        if(dayData.index == dayData.totalOfTopics-1)
+            document.getElementById('nextDay').disabled = true; 
+        else
+            document.getElementById('nextDay').disabled = false; 
+
+        if(dayData.index == 0)
+            document.getElementById('prevDay').disabled = true; 
+        else
+            document.getElementById('prevDay').disabled = false; 
+
         for(let i = 0; i < dayData.totalOfTopics; i++) {
             const dot = document.createElement('span');
             dot.classList.add('day-scroller__dot');
+            if(i==dayData.index)
+                dot.classList.add('selected');
+            else {
+                dot.addEventListener('click', (e) => eventHandler(e, {type: 'goto-topic', topic: i}));  
+            }
             document.getElementById('dotContainer').appendChild(dot);
         }
 
@@ -622,7 +635,7 @@ const DiaryUI = (eventHandler) => {
             document.getElementById('readMoreButton').classList.add('hidden');
             document.getElementById('readLessButton').classList.add('hidden');
         } else {
-            renderShortTopic(dayData.text.substring(0, 90));        
+            renderShortTopic(dayData.text);        
         }
        
         for(let message of dayData.messages) {
@@ -638,7 +651,7 @@ const DiaryUI = (eventHandler) => {
     } 
 
     const renderShortTopic = (text) => {
-        document.getElementById('topicDisplayText').innerText = text;
+        document.getElementById('topicDisplayText').innerText = text.substring(0, 90);
         document.getElementById('readLessButton').classList.add('hidden');
         document.getElementById('readMoreButton').classList.remove('hidden');
     } 
