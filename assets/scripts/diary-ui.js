@@ -186,7 +186,6 @@ const DiaryUI = (eventHandler) => {
     const renderTopics = (topics) => {
 
         for(let i = 0; i < topics.length; i++) {
-            console.log(topics[i]);
             renderTopic(i, topics[i]);
         }
 
@@ -374,8 +373,6 @@ const DiaryUI = (eventHandler) => {
     }
 
     const renderSelectTopicFromChat = (chatData) => {
-
-        console.log(chatData);
 
         document.getElementById('base-container-header-text').innerText = 'Select missing topics from your chat.';
 

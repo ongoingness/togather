@@ -75,7 +75,10 @@ const WhatsAppChatParser = () => {
 
     const parseMessages = (messages, files) => {
 
-        const users = [];
+        const users = {
+            names: [],
+            numbers: [],
+        };
         const messageMap = {};
         const orderedMessages = [];
 
@@ -100,37 +103,20 @@ const WhatsAppChatParser = () => {
             const linkRegexResult = text.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g);
             let links = linkRegexResult != null ? linkRegexResult : [];
             
-            return filename != undefined ? {text, filename, links} : {text, undefined, links} 
+            //youtube regex
+            //(http:|https:)?(\/\/)?(www\.)?(youtube.com|youtu.be|youtube-nocookie.com)\/(watch|embed)?(\?v=|\/)?(\S+)?
+
+            const atRegexresult = text.match(/(@[0-9]+)/g);
+            let atUser = atRegexresult != null ? atRegexresult : []
+
+            return filename != undefined ? {text, filename, links, atUser} : {text, undefined, links, atUser} 
         };
 
         const parseDateToTimestamp = (day, month, year, time) => {
             const formattedYear = year.length === 2 ? `20${year}` : year;
-            return new Date(`${formattedYear}/${month}/${day} ${time}:00`).getTime();
+            const formattedTime = time.length === 5 ? `${time}:00`: time
+            return new Date(`${formattedYear}/${month}/${day} ${formattedTime}`).getTime();
         };
-
-        const parseUser = (name) => {
-
-            let foundUser = false;
-
-            const getRandomColor = () => {
-                var letters = '0123456789ABCDEF';
-                var color = '#';
-                for (var i = 0; i < 6; i++) {
-                    color += letters[Math.floor(Math.random() * 16)];
-                }
-                return color;
-            }
-
-            for(let user of users) {
-                if(user.name === name) {
-                    foundUser = true;
-                    break;
-                }
-            }
-            if(foundUser == false)
-                users.push({name, color: getRandomColor()});
-
-        }
 
         const rawMessages = messages.split('\n');
 
@@ -140,8 +126,6 @@ const WhatsAppChatParser = () => {
 
             const messageStart = messageStartRegex.exec(rawMessage);
             if(messageStart != null) {
-
-                console.log(messageStart);
 
                 const [fullLine, day, month, year, fullTime, username, body] = messageStart;
 
@@ -157,14 +141,19 @@ const WhatsAppChatParser = () => {
                 currentMessage.fulltimestamp = parseDateToTimestamp(day, month, year, fullTime);
 
                 currentMessage.user = username;
-                parseUser(username);
-
+                if(!users.names.includes(username)) users.names.push(username);
+                
                 currentMessage.rawText = body;
 
-                const {text, filename, links} = parseMessageBody(body);
+                const {text, filename, links, atUser} = parseMessageBody(body);
                 currentMessage.text = text;
                 currentMessage.file = filename != undefined ? filename : '';
                 currentMessage.links = links;
+                currentMessage.atUser = atUser;
+
+                for(let number of atUser) {
+                    if(!users.numbers.includes(number)) users.numbers.push(number);
+                }
 
             } else {
                 if(currentMessage != null) {
@@ -183,7 +172,7 @@ const WhatsAppChatParser = () => {
             orderedMessages.push(currentMessage.hash);
             currentMessage = null;
         }
-
+        console.log(users);
         return ({messageMap, orderedMessages, users});
 
     };
