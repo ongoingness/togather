@@ -150,7 +150,7 @@ const WhatsAppChatParser = () => {
                 const [fullLine, fullDate, day, month, year, fullTime, hours, minutes, username, body] = messageStart;
 
                 if(currentMessage != null) {
-                    currentMessage.hash = hashCode(`${currentMessage.fullTime}${currentMessage.username}${currentMessage.rawText}`);
+                    currentMessage.hash = hashCode(`${index}${currentMessage.fulltimestamp}${currentMessage.username}${currentMessage.rawText}`);
                     messageMap[currentMessage.hash] = {...currentMessage};
                     orderedMessages.push(currentMessage.hash);
                 }
@@ -186,7 +186,7 @@ const WhatsAppChatParser = () => {
         }
 
         if(currentMessage != null) {
-            currentMessage.hash = hashCode(`${currentMessage.fullTime}${currentMessage.username}${currentMessage.rawText}`);
+            currentMessage.hash = hashCode(`${currentMessage.id}${currentMessage.fulltimestamp}${currentMessage.username}${currentMessage.rawText}`);
             messageMap[currentMessage.hash] = {...currentMessage};
             orderedMessages.push(currentMessage.hash);
             currentMessage = null;

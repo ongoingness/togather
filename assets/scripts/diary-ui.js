@@ -167,9 +167,7 @@ const DiaryUI = (eventHandler) => {
 
         const topicHeaderDeleteButton = document.createElement('button');
         topicHeaderDeleteButton.classList.add('topic__header__delete-button');
-        topicHeaderDeleteButton.addEventListener('click', () => {
-            console.log('Topic Delete Button');
-        });
+        topicHeaderDeleteButton.addEventListener('click', (e) => eventHandler(e, {type: 'delete-topic', day}));
         topicHeader.appendChild(topicHeaderDeleteButton);
 
         const deleteButtonImage = document.createElement('img');
@@ -192,6 +190,10 @@ const DiaryUI = (eventHandler) => {
             renderTopic(i, topics[i]);
         }
 
+    }
+
+    const removeTopics = () => {
+        removeChildren('baseList');
     }
 
     const removeChildren = (id) => {
@@ -266,6 +268,8 @@ const DiaryUI = (eventHandler) => {
         const topicTextArea = document.createElement('textarea');
         topicTextArea.classList.add('topic__write-topic__textarea');
         topicTextArea.placeholder = 'Type your own topic here';
+        if(topicData != null)
+            topicTextArea.textContent = topicData.text;
         container.appendChild(topicTextArea);
 
         const datePhotoContainer = document.createElement('div');
@@ -277,6 +281,8 @@ const DiaryUI = (eventHandler) => {
         topicDate.name = 'topicDate';
         topicDate.id = 'topicDate';
         topicDate.classList.add('topic__write-topic__date');
+        if(topicData != null)
+            topicDate.valueAsDate = new Date(topicData.fulltimestamp);
         datePhotoContainer.appendChild(topicDate);
 
         const addPhotoLabel = document.createElement('label');
@@ -326,7 +332,7 @@ const DiaryUI = (eventHandler) => {
         doneButton.classList.add('topic-button');
         doneButton.classList.add('base-container__footer__item__button');
         doneButton.innerText = 'DONE';
-        doneButton.addEventListener('click', (e) => eventHandler(e, {type: 'done'}));   
+        doneButton.addEventListener('click', (e) => eventHandler(e, {type: 'done', hash: topicData != null ? topicData.hash : '', text: topicTextArea.value , timestamp: topicDate.valueAsDate.getTime() }));   
         document.getElementById('base-container-footer-right').appendChild(doneButton);
 
     }
@@ -367,12 +373,14 @@ const DiaryUI = (eventHandler) => {
 
     }
 
-    const renderSelectTopicFromChat = () => {
+    const renderSelectTopicFromChat = (chatData) => {
+
+        console.log(chatData);
 
         document.getElementById('base-container-header-text').innerText = 'Select missing topics from your chat.';
 
-        for(let i = 0; i < 100; i++) {
-            renderChatMessage(i, 'baseList');
+        for(let message of chatData) {
+            renderChatMessage(message, 'baseList');
         }
 
         const backButton = document.createElement('button');
@@ -399,10 +407,10 @@ const DiaryUI = (eventHandler) => {
 
             if(chatMessage.classList.contains('selected')) {
                 chatMessage.classList.remove('selected');
-                eventHandler(e, {type: 'deselected-message', hash: '123'})
+                eventHandler(e, {type: 'deselected-message', hash: messageData.hash});
             } else {
                 chatMessage.classList.add('selected');
-                eventHandler(e, {type: 'selected-message', hash: '123'})
+                eventHandler(e, {type: 'selected-message', hash: messageData.hash});
             }
             
         }); 
@@ -416,20 +424,21 @@ const DiaryUI = (eventHandler) => {
         const colour = getRandomColor();
 
         const chatMessageUser = document.createElement('div');
-        chatMessageUser.innerText = 'User';
+        chatMessageUser.innerText = `${messageData.user}`;
         chatMessageUser.classList.add('chat-message__name');
         chatMessageUser.style = `color: ${colour}`;
         header.appendChild(chatMessageUser);
 
+        const date = new Date(messageData.fulltimestamp);
         const chatMessageTime = document.createElement('div');
-        chatMessageTime.innerText = '2002/20/22';
+        chatMessageTime.innerText = `${date.toLocaleDateString()}`;
         chatMessageTime.classList.add('chat-message__date');
         chatMessageTime.style = `color: ${colour}`;
         header.appendChild(chatMessageTime);
 
         const chatMessageBody = document.createElement('div');
         chatMessageBody.classList.add('chat-message__text');
-        chatMessageBody.innerText = 'Text message Test dsfsdfsdfdsfds fsdfsdfsdfsdfsdfsd fsd fsd fsdf ds fdsfsdf sdf sd fsdf sf ';
+        chatMessageBody.innerText = `${messageData.text}`;
         chatMessage.appendChild(chatMessageBody);
 
 
@@ -478,7 +487,7 @@ const DiaryUI = (eventHandler) => {
         document.getElementById('base-container-header-text').innerText  = 'Make changes to this topic';
     }
 
-    const renderSelectMessages = () => {
+    const renderSelectMessages = (dayData) => {
 
         const headerText = document.getElementById('base-container-header-text');
         headerText.classList.add('base-container__header__text__override');
@@ -498,16 +507,17 @@ const DiaryUI = (eventHandler) => {
         const prevDay = document.createElement('button');
         prevDay.classList.add('day-scroller__prev');
         prevDay.innerHTML = '&#10094;'
+        prevDay.addEventListener('click', (e) => eventHandler(e, {type: 'prev-day'}));  
         daysLeft.appendChild(prevDay);
 
         const daysCenter = document.createElement('div');
         daysCenter.classList.add('day-scroller__day-buttons-container__center');
         days.appendChild(daysCenter);
 
-        const dayDisplay1 = document.createElement('div');
-        dayDisplay1.classList.add('day-scroller__day-display');
-        dayDisplay1.innerText = 'Day 1';
-        daysCenter.appendChild(dayDisplay1);
+        const dayDisplay = document.createElement('div');
+        dayDisplay.id = 'dayDisplay';
+        dayDisplay.classList.add('day-scroller__day-display');
+        daysCenter.appendChild(dayDisplay);
 
         const daysRight = document.createElement('div');
         daysRight.classList.add('day-scroller__day-buttons-container__right');
@@ -516,6 +526,7 @@ const DiaryUI = (eventHandler) => {
         const nextDay = document.createElement('button');
         nextDay.classList.add('day-scroller__next');
         nextDay.innerHTML = '&#10095;'
+        nextDay.addEventListener('click', (e) => eventHandler(e, {type: 'next-day'}));  
         daysRight.appendChild(nextDay);
 
         const dotContainer = document.createElement('div');
@@ -577,24 +588,45 @@ const DiaryUI = (eventHandler) => {
         finishDiaryButton.addEventListener('click', (e) => eventHandler(e, {type: 'finish-diary'}));   
         document.getElementById('base-container-footer-right').appendChild(finishDiaryButton);
 
-        renderDay('1', 'topicDisplay', 'baseList');
+        renderDay(dayData);
   
     }
 
     const clearDay = () => {
-ß
+
+        document.getElementById('dayDisplay').innerText = '';
+        removeChildren('dotContainer');
+        document.getElementById('topicDisplayText').innerText = '';
+        document.getElementById('readMoreButton').classList.add('hidden');
+        document.getElementById('readLessButton').classList.add('hidden');
+        
+        const elements = document.getElementsByClassName('chat-message');
+        while(elements.length > 0){
+            elements[0].parentNode.removeChild(elements[0]);
+        }
+        
     }
 
-    const renderDay = (dayData, topicDisplayId, messageListId) => {
+    const renderDay = (dayData) => {
 
-        const dot = document.createElement('span');
-        dot.classList.add('day-scroller__dot');
-        document.getElementById('dotContainer').appendChild(dot);
+        document.getElementById('dayDisplay').innerText = `Day ${dayData.index + 1}`;
 
-        renderShortTopic('This is the challenge that we selected we were gonna write something about today. Now wer are gonna select every message that is send for today.');        
+        for(let i = 0; i < dayData.totalOfTopics; i++) {
+            const dot = document.createElement('span');
+            dot.classList.add('day-scroller__dot');
+            document.getElementById('dotContainer').appendChild(dot);
+        }
 
-        for(let i = 0; i < 100; i++) {
-            renderChatMessage(i, messageListId);
+        if(dayData.text.length < 90) {
+            document.getElementById('topicDisplayText').innerText = dayData.text;
+            document.getElementById('readMoreButton').classList.add('hidden');
+            document.getElementById('readLessButton').classList.add('hidden');
+        } else {
+            renderShortTopic(dayData.text.substring(0, 90));        
+        }
+       
+        for(let message of dayData.messages) {
+            renderChatMessage(message, 'baseList');
         }
 
     }
@@ -624,6 +656,8 @@ const DiaryUI = (eventHandler) => {
         renderAddTopicOptions,
         renderWriteTopic,
         renderEditTopic,
+        renderTopics,
+        removeTopics,
 
         startChatUI,
         removeChatUI,
@@ -632,6 +666,7 @@ const DiaryUI = (eventHandler) => {
         renderFullTopic,
         renderShortTopic,
         renderDay,
+        clearDay,
 
     }
 }
