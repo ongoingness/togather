@@ -16,8 +16,10 @@ permalink: /diary/
     <!--script src="{{ '/assets/scripts/diary.js' | prepend: site.baseurl }}" type="module"></script-->
     <!--script src="{{ '/assets/scripts/diary-ui.js' | prepend: site.baseurl }}"></script-->
     <!--script src="{{ '/assets/scripts/diary-controller.js' | prepend: site.baseurl }}" ></script-->
+    <script src="{{ '/assets/scripts/html2canvas.min.js' | prepend: site.baseurl }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
 </head>
-<body>
+<body id="nodeToRenderAsPDF">
     <!--section>
         <div>
             <label for="myfile">Select files:</label>
@@ -26,7 +28,10 @@ permalink: /diary/
     </section-->
    
 
- 
+    <script>
+    
+
+    </script>
     <script type="module">
         
         // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
@@ -41,10 +46,15 @@ permalink: /diary/
             document.documentElement.style.setProperty('--vh', `${vh}px`);
         });
 
-    
-      import Diary from "{{ '/assets/scripts/diary.js' | prepend: site.baseurl }}"; // Or it could be simply `hello.js`
-        Diary();
 
+                        
+
+    
+      //import Diary from "{{ '/assets/scripts/diary.js' | prepend: site.baseurl }}";
+        //Diary();
+
+        import DiaryTemplates from "{{ '/assets/scripts/diary-templates.js' | prepend: site.baseurl }}";
+        DiaryTemplates().topicPage();
         /*
         let open = true;
 

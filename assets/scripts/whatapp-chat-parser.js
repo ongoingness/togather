@@ -67,9 +67,15 @@ const WhatsAppChatParser = () => {
             user: string
             text: string
             file: string 
-            links: []
+            links: [
+                { 
+                    url: !!!!!!!!!!!!!!!
+                    type:!!!!!!!!!!!!!!!!!!!!!!!
+                }
+            ]
             hash: string
             rawText: string
+            atUser: []
         }
     */
 

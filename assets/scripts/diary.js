@@ -240,7 +240,21 @@ const Diary = () => {
                         break;
                     
                     case 'finish-diary': 
-                        updateState(STATES.topicsFound);
+                        //updateState(STATES.topicsFound);
+                          
+
+
+                        const filename  = 'ThisIsYourPDFFilename.pdf';
+
+                        html2canvas(document.body).then(canvas => {
+                            let pdf = new jsPDF('p', 'mm', 'a4');
+                            pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);
+                            pdf.save(filename);
+                        });
+                        
+                        
+                       //console.log(html2canvas);
+                        
                         break;
 
                 }
