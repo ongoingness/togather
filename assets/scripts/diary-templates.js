@@ -22,12 +22,15 @@ const DiaryTemplates = () => {
         dayBanner.innerText = 'Day 1';
         pageContainer.appendChild(dayBanner);
 
+        const topicDate = document.createElement('div');
+        topicDate.classList.add('topic-date');
+        topicDate.innerText = '15 April 2020';
+        pageContainer.appendChild(topicDate);
 
-
-
-
-
-
+        const topicDescription = document.createElement('div');
+        topicDescription.classList.add('topic-description');
+        topicDescription.innerText = '“Here we can place the description of the challenge they will be writing about for this day, but people can of course also add things that they just want to add. The challenges are mainly there for inspiration to capture something each day”';
+        pageContainer.appendChild(topicDescription);
 
         const print = document.createElement('button');
         print.addEventListener('click', e=> {

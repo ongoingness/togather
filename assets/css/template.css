@@ -35,5 +35,27 @@ body{
     position: absolute;
     font-size: 60px;
     font-family: 'Ostrich Sans Black';
-    padding-left: 4.5cm;;
+    padding-left: 4.5cm;
+}
+
+.topic-date {
+    position: absolute;
+    top: 230px;
+    width: 21cm;
+    padding-left: 4.5cm;
+    font-size: 60px;
+    font-family: 'Ostrich Sans Black';
+    font-weight: 100;
+}
+
+.topic-description {
+    position: absolute;
+    top: 500px;
+    width: 21cm;
+    padding-left: 4.5cm;
+    padding-right: 4.5cm;
+    font-family: 'Open Sans';
+    font-size: 23px;
+    font-style: italic;
+    font-weight: 600;
 }
