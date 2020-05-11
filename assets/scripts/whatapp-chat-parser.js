@@ -20,8 +20,7 @@ const WhatsAppChatParser = () => {
                 orderedMessages = parsedResult.orderedMessages;
                 users = parsedResult.users;
             }
-        }
-    
+        }   
         return { messageMap, orderedMessages, files, users }
     }
 
@@ -82,7 +81,6 @@ const WhatsAppChatParser = () => {
     const parseMessages = (messages, files) => {
 
         const users = {
-            names: [],
             numbers: [],
         };
         const messageMap = {};
@@ -146,9 +144,13 @@ const WhatsAppChatParser = () => {
                 
                 currentMessage.fulltimestamp = parseDateToTimestamp(day, month, year, fullTime);
 
-                currentMessage.user = username;
-                if(!users.names.includes(username)) users.names.push(username);
-                
+                const hashUser = hashCode(username);
+                if(!users.hasOwnProperty(hashUser)) {
+                    users[hashUser] = {
+                        name: username,
+                    }
+                }                
+                currentMessage.user = hashUser;
                 currentMessage.rawText = body;
 
                 const {text, filename, links, atUser} = parseMessageBody(body);

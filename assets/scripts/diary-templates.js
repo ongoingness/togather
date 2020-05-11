@@ -122,7 +122,8 @@ const DiaryTemplates = () => {
         const messageLeft = (doc, data) => {
 
             doc.setDrawColor(0);
-            doc.setFillColor(0, 122, 125);
+            //doc.setFillColor(0, 122, 125);
+            doc.setFillColor(data.color);
             doc.rect(5, yLeft, 106, 11, 'F');
             
             doc.setTextColor(255, 255, 255);
@@ -153,7 +154,8 @@ const DiaryTemplates = () => {
         const messageRight = (doc, data) => {
         
             doc.setDrawColor(0);
-            doc.setFillColor(0, 122, 125);
+            //doc.setFillColor(0, 122, 125);
+            doc.setFillColor(data.color);
             doc.rect(99.25, yRight, 106, 11, 'F');
             
             doc.setTextColor(255, 255, 255);

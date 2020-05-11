@@ -1,6 +1,6 @@
 const DiaryModel = () => {
 
-    const colours = [
+    const colors = [
         '#007a7d',
         '#008000',
         '#5a781d',
@@ -33,8 +33,22 @@ const DiaryModel = () => {
 
     let topics = [];
 
-    const setWhatsAppChat = (tempWhatsAppChat) => whatsAppChat = tempWhatsAppChat;
+    const setWhatsAppChat = (tempWhatsAppChat) => {
+        whatsAppChat = tempWhatsAppChat;
 
+        const colorsPicked = []
+    
+        for(let user in whatsAppChat.users) {
+            if( user != 'numbers') {
+                let color = colors[Math.floor(Math.random() * (colors.length -1 - 0 + 1) + 0)];
+                while(colorsPicked.includes(color)) {
+                    color = colors[Math.floor(Math.random() * (colors.length -1 - 0 + 1) + 0)];
+                }
+                whatsAppChat.users[user].color = color;
+            }
+        }
+        console.log(whatsAppChat.users);
+    }
     /*
     //Topic structure
     {
@@ -44,6 +58,7 @@ const DiaryModel = () => {
         selectedMessages: [hash]
     }
     */
+
     const findTopics = () => {
 
         const topicRegex = RegExp('https://lapc1995.github.io/while-you-were-fighting/challenges/[0-9]*');
@@ -106,11 +121,11 @@ const DiaryModel = () => {
         const messages = [];
         const selectedMessages = [];
         for(let messageHash of topic.messages) {
-            messages.push(whatsAppChat.messageMap[messageHash]);
+            messages.push(getFullMessage(messageHash));
         }
 
         for(let messageHash of topic.selectedMessages) {
-            selectedMessages.push(whatsAppChat.messageMap[messageHash]);
+            selectedMessages.push(getFullMessage(messageHash));
         }
 
        return {
@@ -130,14 +145,19 @@ const DiaryModel = () => {
         const messages = [];
 
         for(let hash of whatsAppChat.orderedMessages) {
-            messages.push(whatsAppChat.messageMap[hash]);
+            messages.push(getFullMessage(hash));
         }
 
         return messages;
     }
 
     const getFullMessage = (hash) => {
-        return whatsAppChat.messageMap[hash];
+        const messageObj = {...whatsAppChat.messageMap[hash]};
+        const hashUser = messageObj.user;
+        messageObj.user  = whatsAppChat.users[hashUser].name;
+        messageObj.color = whatsAppChat.users[hashUser].color;
+        console.log(messageObj);
+        return messageObj;
     }
 
     const updateTopic = ({hash, text, timestamp}) => {

@@ -418,19 +418,17 @@ const DiaryUI = (eventHandler) => {
         header.classList.add('chat-message__header');
         chatMessage.appendChild(header);
       
-        const colour = getRandomColor();
-
         const chatMessageUser = document.createElement('div');
         chatMessageUser.innerText = `${messageData.user}`;
         chatMessageUser.classList.add('chat-message__name');
-        chatMessageUser.style = `color: ${colour}`;
+        chatMessageUser.style = `color: ${messageData.color}`;
         header.appendChild(chatMessageUser);
 
         const date = new Date(messageData.fulltimestamp);
         const chatMessageTime = document.createElement('div');
         chatMessageTime.innerText = `${date.toLocaleDateString()}`;
         chatMessageTime.classList.add('chat-message__date');
-        chatMessageTime.style = `color: ${colour}`;
+        chatMessageTime.style = `color: ${messageData.color}`;
         header.appendChild(chatMessageTime);
 
         const chatMessageBody = document.createElement('div');
