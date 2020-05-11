@@ -1,5 +1,34 @@
 const DiaryModel = () => {
 
+    const colours = [
+        '#007a7d',
+        '#008000',
+        '#5a781d',
+        '#113321',
+        '#315131',
+        '#2a7ab0',
+        '#406098',
+        '#0000e0',
+        '#34385e',
+        '#0a3055',
+        '#004055',
+        '#004055',
+        '#7659b6',
+        '#886288',
+        '#a74165',
+        '#591d77',
+        '#3c1362',
+        '#8d6708',
+        '#554800',
+        '#2a2400',
+        '#d43900',
+        '#aa5d00',
+        '#aa5535',
+        '#aa2e00',
+        '#5c0819',
+        '#b11030'
+    ];
+
     let whatsAppChat;
 
     let topics = [];
@@ -75,8 +104,13 @@ const DiaryModel = () => {
         
         const topic = topics[index];
         const messages = [];
+        const selectedMessages = [];
         for(let messageHash of topic.messages) {
             messages.push(whatsAppChat.messageMap[messageHash]);
+        }
+
+        for(let messageHash of topic.selectedMessages) {
+            selectedMessages.push(whatsAppChat.messageMap[messageHash]);
         }
 
        return {
@@ -85,7 +119,8 @@ const DiaryModel = () => {
            hash: topic.hash,
            timestamp: whatsAppChat.messageMap[topic.hash].fulltimestamp,
            text: whatsAppChat.messageMap[topic.hash].text,
-           messages
+           messages,
+           selectedMessages,
        }
 
     }
@@ -246,6 +281,13 @@ const DiaryModel = () => {
         console.log(topics[topicIndex].selectedMessages);
     }
 
+    const getFullTopics = () => {
+        const fullTopics = [];
+        for(let i = 0; i < topics.length; i++)
+            fullTopics.push(getFullTopic(i));
+        return fullTopics;
+    }
+
     return {
         setWhatsAppChat,
         findTopics,
@@ -260,6 +302,7 @@ const DiaryModel = () => {
         getFullTopic,
         saveSelectedTopicMesssage,
         removeSelectedTopicMessage,
+        getFullTopics,
     };
 }
 

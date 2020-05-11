@@ -11,7 +11,7 @@
         outline-style: solid;
         position: absolute;
     } 
-}
+
 
 body{
     width: 21cm;
@@ -28,7 +28,7 @@ body{
 
 .day-banner {
     height: 100px;
-    background-color: green;
+    background-color: #007a7d;
     color: white;
     top: 120px;
     width: 21cm;
@@ -58,4 +58,64 @@ body{
     font-size: 23px;
     font-style: italic;
     font-weight: 600;
+}
+
+.name-banner {
+    height: 65px;
+    background-color: #007a7d;
+    color: white;
+    width: 21cm;
+    position: absolute;
+    font-size: 40px;
+    font-family: 'Ostrich Sans Black';
+}
+
+.name-banner.first {
+    top: 90px;
+    padding-left: 11cm;
+}
+
+.name-banner.second {
+    top: 690px;
+    padding-left: 1cm;
+}
+
+.message-text {
+    position: absolute;
+    font-family: 'Open sans';
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.message-text.first {
+    padding-left: 11cm;
+    top: 200px;
+    padding-right: 1cm;
+}
+
+.message-text.second {
+    top: 800px;
+    padding-left: 1cm;
+    padding-right: 11cm;
+}
+
+.message-media {
+    position: absolute;
+    font-family: 'Open sans';
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.message-media.first {
+    padding-left: 11cm;
+    top: 200px;
+    padding-right: 1cm;
+}
+
+.message-media.second {
+    top: 800px;
+    padding-left: 1cm;
+    padding-right: 11cm;
+}
+
 }

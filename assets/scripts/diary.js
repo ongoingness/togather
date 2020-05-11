@@ -1,5 +1,6 @@
 import DiaryUI from './diary-ui.js';
 import DiaryModel from './diary-model.js';
+import DiaryTemplates from './diary-templates.js';
 import WhatsAppChatParser from './whatapp-chat-parser.js';
 
 const Diary = () => {
@@ -240,21 +241,7 @@ const Diary = () => {
                         break;
                     
                     case 'finish-diary': 
-                        //updateState(STATES.topicsFound);
-                          
-
-
-                        const filename  = 'ThisIsYourPDFFilename.pdf';
-
-                        html2canvas(document.body).then(canvas => {
-                            let pdf = new jsPDF('p', 'mm', 'a4');
-                            pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);
-                            pdf.save(filename);
-                        });
-                        
-                        
-                       //console.log(html2canvas);
-                        
+                        DiaryTemplates().generatePDF(model.getFullTopics());             
                         break;
 
                 }
