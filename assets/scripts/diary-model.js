@@ -47,12 +47,10 @@ const DiaryModel = () => {
                 whatsAppChat.users[user].color = color;
             }
         }
-        console.log(whatsAppChat.users);
     }
     /*
     //Topic structure
     {
-        timestamp: long
         hash: string or text: string 
         messages: [hash]
         selectedMessages: [hash]
@@ -65,13 +63,11 @@ const DiaryModel = () => {
 
         const tempTopics = [];
 
-        for(let hash of whatsAppChat.orderedMessages) {
+        whatsAppChat.messageMap.forEach( (message, hash) => {
 
-            let message = whatsAppChat.messageMap[hash];
             for(let link of message.links) {
                 if(topicRegex.exec(link) != null) {
                     tempTopics.push({
-                        timestamp: message.datetimestamp,
                         hash,
                         messages: [],
                         selectedMessages: [],
@@ -79,98 +75,166 @@ const DiaryModel = () => {
                     break;
                 }
             }
-        }
+
+        });
 
         topics = tempTopics;
 
         sortTopicsByTimestamp();
         findTopicMessages();
 
-        console.log(whatsAppChat.orderedMessages.length);
-
         return tempTopics;
     }
 
-    const addTopic = (text, timestamp) => {
-        topics.push(({
-            timestamp,
-            text,
-            messages: [],
-            selectedMessages: []
-        }));
+    const sortTopicsByTimestamp = () => topics.sort((a, b) => whatsAppChat.messageMap.get(a.hash).fulltimestamp - whatsAppChat.messageMap.get(b.hash).fulltimestamp);
+    
+    const findTopicMessages = () => {
+
+        if(topics.length == 0) return
+
+        const messages = Array.from(whatsAppChat.messageMap.values());
+        let topicMessageIndex = 0;
+    
+        for(let i = 0; i < topics.length; i++) {
+
+            topics[i].messages = [];
+            topics[i].selectedMessages = [];
+
+            const topic = whatsAppChat.messageMap.get(topics[i].hash);
+
+            if(i + 1 == topics.length) {
+        
+                for(let j = topicMessageIndex; j < messages.length; j++) {
+                    const message = messages[j];
+                    if(message.hash != topic.hash && message.fulltimestamp >= topic.fulltimestamp) {
+                        topics[i].messages.push(message.hash);
+                    }
+                }
+
+            } else {
+
+                const nextTopic = whatsAppChat.messageMap.get(topics[i+1].hash);
+                const nextTopicTimestampPlusDay = new Date(nextTopic.fulltimestamp);
+                nextTopicTimestampPlusDay.setDate(nextTopicTimestampPlusDay.getDate() + 1);
+                let nextTopicMessageIndexFound = false;
+
+                for(let j = topicMessageIndex; j < messages.length; j++) {
+                   
+                    if(messages[j].hash != topic.hash) {
+
+                        if(messages[j].fulltimestamp >= topic.fulltimestamp) {
+                            
+                            if(messages[j].fulltimestamp >= nextTopic.fulltimestamp && !nextTopicMessageIndexFound) {
+                                nextTopicMessageIndexFound = true;
+                                topicMessageIndex = j;
+                            }
+
+                            if(messages[j].fulltimestamp <= nextTopicTimestampPlusDay.getTime()) {
+                                topics[i].messages.push(messages[j].hash);
+                            } 
+
+                        } 
+                    }
+                }
+            }
+        }
+    }
+
+    const getTopic = (index) => {
+
+        const topic = topics[index];
+
+        const files = [];
+        for(let file of whatsAppChat.messageMap.get(topic.hash).files) {
+            files.push(whatsAppChat.files.get(file));
+        }
+
+        return {
+                hash: topic.hash,
+                timestamp: whatsAppChat.messageMap.get(topic.hash).fulltimestamp,
+                text: whatsAppChat.messageMap.get(topic.hash).text,
+                files,
+            };
+    }
+
+    const getTopicWithMessages = (index) => {
+
+        const topic = getTopic(index);
+
+        const messages = [];
+        const selectedMessages = [];
+
+        for(let messageHash of topics[index].messages) {
+            messages.push(getMessage(messageHash));
+        }
+
+        for(let messageHash of topics[index].selectedMessages) {
+            selectedMessages.push(getMessage(messageHash));
+        }
+
+        topic.index = index;
+        topic.totalOfTopics = topics.length,
+        topic.messages = messages;
+        topic.selectedMessages = selectedMessages; 
+
+        console.log(topic);
+
+        return topic;
     }
 
     const getTopics = () => {
 
         const resultTopics = [];
 
-        for(let topic of topics) {
-            console.log(topic);
-            resultTopics.push({
-                hash: topic.hash,
-                timestamp: whatsAppChat.messageMap[topic.hash].fulltimestamp,
-                text: whatsAppChat.messageMap[topic.hash].text,
-            });
-        }
-        return resultTopics;
-    }
-
-    const getFullTopic = (index) => {
+        for(let i = 0; i < topics.length; i++)
+            resultTopics.push(getTopic(i));
         
-        const topic = topics[index];
-        const messages = [];
-        const selectedMessages = [];
-        for(let messageHash of topic.messages) {
-            messages.push(getFullMessage(messageHash));
-        }
-
-        for(let messageHash of topic.selectedMessages) {
-            selectedMessages.push(getFullMessage(messageHash));
-        }
-
-       return {
-           index,
-           totalOfTopics: topics.length,
-           hash: topic.hash,
-           timestamp: whatsAppChat.messageMap[topic.hash].fulltimestamp,
-           text: whatsAppChat.messageMap[topic.hash].text,
-           messages,
-           selectedMessages,
-       }
-
+            return resultTopics;
     }
 
-    const getFullMessagesInOrder = () => {
-
-        const messages = [];
-
-        for(let hash of whatsAppChat.orderedMessages) {
-            messages.push(getFullMessage(hash));
-        }
-
-        return messages;
-    }
-
-    const getFullMessage = (hash) => {
-        const messageObj = {...whatsAppChat.messageMap[hash]};
-        const hashUser = messageObj.user;
-        messageObj.user  = whatsAppChat.users[hashUser].name;
-        messageObj.color = whatsAppChat.users[hashUser].color;
-        console.log(messageObj);
-        return messageObj;
+    const getTopicsWithMessages = () => {
+        const fullTopics = [];
+        for(let i = 0; i < topics.length; i++)
+            fullTopics.push(getTopicWithMessages(i));
+        return fullTopics;
     }
 
     const updateTopic = ({hash, text, timestamp}) => {
         
-        whatsAppChat.messageMap[hash].text = text;
-        whatsAppChat.messageMap[hash].rawText = text;
-        whatsAppChat.messageMap[hash].datetimestamp = timestamp;
-        whatsAppChat.messageMap[hash].fulltimestamp = timestamp;
+        whatsAppChat.messageMap.get(hash).text = text;
+        whatsAppChat.messageMap.get(hash).rawText = text;
+        whatsAppChat.messageMap.get(hash).datetimestamp = timestamp;
+        whatsAppChat.messageMap.get(hash).fulltimestamp = timestamp;
 
     }
 
-    const deleteTopic = (day) => {
-        topics.splice(day, 1);
+    const deleteTopic = (day) => topics.splice(day, 1);
+    
+    const getMessage = (hash) => {
+        const messageObj = {...whatsAppChat.messageMap.get(hash)};
+        const hashUser = messageObj.user;
+        messageObj.user  = whatsAppChat.users[hashUser].name;
+        messageObj.color = whatsAppChat.users[hashUser].color;
+        
+        const files = [];
+        for(let file of messageObj.files) {
+            files.push(whatsAppChat.files.get(file));
+        }
+        messageObj.files = files;
+
+        return messageObj;
+    }
+
+    const getMessages = () => {
+
+        const messages = [];
+
+        whatsAppChat.messageMap.forEach((value, key) => {
+            messages.push(getMessage(key));
+        });
+
+        return messages;
+    
     }
 
     const hashCode = (s) => {
@@ -184,7 +248,6 @@ const DiaryModel = () => {
     const createTopicsFromHashes = (hashList) => {
         for(let hash of hashList) {
             topics.push({
-                timestamp: 0,
                 hash,
                 messages: [],
                 selectedMessages: [],
@@ -215,7 +278,6 @@ const DiaryModel = () => {
         whatsAppChat.messageMap[hash] = message;
 
         const topic = {
-            timestamp,
             hash,
             messages: [],
             selectedMessages: [],
@@ -226,68 +288,6 @@ const DiaryModel = () => {
 
         findTopicMessages();
 
-    }
-
-    const sortTopicsByTimestamp = () => topics.sort((a, b) => whatsAppChat.messageMap[a.hash].fulltimestamp - whatsAppChat.messageMap[b.hash].fulltimestamp);
-    
-    const findTopicMessages = () => {
-
-        if(topics.length == 0) return
-
-        for(let t of topics) {
-            t.messages = []
-        }
-
-        console.log(whatsAppChat.orderedMessages);
-        let topicMessageIndex = 0;
-
-        for(let i = 0; i < topics.length; i++) {
-
-            const topic = whatsAppChat.messageMap[topics[i].hash];
-
-            if(i + 1 == topics.length) {
-                console.log(topicMessageIndex);
-                for(let j = topicMessageIndex; j < whatsAppChat.orderedMessages.length; j++) {
-                    const message = getOrderedMessage(j);
-                    if(message.hash != topic.hash && message.fulltimestamp >= topic.fulltimestamp) {
-                        topics[i].messages.push(message.hash);
-                    }
-                }
-            } else {
-
-                const nextTopic = whatsAppChat.messageMap[topics[i+1].hash];
-                const nextTopicTimestampPlusDay = new Date(nextTopic.fulltimestamp);
-                nextTopicTimestampPlusDay.setDate(nextTopicTimestampPlusDay.getDate() + 1);
-                let nextTopicMessageIndexFound = false;
-
-                for(let j = topicMessageIndex; j < whatsAppChat.orderedMessages.length; j++) {
-                   
-                    const message = getOrderedMessage(j);
-
-                    if(message.hash != topic.hash) {
-
-                        if(message.fulltimestamp >= topic.fulltimestamp) {
-                            
-                            if(message.fulltimestamp >= nextTopic.fulltimestamp && !nextTopicMessageIndexFound) {
-                                nextTopicMessageIndexFound = true;
-                                topicMessageIndex = j;
-                            }
-
-                            if(message.fulltimestamp <= nextTopicTimestampPlusDay.getTime()) {
-                                topics[i].messages.push(message.hash);
-                            } 
-
-                        } 
-                    }
-                }
-
-            }
-            
-        }
-    }
-
-    const getOrderedMessage = (index) => {
-        return whatsAppChat.messageMap[whatsAppChat.orderedMessages[index]];
     }
 
     const saveSelectedTopicMesssage = (topicIndex, messageHash) => {
@@ -301,28 +301,24 @@ const DiaryModel = () => {
         console.log(topics[topicIndex].selectedMessages);
     }
 
-    const getFullTopics = () => {
-        const fullTopics = [];
-        for(let i = 0; i < topics.length; i++)
-            fullTopics.push(getFullTopic(i));
-        return fullTopics;
-    }
 
     return {
+
         setWhatsAppChat,
         findTopics,
-        addTopic,
+        getTopic,
+        getTopicWithMessages,
         getTopics,
-        getFullMessagesInOrder,
-        getFullMessage,
+        getTopicsWithMessages,
         updateTopic,
         deleteTopic,
         createTopic,
         createTopicsFromHashes,
-        getFullTopic,
         saveSelectedTopicMesssage,
         removeSelectedTopicMessage,
-        getFullTopics,
+        getMessages,
+        getMessage,
+ 
     };
 }
 

@@ -154,7 +154,6 @@ const DiaryTemplates = () => {
         const messageRight = (doc, data) => {
         
             doc.setDrawColor(0);
-            //doc.setFillColor(0, 122, 125);
             doc.setFillColor(data.color);
             doc.rect(99.25, yRight, 106, 11, 'F');
             

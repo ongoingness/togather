@@ -78,7 +78,7 @@ const DiaryUI = (eventHandler) => {
     const renderUploadFiles = () => {
 
         const headerText = document.getElementById('base-container-header-text');
-        headerText.innerText = 'Create Diary';
+        headerText.innerText = i18n.getStringById('create_diary');
 
         const topicList = document.getElementById('baseList');
 
@@ -91,7 +91,7 @@ const DiaryUI = (eventHandler) => {
 
         const uploadFilesLabel = document.createElement('label');
         uploadFilesLabel.classList.add('upload-files__label');
-        uploadFilesLabel.innerText = 'Upload Files';
+        uploadFilesLabel.innerText = i18n.getStringById('upload_files');
         buttonsContainer.appendChild(uploadFilesLabel);
 
         const uploadFilesInput = document.createElement('input');
@@ -108,21 +108,21 @@ const DiaryUI = (eventHandler) => {
 
     const renderTopicsFound = (topics) => {
      
-        document.getElementById('base-container-header-text').innerText = 'We found the following daily topics you have been messaging about. Is this set complete? Or are there any topics you want to add tho this list?';
+        document.getElementById('base-container-header-text').innerText = i18n.getStringById('topics_found_header');
         
         renderTopics(topics);
 
         const addTopicButton  = document.createElement('button');
         addTopicButton.classList.add('topic-button');
         addTopicButton.classList.add('base-container__footer__item__button');
-        addTopicButton.innerText = 'ADD TOPICS';
+        addTopicButton.innerText = i18n.getStringById('add_topics');
         addTopicButton.addEventListener('click', (e) => eventHandler(e, {type: 'add-topic'}));              
         document.getElementById('base-container-footer-left').appendChild(addTopicButton);
 
         const thatsAllButton  = document.createElement('button');
         thatsAllButton.classList.add('topic-button');
         thatsAllButton.classList.add('base-container__footer__item__button');
-        thatsAllButton.innerText = 'THAT\'S All';
+        thatsAllButton.innerText = i18n.getStringById('thats_all');
         thatsAllButton.addEventListener('click', (e) => eventHandler(e, {type: 'thats-all'}));  
         document.getElementById('base-container-footer-right').appendChild(thatsAllButton);
 
@@ -143,7 +143,7 @@ const DiaryUI = (eventHandler) => {
 
         const topicHeaderDay =  document.createElement('div');
         topicHeaderDay.classList.add('topic__header__day');
-        topicHeaderDay.innerText = `DAY ${day + 1}`;
+        topicHeaderDay.innerText = `${i18n.getStringById('day')} ${day + 1}`;
         topicHeaderDay.style = `color: ${color};`
         topicHeader.appendChild(topicHeaderDay);
 
@@ -176,9 +176,60 @@ const DiaryUI = (eventHandler) => {
         deleteButtonImage.height = '25';
         topicHeaderDeleteButton.appendChild(deleteButtonImage);
 
-        const topicText = document.createElement('div');
-        topicText.innerText = `${topicData.text}`;
-        topic.appendChild(topicText);
+        if(topicData.text.length > 1) {
+            const topicText = document.createElement('div');
+            topicText.innerText = `${topicData.text}`;
+            topic.appendChild(topicText);
+        }
+
+        console.log(topicData.files);
+
+        if(topicData.files.length > 0) {
+            const chatMessageMediaBody = document.createElement('div');
+            chatMessageMediaBody.classList.add('topic__media');
+            topic.appendChild(chatMessageMediaBody);
+            for(let file of topicData.files) {
+
+                if(file.type.includes('audio')) {
+
+                    const audio = document.createElement('audio');
+                    audio.setAttribute('controls', true);
+
+                    const source = document.createElement('source');
+                    source.setAttribute('src', file.data);
+                    source.setAttribute('type', file.type);
+
+                    audio.appendChild(source);
+                    chatMessageMediaBody.appendChild(audio);
+
+                } else if(file.type.includes('video')) {
+
+                    const video = document.createElement('video');
+                    video.width = 320;
+                    video.height = 240;
+                    video.controls = true;
+                    video.autoplay = true;
+                    video.loop = true;
+                    video.muted = true;
+
+                    const source = document.createElement('source');
+                    source.src = file.data;
+                    source.type = file.type;
+
+                    video.appendChild(source);
+                    chatMessageMediaBody.appendChild(video);
+
+                } else if(file.type.includes('image')) {
+
+                    const image = document.createElement('img');
+                    image.src = file.data;
+                    image.width = 320;
+                    image.height = 240;
+                    chatMessageMediaBody.appendChild(image);
+
+                }
+            }
+        }
 
         topicList.appendChild(topic);          
     }
@@ -207,7 +258,7 @@ const DiaryUI = (eventHandler) => {
     const renderAddTopicOptions = () => {
 
         const headerText = document.getElementById('base-container-header-text');
-        headerText.innerText = 'New Topic From Where';
+        headerText.innerText = i18n.getStringById('add_topic_options_header');
 
         const topicList = document.getElementById('baseList');
 
@@ -220,17 +271,17 @@ const DiaryUI = (eventHandler) => {
 
         const writeTopic = document.createElement('button');
         writeTopic.classList.add('topic-button');
-        writeTopic.innerText = 'Write Topic';
+        writeTopic.innerText = i18n.getStringById('write_topic');
         writeTopic.addEventListener('click', (e) => eventHandler(e, {type: 'write-topic'})); 
         buttonsContainer.appendChild(writeTopic);
 
         const orText = document.createElement('div');
-        orText.innerText = 'or';
+        orText.innerText = i18n.getStringById('or');
         buttonsContainer.appendChild(orText);
 
         const selectTopic = document.createElement('button');
         selectTopic.classList.add('topic-button');
-        selectTopic.innerText = 'Select from chat';
+        selectTopic.innerText = i18n.getStringById('select_from_chat');
         selectTopic.addEventListener('click', (e) => eventHandler(e, {type: 'select-from-chat'})); 
         buttonsContainer.appendChild(selectTopic);
         
@@ -239,7 +290,7 @@ const DiaryUI = (eventHandler) => {
         const backButton = document.createElement('button');
         backButton.classList.add('topic-button');
         backButton.classList.add('base-container__footer__item__button');
-        backButton.innerText = 'BACK';
+        backButton.innerText = i18n.getStringById('back');
         backButton.addEventListener('click', (e) => eventHandler(e, {type: 'back'})); 
         document.getElementById('base-container-footer-left').appendChild(backButton);
 
@@ -257,7 +308,7 @@ const DiaryUI = (eventHandler) => {
     const renderWriteTopic = (topicData) => {
 
         const headerText = document.getElementById('base-container-header-text');
-        headerText.innerText = 'Write your own topic and assign it to a date.';
+        headerText.innerText = i18n.getStringById('write_topic_header');
 
         const topicList = document.getElementById('baseList');
 
@@ -266,7 +317,7 @@ const DiaryUI = (eventHandler) => {
 
         const topicTextArea = document.createElement('textarea');
         topicTextArea.classList.add('topic__write-topic__textarea');
-        topicTextArea.placeholder = 'Type your own topic here';
+        topicTextArea.placeholder = i18n.getStringById('type_your_own_topic_here');
         if(topicData != null)
             topicTextArea.textContent = topicData.text;
         container.appendChild(topicTextArea);
@@ -291,7 +342,56 @@ const DiaryUI = (eventHandler) => {
         const addPhotoInput = document.createElement('input');
         addPhotoInput.classList.add('topic__write-topic__add-photo-input');
         addPhotoInput.type = 'file';
+        addPhotoInput.multiple = true;
         addPhotoLabel.appendChild(addPhotoInput);
+        addPhotoInput.addEventListener('change', async (e) => {
+
+            let files = [];
+    
+            const readFile = (file) => {
+                const fileReader = new FileReader();
+    
+                return new Promise((resolve, reject) => {
+                    fileReader.onerror = () => {
+                        fileReader.abort();
+                        reject(new DOMException("Problem parsing input file."));
+                    };
+    
+                    fileReader.onload = () => {
+                        resolve({file, fileContent: fileReader.result});
+                    };
+    
+                    if(file.type === 'text/plain') {
+                        fileReader.readAsText(file);
+                    } else {
+                        fileReader.readAsDataURL(file); 
+                    }
+                    
+                });
+            }
+    
+            let column = 1;
+
+            for(let i = 0; i < addPhotoInput.files.length; i++) {
+                const result = await readFile(addPhotoInput.files[i]);
+                const file = { type: result.file.type, data: result.fileContent } 
+
+                console.log(result);
+                if(column == 1) {
+                    renderAddedPhoto(file, uploadedPhotosColumn1); 
+                    column = 2;
+                } else {
+                    renderAddedPhoto(file, uploadedPhotosColumn2); 
+                    column = 1;
+                }
+                    
+        
+                files.push(file);
+            }
+    
+            eventHandler(e, {type: 'upload-files', files});
+            
+        });
 
         const uploadedPhotos = document.createElement('div');
         uploadedPhotos.classList.add('topic__write-topic__uploaded-photos');
@@ -311,45 +411,95 @@ const DiaryUI = (eventHandler) => {
         uploadedPhotosColumn2.classList.add('topic__write-topic__uploaded-photos__column');
         uploadedPhotosRow.appendChild(uploadedPhotosColumn2);
 
-        //////////////////////
-        renderAddedPhoto("{{ '/assets/images/test1.jpg' | prepend: site.baseurl }}", uploadedPhotosColumn1); 
-        renderAddedPhoto("{{ '/assets/images/test2.jpg' | prepend: site.baseurl }}", uploadedPhotosColumn1); 
-        renderAddedPhoto("{{ '/assets/images/test3.jpg' | prepend: site.baseurl }}", uploadedPhotosColumn2); 
-        renderAddedPhoto("{{ '/assets/images/test4.jpg' | prepend: site.baseurl }}", uploadedPhotosColumn2); 
-        ///////////////////////
+        let column = 1;
+        
+        if(topicData && topicData.files) {
 
+            for(let file of topicData.files) {
+                console.log(file);
+                if(column == 1) {
+                    renderAddedPhoto(file, uploadedPhotosColumn1); 
+                    column = 2;
+                } else {
+                    renderAddedPhoto(file, uploadedPhotosColumn2); 
+                    column = 1;
+                }
+            }
+        }
         topicList.appendChild(container);
 
         const backButton = document.createElement('button');
         backButton.classList.add('topic-button');
         backButton.classList.add('base-container__footer__item__button');
-        backButton.innerText = 'BACK';
+        backButton.innerText = i18n.getStringById('back');
         backButton.addEventListener('click', (e) => eventHandler(e, {type: 'back'}))    
         document.getElementById('base-container-footer-left').appendChild(backButton);
 
         const doneButton = document.createElement('button');
         doneButton.classList.add('topic-button');
         doneButton.classList.add('base-container__footer__item__button');
-        doneButton.innerText = 'DONE';
+        doneButton.innerText = i18n.getStringById('done');
         doneButton.addEventListener('click', (e) => eventHandler(e, {type: 'done', hash: topicData != null ? topicData.hash : '', text: topicTextArea.value , timestamp: topicDate.valueAsDate.getTime() }));   
         document.getElementById('base-container-footer-right').appendChild(doneButton);
 
     }
 
-    const renderAddedPhoto = (photoData, parent) => {
+    const renderAddedPhoto = (file, parent) => {
   
         const photoContainer = document.createElement('div');
         photoContainer.classList.add('topic__write-topic__photo-container');
         parent.appendChild(photoContainer);
 
-        const photo = document.createElement('img');
-        photo.classList.add('topic__write-topic__uploaded-photos__image');
-        photo.src = photoData;
-        photoContainer.appendChild(photo);
+        const chatMessageMediaBody = document.createElement('div');
+        chatMessageMediaBody.classList.add('chat-message__media');
+        photoContainer.appendChild(chatMessageMediaBody);
 
+        if(file.type.includes('audio')) {
+
+            const audio = document.createElement('audio');
+            audio.setAttribute('controls', true);
+
+            const source = document.createElement('source');
+            source.setAttribute('src', file.data);
+            source.setAttribute('type', file.type);
+
+            audio.appendChild(source);
+            chatMessageMediaBody.appendChild(audio);
+
+        } else if(file.type.includes('video')) {
+
+            const video = document.createElement('video');
+            video.width = 320;
+            video.height = 240;
+            video.controls = true;
+            video.autoplay = true;
+            video.loop = true;
+            video.muted = true;
+
+            const source = document.createElement('source');
+            source.src = file.data;
+            source.type = file.type;
+
+            video.appendChild(source);
+            chatMessageMediaBody.appendChild(video);
+
+        } else if(file.type.includes('image')) {
+
+            const image = document.createElement('img');
+            image.classList.add('topic__write-topic__uploaded-photos__image');
+            image.src = file.data;
+            image.width = 320;
+            image.height = 240;
+            chatMessageMediaBody.appendChild(image);
+
+        }
+            
         const deleteButton = document.createElement('button');
         deleteButton.classList.add('topic__write-topic__uploaded-photos__delete-button');
-        deleteButton.addEventListener('click', (e) => eventHandler(e, {type: 'delete-photo'}));   
+        deleteButton.addEventListener('click', (e) => {
+            photoContainer.remove();
+            eventHandler(e, {type: 'delete-photo', file})
+        });   
         photoContainer.appendChild(deleteButton);
 
         const deleteButtonImage = document.createElement('img');
@@ -383,14 +533,14 @@ const DiaryUI = (eventHandler) => {
         const backButton = document.createElement('button');
         backButton.classList.add('topic-button');
         backButton.classList.add('base-container__footer__item__button');
-        backButton.innerText = 'BACK';
+        backButton.innerText = i18n.getStringById('back');
         backButton.addEventListener('click', (e) => eventHandler(e, {type: 'back'}))    
         document.getElementById('base-container-footer-left').appendChild(backButton);
 
         const doneButton = document.createElement('button');
         doneButton.classList.add('topic-button');
         doneButton.classList.add('base-container__footer__item__button');
-        doneButton.innerText = 'DONE';
+        doneButton.innerText = i18n.getStringById('done');
         doneButton.addEventListener('click', (e) => eventHandler(e, {type: 'done'}));   
         document.getElementById('base-container-footer-right').appendChild(doneButton);
 
@@ -431,55 +581,65 @@ const DiaryUI = (eventHandler) => {
         chatMessageTime.style = `color: ${messageData.color}`;
         header.appendChild(chatMessageTime);
 
-        const chatMessageBody = document.createElement('div');
-        chatMessageBody.classList.add('chat-message__text');
-        chatMessageBody.innerText = `${messageData.text}`;
-        chatMessage.appendChild(chatMessageBody);
+        if(messageData.text.length > 1) {
+            console.log(messageData.text.length, messageData.text);
+            const chatMessageTextBody = document.createElement('div');
+            chatMessageTextBody.classList.add('chat-message__text');
+            chatMessageTextBody.innerText = `${messageData.text}`;
+            chatMessage.appendChild(chatMessageTextBody);
+        }
 
+        if(messageData.files.length > 0) {
+            const chatMessageMediaBody = document.createElement('div');
+            chatMessageMediaBody.classList.add('chat-message__media');
+            chatMessage.appendChild(chatMessageMediaBody);
+            for(let file of messageData.files) {
 
-        /*
-        if(parsedMessage.file != '') {
-            if(files[parsedMessage.file].type.includes('audio')) {
-                const audio = document.createElement('audio');
-                audio.setAttribute('controls', true);
+                if(file.type.includes('audio')) {
 
-                const source = document.createElement('source');
-                source.setAttribute('src', files[parsedMessage.file].data);
-                source.setAttribute('type', files[parsedMessage.file].type);
+                    const audio = document.createElement('audio');
+                    audio.setAttribute('controls', true);
 
-                audio.appendChild(source);
-                chatMessageBody.appendChild(audio);
+                    const source = document.createElement('source');
+                    source.setAttribute('src', file.data);
+                    source.setAttribute('type', file.type);
 
-            } else if(files[parsedMessage.file].type.includes('video')) {
-                const video = document.createElement('video');
-                video.width = 320;
-                video.height = 240;
-                video.controls = true;
-                video.autoplay = true;
-                video.loop = true;
-                video.muted = true;
+                    audio.appendChild(source);
+                    chatMessageMediaBody.appendChild(audio);
 
-                const source = document.createElement('source');
-                source.src = files[parsedMessage.file].data;
-                source.type = files[parsedMessage.file].type;
+                } else if(file.type.includes('video')) {
 
-                video.appendChild(source);
-                chatMessageBody.appendChild(video);
-            } else if(files[parsedMessage.file].type.includes('image')) {
-                const image = document.createElement('img');
-                image.src = files[parsedMessage.file].data;
-                image.width = 320;
-                image.height = 240;
-                chatMessageBody.appendChild(image);
+                    const video = document.createElement('video');
+                    video.width = 320;
+                    video.height = 240;
+                    video.controls = true;
+                    video.autoplay = true;
+                    video.loop = true;
+                    video.muted = true;
+
+                    const source = document.createElement('source');
+                    source.src = file.data;
+                    source.type = file.type;
+
+                    video.appendChild(source);
+                    chatMessageMediaBody.appendChild(video);
+
+                } else if(file.type.includes('image')) {
+
+                    const image = document.createElement('img');
+                    image.src = file.data;
+                    image.width = 320;
+                    image.height = 240;
+                    chatMessageMediaBody.appendChild(image);
+
+                }
             }
-
-        }*/
-
+        }
     }
 
     const renderEditTopic = (topicData) => {
         renderWriteTopic(topicData);
-        document.getElementById('base-container-header-text').innerText  = 'Make changes to this topic';
+        document.getElementById('base-container-header-text').innerText  = i18n.getStringById('edit_topic_header');
     }
 
     const renderSelectMessages = (dayData) => {
@@ -550,7 +710,7 @@ const DiaryUI = (eventHandler) => {
         const readMoreButton = document.createElement('button');
         readMoreButton.id = 'readMoreButton';
         readMoreButton.classList.add('select-messages__read-more-button');
-        readMoreButton.innerText = 'Read More';
+        readMoreButton.innerText = i18n.getStringById('read_more');
         readMoreButton.addEventListener('click', (e) => eventHandler(e, {type: 'read-more'}));     
         buttonContainer.appendChild(readMoreButton);
 
@@ -558,26 +718,26 @@ const DiaryUI = (eventHandler) => {
         readLessButton.id = 'readLessButton';
         readLessButton.classList.add('select-messages__read-less-button');
         readLessButton.classList.add('hidden');
-        readLessButton.innerText = 'Read Less';
+        readLessButton.innerText = i18n.getStringById('read_less');;
         readLessButton.addEventListener('click', (e) => eventHandler(e, {type: 'read-less'}));     
         buttonContainer.appendChild(readLessButton);
 
         const actionText = document.createElement('div');
         actionText.classList.add('select-messages__action-text');
-        actionText.innerText = 'Select all the messages to go in the diary for this day.'
+        actionText.innerText = i18n.getStringById('select_messages_action_text');
         topicDisplay.appendChild(actionText);
         
         const topicsButton = document.createElement('button');
         topicsButton.classList.add('topic-button');
         topicsButton.classList.add('base-container__footer__item__button');
-        topicsButton.innerText = 'TOPICS';
+        topicsButton.innerText = i18n.getStringById('topics');
         topicsButton.addEventListener('click', (e) => eventHandler(e, {type: 'topics'}))    
         document.getElementById('base-container-footer-left').appendChild(topicsButton);
 
         const finishDiaryButton = document.createElement('button');
         finishDiaryButton.classList.add('topic-button');
         finishDiaryButton.classList.add('base-container__footer__item__button');
-        finishDiaryButton.innerText = 'FINISH DIARY';
+        finishDiaryButton.innerText = i18n.getStringById('finish');
         finishDiaryButton.addEventListener('click', (e) => eventHandler(e, {type: 'finish-diary'}));   
         document.getElementById('base-container-footer-right').appendChild(finishDiaryButton);
 
@@ -602,7 +762,7 @@ const DiaryUI = (eventHandler) => {
 
     const renderDay = (dayData) => {
 
-        document.getElementById('dayDisplay').innerText = `Day ${dayData.index + 1}`;
+        document.getElementById('dayDisplay').innerText = `${i18n.getStringById('day')} ${dayData.index + 1}`;
 
         if(dayData.index == dayData.totalOfTopics-1)
             document.getElementById('nextDay').disabled = true; 

@@ -2,26 +2,40 @@ const WhatsAppChatParser = () => {
 
     const start =  async (filesInput) => {
         const tempFiles = await readFiles(filesInput);
-        const files = {}; 
+        const files = new Map(); 
 
-        for(let file of tempFiles) {
-            if(file.file.type != 'text/plain') {
-                files[`${file.file.name}`] = {type: file.file.type, data: file.fileContent};
+        /*
+        files: {
+
+            hash: {
+                name: string,
+                type: string,
+                data: 
             }
+
+        }
+
+
+        */
+
+        for(let {file:{name}, file:{type}, fileContent} of tempFiles) {
+            if(type != 'text/plain')
+                files.set(hashCode(fileContent), { name, type, data: fileContent});
         }
 
         let messageMap;
-        let orderedMessages;
         let users;
         for(let file of tempFiles) {
             if(file.file.type === 'text/plain') {
                 const parsedResult = parseMessages(file.fileContent, files);
                 messageMap = parsedResult.messageMap;
-                orderedMessages = parsedResult.orderedMessages;
                 users = parsedResult.users;
             }
         }   
-        return { messageMap, orderedMessages, files, users }
+
+        console.log(messageMap, files);
+
+        return { messageMap, files, users }
     }
 
     const readFiles = async(fileInput) => {
@@ -83,8 +97,7 @@ const WhatsAppChatParser = () => {
         const users = {
             numbers: [],
         };
-        const messageMap = {};
-        const orderedMessages = [];
+        const messageMap = new Map();
 
         const messageStartRegex = RegExp('[\[]?([0-9]{2})\/([0-9]{2})\/([0-9]{2,4})\, ([0-9]{2}\:[0-9]{2}(?:\:[0-9]{2})?)\]? (?:- )?([^:]+)\: (.*)');
 
@@ -92,16 +105,23 @@ const WhatsAppChatParser = () => {
 
         const parseMessageBody = (body) => {
 
-            let filename;
+            let filename = [];
             let text = body;
 
             const fileRegexResult = fileRegex.exec(text);
             if(fileRegexResult != null) {
                 const [fullLine, fullFilename, tempFilename] = fileRegexResult;
-                if(files[tempFilename] != undefined) {
+
+                let hash;
+                files.forEach((value, key) => {
+                    if(value.name === tempFilename) hash = key;
+                });
+
+                if(hash != undefined) {
                     text = text.replace(fullFilename, '');
-                    filename = tempFilename;
+                    filename.push(hash);
                 }
+
             }
 
             const linkRegexResult = text.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g);
@@ -113,7 +133,7 @@ const WhatsAppChatParser = () => {
             const atRegexresult = text.match(/(@[0-9]+)/g);
             let atUser = atRegexresult != null ? atRegexresult : []
 
-            return filename != undefined ? {text, filename, links, atUser} : {text, undefined, links, atUser} 
+            return {text, filename, links, atUser}
         };
 
         const parseDateToTimestamp = (day, month, year, time) => {
@@ -132,11 +152,9 @@ const WhatsAppChatParser = () => {
             if(messageStart != null) {
 
                 const [fullLine, day, month, year, fullTime, username, body] = messageStart;
-
                 if(currentMessage != null) {
                     currentMessage.hash = hashCode(`${index}${currentMessage.fulltimestamp}${currentMessage.username}${currentMessage.rawText}`);
-                    messageMap[currentMessage.hash] = {...currentMessage};
-                    orderedMessages.push(currentMessage.hash);
+                    messageMap.set(currentMessage.hash, {...currentMessage});
                 }
                 
                 currentMessage = {};
@@ -155,7 +173,7 @@ const WhatsAppChatParser = () => {
 
                 const {text, filename, links, atUser} = parseMessageBody(body);
                 currentMessage.text = text;
-                currentMessage.file = filename != undefined ? filename : '';
+                currentMessage.files = filename;
                 currentMessage.links = links;
                 currentMessage.atUser = atUser;
 
@@ -164,10 +182,11 @@ const WhatsAppChatParser = () => {
                 }
 
             } else {
+
                 if(currentMessage != null) {
                     const {text, filename, links, atUser} = parseMessageBody(rawMessage);
                     currentMessage.text += currentMessage.text === '' ? text : ` ${text}`;
-                    currentMessage.file = filename != undefined ? filename : '';
+                    currentMessage.files.concat(filename);
                     currentMessage.links = currentMessage.links.concat(links);
                     currentMessage.atUser = currentMessage.atUser.concat(atUser);
                     for(let number of atUser) {
@@ -180,12 +199,11 @@ const WhatsAppChatParser = () => {
 
         if(currentMessage != null) {
             currentMessage.hash = hashCode(`${currentMessage.id}${currentMessage.fulltimestamp}${currentMessage.username}${currentMessage.rawText}`);
-            messageMap[currentMessage.hash] = {...currentMessage};
-            orderedMessages.push(currentMessage.hash);
+            messageMap.set(currentMessage.hash, {...currentMessage});
             currentMessage = null;
         }
-        console.log(users);
-        return ({messageMap, orderedMessages, users});
+ 
+        return ({messageMap, users});
 
     };
 
