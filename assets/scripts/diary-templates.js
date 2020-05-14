@@ -19,18 +19,27 @@ const DiaryTemplates = () => {
 
         //document.getElementById('baseContainer').style.display = 'none';
 
+
+      
+
         let doc = new jsPDF();
 
         console.log(topics);
 
         for(let topic of topics) {
             doc = topicPage(doc, topic);
-            doc = messagePages(doc, topic.selectedMessages);
+            doc = await messagePages(doc, topic.selectedMessages);
         }
 
+        const link = await getSpotifyCode("https://open.spotify.com/track/'7CH99b2i1TXS5P8UUyWtnM?si=ZMlavzVYQLSMSCfOiJX8LA");
+        
+        
+        doc.addImage(link, 'PNG', 10, 10, 100, 100);
+
         doc.save('test');
- 
+
     }
+
 /*
     const topicPage = (node, data) => {
 
@@ -109,7 +118,7 @@ const DiaryTemplates = () => {
         return doc;
     }
 
-    const messagePages = (doc, messages) => {
+    const messagePages = async(doc, messages) => {
 
         let yLeft = 11;
         let yRight = 11;
@@ -119,7 +128,7 @@ const DiaryTemplates = () => {
 
         console.log(messages);
 
-        const messageLeft = (doc, data) => {
+        const messageLeft = async (doc, data) => {
 
             doc.setDrawColor(0);
             //doc.setFillColor(0, 122, 125);
@@ -141,17 +150,83 @@ const DiaryTemplates = () => {
             doc.setFont('OpenSans');
         
             const lines = splitTextInLines(data.text, 30); 
-        
             doc.text(lines, 4.838, yLeft, {maxWidth: 87.77});
-        
-            console.log('a', yLeft);
             yLeft += lines.length * 4;
-            console.log('b', yLeft);
 
+            await addMedia(data.files, 'l');
+ 
             return doc;
         }
+
+
+        const addMedia = async(files, side) => {
+
+            for(let media of files) {
+
+                if(media.type.includes('image')) {
+                    
+                    const {w,h} = fitDimensions(media.data);
+                    doc.addImage(media.data, 'PNG', side === 'l' ? 4.838 : 117.23, side === 'l' ? yLeft : yRight, w, h);
+                    if(side === 'l') yLeft += h; else yRight += h;
+
+                } else if (media.type.includes('video')) {
+
+                    const frame = await getFrameFromVideo(media);
+                    const {w,h} = fitDimensions(frame);
+                    doc.addImage(frame, 'PNG', side === 'l' ? 4.838 : 117.23, side === 'l' ? yLeft : yRight, w, h);
+                    if(side === 'l') yLeft += h; else yRight += h;
+                       
+                }
+            }
+
+        }
         
-        const messageRight = (doc, data) => {
+        const fitDimensions = (media) => {
+            let img = new Image();
+            img.src = media;
+
+            let mmWidth = Math.floor(img.width * 0.264583);
+            let mmHeight =  Math.floor(img.height * 0.264583);
+
+            if(mmWidth > 87.77) {
+                const ratio = 87.77 / mmWidth;
+                mmWidth = 87.77;
+                mmHeight *= ratio; 
+            }
+
+            return {w: mmWidth, h: mmHeight};
+        }
+
+        const getFrameFromVideo = (media) => {
+
+            const video = document.createElement('video');
+            video.autoplay = true;
+            //video.style.display = 'none';
+            const source = document.createElement('source');
+            source.src = media.data;
+            video.appendChild(source);
+            document.body.append(video);
+
+            const canvas = document.createElement('canvas');
+            canvas.id = 'canvas-element';
+            //canvas.style.display = 'none';
+            document.body.append(canvas);
+        
+            video.addEventListener('loadedmetadata', function() {
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;           
+            });
+
+            return new Promise((resolve, reject) => {
+                video.oncanplay = (e) => {
+                    canvas.getContext("2d").drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+                    resolve(canvas.toDataURL());
+                }
+            });
+        }
+
+  
+        const messageRight = async(doc, data) => {
         
             doc.setDrawColor(0);
             doc.setFillColor(data.color);
@@ -191,6 +266,9 @@ const DiaryTemplates = () => {
                 doc.text(lines, 117.23, yRight, {maxWidth: 87.77});
                 yRight += lines.length * 4;
             }
+
+            await addMedia(data.files, 'r');
+
             return doc;
         
         }
@@ -218,17 +296,17 @@ const DiaryTemplates = () => {
             }
 
             if(lastElemPositon === '') {
-                doc = messageLeft(doc, message);
+                doc = await messageLeft(doc, message);
                 lastElemPositon = 'left';
             } else if(lastElemPositon === 'left') {
 
                 if(yRight > yLeft) {
                     yLeft += 15;
-                    doc = messageLeft(doc, message);
+                    doc = await messageLeft(doc, message);
                     lastElemPositon = 'left';
                 } else {
                     yRight = yHeaderLeft + 15;
-                    doc = messageRight(doc, message);
+                    doc = await messageRight(doc, message);
                     lastElemPositon = 'right';
                 }
 
@@ -236,11 +314,11 @@ const DiaryTemplates = () => {
 
                 if(yLeft > yRight) {
                     yRight += 15;
-                    doc = messageRight(doc, message);
+                    doc = await messageRight(doc, message);
                     lastElemPositon = 'right';
                 } else {
                     yLeft = yHeaderRight + 15;
-                    doc = messageLeft(doc, message);
+                    doc = await messageLeft(doc, message);
                     lastElemPositon = 'left';
                 }
 
@@ -249,6 +327,44 @@ const DiaryTemplates = () => {
         }
 
         return doc;
+    }
+
+
+    const getSpotifyCode = async(link) => {
+
+        const result = RegExp('https:\/\/open.spotify.com\/track\/([^\?]*)\?').exec(link);
+        if(result != undefined) {
+            const musicCode = result[1];
+            const url = `https://scannables.scdn.co/uri/plain/png/000000/white/640/spotify:track:${musicCode}`;
+
+            let response = await fetch(url);
+            let blob = await response.blob();
+  
+            const getImageFromBlob = (blob) => {
+
+                var reader = new FileReader();
+                reader.readAsDataURL(blob); 
+
+                return new Promise((resolve, reject) => {
+
+                    reader.onloadend = () => resolve(reader.result);
+                    
+                });
+            }
+            const r = getImageFromBlob(blob);
+            return r;
+        }
+    
+        return null;
+        /*
+
+        https://www.spotifycodes.com/downloadCode.php?uri=jpeg%2F000000%2Fwhite%2F640%2Fspotify%3Atrack%3A 2NDJAS0IlvK0UswjMzsac5
+
+        https://www.spotifycodes.com/downloadCode.php?uri=jpeg%2F000000%2Fwhite%2F640%2Fspotify%3Atrack%3A 7CH99b2i1TXS5P8UUyWtnM
+        
+        https://open.spotify.com/track/ 7CH99b2i1TXS5P8UUyWtnM ?si=ZMlavzVYQLSMSCfOiJX8LA
+        */
+
     }
 
     const splitTextInLines = (text, lineSize) => {
@@ -335,59 +451,7 @@ const DiaryTemplates = () => {
 
     }
 
-    const messagesOneUserPage = (data) => {
-
-    }
-
-    const render = () => {
-
-    }
-
-    const printPages = async (quality = 1, tempBody) => {
-        
-        /*
-        const filename  = 'ThisIsYourPDFFilename.pdf';
-        var pages = document.querySelectorAll('.nodeToRenderAsPDF');
-        console.log(pages);
-        let pdf = new jsPDF('p', 'mm', 'a4');
-
-        for(var i = 0; i < pages.length; i++) {
-            await html2canvas(pages.item(i), {scale: quality}).then(canvas => {
-                pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);
-                pdf.addPage();
-            });
-        }
-        pdf.save(filename);
-
-    */
-
-        console.log(document);    
-
-        /*
-        const filename  = 'ThisIsYourPDFFilename.pdf';
-
-        html2canvas(document.getElementById('pageContainer')).then(canvas => {
-            let pdf = new jsPDF('p', 'mm', 'a4');
-            pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);
-            pdf.save(filename);
-            //document.body = tempBody;
-        });
-        */
-
-       var printDoc = new jsPDF();
-       printDoc.fromHTML(document.getElementById('pageContainer'), 10, 10, {'width': 180});
-       printDoc.autoPrint();
-       printDoc.output("dataurlnewwindow");
-
-    }
-
-
     return {
-        topicPage,
-        messagesTwoUsersPage,
-        messagesOneUserPage,
-        render,
-        print,
         generatePDF,
     }
 }

@@ -18,7 +18,8 @@ const WhatsAppChatParser = () => {
 
         */
 
-        for(let {file:{name}, file:{type}, fileContent} of tempFiles) {
+        for(let {file, file:{name}, file:{type}, fileContent} of tempFiles) {
+            console.log(file);
             if(type != 'text/plain')
                 files.set(hashCode(fileContent), { name, type, data: fileContent});
         }

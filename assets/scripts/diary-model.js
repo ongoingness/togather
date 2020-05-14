@@ -213,8 +213,9 @@ const DiaryModel = () => {
     const getMessage = (hash) => {
         const messageObj = {...whatsAppChat.messageMap.get(hash)};
         const hashUser = messageObj.user;
-        messageObj.user  = whatsAppChat.users[hashUser].name;
-        messageObj.color = whatsAppChat.users[hashUser].color;
+
+        messageObj.user  = messageObj.user != '' ? whatsAppChat.users[hashUser].name : '';
+        messageObj.color = messageObj.user != '' ? whatsAppChat.users[hashUser].color: colors[0];
         
         const files = [];
         for(let file of messageObj.files) {
@@ -257,25 +258,47 @@ const DiaryModel = () => {
         findTopicMessages();
     }
 
-    const createTopic = ({text, timestamp}) => {
+    const createTopic = ({text, timestamp, tempFiles}) => {
 
         const hash = hashCode(`topic${timestamp}${text}`);
 
-        const message = {
-            id: '00',
-            date: '00',
-            time: '00',
-            datetimestamp: timestamp,
-            fulltimestamp: timestamp,
-            user: 'topic',
-            text,
-            file: '',
-            links: [],
-            hash,
-            rawText: text
+        const files = [];
+        for(let tempFile of tempFiles) {
+
+            const fileHashCode = hashCode(tempFile.data);
+            whatsAppChat.files.set(fileHashCode, {
+                type: tempFile.type,
+                name: tempFile.name,
+                data: tempFile.data,
+            });
+            files.push(fileHashCode);
+
         }
 
-        whatsAppChat.messageMap[hash] = message;
+        const message = {
+            index: '',
+            fulltimestamp: timestamp,
+            user: '',
+            text,
+            files: files,
+            linns: [],
+            hash,
+            rawText: text,
+            atUser: [],
+        }
+
+        let index = -1;
+        const arrayFromMap = Array.from(whatsAppChat.messageMap);
+        for(let i = 0; i < arrayFromMap.length && index === -1; i++) {
+            if(arrayFromMap[i][1].fulltimestamp >= timestamp) index = i;
+        }
+        if(index == -1) index = arrayFromMap.length;
+
+        arrayFromMap.splice(index, 0, [hash, message]);
+        
+        whatsAppChat.messageMap = new Map(arrayFromMap);
+
+  
 
         const topic = {
             hash,
@@ -284,10 +307,10 @@ const DiaryModel = () => {
         }
 
         topics.push(topic);
+
         sortTopicsByTimestamp();
-
         findTopicMessages();
-
+        
     }
 
     const saveSelectedTopicMesssage = (topicIndex, messageHash) => {

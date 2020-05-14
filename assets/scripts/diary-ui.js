@@ -182,7 +182,7 @@ const DiaryUI = (eventHandler) => {
             topic.appendChild(topicText);
         }
 
-        console.log(topicData.files);
+        console.log('topic', topicData.files);
 
         if(topicData.files.length > 0) {
             const chatMessageMediaBody = document.createElement('div');
@@ -370,22 +370,13 @@ const DiaryUI = (eventHandler) => {
                 });
             }
     
-            let column = 1;
+            let nMedia = document.getElementsByClassName('topic__write-topic__photo-container').length;
 
             for(let i = 0; i < addPhotoInput.files.length; i++) {
                 const result = await readFile(addPhotoInput.files[i]);
-                const file = { type: result.file.type, data: result.fileContent } 
+                const file = { type: result.file.type, data: result.fileContent, name: result.file.name } 
 
-                console.log(result);
-                if(column == 1) {
-                    renderAddedPhoto(file, uploadedPhotosColumn1); 
-                    column = 2;
-                } else {
-                    renderAddedPhoto(file, uploadedPhotosColumn2); 
-                    column = 1;
-                }
-                    
-        
+                renderAddedPhoto(file, (nMedia+i)%2 === 0 ? uploadedPhotosColumn1 : uploadedPhotosColumn2);                 
                 files.push(file);
             }
     
@@ -411,21 +402,12 @@ const DiaryUI = (eventHandler) => {
         uploadedPhotosColumn2.classList.add('topic__write-topic__uploaded-photos__column');
         uploadedPhotosRow.appendChild(uploadedPhotosColumn2);
 
-        let column = 1;
-        
         if(topicData && topicData.files) {
-
-            for(let file of topicData.files) {
-                console.log(file);
-                if(column == 1) {
-                    renderAddedPhoto(file, uploadedPhotosColumn1); 
-                    column = 2;
-                } else {
-                    renderAddedPhoto(file, uploadedPhotosColumn2); 
-                    column = 1;
-                }
+            for(let i = 0; i < topicData.files.length; i++) {
+                renderAddedPhoto(topicData.files[i], i%2 === 0 ? uploadedPhotosColumn1 : uploadedPhotosColumn2); 
             }
         }
+
         topicList.appendChild(container);
 
         const backButton = document.createElement('button');

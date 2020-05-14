@@ -105,8 +105,10 @@ const Diary = () => {
                     case 'done':
                         model.createTopic({
                             text: params.text, 
-                            timestamp: params.timestamp
+                            timestamp: params.timestamp,
+                            tempFiles: STATES.writeTopic.variables.tempMedia,
                         });
+                        STATES.writeTopic.variables.tempMedia = []
                         updateState(STATES.topicsFound);
                         break;
                     
