@@ -38,7 +38,8 @@
     {% include intro.html %}
     <script>
         const shareTopic = () => {
-            let link = `https://wa.me/?text=${encodeURI(window.location.href)}`
+            //let link = `https://wa.me/?text=${encodeURI(window.location.href)}`
+            let link = `https://api.whatsapp.com/send?text=${encodeURI(window.location.href)}`
             window.open(link, '_blank');
         }
 
