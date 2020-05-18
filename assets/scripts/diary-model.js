@@ -59,7 +59,7 @@ const DiaryModel = () => {
 
     const findTopics = () => {
 
-        const topicRegex = RegExp('https://lapc1995.github.io/while-you-were-fighting/challenges/[0-9]*');
+        const topicRegex = RegExp('https://lapc1995.github.io/while-you-were-fighting/topics/[0-9]*');
 
         const tempTopics = [];
 

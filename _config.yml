@@ -43,6 +43,6 @@ plugins:
 #   - vendor/ruby/
 
 collections:
-  challenges:
+  topics:
     output: true
     permalink: /:collection/:name
