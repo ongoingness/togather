@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta property="og:title" content="While you were fighting Topic">
+    <meta property="og:title" content="While you were fighting">
     <meta property="og:description" content="{{ page.description }}">
     <!--meta property="og:image" content="http://euro-travel-example.com/thumbnail.jpg"-->
     <meta property="og:url" content="{{ site.url }}{{ site.baseurl }}/challenges/{{page.name}}">
@@ -39,7 +39,8 @@
     <script>
         const shareTopic = () => {
             //let link = `https://wa.me/?text=${encodeURI(window.location.href)}`
-            let link = `https://api.whatsapp.com/send?text=${encodeURI(window.location.href)}`
+            const text = `${window.location.href}\nTopic: {{ page.description }}`;
+            const link = `https://api.whatsapp.com/send?text=${encodeURI(text)}`;
             window.open(link, '_blank');
         }
 
