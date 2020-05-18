@@ -11,7 +11,14 @@
     <link href="{{ '/assets/css/challenge.css' | prepend: site.baseurl }}" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <div class="section">
+    {% include header.html %}
+    <div class='button-container'>
+        <button class="button topic" onclick="getTopic()"> Give me a topic</button>
+        <button class="button diary" onclick="goToDiary()"> Assemble Diary </button>
+    </div>
+    {% include intro.html %}
+    
+    <!--div class="section">
         <div class="container">
                 <div class="level">
                     <div class="level-item">
@@ -25,12 +32,29 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div-->
     <script>
-        const getChallenge = () => {
+
+        // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+        let vh = window.innerHeight * 0.01;
+        // Then we set the value in the --vh custom property to the root of the document
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+        // We listen to the resize event
+        window.addEventListener('resize', () => {
+            // We execute the same script as before
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        });
+
+
+        const getTopic = () => {
             let challenge = Math.floor(Math.random() * 5) + 1
             window.location.href = `{{ site.url }}{{ site.baseurl }}/challenges/${challenge}`;
         }
+
+        const goToDiary = () =>  window.location.href = `{{ site.url }}{{ site.baseurl }}/diary`;
+
     </script>
 </body>
 </html>

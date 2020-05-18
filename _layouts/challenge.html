@@ -5,46 +5,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:title" content="While you were fighting Topic">
+    <meta property="og:description" content="{{ page.description }}">
+    <!--meta property="og:image" content="http://euro-travel-example.com/thumbnail.jpg"-->
+    <meta property="og:url" content="{{ site.url }}{{ site.baseurl }}/challenges/{{page.name}}">
+    <!--meta name="twitter:card" content="summary_large_image"-->
+    
+    
+    <!--  Non-Essential, But Recommended -->
+    
+    <meta property="og:site_name" content="European Travel, Inc.">
+    <meta name="twitter:image:alt" content="Alt text for image">
+
+
+
     <title>While you were fighting</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <link href="{{ '/assets/css/challenge.css' | prepend: site.baseurl }}" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <div class="section">
-        <div class="container">
-                <div class="level">
-                    <div class="level-item">
-                        <h1 class="is-size-2"> Your Daily Challenge </h1>
-                    </div>
-                </div>
-                <div class="level">
-                    <div id="challenge-description" class="level-item">
-                        <div> {{ page.description }} </div>
-                    </div>
-                </div>
-                <div class="level">
-                    <div class="level-item">
-                        <button id="challenge-button" class="is-size-3" onclick="getChallenge()"> Give me another challenge </button>
-                    </div>
-                </div>
-                <div class="level">
-                    <div class="level-item">
-                        <button id="share-button" class="is-size-4" onclick="shareChallenge()"> Share on WhatsApp </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+    {% include header.html %}
+    <div class="topic-description">
+        <div> {{ page.description }} </div>
     </div>
+    <div class='button-container'>
+        <button class="button share" onclick="shareTopic()"> Share topic </button>
+        <button class="button topic" onclick="getTopic()"> Another topic</button>
+        <button class="button diary" onclick="goToDiary()"> Assemble Diary </button>
+    </div>
+    {% include intro.html %}
     <script>
-        const getChallenge = () => {
-            let challenge = Math.floor(Math.random() * 5) + 1
-            window.location.href = `{{ site.url }}{{ site.baseurl }}/challenges/${challenge}`;
-        }
-        const shareChallenge = () => {
+        const shareTopic = () => {
             let link = `https://wa.me/?text=${encodeURI(window.location.href)}`
             window.open(link, '_blank');
         }
+
+        const getTopic = () => {
+            let challenge = Math.floor(Math.random() * 5) + 1
+            window.location.href = `{{ site.url }}{{ site.baseurl }}/challenges/${challenge}`;
+        }
+
+        const goToDiary = () =>  window.location.href = `{{ site.url }}{{ site.baseurl }}/diary`;
+
     </script>
 </body>
 </html>

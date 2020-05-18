@@ -82,7 +82,6 @@ body, textarea, button, input, select {
     background: white;
 }
 
-
 .topic__list__background {
     background-image: url("{{ '/assets/images/background_pattern_topics.svg' | prepend: site.baseurl }}");
     background-repeat: repeat-y;

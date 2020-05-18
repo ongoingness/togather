@@ -310,7 +310,7 @@ const DiaryModel = () => {
 
         sortTopicsByTimestamp();
         findTopicMessages();
-        
+
     }
 
     const saveSelectedTopicMesssage = (topicIndex, messageHash) => {

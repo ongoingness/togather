@@ -1,10 +1,22 @@
-html, body {
+@font-face {
+    font-family: 'Ostrich Sans Black';
+    src: url('../fonts/ostrich-sans/OstrichSans-Black.otf');
+}
+
+@font-face {
+    font-family: 'Ostrich Sans Medium';
+    src: url('../fonts/ostrich-sans/OstrichSans-Medium.otf');
+}
+
+
+
+/*html, body {
     display: flex;
     height: 100%;
     width: 100%;
     align-items: center;
     justify-content: center;
-}
+}*/
 
 #challenge-description {
     border-style: solid;
@@ -41,4 +53,218 @@ html, body {
 #share-button:focus {
     outline: none;
     background: #00c241;
+}
+
+
+body {
+    margin: 0 auto;
+    max-width: 95vh;
+    width: 100%;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    line-height: 3.5vh;
+}
+
+.header {
+    display: flex;
+    width: 100%;
+    height: 10vh;
+    background-color: rgb(3, 123, 126);
+}
+
+.header__text {
+    font-size: 4vh;
+    font-family: 'Ostrich Sans Black';
+    color: white;
+    text-align: center;
+    margin: auto;
+}
+
+.button-container {
+    width: 100%;
+    text-align: center;
+    margin-top: 4vh;
+}
+
+.button {
+    display: flex;
+    width: 25vh;
+    border: none;
+    cursor: pointer;
+    border-radius: 1vh;
+    margin: auto;
+    margin-bottom: 4vh;
+    font-family: 'Ostrich Sans Black';
+    font-size: 3vh;
+    color: white;
+}
+
+.button.topic {
+    background-color: rgb(255, 69, 0);
+}
+
+.button.diary {
+    background-color: rgb(184, 134, 11);
+}
+
+.button.copy, .button.share{
+    background-color: rgb(0, 170, 0);
+}
+
+
+.section-title {
+    margin-bottom: 7vh;
+    margin-top: 7vh;
+    font-family: 'Ostrich Sans Black';
+    font-size: 4vh;
+    color: rgb(10, 40, 75);
+    text-align: center;
+    font-weight: bolder;
+}
+
+.section-subtitle {
+    font-family: 'Ostrich Sans Medium';
+    font-size: 4vh;
+    color: rgb(10, 40, 75);
+    text-align: center;
+}
+
+.section-subtitle.margin {
+    margin-top: 4vh;
+    margin-bottom: 3vh;
+}
+
+.section-body {
+    display: flex;
+    margin: 2vh;
+    flex-flow: column;
+}
+
+.section-body__content {
+    position: relative;
+    margin: auto;
+    width: 100%;
+    max-width: 50vh;
+    min-height: 130vh;
+}
+
+.phone-image {
+    width: 18vh;
+}
+
+.phone-image.second {
+    position: absolute;
+    top: 35vh;
+    right: 0vh;
+}
+
+.phone-image.third {
+    position: absolute;
+    top: 85vh;
+    left: 0vh;
+}
+
+.text-block {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    position: absolute;
+    line-height: 3.5vh;
+}
+
+.text-block.first {
+    top: 12vh;
+    right: 5vh;
+    max-width: 18vh;
+}
+
+.text-block.second {
+    top: 50vh;
+    left: 3vh;
+    max-width: 20vh;
+}
+
+.text-block.third {
+    top: 69vh;
+    left: 3vh;
+    max-width: 16vh;
+}
+
+.text-block.fourth {
+    top: 95vh;
+    right: 1vh;
+    max-width: 22vh;
+}
+
+.text-block.fifth {
+    top: 121vh;
+    right: 9vh;
+    max-width: 14vh;
+}
+
+.text-box-1 {
+    margin: auto;
+    margin-top: 7vh;
+    margin-bottom: 7vh;
+    max-width: 44vh;
+    text-align: justify;
+}
+
+.text-box-2 {
+    margin: auto;
+    max-width: 44vh;
+    text-align: justify;
+    width: 100%;
+}
+
+.intro-text-greet {
+    margin: auto;
+    margin-top: 7vh;
+    margin-bottom: 4vh;
+    max-width: 44vh;
+    text-align: justify;
+    width: 100%;
+}
+
+.intro-text {
+    margin: auto;
+    margin-bottom: 7vh;
+    max-width: 44vh;
+    text-align: justify;
+}
+
+.how-to-link {
+    margin: auto;
+    max-width: 44vh;
+    text-align: justify;
+    width: 100%;
+    text-decoration: underline;
+}
+
+.text-box-3 {
+    margin: auto;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+    max-width: 44vh;
+    text-align: justify;
+}
+
+.text-box-4 {
+    margin: auto;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+    max-width: 44vh;
+    text-align: justify;
+    border-style: dotted;
+    border-width: thin;
+    padding: 2vh;
+}
+
+.topic-description {
+    border-style: solid;
+    border-radius: 20px;
+    border-width: thick;
+    padding: 3vh;
+    border-color: rgb(0, 170, 0);
+    margin: 2vh;
+    text-align: justify;
 }

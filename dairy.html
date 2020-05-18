@@ -28,8 +28,21 @@ permalink: /diary/
     <script defer src="{{ '/assets/scripts/OpenSans-normal.js' | prepend: site.baseurl }}"></script>
 
     <script defer src="{{ '/assets/scripts/i18n.js' | prepend: site.baseurl }}"></script>
+    <script src="{{ '/assets/scripts/html2canvas.min.js' | prepend: site.baseurl }}"></script>
+
 </head>
 <body>
+    
+    <!--img id='test' src="https://i1.ytimg.com/vi/7OnvJJn2iyA/maxresdefault.jpg">
+
+    <img
+    id='test'
+    src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" 
+    height="220"
+    width="200"
+    class="watermark"-->
+
+
     <!--canvas id="the-canvas" style="  border: 1px solid black;
     direction: ltr;"></canvas-->
     <!--section>
@@ -110,7 +123,154 @@ loadingTask.promise.then(function(pdf) {
 
 
 </script-->
+<script>
+/*
+const youtubeTest = async (link) => {
+
+
+   const url = `https://www.youtube.com/oembed?url=${link}&format=json&origin=http://localhost:4000`;
+   // const url = 'https://img.youtube.com/vi/7OnvJJn2iyA/0.jpg';
+
+   //const url = 'https://i1.ytimg.com/vi/7OnvJJn2iyA/maxresdefault.jpg';
+//let response = await fetch(url);
+console.log(response);
+
+//let blob = await response.blob();
+}*/
+
+/*
+const cors_api_url = 'https://cors-anywhere.herokuapp.com/';
+const doCORSRequest = (options, printResult) => {
+    var x = new XMLHttpRequest();
+    x.open(options.method, cors_api_url + options.url);
+    x.responseType = "blob";
+    x.onload = x.onerror = async function() {
+      printResult(
+        options.method + ' ' + options.url + '\n' +
+        x.status + ' ' + x.statusText + '\n\n' +
+        (x.response || '')
+      );
+
+      const getImageFromBlob = (blob) => {
+
+        var reader = new FileReader();
+        reader.readAsDataURL(blob); 
+
+        return new Promise((resolve, reject) => {
+
+            reader.onloadend = () => resolve(reader.result);
+            
+        });
+        }
+        const r = await getImageFromBlob(x.response);
+        console.log(r);
+
+      let imgss = document.createElement('img');
+      imgss.src = r;
+      document.body.appendChild(imgss);
+    };
+    x.send(options.data);
+  }
+
+
+      doCORSRequest({
+        method: 'GET',
+        url: 'https://i1.ytimg.com/vi/7OnvJJn2iyA/maxresdefault.jpg',
+        data: ''
+      }, function printResult(result) {
+        console.log(result);
+      });
+  */
+
+/*
+const doCORSRequest = async (url, responseType) => {
+
+    const fetch = async(url) => {
+        const cors_api_url = 'https://cors-anywhere.herokuapp.com/';
+        var x = new XMLHttpRequest();
+        x.open('GET', cors_api_url + url);
+        x.responseType = responseType;
+        x.send();
+        return new Promise((resolve, reject) => { 
+            x.onload = () => resolve(x.response);
+        });
+    };
+    
+    const convertBlobToBase64 = async(blob) => {
+        var reader = new FileReader();
+        reader.readAsDataURL(blob); 
+        return new Promise((resolve, reject) => {
+            reader.onloadend = () => resolve(reader.result);
+        });
+    }
+
+    const response = await fetch(url);
+    if(responseType === 'blob')
+        return await convertBlobToBase64(response);
+    else if(responseType === 'json')
+        return response;
+
+}
+
+doCORSRequest('https://i.ytimg.com/vi/7OnvJJn2iyA/hqdefault.jpg', 'blob').then((v) => console.log(v) );
+doCORSRequest('https://www.youtube.com/oembed?url=https://youtu.be/7OnvJJn2iyA&format=json ', 'json').then((v) => console.log(v) );
+
+*/
+//youtubeTest('https://youtu.be/7OnvJJn2iyA');
+/*
+let iframe = document.createElement('iframe');
+iframe.width = 480;
+iframe.height = 270;
+iframe.src = 'https://www.youtube.com/embed/7OnvJJn2iyA?feature=oembed';
+iframe.frameBorder = 0; 
+iframe.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
+iframe.allowFullscreen = true;
+document.body.appendChild(iframe);
+
+iframe.onload = () => {
+    let r =  iframe //.getElementsByClassName('ytp-cued-thumbnail-overlay-image');
+console.log(r);
+}
+
+    var youtube_video_id = iframe.src.match(/youtube\.com.*(\?v=|\/embed\/)(.{11})/).pop();
+    
+    if (youtube_video_id.length == 11) {
+        var video_thumbnail = $('<img src="//img.youtube.com/vi/'+youtube_video_id+'/0.jpg">');
+        $('body').append(video_thumbnail);
+    
+        $('img:first').click(function() {
+            $('iframe:first').fadeToggle('400');
+        });
+    }
+*/
+
+//let imageTest = document.getElementById('test');//document.createElement('img');
+//let imageTest = document.getElementById('test');
+//imageTest.src = 'https://i1.ytimg.com/vi/7OnvJJn2iyA/maxresdefault.jpg';
+//document.body.appendChild(imageTest);
+
+//let canvass = document.createElement('canvas');
+//document.body.appendChild(canvass);
+//canvass.getContext("2d").drawImage(imageTest, 530, 298);
+//let data = canvas.toDataURL();
+//console.log(data);
+
+
+
+/*
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+var img = document.getElementById("preview");
+ctx.drawImage(img, 10, 10);
+alert(c.toDataURL());*/
+
+</script>
+
     <script type="module">
+
+
+
+
         
         // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
         let vh = window.innerHeight * 0.01;

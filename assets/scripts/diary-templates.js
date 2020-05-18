@@ -4,6 +4,30 @@
 const DiaryTemplates = () => {
 
 
+   
+    const doCORSRequestForBlob = async (url) => {
+
+        const cors_api_url = 'https://cors-anywhere.herokuapp.com/';
+        var x = new XMLHttpRequest();
+        x.open('GET', cors_api_url + url);
+        x.responseType = 'blob';
+
+        return new Promise( (resolve, reject) => {
+
+            x.onload = function() {
+        
+                var reader = new FileReader();
+                reader.readAsDataURL(x.response); 
+                reader.onloadend = () => resolve(reader.result);
+        
+            }
+
+            x.send();
+        });    
+    }
+      
+
+
     const generatePDF = async(topics) => {
 
         /*
@@ -328,14 +352,13 @@ const DiaryTemplates = () => {
 
         return doc;
     }
-
-
+ 
     const getSpotifyCode = async(link) => {
 
         const result = RegExp('https:\/\/open.spotify.com\/track\/([^\?]*)\?').exec(link);
         if(result != undefined) {
             const musicCode = result[1];
-            const url = `https://scannables.scdn.co/uri/plain/png/000000/white/640/spotify:track:${musicCode}`;
+            const url = `https://scannables.scdn.co/uri/plain/png/000000/white/640/spotify:track:7CH99b2i1TXS5P8UUyWtnM${musicCode}`;
 
             let response = await fetch(url);
             let blob = await response.blob();
