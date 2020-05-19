@@ -33,8 +33,8 @@
         });
 
         const getTopic = () => {
-            let challenge = Math.floor(Math.random() * 5) + 1
-            window.location.href = `{{ site.url }}{{ site.baseurl }}/topics/${challenge}`;
+            let topic = Math.floor(Math.random() * 5) + 1
+            window.location.href = `{{ site.url }}{{ site.baseurl }}/topics/${topic}`;
         }
 
         const goToDiary = () =>  window.location.href = `{{ site.url }}{{ site.baseurl }}/diary`;

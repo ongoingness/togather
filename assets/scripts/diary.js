@@ -95,11 +95,8 @@ const Diary = () => {
                 switch(params.type) {
                     
                     case 'delete-photo':
-                        console.log(params.file);
                         const index = STATES.writeTopic.variables.tempMedia.indexOf(params.file);
-                        console.log(index);
                         STATES.writeTopic.variables.tempMedia.splice(index, 1);
-                        console.log(STATES.writeTopic.variables.tempMedia);
                         break;
 
                     case 'done':
@@ -118,7 +115,6 @@ const Diary = () => {
 
                     case 'upload-files':
                         STATES.writeTopic.variables.tempMedia = STATES.writeTopic.variables.tempMedia.concat(params.files);
-                        console.log(STATES.writeTopic.variables.tempMedia);
                         break;
                 }
 
@@ -157,14 +153,20 @@ const Diary = () => {
                         STATES.selectTopicFromChat.variables.selectedMessages = [];
                         updateState(STATES.topicsOptions);
                         break;
+
                 }
 
             }
         },
         editTopic: {
+            variables: {
+                tempMedia: [],
+            },
             render: () => {
                 const hash = STATES.editTopic.parameters.hash;
                 const topic = model.getMessage(hash);
+                STATES.editTopic.variables.tempMedia = topic.files;
+                console.log(STATES.editTopic.variables.tempMedia);
                 ui.clearBaseUI();
                 ui.startTopicUI();
                 ui.renderEditTopic(topic);
@@ -173,13 +175,26 @@ const Diary = () => {
 
                 switch(params.type) {
 
+                    case 'delete-photo':
+                        console.log(STATES.editTopic.variables.tempMedia);
+                        const index = STATES.editTopic.variables.tempMedia.indexOf(params.file);
+                        STATES.editTopic.variables.tempMedia.splice(index, 1);
+                        console.log(STATES.editTopic.variables.tempMedia);
+                        break;
+
+                    case 'upload-files':
+                        STATES.editTopic.variables.tempMedia = STATES.editTopic.variables.tempMedia.concat(params.files);
+                        break;
+
                     case 'done':
-                        console.log(params);
+                       
                         model.updateTopic({
                             hash: params.hash,
                             text: params.text, 
-                            timestamp: params.timestamp
+                            timestamp: params.timestamp,
+                            tempFiles: STATES.editTopic.variables.tempMedia,
                         });
+                        STATES.editTopic.variables.tempMedia = []
                         updateState(STATES.topicsFound);
                         break;
                     
@@ -201,7 +216,8 @@ const Diary = () => {
                 ui.startChatUI();
                 const fullTopic = model.getTopicWithMessages(STATES.selectMessages.variables.topic);
                 STATES.selectMessages.variables.totalOfTopics = fullTopic.totalOfTopics;
-                ui.renderSelectMessages(fullTopic);
+                STATES.selectMessages.variables.text = fullTopic.text.join(' ');
+                ui.renderSelectMessages(fullTopic, model.getMessages());
             },
             eventHandler: (e, params) => {
 
@@ -211,9 +227,9 @@ const Diary = () => {
                         if(STATES.selectMessages.variables.topic < STATES.selectMessages.variables.totalOfTopics-1) {
                             STATES.selectMessages.variables.topic += 1;
                             const fullTopic = model.getTopicWithMessages(STATES.selectMessages.variables.topic);
-                            STATES.selectMessages.variables.text = fullTopic.text;
+                            STATES.selectMessages.variables.text = fullTopic.text.join(' ');
                             ui.clearDay();
-                            ui.renderDay(fullTopic);
+                            ui.renderDay(fullTopic, model.getMessages());
                         }
                         break;
 
@@ -221,18 +237,18 @@ const Diary = () => {
                         if(STATES.selectMessages.variables.topic > 0) {
                             STATES.selectMessages.variables.topic -= 1;
                             const fullTopic = model.getTopicWithMessages(STATES.selectMessages.variables.topic);
-                            STATES.selectMessages.variables.text = fullTopic.text;
+                            STATES.selectMessages.variables.text = fullTopic.text.join(' ');
                             ui.clearDay();
-                            ui.renderDay(fullTopic);
+                            ui.renderDay(fullTopic, model.getMessages());
                         }
                         break;
 
                     case 'goto-topic':
                         STATES.selectMessages.variables.topic = params.topic;
                         const fullTopic = model.getTopicWithMessages(STATES.selectMessages.variables.topic);
-                        STATES.selectMessages.variables.text = fullTopic.text;
+                        STATES.selectMessages.variables.text = fullTopic.text.join(' ');
                         ui.clearDay();
-                        ui.renderDay(fullTopic);
+                        ui.renderDay(fullTopic, model.getMessages());
                         break;
 
                     case 'read-more':

@@ -64,67 +64,19 @@ const DiaryTemplates = () => {
 
     }
 
-/*
-    const topicPage = (node, data) => {
-
-        const link = document.createElement( 'link' );
-        link.href="{{ '/assets/css/template.css' | prepend: site.baseurl }}" 
-        link.type = "text/css";
-        link.rel = "stylesheet";
-        link.media = "screen,print";
-        document.getElementsByTagName( "head" )[0].appendChild( link );
-
-        const pageContainer = document.createElement('div');
-        pageContainer.id = 'pageContainer';
-        pageContainer.classList.add('page-container');
-        document.body.appendChild(pageContainer);
-
-        const dayBanner = document.createElement('div');
-        dayBanner.classList.add('day-banner');
-        dayBanner.innerText = `Day ${data.id + 1}`;
-        pageContainer.appendChild(dayBanner);
-
-        const date = new Date(data.timestamp);
-        const topicDate = document.createElement('div');
-        topicDate.classList.add('topic-date');
-        topicDate.innerText = date.toLocaleDateString();
-        pageContainer.appendChild(topicDate);
-
-        const topicDescription = document.createElement('div');
-        topicDescription.classList.add('topic-description');
-        topicDescription.innerText = data.text;
-        pageContainer.appendChild(topicDescription);
-
-        const print = document.createElement('button');
-        print.addEventListener('click', async(e)=> {
-            await printPages(1, 'a');
-            
-            const filename  = 'ThisIsYourPDFFilename.pdf';
-
-            html2canvas(document.getElementById('pageContainer')).then(canvas => {
-                let pdf = new jsPDF('p', 'mm', 'a4');
-                pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);
-                pdf.save(filename);
-            });
-        });
-        pageContainer.appendChild(print);
-
-    }
-    */
-
     const topicPage = (doc, data) => {
 
         doc.addPage('a4', 'portrait');
 
         doc.setDrawColor(0);
-        doc.setFillColor(0, 122, 125);
+        doc.setFillColor(data.color);
         doc.rect(0, 33.826, 210, 27.174, 'F'); 
         
         doc.setTextColor(255, 255, 255);
         doc.setFontSize(52);
         doc.setFontType('normal');
         doc.setFont('OstrichSans-Black');
-        doc.text(`Day ${data.index + 1}`, 45, 54);
+        doc.text(`Day ${data.day}`, 45, 54);
           
         doc.setTextColor(0, 0, 0);
         const date = new Date(data.timestamp);
@@ -173,7 +125,8 @@ const DiaryTemplates = () => {
             doc.setFontType('normal');
             doc.setFont('OpenSans');
         
-            const lines = splitTextInLines(data.text, 30); 
+            const lines = data.text//splitTextInLines(data.text, 30); 
+            
             doc.text(lines, 4.838, yLeft, {maxWidth: 87.77});
             yLeft += lines.length * 4;
 
@@ -270,7 +223,7 @@ const DiaryTemplates = () => {
             doc.setFontType('normal');
             doc.setFont('OpenSans');
             
-            const lines = splitTextInLines(data.text, 30); 
+            const lines =  data.text//splitTextInLines(data.text, 30); 
         
             let breakPoint = -1;
             for(let i = 0; i < lines.length && breakPoint === -1; i++)
@@ -412,66 +365,6 @@ const DiaryTemplates = () => {
         lines.push(line.join(' '));
     
         return lines;
-    }
-
-    const messagesTwoUsersPage = (data) => {
-
-        const link = document.createElement( 'link' );
-        link.href="{{ '/assets/css/template.css' | prepend: site.baseurl }}" 
-        link.type = "text/css";
-        link.rel = "stylesheet";
-        link.media = "screen,print";
-        document.getElementsByTagName( "head" )[0].appendChild( link );
-
-        const pageContainer = document.createElement('div');
-        pageContainer.id = 'pageContainer';
-        pageContainer.classList.add('page-container');
-        document.body.appendChild(pageContainer);
-
-        const nameBanner1 = document.createElement('div');
-        nameBanner1.classList.add('name-banner');
-        nameBanner1.classList.add('first');
-        nameBanner1.innerText = 'Linnea';
-        pageContainer.appendChild(nameBanner1);
-
-        const messageText1 = document.createElement('div');
-        messageText1.classList.add('message-text');
-        messageText1.classList.add('first');
-        messageText1.innerText = 'Vocaequit? Fuluteliusa imus Ahachui sendees patis conondest? Num tus fue factari sentrioris. Scio es confec orevirmilica Ser ute dum num plingula virterum sero crisses soltus consunum hoca; ina virisul tiemquam men adducto tus? quam mis am iu vehenatumul hocultus fachus horae, sum hiliam, eses eo, ses Muliae tea cris. Vivis opublibunum elinunti caedo, nit vivehen ternimus coti se, conequi deravent? Edees verenit; nocchilicis fuit. Uppl. Mare me fortimi hinveri sultus omneste nihilis ia vidiis.Tum publin te, Ti. Satquod iendeti patia? Nihicae mandiem sendiem aucest? Ces mentem fortem is, nos es? Mae fure nestris fordin vehem tintiemque ';
-        pageContainer.appendChild(messageText1);
-
-        const messageMedia1 = document.createElement('div');
-        messageMedia1.classList.add('topic-description');
-        pageContainer.appendChild(messageMedia1);
-
-        const nameBanner2 = document.createElement('div');
-        nameBanner2.classList.add('name-banner');
-        nameBanner2.classList.add('second');
-        nameBanner2.innerText = 'Luis';
-        pageContainer.appendChild(nameBanner2);
-
-        const messageText2 = document.createElement('div');
-        messageText2.classList.add('message-text');
-        messageText2.classList.add('second');
-        messageText2.innerText = 'Vocaequit? Fuluteliusa imus Ahachui sendees patis conondest? Num tus fue factari sentrioris. Scio es confec orevirmilica Ser ute dum num plingula virterum sero crisses soltus consunum hoca; ina virisul tiemquam men adducto tus? quam mis am iu vehenatumul hocultus fachus horae, sum hiliam, eses eo, ses Muliae tea cris. Vivis opublibunum elinunti caedo, nit vivehen ternimus coti se, conequi deravent? Edees verenit; nocchilicis fuit. Uppl. Mare me fortimi hinveri sultus omneste nihilis ia vidiis.Tum publin te, Ti. Satquod iendeti patia? Nihicae mandiem sendiem aucest? Ces mentem fortem is, nos es? Mae fure nestris fordin vehem tintiemque ';
-        pageContainer.appendChild(messageText2);
-
-        const messageMedia2 = document.createElement('div');
-        messageMedia2.classList.add('topic-description');
-        pageContainer.appendChild(messageMedia2);
-
-        const print = document.createElement('button');
-        print.addEventListener('click', e=> {
-            const filename  = 'ThisIsYourPDFFilename.pdf';
-
-            html2canvas(document.getElementById('pageContainer')).then(canvas => {
-                let pdf = new jsPDF('p', 'mm', 'a4');
-                pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);
-                pdf.save(filename);
-            });
-        });
-        pageContainer.appendChild(print);
-
     }
 
     return {

@@ -8,54 +8,6 @@
     src: url('../fonts/ostrich-sans/OstrichSans-Medium.otf');
 }
 
-
-
-/*html, body {
-    display: flex;
-    height: 100%;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-}*/
-
-#challenge-description {
-    border-style: solid;
-    border-radius: 20px;
-    border-width: thick;
-    padding: 40px;
-    border-color: #ffc241;
-    width: 100%;
-}
-
-#challenge-button {
-    background: #ffc241;
-    border: none;
-    color: white;
-    cursor: pointer;
-    border-radius: 20px;
-    padding: 20px;
-}
-
-#challenge-button:focus {
-    outline: none;
-    background: #00c241;
-}
-
-#share-button {
-    background: #00c241;
-    border: none;
-    color: white;
-    cursor: pointer;
-    border-radius: 20px;
-    padding: 20px;
-}
-
-#share-button:focus {
-    outline: none;
-    background: #00c241;
-}
-
-
 body {
     margin: 0 auto;
     max-width: 95vh;
@@ -267,4 +219,47 @@ body {
     border-color: rgb(0, 170, 0);
     margin: 2vh;
     text-align: justify;
+}
+
+.mySlides {display: none;}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+  border-style: solid;
+  border-width: thin;
+  border-color: lightgray;
+}
+
+
+/* The dots/bullets/indicators */
+.dot {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active {
+  background-color: #717171;
+}
+
+.fade {
+    -webkit-animation: fadeinout 5s linear forwards;
+    animation: fadeinout 5s linear forwards;
+}
+
+@-webkit-keyframes fadeinout {
+    0%,100% { opacity: 0; }
+    20%,80% { opacity: 1; }
+}
+
+@keyframes fadeinout {
+    0%,100% { opacity: 0; }
+    20%,80% { opacity: 1; }
 }

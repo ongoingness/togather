@@ -139,19 +139,17 @@ const DiaryUI = (eventHandler) => {
         topicHeader.classList.add('topic__header');
         topic.appendChild(topicHeader);
 
-        const color = getRandomColor();
-
         const topicHeaderDay =  document.createElement('div');
         topicHeaderDay.classList.add('topic__header__day');
-        topicHeaderDay.innerText = `${i18n.getStringById('day')} ${day + 1}`;
-        topicHeaderDay.style = `color: ${color};`
+        topicHeaderDay.innerText = `${i18n.getStringById('day')} ${topicData.day}`;
+        topicHeaderDay.style = `color: ${topicData.color};`
         topicHeader.appendChild(topicHeaderDay);
 
         const date = new Date(topicData.timestamp);
         const topicHeaderDate =  document.createElement('div');
         topicHeaderDate.classList.add('topic__header__date');
         topicHeaderDate.innerText = `${date.toLocaleDateString()}`;
-        topicHeaderDate.style = `color: ${color};`
+        topicHeaderDate.style = `color: ${topicData.color};`
         topicHeader.appendChild(topicHeaderDate);
 
         const topicHeaderEditButton = document.createElement('button');
@@ -176,13 +174,11 @@ const DiaryUI = (eventHandler) => {
         deleteButtonImage.height = '25';
         topicHeaderDeleteButton.appendChild(deleteButtonImage);
 
-        if(topicData.text.length > 1) {
+        for(let line of topicData.text) {
             const topicText = document.createElement('div');
-            topicText.innerText = `${topicData.text}`;
+            topicText.innerText = `${line}`;
             topic.appendChild(topicText);
         }
-
-        console.log('topic', topicData.files);
 
         if(topicData.files.length > 0) {
             const chatMessageMediaBody = document.createElement('div');
@@ -528,10 +524,17 @@ const DiaryUI = (eventHandler) => {
 
     }
 
-    const renderChatMessage = (messageData, messageListId) => {
-
+    const renderChatMessage = (messageData, messageListId, isSelected = false, isFromDay = false) => {
+        
         const chatMessage = document.createElement('div');
         chatMessage.classList.add('chat-message');
+
+        if(isFromDay)
+            chatMessage.classList.add('day');
+        
+        if(isSelected)
+            chatMessage.classList.add('selected');
+ 
         chatMessage.addEventListener('click', (e) => {
 
             if(chatMessage.classList.contains('selected')) {
@@ -563,11 +566,10 @@ const DiaryUI = (eventHandler) => {
         chatMessageTime.style = `color: ${messageData.color}`;
         header.appendChild(chatMessageTime);
 
-        if(messageData.text.length > 1) {
-            console.log(messageData.text.length, messageData.text);
+        for(let line of messageData.text) {
             const chatMessageTextBody = document.createElement('div');
             chatMessageTextBody.classList.add('chat-message__text');
-            chatMessageTextBody.innerText = `${messageData.text}`;
+            chatMessageTextBody.innerText = `${line}`;
             chatMessage.appendChild(chatMessageTextBody);
         }
 
@@ -624,7 +626,7 @@ const DiaryUI = (eventHandler) => {
         document.getElementById('base-container-header-text').innerText  = i18n.getStringById('edit_topic_header');
     }
 
-    const renderSelectMessages = (dayData) => {
+    const renderSelectMessages = (dayData, allMessagesData) => {
 
         const headerText = document.getElementById('base-container-header-text');
         headerText.classList.add('base-container__header__text__override');
@@ -710,6 +712,7 @@ const DiaryUI = (eventHandler) => {
         topicDisplay.appendChild(actionText);
         
         const topicsButton = document.createElement('button');
+        topicsButton.id = 'topics';
         topicsButton.classList.add('topic-button');
         topicsButton.classList.add('base-container__footer__item__button');
         topicsButton.innerText = i18n.getStringById('topics');
@@ -717,14 +720,15 @@ const DiaryUI = (eventHandler) => {
         document.getElementById('base-container-footer-left').appendChild(topicsButton);
 
         const finishDiaryButton = document.createElement('button');
+        finishDiaryButton.id = 'finishDiary';
         finishDiaryButton.classList.add('topic-button');
         finishDiaryButton.classList.add('base-container__footer__item__button');
         finishDiaryButton.innerText = i18n.getStringById('finish');
         finishDiaryButton.addEventListener('click', (e) => eventHandler(e, {type: 'finish-diary'}));   
         document.getElementById('base-container-footer-right').appendChild(finishDiaryButton);
 
-        renderDay(dayData);
-  
+        renderDay(dayData, allMessagesData);
+
     }
 
     const clearDay = () => {
@@ -742,19 +746,26 @@ const DiaryUI = (eventHandler) => {
         
     }
 
-    const renderDay = (dayData) => {
+    const renderDay = (dayData, allMessagesData) => {
 
-        document.getElementById('dayDisplay').innerText = `${i18n.getStringById('day')} ${dayData.index + 1}`;
+        document.getElementById('dayDisplay').innerText = `${i18n.getStringById('day')} ${dayData.day}`;
+        document.getElementById('dayDisplay').style = `color: ${dayData.color};`
 
-        if(dayData.index == dayData.totalOfTopics-1)
-            document.getElementById('nextDay').disabled = true; 
-        else
-            document.getElementById('nextDay').disabled = false; 
+        if(dayData.index == dayData.totalOfTopics-1) {
+            document.getElementById('nextDay').style.display = 'none';
+            document.getElementById('finishDiary').style.display = 'inline-block';
+        } else {
+            document.getElementById('nextDay').style.display = 'inline-block';
+            document.getElementById('finishDiary').style.display = 'none';
+        }
 
-        if(dayData.index == 0)
-            document.getElementById('prevDay').disabled = true; 
-        else
-            document.getElementById('prevDay').disabled = false; 
+        if(dayData.index == 0) {
+            document.getElementById('prevDay').style.display = 'none';
+            document.getElementById('topics').style.display = 'inline-block';
+        } else {
+            document.getElementById('prevDay').style.display = 'inline-block';
+            document.getElementById('topics').style.display = 'none';
+        }
 
         for(let i = 0; i < dayData.totalOfTopics; i++) {
             const dot = document.createElement('span');
@@ -767,16 +778,32 @@ const DiaryUI = (eventHandler) => {
             document.getElementById('dotContainer').appendChild(dot);
         }
 
-        if(dayData.text.length < 90) {
-            document.getElementById('topicDisplayText').innerText = dayData.text;
-            document.getElementById('readMoreButton').classList.add('hidden');
-            document.getElementById('readLessButton').classList.add('hidden');
-        } else {
-            renderShortTopic(dayData.text);        
+        if(dayData.text.length > 0) {
+
+            const joinedText = dayData.text.join(' ');
+            if(joinedText.length < 90) {
+                document.getElementById('topicDisplayText').innerText =  joinedText;
+                document.getElementById('readMoreButton').classList.add('hidden');
+                document.getElementById('readLessButton').classList.add('hidden');
+            } else {
+                renderShortTopic(joinedText);        
+            }
+
         }
-       
-        for(let message of dayData.messages) {
-            renderChatMessage(message, 'baseList');
+
+   
+        for(let message of allMessagesData) {
+
+            const isSelected = dayData.selectedMessages.some(sm => sm.hash === message.hash);
+            const isFromDay = new Date(message.fulltimestamp).getDate() === new Date(dayData.timestamp).getDate()
+
+            renderChatMessage(message, 'baseList', isSelected, isFromDay);
+        }
+
+        let dayMessages = document.getElementsByClassName('chat-message day');
+        if(dayMessages.length > 0) {
+            console.log('hello')
+            document.getElementById('baseList').scrollTop = dayMessages[0].offsetTop - (window.innerHeight * 0.35) ;
         }
 
     }
@@ -788,7 +815,7 @@ const DiaryUI = (eventHandler) => {
     } 
 
     const renderShortTopic = (text) => {
-        document.getElementById('topicDisplayText').innerText = text.substring(0, 90);
+        document.getElementById('topicDisplayText').innerText = text.substring(0, 80);
         document.getElementById('readLessButton').classList.add('hidden');
         document.getElementById('readMoreButton').classList.remove('hidden');
     } 

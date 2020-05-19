@@ -1,6 +1,12 @@
 const WhatsAppChatParser = () => {
 
+    /**
+     * Starts the parsing of files of a given input
+     * @param {Element Node} filesInput Input from which the files are going to be parsed
+     * @returns {{Map, Map, object}}
+     */
     const start =  async (filesInput) => {
+
         const tempFiles = await readFiles(filesInput);
         const files = new Map(); 
 
@@ -19,7 +25,6 @@ const WhatsAppChatParser = () => {
         */
 
         for(let {file, file:{name}, file:{type}, fileContent} of tempFiles) {
-            console.log(file);
             if(type != 'text/plain')
                 files.set(hashCode(fileContent), { name, type, data: fileContent});
         }
@@ -34,7 +39,7 @@ const WhatsAppChatParser = () => {
             }
         }   
 
-        console.log(messageMap, files);
+        console.log(messageMap);
 
         return { messageMap, files, users }
     }
@@ -144,7 +149,7 @@ const WhatsAppChatParser = () => {
         };
 
         const rawMessages = messages.split('\n');
-
+        console.log(rawMessages);
         let currentMessage = null;
 
         for(let [index, rawMessage] of rawMessages.entries()) {
@@ -153,13 +158,13 @@ const WhatsAppChatParser = () => {
             if(messageStart != null) {
 
                 const [fullLine, day, month, year, fullTime, username, body] = messageStart;
-                if(currentMessage != null) {
-                    currentMessage.hash = hashCode(`${index}${currentMessage.fulltimestamp}${currentMessage.username}${currentMessage.rawText}`);
+
+                if(currentMessage != null) 
                     messageMap.set(currentMessage.hash, {...currentMessage});
-                }
                 
                 currentMessage = {};
                 currentMessage.index = index;
+                currentMessage.hash = hashCode(rawMessage);
                 
                 currentMessage.fulltimestamp = parseDateToTimestamp(day, month, year, fullTime);
 
@@ -170,10 +175,10 @@ const WhatsAppChatParser = () => {
                     }
                 }                
                 currentMessage.user = hashUser;
-                currentMessage.rawText = body;
+                currentMessage.rawText = [body];
 
                 const {text, filename, links, atUser} = parseMessageBody(body);
-                currentMessage.text = text;
+                currentMessage.text = [text];
                 currentMessage.files = filename;
                 currentMessage.links = links;
                 currentMessage.atUser = atUser;
@@ -186,7 +191,10 @@ const WhatsAppChatParser = () => {
 
                 if(currentMessage != null) {
                     const {text, filename, links, atUser} = parseMessageBody(rawMessage);
-                    currentMessage.text += currentMessage.text === '' ? text : ` ${text}`;
+                    if(text != '') 
+                        currentMessage.text.push(text);    //currentMessage.text === '' ? text : ` ${text}`;
+                    if(rawMessage != '') 
+                        currentMessage.rawText.push(rawMessage); //+= `\n${rawMessage}`;
                     currentMessage.files.concat(filename);
                     currentMessage.links = currentMessage.links.concat(links);
                     currentMessage.atUser = currentMessage.atUser.concat(atUser);
@@ -194,12 +202,12 @@ const WhatsAppChatParser = () => {
                         if(!users.numbers.includes(number)) users.numbers.push(number);
                     }
                 }
+                
             }
         
         }
 
         if(currentMessage != null) {
-            currentMessage.hash = hashCode(`${currentMessage.id}${currentMessage.fulltimestamp}${currentMessage.username}${currentMessage.rawText}`);
             messageMap.set(currentMessage.hash, {...currentMessage});
             currentMessage = null;
         }
