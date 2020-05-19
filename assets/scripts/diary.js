@@ -210,16 +210,21 @@ const Diary = () => {
                 topic: 0,
                 totalOfTopics: 0,
                 text: '',
+                page: 1,
             },
-            render: () => {
+            render: async () => {
                 ui.clearBaseUI();
                 ui.startChatUI();
                 const fullTopic = model.getTopicWithMessages(STATES.selectMessages.variables.topic);
                 STATES.selectMessages.variables.totalOfTopics = fullTopic.totalOfTopics;
                 STATES.selectMessages.variables.text = fullTopic.text.join(' ');
                 ui.renderSelectMessages(fullTopic, model.getMessages());
+                if(window.innerWidth > 700) {
+                    let doc3 = await DiaryTemplates().generatePDF(model.getTopicsWithMessages());
+                    DiaryTemplates().previewPdf(doc3, STATES.selectMessages.variables.page);
+                }
             },
-            eventHandler: (e, params) => {
+            eventHandler: async(e, params) => {
 
                 switch(params.type) {
 
@@ -261,10 +266,28 @@ const Diary = () => {
 
                     case 'selected-message':
                         model.saveSelectedTopicMesssage(STATES.selectMessages.variables.topic, params.hash);
+                        if(window.innerWidth > 700) {
+                            let doc1 = await DiaryTemplates().generatePDF(model.getTopicsWithMessages());
+
+                            if(STATES.selectMessages.variables.page < doc1.internal.getNumberOfPages())
+                                STATES.selectMessages.variables.page = doc1.internal.getNumberOfPages();
+
+                            DiaryTemplates().previewPdf(doc1);
+                        }
                         break;
 
                     case 'deselected-message':
                         model.removeSelectedTopicMessage(STATES.selectMessages.variables.topic, params.hash);
+                        if(window.innerWidth > 700) {
+
+
+                            let doc2 = await DiaryTemplates().generatePDF(model.getTopicsWithMessages());
+
+                            if(STATES.selectMessages.variables.page > doc2.internal.getNumberOfPages())
+                                STATES.selectMessages.variables.page = doc2.internal.getNumberOfPages();
+
+                            DiaryTemplates().previewPdf(doc2);
+                        }
                         break;
 
                     case 'topics':
@@ -272,7 +295,29 @@ const Diary = () => {
                         break;
                     
                     case 'finish-diary': 
-                        DiaryTemplates().generatePDF(model.getTopicsWithMessages());             
+                        const doc = await DiaryTemplates().generatePDF(model.getTopicsWithMessages());             
+                        DiaryTemplates().downloadPdf(doc);
+                        break;
+                    
+                    case 'next-page':
+                        if(window.innerWidth > 700) {
+                            let doc4 = await DiaryTemplates().generatePDF(model.getTopicsWithMessages());
+                            if(STATES.selectMessages.variables.page + 1 <= doc4.internal.getNumberOfPages()) {
+                                STATES.selectMessages.variables.page = STATES.selectMessages.variables.page + 1;
+                                DiaryTemplates().previewPdf(doc4, STATES.selectMessages.variables.page);
+                            }
+
+                        }
+                        break;
+                        
+                    case 'prev-page':
+                        if(window.innerWidth > 700) {
+                            if(STATES.selectMessages.variables.page - 1 >= 1) {
+                                let doc5 = await DiaryTemplates().generatePDF(model.getTopicsWithMessages());
+                                STATES.selectMessages.variables.page = STATES.selectMessages.variables.page-1;
+                                DiaryTemplates().previewPdf(doc5, STATES.selectMessages.variables.page);
+                            }
+                        }
                         break;
 
                 }

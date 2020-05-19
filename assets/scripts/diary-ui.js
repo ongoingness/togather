@@ -729,6 +729,42 @@ const DiaryUI = (eventHandler) => {
 
         renderDay(dayData, allMessagesData);
 
+
+        if(window.innerWidth > 700) {
+
+            document.body.style.display = 'flex';
+            document.body.style.position = 'relative';
+            document.getElementById('baseContainer').style.marginRight = 0;
+          
+            const previewContainer = document.createElement('div');
+            previewContainer.classList.add('preview-container');
+            previewContainer.style.maxHeight = `${window.innerHeight}px`;
+            document.body.appendChild(previewContainer);
+
+            const canvas = document.createElement('canvas');
+            canvas.id = 'preview';
+            canvas.classList.add('preview-canvas');
+            canvas.style.maxHeight = `${window.innerHeight}px`;
+            previewContainer.appendChild(canvas);
+
+
+            const prevPage = document.createElement('button');
+            prevPage.id = 'prevPage';
+            prevPage.classList.add('topic-button', 'preview-button', 'prev');
+            prevPage.innerText = 'Prev';
+            prevPage.addEventListener('click', (e) => eventHandler(e, {type: 'prev-page'}))    
+            previewContainer.appendChild(prevPage);
+
+            const nextPage = document.createElement('button');
+            nextPage.id = 'nextPage';
+            nextPage.classList.add('topic-button', 'preview-button', 'next');
+            nextPage.innerText = 'Next';
+            nextPage.addEventListener('click', (e) => eventHandler(e, {type: 'next-page'}))    
+            previewContainer.appendChild(nextPage);
+    
+
+        }
+
     }
 
     const clearDay = () => {
@@ -820,6 +856,8 @@ const DiaryUI = (eventHandler) => {
         document.getElementById('readMoreButton').classList.remove('hidden');
     } 
 
+
+  
     return{
 
         renderBaseUI,

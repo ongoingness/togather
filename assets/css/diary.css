@@ -436,3 +436,31 @@ body, textarea, button, input, select, pre {
     border-width: medium;
     cursor: pointer;
 }
+
+.preview-container {
+   height: 100%;
+   margin:auto;
+   margin-left: 0;
+   position: relative;
+}
+
+.preview-canvas {
+    border: 1px solid black; 
+    direction: ltr;  
+    height: 100%;  
+    margin:auto;
+    margin-left: 0;
+}
+
+.preview-button {
+   position: absolute;
+   bottom: 3vh;
+}
+
+.preview-button.prev {
+    left: 25%;
+}
+
+.preview-button.next {
+    right: 25%;
+}

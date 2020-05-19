@@ -30,37 +30,20 @@ const DiaryTemplates = () => {
 
     const generatePDF = async(topics) => {
 
-        /*
-        const printSection = document.createElement('body');
-        printSection.id = 'printSection';
-
-        var linkNode = document.getElementsByTagName('link')[2];
-        linkNode.parentNode.removeChild(linkNode);
-
-        const tempBody = document.body;
-        document.body = printSection;
-*/
-
-        //document.getElementById('baseContainer').style.display = 'none';
-
-
-      
-
         let doc = new jsPDF();
-
-        console.log(topics);
 
         for(let topic of topics) {
             doc = topicPage(doc, topic);
             doc = await messagePages(doc, topic.selectedMessages);
         }
 
+        /*
         const link = await getSpotifyCode("https://open.spotify.com/track/'7CH99b2i1TXS5P8UUyWtnM?si=ZMlavzVYQLSMSCfOiJX8LA");
         
         
         doc.addImage(link, 'PNG', 10, 10, 100, 100);
-
-        doc.save('test');
+        */
+        return doc;
 
     }
 
@@ -367,8 +350,58 @@ const DiaryTemplates = () => {
         return lines;
     }
 
+    const previewPdf = (doc, pageNum) => {
+
+        const pdfData = doc.output('arraybuffer');
+        
+        // The workerSrc property shall be specified.
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.4.456/pdf.worker.js';
+        
+        // Asynchronous download of PDF
+        var loadingTask = pdfjsLib.getDocument(pdfData);
+        loadingTask.promise.then(function(pdf) {
+          console.log('PDF loaded');
+          
+          // Fetch the first page
+
+          console.log(pageNum);
+          
+          var pageNumber = pageNum > pdf.numPages || pageNum < 1 || pageNum === undefined ? pdf.numPages : pageNum;
+          pdf.getPage(pageNumber).then(function(page) {
+            console.log('Page loaded');
+
+            var canvas = document.getElementById('preview');
+            var context = canvas.getContext('2d');
+        
+            var viewport = page.getViewport({scale: 10});
+            canvas.width = viewport.width;
+            canvas.height = viewport.height;
+            canvas.style.height = "100%";
+
+            var renderContext = {
+              canvasContext: context,
+              viewport: viewport
+            };
+            var renderTask = page.render(renderContext);
+            renderTask.promise.then(function () {
+              console.log('Page rendered');
+            });
+          });
+        }, function (reason) {
+          // PDF loading error
+          console.error(reason);
+        });
+        
+    }
+
+    const downloadPdf = (doc) => {
+        doc.save('test');
+    }
+
     return {
         generatePDF,
+        previewPdf,
+        downloadPdf,
     }
 }
 
