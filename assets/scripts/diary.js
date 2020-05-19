@@ -220,7 +220,7 @@ const Diary = () => {
                 STATES.selectMessages.variables.text = fullTopic.text.join(' ');
                 ui.renderSelectMessages(fullTopic, model.getMessages());
                 if(window.innerWidth > 700) {
-                    let doc3 = await DiaryTemplates().generatePDF(model.getTopicsWithMessages());
+                    let doc3 = await DiaryTemplates().generatePDF(model.getTopicsWithMessages(), STATES.selectMessages.variables.topic);
                     DiaryTemplates().previewPdf(doc3, STATES.selectMessages.variables.page);
                 }
             },
@@ -267,7 +267,7 @@ const Diary = () => {
                     case 'selected-message':
                         model.saveSelectedTopicMesssage(STATES.selectMessages.variables.topic, params.hash);
                         if(window.innerWidth > 700) {
-                            let doc1 = await DiaryTemplates().generatePDF(model.getTopicsWithMessages());
+                            let doc1 = await DiaryTemplates().generatePDF(model.getTopicsWithMessages(), STATES.selectMessages.variables.topic);
 
                             if(STATES.selectMessages.variables.page < doc1.internal.getNumberOfPages())
                                 STATES.selectMessages.variables.page = doc1.internal.getNumberOfPages();
@@ -281,7 +281,7 @@ const Diary = () => {
                         if(window.innerWidth > 700) {
 
 
-                            let doc2 = await DiaryTemplates().generatePDF(model.getTopicsWithMessages());
+                            let doc2 = await DiaryTemplates().generatePDF(model.getTopicsWithMessages(), STATES.selectMessages.variables.topic);
 
                             if(STATES.selectMessages.variables.page > doc2.internal.getNumberOfPages())
                                 STATES.selectMessages.variables.page = doc2.internal.getNumberOfPages();
@@ -301,7 +301,7 @@ const Diary = () => {
                     
                     case 'next-page':
                         if(window.innerWidth > 700) {
-                            let doc4 = await DiaryTemplates().generatePDF(model.getTopicsWithMessages());
+                            let doc4 = await DiaryTemplates().generatePDF(model.getTopicsWithMessages(), STATES.selectMessages.variables.topic);
                             if(STATES.selectMessages.variables.page + 1 <= doc4.internal.getNumberOfPages()) {
                                 STATES.selectMessages.variables.page = STATES.selectMessages.variables.page + 1;
                                 DiaryTemplates().previewPdf(doc4, STATES.selectMessages.variables.page);
@@ -313,7 +313,7 @@ const Diary = () => {
                     case 'prev-page':
                         if(window.innerWidth > 700) {
                             if(STATES.selectMessages.variables.page - 1 >= 1) {
-                                let doc5 = await DiaryTemplates().generatePDF(model.getTopicsWithMessages());
+                                let doc5 = await DiaryTemplates().generatePDF(model.getTopicsWithMessages(), STATES.selectMessages.variables.topic);
                                 STATES.selectMessages.variables.page = STATES.selectMessages.variables.page-1;
                                 DiaryTemplates().previewPdf(doc5, STATES.selectMessages.variables.page);
                             }

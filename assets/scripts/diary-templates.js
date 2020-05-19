@@ -28,14 +28,17 @@ const DiaryTemplates = () => {
       
 
 
-    const generatePDF = async(topics) => {
+    const generatePDF = async(topics, topicLimit = -1) => {
 
         let doc = new jsPDF();
 
-        for(let topic of topics) {
-            doc = topicPage(doc, topic);
-            doc = await messagePages(doc, topic.selectedMessages);
+        console.log(topicLimit);
+
+        for(let i = 0; i <= (topicLimit != -1 && topicLimit < topics.length ? topicLimit : topics.length); i++) {
+            doc = topicPage(doc, topics[i], i == 0);
+            doc = await messagePages(doc, topics[i].selectedMessages);
         }
+
 
         /*
         const link = await getSpotifyCode("https://open.spotify.com/track/'7CH99b2i1TXS5P8UUyWtnM?si=ZMlavzVYQLSMSCfOiJX8LA");
@@ -47,9 +50,10 @@ const DiaryTemplates = () => {
 
     }
 
-    const topicPage = (doc, data) => {
+    const topicPage = (doc, data, firstPage = false) => {
 
-        doc.addPage('a4', 'portrait');
+        if(!firstPage)
+            doc.addPage('a4', 'portrait');
 
         doc.setDrawColor(0);
         doc.setFillColor(data.color);
