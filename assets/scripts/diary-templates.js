@@ -32,9 +32,14 @@ const DiaryTemplates = () => {
 
         let doc = new jsPDF();
 
-        console.log(topicLimit);
 
-        for(let i = 0; i <= (topicLimit != -1 && topicLimit < topics.length ? topicLimit : topics.length); i++) {
+
+        console.log('generatePDF',topics, topicLimit);
+
+        for(let i = 0; i <= ( (topicLimit != -1 && topicLimit < topics.length) ? topicLimit : topics.length-1); i++) {
+
+            console.log('topic', i , topics[i]);
+
             doc = topicPage(doc, topics[i], i == 0);
             doc = await messagePages(doc, topics[i].selectedMessages);
         }

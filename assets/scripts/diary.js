@@ -295,7 +295,9 @@ const Diary = () => {
                         break;
                     
                     case 'finish-diary': 
-                        const doc = await DiaryTemplates().generatePDF(model.getTopicsWithMessages());             
+                        const topicss = model.getTopicsWithMessages();
+                        console.log(topicss);
+                        const doc = await DiaryTemplates().generatePDF(topicss);             
                         DiaryTemplates().downloadPdf(doc);
                         break;
                     
