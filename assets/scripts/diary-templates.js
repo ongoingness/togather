@@ -4,7 +4,7 @@
 const DiaryTemplates = () => {
 
 
-   
+   /*
     const doCORSRequestForBlob = async (url) => {
 
         const cors_api_url = 'https://cors-anywhere.herokuapp.com/';
@@ -25,16 +25,12 @@ const DiaryTemplates = () => {
             x.send();
         });    
     }
-      
+    */
 
 
     const generatePDF = async(topics, topicLimit = -1) => {
 
         let doc = new jsPDF();
-
-
-
-        console.log('generatePDF',topics, topicLimit);
 
         for(let i = 0; i <= ( (topicLimit != -1 && topicLimit < topics.length) ? topicLimit : topics.length-1); i++) {
 
@@ -44,15 +40,7 @@ const DiaryTemplates = () => {
             doc = await messagePages(doc, topics[i].selectedMessages);
         }
 
-
-        /*
-        const link = await getSpotifyCode("https://open.spotify.com/track/'7CH99b2i1TXS5P8UUyWtnM?si=ZMlavzVYQLSMSCfOiJX8LA");
-        
-        
-        doc.addImage(link, 'PNG', 10, 10, 100, 100);
-        */
         return doc;
-
     }
 
     const topicPage = (doc, data, firstPage = false) => {
@@ -88,78 +76,150 @@ const DiaryTemplates = () => {
 
     const messagePages = async(doc, messages) => {
 
-        let yLeft = 11;
-        let yRight = 11;
+        const topMargin = 11;
+        const bottomMargin = 286;
+        const leftColumnLeftMargin = 53;
+        const leftColumnRightMargin = 5;
+        const rightColumnLeftMargin = 148.875;
+        const rightColumnRightMargin = 5;
+        const lineLength = 87.77;
+        const lineHeight = 5;
+
+        const leftColumnContentMargin = 4.838;
+        const rightColumnContentMargin = 117.23;
+
+        let yLeft = topMargin;
+        let yRight = topMargin;
 
         let yHeaderLeft = yLeft;
         let yHeaderRight = yRight;
 
-        console.log(messages);
+        const addMessage = async (doc, data, column) => {
 
-        const messageLeft = async (doc, data) => {
+            let createdPage = false;
+
+            let expectedSize = column === 'l' ? yLeft : yRight;
+            console.log(expectedSize)
+            expectedSize +=  11 + 7;
+
+            if(expectedSize > bottomMargin && !createdPage) {
+                doc = newPage(doc);
+                createdPage = true;
+            }
+
+            let splittedLines = [];
+            for(let i = 0; i < data.text.length; i++) {
+
+                const splittedLinesTemp = doc.splitTextToSize(data.text[i].replace(/[^\x20-\x7E]/g, ''), lineLength).filter(line => line != '');
+
+                expectedSize += splittedLinesTemp.length * lineHeight;
+                if(i === 0 && expectedSize > bottomMargin && !createdPage) {
+                    doc = newPage(doc);
+                    createdPage = true;
+                }
+                splittedLines = splittedLines.concat(splittedLinesTemp);
+            }
 
             doc.setDrawColor(0);
-            //doc.setFillColor(0, 122, 125);
             doc.setFillColor(data.color);
-            doc.rect(5, yLeft, 106, 11, 'F');
+            doc.rect(column === 'l' ? 5 : 99.25, column === 'l' ? yLeft : yRight, 106, 11, 'F');
             
             doc.setTextColor(255, 255, 255);
             doc.setFontSize(18);
             doc.setFontType('normal');
             doc.setFont('OstrichSans-Black');
-            doc.text(`${data.user}`, 53, yLeft + 7.5, 'center');
+            doc.text(`${data.user}`,
+                      column === 'l' ? leftColumnLeftMargin : rightColumnLeftMargin, 
+                      (column === 'l' ? yLeft : yRight) + 7.5,
+                      'center'
+            );
         
-            yHeaderLeft = yLeft + 11; 
-            yLeft += 11 + 7;
-           
+            if(column === 'l') {
+                yHeaderLeft = yLeft + 11; 
+                yLeft += 11 + 7;
+            } else {
+                yHeaderRight = yRight + 11; 
+                yRight += 11 + 7;
+            }
+        
             doc.setTextColor(0, 0, 0);
             doc.setFontSize(12);
             doc.setFontType('normal');
             doc.setFont('OpenSans');
-        
-            const lines = data.text//splitTextInLines(data.text, 30); 
-            
-            doc.text(lines, 4.838, yLeft, {maxWidth: 87.77});
-            yLeft += lines.length * 4;
 
-            await addMedia(data.files, 'l');
- 
+            for(let line of splittedLines) {
+
+                if((column === 'l' && yLeft + lineHeight > bottomMargin) || (column === 'r' && yRight + lineHeight > bottomMargin))
+                    doc = newPage(doc);
+
+                doc.text(line, column === 'l' ? leftColumnContentMargin :  rightColumnContentMargin, column === 'l' ? yLeft : yRight, {maxWidth: lineLength});
+                if(column === 'l') 
+                    yLeft += lineHeight;
+                else 
+                    yRight += lineHeight;
+
+            }
+
+            doc = await addMedia(doc, data.files, column);
+
             return doc;
+        
         }
 
+        const getMediaSizes = async (files) => {
 
-        const addMedia = async(files, side) => {
+            const sizes = [];
+
+            for(let media of files) {
+            
+                if(media.type.includes('image')) {
+                    sizes.push(fitDimensions(media.data));
+                } else if (media.type.includes('video')) {
+                    const frame = await getFrameFromVideo(media);
+                    sizes.push(fitDimensions(frame));
+                }
+            
+            }
+
+            return sizes;
+        }
+
+        const addMedia = async(doc, files, side) => {
 
             for(let media of files) {
 
                 if(media.type.includes('image')) {
                     
                     const {w,h} = fitDimensions(media.data);
-                    doc.addImage(media.data, 'PNG', side === 'l' ? 4.838 : 117.23, side === 'l' ? yLeft : yRight, w, h);
+                    doc.addImage(media.data, 'PNG', side === 'l' ? leftColumnContentMargin : rightColumnContentMargin, side === 'l' ? yLeft : yRight, w, h);
+                    console.log('height', h);
                     if(side === 'l') yLeft += h; else yRight += h;
+                    
 
                 } else if (media.type.includes('video')) {
 
                     const frame = await getFrameFromVideo(media);
                     const {w,h} = fitDimensions(frame);
-                    doc.addImage(frame, 'PNG', side === 'l' ? 4.838 : 117.23, side === 'l' ? yLeft : yRight, w, h);
+                    doc.addImage(frame, 'PNG', side === 'l' ? leftColumnContentMargin : rightColumnContentMargin, side === 'l' ? yLeft : yRight, w, h);
                     if(side === 'l') yLeft += h; else yRight += h;
                        
                 }
-            }
 
+            }
+            return doc;
         }
         
         const fitDimensions = (media) => {
+
             let img = new Image();
             img.src = media;
 
             let mmWidth = Math.floor(img.width * 0.264583);
             let mmHeight =  Math.floor(img.height * 0.264583);
 
-            if(mmWidth > 87.77) {
-                const ratio = 87.77 / mmWidth;
-                mmWidth = 87.77;
+            if(mmWidth > lineLength) {
+                const ratio = lineLength / mmWidth;
+                mmWidth = lineLength;
                 mmHeight *= ratio; 
             }
 
@@ -193,55 +253,7 @@ const DiaryTemplates = () => {
                 }
             });
         }
-
-  
-        const messageRight = async(doc, data) => {
         
-            doc.setDrawColor(0);
-            doc.setFillColor(data.color);
-            doc.rect(99.25, yRight, 106, 11, 'F');
-            
-            doc.setTextColor(255, 255, 255);
-            doc.setFontSize(18);
-            doc.setFontType('normal');
-            doc.setFont('OstrichSans-Black');
-            doc.text(`${data.user}`, 49.625 + 99.25, yRight + 7.5, 'center');
-        
-            yHeaderRight = yRight + 11; 
-            yRight += 11 + 7;
-        
-            doc.setTextColor(0, 0, 0);
-            doc.setFontSize(12);
-            doc.setFontType('normal');
-            doc.setFont('OpenSans');
-            
-            const lines =  data.text//splitTextInLines(data.text, 30); 
-        
-            let breakPoint = -1;
-            for(let i = 0; i < lines.length && breakPoint === -1; i++)
-                breakPoint = lines.length * i + yRight > 297 ? i : -1;
-
-            if(breakPoint != -1) {
-                const sliceA = lines.slice(0,breakPoint);
-                doc.text(sliceA, 117.23, yRight, {maxWidth: 87.77});
-
-                const sliceB = lines.slice(breakPoint, lines.length);
-                doc = newPage(doc);
-                doc.text(sliceB, 117.23, yRight, {maxWidth: 87.77});
-                yRight += (lines.length - breakPoint) * 4;
-                lastElemPositon = 'Right';
-
-            } else {
-                doc.text(lines, 117.23, yRight, {maxWidth: 87.77});
-                yRight += lines.length * 4;
-            }
-
-            await addMedia(data.files, 'r');
-
-            return doc;
-        
-        }
-
         const newPage = (doc) => {
             doc.addPage('a4', 'portrait');
             yLeft = 11;
@@ -255,40 +267,53 @@ const DiaryTemplates = () => {
             return doc
         }
         doc = newPage(doc);
+    
 
         let lastElemPositon = '';
 
         for(let message of messages) {
 
-            if(yLeft >= 297 || yRight  >= 297) {
+            if(yLeft >= bottomMargin || yRight  >= bottomMargin ) {
                 doc = newPage(doc);
             }
 
             if(lastElemPositon === '') {
-                doc = await messageLeft(doc, message);
-                lastElemPositon = 'left';
-            } else if(lastElemPositon === 'left') {
+                doc = await addMessage(doc, message, 'l'); //await messageLeft(doc, message);
+                lastElemPositon = 'l';
+            } else if(lastElemPositon === 'l') {
 
                 if(yRight > yLeft) {
                     yLeft += 15;
-                    doc = await messageLeft(doc, message);
-                    lastElemPositon = 'left';
+                    doc = await addMessage(doc, message, 'l'); //await messageLeft(doc, message);
+                    lastElemPositon = 'l';
                 } else {
-                    yRight = yHeaderLeft + 15;
-                    doc = await messageRight(doc, message);
-                    lastElemPositon = 'right';
+                    
+                    if(yRight < yHeaderLeft + 15)
+                        yRight = yHeaderLeft + 15;
+                    else
+                        yRight += 15;
+                
+                    doc = await addMessage(doc, message, 'r'); //await messageLeft(doc, message);
+                    lastElemPositon = 'r';
+
                 }
 
-            } else if (lastElemPositon === 'right') {
+            } else if (lastElemPositon === 'r') {
 
                 if(yLeft > yRight) {
                     yRight += 15;
-                    doc = await messageRight(doc, message);
-                    lastElemPositon = 'right';
+                    doc = await addMessage(doc, message, 'r'); //await messageLeft(doc, message);
+                    lastElemPositon = 'r';
                 } else {
-                    yLeft = yHeaderRight + 15;
-                    doc = await messageLeft(doc, message);
-                    lastElemPositon = 'left';
+                    console.log('vs', yLeft, yHeaderRight + 15)
+
+                    if(yLeft < yHeaderRight + 15)
+                        yLeft = yHeaderRight + 15;
+                    else
+                        yLeft += 15;
+                    
+                    doc = await addMessage(doc, message, 'l'); //await messageLeft(doc, message);
+                    lastElemPositon = 'l';
                 }
 
             }
@@ -335,30 +360,6 @@ const DiaryTemplates = () => {
 
     }
 
-    const splitTextInLines = (text, lineSize) => {
-
-        const lines = [];
-    
-        const words = text.split(' ');
-    
-        let tempSize = 0;
-        let line = [];
-    
-        for(let word of words) {
-            if(word.length + 1 + tempSize > lineSize) {
-                lines.push(line.join(' '));
-                line = [];
-                tempSize = 0;
-            } 
-            line.push(word);
-            tempSize+= word.length + 1;
-            
-        }
-        lines.push(line.join(' '));
-    
-        return lines;
-    }
-
     const previewPdf = (doc, pageNum) => {
 
         const pdfData = doc.output('arraybuffer');
@@ -369,15 +370,9 @@ const DiaryTemplates = () => {
         // Asynchronous download of PDF
         var loadingTask = pdfjsLib.getDocument(pdfData);
         loadingTask.promise.then(function(pdf) {
-          console.log('PDF loaded');
-          
-          // Fetch the first page
-
-          console.log(pageNum);
           
           var pageNumber = pageNum > pdf.numPages || pageNum < 1 || pageNum === undefined ? pdf.numPages : pageNum;
           pdf.getPage(pageNumber).then(function(page) {
-            console.log('Page loaded');
 
             var canvas = document.getElementById('preview');
             var context = canvas.getContext('2d');
@@ -393,7 +388,7 @@ const DiaryTemplates = () => {
             };
             var renderTask = page.render(renderContext);
             renderTask.promise.then(function () {
-              console.log('Page rendered');
+            
             });
           });
         }, function (reason) {
