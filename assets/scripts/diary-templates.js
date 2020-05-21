@@ -120,6 +120,17 @@ const DiaryTemplates = () => {
                 splittedLines = splittedLines.concat(splittedLinesTemp);
             }
 
+            if(!createdPage && splittedLines.length == 0) {
+                let mediaSizes = await getMediaSizes(data.files);
+                if(mediaSizes.length > 0) {
+                    expectedSize += mediaSizes[0].h;
+                    if(expectedSize > bottomMargin) {
+                        doc = newPage(doc);
+                        createdPage = true;
+                    }
+                }
+            }
+
             doc.setDrawColor(0);
             doc.setFillColor(data.color);
             doc.rect(column === 'l' ? 5 : 99.25, column === 'l' ? yLeft : yRight, 106, 11, 'F');
@@ -191,15 +202,15 @@ const DiaryTemplates = () => {
                 if(media.type.includes('image')) {
                     
                     const {w,h} = fitDimensions(media.data);
+                    if((side === 'l' ? yLeft : yRight) + h > bottomMargin) doc = newPage(doc);
                     doc.addImage(media.data, 'PNG', side === 'l' ? leftColumnContentMargin : rightColumnContentMargin, side === 'l' ? yLeft : yRight, w, h);
-                    console.log('height', h);
                     if(side === 'l') yLeft += h; else yRight += h;
-                    
 
                 } else if (media.type.includes('video')) {
 
                     const frame = await getFrameFromVideo(media);
                     const {w,h} = fitDimensions(frame);
+                    if((side === 'l' ? yLeft : yRight) + h > bottomMargin) doc = newPage(doc);
                     doc.addImage(frame, 'PNG', side === 'l' ? leftColumnContentMargin : rightColumnContentMargin, side === 'l' ? yLeft : yRight, w, h);
                     if(side === 'l') yLeft += h; else yRight += h;
                        
@@ -323,6 +334,7 @@ const DiaryTemplates = () => {
         return doc;
     }
  
+    /*
     const getSpotifyCode = async(link) => {
 
         const result = RegExp('https:\/\/open.spotify.com\/track\/([^\?]*)\?').exec(link);
@@ -349,16 +361,16 @@ const DiaryTemplates = () => {
         }
     
         return null;
-        /*
-
-        https://www.spotifycodes.com/downloadCode.php?uri=jpeg%2F000000%2Fwhite%2F640%2Fspotify%3Atrack%3A 2NDJAS0IlvK0UswjMzsac5
-
-        https://www.spotifycodes.com/downloadCode.php?uri=jpeg%2F000000%2Fwhite%2F640%2Fspotify%3Atrack%3A 7CH99b2i1TXS5P8UUyWtnM
         
-        https://open.spotify.com/track/ 7CH99b2i1TXS5P8UUyWtnM ?si=ZMlavzVYQLSMSCfOiJX8LA
-        */
 
-    }
+        //https://www.spotifycodes.com/downloadCode.php?uri=jpeg%2F000000%2Fwhite%2F640%2Fspotify%3Atrack%3A 2NDJAS0IlvK0UswjMzsac5
+
+        //https://www.spotifycodes.com/downloadCode.php?uri=jpeg%2F000000%2Fwhite%2F640%2Fspotify%3Atrack%3A 7CH99b2i1TXS5P8UUyWtnM
+        
+        //https://open.spotify.com/track/ 7CH99b2i1TXS5P8UUyWtnM ?si=ZMlavzVYQLSMSCfOiJX8LA
+        
+
+    }*/
 
     const previewPdf = (doc, pageNum) => {
 
