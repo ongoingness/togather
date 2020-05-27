@@ -1,3 +1,6 @@
+---
+---
+
 import DiaryUI from './diary-ui.js';
 import DiaryModel from './diary-model.js';
 import DiaryTemplates from './diary-templates.js';
@@ -296,9 +299,12 @@ const Diary = () => {
                     
                     case 'finish-diary': 
                         const topicss = model.getTopicsWithMessages();
-                        console.log(topicss);
                         const doc = await DiaryTemplates().generatePDF(topicss);             
                         DiaryTemplates().downloadPdf(doc);
+                        const dataUriString = DiaryTemplates().getDataUriStringPdf(doc);
+                        const previewBody = DiaryUI().renderPdfPreview(dataUriString);
+                        const previewWindow = window.open("", '__blank');
+                        previewWindow.document.body.appendChild(previewBody);
                         break;
                     
                     case 'next-page':
@@ -325,6 +331,16 @@ const Diary = () => {
                 }
             
             }   
+        },
+        previewPdf: {
+
+            render: async () => {
+                
+  
+            },
+            eventHandler: async(e, params) => {
+
+            },
         }
     }
 

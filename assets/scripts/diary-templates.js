@@ -207,20 +207,20 @@ const DiaryTemplates = () => {
                     if(side === 'l') yLeft += h; else yRight += h;
 
                 } else if (media.type.includes('video')) {
-
-                    const frame = await getFrameFromVideo(media);
-                    const {w,h} = fitDimensions(frame);
+     
+                    const frame = await getFilmRollFromVideoAsync(media, 3,3);               
+                    const {w,h} = await fitDimensions2(frame);
                     if((side === 'l' ? yLeft : yRight) + h > bottomMargin) doc = newPage(doc);
                     doc.addImage(frame, 'PNG', side === 'l' ? leftColumnContentMargin : rightColumnContentMargin, side === 'l' ? yLeft : yRight, w, h);
                     if(side === 'l') yLeft += h; else yRight += h;
-                       
+                     
                 }
 
             }
             return doc;
         }
         
-        const fitDimensions = (media) => {
+        const fitDimensions = (media, lineWidth = lineLength) => {
 
             let img = new Image();
             img.src = media;
@@ -228,43 +228,241 @@ const DiaryTemplates = () => {
             let mmWidth = Math.floor(img.width * 0.264583);
             let mmHeight =  Math.floor(img.height * 0.264583);
 
-            if(mmWidth > lineLength) {
-                const ratio = lineLength / mmWidth;
-                mmWidth = lineLength;
+            if(mmWidth > lineWidth) {
+                const ratio = lineWidth / mmWidth;
+                mmWidth = lineWidth;
                 mmHeight *= ratio; 
             }
+
+            console.log(mmWidth, mmHeight);
 
             return {w: mmWidth, h: mmHeight};
         }
 
-        const getFrameFromVideo = (media) => {
+        const fitDimensions2 = async(media, lineWidth = lineLength) => {
+
+            let img = new Image();
+
+            const loadImage = new Promise( (resolve, reject) => {
+                img.onload = () => {
+
+                    let mmWidth = Math.floor(img.width * 0.264583);
+                    let mmHeight =  Math.floor(img.height * 0.264583);
+        
+                    if(mmWidth > lineWidth) {
+                        const ratio = lineWidth / mmWidth;
+                        mmWidth = lineWidth;
+                        mmHeight *= ratio; 
+                    }
+        
+                    console.log(mmWidth, mmHeight);
+
+                    resolve({w: mmWidth, h: mmHeight});
+
+                };
+            });
+            img.src = media;
+            const result = await loadImage;
+            return result;
+        }
+
+        const getFrameFromVideo = (media, time=0.0) => {
 
             const video = document.createElement('video');
-            video.autoplay = true;
-            //video.style.display = 'none';
+            video.style.display = 'none';
+            const source = document.createElement('source');
+            source.src = media.data;
+            video.appendChild(source);
+            document.body.append(video);
+            
+            const canvas = document.createElement('canvas');
+            canvas.id = 'canvas-element';
+            canvas.style.display = 'none';
+            document.body.append(canvas);
+
+            video.addEventListener('loadedmetadata', function() {
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;           
+            });
+
+            video.currentTime = time;
+
+            return new Promise((resolve, reject) => {
+                video.oncanplay = (e) => {
+                    canvas.getContext("2d").drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+                    const result = canvas.toDataURL()
+                    canvas.remove();
+                    video.remove();
+                    resolve({data: result, w: video.videoWidth, h: video.videoHeight, time});
+                }
+            });
+        }
+
+        const getFramesAsync = async(media, columns, rows) => {
+
+            console.time('frameAsync');
+
+            const video = document.createElement('video');
+            video.style.display = 'none';
+            const source = document.createElement('source');
+            source.src = media.data;
+            video.appendChild(source);
+            document.body.append(video);
+
+            return new Promise ((resolve, reject) => {
+
+                video.oncanplay = async(e) => {
+                    const framePromises = [];
+                    const sliceLength = video.duration / (columns * rows);
+
+                    for(let i = 0.01 ; i < video.duration; i += sliceLength) {
+                        framePromises.push(getFrameFromVideo(media, i));
+                    }
+                    const result = await Promise.all(framePromises);
+                    video.remove();
+                    console.timeEnd('frameAsync');
+                    resolve(result);
+                }
+            });
+   
+        }
+
+        const getFramesSync = async(media, columns, rows) => {
+
+            console.time('frameSync');
+
+            const video = document.createElement('video');
+            video.style.display = 'none';
+            const source = document.createElement('source');
+            source.src = media.data;
+            video.appendChild(source);
+            document.body.append(video);
+
+            return new Promise ((resolve, reject) => {
+
+                video.oncanplay = async(e) => {
+                    const frames = [];
+                    const sliceLength = video.duration / (columns * rows);
+
+                    for(let i = 0.01 ; i < video.duration; i += sliceLength) {
+                        const frame = await getFrameFromVideo(media, i);
+                        frames.push(frame);
+                    }
+        
+                    console.timeEnd('frameSync');
+                    resolve(frames);
+                }
+            });
+   
+        }
+
+        const getFilmRollFromVideo = async(media, columns, rows) => {
+            
+            console.time('roll');
+
+            const video = document.createElement('video');
+            video.style.display = 'none';
             const source = document.createElement('source');
             source.src = media.data;
             video.appendChild(source);
             document.body.append(video);
 
             const canvas = document.createElement('canvas');
-            canvas.id = 'canvas-element';
-            //canvas.style.display = 'none';
+            canvas.id = 'film-roll-canvas';
+            canvas.style.display = 'none';
             document.body.append(canvas);
-        
-            video.addEventListener('loadedmetadata', function() {
-                canvas.width = video.videoWidth;
-                canvas.height = video.videoHeight;           
-            });
 
-            return new Promise((resolve, reject) => {
-                video.oncanplay = (e) => {
-                    canvas.getContext("2d").drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
-                    resolve(canvas.toDataURL());
+            return new Promise ((resolve, reject) => {
+
+                video.oncanplay = async(e) => {
+
+                    const sliceLength = video.duration / (columns * rows);
+
+                    let x = 0;
+                    let y = 0;
+
+                    let index = 0;
+
+                    for(let i = 0.01 ; i < video.duration; i += sliceLength) {
+                       const frame = await getFrameFromVideo(media, i);
+
+                        if(i === 0.01) {
+                            canvas.width = frame.w * columns;
+                            canvas.height = frame.h * rows;
+                        }
+
+                        const img = new Image;
+                        const loadImage = new Promise( (resolve, reject) => {
+                            img.onload = () => {
+                                canvas.getContext("2d").drawImage(img, x, y, frame.w, frame.h);
+                                if(index != 0 && (index + 1) % columns === 0) {
+                                    x = 0;
+                                    y += frame.h;
+                                } else {
+                                    x += frame.w;
+                                }
+                                index++;
+                                resolve(true);
+                            };
+                        });
+                        img.src = frame.data;
+                        await loadImage;
+                    }
+                    const imageDataUrl = canvas.toDataURL();
+                    canvas.remove();
+                    video.remove();
+                    console.timeEnd('roll');
+                    resolve(imageDataUrl);
+          
                 }
+
             });
         }
+
+        const getFilmRollFromVideoAsync = async(media, columns, rows) => {
         
+            console.time('rollAsync');
+
+            const canvas = document.createElement('canvas');
+            canvas.id = 'film-roll-canvas';
+            canvas.style.display = 'none';
+            document.body.append(canvas);
+
+            const frames = await getFramesAsync(media, columns, rows);
+        
+            if(frames.length === 0)
+                return undefined;
+
+            canvas.width = frames[0].w * columns;
+            canvas.height = frames[0].h * rows;
+
+            let x = 0;
+            let y = 0;
+            const img = new Image;
+            const loadImage = (i) => new Promise( (resolve, reject) => {
+                img.onload = () => {
+                    canvas.getContext("2d").drawImage(img, x, y, frames[i].w, frames[i].h);
+                    if(i != 0 && (i + 1) % columns === 0) {
+                        x = 0;
+                        y += frames[i].h;
+                    } else {
+                        x += frames[i].w;
+                    }
+                    resolve(true);
+                };
+            });
+
+            for(let i = 0 ; i < frames.length; i++) {
+                img.src = frames[i].data;
+                await loadImage(i);
+            }
+            
+            const imageDataUrl = canvas.toDataURL();
+            canvas.remove();
+            console.timeEnd('rollAsync');
+            return imageDataUrl;
+        }
+
         const newPage = (doc) => {
             doc.addPage('a4', 'portrait');
             yLeft = 11;
@@ -289,13 +487,13 @@ const DiaryTemplates = () => {
             }
 
             if(lastElemPositon === '') {
-                doc = await addMessage(doc, message, 'l'); //await messageLeft(doc, message);
+                doc = await addMessage(doc, message, 'l');
                 lastElemPositon = 'l';
             } else if(lastElemPositon === 'l') {
 
                 if(yRight > yLeft) {
                     yLeft += 15;
-                    doc = await addMessage(doc, message, 'l'); //await messageLeft(doc, message);
+                    doc = await addMessage(doc, message, 'l');
                     lastElemPositon = 'l';
                 } else {
                     
@@ -304,7 +502,7 @@ const DiaryTemplates = () => {
                     else
                         yRight += 15;
                 
-                    doc = await addMessage(doc, message, 'r'); //await messageLeft(doc, message);
+                    doc = await addMessage(doc, message, 'r');
                     lastElemPositon = 'r';
 
                 }
@@ -313,7 +511,7 @@ const DiaryTemplates = () => {
 
                 if(yLeft > yRight) {
                     yRight += 15;
-                    doc = await addMessage(doc, message, 'r'); //await messageLeft(doc, message);
+                    doc = await addMessage(doc, message, 'r');
                     lastElemPositon = 'r';
                 } else {
                     console.log('vs', yLeft, yHeaderRight + 15)
@@ -323,7 +521,7 @@ const DiaryTemplates = () => {
                     else
                         yLeft += 15;
                     
-                    doc = await addMessage(doc, message, 'l'); //await messageLeft(doc, message);
+                    doc = await addMessage(doc, message, 'l');
                     lastElemPositon = 'l';
                 }
 
@@ -414,10 +612,15 @@ const DiaryTemplates = () => {
         doc.save('test');
     }
 
+    const getDataUriStringPdf = (doc) => {
+        return doc.output('datauristring');
+    }
+
     return {
         generatePDF,
         previewPdf,
         downloadPdf,
+        getDataUriStringPdf,
     }
 }
 

@@ -1,0 +1,101 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    <link href="{{ '/assets/css/home.css' | prepend: site.baseurl }}" rel="stylesheet" type="text/css">
+    {% if page.custom_css %}
+        {% for stylesheet in page.custom_css %}
+            <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/{{ stylesheet }}.css" type="text/css">
+        {% endfor %}
+    {% endif %}
+    <title>ToGather</title>
+</head>
+<body>
+    <div class="header">
+        <div class="hamburguer" onclick="openNav()">            
+            <div class="hamburguer-line"></div>
+            <div class="hamburguer-line"></div>
+            <div class="hamburguer-line"></div>
+        </div>
+        <div class="header__text">
+            ToGather
+        </div>
+    </div>
+    <div id="myNav" class="overlay">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div class="overlay-content">
+          <a id="home-a" href="{{ site.url }}{{ site.baseurl }}/">Home</a>
+          <a id="topic-a" href="{{ site.url }}{{ site.baseurl }}/topics/">Get a topic</a>
+          <a id="explained-a" href="{{ site.url }}{{ site.baseurl }}/explained/">ToGather Explained</a>
+          <a id="instructions-a" href="{{ site.url }}{{ site.baseurl }}/instructions/">Instructions</a>
+          <a id="diary-a" href="{{ site.url }}{{ site.baseurl }}/diary/">Assemble Diary</a>
+          <a id="about-a" href="{{ site.url }}{{ site.baseurl }}/about/">About Us</a>
+        </div>
+    </div>
+
+    <div class="content">
+        {{ content }}
+    </div>
+    <div class="footer">
+        <div class="footer__text">
+            ToGather
+        </div>
+    </div>
+
+    <script>
+
+        // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+        let vh = window.innerHeight * 0.01;
+        // Then we set the value in the --vh custom property to the root of the document
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+        // We listen to the resize event
+        window.addEventListener('resize', () => {
+            // We execute the same script as before
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        });
+
+
+        switch('{{page.url}}') {
+
+            case '/':
+                document.getElementById('home-a').style.textDecoration = 'underline';
+                break;
+
+            case '/topic.html':
+            document.getElementById('topic-a').style.textDecoration = 'underline';
+                break;
+
+            case '/explained.html':
+                document.getElementById('explained-a').style.textDecoration = 'underline';
+                break;
+
+            case '/instructions.html':
+                document.getElementById('instructions-a').style.textDecoration = 'underline';
+                break;
+
+            case '/diary.html':
+                ocument.getElementById('diary-a').style.textDecoration = 'underline';
+                break;
+
+            case '/about.html':
+                document.getElementById('about-a').style.textDecoration = 'underline';
+                break;
+        }
+
+        const openNav = () => {
+            document.getElementById("myNav").style.width = "100%";
+        }
+
+        const closeNav = () => {
+            document.getElementById("myNav").style.width = "0%";
+        }
+        
+    </script>
+</body>
+</html>

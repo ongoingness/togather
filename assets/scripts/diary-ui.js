@@ -856,6 +856,29 @@ const DiaryUI = (eventHandler) => {
         document.getElementById('readMoreButton').classList.remove('hidden');
     } 
 
+    const renderPdfPreview = (pdfData) => {
+
+        const div = document.createElement('div');
+        div.style.width = '100%';
+        div.style.height = '100%';
+        div.style.position = 'relative';
+
+        const iframe = document.createElement('iframe');
+        iframe.src = pdfData;
+        iframe.style.width = '100%';
+        iframe.style.height = '100%';
+        div.appendChild(iframe);
+
+        const buttonDownload = document.createElement('button');
+        buttonDownload.style.position = 'absolute';
+        buttonDownload.style.bottom = '5vh';
+        buttonDownload.style.left = '50%';
+        buttonDownload.innerText = 'Download';
+        div.appendChild(buttonDownload);
+
+        return div;
+
+    }
 
   
     return{
@@ -882,6 +905,8 @@ const DiaryUI = (eventHandler) => {
         renderShortTopic,
         renderDay,
         clearDay,
+
+        renderPdfPreview,
 
     }
 }

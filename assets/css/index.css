@@ -1,0 +1,35 @@
+.row {
+    display: flex;
+    width: 100%;
+    height: 33.33%;
+    margin: auto;
+    align-items: center;
+    flex-direction: column;
+}
+
+.button {
+    text-align: center;
+    display: flex;
+    padding: 1.5vh;
+    color: white;
+    border: none;
+    font-family: 'Open Sans', sans-serif;
+    font-style: oblique;
+    font-size: 2.2vh;
+}
+
+.button.learn {
+    background: #f89406;
+    margin: auto;
+    margin-top: 1vh;
+}
+
+.button.give {
+    background: #7659b6;
+    margin: auto;
+}
+
+.text-box {
+    padding: 3vh;
+    text-align: center;
+}
