@@ -1,0 +1,73 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:title" content="While you were fighting">
+    <meta property="og:description" content="{{ page.description }}">
+    <!--meta property="og:image" content="http://euro-travel-example.com/thumbnail.jpg"-->
+    <meta property="og:url" content="{{ site.url }}{{ site.baseurl }}/topics/{{page.name}}">
+    <!--meta name="twitter:card" content="summary_large_image"-->
+    <!--meta property="og:site_name" content="While you were fighting"-->
+    <meta name="twitter:image:alt" content="Alt text for image">
+
+    <title>While you were fighting</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <link href="{{ '/assets/css/challenge.css' | prepend: site.baseurl }}" rel="stylesheet" type="text/css">
+</head>
+<body>
+    {% include header.html %}
+    <div class="topic-description">
+        <div> {{ page.description }} </div>
+    </div>
+    <div class='button-container'>
+        <button class="button share" onclick="shareTopic()"> Share topic </button>
+        <button class="button topic" onclick="getTopic()"> Another topic</button>
+        <button class="button diary" onclick="goToDiary()"> Assemble Diary </button>
+    </div>
+    {% include intro.html %}
+    <script>
+
+        // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+        let vh = window.innerHeight * 0.01;
+        // Then we set the value in the --vh custom property to the root of the document
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+        // We listen to the resize event
+        window.addEventListener('resize', () => {
+            // We execute the same script as before
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        });
+
+        const shareTopic = () => {
+
+            const text = `${window.location.href}\nTopic: {{ page.description }}`;
+
+            const link = (navigator.userAgent.match(/Android/i) 
+                || navigator.userAgent.match(/webOS/i) 
+                || navigator.userAgent.match(/iPhone/i)  
+                || navigator.userAgent.match(/iPad/i)  
+                || navigator.userAgent.match(/iPod/i) 
+                || navigator.userAgent.match(/BlackBerry/i) 
+                || navigator.userAgent.match(/Windows Phone/i)) ? 
+                `https://api.whatsapp.com/send?text=${encodeURI(text)}`:
+                `https://web.whatsapp.com/send?text=${encodeURI(text)}`;
+
+            window.open(link, '_blank');
+        }
+
+        const getTopic = () => {
+            let topic = Math.floor(Math.random() * 5) + 1
+            window.location.href = `{{ site.url }}{{ site.baseurl }}/topics/${topic}`;
+        }
+
+        const goToDiary = () =>  window.location.href = `{{ site.url }}{{ site.baseurl }}/diary`;
+
+    </script>
+</body>
+</html>

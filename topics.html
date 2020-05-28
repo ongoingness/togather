@@ -1,0 +1,17 @@
+---
+permalink: topics/
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToGather</title>
+</head>
+<body>
+    <script>
+        let topic = Math.floor(Math.random() * 5) + 1
+        window.location.href = `{{ site.url }}{{ site.baseurl }}/topics/${topic}`;
+    </script>
+</body>
+</html>

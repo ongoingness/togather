@@ -14,22 +14,56 @@
     <!--meta property="og:site_name" content="While you were fighting"-->
     <meta name="twitter:image:alt" content="Alt text for image">
 
-    <title>While you were fighting</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <link href="{{ '/assets/css/challenge.css' | prepend: site.baseurl }}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    <link href="{{ '/assets/css/home.css' | prepend: site.baseurl }}" rel="stylesheet" type="text/css">
+    <link href="{{ '/assets/css/topic.css' | prepend: site.baseurl }}" rel="stylesheet" type="text/css">
+    <title>ToGather</title>
 </head>
 <body>
-    {% include header.html %}
-    <div class="topic-description">
-        <div> {{ page.description }} </div>
+    <div class="header">
+        <div class="hamburguer" onclick="openNav()">            
+            <div class="hamburguer-line"></div>
+            <div class="hamburguer-line"></div>
+            <div class="hamburguer-line"></div>
+        </div>
+        <div class="header__text">
+            ToGather
+        </div>
     </div>
-    <div class='button-container'>
-        <button class="button share" onclick="shareTopic()"> Share topic </button>
-        <button class="button topic" onclick="getTopic()"> Another topic</button>
-        <button class="button diary" onclick="goToDiary()"> Assemble Diary </button>
+    <div id="myNav" class="overlay">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div class="overlay-content">
+          <a id="home-a" href="{{ site.url }}{{ site.baseurl }}/">Home</a>
+          <a id="topic-a" href="{{ site.url }}{{ site.baseurl }}/topics/">Get a topic</a>
+          <a id="explained-a" href="{{ site.url }}{{ site.baseurl }}/explained/">ToGather Explained</a>
+          <a id="instructions-a" href="{{ site.url }}{{ site.baseurl }}/instructions/">Instructions</a>
+          <a id="diary-a" href="{{ site.url }}{{ site.baseurl }}/diary/">Assemble Diary</a>
+          <a id="about-a" href="{{ site.url }}{{ site.baseurl }}/about/">About Us</a>
+        </div>
     </div>
-    {% include intro.html %}
+
+    <div class="content">
+        <div class="content-header" style="background-color: #7659B6;">
+            Get Topic
+        </div>
+        <div class="topic-gradient">
+            <div class="topic-box">
+                {{ page.description }}
+            </div>
+            <button class="button round pick" onclick="shareTopic()">
+                Pick this topic
+            </button>
+            <button class="button give" onclick="getTopic()">
+                View another topic
+            </button>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer__text">
+            ToGather
+        </div>
+    </div>
+
     <script>
 
         // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
@@ -43,6 +77,42 @@
             let vh = window.innerHeight * 0.01;
             document.documentElement.style.setProperty('--vh', `${vh}px`);
         });
+
+
+        switch('{{page.url}}') {
+
+            case '/':
+                document.getElementById('home-a').style.textDecoration = 'underline';
+                break;
+
+            case '/topic.html':
+            document.getElementById('topic-a').style.textDecoration = 'underline';
+                break;
+
+            case '/explained.html':
+                document.getElementById('explained-a').style.textDecoration = 'underline';
+                break;
+
+            case '/instructions.html':
+                document.getElementById('instructions-a').style.textDecoration = 'underline';
+                break;
+
+            case '/diary.html':
+                ocument.getElementById('diary-a').style.textDecoration = 'underline';
+                break;
+
+            case '/about.html':
+                document.getElementById('about-a').style.textDecoration = 'underline';
+                break;
+        }
+
+        const openNav = () => {
+            document.getElementById("myNav").style.width = "100%";
+        }
+
+        const closeNav = () => {
+            document.getElementById("myNav").style.width = "0%";
+        }
 
         const shareTopic = () => {
 
@@ -59,15 +129,11 @@
                 `https://web.whatsapp.com/send?text=${encodeURI(text)}`;
 
             window.open(link, '_blank');
+
         }
 
-        const getTopic = () => {
-            let topic = Math.floor(Math.random() * 5) + 1
-            window.location.href = `{{ site.url }}{{ site.baseurl }}/topics/${topic}`;
-        }
-
-        const goToDiary = () =>  window.location.href = `{{ site.url }}{{ site.baseurl }}/diary`;
-
+        const getTopic = () => window.location.href = `{{ site.url }}{{ site.baseurl }}/topics/`;
+        
     </script>
 </body>
 </html>
