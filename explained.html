@@ -1,3 +1,118 @@
 ---
 layout: home
 ---
+
+<div class="content-header explained">
+    Togather explained
+</div>
+<div class="gradient-container explained">
+    <div class="explained-box">
+        ToGather makes it easy to capture and share in the time spent apart from your loved ones.
+    </div>
+</div>
+<div style="display: flex; flex-direction: row; height: 50vh;">
+    <div style="width: 100%; height: 100%;display: flex;flex-direction: column;">
+        <div style="text-align: center; margin: auto;
+        margin-bottom: 6vh;">
+            Gather a group on Whatsapp
+        </div>
+        <button class="button started" onclick="location.href='{{ site.url }}{{ site.baseurl }}/instructions/'" type="button">
+            Get started >>
+        </button>
+    </div>
+    <div style="width: 75%; height: 100%;">
+        <div class="group-image"></div>           
+    </div>
+</div>
+<div style="display: flex; flex-direction: row; height: 50vh;">
+    <div style="width: 75%; height: 100%;">
+        <div class="challenge-image"></div>        
+    </div>
+    <div style="width: 100%; height: 100%;display: flex;flex-direction: column;">
+        <div style="text-align: center; margin: auto;
+        margin-bottom: 6vh;">
+            Get a nostalgic, creative, fun or challenging topic
+        </div>
+        <div style="text-align: center; margin: auto;
+        margin-bottom: 6vh;">
+            Share it with your group
+        </div>
+        <button class="button give" onclick="location.href='{{ site.url }}{{ site.baseurl }}/topics/'" type="button">
+            Get a topic >>
+        </button>
+    </div>
+</div>
+<div style="display: flex; flex-direction: row; height: 50vh;">
+    <div style="width: 100%; height: 100%;display: flex;flex-direction: column;">
+        <div style="text-align: center; margin: auto;
+        margin-bottom: 6vh;">
+            Create , capture, write, photograph and share with your group.
+        </div>
+        <div style="text-align: center; margin: auto;
+        margin-bottom: 6vh;">
+            Repeat this every day
+        </div>
+        <button class="button started" onclick="location.href='{{ site.url }}{{ site.baseurl }}/instructions/'" type="button">
+            To-do daily >>
+        </button>
+    </div>
+    <div style="width: 75%; height: 100%;">
+        <div class="chat-image"></div>          
+    </div>
+</div>
+
+<div class="explained-box-2">
+    So when your loved one leaves the hospital you can share all the love and support you wanted to give them in a book full of your stories, thoughts and images.
+</div>
+
+<div>
+    <div class="slideshow-container">
+        <div class="mySlides fade">
+            <img src="{{ '/assets/images/Diary_template_conversation.jpg' | prepend: site.baseurl }}" style="width:100%">
+        </div>
+
+        <div class="mySlides fade">
+            <img src="{{ '/assets/images/Diary_template_conversation2.jpg' | prepend: site.baseurl }}" style="width:100%">
+        </div>
+
+        <div class="mySlides fade">
+            <img src="{{ '/assets/images/Diary_template_conversation3.jpg' | prepend: site.baseurl }}" style="width:100%">
+        </div>
+
+        <div style="text-align:center">
+            <span class="dot"></span> 
+            <span class="dot"></span> 
+            <span class="dot"></span> 
+        </div>
+    </div>
+</div>
+<button class="button started" style="margin-top: 5vh; margin-bottom: 4vh;" onclick="location.href='{{ site.url }}{{ site.baseurl }}/diary/'" type="button">
+    Assembling the diary >>
+</button>
+<button class="button give" style="margin-top: 4vh; margin-bottom: 5vh;" onclick="location.href='{{ site.url }}{{ site.baseurl }}/topics/'" type="button">
+    Get a topic >>
+</button>
+
+
+
+<script>
+    var slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";  
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {slideIndex = 1}    
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex-1].style.display = "block";  
+        dots[slideIndex-1].className += " active";
+        setTimeout(showSlides, 5000); 
+    }
+</script>

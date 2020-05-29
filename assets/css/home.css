@@ -1,3 +1,6 @@
+---
+---
+
 @font-face {
     font-family: 'Ostrich Sans Black';
     src: url('../fonts/ostrich-sans/OstrichSans-Black.otf');
@@ -48,7 +51,7 @@ body {
 
 .content {
     width: 100%;
-    height: 80vh;
+    min-height: 80vh;
 }
 
 .footer {
@@ -118,12 +121,28 @@ body {
     color: white;
 }
 
-.topic-gradient {
+.content-header.topic {
+    background-color: #7659B6;
+}
+
+.content-header.explained {
+    background-color: #F89406;
+}
+
+.gradient-container {
     display: flex;
     flex-flow: column;
     width: 100%;
     height: 73vh;
+}
+
+.gradient-container.topic {
     background: transparent linear-gradient(180deg, #7659B61A 0%, #2D0F3C00 100%) 0% 0% no-repeat padding-box;
+}
+
+.gradient-container.explained {
+    height: 100%;
+    background: transparent linear-gradient(180deg, #F894061A 0%, #F8940600 100%) 0% 0% no-repeat padding-box;
 }
 
 .topic-box {
@@ -133,6 +152,7 @@ body {
     font-size: 18px;
     text-align: center;
     padding: 2.5vh;
+    overflow: auto;
 }
 
 .button {
@@ -163,4 +183,75 @@ body {
     margin: auto;
     margin-top: 3vh;
 }
+
+.button.started {
+    background: #2A7AB0;
+    margin: auto;
+    margin-top: 2vh;
+}
   
+.explained-box {
+    text-align: center;
+    margin: 8vh 3vh;
+}
+
+.group-image {
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/screen_whatsapp_group.png' | prepend: site.baseurl }}') no-repeat;
+    background-size: cover;
+}
+
+.challenge-image {
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/screen_share_challenge.png' | prepend: site.baseurl }}') no-repeat;
+    background-size: cover;
+    background-position-x: right;
+}
+
+.chat-image {
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/screen_group_chat.png' | prepend: site.baseurl }}') no-repeat;
+    background-size: cover;
+}
+
+.explained-box-2 {
+    text-align: center;
+    margin: 4vh;
+}
+
+.mySlides {display: none;}
+
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+.dot {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active {
+  background-color: black;
+}
+
+.fade {
+    -webkit-animation: fadeinout 5s linear forwards;
+    animation: fadeinout 5s linear forwards;
+}
+
+@-webkit-keyframes fadeinout {
+    0%,100% { opacity: 0; }
+    20%,80% { opacity: 1; }
+}
+
+@keyframes fadeinout {
+    0%,100% { opacity: 0; }
+    20%,80% { opacity: 1; }
+}
