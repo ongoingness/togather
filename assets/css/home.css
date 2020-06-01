@@ -129,6 +129,10 @@ body {
     background-color: #F89406;
 }
 
+.content-header.instructions {
+    background-color: #2A7AB0;
+}
+
 .gradient-container {
     display: flex;
     flex-flow: column;
@@ -143,6 +147,11 @@ body {
 .gradient-container.explained {
     height: 100%;
     background: transparent linear-gradient(180deg, #F894061A 0%, #F8940600 100%) 0% 0% no-repeat padding-box;
+}
+
+.gradient-container.instructions {
+    height: 100%;
+    background: transparent linear-gradient(180deg, #2A7AB01A 0%, #2A7AB000 60%, #FFFFFF 100%) 0% 0% no-repeat padding-box
 }
 
 .topic-box {
@@ -254,4 +263,24 @@ body {
 @keyframes fadeinout {
     0%,100% { opacity: 0; }
     20%,80% { opacity: 1; }
+}
+
+.instructions-video {
+    background: white;
+    border-style: solid;
+    border-width: 1px;
+    text-align: center;
+    margin: 5vh 2vh;
+    height: 25vh;
+    line-height: 25vh;
+}
+
+.instructions-title {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: bold;
+    color: #2A7AB0;
+    margin-left: 5vh;
+    margin-bottom: 2vh;
 }
