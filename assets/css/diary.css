@@ -484,4 +484,28 @@ body, textarea, button, input, select, pre {
     border-width: 1px;
     text-align: center;
     padding: 2vh;
+    font-style: italic;
+    font-size: 16px;
+    color: #606060;
+    overflow-y: auto;
+    max-height: 40vh;
+}
+
+.file-element-container {
+    display: flex;
+    flex-direction: row;
+    border-bottom-style: solid;
+    border-color: #707070;
+    border-width: 1px;
+}
+
+.file-element {
+    text-align: left;
+    font-size: 12px;
+    padding: 1.5vh;
+    width: 90%;
+}
+
+.file-element__delete-button {
+    margin: auto;
 }

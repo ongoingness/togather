@@ -10,6 +10,9 @@ const Diary = () => {
 
     const STATES = {
         uploadFiles: {
+            variables: {
+                files: new Map(),
+            },
             render: () => {    
                 
                 ui.renderSiteHeader();
@@ -24,11 +27,24 @@ const Diary = () => {
 
                 switch(params.type) {
                   
-                    case 'upload-files': 
-                        const whatsAppChat = await WhatsAppChatParser().start(params.input);              
+                    case 'upload-files':
+                        for(let file of params.files) {
+                            if(!STATES.uploadFiles.variables.files.has(file.name)) {
+                                STATES.uploadFiles.variables.files.set(file.name, file);
+                                ui.renderFile(file);
+                            }
+                        }
+                        break;
+
+                    case 'start-assembling':
+                        const whatsAppChat = await WhatsAppChatParser().start(Array.from(STATES.uploadFiles.variables.files.values()));              
                         model.setWhatsAppChat(whatsAppChat);
                         model.findTopics();
                         updateState(STATES.topicsFound);
+                        break;
+
+                    case 'delete-file':
+                        STATES.uploadFiles.variables.files.delete(params.filename);
                         break;
 
                 }

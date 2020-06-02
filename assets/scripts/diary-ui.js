@@ -141,32 +141,89 @@ const DiaryUI = (eventHandler) => {
         textBox2.innerText = 'Your conversations stay private as this all happens just on your device, you even don\'t need internet.';
         gradient.appendChild(textBox2);
 
-        const selectFilesButton = document.createElement('button');
+        const selectFilesButton = document.createElement('label');
         selectFilesButton.classList.add('button', 'round', 'diary');
+        selectFilesButton.style.marginTop = '6vh'
         selectFilesButton.innerHTML = 'Select Files';
         gradient.appendChild(selectFilesButton);
+
+        const uploadFilesInput = document.createElement('input');
+        uploadFilesInput.id = 'uploadFilesInput';
+        uploadFilesInput.classList.add('upload-files__input');
+        uploadFilesInput.type = 'file';
+        uploadFilesInput.multiple = true;
+        uploadFilesInput.addEventListener('change', e => eventHandler(e, {type: 'upload-files', files: uploadFilesInput.files}));
+        selectFilesButton.appendChild(uploadFilesInput);
 
         const filesSelectedContainer = document.createElement('div');
         filesSelectedContainer.id = 'filesSelected';
         filesSelectedContainer.classList.add('files-selected-container', 'text-box');
-        filesSelectedContainer.innerText = 'No files selected';
         gradient.appendChild(filesSelectedContainer);
 
+        const noFilesSelected = document.createElement('div');
+        noFilesSelected.id = 'noFilesSelected';
+        noFilesSelected.innerText = 'No files selected';
+        filesSelectedContainer.appendChild(noFilesSelected);
+
         const startButton = document.createElement('button');
+        startButton.id = 'startAssembling';
         startButton.classList.add('button', 'round', 'diary');
         startButton.innerHTML = 'Start assembling';
+        startButton.disabled = true;
+        startButton.addEventListener('click', e => eventHandler(e, {type: 'start-assembling'}));
         gradient.appendChild(startButton);
 
         const instructionsButton = document.createElement('button');
         instructionsButton.classList.add('button', 'started', 'small-font');
+        instructionsButton.style.marginTop = '4.5vh';
         instructionsButton.innerHTML = 'Full assembling instructions >>';
+        instructionsButton.addEventListener('click', () => location.href='{{ site.url }}{{ site.baseurl }}/instructions/');
         gradient.appendChild(instructionsButton);
 
         const aboutButton = document.createElement('button');
         aboutButton.classList.add('button', 'pick', 'small-font');
+        aboutButton.style.marginTop = '3vh';
+        aboutButton.style.marginBottom = '6vh';
         aboutButton.innerHTML = 'How we assure your privacy >>';
+        aboutButton.addEventListener('click', () => location.href='{{ site.url }}{{ site.baseurl }}/about/');
         gradient.appendChild(aboutButton);
     
+    }
+
+    const renderFile = (file) => {
+
+        document.getElementById('noFilesSelected').style.display = 'none';
+        document.getElementById('startAssembling').disabled = false;
+
+        const fileElemContainer = document.createElement('div');
+        fileElemContainer.classList.add('file-element-container');
+        document.getElementById('filesSelected').appendChild(fileElemContainer);
+
+        const fileElem = document.createElement('div');
+        fileElem.classList.add('file-element');
+        fileElem.innerText = file.name;
+        fileElemContainer.appendChild(fileElem);
+
+        const fileElemDeleteButton = document.createElement('button');
+        fileElemDeleteButton.classList.add('file-element__delete-button');
+        fileElemDeleteButton.addEventListener('click', (e) => {
+            fileElemContainer.remove();
+
+            if(document.getElementsByClassName('file-element-container').length === 0) {
+                document.getElementById('noFilesSelected').style.display = 'block';
+                document.getElementById('startAssembling').disabled = true;
+            }
+
+            eventHandler(e, {type: 'delete-file', filename: file.name});
+        });
+        fileElemContainer.appendChild(fileElemDeleteButton);
+
+        const deleteButtonImage = document.createElement('img');
+        deleteButtonImage.src = "{{ '/assets/images/delete.svg' | prepend: site.baseurl }}";
+        deleteButtonImage.width = '25';
+        deleteButtonImage.height = '25';
+        fileElemDeleteButton.appendChild(deleteButtonImage);
+
     }
 
 
@@ -1055,6 +1112,7 @@ const DiaryUI = (eventHandler) => {
         renderSiteHeader,
         renderSiteFooter,
         renderUploadFiles,
+        renderFile,
 
         renderBaseUI,
         clearBaseUI,

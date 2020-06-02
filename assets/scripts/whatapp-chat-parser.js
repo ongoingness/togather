@@ -70,8 +70,8 @@ const WhatsAppChatParser = () => {
             });
         }
 
-        for(let i = 0; i < fileInput.files.length; i++) {
-            let result = await readFile(fileInput.files[i]);
+        for(let i = 0; i < fileInput.length; i++) {
+            let result = await readFile(fileInput[i]);
             files.push(result);
         }
 

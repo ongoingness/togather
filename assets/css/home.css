@@ -162,7 +162,7 @@ body {
 
 .gradient-container.diary {
     height: 100%;
-    background: transparent linear-gradient(180deg, #E26A6A1A 0%, #E26A6A00 100%) 0% 0% no-repeat padding-box;
+    background: transparent linear-gradient(180deg, #E26A6A1A 0%, #E26A6A00 50%) 0% 0% no-repeat padding-box;
 }
 
 .topic-box {
@@ -217,8 +217,16 @@ body {
 
 .button.diary {
     margin: auto;
-    padding: 0vh 5vh;
+    padding: 2vh 5vh;
     background: #E26A6A
+}
+
+.button:disabled {
+    background-color: #C7C7C7;
+}
+
+.button:hover {
+    cursor: pointer;
 }
 
 .button.small-font {
