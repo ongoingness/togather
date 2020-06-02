@@ -17,6 +17,8 @@ body {
     width: 100%;
     font-family: 'Open Sans', sans-serif;
     line-height: 3.5vh;
+    color: black;
+    font-size: 18px;
 }
 
 .header {
@@ -133,6 +135,10 @@ body {
     background-color: #2A7AB0;
 }
 
+.content-header.diary {
+    background-color: #E26A6A
+}
+
 .gradient-container {
     display: flex;
     flex-flow: column;
@@ -152,6 +158,11 @@ body {
 .gradient-container.instructions {
     height: 100%;
     background: transparent linear-gradient(180deg, #2A7AB01A 0%, #2A7AB000 60%, #FFFFFF 100%) 0% 0% no-repeat padding-box
+}
+
+.gradient-container.diary {
+    height: 100%;
+    background: transparent linear-gradient(180deg, #E26A6A1A 0%, #E26A6A00 100%) 0% 0% no-repeat padding-box;
 }
 
 .topic-box {
@@ -177,7 +188,7 @@ body {
 }
 
 .button.round {
-    border-radius: 3vh;
+    border-radius: 10vh;
 }
 
 .button.round.pick{
@@ -185,6 +196,11 @@ body {
     margin: auto;
     margin-top: 0vh;
     margin-bottom: 3vh;
+}
+
+.button.pick {
+    background: #00AA00;
+    margin: auto;
 }
 
 .button.give {
@@ -197,6 +213,16 @@ body {
     background: #2A7AB0;
     margin: auto;
     margin-top: 2vh;
+}
+
+.button.diary {
+    margin: auto;
+    padding: 0vh 5vh;
+    background: #E26A6A
+}
+
+.button.small-font {
+    font-size: 16px;
 }
   
 .explained-box {

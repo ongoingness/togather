@@ -3,173 +3,6 @@
 
 const DiaryUI = (eventHandler) => {
 
-    const renderSiteHeader = () => {
-
-        const header = document.createElement('div');
-        header.classList.add('header');
-        document.body.appendChild(header);
-
-        const openNav = () => {
-            document.getElementById("myNav").style.width = "100%";
-        }
-
-        const closeNav = () => {
-            document.getElementById("myNav").style.width = "0%";
-        }
-
-        const hamburguer = document.createElement('div');
-        hamburguer.classList.add('hamburguer');
-        hamburguer.addEventListener('click', openNav);
-        header.appendChild(hamburguer);
-        
-        for(let i = 0; i < 3; i++) {
-            const hamLine = document.createElement('div');
-            hamLine.classList.add('hamburguer-line');
-            hamburguer.appendChild(hamLine);
-        }
-
-        const headerText = document.createElement('div');
-        headerText.classList.add('header__text');
-        headerText.innerText = 'ToGather';
-        header.appendChild(headerText);
-
-        const nav = document.createElement('div');
-        nav.id = 'myNav';
-        nav.classList.add('overlay');
-        document.body.appendChild(nav);
-
-        const closeNavElem = document.createElement('a');
-        closeNavElem.href = 'javascript:void(0)';
-        closeNavElem.classList.add('closebtn');
-        closeNavElem.addEventListener('click', closeNav);
-        closeNavElem.innerHTML = '&times;';
-        nav.appendChild(closeNavElem);
-
-        const overlayContent = document.createElement('div');
-        overlayContent.classList.add('overlay-content');
-        nav.appendChild(overlayContent);
-
-        const aHome = document.createElement('a');
-        aHome.id = 'home-a';
-        aHome.href = '{{ site.url }}{{ site.baseurl }}/';
-        aHome.innerText = 'Home';
-        overlayContent.appendChild(aHome);
-
-        const aTopic = document.createElement('a');
-        aTopic.id = 'topic-a';
-        aTopic.href = '{{ site.url }}{{ site.baseurl }}/topics/';
-        aTopic.innerText = 'Get a topic';
-        overlayContent.appendChild(aTopic);
-
-        const aExpl = document.createElement('a');
-        aExpl.id = 'explained-a';
-        aExpl.href = '{{ site.url }}{{ site.baseurl }}/explained/';
-        aExpl.innerText = 'ToGather Explained';
-        overlayContent.appendChild(aExpl)
-
-        const aInst = document.createElement('a');
-        aInst.id = 'instructions-a';
-        aInst.href = '{{ site.url }}{{ site.baseurl }}/instructions/'
-        aInst.innerText = 'Instructions';
-        overlayContent.appendChild(aInst);
-
-        const aDiary = document.createElement('a');
-        aDiary.id = 'diary-a'
-        aDiary.href = '{{ site.url }}{{ site.baseurl }}/diary/' 
-        aDiary.innerText = 'Assemble Diary';
-        overlayContent.appendChild(aDiary);
-
-        const aAbout = document.createElement('a');
-        aAbout.id = 'about-a';
-        aAbout.href = '{{ site.url }}{{ site.baseurl }}/about/';
-        aAbout.innerText = 'About Us';
-        overlayContent.appendChild(aAbout);
-        
-    }
-
-    const renderSiteFooter = () => {
-
-        const footer = document.createElement('div');
-        footer.classList.add('footer');
-        document.body.appendChild(footer);
-
-        const footerText = document.createElement('div');
-        footerText.classList.add('footer__text');
-        footerText.innerText = 'ToGather';
-        footer.appendChild(footerText);
-
-    }
-
-    const renderUploadFiles = () => {
-    
-        const assembleHeader = document.createElement('div');
-        assembleHeader.classList.add('content-header', 'diary');
-        assembleHeader.innerText = 'Assemble Diary';
-        document.body.appendChild(assembleHeader);
-
-        const content = document.createElement('div');
-        content.classList.add('content');
-        document.body.appendChild(content);
-
-        const gradient = document.createElement('div');
-        gradient.classList.add('gradient-container', 'diary');
-        content.appendChild(gradient);
-
-        const textBox1 = document.createElement('div');
-        textBox1.classList.add('text-box');
-        textBox1.innerText = 'Find your exported WhatsApp group chat files and add them below.';
-        textBox1.style.marginTop = '4.5vh';
-        gradient.appendChild(textBox1);
-        
-        const dualTextBox = document.createElement('div');
-        dualTextBox.classList.add('dual-text-box', 'text-box');
-        dualTextBox.style = 'font-style: italic; margin-top: 0;';
-        gradient.appendChild(dualTextBox);
-
-        const dualTextBoxLeft = document.createElement('div');
-        dualTextBoxLeft.innerText = 'TIP:';
-        dualTextBoxLeft.style.marginRight = '1.7vh';
-        dualTextBox.appendChild(dualTextBoxLeft);
-
-        const dualTextBoxRight = document.createElement('div');
-        dualTextBoxRight.innerText = 'Exported by an Android phone? Select all media files and a .txt file. Exported by an iPhone? Select the .zip file.';
-        dualTextBox.appendChild(dualTextBoxRight);
-
-        const textBox2 = document.createElement('div');
-        textBox2.classList.add('text-box');
-        textBox2.style.marginTop = '0';
-        textBox2.innerText = 'Your conversations stay private as this all happens just on your device, you even don\'t need internet.';
-        gradient.appendChild(textBox2);
-
-        const selectFilesButton = document.createElement('button');
-        selectFilesButton.classList.add('button', 'round', 'diary');
-        selectFilesButton.innerHTML = 'Select Files';
-        gradient.appendChild(selectFilesButton);
-
-        const filesSelectedContainer = document.createElement('div');
-        filesSelectedContainer.id = 'filesSelected';
-        filesSelectedContainer.classList.add('files-selected-container', 'text-box');
-        filesSelectedContainer.innerText = 'No files selected';
-        gradient.appendChild(filesSelectedContainer);
-
-        const startButton = document.createElement('button');
-        startButton.classList.add('button', 'round', 'diary');
-        startButton.innerHTML = 'Start assembling';
-        gradient.appendChild(startButton);
-
-        const instructionsButton = document.createElement('button');
-        instructionsButton.classList.add('button', 'started', 'small-font');
-        instructionsButton.innerHTML = 'Full assembling instructions >>';
-        gradient.appendChild(instructionsButton);
-
-        const aboutButton = document.createElement('button');
-        aboutButton.classList.add('button', 'pick', 'small-font');
-        aboutButton.innerHTML = 'How we assure your privacy >>';
-        gradient.appendChild(aboutButton);
-    
-    }
-
-
     const renderBaseUI = () => {
 
         const baseContainer = document.createElement('div');
@@ -242,7 +75,6 @@ const DiaryUI = (eventHandler) => {
 
     }
 
-    /*
     const renderUploadFiles = () => {
 
         const headerText = document.getElementById('base-container-header-text');
@@ -273,7 +105,6 @@ const DiaryUI = (eventHandler) => {
         topicList.appendChild(optionsContainer);
 
     }
-    */
 
     const renderTopicsFound = (topics) => {
      
@@ -1050,11 +881,7 @@ const DiaryUI = (eventHandler) => {
     }
 
   
-    return {
-
-        renderSiteHeader,
-        renderSiteFooter,
-        renderUploadFiles,
+    return{
 
         renderBaseUI,
         clearBaseUI,

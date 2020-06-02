@@ -11,9 +11,14 @@ const Diary = () => {
     const STATES = {
         uploadFiles: {
             render: () => {    
-                ui.clearBaseUI();
-                ui.startTopicUI();
+                
+                ui.renderSiteHeader();
                 ui.renderUploadFiles();
+                ui.renderSiteFooter();
+                
+                //ui.clearBaseUI();
+                //ui.startTopicUI();
+                //ui.renderUploadFiles();
             },
             eventHandler: async (e, params) => {
 
@@ -369,7 +374,7 @@ const Diary = () => {
     const ui = DiaryUI(handleEvent);
     const model = DiaryModel();
 
-    ui.renderBaseUI();
+    //ui.renderBaseUI();
     updateState(STATES.uploadFiles);
 
 }

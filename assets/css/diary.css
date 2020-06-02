@@ -464,3 +464,24 @@ body, textarea, button, input, select, pre {
 .preview-button.next {
     right: 25%;
 }
+
+
+
+
+.text-box {
+    margin: 3vh 3.5vh;
+}
+
+.dual-text-box {
+    display: flex;
+    flex-direction: row;
+    font-size: 16px;
+}
+
+.files-selected-container {
+    border-style: dashed;
+    border-color: #707070;
+    border-width: 1px;
+    text-align: center;
+    padding: 2vh;
+}
