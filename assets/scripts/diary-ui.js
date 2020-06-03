@@ -87,11 +87,11 @@ const DiaryUI = (eventHandler) => {
         
     }
 
-    const renderSiteFooter = () => {
+    const renderSiteFooter = (parent) => {
 
         const footer = document.createElement('div');
         footer.classList.add('footer');
-        document.body.appendChild(footer);
+        parent.appendChild(footer);
 
         const footerText = document.createElement('div');
         footerText.classList.add('footer__text');
@@ -187,7 +187,7 @@ const DiaryUI = (eventHandler) => {
         aboutButton.innerHTML = 'How we assure your privacy >>';
         aboutButton.addEventListener('click', () => location.href='{{ site.url }}{{ site.baseurl }}/about/');
         gradient.appendChild(aboutButton);
-    
+       
     }
 
     const renderFile = (file) => {
@@ -226,6 +226,147 @@ const DiaryUI = (eventHandler) => {
 
     }
 
+    const renderDiaryHeader = (parent) => {
+
+        const openNav = () => {
+            document.getElementById('privacyNav').style.width = '100%';
+        }
+
+        const closeNav = () => {
+            document.getElementById('privacyNav').style.width = '0%';
+        }
+
+        const nav = document.createElement('div');
+        nav.id = 'privacyNav';
+        nav.classList.add('overlay', 'privacy');
+        document.body.appendChild(nav);
+
+        const closeNavElem = document.createElement('a');
+        closeNavElem.href = 'javascript:void(0)';
+        closeNavElem.classList.add('closebtn', 'close-diary');
+        closeNavElem.addEventListener('click', closeNav);
+        closeNavElem.innerHTML = '&times;';
+        nav.appendChild(closeNavElem);
+
+        const overlayContent = document.createElement('div');
+        overlayContent.classList.add('overlay-content', 'privacy');
+        nav.appendChild(overlayContent);
+
+        const textContent = document.createElement('div');
+        textContent.classList.add('privacy__text');
+        textContent.innerHTML = 'Because of our privacy measures if you quit now, <span class=\'bold\'>your process cannot be saved</span>. This means when you come back to assemble <span class=\'bold\'>you have to start over</span>. If you want a break you can leave this website open without losing your progress. <span class=\'bold\'>Are you sure</span> you want to stop assembling your diary?';
+        overlayContent.appendChild(textContent);
+
+        const stopButton = document.createElement('button');
+        stopButton.classList.add('button', 'round', 'diary');
+        stopButton.style.marginTop = '8vh';
+        stopButton.innerHTML = 'Yes, stop assembling';
+        stopButton.addEventListener('click', e => eventHandler(e, {type: 'stop-assembling'}));
+        overlayContent.appendChild(stopButton);
+
+        const continueButton = document.createElement('button');
+        continueButton.classList.add('button', 'round', 'diary');
+        continueButton.style.marginTop = '8vh';
+        continueButton.innerHTML = 'No, continue with the diary';
+        continueButton.addEventListener('click', closeNav);
+        overlayContent.appendChild(continueButton);
+
+        const assembleHeader = document.createElement('div');
+        assembleHeader.classList.add('content-header', 'diary');
+        parent.appendChild(assembleHeader);
+
+        const closeDiary = document.createElement('a');
+        closeDiary.classList.add('diary-header__close-button');
+        closeDiary.addEventListener('click', openNav);
+        closeDiary.innerHTML = '&times;';
+        assembleHeader.appendChild(closeDiary);
+
+        const text = document.createElement('div');
+        text.classList.add('diary-header__text');
+        text.innerText = 'Assemble Diary';
+        assembleHeader.appendChild(text);
+  
+    }
+
+    const renderDiarySteps = () => {
+
+        const container = document.createElement('div');
+        container.style.width = '100%';
+        container.style.height = '100%';
+        container.style.position = 'relative';
+        container.style.overflow = 'hidden';
+        document.body.appendChild(container); 
+
+        renderDiaryHeader(container);
+        
+        const content = document.createElement('div');
+        content.classList.add('content');
+        container.appendChild(content);
+
+        const gradient = document.createElement('div');
+        gradient.classList.add('gradient-container', 'diary');
+        content.appendChild(gradient);
+
+        const textBox1 = document.createElement('div');
+        textBox1.classList.add('text-box');
+        textBox1.innerHTML = 'Assembling the diary takes <span class=\'bold\'>5 steps</span>.';
+        textBox1.style.marginTop = '4.5vh';
+        textBox1.style.marginBottom ='4.5vh';
+        textBox1.style.textAlign = 'center';
+        gradient.appendChild(textBox1);
+
+        const stepsContainer = document.createElement('div');
+        stepsContainer.classList.add('diary-steps__steps-container');
+        gradient.appendChild(stepsContainer);
+
+        const step1 = document.createElement('div');
+        step1.classList.add('title', 'diary');
+        step1.innerText = '#1 Who is the diary for?';
+        stepsContainer.appendChild(step1);
+
+        const step2 = document.createElement('div');
+        step2.classList.add('title', 'diary');
+        step2.innerText = '#2 Check contibuter names';
+        stepsContainer.appendChild(step2);
+
+        const step3 = document.createElement('div');
+        step3.classList.add('title', 'diary');
+        step3.innerText = '#3 Complete topic list';
+        stepsContainer.appendChild(step3);
+
+        const step4 = document.createElement('div');
+        step4.classList.add('title', 'diary');
+        step4.innerText = '#4 Collect responses per day';
+        stepsContainer.appendChild(step4);
+
+        const step5 = document.createElement('div');
+        step5.classList.add('title', 'diary');
+        step5.innerText = '#5 Review and download diary';
+        stepsContainer.appendChild(step5);
+
+        const line = document.createElement('div');
+        line.classList.add('diary-steps__vertical-line');
+        gradient.appendChild(line);
+
+        const circle = document.createElement('div');
+        circle.classList.add('diary-steps__circle');
+        gradient.appendChild(circle);
+
+        const stepCounterHelper = document.createElement('div');
+        stepCounterHelper.classList.add('diary-steps__step-counter-helper');
+        stepCounterHelper.innerText = 'Here you will see in which step you are.';
+        gradient.appendChild(stepCounterHelper);
+
+        const goButton = document.createElement('button');
+        goButton.classList.add('button', 'round', 'diary');
+        goButton.style.marginTop = '20vh';
+        goButton.innerHTML = 'Go to step 1';
+        goButton.addEventListener('click', e => eventHandler(e, {type: 'go-to-step-1'}));
+        gradient.appendChild(goButton);
+
+        renderSiteFooter(container);
+
+    }
 
     const renderBaseUI = () => {
 
@@ -1113,6 +1254,7 @@ const DiaryUI = (eventHandler) => {
         renderSiteFooter,
         renderUploadFiles,
         renderFile,
+        renderDiarySteps,
 
         renderBaseUI,
         clearBaseUI,

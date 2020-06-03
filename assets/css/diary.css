@@ -509,3 +509,91 @@ body, textarea, button, input, select, pre {
 .file-element__delete-button {
     margin: auto;
 }
+
+.overlay.privacy {
+    background: white;
+}
+
+.closebtn.close-diary{
+    color: #E26A6A;
+    margin: 0;
+    padding: 0;
+    font-size: 9vh;
+    left: 0.5vh;
+}
+
+.privacy__text {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    font-style: italic;
+    margin-left: 4vh;
+    margin-right: 4vh;
+    text-align: left;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.overlay-content.privacy {
+    top: 10vh;
+}
+
+.diary-header__close-button {
+    color: white;
+    position: absolute;
+    color: white;
+    position: absolute;
+    left: 1vh;
+    top: 1vh;
+    font-size: 20vh;
+    cursor: pointer;
+}
+
+.title.diary{
+    color: #E26A6A;
+    margin-bottom: 3vh;
+}
+
+.diary-steps__vertical-line {
+    position: absolute;
+    border-right-style: solid;
+    top: 6vh;
+    right: 1.5vh;
+    height: 55vh;
+    width: 7vh;
+    border-bottom-style: solid;
+    border-bottom-right-radius: 50vh;
+    border-width: 2px;
+    border-color: #A8A8A8;
+}
+
+.diary-steps__circle {
+    position: absolute;
+    background-color: white;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #A8A8A8;
+    border-radius: 50vh;
+    height: 11vh;
+    width: 11vh;
+    right: -3.5vh;
+    top: -3vh;
+}
+
+.diary-steps__step-counter-helper {
+    position: absolute;
+    text-align: left;
+    font: Italic 16px/22px Open Sans;
+    letter-spacing: 0px;
+    color: #000000;
+    opacity: 1;
+    height: 9vh;
+    top: 58vh;
+    right: 9vh;
+    width: 22vh;
+}
+
+.diary-steps__steps-container {
+    margin: auto;
+}

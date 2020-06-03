@@ -19,6 +19,8 @@ body {
     line-height: 3.5vh;
     color: black;
     font-size: 18px;
+
+    height: calc(var(--vh, 1vh) * 100);
 }
 
 .header {
@@ -53,7 +55,7 @@ body {
 
 .content {
     width: 100%;
-    min-height: 80vh;
+    min-height: 83vh;
 }
 
 .footer {
@@ -218,7 +220,8 @@ body {
 .button.diary {
     margin: auto;
     padding: 2vh 5vh;
-    background: #E26A6A
+    background: #E26A6A;
+    position: relative;
 }
 
 .button:disabled {
@@ -309,12 +312,15 @@ body {
     line-height: 25vh;
 }
 
-.instructions-title {
+.title {
     font-family: 'Open Sans', sans-serif;
     font-size: 20px;
     font-style: italic;
     font-weight: bold;
+    margin-bottom: 2vh;
+}
+
+.title.instructions {
     color: #2A7AB0;
     margin-left: 5vh;
-    margin-bottom: 2vh;
 }

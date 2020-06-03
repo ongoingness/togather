@@ -51,6 +51,18 @@ const Diary = () => {
 
             }
         },
+        diarySteps: {
+            render: () => {
+                ui.renderDiarySteps(); 
+            },
+            eventHandler: (e, params) => {
+            
+                switch(params.type) {
+                    
+                }
+
+            }
+        },
         topicsFound: {
             render: () => {
                 ui.clearBaseUI();
@@ -58,7 +70,6 @@ const Diary = () => {
                 ui.renderTopicsFound(model.getTopics());
             },
             eventHandler: (e, params) => {
-                console.log(params.type);
                 switch(params.type) {
                   
                     case 'add-topic': 
@@ -391,7 +402,8 @@ const Diary = () => {
     const model = DiaryModel();
 
     //ui.renderBaseUI();
-    updateState(STATES.uploadFiles);
+    //updateState(STATES.uploadFiles);
+    updateState(STATES.diarySteps);
 
 }
 
