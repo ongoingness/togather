@@ -448,9 +448,14 @@ const DiaryUI = (eventHandler) => {
 
     const renderWhoTheDiaryIsFor = () => {
 
+        /*
+
         const containerMain = document.createElement('div');
         containerMain.style.minHeight = '100vh'
         document.body.appendChild(containerMain);
+        */
+
+       const containerMain = document.body;
 
         renderDiaryHeader(containerMain, 1);
 
@@ -489,7 +494,7 @@ const DiaryUI = (eventHandler) => {
 
         renderStepController(content, 2, helpText);
 
-        renderSiteFooter(containerMain);
+        renderSiteFooter(content);
 
     }
 
