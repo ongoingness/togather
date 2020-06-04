@@ -448,11 +448,15 @@ const DiaryUI = (eventHandler) => {
 
     const renderWhoTheDiaryIsFor = () => {
 
-        renderDiaryHeader(document.body, 1);
+        const containerMain = document.createElement('div');
+        containerMain.style.minHeight = '100vh'
+        document.body.appendChild(containerMain);
+
+        renderDiaryHeader(containerMain, 1);
 
         const content = document.createElement('div');
         content.classList.add('content');
-        document.body.appendChild(content);
+        containerMain.appendChild(content);
 
         const upperPage = document.createElement('div');
         upperPage.classList.add('upper-page');
@@ -460,7 +464,7 @@ const DiaryUI = (eventHandler) => {
 
         const title = document.createElement('div');
         title.classList.add('title', 'diary');
-        title.style.marginTop = '3vh';
+        title.style.marginTop = '16px';
         title.innerText = 'Who is this Diary for?';
         upperPage.appendChild(title);
 
@@ -485,7 +489,7 @@ const DiaryUI = (eventHandler) => {
 
         renderStepController(content, 2, helpText);
 
-        renderSiteFooter(document.body);
+        renderSiteFooter(containerMain);
 
     }
 

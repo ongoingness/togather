@@ -469,7 +469,7 @@ body, textarea, button, input, select, pre {
 
 
 .text-box {
-    margin: 3vh 3.5vh;
+    margin: 20px 25px;
 }
 
 .dual-text-box {
@@ -552,7 +552,7 @@ body, textarea, button, input, select, pre {
 
 .title.diary{
     color: #E26A6A;
-    margin-bottom: 3vh;
+    margin-bottom: 10px;
 }
 
 .diary-steps__vertical-line {
@@ -614,34 +614,34 @@ body, textarea, button, input, select, pre {
     background-image: url("{{ '/assets/images/background_pattern_chat.svg' | prepend: site.baseurl }}");
     background-repeat: repeat-y;
     background-size: 150%;
-    height: 50vh;
+    height: 365px;
     display: flex;
 }
 
 .who__input-name {
     margin: auto;
-    margin-top: 10vh;
+    margin-top: 74px;
     font: Italic 16px/22px Open Sans;
     text-align: center;
     border: 1px dashed #707070;
-    padding: 3vh 7vh;
+    padding: 20px 50px;
 }
 
 .step-controller__container {
     display: flex;
     flex-direction: row;
     width: 100%;
-    margin-top: 2.89vh;
-    height: 13vh;
+    margin-top: 20px;
+    height: 95px;
 }
 
 .button.step-controller__step-button {
-    padding: 1.5vh 3vh;
+    padding: 10px 20px;
 }
 
 .button.step-controller__help-button {
-    padding: 0vh 2.3vh;
-    padding-left: 2.6vh;
+    padding: 0 15px;
+    padding-left: 15px;
     font-family: 'Ostrich Sans Black';
     font-size: 35px;
     font-style: normal;
