@@ -59,6 +59,26 @@ const Diary = () => {
             
                 switch(params.type) {
                     
+                    case 'stop-assembling':
+                        updateState(STATES.uploadFiles);
+                        break;
+
+                    case 'go-to-step-1':
+
+                        break;
+
+                }
+
+            }
+        },
+        whoTheDiaryIsFor: {
+            render: () => {
+                ui.renderWhoTheDiaryIsFor();
+            },
+            eventHandler: (e, params) => {
+            
+                switch(params.type) {
+
                 }
 
             }
@@ -403,7 +423,7 @@ const Diary = () => {
 
     //ui.renderBaseUI();
     //updateState(STATES.uploadFiles);
-    updateState(STATES.diarySteps);
+    updateState(STATES.whoTheDiaryIsFor);
 
 }
 

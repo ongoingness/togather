@@ -597,3 +597,54 @@ body, textarea, button, input, select, pre {
 .diary-steps__steps-container {
     margin: auto;
 }
+
+.diary-header__step-counter {
+    position: absolute;
+    top: 1.1vh;
+    right: 1vh;
+    font: Bold 20px/27px Open Sans;
+}
+
+.upper-page {
+    margin: auto;
+    text-align: center;
+}
+
+.lower-page {
+    background-image: url("{{ '/assets/images/background_pattern_chat.svg' | prepend: site.baseurl }}");
+    background-repeat: repeat-y;
+    background-size: 150%;
+    height: 50vh;
+    display: flex;
+}
+
+.who__input-name {
+    margin: auto;
+    margin-top: 10vh;
+    font: Italic 16px/22px Open Sans;
+    text-align: center;
+    border: 1px dashed #707070;
+    padding: 3vh 7vh;
+}
+
+.step-controller__container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 2.89vh;
+    height: 13vh;
+}
+
+.button.step-controller__step-button {
+    padding: 1.5vh 3vh;
+}
+
+.button.step-controller__help-button {
+    padding: 0vh 2.3vh;
+    padding-left: 2.6vh;
+    font-family: 'Ostrich Sans Black';
+    font-size: 35px;
+    font-style: normal;
+    text-align: center;
+}
+

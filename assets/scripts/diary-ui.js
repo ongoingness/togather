@@ -226,7 +226,7 @@ const DiaryUI = (eventHandler) => {
 
     }
 
-    const renderDiaryHeader = (parent) => {
+    const renderDiaryHeader = (parent, step) => {
 
         const openNav = () => {
             document.getElementById('privacyNav').style.width = '100%';
@@ -285,6 +285,16 @@ const DiaryUI = (eventHandler) => {
         text.classList.add('diary-header__text');
         text.innerText = 'Assemble Diary';
         assembleHeader.appendChild(text);
+
+        if(step != undefined) {
+            
+            const stepCounter = document.createElement('div');
+            stepCounter.classList.add('diary-header__step-counter');
+            stepCounter.innerText = `#${step}/5`;
+            assembleHeader.appendChild(stepCounter);
+
+
+        }
   
     }
 
@@ -365,6 +375,117 @@ const DiaryUI = (eventHandler) => {
         gradient.appendChild(goButton);
 
         renderSiteFooter(container);
+
+    }
+
+
+    const renderStepController = (parent, step, helpContent) => {
+
+        const openNav = () => {
+            document.getElementById('helpNav').style.width = '100%';
+        }
+
+        const closeNav = () => {
+            document.getElementById('helpNav').style.width = '0%';
+        }
+
+        const nav = document.createElement('div');
+        nav.id = 'helpNav';
+        nav.classList.add('overlay', 'privacy');
+        parent.appendChild(nav);
+
+        const closeNavElem = document.createElement('a');
+        closeNavElem.href = 'javascript:void(0)';
+        closeNavElem.classList.add('closebtn', 'close-diary');
+        closeNavElem.addEventListener('click', closeNav);
+        closeNavElem.innerHTML = '&times;';
+        nav.appendChild(closeNavElem);
+
+        const overlayContent = document.createElement('div');
+        overlayContent.classList.add('overlay-content', 'privacy');
+        nav.appendChild(overlayContent);
+
+        if(helpContent != undefined)
+            overlayContent.appendChild(helpContent);
+
+        const container = document.createElement('div');
+        container.classList.add('step-controller__container');
+        parent.appendChild(container);
+
+        const column1 = document.createElement('div');
+        column1.style.width ='40%'
+        container.appendChild(column1);
+
+        if(step > 1) {
+            const previousButton = document.createElement('button');
+            previousButton.classList.add('button', 'round', 'diary', 'step-controller__step-button');
+            previousButton.innerText = `< Step ${step - 1}`;
+            previousButton.addEventListener('click', e => eventHandler(e, {type: `go-to-step-${step - 1}`}));
+            column1.appendChild(previousButton);
+        }
+
+        const column2 = document.createElement('div');
+        column2.style.width ='20%'
+        container.appendChild(column2);
+
+        const helpButton = document.createElement('button');
+        helpButton.classList.add('button', 'round', 'diary', 'step-controller__help-button');
+        helpButton.innerText = '?';
+        helpButton.addEventListener('click', openNav);
+        column2.appendChild(helpButton);
+
+        const column3 = document.createElement('div');
+        column3.style.width ='40%'
+        container.appendChild(column3);
+
+        const nextButton = document.createElement('button');
+        nextButton.classList.add('button', 'round', 'diary', 'step-controller__step-button');
+        nextButton.innerText = `Step ${step + 1} >`;
+        nextButton.addEventListener('click', e => eventHandler(e, {type: `go-to-step-${step + 1}`}));
+        column3.appendChild(nextButton);
+
+    }
+
+    const renderWhoTheDiaryIsFor = () => {
+
+        renderDiaryHeader(document.body, 1);
+
+        const content = document.createElement('div');
+        content.classList.add('content');
+        document.body.appendChild(content);
+
+        const upperPage = document.createElement('div');
+        upperPage.classList.add('upper-page');
+        content.appendChild(upperPage)
+
+        const title = document.createElement('div');
+        title.classList.add('title', 'diary');
+        title.style.marginTop = '3vh';
+        title.innerText = 'Who is this Diary for?';
+        upperPage.appendChild(title);
+
+        const textBox = document.createElement('div');
+        textBox.classList.add('text-box');
+        textBox.innerText = 'The name will be used to create a personal cover and opening page.';
+        upperPage.appendChild(textBox);
+
+        const lowerPage = document.createElement('div');
+        lowerPage.classList.add('lower-page');
+        content.appendChild(lowerPage);
+
+        const inputName = document.createElement('input');
+        inputName.classList.add('who__input-name');
+        inputName.placeholder = 'Type the name here';
+        lowerPage.appendChild(inputName);
+
+
+        const helpText = document.createElement('div');
+        helpText.classList.add('privacy__text');
+        helpText.innerHTML = 'Give the name of your loved one who you are making this diary for. This name will be used on the cover of the final diary and on the first page to create a personal booklet and message for them. We do not save this information, this is all private and just for you and who you choose to share it with.';
+
+        renderStepController(content, 2, helpText);
+
+        renderSiteFooter(document.body);
 
     }
 
@@ -1096,7 +1217,6 @@ const DiaryUI = (eventHandler) => {
 
         renderDay(dayData, allMessagesData);
 
-
         if(window.innerWidth > 700) {
 
             document.body.style.display = 'flex';
@@ -1255,6 +1375,7 @@ const DiaryUI = (eventHandler) => {
         renderUploadFiles,
         renderFile,
         renderDiarySteps,
+        renderWhoTheDiaryIsFor,
 
         renderBaseUI,
         clearBaseUI,
