@@ -271,28 +271,48 @@ const DiaryUI = (eventHandler) => {
         continueButton.addEventListener('click', closeNav);
         overlayContent.appendChild(continueButton);
 
+
         const assembleHeader = document.createElement('div');
         assembleHeader.classList.add('content-header', 'diary');
         parent.appendChild(assembleHeader);
+
+        const leftColumn = document.createElement('div');
+        leftColumn.style.width = '20%';
+        leftColumn.style.display = 'flex';
+        leftColumn.style.margin = 'auto';
+        assembleHeader.appendChild(leftColumn);
 
         const closeDiary = document.createElement('a');
         closeDiary.classList.add('diary-header__close-button');
         closeDiary.addEventListener('click', openNav);
         closeDiary.innerHTML = '&times;';
-        assembleHeader.appendChild(closeDiary);
+        leftColumn.appendChild(closeDiary);
+
+        const centerColumn = document.createElement('div');
+        centerColumn.style.width = '60%';
+        centerColumn.style.display = 'flex';
+        centerColumn.style.margin = 'auto';
+        assembleHeader.appendChild(centerColumn);
 
         const text = document.createElement('div');
         text.classList.add('diary-header__text');
+        text.style.width = '100%';
+        text.style.paddingTop = '4px';
         text.innerText = 'Assemble Diary';
-        assembleHeader.appendChild(text);
+        centerColumn.appendChild(text);
+
+        const rightColumn = document.createElement('div');
+        rightColumn.style.width = '20%';
+        rightColumn.style.display = 'flex';
+        rightColumn.style.margin = 'auto';
+        assembleHeader.appendChild(rightColumn);
 
         if(step != undefined) {
             
             const stepCounter = document.createElement('div');
             stepCounter.classList.add('diary-header__step-counter');
             stepCounter.innerText = `#${step}/5`;
-            assembleHeader.appendChild(stepCounter);
-
+            rightColumn.appendChild(stepCounter);
 
         }
   
@@ -414,6 +434,7 @@ const DiaryUI = (eventHandler) => {
 
         const column1 = document.createElement('div');
         column1.style.width ='40%'
+        column1.style.margin = 'auto';
         container.appendChild(column1);
 
         if(step > 1) {
@@ -426,6 +447,7 @@ const DiaryUI = (eventHandler) => {
 
         const column2 = document.createElement('div');
         column2.style.width ='20%'
+        column2.style.margin = 'auto';
         container.appendChild(column2);
 
         const helpButton = document.createElement('button');
@@ -436,6 +458,7 @@ const DiaryUI = (eventHandler) => {
 
         const column3 = document.createElement('div');
         column3.style.width ='40%'
+        column3.style.margin = 'auto';
         container.appendChild(column3);
 
         const nextButton = document.createElement('button');

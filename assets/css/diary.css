@@ -540,13 +540,10 @@ body, textarea, button, input, select, pre {
 }
 
 .diary-header__close-button {
-    color: white;
-    position: absolute;
-    color: white;
-    position: absolute;
-    left: 1vh;
-    top: 1vh;
-    font-size: 20vh;
+    width: 100%;
+    padding-left: 5px;
+    text-align: left;
+    font: 50px/27px Open Sans;
     cursor: pointer;
 }
 
@@ -599,9 +596,9 @@ body, textarea, button, input, select, pre {
 }
 
 .diary-header__step-counter {
-    position: absolute;
-    top: 1.1vh;
-    right: 1vh;
+    width: 100%;
+    padding-right: 5px;
+    text-align: right;
     font: Bold 20px/27px Open Sans;
 }
 
@@ -631,7 +628,7 @@ body, textarea, button, input, select, pre {
     display: flex;
     flex-direction: row;
     width: 100%;
-    margin-top: 20px;
+    margin-bottom: 20px;
     height: 95px;
 }
 

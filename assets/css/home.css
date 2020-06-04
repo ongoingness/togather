@@ -143,6 +143,8 @@ body {
 }
 
 .content-header.diary {
+    display: flex;
+    flex-direction: row;
     background-color: #E26A6A
 }
 
