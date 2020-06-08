@@ -473,20 +473,11 @@ const DiaryUI = (eventHandler) => {
 
     const renderWhoTheDiaryIsFor = () => {
 
-        /*
-
-        const containerMain = document.createElement('div');
-        containerMain.style.minHeight = '100vh'
-        document.body.appendChild(containerMain);
-        */
-
-       const containerMain = document.body;
-
-        renderDiaryHeader(containerMain, 1);
+        renderDiaryHeader(document.body, 1);
 
         const content = document.createElement('div');
         content.classList.add('content');
-        containerMain.appendChild(content);
+        document.body.appendChild(content);
 
         const upperPage = document.createElement('div');
         upperPage.classList.add('upper-page');
@@ -517,10 +508,7 @@ const DiaryUI = (eventHandler) => {
         helpText.classList.add('privacy__text');
         helpText.innerHTML = 'Give the name of your loved one who you are making this diary for. This name will be used on the cover of the final diary and on the first page to create a personal booklet and message for them. We do not save this information, this is all private and just for you and who you choose to share it with.';
 
-        renderStepController(content, 2, helpText);
-
-        renderSiteFooter(content);
-
+        renderStepController(document.body, 2, helpText);
     }
 
     const renderWhoContributed = () => {
@@ -606,7 +594,11 @@ const DiaryUI = (eventHandler) => {
 
         }
 
-        renderStepController(document.body, 2, document.createElement('div'));
+        const helpContent = document.createElement('div');
+        helpContent.classList.add('privacy__text');
+        helpContent.innerText = 'These are the names of the group members as they are saved on your phone. Make sure the list is complete and that these are the names that you would like to have them in the diary. If you would like to change them, click the pencil button to edit. If you see just a phone number, this person was not saved in your contacts. As we use these names to show who wrote which message take the time to check and edit them.';
+
+        renderStepController(document.body, 2, helpContent);
     }
 
     const renderBaseUI = () => {

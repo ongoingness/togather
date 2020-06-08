@@ -630,8 +630,6 @@ body, textarea, button, input, select, pre {
     display: flex;
     flex-direction: row;
     width: 100%;
-    margin-bottom: 20px;
-
     min-height: 95px;
     height: 19%;
 }
@@ -650,7 +648,6 @@ body, textarea, button, input, select, pre {
     font-style: normal;
     text-align: center;
 }
-
 
 .who-contributed__username-list {
     width: 100%;
