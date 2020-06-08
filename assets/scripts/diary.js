@@ -129,6 +129,7 @@ const Diary = () => {
                 }
             }
         },
+        /*
         topicsOptions: {
             render: () => {
                 ui.clearBaseUI();
@@ -152,14 +153,14 @@ const Diary = () => {
                         break;
                 }
             }
-        },
+        },*/
         writeTopic: {
             variables: {
                 tempMedia: [],
             },
             render: () => {
-                ui.clearBaseUI();
-                ui.startTopicUI();
+                //ui.clearBaseUI();
+                //ui.startTopicUI();
                 ui.renderWriteTopic();
             },
             eventHandler: (e, params) => {
@@ -440,7 +441,7 @@ const Diary = () => {
 
     //ui.renderBaseUI();
     //updateState(STATES.uploadFiles);
-    updateState(STATES.whoContributed);
+    updateState(STATES.writeTopic);
 
 }
 

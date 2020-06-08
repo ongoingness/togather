@@ -745,25 +745,58 @@ const DiaryUI = (eventHandler) => {
 
         renderTopics(topics);
 
+        const overlay = document.createElement('div');
+        overlay.id = 'addTopicOptions';
+        overlay.classList.add('overlay', 'privacy');
+        document.body.appendChild(overlay);
+
+        const closeNavElem = document.createElement('a');
+        closeNavElem.href = 'javascript:void(0)';
+        closeNavElem.classList.add('closebtn', 'close-diary');
+        closeNavElem.addEventListener('click', () => overlay.style.width = '0');
+        closeNavElem.innerHTML = '&times;';
+        overlay.appendChild(closeNavElem);
+
+        const overlayContent = document.createElement('div');
+        overlayContent.classList.add('overlay-content', 'topic__options');
+        overlay.appendChild(overlayContent);
+
+        const selectFromChatButton = document.createElement('button');
+        selectFromChatButton.classList.add('button', 'diary', 'round');
+        selectFromChatButton.style.marginBottom = '50px';
+        selectFromChatButton.innerText = 'Select from chat';
+        selectFromChatButton.addEventListener('click', (e) => eventHandler(e, {type: 'select-from-chat'})); 
+        overlayContent.appendChild(selectFromChatButton);
+
+        const writeButton = document.createElement('button');
+        writeButton.classList.add('button', 'diary', 'round');
+        writeButton.innerText = 'Write my own';
+        writeButton.addEventListener('click', (e) => eventHandler(e, {type: 'write-topic'})); 
+        overlayContent.appendChild(writeButton);
+
         const addTopicContainer =  document.createElement('div');
+        addTopicContainer.style.width = 'fit-content';
         addTopicContainer.classList.add('topic');
         lowerPage.appendChild(addTopicContainer);
 
         const addTopicButton  = document.createElement('button');
-        addTopicButton.classList.add('topic-button');
-        addTopicButton.classList.add('base-container__footer__item__button');
+        addTopicButton.classList.add('topic__add-topic-button');
         addTopicButton.innerText = 'Add Topic';
-        addTopicButton.addEventListener('click', (e) => eventHandler(e, {type: 'add-topic'}));              
+        addTopicButton.addEventListener('click', (e) => overlay.style.width = '100%');              
         addTopicContainer.appendChild(addTopicButton);
 
         const addButtonImage = document.createElement('img');
-        addButtonImage.src = "{{ '/assets/images/delete.svg' | prepend: site.baseurl }}";
+        addButtonImage.style.paddingRight = '10px';
+        addButtonImage.src = "{{ '/assets/images/plus.svg' | prepend: site.baseurl }}";
         addButtonImage.width = '25';
         addButtonImage.height = '25';
-        add.appendChild(addButtonImage);
+        addTopicButton.insertBefore(addButtonImage, addTopicButton.childNodes[0]);
 
+        const helpContent = document.createElement('div');
+        helpContent.classList.add('privacy__text');
+        helpContent.innerText = 'The topics we have found are the ones you shared through the Togather website. If you thought of your own topics you can add them here. You can select them from the chat, if you shared them there, or write your own. If there were days that you didn\'t have a topic, but messages were shared, then try to find a description for that. For example; A log of Monday. Or; Some things we liked to share today. This way we can add that day in the diary template.';
 
-        renderStepController(document.body, 3, document.createElement('div'));
+        renderStepController(document.body, 3, helpContent);
 
         /*
         document.getElementById('base-container-header-text').innerText = i18n.getStringById('topics_found_header');
@@ -802,14 +835,12 @@ const DiaryUI = (eventHandler) => {
         const topicHeaderDay =  document.createElement('div');
         topicHeaderDay.classList.add('topic__header__day');
         topicHeaderDay.innerText = `${i18n.getStringById('day')} ${topicData.day}`;
-        topicHeaderDay.style = `color: ${topicData.color};`
         topicHeader.appendChild(topicHeaderDay);
 
         const date = new Date(topicData.timestamp);
         const topicHeaderDate =  document.createElement('div');
         topicHeaderDate.classList.add('topic__header__date');
         topicHeaderDate.innerText = `${date.toLocaleDateString()}`;
-        topicHeaderDate.style = `color: ${topicData.color};`
         topicHeader.appendChild(topicHeaderDate);
 
         const topicHeaderEditButton = document.createElement('button');
@@ -994,6 +1025,7 @@ const DiaryUI = (eventHandler) => {
     const renderTopics = (topics) => {
 
         for(let i = 0; i < topics.length; i++) {
+
             renderTopic(i, topics[i]);
         }
 
@@ -1012,6 +1044,7 @@ const DiaryUI = (eventHandler) => {
 
     }
 
+    /*
     const renderAddTopicOptions = () => {
 
         const headerText = document.getElementById('base-container-header-text');
@@ -1052,6 +1085,7 @@ const DiaryUI = (eventHandler) => {
         document.getElementById('base-container-footer-left').appendChild(backButton);
 
     }
+    */
 
     const getRandomColor = () => {
         var letters = '0123456789ABCDEF';
@@ -1063,6 +1097,49 @@ const DiaryUI = (eventHandler) => {
     }
 
     const renderWriteTopic = (topicData) => {
+
+        renderDiaryHeader(document.body, 3);
+
+        const content = document.createElement('div');
+        content.classList.add('content');
+        document.body.appendChild(content);
+
+        const upperPage = document.createElement('div');
+        upperPage.classList.add('upper-page');
+        content.appendChild(upperPage)
+
+        const textBox = document.createElement('div');
+        textBox.classList.add('text-box');
+        textBox.innerText = 'Write your own topic and for which date this was';
+        upperPage.appendChild(textBox);
+
+        const lowerPage = document.createElement('div');
+        lowerPage.id = 'lowerPage';
+        lowerPage.classList.add('lower-page');
+        content.appendChild(lowerPage);
+
+        renderNewTopic(lowerPage);
+
+        const addTopicContainer =  document.createElement('div');
+        addTopicContainer.id = 'addTopic';
+        addTopicContainer.style.width = 'fit-content';
+        addTopicContainer.classList.add('topic');
+        lowerPage.appendChild(addTopicContainer);
+
+        const addTopicButton  = document.createElement('button');
+        addTopicButton.classList.add('topic__add-topic-button');
+        addTopicButton.innerText = 'Write another topic';
+        addTopicButton.addEventListener('click', (e) => renderNewTopic(lowerPage));              
+        addTopicContainer.appendChild(addTopicButton);
+
+        const addButtonImage = document.createElement('img');
+        addButtonImage.style.paddingRight = '10px';
+        addButtonImage.src = "{{ '/assets/images/plus.svg' | prepend: site.baseurl }}";
+        addButtonImage.width = '25';
+        addButtonImage.height = '25';
+        addTopicButton.insertBefore(addButtonImage, addTopicButton.childNodes[0]);
+
+        /*
 
         const headerText = document.getElementById('base-container-header-text');
         headerText.innerText = i18n.getStringById('write_topic_header');
@@ -1180,8 +1257,110 @@ const DiaryUI = (eventHandler) => {
         doneButton.innerText = i18n.getStringById('done');
         doneButton.addEventListener('click', (e) => eventHandler(e, {type: 'done', hash: topicData != null ? topicData.hash : '', text: topicTextArea.value , timestamp: topicDate.valueAsDate.getTime() }));   
         document.getElementById('base-container-footer-right').appendChild(doneButton);
+*/
+    }
+
+    const renderNewTopic = (topicData) => {
+
+        const container = document.createElement('div');
+        container.classList.add('topic');
+        document.getElementById('lowerPage').insertBefore(container,  document.getElementById('addTopic'));
+
+        const topicDate = document.createElement('input');
+        topicDate.type = 'date';
+        topicDate.name = 'topicDate';
+        topicDate.id = 'topicDate';
+        topicDate.classList.add('topic__write-topic__input', 'topic__write-topic__date');
+        if(topicData != null)
+            topicDate.valueAsDate = new Date(topicData.fulltimestamp);
+        container.appendChild(topicDate);
+
+        const topicTextArea = document.createElement('textarea');
+        topicTextArea.classList.add('topic__write-topic__input', 'topic__write-topic__textarea');
+        topicTextArea.placeholder = 'Type your topic description here';
+        topicTextArea.resize
+        if(topicData != null)
+            topicTextArea.textContent = topicData.text;
+        container.appendChild(topicTextArea);
+
+        container.appendChild(document.createElement('br'));
+
+        const addPhotoLabel = document.createElement('label');
+        addPhotoLabel.classList.add('topic__write-topic__input');
+        //addPhotoLabel.innerText = 'Add media';
+        container.appendChild(addPhotoLabel);
+
+        const labelContainer = document.createElement('span');
+        addPhotoLabel.appendChild(labelContainer);
+
+        const addButtonImage = document.createElement('img');
+        addButtonImage.style.paddingRight = '10px';
+        addButtonImage.style.display = 'inline-block';
+        addButtonImage.style.verticalAlign = 'middle';
+        addButtonImage.src = "{{ '/assets/images/plus.svg' | prepend: site.baseurl }}";
+        addButtonImage.width = '25';
+        addButtonImage.height = '25';
+        labelContainer.appendChild(addButtonImage);
+        //addPhotoLabel.insertBefore(addButtonImage, addPhotoLabel.childNodes[0]);
+
+        const text = document.createElement('span');
+        text.innerText = 'Add media';
+        labelContainer.appendChild(text);
+
+        const addPhotoInput = document.createElement('input');
+        addPhotoInput.classList.add('topic__write-topic__add-photo-input');
+        addPhotoInput.type = 'file';
+        addPhotoInput.multiple = true;
+        addPhotoLabel.appendChild(addPhotoInput);
+        addPhotoInput.addEventListener('change', async (e) => {
+
+            let files = [];
+    
+            const readFile = (file) => {
+                const fileReader = new FileReader();
+    
+                return new Promise((resolve, reject) => {
+                    fileReader.onerror = () => {
+                        fileReader.abort();
+                        reject(new DOMException("Problem parsing input file."));
+                    };
+    
+                    fileReader.onload = () => {
+                        resolve({file, fileContent: fileReader.result});
+                    };
+    
+                    if(file.type === 'text/plain') {
+                        fileReader.readAsText(file);
+                    } else {
+                        fileReader.readAsDataURL(file); 
+                    }
+                    
+                });
+            }
+    
+            for(let i = 0; i < addPhotoInput.files.length; i++) {
+                const result = await readFile(addPhotoInput.files[i]);
+                const file = { type: result.file.type, data: result.fileContent, name: result.file.name } 
+
+                renderAddedPhoto(file, uploadedPhotos);                 
+                files.push(file);
+            }
+            eventHandler(e, {type: 'upload-files', files});
+            
+        });
+
+        const uploadedPhotos = document.createElement('div');
+        uploadedPhotos.classList.add('topic__write-topic__uploaded-photos');
+        container.appendChild(uploadedPhotos);
+
+        if(topicData && topicData.files) {
+            for(let i = 0; i < topicData.files.length; i++) {
+                renderAddedPhoto(uploadedPhotos); 
+            }
+        }
 
     }
+
 
     const renderAddedPhoto = (file, parent) => {
   
@@ -1659,7 +1838,7 @@ const DiaryUI = (eventHandler) => {
         removeTopicUI,
         renderUploadFiles,
         renderTopicsFound,
-        renderAddTopicOptions,
+        //renderAddTopicOptions,
         renderWriteTopic,
         renderEditTopic,
         renderTopics,

@@ -128,6 +128,20 @@ body, textarea, button, input, select, pre {
     border: none;
 }
 
+.topic__add-topic-button {
+    display: flex;
+    align-items:center;
+    background: none;
+    border: none;
+    font: Italic 18px/24px Open Sans;
+}
+
+.topic__options {
+    top: 50%;
+    transform: translate(0, -50%);
+    margin: 0 auto;
+}
+
 .topic__add-topic__options {
     height: 100%;
     display: flex;
@@ -147,16 +161,6 @@ body, textarea, button, input, select, pre {
     flex-direction: column;   
 }
 
-.topic__write-topic__textarea {
-    width: 100%;
-    max-width: 95vh;
-    resize: none;
-    border-style: groove;
-    text-align: center;
-    height: 20vh;
-    padding: 1vh;
-    margin-bottom: 1vh;
-}
 
 .topic__write-topic__date-photo-container {
     width: 100%;
@@ -178,18 +182,29 @@ body, textarea, button, input, select, pre {
     display: none;
 }
 
+
+.topic__write-topic__input {
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1.5px dashed #707070;
+    font: Italic 16px/22px Open Sans;
+    color: #606060;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
 .topic__write-topic__date {
-    text-align: center;
-    border-style: groove;
-    padding: 1vh;
-    height: 100%;
+    text-transform: uppercase;
+}
+
+.topic__write-topic__textarea {
+    width: 92%;
+    resize: none;
 }
 
 .topic__write-topic__uploaded-photos {
-    height: 45vh;
     width: 100%;
     overflow-y: auto;
-    margin-top: 2vh;
+    margin-top: 10px;
 }
 
 .topic__write-topic__uploaded-photos__row {
@@ -608,6 +623,7 @@ body, textarea, button, input, select, pre {
 .upper-page {
     margin: auto;
     text-align: center;
+    max-height: 30%
 }
 
 .lower-page {
@@ -617,6 +633,7 @@ body, textarea, button, input, select, pre {
     background-repeat: repeat-y;
     background-size: 300%;
     overflow-y: auto;
+    min-height: 70%;
 }
 
 .who__input-name {
