@@ -612,7 +612,7 @@ body, textarea, button, input, select, pre {
 .lower-page {
     background-image: url("{{ '/assets/images/background_pattern_chat.svg' | prepend: site.baseurl }}");
     background-repeat: repeat-y;
-    background-size: 150%;
+    background-size: 300%;
     display: flex;
     overflow-y: auto;
 }
