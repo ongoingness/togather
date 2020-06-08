@@ -249,11 +249,13 @@ const DiaryUI = (eventHandler) => {
         nav.appendChild(closeNavElem);
 
         const overlayContent = document.createElement('div');
+        overlayContent.id = 'exitContent';
         overlayContent.classList.add('overlay-content', 'privacy');
         nav.appendChild(overlayContent);
 
         const textContent = document.createElement('div');
         textContent.classList.add('privacy__text');
+        textContent.style.width = overlayContent.style.width;
         textContent.innerHTML = 'Because of our privacy measures if you quit now, <span class=\'bold\'>your process cannot be saved</span>. This means when you come back to assemble <span class=\'bold\'>you have to start over</span>. If you want a break you can leave this website open without losing your progress. <span class=\'bold\'>Are you sure</span> you want to stop assembling your diary?';
         overlayContent.appendChild(textContent);
 
@@ -519,6 +521,92 @@ const DiaryUI = (eventHandler) => {
 
         renderSiteFooter(content);
 
+    }
+
+    const renderWhoContributed = () => {
+
+        renderDiaryHeader(document.body, 2);
+
+        const content = document.createElement('div');
+        content.classList.add('content');
+        document.body.appendChild(content);
+
+        const upperPage = document.createElement('div');
+        upperPage.classList.add('upper-page');
+        content.appendChild(upperPage)
+
+        const title = document.createElement('div');
+        title.classList.add('title', 'diary');
+        title.style.marginTop = '16px';
+        title.innerText = 'Who contributed to this diary?';
+        upperPage.appendChild(title);
+
+        const textBox = document.createElement('div');
+        textBox.classList.add('text-box');
+        textBox.innerText = 'We found the following names in the group. Is this list correct?';
+        upperPage.appendChild(textBox);
+
+        const lowerPage = document.createElement('div');
+        lowerPage.classList.add('lower-page');
+        content.appendChild(lowerPage);
+
+        const names = ['Luis', 'Kyle', 'Linnea', 'Jayne', 'Josh', 'Luis', 'Kyle', 'Linnea', 'Jayne', 'Josh','Luis', 'Kyle', 'Linnea', 'Jayne', 'Josh', 'Josh','Luis', 'Kyle', 'Linnea', 'Jayne', 'Josh']
+
+        const usernameList = document.createElement('div');
+        usernameList.classList.add('who-contributed__username-list');
+        lowerPage.appendChild(usernameList);
+
+        for(name of names) {
+
+            const username = document.createElement('div');
+            username.classList.add('who-contributed__username');
+            usernameList.appendChild(username);
+
+            const usernameText = document.createElement('input');
+            usernameText.classList.add('who-contributed__username-input');
+            usernameText.value = name;
+            usernameText.disabled = true;
+            username.appendChild(usernameText);
+
+            const usernameEdit = document.createElement('button');
+            usernameEdit.classList.add('who-contributed__username-edit');
+            username.appendChild(usernameEdit);
+
+            usernameEdit.addEventListener('click',  () => {
+                username.classList.add('edit');
+                editButtonImage.style.display = 'none';
+                usernameCheck.style.display = 'block';
+                usernameText.disabled = false;
+                usernameText.select();
+            });
+
+            const editButtonImage = document.createElement('img');
+            editButtonImage.src = "{{ '/assets/images/edit.svg' | prepend: site.baseurl }}";
+            editButtonImage.width = '25';
+            editButtonImage.height = '25';
+            usernameEdit.appendChild(editButtonImage);
+
+            const usernameCheck = document.createElement('button');
+            usernameCheck.classList.add('who-contributed__username-edit');
+            usernameCheck.style.display = 'none';
+            username.appendChild(usernameCheck);
+
+            const checkButtonImage = document.createElement('img');
+            checkButtonImage.src = "{{ '/assets/images/checkmark.svg' | prepend: site.baseurl }}";
+            checkButtonImage.width = '25';
+            checkButtonImage.height = '25';
+            usernameCheck.appendChild(checkButtonImage);
+
+            usernameCheck.addEventListener('click',  () => {
+                username.classList.remove('edit');
+                editButtonImage.style.display = 'block';
+                usernameCheck.style.display = 'none';
+                usernameText.disabled = true;
+            });
+
+        }
+
+        renderStepController(document.body, 2, document.createElement('div'));
     }
 
     const renderBaseUI = () => {
@@ -1408,6 +1496,7 @@ const DiaryUI = (eventHandler) => {
         renderFile,
         renderDiarySteps,
         renderWhoTheDiaryIsFor,
+        renderWhoContributed,
 
         renderBaseUI,
         clearBaseUI,

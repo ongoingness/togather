@@ -55,7 +55,8 @@ body {
 
 .content {
     width: 100%;
-    min-height: 94%;
+    height: 74%;
+    min-height: 400px;
     display: flex;
     flex-direction: column;
 }
@@ -106,6 +107,7 @@ body {
     display: block;
     transition: 0.3s;
 }
+
   
 .overlay a:hover, .overlay a:focus {
     color: #f1f1f1;

@@ -83,6 +83,18 @@ const Diary = () => {
 
             }
         },
+        whoContributed: {
+            render:() => {
+                ui.renderWhoContributed();
+            },
+            eventHandler: (e, params) => {
+
+                switch(params.type) {
+
+                }
+
+            }
+        },
         topicsFound: {
             render: () => {
                 ui.clearBaseUI();
@@ -423,7 +435,7 @@ const Diary = () => {
 
     //ui.renderBaseUI();
     //updateState(STATES.uploadFiles);
-    updateState(STATES.whoTheDiaryIsFor);
+    updateState(STATES.whoContributed);
 
 }
 
