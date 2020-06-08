@@ -565,7 +565,7 @@ const DiaryUI = (eventHandler) => {
                 editButtonImage.style.display = 'none';
                 usernameCheck.style.display = 'block';
                 usernameText.disabled = false;
-                usernameText.select();
+                usernameText.focus();
             });
 
             const editButtonImage = document.createElement('img');
@@ -707,7 +707,65 @@ const DiaryUI = (eventHandler) => {
     */
 
     const renderTopicsFound = (topics) => {
+
+        topics = [    {
+            day: 1,
+            hash: "ssss",
+            messages: [],
+            text: ['test1', 'test2', 'test3'],
+            timestamp: new Date().getTime(),
+            color: 'red',
+        }]
      
+        renderDiaryHeader(document.body, 3);
+
+        const content = document.createElement('div');
+        content.classList.add('content');
+        document.body.appendChild(content);
+
+        const upperPage = document.createElement('div');
+        upperPage.classList.add('upper-page');
+        content.appendChild(upperPage)
+
+        const title = document.createElement('div');
+        title.classList.add('title', 'diary');
+        title.style.marginTop = '16px';
+        title.innerText = 'Which topics did you chat about?';
+        upperPage.appendChild(title);
+
+        const textBox = document.createElement('div');
+        textBox.classList.add('text-box');
+        textBox.innerText = 'We found the following set of topics. Is this list complete?';
+        upperPage.appendChild(textBox);
+
+        const lowerPage = document.createElement('div');
+        lowerPage.id = 'lowerPage';
+        lowerPage.classList.add('lower-page');
+        content.appendChild(lowerPage);
+
+        renderTopics(topics);
+
+        const addTopicContainer =  document.createElement('div');
+        addTopicContainer.classList.add('topic');
+        lowerPage.appendChild(addTopicContainer);
+
+        const addTopicButton  = document.createElement('button');
+        addTopicButton.classList.add('topic-button');
+        addTopicButton.classList.add('base-container__footer__item__button');
+        addTopicButton.innerText = 'Add Topic';
+        addTopicButton.addEventListener('click', (e) => eventHandler(e, {type: 'add-topic'}));              
+        addTopicContainer.appendChild(addTopicButton);
+
+        const addButtonImage = document.createElement('img');
+        addButtonImage.src = "{{ '/assets/images/delete.svg' | prepend: site.baseurl }}";
+        addButtonImage.width = '25';
+        addButtonImage.height = '25';
+        add.appendChild(addButtonImage);
+
+
+        renderStepController(document.body, 3, document.createElement('div'));
+
+        /*
         document.getElementById('base-container-header-text').innerText = i18n.getStringById('topics_found_header');
         
         renderTopics(topics);
@@ -725,11 +783,113 @@ const DiaryUI = (eventHandler) => {
         thatsAllButton.innerText = i18n.getStringById('thats_all');
         thatsAllButton.addEventListener('click', (e) => eventHandler(e, {type: 'thats-all'}));  
         document.getElementById('base-container-footer-right').appendChild(thatsAllButton);
+        */
 
     }
 
     const renderTopic = (day, topicData) => {
-                
+            
+        const lowerPage = document.getElementById('lowerPage');
+
+        const topic =  document.createElement('div');
+        topic.classList.add('topic');
+        lowerPage.appendChild(topic);
+
+        const topicHeader = document.createElement('div');
+        topicHeader.classList.add('topic__header');
+        topic.appendChild(topicHeader);
+
+        const topicHeaderDay =  document.createElement('div');
+        topicHeaderDay.classList.add('topic__header__day');
+        topicHeaderDay.innerText = `${i18n.getStringById('day')} ${topicData.day}`;
+        topicHeaderDay.style = `color: ${topicData.color};`
+        topicHeader.appendChild(topicHeaderDay);
+
+        const date = new Date(topicData.timestamp);
+        const topicHeaderDate =  document.createElement('div');
+        topicHeaderDate.classList.add('topic__header__date');
+        topicHeaderDate.innerText = `${date.toLocaleDateString()}`;
+        topicHeaderDate.style = `color: ${topicData.color};`
+        topicHeader.appendChild(topicHeaderDate);
+
+        const topicHeaderEditButton = document.createElement('button');
+        topicHeaderEditButton.classList.add('topic__header__edit-button');
+        topicHeaderEditButton.addEventListener('click', (e) => eventHandler(e, {type: 'edit-topic', hash: topicData.hash}));
+        topicHeader.appendChild(topicHeaderEditButton);
+
+        const editButtonImage = document.createElement('img');
+        editButtonImage.src = "{{ '/assets/images/edit.svg' | prepend: site.baseurl }}";
+        editButtonImage.width = '25';
+        editButtonImage.height = '25';
+        topicHeaderEditButton.appendChild(editButtonImage);
+
+        const topicHeaderDeleteButton = document.createElement('button');
+        topicHeaderDeleteButton.classList.add('topic__header__delete-button');
+        topicHeaderDeleteButton.addEventListener('click', (e) => eventHandler(e, {type: 'delete-topic', day}));
+        topicHeader.appendChild(topicHeaderDeleteButton);
+
+        const deleteButtonImage = document.createElement('img');
+        deleteButtonImage.src = "{{ '/assets/images/delete.svg' | prepend: site.baseurl }}";
+        deleteButtonImage.width = '25';
+        deleteButtonImage.height = '25';
+        topicHeaderDeleteButton.appendChild(deleteButtonImage);
+
+        for(let line of topicData.text) {
+            const topicText = document.createElement('div');
+            topicText.innerText = `${line}`;
+            topic.appendChild(topicText);
+        }
+
+        if(topicData.files && topicData.files.length > 0) {
+            const chatMessageMediaBody = document.createElement('div');
+            chatMessageMediaBody.classList.add('topic__media');
+            topic.appendChild(chatMessageMediaBody);
+            for(let file of topicData.files) {
+
+                if(file.type.includes('audio')) {
+
+                    const audio = document.createElement('audio');
+                    audio.setAttribute('controls', true);
+
+                    const source = document.createElement('source');
+                    source.setAttribute('src', file.data);
+                    source.setAttribute('type', file.type);
+
+                    audio.appendChild(source);
+                    chatMessageMediaBody.appendChild(audio);
+
+                } else if(file.type.includes('video')) {
+
+                    const video = document.createElement('video');
+                    video.width = 320;
+                    video.height = 240;
+                    video.controls = true;
+                    video.autoplay = true;
+                    video.loop = true;
+                    video.muted = true;
+
+                    const source = document.createElement('source');
+                    source.src = file.data;
+                    source.type = file.type;
+
+                    video.appendChild(source);
+                    chatMessageMediaBody.appendChild(video);
+
+                } else if(file.type.includes('image')) {
+
+                    const image = document.createElement('img');
+                    image.src = file.data;
+                    image.width = 320;
+                    image.height = 240;
+                    chatMessageMediaBody.appendChild(image);
+
+                }
+            }
+        }
+
+
+        /*
+
         const topicList = document.getElementById('baseList');
 
         const topic =  document.createElement('div');
@@ -827,7 +987,8 @@ const DiaryUI = (eventHandler) => {
             }
         }
 
-        topicList.appendChild(topic);          
+        topicList.appendChild(topic);    
+        */      
     }
 
     const renderTopics = (topics) => {

@@ -97,9 +97,14 @@ const Diary = () => {
         },
         topicsFound: {
             render: () => {
-                ui.clearBaseUI();
+
+                /*
+                ui.renderBaseUI();
                 ui.startTopicUI();
                 ui.renderTopicsFound(model.getTopics());
+                */
+               ui.renderTopicsFound(model.getTopics());
+            
             },
             eventHandler: (e, params) => {
                 switch(params.type) {
