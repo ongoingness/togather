@@ -134,8 +134,6 @@ const Diary = () => {
 
                     case 'delete-topic':
                         model.deleteTopic(params.day);
-                        ui.removeTopics();
-                        ui.renderTopics(model.getTopics());
                         break;
 
                     case 'write-topic':
@@ -200,7 +198,6 @@ const Diary = () => {
                         break;
 
                     case 'done':
-                        console.log(params.topics);
                         for(const [index, {text, timestamp}] of params.topics.entries()) {
                             model.createTopic({
                                 text, 
@@ -217,7 +214,6 @@ const Diary = () => {
                         break;
 
                     case 'upload-files':
-                        console.log(params);
                         if(STATES.writeTopic.variables.tempMedia.has(params.index))
                             STATES.writeTopic.variables.tempMedia.set(params.index, STATES.writeTopic.variables.tempMedia.get(params.index).concat(params.files));
                         else
@@ -232,8 +228,6 @@ const Diary = () => {
                 selectedMessages: [],
             },
             render: () => {
-                ui.clearBaseUI();
-                ui.startChatUI();
                 ui.renderSelectTopicFromChat(model.getMessages());
             },
             eventHandler: (e, params) => {
@@ -267,9 +261,14 @@ const Diary = () => {
         },
         editTopic: {
             variables: {
-                tempMedia: [],
+                tempMedia: new Map(),
             },
             render: () => {
+                const hash = STATES.editTopic.parameters.hash;
+                const topic = model.getMessage(hash);
+                STATES.editTopic.variables.tempMedia.set("0", topic.files);
+                ui.renderEditTopic(topic);
+                /*
                 const hash = STATES.editTopic.parameters.hash;
                 const topic = model.getMessage(hash);
                 STATES.editTopic.variables.tempMedia = topic.files;
@@ -277,24 +276,42 @@ const Diary = () => {
                 ui.clearBaseUI();
                 ui.startTopicUI();
                 ui.renderEditTopic(topic);
+                */
             },
             eventHandler: (e, params) => {
 
                 switch(params.type) {
 
                     case 'delete-photo':
-                        console.log(STATES.editTopic.variables.tempMedia);
-                        const index = STATES.editTopic.variables.tempMedia.indexOf(params.file);
-                        STATES.editTopic.variables.tempMedia.splice(index, 1);
-                        console.log(STATES.editTopic.variables.tempMedia);
+                        const media = STATES.editTopic.variables.tempMedia.get(Number(params.index));
+                        const fileIndex = media.indexOf(params.file);
+                        media.splice(fileIndex, 1)
+                        STATES.editTopic.variables.tempMedia.set(params.index, media);
+
                         break;
 
                     case 'upload-files':
-                        STATES.editTopic.variables.tempMedia = STATES.editTopic.variables.tempMedia.concat(params.files);
+                        if(STATES.editTopic.variables.tempMedia.has(params.index))
+                        STATES.editTopic.variables.tempMedia.set(params.index, STATES.editTopic.variables.tempMedia.get(params.index).concat(params.files));
+                    else
+                        STATES.editTopic.variables.tempMedia.set(params.index, params.files);
                         break;
 
                     case 'done':
-                       
+                       console.log(params.topics);
+                       console.log(STATES.editTopic.variables.tempMedia);
+                        for(const [index, {text, timestamp}] of params.topics.entries()) {
+                            model.updateTopic({
+                                hash: params.hash,
+                                text, 
+                                timestamp,
+                                tempFiles: STATES.editTopic.variables.tempMedia.has(index) ? STATES.editTopic.variables.tempMedia.get(index) : [],
+                            });   
+                        }
+                        STATES.editTopic.variables.tempMedia = new Map();
+                        updateState(STATES.topicsFound);
+
+                        /*
                         model.updateTopic({
                             hash: params.hash,
                             text: params.text, 
@@ -303,6 +320,7 @@ const Diary = () => {
                         });
                         STATES.editTopic.variables.tempMedia = []
                         updateState(STATES.topicsFound);
+                        */
                         break;
                     
                     case 'back': 

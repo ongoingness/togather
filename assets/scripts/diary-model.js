@@ -240,9 +240,9 @@ const DiaryModel = () => {
                 files.push(fileHashCode);
                 if(!whatsAppChat.files.has(fileHashCode)) {
                     whatsAppChat.files.set(fileHashCode, {
-                        type: tempFile.type,
-                        name: tempFile.name,
-                        data: tempFile.data,
+                        type: file.type,
+                        name: file.name,
+                        data: file.data,
                     });
                 } 
             }

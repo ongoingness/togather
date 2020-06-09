@@ -257,7 +257,7 @@ body, textarea, button, input, select, pre {
     margin: 10px;
     padding: 10px;
     border-style: none;
-    border-radius: 10px;
+    /*border-radius: 10px;*/
     font-size: 18px;
     background: white;
 }
@@ -290,6 +290,7 @@ body, textarea, button, input, select, pre {
 .chat-message__text {
     font-size: small;
     color: black;
+    word-break: break-word;
 }
 
 .base-container__header__text__override {
@@ -716,4 +717,13 @@ body, textarea, button, input, select, pre {
     margin-right: 0;
     background: none;
     border: none;
+}
+
+.topic__media {
+    margin-top: 25px;
+}
+
+.topic__media__image {
+    width: 100%;
+    height: auto;
 }
