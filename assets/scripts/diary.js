@@ -14,14 +14,7 @@ const Diary = () => {
                 files: new Map(),
             },
             render: () => {    
-                
-                ui.renderSiteHeader();
                 ui.renderUploadFiles();
-                ui.renderSiteFooter();
-                
-                //ui.clearBaseUI();
-                //ui.startTopicUI();
-                //ui.renderUploadFiles();
             },
             eventHandler: async (e, params) => {
 
@@ -40,7 +33,7 @@ const Diary = () => {
                         const whatsAppChat = await WhatsAppChatParser().start(Array.from(STATES.uploadFiles.variables.files.values()));              
                         model.setWhatsAppChat(whatsAppChat);
                         model.findTopics();
-                        updateState(STATES.topicsFound);
+                        updateState(STATES.diarySteps);
                         break;
 
                     case 'delete-file':
@@ -64,7 +57,7 @@ const Diary = () => {
                         break;
 
                     case 'go-to-step-1':
-
+                        updateState(STATES.whoTheDiaryIsFor);
                         break;
 
                 }
@@ -73,11 +66,20 @@ const Diary = () => {
         },
         whoTheDiaryIsFor: {
             render: () => {
-                ui.renderWhoTheDiaryIsFor();
+                ui.renderWhoTheDiaryIsFor(model.getWhoDiaryIsFor());
             },
             eventHandler: (e, params) => {
             
                 switch(params.type) {
+
+                    case 'stop-assembling':
+                        updateState(STATES.uploadFiles);
+                        break;
+
+                    case 'go-to-step-2':
+                        model.setWhoDiaryIsFor(params.who);
+                        updateState(STATES.whoContributed);
+                        break;
 
                 }
 
@@ -85,11 +87,23 @@ const Diary = () => {
         },
         whoContributed: {
             render:() => {
-                ui.renderWhoContributed();
+                ui.renderWhoContributed(model.getUsers());
             },
             eventHandler: (e, params) => {
 
                 switch(params.type) {
+
+                    case 'stop-assembling':
+                        updateState(STATES.uploadFiles);
+                        break;
+
+                    case 'go-to-step-1':
+                        updateState(STATES.whoTheDiaryIsFor);
+                        break;
+
+                    case 'go-to-step-3':
+                        updateState(STATES.topicsFound);
+                        break;
 
                 }
 
@@ -97,18 +111,15 @@ const Diary = () => {
         },
         topicsFound: {
             render: () => {
-
-                /*
-                ui.renderBaseUI();
-                ui.startTopicUI();
-                ui.renderTopicsFound(model.getTopics());
-                */
                ui.renderTopicsFound(model.getTopics());
-            
             },
             eventHandler: (e, params) => {
                 switch(params.type) {
                   
+                    case 'stop-assembling':
+                        updateState(STATES.uploadFiles);
+                        break;
+
                     case 'add-topic': 
                         updateState(STATES.topicsOptions);
                         break;
@@ -125,6 +136,22 @@ const Diary = () => {
                         model.deleteTopic(params.day);
                         ui.removeTopics();
                         ui.renderTopics(model.getTopics());
+                        break;
+
+                    case 'write-topic':
+                        updateState(STATES.writeTopic);
+                        break;
+
+                    case 'select-from-chat':
+                        updateState(STATES.selectTopicFromChat);
+                        break;
+
+                    case 'go-to-step-2':
+                        updateState(STATES.whoContributed);
+                        break;
+
+                    case 'go-to-step-4':
+                        updateState(STATES.selectMessages);
                         break;
                 }
             }
@@ -426,6 +453,7 @@ const Diary = () => {
     const updateState = (newState) => {
         previousState = currentState;
         currentState = newState;
+        ui.clearPage();
         currentState.render();
     }
 
@@ -433,6 +461,7 @@ const Diary = () => {
         previousState = currentState;
         currentState = newState;
         currentState['parameters'] = parameters;
+        ui.clearPage();
         currentState.render();
     }
 
@@ -440,8 +469,8 @@ const Diary = () => {
     const model = DiaryModel();
 
     //ui.renderBaseUI();
-    //updateState(STATES.uploadFiles);
-    updateState(STATES.writeTopic);
+    updateState(STATES.uploadFiles);
+  
 
 }
 

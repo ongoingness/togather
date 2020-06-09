@@ -33,6 +33,8 @@ const DiaryModel = () => {
 
     let topics = [];
 
+    let who;
+
     const setWhatsAppChat = (tempWhatsAppChat) => {
         whatsAppChat = tempWhatsAppChat;
 
@@ -374,10 +376,24 @@ const DiaryModel = () => {
         console.log(topics[topicIndex].selectedMessages);
     }
 
+    const getWhoDiaryIsFor = () => who;
+
+    const setWhoDiaryIsFor = (newWho) => {
+        who = newWho;
+    }
+
+    const getUsers = () => {
+        const result = {...whatsAppChat.users};
+        if(result.numbers != undefined)
+            delete result.numbers
+        return result;
+    };
+    
 
     return {
-
         setWhatsAppChat,
+        setWhoDiaryIsFor,
+        getWhoDiaryIsFor,
         findTopics,
         getTopic,
         getTopicWithMessages,
@@ -391,6 +407,7 @@ const DiaryModel = () => {
         removeSelectedTopicMessage,
         getMessages,
         getMessage,
+        getUsers,
  
     };
 }

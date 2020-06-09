@@ -102,13 +102,13 @@ const DiaryUI = (eventHandler) => {
 
     const renderUploadFiles = () => {
     
-        const assembleHeader = document.createElement('div');
-        assembleHeader.classList.add('content-header', 'diary');
-        assembleHeader.innerText = 'Assemble Diary';
-        document.body.appendChild(assembleHeader);
+        renderSiteHeader();
+
+        renderDiaryHeader(document.body);
 
         const content = document.createElement('div');
         content.classList.add('content');
+        content.style.height = 'initial';
         document.body.appendChild(content);
 
         const gradient = document.createElement('div');
@@ -118,7 +118,7 @@ const DiaryUI = (eventHandler) => {
         const textBox1 = document.createElement('div');
         textBox1.classList.add('text-box');
         textBox1.innerText = 'Find your exported WhatsApp group chat files and add them below.';
-        textBox1.style.marginTop = '4.5vh';
+        textBox1.style.marginTop = '28px';
         gradient.appendChild(textBox1);
         
         const dualTextBox = document.createElement('div');
@@ -128,7 +128,7 @@ const DiaryUI = (eventHandler) => {
 
         const dualTextBoxLeft = document.createElement('div');
         dualTextBoxLeft.innerText = 'TIP:';
-        dualTextBoxLeft.style.marginRight = '1.7vh';
+        dualTextBoxLeft.style.marginRight = '10px';
         dualTextBox.appendChild(dualTextBoxLeft);
 
         const dualTextBoxRight = document.createElement('div');
@@ -143,7 +143,7 @@ const DiaryUI = (eventHandler) => {
 
         const selectFilesButton = document.createElement('label');
         selectFilesButton.classList.add('button', 'round', 'diary');
-        selectFilesButton.style.marginTop = '6vh'
+        selectFilesButton.style.marginTop = '38px'
         selectFilesButton.innerHTML = 'Select Files';
         gradient.appendChild(selectFilesButton);
 
@@ -187,6 +187,8 @@ const DiaryUI = (eventHandler) => {
         aboutButton.innerHTML = 'How we assure your privacy >>';
         aboutButton.addEventListener('click', () => location.href='{{ site.url }}{{ site.baseurl }}/about/');
         gradient.appendChild(aboutButton);
+
+        renderSiteFooter(document.body);
        
     }
 
@@ -228,52 +230,6 @@ const DiaryUI = (eventHandler) => {
 
     const renderDiaryHeader = (parent, step) => {
 
-        const openNav = () => {
-            document.getElementById('privacyNav').style.width = '100%';
-        }
-
-        const closeNav = () => {
-            document.getElementById('privacyNav').style.width = '0%';
-        }
-
-        const nav = document.createElement('div');
-        nav.id = 'privacyNav';
-        nav.classList.add('overlay', 'privacy');
-        document.body.appendChild(nav);
-
-        const closeNavElem = document.createElement('a');
-        closeNavElem.href = 'javascript:void(0)';
-        closeNavElem.classList.add('closebtn', 'close-diary');
-        closeNavElem.addEventListener('click', closeNav);
-        closeNavElem.innerHTML = '&times;';
-        nav.appendChild(closeNavElem);
-
-        const overlayContent = document.createElement('div');
-        overlayContent.id = 'exitContent';
-        overlayContent.classList.add('overlay-content', 'privacy');
-        nav.appendChild(overlayContent);
-
-        const textContent = document.createElement('div');
-        textContent.classList.add('privacy__text');
-        textContent.style.width = overlayContent.style.width;
-        textContent.innerHTML = 'Because of our privacy measures if you quit now, <span class=\'bold\'>your process cannot be saved</span>. This means when you come back to assemble <span class=\'bold\'>you have to start over</span>. If you want a break you can leave this website open without losing your progress. <span class=\'bold\'>Are you sure</span> you want to stop assembling your diary?';
-        overlayContent.appendChild(textContent);
-
-        const stopButton = document.createElement('button');
-        stopButton.classList.add('button', 'round', 'diary');
-        stopButton.style.marginTop = '8vh';
-        stopButton.innerHTML = 'Yes, stop assembling';
-        stopButton.addEventListener('click', e => eventHandler(e, {type: 'stop-assembling'}));
-        overlayContent.appendChild(stopButton);
-
-        const continueButton = document.createElement('button');
-        continueButton.classList.add('button', 'round', 'diary');
-        continueButton.style.marginTop = '8vh';
-        continueButton.innerHTML = 'No, continue with the diary';
-        continueButton.addEventListener('click', closeNav);
-        overlayContent.appendChild(continueButton);
-
-
         const assembleHeader = document.createElement('div');
         assembleHeader.classList.add('content-header', 'diary');
         parent.appendChild(assembleHeader);
@@ -283,12 +239,6 @@ const DiaryUI = (eventHandler) => {
         leftColumn.style.display = 'flex';
         leftColumn.style.margin = 'auto';
         assembleHeader.appendChild(leftColumn);
-
-        const closeDiary = document.createElement('a');
-        closeDiary.classList.add('diary-header__close-button');
-        closeDiary.addEventListener('click', openNav);
-        closeDiary.innerHTML = '&times;';
-        leftColumn.appendChild(closeDiary);
 
         const centerColumn = document.createElement('div');
         centerColumn.style.width = '60%';
@@ -309,8 +259,60 @@ const DiaryUI = (eventHandler) => {
         rightColumn.style.margin = 'auto';
         assembleHeader.appendChild(rightColumn);
 
+
         if(step != undefined) {
-            
+
+            const openNav = () => {
+                document.getElementById('privacyNav').style.width = '100%';
+            }
+
+            const closeNav = () => {
+                document.getElementById('privacyNav').style.width = '0%';
+            }
+
+            const nav = document.createElement('div');
+            nav.id = 'privacyNav';
+            nav.classList.add('overlay', 'privacy');
+            document.body.appendChild(nav);
+
+            const closeNavElem = document.createElement('a');
+            closeNavElem.href = 'javascript:void(0)';
+            closeNavElem.classList.add('closebtn', 'close-diary');
+            closeNavElem.addEventListener('click', closeNav);
+            closeNavElem.innerHTML = '&times;';
+            nav.appendChild(closeNavElem);
+
+            const overlayContent = document.createElement('div');
+            overlayContent.id = 'exitContent';
+            overlayContent.classList.add('overlay-content', 'privacy');
+            nav.appendChild(overlayContent);
+
+            const textContent = document.createElement('div');
+            textContent.classList.add('privacy__text');
+            textContent.style.width = overlayContent.style.width;
+            textContent.innerHTML = 'Because of our privacy measures if you quit now, <span class=\'bold\'>your process cannot be saved</span>. This means when you come back to assemble <span class=\'bold\'>you have to start over</span>. If you want a break you can leave this website open without losing your progress. <span class=\'bold\'>Are you sure</span> you want to stop assembling your diary?';
+            overlayContent.appendChild(textContent);
+
+            const stopButton = document.createElement('button');
+            stopButton.classList.add('button', 'round', 'diary');
+            stopButton.style.marginTop = '8vh';
+            stopButton.innerHTML = 'Yes, stop assembling';
+            stopButton.addEventListener('click', e => eventHandler(e, {type: 'stop-assembling'}));
+            overlayContent.appendChild(stopButton);
+
+            const continueButton = document.createElement('button');
+            continueButton.classList.add('button', 'round', 'diary');
+            continueButton.style.marginTop = '8vh';
+            continueButton.innerHTML = 'No, continue with the diary';
+            continueButton.addEventListener('click', closeNav);
+            overlayContent.appendChild(continueButton);
+
+            const closeDiary = document.createElement('a');
+            closeDiary.classList.add('diary-header__close-button');
+            closeDiary.addEventListener('click', openNav);
+            closeDiary.innerHTML = '&times;';
+            leftColumn.appendChild(closeDiary);
+    
             const stepCounter = document.createElement('div');
             stepCounter.classList.add('diary-header__step-counter');
             stepCounter.innerText = `#${step}/5`;
@@ -342,8 +344,8 @@ const DiaryUI = (eventHandler) => {
         const textBox1 = document.createElement('div');
         textBox1.classList.add('text-box');
         textBox1.innerHTML = 'Assembling the diary takes <span class=\'bold\'>5 steps</span>.';
-        textBox1.style.marginTop = '4.5vh';
-        textBox1.style.marginBottom ='4.5vh';
+        textBox1.style.marginTop = '28px';
+        textBox1.style.marginBottom ='28px';
         textBox1.style.textAlign = 'center';
         gradient.appendChild(textBox1);
 
@@ -391,7 +393,7 @@ const DiaryUI = (eventHandler) => {
 
         const goButton = document.createElement('button');
         goButton.classList.add('button', 'round', 'diary');
-        goButton.style.marginTop = '20vh';
+        goButton.style.marginTop = '130px';
         goButton.innerHTML = 'Go to step 1';
         goButton.addEventListener('click', e => eventHandler(e, {type: 'go-to-step-1'}));
         gradient.appendChild(goButton);
@@ -439,11 +441,16 @@ const DiaryUI = (eventHandler) => {
         column1.style.margin = 'auto';
         container.appendChild(column1);
 
+        let previousButton;
+        let previousButtonListener;
         if(step > 1) {
-            const previousButton = document.createElement('button');
+            previousButton = document.createElement('button');
             previousButton.classList.add('button', 'round', 'diary', 'step-controller__step-button');
             previousButton.innerText = `< Step ${step - 1}`;
-            previousButton.addEventListener('click', e => eventHandler(e, {type: `go-to-step-${step - 1}`}));
+            previousButtonListener = (e) => {
+                eventHandler(e, {type: `go-to-step-${step - 1}`})
+            } 
+            previousButton.addEventListener('click', previousButtonListener);
             column1.appendChild(previousButton);
         }
 
@@ -466,12 +473,17 @@ const DiaryUI = (eventHandler) => {
         const nextButton = document.createElement('button');
         nextButton.classList.add('button', 'round', 'diary', 'step-controller__step-button');
         nextButton.innerText = `Step ${step + 1} >`;
-        nextButton.addEventListener('click', e => eventHandler(e, {type: `go-to-step-${step + 1}`}));
+
+        const nextButtonListener = (e) => {
+            eventHandler(e, {type: `go-to-step-${step + 1}`})
+        }
+        nextButton.addEventListener('click', nextButtonListener);
         column3.appendChild(nextButton);
 
+        return {leftButton: previousButton, leftButtonListener: previousButtonListener, rightButton: nextButton, rightButtonListener: nextButtonListener};
     }
 
-    const renderWhoTheDiaryIsFor = () => {
+    const renderWhoTheDiaryIsFor = (who) => {
 
         renderDiaryHeader(document.body, 1);
 
@@ -501,17 +513,21 @@ const DiaryUI = (eventHandler) => {
         const inputName = document.createElement('input');
         inputName.classList.add('who__input-name');
         inputName.placeholder = 'Type the name here';
-        lowerPage.appendChild(inputName);
+        if(who != undefined)
+            inputName.value = who;
 
+        lowerPage.appendChild(inputName);
 
         const helpText = document.createElement('div');
         helpText.classList.add('privacy__text');
         helpText.innerHTML = 'Give the name of your loved one who you are making this diary for. This name will be used on the cover of the final diary and on the first page to create a personal booklet and message for them. We do not save this information, this is all private and just for you and who you choose to share it with.';
 
-        renderStepController(document.body, 2, helpText);
+        const { rightButton, rightButtonListener } = renderStepController(document.body, 1, helpText);
+        rightButton.removeEventListener('click', rightButtonListener);
+        rightButton.addEventListener('click', e => eventHandler(e, {type: `go-to-step-2`, who: inputName.value}));
     }
 
-    const renderWhoContributed = () => {
+    const renderWhoContributed = (userData) => {
 
         renderDiaryHeader(document.body, 2);
 
@@ -538,13 +554,13 @@ const DiaryUI = (eventHandler) => {
         lowerPage.classList.add('lower-page');
         content.appendChild(lowerPage);
 
-        const names = ['Luis', 'Kyle', 'Linnea', 'Jayne', 'Josh', 'Luis', 'Kyle', 'Linnea', 'Jayne', 'Josh','Luis', 'Kyle', 'Linnea', 'Jayne', 'Josh', 'Josh','Luis', 'Kyle', 'Linnea', 'Jayne', 'Josh']
-
         const usernameList = document.createElement('div');
         usernameList.classList.add('who-contributed__username-list');
         lowerPage.appendChild(usernameList);
 
-        for(name of names) {
+
+
+        for(const hash in userData) {
 
             const username = document.createElement('div');
             username.classList.add('who-contributed__username');
@@ -552,7 +568,7 @@ const DiaryUI = (eventHandler) => {
 
             const usernameText = document.createElement('input');
             usernameText.classList.add('who-contributed__username-input');
-            usernameText.value = name;
+            usernameText.value = userData[hash].name;
             usernameText.disabled = true;
             username.appendChild(usernameText);
 
@@ -585,11 +601,12 @@ const DiaryUI = (eventHandler) => {
             checkButtonImage.height = '25';
             usernameCheck.appendChild(checkButtonImage);
 
-            usernameCheck.addEventListener('click',  () => {
+            usernameCheck.addEventListener('click',  (e) => {
                 username.classList.remove('edit');
                 editButtonImage.style.display = 'block';
                 usernameCheck.style.display = 'none';
                 usernameText.disabled = true;
+                eventHandler(e, {type: `edit-name`, hash, name: usernameText.value})
             });
 
         }
@@ -639,6 +656,10 @@ const DiaryUI = (eventHandler) => {
 
         document.body.appendChild(baseContainer);
 
+    }
+
+    const clearPage = () => {
+        removeChildren('body');
     }
 
     const clearBaseUI = () => {
@@ -708,15 +729,18 @@ const DiaryUI = (eventHandler) => {
 
     const renderTopicsFound = (topics) => {
 
-        topics = [    {
-            day: 1,
-            hash: "ssss",
-            messages: [],
-            text: ['test1', 'test2', 'test3'],
-            timestamp: new Date().getTime(),
-            color: 'red',
-        }]
-     
+        if(topics == undefined) {
+
+            topics = [    {
+                day: 1,
+                hash: "ssss",
+                messages: [],
+                text: ['test1', 'test2', 'test3'],
+                timestamp: new Date().getTime(),
+                color: 'red',
+            }]
+
+        }
         renderDiaryHeader(document.body, 3);
 
         const content = document.createElement('div');
@@ -1830,13 +1854,14 @@ const DiaryUI = (eventHandler) => {
         renderWhoTheDiaryIsFor,
         renderWhoContributed,
 
+        clearPage,
+
         renderBaseUI,
         clearBaseUI,
         removeBaseUI,
 
         startTopicUI,
         removeTopicUI,
-        renderUploadFiles,
         renderTopicsFound,
         //renderAddTopicOptions,
         renderWriteTopic,

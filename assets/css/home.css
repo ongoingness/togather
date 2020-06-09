@@ -26,13 +26,13 @@ body {
 .header {
     display: flex;
     width: 100%;
-    height: 10vh;
+    height: 60px;
     background-color: white;
     position: relative;
 }
 
 .header__text {
-    font-size: 5.5vh;
+    font-size: 35px;
     font-family: 'Ostrich Sans Medium';
     color: rgb(3, 123, 126);
     text-align: center;
@@ -43,12 +43,12 @@ body {
   width: 35px;
   height: 3px;
   background-color: rgb(3, 123, 126);
-  margin: 1vh 0;
+  margin: 6.5px 0;
 }
 
 .hamburguer {
     position: absolute;
-    left: 2vh;
+    left: 12px;
     top: 50%;
     transform: translate(0%, -50%);
 }

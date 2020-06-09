@@ -499,12 +499,13 @@ body, textarea, button, input, select, pre {
     border-color: #707070;
     border-width: 1px;
     text-align: center;
-    padding: 2vh;
+    padding: 12px;
     font-style: italic;
     font-size: 16px;
     color: #606060;
     overflow-y: auto;
-    max-height: 40vh;
+    max-height: 250px;
+    min-height: 25px;
 }
 
 .file-element-container {
@@ -518,12 +519,14 @@ body, textarea, button, input, select, pre {
 .file-element {
     text-align: left;
     font-size: 12px;
-    padding: 1.5vh;
+    padding: 9.5px;
     width: 90%;
 }
 
 .file-element__delete-button {
     margin: auto;
+    background: white;
+    border: none;
 }
 
 .overlay.privacy {
@@ -573,12 +576,12 @@ body, textarea, button, input, select, pre {
 .diary-steps__vertical-line {
     position: absolute;
     border-right-style: solid;
-    top: 6vh;
-    right: 1.5vh;
-    height: 55vh;
-    width: 7vh;
+    top: 45px;
+    right: 10px;
+    height: 350px;
+    width: 45px;
     border-bottom-style: solid;
-    border-bottom-right-radius: 50vh;
+    border-bottom-right-radius: 100px;
     border-width: 2px;
     border-color: #A8A8A8;
 }
@@ -589,11 +592,11 @@ body, textarea, button, input, select, pre {
     border-width: 2px;
     border-style: solid;
     border-color: #A8A8A8;
-    border-radius: 50vh;
-    height: 11vh;
-    width: 11vh;
-    right: -3.5vh;
-    top: -3vh;
+    border-radius: 100px;
+    height: 70px;
+    width: 70px;
+    right: -25px;
+    top: -25px;
 }
 
 .diary-steps__step-counter-helper {
@@ -603,10 +606,10 @@ body, textarea, button, input, select, pre {
     letter-spacing: 0px;
     color: #000000;
     opacity: 1;
-    height: 9vh;
-    top: 58vh;
-    right: 9vh;
-    width: 22vh;
+    height: 60px;
+    top: 375px;
+    right: 60px;
+    width: 140px;
 }
 
 .diary-steps__steps-container {
