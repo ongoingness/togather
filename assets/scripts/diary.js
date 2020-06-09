@@ -252,7 +252,7 @@ const Diary = () => {
                     
                     case 'back': 
                         STATES.selectTopicFromChat.variables.selectedMessages = [];
-                        updateState(STATES.topicsOptions);
+                        updateState(STATES.topicsFound);
                         break;
 
                 }
