@@ -1142,7 +1142,9 @@ const DiaryUI = (eventHandler) => {
         lowerPage.classList.add('lower-page');
         content.appendChild(lowerPage);
 
-        renderNewTopic(lowerPage);
+        let newTopicCounter = 0;
+        renderNewTopic(lowerPage, newTopicCounter);
+        newTopicCounter++;
 
         const addTopicContainer =  document.createElement('div');
         addTopicContainer.id = 'addTopic';
@@ -1153,7 +1155,10 @@ const DiaryUI = (eventHandler) => {
         const addTopicButton  = document.createElement('button');
         addTopicButton.classList.add('topic__add-topic-button');
         addTopicButton.innerText = 'Write another topic';
-        addTopicButton.addEventListener('click', (e) => renderNewTopic(lowerPage));              
+        addTopicButton.addEventListener('click', (e) => {
+            renderNewTopic(lowerPage, newTopicCounter);
+            newTopicCounter++;
+        });              
         addTopicContainer.appendChild(addTopicButton);
 
         const addButtonImage = document.createElement('img');
@@ -1163,6 +1168,91 @@ const DiaryUI = (eventHandler) => {
         addButtonImage.height = '25';
         addTopicButton.insertBefore(addButtonImage, addTopicButton.childNodes[0]);
 
+        const helpContent = document.createElement('div');
+        helpContent.classList.add('privacy__text');
+        helpContent.innerText = 'The topics we have found are the ones you shared through the Togather website. If you thought of your own topics you can add them here. You can select them from the chat, if you shared them there, or write your own. If there were days that you didn\'t have a topic, but messages were shared, then try to find a description for that. For example; A log of Monday. Or; Some things we liked to share today. This way we can add that day in the diary template.';
+
+        const openNav = () => {
+            document.getElementById('helpNav').style.width = '100%';
+        }
+
+        const closeNav = () => {
+            document.getElementById('helpNav').style.width = '0%';
+        }
+
+        const nav = document.createElement('div');
+        nav.id = 'helpNav';
+        nav.classList.add('overlay', 'privacy');
+        document.body.appendChild(nav);
+
+        const closeNavElem = document.createElement('a');
+        closeNavElem.href = 'javascript:void(0)';
+        closeNavElem.classList.add('closebtn', 'close-diary');
+        closeNavElem.addEventListener('click', closeNav);
+        closeNavElem.innerHTML = '&times;';
+        nav.appendChild(closeNavElem);
+
+        const overlayContent = document.createElement('div');
+        overlayContent.classList.add('overlay-content', 'privacy');
+        nav.appendChild(overlayContent);
+
+        if(helpContent != undefined)
+            overlayContent.appendChild(helpContent);
+
+        const container = document.createElement('div');
+        container.classList.add('step-controller__container');
+        document.body.appendChild(container);
+
+        const column1 = document.createElement('div');
+        column1.style.width ='40%'
+        column1.style.margin = 'auto';
+        container.appendChild(column1);
+
+        const previousButton = document.createElement('button');;
+        previousButton.classList.add('button', 'round', 'diary', 'step-controller__step-button');
+        previousButton.innerText = `< Back`;
+        const previousButtonListener = (e) => {
+            eventHandler(e, {type: `back`})
+        } 
+        previousButton.addEventListener('click', previousButtonListener);
+        column1.appendChild(previousButton);
+        
+
+        const column2 = document.createElement('div');
+        column2.style.width ='20%'
+        column2.style.margin = 'auto';
+        container.appendChild(column2);
+
+        const helpButton = document.createElement('button');
+        helpButton.classList.add('button', 'round', 'diary', 'step-controller__help-button');
+        helpButton.innerText = '?';
+        helpButton.addEventListener('click', openNav);
+        column2.appendChild(helpButton);
+
+        const column3 = document.createElement('div');
+        column3.style.width ='40%'
+        column3.style.margin = 'auto';
+        container.appendChild(column3);
+
+        const nextButton = document.createElement('button');
+        nextButton.classList.add('button', 'round', 'diary', 'step-controller__step-button');
+        nextButton.innerText = 'Add to topics';
+
+        const nextButtonListener = (e) => {
+
+            const topics = new Map();
+            const dates = document.getElementsByClassName('topic__write-topic__date');
+            const textAreas = document.getElementsByClassName('topic__write-topic__textarea');
+          
+            for(let i = 0; i < dates.length; i++) {
+                topics.set(dates[i].getAttribute('index'),{text: textAreas[i].value , timestamp: dates[i].valueAsDate.getTime()});
+            }
+
+            eventHandler(e, {type: 'done', topics})
+        }
+        nextButton.addEventListener('click', nextButtonListener);
+        column3.appendChild(nextButton);
+        
         /*
 
         const headerText = document.getElementById('base-container-header-text');
@@ -1284,7 +1374,7 @@ const DiaryUI = (eventHandler) => {
 */
     }
 
-    const renderNewTopic = (topicData) => {
+    const renderNewTopic = (topicData, index) => {
 
         const container = document.createElement('div');
         container.classList.add('topic');
@@ -1294,6 +1384,7 @@ const DiaryUI = (eventHandler) => {
         topicDate.type = 'date';
         topicDate.name = 'topicDate';
         topicDate.id = 'topicDate';
+        topicDate.setAttribute('index', index);
         topicDate.classList.add('topic__write-topic__input', 'topic__write-topic__date');
         if(topicData != null)
             topicDate.valueAsDate = new Date(topicData.fulltimestamp);
@@ -1311,7 +1402,6 @@ const DiaryUI = (eventHandler) => {
 
         const addPhotoLabel = document.createElement('label');
         addPhotoLabel.classList.add('topic__write-topic__input');
-        //addPhotoLabel.innerText = 'Add media';
         container.appendChild(addPhotoLabel);
 
         const labelContainer = document.createElement('span');
@@ -1325,7 +1415,6 @@ const DiaryUI = (eventHandler) => {
         addButtonImage.width = '25';
         addButtonImage.height = '25';
         labelContainer.appendChild(addButtonImage);
-        //addPhotoLabel.insertBefore(addButtonImage, addPhotoLabel.childNodes[0]);
 
         const text = document.createElement('span');
         text.innerText = 'Add media';
@@ -1362,31 +1451,47 @@ const DiaryUI = (eventHandler) => {
                 });
             }
     
+            let nMedia = uploadedPhotos.getElementsByClassName('topic__write-topic__photo-container').length;
+
             for(let i = 0; i < addPhotoInput.files.length; i++) {
                 const result = await readFile(addPhotoInput.files[i]);
                 const file = { type: result.file.type, data: result.fileContent, name: result.file.name } 
 
-                renderAddedPhoto(file, uploadedPhotos);                 
+                renderAddedPhoto(file, (nMedia+i)%2 === 0 ? uploadedPhotosColumn1 : uploadedPhotosColumn2, index);                 
                 files.push(file);
             }
-            eventHandler(e, {type: 'upload-files', files});
+    
+            eventHandler(e, {type: 'upload-files', files, index});
             
         });
 
         const uploadedPhotos = document.createElement('div');
         uploadedPhotos.classList.add('topic__write-topic__uploaded-photos');
         container.appendChild(uploadedPhotos);
+    
+        const uploadedPhotosRow = document.createElement('div');
+        uploadedPhotosRow.classList.add('topic__write-topic__uploaded-photos__row');
+        uploadedPhotos.appendChild(uploadedPhotosRow);
+
+        const uploadedPhotosColumn1 = document.createElement('div');
+        uploadedPhotosColumn1.id = `uploadedPhotosColumn1${index}`;
+        uploadedPhotosColumn1.classList.add('topic__write-topic__uploaded-photos__column');
+        uploadedPhotosRow.appendChild(uploadedPhotosColumn1);
+
+        const uploadedPhotosColumn2 = document.createElement('div');
+        uploadedPhotosColumn2.id = `uploadedPhotosColumn2${index}`;
+        uploadedPhotosColumn2.classList.add('topic__write-topic__uploaded-photos__column');
+        uploadedPhotosRow.appendChild(uploadedPhotosColumn2);
 
         if(topicData && topicData.files) {
             for(let i = 0; i < topicData.files.length; i++) {
-                renderAddedPhoto(uploadedPhotos); 
+                renderAddedPhoto(topicData.files[i], i%2 === 0 ? uploadedPhotosColumn1 : uploadedPhotosColumn2, index); 
             }
         }
-
     }
 
 
-    const renderAddedPhoto = (file, parent) => {
+    const renderAddedPhoto = (file, parent, index) => {
   
         const photoContainer = document.createElement('div');
         photoContainer.classList.add('topic__write-topic__photo-container');
@@ -1440,7 +1545,7 @@ const DiaryUI = (eventHandler) => {
         deleteButton.classList.add('topic__write-topic__uploaded-photos__delete-button');
         deleteButton.addEventListener('click', (e) => {
             photoContainer.remove();
-            eventHandler(e, {type: 'delete-photo', file})
+            eventHandler(e, {type: 'delete-photo', file, index})
         });   
         photoContainer.appendChild(deleteButton);
 

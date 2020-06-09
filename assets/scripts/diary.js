@@ -183,11 +183,9 @@ const Diary = () => {
         },*/
         writeTopic: {
             variables: {
-                tempMedia: [],
+                tempMedia: new Map(),
             },
             render: () => {
-                //ui.clearBaseUI();
-                //ui.startTopicUI();
                 ui.renderWriteTopic();
             },
             eventHandler: (e, params) => {
@@ -195,26 +193,35 @@ const Diary = () => {
                 switch(params.type) {
                     
                     case 'delete-photo':
-                        const index = STATES.writeTopic.variables.tempMedia.indexOf(params.file);
-                        STATES.writeTopic.variables.tempMedia.splice(index, 1);
+                        const media = STATES.writeTopic.variables.tempMedia.get(params.index);
+                        const fileIndex = media.indexOf(params.file);
+                        media.splice(fileIndex, 1)
+                        STATES.writeTopic.variables.tempMedia.set(params.index, media);
                         break;
 
                     case 'done':
-                        model.createTopic({
-                            text: params.text, 
-                            timestamp: params.timestamp,
-                            tempFiles: STATES.writeTopic.variables.tempMedia,
-                        });
-                        STATES.writeTopic.variables.tempMedia = []
+                        console.log(params.topics);
+                        for(const [index, {text, timestamp}] of params.topics.entries()) {
+                            model.createTopic({
+                                text, 
+                                timestamp,
+                                tempFiles: STATES.writeTopic.variables.tempMedia.has(index) ? STATES.writeTopic.variables.tempMedia.get(index) : [],
+                            });   
+                        }
+                        STATES.writeTopic.variables.tempMedia = new Map();
                         updateState(STATES.topicsFound);
                         break;
                     
                     case 'back': 
-                        updateState(STATES.topicsOptions);
+                        updateState(STATES.topicsFound);
                         break;
 
                     case 'upload-files':
-                        STATES.writeTopic.variables.tempMedia = STATES.writeTopic.variables.tempMedia.concat(params.files);
+                        console.log(params);
+                        if(STATES.writeTopic.variables.tempMedia.has(params.index))
+                            STATES.writeTopic.variables.tempMedia.set(params.index, STATES.writeTopic.variables.tempMedia.get(params.index).concat(params.files));
+                        else
+                            STATES.writeTopic.variables.tempMedia.set(params.index, params.files);
                         break;
                 }
 
@@ -470,7 +477,7 @@ const Diary = () => {
 
     //ui.renderBaseUI();
     updateState(STATES.uploadFiles);
-  
+    //updateState(STATES.writeTopic);
 
 }
 

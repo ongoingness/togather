@@ -222,6 +222,7 @@ body, textarea, button, input, select, pre {
     margin-top: 8px;
     vertical-align: middle;
     width: 100%;
+    height: auto;
 }
 
 .topic__write-topic__photo-container {
@@ -230,17 +231,16 @@ body, textarea, button, input, select, pre {
 
 .topic__write-topic__uploaded-photos__delete-button {
     position: absolute;
-    height: 3vh;
-    width: 3vh;
+    height: 24px;
+    width: 24px;
     background: white;
-    right: 0.1vh;
-    top: 1.2vh;
+    right: 1px;
+    top: 10px;
     border: none;
     padding: 0;
     margin: 0;
-    border-radius: 15vh;
+    border-radius: 100px;
 }
-
 
 .chat__list__background {
     background-image: url("{{ '/assets/images/background_pattern_chat.svg' | prepend: site.baseurl }}");
