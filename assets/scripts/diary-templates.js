@@ -570,7 +570,7 @@ const DiaryTemplates = () => {
 
     }*/
 
-    const previewPdf = (doc, pageNum) => {
+    const previewPdf = (doc, pageNum, canvas) => {
 
         const pdfData = doc.output('arraybuffer');
         
@@ -584,13 +584,12 @@ const DiaryTemplates = () => {
           var pageNumber = pageNum > pdf.numPages || pageNum < 1 || pageNum === undefined ? pdf.numPages : pageNum;
           pdf.getPage(pageNumber).then(function(page) {
 
-            var canvas = document.getElementById('preview');
             var context = canvas.getContext('2d');
         
             var viewport = page.getViewport({scale: 10});
             canvas.width = viewport.width;
             canvas.height = viewport.height;
-            canvas.style.height = "100%";
+            //canvas.style.height = "100%";
 
             var renderContext = {
               canvasContext: context,

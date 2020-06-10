@@ -1809,6 +1809,83 @@ const DiaryUI = (eventHandler) => {
 
     const renderSelectMessages = (dayData, allMessagesData) => {
 
+        renderDiaryHeader(document.body, 4);
+
+        const content = document.createElement('div');
+        content.classList.add('content');
+        document.body.appendChild(content);
+
+        const upperPage = document.createElement('div');
+        upperPage.classList.add('upper-page');
+        content.appendChild(upperPage);
+
+        const title = document.createElement('div');
+        title.classList.add('title', 'diary');
+        title.style.marginTop = '16px';
+        title.innerText = 'Select all messages for this day:';
+        upperPage.appendChild(title);
+
+        const dayScrollerContainer = document.createElement('div');
+        dayScrollerContainer.classList.add('day-scroller__container');
+        upperPage.appendChild(dayScrollerContainer);
+
+        const days = document.createElement('div');
+        days.classList.add('day-scroller__day-buttons-container');
+        dayScrollerContainer.appendChild(days);
+
+        const daysLeft = document.createElement('div');
+        daysLeft.classList.add('day-scroller__day-buttons-container__left');
+        days.appendChild(daysLeft);
+
+        const prevDay = document.createElement('button');
+        prevDay.id = 'prevDay';
+        prevDay.classList.add('day-scroller__prev');
+        prevDay.innerHTML = '&#10094;'
+        prevDay.addEventListener('click', (e) => eventHandler(e, {type: 'prev-day'}));  
+        daysLeft.appendChild(prevDay);
+
+        const daysCenter = document.createElement('div');
+        daysCenter.classList.add('day-scroller__day-buttons-container__center');
+        days.appendChild(daysCenter);
+
+        const dayDisplay = document.createElement('div');
+        dayDisplay.id = 'dayDisplay';
+        dayDisplay.classList.add('day-scroller__day-display');
+        daysCenter.appendChild(dayDisplay);
+
+        const daysRight = document.createElement('div');
+        daysRight.classList.add('day-scroller__day-buttons-container__right');
+        days.appendChild(daysRight);
+
+        const nextDay = document.createElement('button');
+        nextDay.id = 'nextDay';
+        nextDay.classList.add('day-scroller__next');
+        nextDay.innerHTML = '&#10095;'
+        nextDay.addEventListener('click', (e) => eventHandler(e, {type: 'next-day'}));  
+        daysRight.appendChild(nextDay);
+
+        const dotContainer = document.createElement('div');
+        dotContainer.id = 'dotContainer';
+        dotContainer.classList.add('day-scroller__dot-container');
+        dayScrollerContainer.appendChild(dotContainer);
+
+        const lowerPage = document.createElement('div');
+        lowerPage.id = 'lowerPage';
+        lowerPage.classList.add('lower-page');
+    
+        content.appendChild(lowerPage);
+
+        renderDay(dayData, allMessagesData);
+
+        const helpContent = document.createElement('div');
+        helpContent.classList.add('privacy__text');
+        helpContent.innerText = 'The topics we have found are the ones you shared through the Togather website. If you thought of your own topics you can add them here. You can select them from the chat, if you shared them there, or write your own. If there were days that you didn\'t have a topic, but messages were shared, then try to find a description for that. For example; A log of Monday. Or; Some things we liked to share today. This way we can add that day in the diary template.';
+
+        const {rightButton} = renderStepController(document.body, 4, helpContent);
+        rightButton.innerText = 'Review Diary >';
+/*  
+
+
         const headerText = document.getElementById('base-container-header-text');
         headerText.classList.add('base-container__header__text__override');
 
@@ -1944,21 +2021,14 @@ const DiaryUI = (eventHandler) => {
     
 
         }
-
+*/
     }
 
     const clearDay = () => {
 
         document.getElementById('dayDisplay').innerText = '';
         removeChildren('dotContainer');
-        document.getElementById('topicDisplayText').innerText = '';
-        document.getElementById('readMoreButton').classList.add('hidden');
-        document.getElementById('readLessButton').classList.add('hidden');
-        
-        const elements = document.getElementsByClassName('chat-message');
-        while(elements.length > 0){
-            elements[0].parentNode.removeChild(elements[0]);
-        }
+        removeChildren('lowerPage');
         
     }
 
@@ -1966,21 +2036,69 @@ const DiaryUI = (eventHandler) => {
 
         document.getElementById('dayDisplay').innerText = `${i18n.getStringById('day')} ${dayData.day}`;
         document.getElementById('dayDisplay').style = `color: ${dayData.color};`
+        document.getElementById('dayDisplay').addEventListener('click', e => document.getElementById('topicText').style.height = '100%')
+
+        if(dayData.day == 1) { 
+
+            document.getElementById('dayDisplay').style.position = 'relative';
+            const tapImage = document.createElement('img');
+            tapImage.src = "{{ '/assets/images/tap.svg' | prepend: site.baseurl }}";
+            tapImage.width = '25';
+            tapImage.height = '25';
+            tapImage.classList.add('day-display__tap');
+            document.getElementById('dayDisplay').appendChild(tapImage);
+
+        }
+
+        const topicTextOverlay = document.createElement('div');
+        topicTextOverlay.id = 'topicText';
+        topicTextOverlay.classList.add('overlay', 'topic-text');
+        lowerPage.appendChild(topicTextOverlay);
+
+        topicTextOverlay.addEventListener('click', e =>  document.getElementById('topicText').style.height = '0%')
+
+        const overlayContent = document.createElement('div');
+        overlayContent.classList.add('overlay-content', 'privacy');
+        topicTextOverlay.appendChild(overlayContent);
+
+        const topicTextTitle = document.createElement('div');
+        topicTextTitle.classList.add('overlay__text-box');
+        topicTextTitle.style.marginBottom = '20px';
+        topicTextTitle.innerText = `Topic Day ${dayData.day}:`;
+        overlayContent.appendChild(topicTextTitle);
+
+        const topicTextBox = document.createElement('div');
+        topicTextBox.classList.add('overlay__text-box');
+        topicTextBox.style.maxHeight = '250px';
+        topicTextBox.style.overflowY = 'auto';
+        topicTextBox.innerText = `"${dayData.text}"`;
+        overlayContent.appendChild(topicTextBox);
+
+        const topicCheckBox = document.createElement('div');
+        topicCheckBox.classList.add('overlay__text-box');
+        overlayContent.appendChild(topicCheckBox);
+
+        const checkButtonImage = document.createElement('img');
+        checkButtonImage.src = "{{ '/assets/images/checkmark.svg' | prepend: site.baseurl }}";
+        checkButtonImage.width = '25';
+        checkButtonImage.height = '25';
+        checkButtonImage.classList.add('overlay__topic__checkmark');
+        topicCheckBox.appendChild(checkButtonImage);
 
         if(dayData.index == dayData.totalOfTopics-1) {
             document.getElementById('nextDay').style.display = 'none';
-            document.getElementById('finishDiary').style.display = 'inline-block';
+            //document.getElementById('finishDiary').style.display = 'inline-block';
         } else {
             document.getElementById('nextDay').style.display = 'inline-block';
-            document.getElementById('finishDiary').style.display = 'none';
+            //document.getElementById('finishDiary').style.display = 'none';
         }
 
         if(dayData.index == 0) {
             document.getElementById('prevDay').style.display = 'none';
-            document.getElementById('topics').style.display = 'inline-block';
+            //document.getElementById('topics').style.display = 'inline-block';
         } else {
             document.getElementById('prevDay').style.display = 'inline-block';
-            document.getElementById('topics').style.display = 'none';
+            //document.getElementById('topics').style.display = 'none';
         }
 
         for(let i = 0; i < dayData.totalOfTopics; i++) {
@@ -1994,6 +2112,7 @@ const DiaryUI = (eventHandler) => {
             document.getElementById('dotContainer').appendChild(dot);
         }
 
+        /*
         if(dayData.text.length > 0) {
 
             const joinedText = dayData.text.join(' ');
@@ -2006,20 +2125,20 @@ const DiaryUI = (eventHandler) => {
             }
 
         }
-
+        */
    
         for(let message of allMessagesData) {
 
             const isSelected = dayData.selectedMessages.some(sm => sm.hash === message.hash);
             const isFromDay = new Date(message.fulltimestamp).getDate() === new Date(dayData.timestamp).getDate()
 
-            renderChatMessage(message, 'baseList', isSelected, isFromDay);
+            renderChatMessage(message, 'lowerPage', isSelected, isFromDay);
         }
 
         let dayMessages = document.getElementsByClassName('chat-message day');
         if(dayMessages.length > 0) {
             console.log('hello')
-            document.getElementById('baseList').scrollTop = dayMessages[0].offsetTop - (window.innerHeight * 0.35) ;
+            document.getElementById('lowerPage').scrollTop = dayMessages[0].offsetTop - (window.innerHeight * 0.35) ;
         }
 
     }
@@ -2060,6 +2179,184 @@ const DiaryUI = (eventHandler) => {
 
     }
 
+    const renderReviewDiary = () => {
+
+        renderDiaryHeader(document.body, 5);
+
+        const content = document.createElement('div');
+        content.classList.add('content');
+        document.body.appendChild(content);
+
+        const upperPage = document.createElement('div');
+        upperPage.classList.add('upper-page');
+        content.appendChild(upperPage);
+
+        const title = document.createElement('div');
+        title.classList.add('title', 'diary');
+        title.style.marginTop = '16px';
+        title.innerText = 'Review your diary, is it complete?';
+        upperPage.appendChild(title);
+
+        const lowerPage = document.createElement('div');
+        lowerPage.id = 'lowerPage';
+        lowerPage.classList.add('lower-page');
+        content.appendChild(lowerPage);
+
+        const pageContainer = document.createElement('div');
+        pageContainer.id = 'pageContainer';
+        pageContainer.style.margin = '25px';
+        lowerPage.appendChild(pageContainer);
+
+        const helpContent = document.createElement('div');
+        helpContent.classList.add('privacy__text');
+        helpContent.innerText = 'Go through the pages of your diary. Check if all the days, with their topics and messages are there. When you are happy with the diary you can save and download it. If there are things missing, go back to the previous step and add them.';
+
+        const {rightButton} = renderStepController(document.body, 5, helpContent);
+        rightButton.innerText = 'Finish Diary';
+
+    }
+
+    const renderPreviewDiaryPage = () => {
+
+        const canvas = document.createElement('canvas');
+        canvas.id = 'preview';
+        canvas.classList.add('preview-canvas');
+        document.getElementById('pageContainer').appendChild(canvas);
+        
+        return canvas;
+    }
+
+    const renderDownloadDiary = () => {
+
+        renderDiaryHeader(document.body, 5);
+
+        const content = document.createElement('div');
+        content.classList.add('content');
+        document.body.appendChild(content);
+
+        const upperPage = document.createElement('div');
+        upperPage.classList.add('upper-page');
+        content.appendChild(upperPage);
+
+        const title = document.createElement('div');
+        title.classList.add('title', 'diary');
+        title.style.marginTop = '16px';
+        title.innerText = 'Your diary is ready!';
+        upperPage.appendChild(title);
+
+        const gradient = document.createElement('div');
+        gradient.classList.add('gradient-container', 'diary');
+        content.appendChild(gradient);
+
+        const centerContainer = document.createElement('div');
+        centerContainer.style.margin = 'auto';
+        centerContainer.style.font = 'Bold 18px/24px Open Sans';
+        gradient.appendChild(centerContainer);
+        
+        const textBox1 = document.createElement('div');
+        textBox1.classList.add('text-box');
+        textBox1.innerText = 'Download your Diary here:';
+        textBox1.style.marginTop = '28px';
+        centerContainer.appendChild(textBox1);
+        
+        const downloadButton = document.createElement('button');
+        downloadButton.classList.add('button', 'round', 'diary');
+        downloadButton.innerText = 'Download Diary';
+        downloadButton.addEventListener('click', e => eventHandler(e, {type: 'download-diary'}));
+        centerContainer.appendChild(downloadButton);
+    }
+
+    const renderAskFeedback = () => {
+
+        renderDiaryHeader(document.body, 5);
+
+        const content = document.createElement('div');
+        content.classList.add('content');
+        document.body.appendChild(content);
+
+        const upperPage = document.createElement('div');
+        upperPage.classList.add('upper-page');
+        content.appendChild(upperPage);
+
+        const title = document.createElement('div');
+        title.classList.add('title', 'diary');
+        title.style.marginTop = '16px';
+        title.innerText = 'Your diary is ready!';
+        upperPage.appendChild(title);
+
+        const gradient = document.createElement('div');
+        gradient.classList.add('gradient-container', 'diary');
+        content.appendChild(gradient);
+
+        const centerContainer = document.createElement('div');
+        centerContainer.style.margin = 'auto';
+        gradient.appendChild(centerContainer);
+        
+        const textBox1 = document.createElement('div');
+        textBox1.classList.add('text-box');
+        textBox1.innerText = 'Thanks for using Togather, as we are curious to how you have experienced living with togather, we are keen to hear your thoughts!';
+        textBox1.style.marginTop = '28px';
+        centerContainer.appendChild(textBox1);
+        
+        const giveButton = document.createElement('button');
+        giveButton.classList.add('button', 'round', 'diary');
+        giveButton.style.backgroundColor = '#00797D';
+        giveButton.innerText = 'Give Feedback';
+        giveButton.addEventListener('click', e => eventHandler(e, {type: 'give-feedback'}));
+        centerContainer.appendChild(giveButton);
+
+        const noButton = document.createElement('button');
+        noButton.classList.add('button', 'round', 'diary');
+        noButton.style.backgroundColor = '#00797D';
+        noButton.style.marginTop = '25px';
+        noButton.innerText = 'No thanks';
+        noButton.addEventListener('click', e => eventHandler(e, {type: 'no'}));
+        centerContainer.appendChild(noButton);
+    }
+
+    const renderGiveFeedback = () => {
+
+        const content = document.createElement('div');
+        content.classList.add('content');
+        document.body.appendChild(content);
+
+        const gradient = document.createElement('div');
+        gradient.classList.add('gradient-container', 'diary');
+        content.appendChild(gradient);
+
+        const centerContainer = document.createElement('div');
+        centerContainer.classList.add('feedback__container');
+        gradient.appendChild(centerContainer);7
+
+        const title = document.createElement('div');
+        title.classList.add('title', 'feedback');
+        title.style.marginTop = '25px';
+        title.innerText = 'Feedback Form';
+        centerContainer.appendChild(title);
+        
+        const feedback = document.createElement('textarea');
+        feedback.classList.add('feedback__textarea');
+        centerContainer.appendChild(feedback);
+        
+        const consentLabel = document.createElement('label');
+        consentLabel.classList.add('feedback__label');
+        consentLabel.innerText = 'Consent text! Do I consent?';
+        centerContainer.appendChild(consentLabel);
+
+        const consent = document.createElement('input');
+        consent.classList.add('feedback__checkbox');
+        consent.type = 'checkbox';
+        consentLabel.appendChild(consent);
+        
+        const giveButton = document.createElement('button');
+        giveButton.classList.add('button', 'round', 'diary');
+        giveButton.style.backgroundColor = '#00797D';
+        giveButton.innerText = 'Submit';
+        giveButton.addEventListener('click', e => eventHandler(e, {type: 'give-feedback', feedback: feedback.value, consent: consent.checked}));
+        centerContainer.appendChild(giveButton);
+
+    }
+
   
     return {
 
@@ -2070,6 +2367,12 @@ const DiaryUI = (eventHandler) => {
         renderDiarySteps,
         renderWhoTheDiaryIsFor,
         renderWhoContributed,
+
+        renderReviewDiary,
+        renderPreviewDiaryPage,
+        renderDownloadDiary,
+        renderAskFeedback,
+        renderGiveFeedback,
 
         clearPage,
 

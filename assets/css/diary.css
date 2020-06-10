@@ -6,6 +6,11 @@
     src: url('../fonts/ostrich-sans/OstrichSans-Black.otf');
 }
 
+@font-face {
+    font-family: 'Ostrich Sans Medium';
+    src: url('../fonts/ostrich-sans/OstrichSans-Medium.otf');
+}
+
 body, textarea, button, input, select, pre {
     font-family: 'Open Sans', sans-serif;
 }
@@ -302,13 +307,11 @@ body, textarea, button, input, select, pre {
 .day-scroller__container {
     width: 100%;
     height: 100%;
-    padding-left: 1vh;
-    padding-right: 1vh;
 }
 
 .day-scroller__day-buttons-container {
     display: flex;
-    margin-top: 2.7vh;
+    margin-top: 18px;
 }
 
 .day-scroller__day-buttons-container__left, .day-scroller__day-buttons-container__right{
@@ -335,22 +338,24 @@ body, textarea, button, input, select, pre {
     border-style: solid;
     border-color: black;
     border-width: thin;
-    max-width: 12vh;
+    max-width: 75px;
     margin: auto;
 }
 
 .day-scroller__prev, .day-scroller__next {
-    cursor: pointer; 
+    font-family: 'Ostrich Sans Medium';
+    cursor: pointer;
     color: black;
     font-weight: bold;
     font-size: 18px;
     user-select: none;
-    background: white;
-    border-style: solid;
-    border-color: black;
-    border-radius: 250px;
-    width: 7vh;
-    height: 6vh;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #000000;
+    border-radius: 30px;
+    opacity: 1;
+    width: 37px;
+    height: 27px;
+    line-height: 27px;
 }
   
   /* Position the "next button" to the right */
@@ -369,7 +374,7 @@ body, textarea, button, input, select, pre {
 
 .day-scroller__dot-container {
     text-align: center;
-    padding-top: 0.5vh;
+    padding-top: 2px;
 }
 
 .day-scroller__dot {
@@ -462,11 +467,10 @@ body, textarea, button, input, select, pre {
 }
 
 .preview-canvas {
-    border: 1px solid black; 
-    direction: ltr;  
-    height: 100%;  
-    margin:auto;
-    margin-left: 0;
+    border: 1px solid black;
+    direction: ltr;
+    height: auto;
+    width: 100%;
 }
 
 .preview-button {
@@ -726,4 +730,71 @@ body, textarea, button, input, select, pre {
 .topic__media__image {
     width: 100%;
     height: auto;
+}
+
+
+.overlay.topic-text {
+    background: #E26A6A 0% 0% no-repeat padding-box;
+    opacity: 0.95;
+    height: 100%;
+    width: 100%;
+    overflow-y: hidden;
+    transition: 0.5s;
+    top: inherit;
+}
+
+.overlay__text-box {
+    text-align: center;
+    font: Bold Italic 20px/27px Open Sans;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    opacity: 1;
+    margin: 0 40px;
+}
+
+.overlay__topic__checkmark {
+    margin-top: 20px;
+    filter: invert(1);
+    width: 67px;
+    height: 54px;
+}
+
+.day-display__tap {
+    position: absolute;
+    transform: rotate(290deg);
+    width: 35px;
+    height: 35px;
+    top: -12px;
+    right: -25px;
+}
+   
+.feedback__container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    font: bold 18px / 24px "Open Sans";
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.title.feedback {
+    text-align: center;
+    font: 25px/30px 'Ostrich Sans Black';
+    letter-spacing: 0.5px;
+}
+
+.feedback__textarea {
+    resize: none;
+    height: 200px;
+    margin-bottom: 20px;
+}
+
+.feedback__checkbox {
+    width: 18px;
+    height: 18px;
+}
+
+.feedback__label {
+    font-weight: normal;
+    margin-bottom: 20px;
 }

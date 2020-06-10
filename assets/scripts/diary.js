@@ -5,6 +5,7 @@ import DiaryUI from './diary-ui.js';
 import DiaryModel from './diary-model.js';
 import DiaryTemplates from './diary-templates.js';
 import WhatsAppChatParser from './whatapp-chat-parser.js';
+import DataCollection from './data-collection.js';
 
 const Diary = () => {
 
@@ -338,8 +339,6 @@ const Diary = () => {
                 page: 1,
             },
             render: async () => {
-                ui.clearBaseUI();
-                ui.startChatUI();
                 const fullTopic = model.getTopicWithMessages(STATES.selectMessages.variables.topic);
                 STATES.selectMessages.variables.totalOfTopics = fullTopic.totalOfTopics;
                 STATES.selectMessages.variables.text = fullTopic.text.join(' ');
@@ -450,19 +449,104 @@ const Diary = () => {
                         }
                         break;
 
+                    case 'go-to-step-3':
+                        updateState(STATES.topicsFound);
+                        break;
+
+                    case 'go-to-step-5':
+                        updateState(STATES.reviewDiary);
+                        break;
+
                 }
             
             }   
         },
-        previewPdf: {
+        reviewDiary: {
 
-            render: async () => {
+            render: async() => {
+                const doc = await DiaryTemplates().generatePDF(model.getTopicsWithMessages(), STATES.selectMessages.variables.topic);
+                ui.renderReviewDiary();
+                for(let i = 0; i < doc.getNumberOfPages(); i++) {
+                    const canvas = ui.renderPreviewDiaryPage();
+                    DiaryTemplates().previewPdf(doc, i, canvas);
+                }
                 
-  
+            },
+            eventHandler: (e, params) => {
+
+                switch(params.type) {
+
+                    case 'go-to-step-4':
+                        updateState(STATES.selectMessages);
+                        break;
+
+                    case 'go-to-step-6':
+                        updateState(STATES.downloadDiary);
+                        break;
+                
+                }
+
+            }
+
+        },
+        downloadDiary: {
+            render: () => {
+                ui.renderDownloadDiary();
+            },
+            eventHandler: async(e,params) => {
+
+                switch(params.type) {
+
+                    case 'download-diary':
+                        const doc = await templates.generatePDF(model.getTopicsWithMessages(), STATES.selectMessages.variables.topic);
+                        templates.downloadPdf(doc);
+                        updateState(STATES.askFeedback);
+                        break;
+
+                }
+
+            }
+        },
+        askFeedback: {
+            render: () => {
+                ui.renderAskFeedback();
+            },
+            eventHandler: (e, params) => {
+
+                switch(params.type) {
+
+                    case 'give-feedback':
+                        updateState(STATES.giveFeedback);
+                        break;
+
+                    case 'no':
+                        window.location.href = `{{ site.url }}{{ site.baseurl }}/`;
+                        break;
+                }
+
+            }
+        },
+        giveFeedback: {
+            render: () => {
+                ui.renderGiveFeedback();
             },
             eventHandler: async(e, params) => {
 
-            },
+                switch(params.type) {
+
+                    case 'give-feedback':
+
+                        console.log(params);
+
+                        const result = await DataCollection().sendFeedback(params.feedback, params.consent);
+
+                        console.log(result);
+
+                        break
+
+                }
+
+            }
         }
     }
 
@@ -490,12 +574,13 @@ const Diary = () => {
         currentState.render();
     }
 
+    const templates = DiaryTemplates();
     const ui = DiaryUI(handleEvent);
     const model = DiaryModel();
 
-    //ui.renderBaseUI();
-    updateState(STATES.uploadFiles);
-    //updateState(STATES.writeTopic);
+
+    //updateState(STATES.uploadFiles);
+    updateState(STATES.giveFeedback);
 
 }
 
