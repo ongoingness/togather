@@ -542,16 +542,16 @@ body, textarea, button, input, select, pre {
     color: #E26A6A;
     margin: 0;
     padding: 0;
-    font-size: 9vh;
-    left: 0.5vh;
+    font-size: 50px;
+    left: 5px;
 }
 
 .privacy__text {
     font-family: 'Open Sans', sans-serif;
     font-size: 20px;
     font-style: italic;
-    margin-left: 4vh;
-    margin-right: 4vh;
+    margin-left: 25px;
+    margin-right: 25px;
     text-align: left;
 }
 
@@ -560,7 +560,7 @@ body, textarea, button, input, select, pre {
 }
 
 .overlay-content.privacy {
-    top: 10vh;
+    top: 65px;
     max-width: 600px;
     margin: 0 auto;
 }
@@ -649,8 +649,12 @@ body, textarea, button, input, select, pre {
     margin-top: 74px;
     font: Italic 16px/22px Open Sans;
     text-align: center;
-    border: 1px dashed #707070;
+    border: 2.5px dashed #707070;
     padding: 20px 50px;
+}
+
+.who__input-name:focus {
+    outline: none;
 }
 
 .step-controller__container {
@@ -663,7 +667,8 @@ body, textarea, button, input, select, pre {
 }
 
 .button.step-controller__step-button {
-    padding: 10px 20px;
+    /*padding: 10px 20px;*/
+    padding: 8px 12px;
 }
 
 .button.step-controller__help-button {
@@ -798,4 +803,16 @@ body, textarea, button, input, select, pre {
 .feedback__label {
     font-weight: normal;
     margin-bottom: 20px;
+}
+
+
+.closebtn.close-helper {
+    color: #E26A6A;
+    margin: 0;
+    padding: 0;
+    font-size: 50px;
+    top: initial;
+    bottom: 25px;
+    left: 50%;
+    transform: translate(-50%, 0);
 }

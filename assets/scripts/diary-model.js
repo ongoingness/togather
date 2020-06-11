@@ -388,6 +388,10 @@ const DiaryModel = () => {
             delete result.numbers
         return result;
     };
+
+    const updateUsername = (hash, name) => {
+        whatsAppChat.users[hash].name = name;
+    }
     
 
     return {
@@ -408,6 +412,7 @@ const DiaryModel = () => {
         getMessages,
         getMessage,
         getUsers,
+        updateUsername,
  
     };
 }

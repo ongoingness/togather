@@ -98,6 +98,11 @@ const Diary = () => {
                         updateState(STATES.uploadFiles);
                         break;
 
+                    
+                    case 'edit-name':
+                        model.updateUsername(params.hash, params.name);
+                        break;
+
                     case 'go-to-step-1':
                         updateState(STATES.whoTheDiaryIsFor);
                         break;

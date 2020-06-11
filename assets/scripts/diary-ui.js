@@ -263,6 +263,7 @@ const DiaryUI = (eventHandler) => {
         if(step != undefined) {
 
             const openNav = () => {
+          
                 document.getElementById('privacyNav').style.width = '100%';
             }
 
@@ -275,6 +276,8 @@ const DiaryUI = (eventHandler) => {
             nav.classList.add('overlay', 'privacy');
             document.body.appendChild(nav);
 
+            window.addEventListener('resize', (e) => overlayContent.style.minWidth = `${document.body.offsetWidth}px`);
+
             const closeNavElem = document.createElement('a');
             closeNavElem.href = 'javascript:void(0)';
             closeNavElem.classList.add('closebtn', 'close-diary');
@@ -285,14 +288,14 @@ const DiaryUI = (eventHandler) => {
             const overlayContent = document.createElement('div');
             overlayContent.id = 'exitContent';
             overlayContent.classList.add('overlay-content', 'privacy');
+            overlayContent.style.minWidth = `${document.body.offsetWidth}px`;
             nav.appendChild(overlayContent);
 
             const textContent = document.createElement('div');
             textContent.classList.add('privacy__text');
-            textContent.style.width = overlayContent.style.width;
             textContent.innerHTML = 'Because of our privacy measures if you quit now, <span class=\'bold\'>your process cannot be saved</span>. This means when you come back to assemble <span class=\'bold\'>you have to start over</span>. If you want a break you can leave this website open without losing your progress. <span class=\'bold\'>Are you sure</span> you want to stop assembling your diary?';
             overlayContent.appendChild(textContent);
-
+    
             const stopButton = document.createElement('button');
             stopButton.classList.add('button', 'round', 'diary');
             stopButton.style.marginTop = '8vh';
@@ -418,18 +421,22 @@ const DiaryUI = (eventHandler) => {
         const nav = document.createElement('div');
         nav.id = 'helpNav';
         nav.classList.add('overlay', 'privacy');
+        nav.style.opacity = '0.95';
         parent.appendChild(nav);
 
         const closeNavElem = document.createElement('a');
         closeNavElem.href = 'javascript:void(0)';
-        closeNavElem.classList.add('closebtn', 'close-diary');
+        closeNavElem.classList.add('closebtn', 'close-helper');
         closeNavElem.addEventListener('click', closeNav);
         closeNavElem.innerHTML = '&times;';
         nav.appendChild(closeNavElem);
 
         const overlayContent = document.createElement('div');
         overlayContent.classList.add('overlay-content', 'privacy');
+        overlayContent.style.minWidth = `${document.body.offsetWidth}px`;
         nav.appendChild(overlayContent);
+
+        window.addEventListener('resize', (e) => overlayContent.style.minWidth = `${document.body.offsetWidth}px`);
 
         if(helpContent != undefined)
             overlayContent.appendChild(helpContent);
@@ -515,9 +522,9 @@ const DiaryUI = (eventHandler) => {
         const inputName = document.createElement('input');
         inputName.classList.add('who__input-name');
         inputName.placeholder = 'Type the name here';
-        if(who != undefined)
+        inputName.addEventListener('input', () => rightButton.disabled = inputName.value.length === 0);
+        if(who != undefined && who != '')
             inputName.value = who;
-
         lowerPage.appendChild(inputName);
 
         const helpText = document.createElement('div');
@@ -527,6 +534,9 @@ const DiaryUI = (eventHandler) => {
         const { rightButton, rightButtonListener } = renderStepController(document.body, 1, helpText);
         rightButton.removeEventListener('click', rightButtonListener);
         rightButton.addEventListener('click', e => eventHandler(e, {type: `go-to-step-2`, who: inputName.value}));
+
+        if(inputName.value == undefined || inputName.value == '')
+            rightButton.disabled = true;
     }
 
     const renderWhoContributed = (userData) => {
@@ -1117,15 +1127,6 @@ const DiaryUI = (eventHandler) => {
 
     }
     */
-
-    const getRandomColor = () => {
-        var letters = '0123456789ABCDEF';
-        var color = '#';
-        for (var i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-    }
 
     const renderWriteTopic = (topicData) => {
 
@@ -1884,7 +1885,18 @@ const DiaryUI = (eventHandler) => {
         helpContent.innerText = 'The topics we have found are the ones you shared through the Togather website. If you thought of your own topics you can add them here. You can select them from the chat, if you shared them there, or write your own. If there were days that you didn\'t have a topic, but messages were shared, then try to find a description for that. For example; A log of Monday. Or; Some things we liked to share today. This way we can add that day in the diary template.';
 
         const {rightButton} = renderStepController(document.body, 4, helpContent);
-        rightButton.innerText = 'Review Diary >';
+
+        /*
+        const rightButtonTextSmall = document.createElement('span');
+        rightButtonTextSmall.innerText = 'Review Diary';
+        rightButtonTextSmall.style.fontSize = '15px';
+        rightButtonTextSmall.style.lineHeight = '24px';
+        rightButtonTextSmall.style.paddingRight = '2px';
+        const textNode = document.createTextNode('>');
+        rightButton.innerText = '';
+        rightButton.appendChild(rightButtonTextSmall);
+        rightButton.appendChild(textNode);
+        */
 /*  
 
 
