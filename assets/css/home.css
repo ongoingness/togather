@@ -55,7 +55,8 @@ body {
 
 .content {
     width: 100%;
-    height: 74%;
+    /*height: 74%;*/
+    height: 83%;
     min-height: 400px;
     display: flex;
     flex-direction: column;

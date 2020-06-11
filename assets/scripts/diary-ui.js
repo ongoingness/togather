@@ -153,6 +153,7 @@ const DiaryUI = (eventHandler) => {
         uploadFilesInput.type = 'file';
         uploadFilesInput.multiple = true;
         uploadFilesInput.addEventListener('change', e => eventHandler(e, {type: 'upload-files', files: uploadFilesInput.files}));
+        uploadFilesInput.addEventListener('click', e => uploadFilesInput.value = null);
         selectFilesButton.appendChild(uploadFilesInput);
 
         const filesSelectedContainer = document.createElement('div');
@@ -259,7 +260,6 @@ const DiaryUI = (eventHandler) => {
         rightColumn.style.margin = 'auto';
         assembleHeader.appendChild(rightColumn);
 
-
         if(step != undefined) {
 
             const openNav = () => {
@@ -328,13 +328,14 @@ const DiaryUI = (eventHandler) => {
         container.style.width = '100%';
         container.style.height = '100%';
         container.style.position = 'relative';
-        container.style.overflow = 'hidden';
+        container.style.overflowX = 'hidden';
         document.body.appendChild(container); 
 
         renderDiaryHeader(container);
         
         const content = document.createElement('div');
         content.classList.add('content');
+        content.style.height = '94%';
         container.appendChild(content);
 
         const gradient = document.createElement('div');
@@ -394,11 +395,12 @@ const DiaryUI = (eventHandler) => {
         const goButton = document.createElement('button');
         goButton.classList.add('button', 'round', 'diary');
         goButton.style.marginTop = '130px';
+        goButton.style.marginBottom = '30px';
         goButton.innerHTML = 'Go to step 1';
         goButton.addEventListener('click', e => eventHandler(e, {type: 'go-to-step-1'}));
         gradient.appendChild(goButton);
 
-        renderSiteFooter(container);
+        renderSiteFooter(gradient);
 
     }
 

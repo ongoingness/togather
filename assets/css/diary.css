@@ -657,8 +657,9 @@ body, textarea, button, input, select, pre {
     display: flex;
     flex-direction: row;
     width: 100%;
-    min-height: 95px;
-    height: 19%;
+    /*min-height: 95px;*/
+    /*height: 19%;*/
+    height: 10%;
 }
 
 .button.step-controller__step-button {
