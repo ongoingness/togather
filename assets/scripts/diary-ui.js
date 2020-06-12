@@ -197,21 +197,10 @@ const DiaryUI = (eventHandler) => {
         startButton.classList.add('button', 'round', 'diary');
         startButton.innerHTML = 'Start assembling';
         startButton.disabled = true;
-        
-        const { openLoader } = renderLoader(document.body);
 
         const startButtonClickListener = e => {
+            renderButtonLoader(startButton);
             eventHandler(e, {type: 'start-assembling'});
-            //openLoader();
-            const width = startButton.offsetWidth;
-            startButton.disabled = true;
-            startButton.style.width = `${width}px`;
-
-            const icon = document.createElement('i');
-            icon.classList.add('button-loader');
-
-            startButton.innerText = '';
-            startButton.appendChild(icon);
         };
 
         //startButton.addEventListener('click', e => eventHandler(e, {type: 'start-assembling'}));
@@ -277,6 +266,17 @@ const DiaryUI = (eventHandler) => {
         container.append(loader);
 
         return {openLoader, closeLoader};
+    }
+
+    const renderButtonLoader = (button) => {
+        button.disabled = true;
+        button.style.width = `${button.offsetWidth}px`;
+        //button.style.height = `${button.offsetHeight}px`;
+        button.innerText = '';
+
+        const icon = document.createElement('i');
+        icon.classList.add('button-loader');
+        button.appendChild(icon);
     }
 
     const renderFile = (file) => {

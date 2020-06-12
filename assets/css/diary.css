@@ -831,8 +831,8 @@ body, textarea, button, input, select, pre {
     border: 3px solid #f3f3f3;
     border-top: 3px solid #E26A6A;
     border-radius: 50%;
-    width: 17px;
-    height: 17px;
+    width: 21px;
+    height: 21px;
     animation: spin 2s linear infinite;
 }
 
