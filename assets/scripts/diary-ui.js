@@ -271,7 +271,6 @@ const DiaryUI = (eventHandler) => {
     const renderButtonLoader = (button) => {
         button.disabled = true;
         button.style.width = `${button.offsetWidth}px`;
-        //button.style.height = `${button.offsetHeight}px`;
         button.innerText = '';
 
         const icon = document.createElement('i');
@@ -609,6 +608,14 @@ const DiaryUI = (eventHandler) => {
         inputName.classList.add('who__input-name');
         inputName.placeholder = 'Type the name here';
         inputName.addEventListener('input', () => rightButton.disabled = inputName.value.length === 0);
+        inputName.addEventListener('keyup', (e) => {
+            if (e.keyCode === 13) {
+                e.preventDefault();
+                inputName.blur();
+            }
+          });
+
+        inputName.addEventListener('submit', (e) =>  console.log('what'));
         if(who != undefined && who != '')
             inputName.value = who;
         lowerPage.appendChild(inputName);
