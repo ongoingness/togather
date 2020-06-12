@@ -663,8 +663,6 @@ const DiaryUI = (eventHandler) => {
         usernameList.classList.add('who-contributed__username-list');
         lowerPage.appendChild(usernameList);
 
-
-
         for(const hash in userData) {
 
             const username = document.createElement('div');
@@ -687,6 +685,18 @@ const DiaryUI = (eventHandler) => {
                 usernameCheck.style.display = 'block';
                 usernameText.disabled = false;
                 usernameText.focus();
+            });
+
+            usernameText.addEventListener('keyup', (e) => {
+                if (e.keyCode === 13) {
+                    e.preventDefault();
+                    usernameEdit.blur();
+                    username.classList.remove('edit');
+                    editButtonImage.style.display = 'block';
+                    usernameCheck.style.display = 'none';
+                    usernameText.disabled = true;
+                    eventHandler(e, {type: `edit-name`, hash, name: usernameText.value})
+                }
             });
 
             const editButtonImage = document.createElement('img');
