@@ -172,7 +172,9 @@ const DiaryUI = (eventHandler) => {
         uploadFilesInput.classList.add('upload-files__input');
         uploadFilesInput.type = 'file';
         uploadFilesInput.multiple = true;
-        const uploadFileChangeListener = (e) => eventHandler(e, {type: 'upload-files', files: uploadFilesInput.files});
+        const uploadFileChangeListener = (e) => {
+            eventHandler(e, {type: 'upload-files', files: uploadFilesInput.files})
+        };
         //uploadFilesInput.addEventListener('change', uploadFileChangeListener);
         addEventListener(uploadFilesInput, 'change', uploadFileChangeListener);
         //uploadFilesInput.addEventListener('click', e => uploadFilesInput.value = null);
@@ -200,7 +202,16 @@ const DiaryUI = (eventHandler) => {
 
         const startButtonClickListener = e => {
             eventHandler(e, {type: 'start-assembling'});
-            openLoader();
+            //openLoader();
+            const width = startButton.offsetWidth;
+            startButton.disabled = true;
+            startButton.style.width = `${width}px`;
+
+            const icon = document.createElement('i');
+            icon.classList.add('button-loader');
+
+            startButton.innerText = '';
+            startButton.appendChild(icon);
         };
 
         //startButton.addEventListener('click', e => eventHandler(e, {type: 'start-assembling'}));
