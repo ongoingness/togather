@@ -3,6 +3,24 @@
 
 const DiaryUI = (eventHandler) => {
 
+    /*
+        [ {elem, eventype, eventListener}]
+    */
+    const eventListeners = [];
+
+    const addEventListener = (elem, eventType, listener) => {
+        elem.addEventListener(eventType, listener);
+        eventListeners.push({elem, eventType, listener});
+        console.log(eventListeners);
+    }
+
+    const removeEventListeners = () => {
+        for( const {elem, eventType, listener} of eventListeners)
+            elem.removeEventListener(eventType, listener);
+        eventListeners.length = 0;
+        console.log(eventListeners);
+    }
+
     const renderSiteHeader = () => {
 
         const header = document.createElement('div');
@@ -19,7 +37,8 @@ const DiaryUI = (eventHandler) => {
 
         const hamburguer = document.createElement('div');
         hamburguer.classList.add('hamburguer');
-        hamburguer.addEventListener('click', openNav);
+        //hamburguer.addEventListener('click', openNav);
+        addEventListener(hamburguer, 'click', openNav);
         header.appendChild(hamburguer);
         
         for(let i = 0; i < 3; i++) {
@@ -41,7 +60,8 @@ const DiaryUI = (eventHandler) => {
         const closeNavElem = document.createElement('a');
         closeNavElem.href = 'javascript:void(0)';
         closeNavElem.classList.add('closebtn');
-        closeNavElem.addEventListener('click', closeNav);
+        //closeNavElem.addEventListener('click', closeNav);
+        addEventListener(closeNavElem, 'click', closeNav)
         closeNavElem.innerHTML = '&times;';
         nav.appendChild(closeNavElem);
 
@@ -152,8 +172,12 @@ const DiaryUI = (eventHandler) => {
         uploadFilesInput.classList.add('upload-files__input');
         uploadFilesInput.type = 'file';
         uploadFilesInput.multiple = true;
-        uploadFilesInput.addEventListener('change', e => eventHandler(e, {type: 'upload-files', files: uploadFilesInput.files}));
-        uploadFilesInput.addEventListener('click', e => uploadFilesInput.value = null);
+        const uploadFileChangeListener = (e) => eventHandler(e, {type: 'upload-files', files: uploadFilesInput.files});
+        //uploadFilesInput.addEventListener('change', uploadFileChangeListener);
+        addEventListener(uploadFilesInput, 'change', uploadFileChangeListener);
+        //uploadFilesInput.addEventListener('click', e => uploadFilesInput.value = null);
+        const uploadFilesClickListener = (e) => uploadFilesInput.value = null;
+        addEventListener(uploadFilesInput, 'click', uploadFilesClickListener);
         selectFilesButton.appendChild(uploadFilesInput);
 
         const filesSelectedContainer = document.createElement('div');
@@ -171,14 +195,25 @@ const DiaryUI = (eventHandler) => {
         startButton.classList.add('button', 'round', 'diary');
         startButton.innerHTML = 'Start assembling';
         startButton.disabled = true;
-        startButton.addEventListener('click', e => eventHandler(e, {type: 'start-assembling'}));
+        
+        const { openLoader } = renderLoader(document.body);
+
+        const startButtonClickListener = e => {
+            eventHandler(e, {type: 'start-assembling'});
+            openLoader();
+        };
+
+        //startButton.addEventListener('click', e => eventHandler(e, {type: 'start-assembling'}));
+        addEventListener(startButton, 'click', startButtonClickListener);
         gradient.appendChild(startButton);
 
         const instructionsButton = document.createElement('button');
         instructionsButton.classList.add('button', 'started', 'small-font');
         instructionsButton.style.marginTop = '4.5vh';
         instructionsButton.innerHTML = 'Full assembling instructions >>';
-        instructionsButton.addEventListener('click', () => location.href='{{ site.url }}{{ site.baseurl }}/instructions/');
+        const instructionsButtonClickListener = (e) => location.href='{{ site.url }}{{ site.baseurl }}/instructions/';
+        //instructionsButton.addEventListener('click', () => location.href='{{ site.url }}{{ site.baseurl }}/instructions/');
+        addEventListener(instructionsButton, 'click', instructionsButtonClickListener);
         gradient.appendChild(instructionsButton);
 
         const aboutButton = document.createElement('button');
@@ -186,11 +221,51 @@ const DiaryUI = (eventHandler) => {
         aboutButton.style.marginTop = '3vh';
         aboutButton.style.marginBottom = '6vh';
         aboutButton.innerHTML = 'How we assure your privacy >>';
-        aboutButton.addEventListener('click', () => location.href='{{ site.url }}{{ site.baseurl }}/about/');
+        const aboutButtonClickListener = (e) =>  location.href='{{ site.url }}{{ site.baseurl }}/about/';
+        //aboutButton.addEventListener('click', () => location.href='{{ site.url }}{{ site.baseurl }}/about/');
+        addEventListener(aboutButton, 'click', aboutButtonClickListener);
         gradient.appendChild(aboutButton);
 
         renderSiteFooter(document.body);
        
+    }
+
+
+    const renderLoader = (parent) => {
+
+        const openLoader = () => {
+            document.getElementById('loader').style.width = '100%';
+        }
+
+        const closeLoader = () => {
+            document.getElementById('loader').style.width = '0%';
+        }
+
+        const nav = document.createElement('div');
+        nav.id = 'loader';
+        nav.classList.add('overlay', 'privacy');
+        nav.style.opacity = '0.95';
+        parent.appendChild(nav);
+
+        const overlayContent = document.createElement('div');
+        overlayContent.classList.add('overlay-content', 'privacy');
+        overlayContent.style.minWidth = `${document.body.offsetWidth}px`;
+        overlayContent.style.height = '100%';
+        overlayContent.style.top = '0';
+        nav.appendChild(overlayContent);
+
+        window.addEventListener('resize', (e) => overlayContent.style.minWidth = `${document.body.offsetWidth}px`);
+
+        const container = document.createElement('div');
+        container.classList.add('step-controller__container');
+        container.style.height = '100%';
+        overlayContent.appendChild(container);
+
+        const loader = document.createElement('div');
+        loader.classList.add('loader');
+        container.append(loader);
+
+        return {openLoader, closeLoader};
     }
 
     const renderFile = (file) => {
@@ -671,6 +746,7 @@ const DiaryUI = (eventHandler) => {
     }
 
     const clearPage = () => {
+        removeEventListeners();
         removeChildren('body');
     }
 
