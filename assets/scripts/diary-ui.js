@@ -162,7 +162,7 @@ const DiaryUI = (eventHandler) => {
         gradient.appendChild(textBox2);
 
         const selectFilesButton = document.createElement('label');
-        selectFilesButton.classList.add('button', 'round', 'diary');
+        selectFilesButton.classList.add('button', 'round', 'diary','b-gradient');
         selectFilesButton.style.marginTop = '38px'
         selectFilesButton.innerHTML = 'Select Files';
         gradient.appendChild(selectFilesButton);
@@ -177,6 +177,7 @@ const DiaryUI = (eventHandler) => {
         };
         //uploadFilesInput.addEventListener('change', uploadFileChangeListener);
         addEventListener(uploadFilesInput, 'change', uploadFileChangeListener);
+
         //uploadFilesInput.addEventListener('click', e => uploadFilesInput.value = null);
         const uploadFilesClickListener = (e) => uploadFilesInput.value = null;
         addEventListener(uploadFilesInput, 'click', uploadFilesClickListener);
@@ -539,9 +540,11 @@ const DiaryUI = (eventHandler) => {
         let previousButtonListener;
         if(step > 1) {
             previousButton = document.createElement('button');
+            previousButton.id = 'leftButton';
             previousButton.classList.add('button', 'round', 'diary', 'step-controller__step-button');
             previousButton.innerText = `< Step ${step - 1}`;
             previousButtonListener = (e) => {
+                renderButtonLoader(previousButton);
                 eventHandler(e, {type: `go-to-step-${step - 1}`})
             } 
             previousButton.addEventListener('click', previousButtonListener);
@@ -565,10 +568,12 @@ const DiaryUI = (eventHandler) => {
         container.appendChild(column3);
 
         const nextButton = document.createElement('button');
+        nextButton.id = 'rightButton';
         nextButton.classList.add('button', 'round', 'diary', 'step-controller__step-button');
         nextButton.innerText = `Step ${step + 1} >`;
 
         const nextButtonListener = (e) => {
+            renderButtonLoader(nextButton);
             eventHandler(e, {type: `go-to-step-${step + 1}`})
         }
         nextButton.addEventListener('click', nextButtonListener);
@@ -578,6 +583,11 @@ const DiaryUI = (eventHandler) => {
     }
 
     const renderWhoTheDiaryIsFor = (who) => {
+
+        /*
+        window.addEventListener('beforeunload', (e) => {
+            
+        });*/
 
         renderDiaryHeader(document.body, 1);
 
@@ -626,7 +636,10 @@ const DiaryUI = (eventHandler) => {
 
         const { rightButton, rightButtonListener } = renderStepController(document.body, 1, helpText);
         rightButton.removeEventListener('click', rightButtonListener);
-        rightButton.addEventListener('click', e => eventHandler(e, {type: `go-to-step-2`, who: inputName.value}));
+        rightButton.addEventListener('click', e => {
+            renderButtonLoader(rightButton);
+            eventHandler(e, {type: `go-to-step-2`, who: inputName.value})
+        });
 
         if(inputName.value == undefined || inputName.value == '')
             rightButton.disabled = true;
@@ -671,9 +684,12 @@ const DiaryUI = (eventHandler) => {
 
             const usernameText = document.createElement('input');
             usernameText.classList.add('who-contributed__username-input');
+            usernameText.style.width = `${username.offsetWidth-75}px`;
             usernameText.value = userData[hash].name;
             usernameText.disabled = true;
             username.appendChild(usernameText);
+
+            window.addEventListener('resize', e => usernameText.style.width = `${username.offsetWidth-75}px`);
 
             const usernameEdit = document.createElement('button');
             usernameEdit.classList.add('who-contributed__username-edit');
@@ -681,7 +697,7 @@ const DiaryUI = (eventHandler) => {
 
             usernameEdit.addEventListener('click',  () => {
                 username.classList.add('edit');
-                editButtonImage.style.display = 'none';
+                usernameEdit.style.display = 'none';
                 usernameCheck.style.display = 'block';
                 usernameText.disabled = false;
                 usernameText.focus();
@@ -692,7 +708,7 @@ const DiaryUI = (eventHandler) => {
                     e.preventDefault();
                     usernameEdit.blur();
                     username.classList.remove('edit');
-                    editButtonImage.style.display = 'block';
+                    usernameEdit.style.display = 'block';
                     usernameCheck.style.display = 'none';
                     usernameText.disabled = true;
                     eventHandler(e, {type: `edit-name`, hash, name: usernameText.value})
@@ -718,7 +734,7 @@ const DiaryUI = (eventHandler) => {
 
             usernameCheck.addEventListener('click',  (e) => {
                 username.classList.remove('edit');
-                editButtonImage.style.display = 'block';
+                usernameEdit.style.display = 'block';
                 usernameCheck.style.display = 'none';
                 usernameText.disabled = true;
                 eventHandler(e, {type: `edit-name`, hash, name: usernameText.value})
@@ -845,18 +861,6 @@ const DiaryUI = (eventHandler) => {
 
     const renderTopicsFound = (topics) => {
 
-        if(topics == undefined) {
-
-            topics = [    {
-                day: 1,
-                hash: "ssss",
-                messages: [],
-                text: ['test1', 'test2', 'test3'],
-                timestamp: new Date().getTime(),
-                color: 'red',
-            }]
-
-        }
         renderDiaryHeader(document.body, 3);
 
         const content = document.createElement('div');
@@ -899,19 +903,28 @@ const DiaryUI = (eventHandler) => {
 
         const overlayContent = document.createElement('div');
         overlayContent.classList.add('overlay-content', 'topic__options');
+        overlayContent.style.minWidth = `${document.body.offsetWidth}px`;
         overlay.appendChild(overlayContent);
+
+        window.addEventListener('resize', (e) => overlayContent.style.minWidth = `${document.body.offsetWidth}px`);
 
         const selectFromChatButton = document.createElement('button');
         selectFromChatButton.classList.add('button', 'diary', 'round');
         selectFromChatButton.style.marginBottom = '50px';
         selectFromChatButton.innerText = 'Select from chat';
-        selectFromChatButton.addEventListener('click', (e) => eventHandler(e, {type: 'select-from-chat'})); 
+        selectFromChatButton.addEventListener('click', (e) => {
+            renderButtonLoader(selectFromChatButton);
+            eventHandler(e, {type: 'select-from-chat'});
+        }); 
         overlayContent.appendChild(selectFromChatButton);
 
         const writeButton = document.createElement('button');
         writeButton.classList.add('button', 'diary', 'round');
         writeButton.innerText = 'Write my own';
-        writeButton.addEventListener('click', (e) => eventHandler(e, {type: 'write-topic'})); 
+        writeButton.addEventListener('click', (e) => {
+            renderButtonLoader(writeButton);
+            eventHandler(e, {type: 'write-topic'});
+        }); 
         overlayContent.appendChild(writeButton);
 
         const addTopicContainer =  document.createElement('div');
@@ -936,28 +949,8 @@ const DiaryUI = (eventHandler) => {
         helpContent.classList.add('privacy__text');
         helpContent.innerText = 'The topics we have found are the ones you shared through the Togather website. If you thought of your own topics you can add them here. You can select them from the chat, if you shared them there, or write your own. If there were days that you didn\'t have a topic, but messages were shared, then try to find a description for that. For example; A log of Monday. Or; Some things we liked to share today. This way we can add that day in the diary template.';
 
-        renderStepController(document.body, 3, helpContent);
-
-        /*
-        document.getElementById('base-container-header-text').innerText = i18n.getStringById('topics_found_header');
-        
-        renderTopics(topics);
-
-        const addTopicButton  = document.createElement('button');
-        addTopicButton.classList.add('topic-button');
-        addTopicButton.classList.add('base-container__footer__item__button');
-        addTopicButton.innerText = i18n.getStringById('add_topics');
-        addTopicButton.addEventListener('click', (e) => eventHandler(e, {type: 'add-topic'}));              
-        document.getElementById('base-container-footer-left').appendChild(addTopicButton);
-
-        const thatsAllButton  = document.createElement('button');
-        thatsAllButton.classList.add('topic-button');
-        thatsAllButton.classList.add('base-container__footer__item__button');
-        thatsAllButton.innerText = i18n.getStringById('thats_all');
-        thatsAllButton.addEventListener('click', (e) => eventHandler(e, {type: 'thats-all'}));  
-        document.getElementById('base-container-footer-right').appendChild(thatsAllButton);
-        */
-
+        const { rightButton } = renderStepController(document.body, 3, helpContent);
+        rightButton.disabled = document.getElementsByClassName('topic__header').length === 0;
     }
 
     const renderTopic = (day, topicData) => {
@@ -998,6 +991,7 @@ const DiaryUI = (eventHandler) => {
         topicHeaderDeleteButton.classList.add('topic__header__delete-button');
         topicHeaderDeleteButton.addEventListener('click', (e) => {
             topic.remove();
+            document.getElementById('rightButton').disabled = document.getElementsByClassName('topic__header').length === 0;
             eventHandler(e, {type: 'delete-topic', day})
         });
         topicHeader.appendChild(topicHeaderDeleteButton);
@@ -1010,6 +1004,7 @@ const DiaryUI = (eventHandler) => {
 
         for(let line of topicData.text) {
             const topicText = document.createElement('div');
+            topicText.style.marginTop = '15px';
             topicText.innerText = `${line}`;
             topic.appendChild(topicText);
         }
@@ -1288,6 +1283,48 @@ const DiaryUI = (eventHandler) => {
         helpContent.classList.add('privacy__text');
         helpContent.innerText = 'The topics we have found are the ones you shared through the Togather website. If you thought of your own topics you can add them here. You can select them from the chat, if you shared them there, or write your own. If there were days that you didn\'t have a topic, but messages were shared, then try to find a description for that. For example; A log of Monday. Or; Some things we liked to share today. This way we can add that day in the diary template.';
 
+        const {leftButton, rightButton, leftButtonListener, rightButtonListener} = renderStepController(document.body, 3, helpContent);
+        leftButton.innerText = '< Back';
+        rightButton.innerText = topicData == undefined ? 'Add to topics' : 'Done';
+        if(topicData == undefined) rightButton.style.fontSize = 'large';
+
+        rightButton.removeEventListener('click', rightButtonListener);
+        const newRightButtonListener = (e) => {
+
+            renderButtonLoader(rightButton);
+
+            const topics = new Map();
+            const dates = document.getElementsByClassName('topic__write-topic__date');
+            const textAreas = document.getElementsByClassName('topic__write-topic__textarea');
+          
+            for(let i = 0; i < dates.length; i++) {
+
+                if(dates[i].valueAsDate != null && (textAreas[i].value != null && textAreas[i].value != ''))
+                    topics.set(`${dates[i].getAttribute('index')}`,{text: textAreas[i].value , timestamp: dates[i].valueAsDate.getTime()});
+            
+            }
+
+            const params = {type: 'done', topics};
+            if(topicData != undefined) params.hash = topicData.hash;
+            eventHandler(e, params);
+            
+        }
+        rightButton.addEventListener('click', newRightButtonListener);
+
+        leftButton.removeEventListener('click', leftButtonListener);
+        const newLeftButtonListener = (e) => {
+
+            renderButtonLoader(leftButton);
+            eventHandler(e, {type: 'back'});
+
+        }
+        leftButton.addEventListener('click', newLeftButtonListener);
+
+        /*
+        const helpContent = document.createElement('div');
+        helpContent.classList.add('privacy__text');
+        helpContent.innerText = 'The topics we have found are the ones you shared through the Togather website. If you thought of your own topics you can add them here. You can select them from the chat, if you shared them there, or write your own. If there were days that you didn\'t have a topic, but messages were shared, then try to find a description for that. For example; A log of Monday. Or; Some things we liked to share today. This way we can add that day in the diary template.';
+
         const openNav = () => {
             document.getElementById('helpNav').style.width = '100%';
         }
@@ -1365,11 +1402,14 @@ const DiaryUI = (eventHandler) => {
 
             const params = {type: 'done', topics};
             if(topicData != undefined) params.hash = topicData.hash;
-            eventHandler(e, params)
+            eventHandler(e, params);
             
         }
         nextButton.addEventListener('click', nextButtonListener);
         column3.appendChild(nextButton);
+
+        */
+
         
         /*
 
@@ -1504,17 +1544,24 @@ const DiaryUI = (eventHandler) => {
         topicDate.id = 'topicDate';
         topicDate.setAttribute('index', `${index}`);
         topicDate.classList.add('topic__write-topic__input', 'topic__write-topic__date');
+        topicDate.placeholder = 'DD/MM/YYYY';
         if(topicData != null)
             topicDate.valueAsDate = new Date(topicData.fulltimestamp);
         container.appendChild(topicDate);
 
+        const textAreaContainer = document.createElement('div');
+        container.appendChild(textAreaContainer);
+
         const topicTextArea = document.createElement('textarea');
         topicTextArea.classList.add('topic__write-topic__input', 'topic__write-topic__textarea');
         topicTextArea.placeholder = 'Type your topic description here';
-        topicTextArea.resize
+        topicTextArea.resize = false;
+        topicTextArea.style.height = '150px';
         if(topicData != null)
             topicTextArea.textContent = topicData.text;
-        container.appendChild(topicTextArea);
+        textAreaContainer.appendChild(topicTextArea);
+
+        topicTextArea.style.height = topicTextArea.offsetHeight;
 
         container.appendChild(document.createElement('br'));
 
@@ -1715,8 +1762,32 @@ const DiaryUI = (eventHandler) => {
 
         const helpContent = document.createElement('div');
         helpContent.classList.add('privacy__text');
-        helpContent.innerText = 'The topics we have found are the ones you shared through the Togather website. If you thought of your own topics you can add them here. You can select them from the chat, if you shared them there, or write your own. If there were days that you didn\'t have a topic, but messages were shared, then try to find a description for that. For example; A log of Monday. Or; Some things we liked to share today. This way we can add that day in the diary template.';
+        helpContent.innerText = 'Find the topics that we missed from you WhatsApp group chat. select them to add them to the topic list.';
 
+        const {leftButton, rightButton, leftButtonListener, rightButtonListener} = renderStepController(document.body, 3, helpContent);
+        leftButton.innerText = '< Back';
+        rightButton.innerText = 'Add to topics';
+        rightButton.style.fontSize = 'large';
+
+        rightButton.removeEventListener('click', rightButtonListener);
+        const newRightButtonListener = (e) => {
+
+            renderButtonLoader(rightButton);
+            eventHandler(e, {type: 'done'});
+            
+        }
+        rightButton.addEventListener('click', newRightButtonListener);
+
+        leftButton.removeEventListener('click', leftButtonListener);
+        const newLeftButtonListener = (e) => {
+
+            renderButtonLoader(leftButton);
+            eventHandler(e, {type: 'back'});
+
+        }
+        leftButton.addEventListener('click', newLeftButtonListener);
+
+        /*
         const openNav = () => {
             document.getElementById('helpNav').style.width = '100%';
         }
@@ -1784,6 +1855,8 @@ const DiaryUI = (eventHandler) => {
 
         nextButton.addEventListener('click', (e) => eventHandler(e, {type: 'done'}));
         column3.appendChild(nextButton);
+
+        */
         
 
         /*

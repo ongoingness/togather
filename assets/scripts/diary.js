@@ -215,7 +215,8 @@ const Diary = () => {
                         updateState(STATES.topicsFound);
                         break;
                     
-                    case 'back': 
+                    case 'back':
+                        STATES.writeTopic.variables.tempMedia = new Map();
                         updateState(STATES.topicsFound);
                         break;
 
@@ -274,22 +275,13 @@ const Diary = () => {
                 const topic = model.getMessage(hash);
                 STATES.editTopic.variables.tempMedia.set("0", topic.files);
                 ui.renderEditTopic(topic);
-                /*
-                const hash = STATES.editTopic.parameters.hash;
-                const topic = model.getMessage(hash);
-                STATES.editTopic.variables.tempMedia = topic.files;
-                console.log(STATES.editTopic.variables.tempMedia);
-                ui.clearBaseUI();
-                ui.startTopicUI();
-                ui.renderEditTopic(topic);
-                */
             },
             eventHandler: (e, params) => {
 
                 switch(params.type) {
 
                     case 'delete-photo':
-                        const media = STATES.editTopic.variables.tempMedia.get(Number(params.index));
+                        const media = STATES.editTopic.variables.tempMedia.get(params.index);
                         const fileIndex = media.indexOf(params.file);
                         media.splice(fileIndex, 1)
                         STATES.editTopic.variables.tempMedia.set(params.index, media);
