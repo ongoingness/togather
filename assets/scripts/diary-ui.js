@@ -2078,156 +2078,6 @@ const DiaryUI = (eventHandler) => {
         
         rightButton.disabled = dayData.index + 1 < dayData.totalOfTopics;
 
-        /*
-        const rightButtonTextSmall = document.createElement('span');
-        rightButtonTextSmall.innerText = 'Review Diary';
-        rightButtonTextSmall.style.fontSize = '15px';
-        rightButtonTextSmall.style.lineHeight = '24px';
-        rightButtonTextSmall.style.paddingRight = '2px';
-        const textNode = document.createTextNode('>');
-        rightButton.innerText = '';
-        rightButton.appendChild(rightButtonTextSmall);
-        rightButton.appendChild(textNode);
-        */
-/*  
-
-
-        const headerText = document.getElementById('base-container-header-text');
-        headerText.classList.add('base-container__header__text__override');
-
-        const dayScrollerContainer = document.createElement('div');
-        dayScrollerContainer.classList.add('day-scroller__container');
-        headerText.appendChild(dayScrollerContainer);
-
-        const days = document.createElement('div');
-        days.classList.add('day-scroller__day-buttons-container');
-        dayScrollerContainer.appendChild(days);
-
-        const daysLeft = document.createElement('div');
-        daysLeft.classList.add('day-scroller__day-buttons-container__left');
-        days.appendChild(daysLeft);
-
-        const prevDay = document.createElement('button');
-        prevDay.id = 'prevDay';
-        prevDay.classList.add('day-scroller__prev');
-        prevDay.innerHTML = '&#10094;'
-        prevDay.addEventListener('click', (e) => eventHandler(e, {type: 'prev-day'}));  
-        daysLeft.appendChild(prevDay);
-
-        const daysCenter = document.createElement('div');
-        daysCenter.classList.add('day-scroller__day-buttons-container__center');
-        days.appendChild(daysCenter);
-
-        const dayDisplay = document.createElement('div');
-        dayDisplay.id = 'dayDisplay';
-        dayDisplay.classList.add('day-scroller__day-display');
-        daysCenter.appendChild(dayDisplay);
-
-        const daysRight = document.createElement('div');
-        daysRight.classList.add('day-scroller__day-buttons-container__right');
-        days.appendChild(daysRight);
-
-        const nextDay = document.createElement('button');
-        nextDay.id = 'nextDay';
-        nextDay.classList.add('day-scroller__next');
-        nextDay.innerHTML = '&#10095;'
-        nextDay.addEventListener('click', (e) => eventHandler(e, {type: 'next-day'}));  
-        daysRight.appendChild(nextDay);
-
-        const dotContainer = document.createElement('div');
-        dotContainer.id = 'dotContainer';
-        dotContainer.classList.add('day-scroller__dot-container');
-        dayScrollerContainer.appendChild(dotContainer);
-
-        const baseList = document.getElementById('baseList');
-        baseList.classList.add('no-padding');
-
-        const topicDisplay = document.createElement('div');
-        topicDisplay.id = 'topicDisplay';
-        topicDisplay.classList.add('select-messages__topic-display');
-        baseList.appendChild(topicDisplay);
-
-        const topicDisplayText = document.createElement('span');
-        topicDisplayText.id = 'topicDisplayText';
-        topicDisplay.appendChild(topicDisplayText);
-
-        const buttonContainer = document.createElement('div');
-        buttonContainer.classList.add('select-messages__button-container');
-        topicDisplay.appendChild(buttonContainer);
-
-        const readMoreButton = document.createElement('button');
-        readMoreButton.id = 'readMoreButton';
-        readMoreButton.classList.add('select-messages__read-more-button');
-        readMoreButton.innerText = i18n.getStringById('read_more');
-        readMoreButton.addEventListener('click', (e) => eventHandler(e, {type: 'read-more'}));     
-        buttonContainer.appendChild(readMoreButton);
-
-        const readLessButton = document.createElement('button');
-        readLessButton.id = 'readLessButton';
-        readLessButton.classList.add('select-messages__read-less-button');
-        readLessButton.classList.add('hidden');
-        readLessButton.innerText = i18n.getStringById('read_less');;
-        readLessButton.addEventListener('click', (e) => eventHandler(e, {type: 'read-less'}));     
-        buttonContainer.appendChild(readLessButton);
-
-        const actionText = document.createElement('div');
-        actionText.classList.add('select-messages__action-text');
-        actionText.innerText = i18n.getStringById('select_messages_action_text');
-        topicDisplay.appendChild(actionText);
-        
-        const topicsButton = document.createElement('button');
-        topicsButton.id = 'topics';
-        topicsButton.classList.add('topic-button');
-        topicsButton.classList.add('base-container__footer__item__button');
-        topicsButton.innerText = i18n.getStringById('topics');
-        topicsButton.addEventListener('click', (e) => eventHandler(e, {type: 'topics'}))    
-        document.getElementById('base-container-footer-left').appendChild(topicsButton);
-
-        const finishDiaryButton = document.createElement('button');
-        finishDiaryButton.id = 'finishDiary';
-        finishDiaryButton.classList.add('topic-button');
-        finishDiaryButton.classList.add('base-container__footer__item__button');
-        finishDiaryButton.innerText = i18n.getStringById('finish');
-        finishDiaryButton.addEventListener('click', (e) => eventHandler(e, {type: 'finish-diary'}));   
-        document.getElementById('base-container-footer-right').appendChild(finishDiaryButton);
-
-        renderDay(dayData, allMessagesData);
-
-        if(window.innerWidth > 700) {
-
-            document.body.style.display = 'flex';
-            document.body.style.position = 'relative';
-            document.getElementById('baseContainer').style.marginRight = 0;
-          
-            const previewContainer = document.createElement('div');
-            previewContainer.classList.add('preview-container');
-            previewContainer.style.maxHeight = `${window.innerHeight}px`;
-            document.body.appendChild(previewContainer);
-
-            const canvas = document.createElement('canvas');
-            canvas.id = 'preview';
-            canvas.classList.add('preview-canvas');
-            canvas.style.maxHeight = `${window.innerHeight}px`;
-            previewContainer.appendChild(canvas);
-
-
-            const prevPage = document.createElement('button');
-            prevPage.id = 'prevPage';
-            prevPage.classList.add('topic-button', 'preview-button', 'prev');
-            prevPage.innerText = 'Prev';
-            prevPage.addEventListener('click', (e) => eventHandler(e, {type: 'prev-page'}))    
-            previewContainer.appendChild(prevPage);
-
-            const nextPage = document.createElement('button');
-            nextPage.id = 'nextPage';
-            nextPage.classList.add('topic-button', 'preview-button', 'next');
-            nextPage.innerText = 'Next';
-            nextPage.addEventListener('click', (e) => eventHandler(e, {type: 'next-page'}))    
-            previewContainer.appendChild(nextPage);
-    
-
-        }
-*/
     }
 
     const clearDay = () => {
@@ -2235,12 +2085,6 @@ const DiaryUI = (eventHandler) => {
         document.getElementById('dayDisplay').innerText = '';
         removeChildren('dotContainer');
         removeChildren('lowerPage');
-        
-        /*
-        for(const elem of document.getElementsByClassName('day')) {
-            elem.classList.remove('day');
-        }
-        */
 
     }
 
@@ -2571,8 +2415,60 @@ const DiaryUI = (eventHandler) => {
         giveButton.classList.add('button', 'round', 'diary');
         giveButton.style.backgroundColor = '#00797D';
         giveButton.innerText = 'Submit';
-        giveButton.addEventListener('click', e => eventHandler(e, {type: 'give-feedback', feedback: feedback.value, consent: consent.checked}));
+        giveButton.addEventListener('click', e => {
+            renderButtonLoader(giveButton);
+            eventHandler(e, {type: 'give-feedback', feedback: feedback.value, consent: consent.checked})
+        });
         centerContainer.appendChild(giveButton);
+
+    }
+
+    const renderShare = () => {
+
+        renderDiaryHeader(document.body, 5);
+
+        const content = document.createElement('div');
+        content.classList.add('content');
+        document.body.appendChild(content);
+
+        const upperPage = document.createElement('div');
+        upperPage.classList.add('upper-page');
+        content.appendChild(upperPage);
+
+        const title = document.createElement('div');
+        title.classList.add('title', 'diary');
+        title.style.marginTop = '16px';
+        title.innerText = 'Your diary is ready!';
+        upperPage.appendChild(title);
+
+        const gradient = document.createElement('div');
+        gradient.classList.add('gradient-container', 'diary');
+        content.appendChild(gradient);
+
+        const centerContainer = document.createElement('div');
+        centerContainer.style.margin = 'auto';
+        gradient.appendChild(centerContainer);
+        
+        const textBox1 = document.createElement('div');
+        textBox1.classList.add('text-box');
+        textBox1.innerText = 'Thanks for your feedback! If you have friends or family that might also like Togather share the website with them through this link.';
+        textBox1.style.marginTop = '28px';
+        centerContainer.appendChild(textBox1);
+        
+        const giveButton = document.createElement('button');
+        giveButton.classList.add('button', 'round', 'diary');
+        giveButton.style.backgroundColor = '#00797D';
+        giveButton.innerText = 'Share Togather';
+        giveButton.addEventListener('click', e => eventHandler(e, {type: 'share'}));
+        centerContainer.appendChild(giveButton);
+
+        const noButton = document.createElement('button');
+        noButton.classList.add('button', 'round', 'diary');
+        noButton.style.backgroundColor = '#00797D';
+        noButton.style.marginTop = '25px';
+        noButton.innerText = 'No thanks';
+        noButton.addEventListener('click', e => eventHandler(e, {type: 'no'}));
+        centerContainer.appendChild(noButton);
 
     }
 
@@ -2592,6 +2488,7 @@ const DiaryUI = (eventHandler) => {
         renderDownloadDiary,
         renderAskFeedback,
         renderGiveFeedback,
+        renderShare,
 
         clearPage,
 

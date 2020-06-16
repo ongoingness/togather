@@ -430,22 +430,38 @@ const Diary = () => {
 
                     case 'give-feedback':
 
-                        console.log(params);
-
-                        const result = await DataCollection().sendFeedback(params.feedback, params.consent);
-
-                        console.log(result);
+                        await DataCollection().sendFeedback(params.feedback, params.consent);
+                        updateState(STATES.share);
+                     
 
                         break
 
                 }
 
             }
-        }
+        },
+        share: {
+            render: () => {
+                ui.renderShare();
+            },
+            eventHandler: (e, params) => {
+
+                switch(params.type) {
+
+                    case 'share':
+                        
+                        break;
+
+                    case 'no':
+                        window.location.href = `{{ site.url }}{{ site.baseurl }}/`;
+                        break;
+                }
+
+            }
+        },
     }
 
     let currentState = STATES.topicsFound;
-    let previousState = 0;
 
     const handleEvent = (e, params) => {
         e.stopPropagation();
@@ -454,14 +470,12 @@ const Diary = () => {
     }
 
     const updateState = (newState) => {
-        previousState = currentState;
         currentState = newState;
         ui.clearPage();
         currentState.render();
     }
 
     const updateStateWithParameters = (newState, parameters) => {
-        previousState = currentState;
         currentState = newState;
         currentState['parameters'] = parameters;
         ui.clearPage();
@@ -473,7 +487,8 @@ const Diary = () => {
     const model = DiaryModel();
 
 
-    updateState(STATES.uploadFiles);
+    //updateState(STATES.uploadFiles);
+    updateState(STATES.giveFeedback);
 
 }
 

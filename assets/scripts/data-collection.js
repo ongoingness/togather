@@ -12,8 +12,13 @@ const DataCollection = () => {
 
         return new Promise( (resolve, reject) => {
 
-            x.onload = () => resolve(x.response);
+            x.onload = () => resolve('done');
+            x.onerror = () => resolve('done');
+            
             x.send();
+           
+
+            
 
         });
 
