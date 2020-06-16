@@ -267,13 +267,16 @@ body, textarea, button, input, select, pre {
 }
 
 .chat-message.selected {
-    background: lightgrey;
+    position: relative;
+}
+
+.chat-message.selected-day {
+    position: relative;
 }
 
 .chat-message.day {
     border-style: dashed;
     border-width: 1px;
-    border-color: #2a7ab0;
 }
 
 .chat-message__name {
@@ -342,6 +345,7 @@ body, textarea, button, input, select, pre {
 }
 
 .day-scroller__prev, .day-scroller__next {
+    position: relative;
     font-family: 'Ostrich Sans Medium';
     cursor: pointer;
     color: black;
@@ -368,8 +372,26 @@ body, textarea, button, input, select, pre {
   
   /* On hover, add a black background color with a little bit see-through */
 .day-scroller__prev:hover, .day-scroller__next:hover {
-    background-color: rgba(0,0,0,0.8);
+    /*background-color: rgba(0,0,0,0.8);*/
 }
+
+.day-scroller__prev:disabled, .day-scroller__next:disabled {
+    border: 1px solid #C7C7C7;
+    color: #C7C7C7;
+}
+
+.day-scroller__button__loader {
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #E26A6A;
+    border-radius: 50%;
+    width: 5px;
+    height: 5px;
+    animation: spin 2s linear infinite;
+}
+
 
 .day-scroller__dot-container {
     text-align: center;
@@ -869,3 +891,23 @@ body, textarea, button, input, select, pre {
 .button.b-gradient:visited {
     animation: button-gradient 0.2s linear;
 }
+
+.selected-container {
+    display: flex;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: #707070 0% 0% no-repeat padding-box;
+    opacity: 0.8;
+}
+
+.selected-text {
+    margin: auto;
+    font: 50px/61px 'Ostrich Sans Black';
+    letter-spacing: 2.5px;
+    color: #D1D1D1;
+    opacity: 0.9;
+}
+

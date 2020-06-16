@@ -203,8 +203,6 @@ const DiaryModel = () => {
         topic.messages = messages;
         topic.selectedMessages = selectedMessages; 
 
-        console.log(topic);
-
         return topic;
     }
 
@@ -274,7 +272,8 @@ const DiaryModel = () => {
         const messages = [];
 
         whatsAppChat.messageMap.forEach((value, key) => {
-            messages.push(getMessage(key));
+            if(!topics.some(topic => topic.hash === key))
+                messages.push(getMessage(key));
         });
 
         return messages;
@@ -392,6 +391,21 @@ const DiaryModel = () => {
     const updateUsername = (hash, name) => {
         whatsAppChat.users[hash].name = name;
     }
+
+    const getSelectedMessagesHashes = () => {
+
+        const result = new Map();
+
+        for(const topic of topics) {
+
+            for(const selectedMessage of topic.selectedMessages)
+                result.set(selectedMessage, topic.day);
+
+        }
+ 
+
+        return result;
+    }
     
 
     return {
@@ -413,7 +427,7 @@ const DiaryModel = () => {
         getMessage,
         getUsers,
         updateUsername,
- 
+        getSelectedMessagesHashes,
     };
 }
 

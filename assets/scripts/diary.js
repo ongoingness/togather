@@ -340,10 +340,6 @@ const Diary = () => {
                 STATES.selectMessages.variables.totalOfTopics = fullTopic.totalOfTopics;
                 STATES.selectMessages.variables.text = fullTopic.text.join(' ');
                 ui.renderSelectMessages(fullTopic, model.getMessages());
-                if(window.innerWidth > 700) {
-                    let doc3 = await DiaryTemplates().generatePDF(model.getTopicsWithMessages(), STATES.selectMessages.variables.topic);
-                    DiaryTemplates().previewPdf(doc3, STATES.selectMessages.variables.page);
-                }
             },
             eventHandler: async(e, params) => {
 
@@ -355,7 +351,7 @@ const Diary = () => {
                             const fullTopic = model.getTopicWithMessages(STATES.selectMessages.variables.topic);
                             STATES.selectMessages.variables.text = fullTopic.text.join(' ');
                             ui.clearDay();
-                            ui.renderDay(fullTopic, model.getMessages());
+                            ui.renderDay(fullTopic, model.getMessages(), model.getSelectedMessagesHashes());
                         }
                         break;
 
@@ -365,7 +361,7 @@ const Diary = () => {
                             const fullTopic = model.getTopicWithMessages(STATES.selectMessages.variables.topic);
                             STATES.selectMessages.variables.text = fullTopic.text.join(' ');
                             ui.clearDay();
-                            ui.renderDay(fullTopic, model.getMessages());
+                            ui.renderDay(fullTopic, model.getMessages(), model.getSelectedMessagesHashes());
                         }
                         break;
 
@@ -374,7 +370,7 @@ const Diary = () => {
                         const fullTopic = model.getTopicWithMessages(STATES.selectMessages.variables.topic);
                         STATES.selectMessages.variables.text = fullTopic.text.join(' ');
                         ui.clearDay();
-                        ui.renderDay(fullTopic, model.getMessages());
+                        ui.renderDay(fullTopic, model.getMessages(), model.getSelectedMessagesHashes());
                         break;
 
                     case 'read-more':
