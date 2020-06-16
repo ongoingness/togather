@@ -3,39 +3,11 @@
 
 const DiaryTemplates = () => {
 
-
-   /*
-    const doCORSRequestForBlob = async (url) => {
-
-        const cors_api_url = 'https://cors-anywhere.herokuapp.com/';
-        var x = new XMLHttpRequest();
-        x.open('GET', cors_api_url + url);
-        x.responseType = 'blob';
-
-        return new Promise( (resolve, reject) => {
-
-            x.onload = function() {
-        
-                var reader = new FileReader();
-                reader.readAsDataURL(x.response); 
-                reader.onloadend = () => resolve(reader.result);
-        
-            }
-
-            x.send();
-        });    
-    }
-    */
-
-
     const generatePDF = async(topics, topicLimit = -1) => {
 
         let doc = new jsPDF();
 
         for(let i = 0; i <= ( (topicLimit != -1 && topicLimit < topics.length) ? topicLimit : topics.length-1); i++) {
-
-            console.log('topic', i , topics[i]);
-
             doc = topicPage(doc, topics[i], i == 0);
             doc = await messagePages(doc, topics[i].selectedMessages);
         }

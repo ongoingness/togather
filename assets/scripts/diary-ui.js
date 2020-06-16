@@ -489,8 +489,6 @@ const DiaryUI = (eventHandler) => {
         goButton.addEventListener('click', e => eventHandler(e, {type: 'go-to-step-1'}));
         gradient.appendChild(goButton);
 
-        renderSiteFooter(gradient);
-
     }
 
 
@@ -1850,7 +1848,7 @@ const DiaryUI = (eventHandler) => {
 
     }
 
-    const renderChatMessage = (messageData, messageListId, isSelected = false, isFromDay = false, selectString = 'Topic') => {
+    const renderChatMessage = (messageData, messageListId, isSelected = false, isFromDay = false, selectString = 'Topic', isSelectedFromThisDay = false) => {
         
         const chatMessage = document.createElement('div');
         chatMessage.classList.add('chat-message');
@@ -1870,8 +1868,9 @@ const DiaryUI = (eventHandler) => {
             selectText.innerText = `${selectString}`;
             selectContainer.appendChild(selectText);
         } 
+
         
-        if(!isSelected || (isSelected && isFromDay)){
+        if(!isSelected || (isSelected && isSelectedFromThisDay)) {
 
         
             chatMessage.addEventListener('click', (e) => {
@@ -1979,7 +1978,7 @@ const DiaryUI = (eventHandler) => {
         renderWriteTopic(topicData);
     }
 
-    const renderSelectMessages = (dayData, allMessagesData) => {
+    const renderSelectMessages = (dayData, allMessagesData, selectedMessagesHashes) => {
 
         renderDiaryHeader(document.body, 4);
 
@@ -2069,7 +2068,7 @@ const DiaryUI = (eventHandler) => {
     
         content.appendChild(lowerPage);
 
-        renderDay(dayData, allMessagesData);
+        renderDay(dayData, allMessagesData, selectedMessagesHashes);
 
         const helpContent = document.createElement('div');
         helpContent.classList.add('privacy__text');
@@ -2328,14 +2327,16 @@ const DiaryUI = (eventHandler) => {
             const isFromDay = new Date(message.fulltimestamp).getDate() === new Date(dayData.timestamp).getDate();
             let isSelected = false;
             let selectedDay = dayData.day;
+            let isSelectedFromThisDay = false;
             if(selectedMessages != undefined) {
                 if(selectedMessages.has(message.hash)) {
                     isSelected = true;
                     selectedDay = selectedMessages.get(message.hash);
+                    isSelectedFromThisDay = dayData.day === selectedDay;
                 }
             }
 
-            renderChatMessage(message, 'lowerPage', isSelected, isFromDay, `Day ${selectedDay}`);
+            renderChatMessage(message, 'lowerPage', isSelected, isFromDay, `Day ${selectedDay}`, isSelectedFromThisDay);
         }
 
         let dayMessages = document.getElementsByClassName('chat-message day');
@@ -2437,7 +2438,6 @@ const DiaryUI = (eventHandler) => {
     const renderPreviewDiaryPage = () => {
 
         const canvas = document.createElement('canvas');
-        canvas.id = 'preview';
         canvas.classList.add('preview-canvas');
         document.getElementById('pageContainer').appendChild(canvas);
         
@@ -2482,6 +2482,7 @@ const DiaryUI = (eventHandler) => {
         downloadButton.innerText = 'Download Diary';
         downloadButton.addEventListener('click', e => eventHandler(e, {type: 'download-diary'}));
         centerContainer.appendChild(downloadButton);
+
     }
 
     const renderAskFeedback = () => {

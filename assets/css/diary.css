@@ -557,6 +557,7 @@ body, textarea, button, input, select, pre {
 
 .overlay.privacy {
     background: white;
+    z-index: 99;
 }
 
 .closebtn.close-diary{
@@ -604,7 +605,7 @@ body, textarea, button, input, select, pre {
     border-right-style: solid;
     top: 45px;
     right: 10px;
-    height: 350px;
+    height: 380px;
     width: 45px;
     border-bottom-style: solid;
     border-bottom-right-radius: 100px;
@@ -633,7 +634,7 @@ body, textarea, button, input, select, pre {
     color: #000000;
     opacity: 1;
     height: 60px;
-    top: 375px;
+    top: 400px;
     right: 60px;
     width: 140px;
 }
