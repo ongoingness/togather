@@ -269,12 +269,12 @@ body {
   
 .explained-box {
     text-align: center;
-    margin: 8vh 3vh;
+    margin: 50px 20px;
 }
 
 .group-image {
     height: 100%;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/screen_whatsapp_group.png' | prepend: site.baseurl }}') no-repeat;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/whatsapp-chat–1.png' | prepend: site.baseurl }}') no-repeat;
     background-size: cover;
 }
 
@@ -287,19 +287,19 @@ body {
 
 .chat-image {
     height: 100%;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/screen_group_chat.png' | prepend: site.baseurl }}') no-repeat;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/whatsapp-chat–3.png' | prepend: site.baseurl }}') no-repeat;
     background-size: cover;
 }
 
 .explained-box-2 {
     text-align: center;
-    margin: 4vh;
+    margin: 30px;
 }
 
 .mySlides {display: none;}
 
 .slideshow-container {
-  max-width: 1000px;
+  max-width: 450px;
   position: relative;
   margin: auto;
 }
@@ -354,4 +354,12 @@ body {
 .title.instructions {
     color: #2A7AB0;
     margin-left: 5vh;
+}
+
+
+.row {
+    display: flex;
+    flex-direction: row;
+    height: 320px;
+    margin-bottom: 50px;
 }

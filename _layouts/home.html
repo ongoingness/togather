@@ -40,30 +40,7 @@
     <div class="static-page-content">
         {{ content }}
     </div>
-    <div class="footer">
-        <div class="footer__text">
-            ToGather
-        </div>
-        <div class="footer__text__small" style="padding-bottom: 20px;"> Contact: </div>
-        <div class="footer__text__small" style="width: 200px;"> 
-            Kyle Montague <br>
-            Associate Professor, <br>
-            Northumbria University <br>
-            kyle.montague@northumbria.ac.uk
-        </div>
-        <div class="footer__text__small" style="padding: 15px 15px;">
-            by
-        </div>
-        <div style="display: flex; flex-direction: row; padding-left: 15px;">
-            <div style="width: 100px; height: 40px;padding: 0px 12px;"> </div>
-            <div style="padding: 0px 12px;"> <img src="{{ '/assets/images/iDi_logo_extended_white.svg' | prepend: site.baseurl }}"> </div>
-            <div style="padding: 0px 12px;"> <img src="{{ '/assets/images/openlab-vertical.svg' | prepend: site.baseurl }}"> </div>
-        </div>
-        <div style="display: flex; flex-direction: row; padding: 15px;">
-            <div style="width: 150px; height: 40px;"> <img width="150" height="40" src="{{ '/assets/images/unn_logo_white.png' | prepend: site.baseurl }}"> </div>
-            <div style="width: 120px; height: 40px;"> <img width="120" height="40" src="{{ '/assets/images/NCL_logo_white.png' | prepend: site.baseurl }}"> </div>
-        </div>
-    </div>
+    {% include footer.html %}
 
     <script>
 
