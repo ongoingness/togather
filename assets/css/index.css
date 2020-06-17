@@ -10,7 +10,7 @@
 .button {
     text-align: center;
     display: flex;
-    padding: 1.5vh;
+    padding: 10px;
     color: white;
     border: none;
     font-family: 'Open Sans', sans-serif;
@@ -21,7 +21,7 @@
 .button.learn {
     background: #f89406;
     margin: auto;
-    margin-top: 1vh;
+    margin-top: 5px;
 }
 
 .button.give {
@@ -30,6 +30,6 @@
 }
 
 .text-box {
-    padding: 3vh;
+    padding: 20px;
     text-align: center;
 }
