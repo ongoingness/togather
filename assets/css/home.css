@@ -167,6 +167,10 @@ body {
     background-color: #E26A6A
 }
 
+.content-header.contact {
+    background-color: #6D8891;
+}
+
 .gradient-container {
     display: flex;
     flex-flow: column;
@@ -197,6 +201,11 @@ body {
 .gradient-container.diary {
     height: 100%;
     background: transparent linear-gradient(180deg, #E26A6A1A 0%, #E26A6A00 50%) 0% 0% no-repeat padding-box;
+}
+
+.gradient-container.contact {
+    height: 100%;
+    background: transparent linear-gradient(180deg, #6D88911A 0%, #6D889100 50%) 0% 0% no-repeat padding-box;
 }
 
 .topic-box {
