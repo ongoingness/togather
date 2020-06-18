@@ -2,18 +2,36 @@
     <div class="footer__text">
         ToGather
     </div>
-    <div class="footer__text__small" style="padding-bottom: 20px;"> Contact: </div>
-    <div class="footer__text__small" style="width: 200px;"> 
+    <!--div class="footer__text__small" style="padding-bottom: 20px;"> Contact: </div-->
+    <!--div class="footer__text__small" style="width: 200px;"> 
         Kyle Montague <br>
         Associate Professor, <br>
         Northumbria University <br>
         kyle.montague@northumbria.ac.uk
-    </div>
-    <div class="footer__text__small" style="padding: 15px 15px;">
+    </div-->
+    <!--div class="footer__text__small" style="padding: 15px 15px;">
         by
+    </div-->
+    <div class="row" style="height: 80px;">
+        <div class="column">
+            <a class="footer__text__small"> Home </a>
+            <a class="footer__text__small"> Get a Topic </a>
+            <a class="footer__text__small"> Introduction </a>
+            <a class="footer__text__small"> Instructions </a>
+            <a class="footer__text__small"> Assemble Diary </a>
+            <a class="footer__text__small"> About </a>
+        </div>
+        <div class="column" style="max-width: 200px;">
+            <label for="languages" class='footer__text__small' style="padding:0;">Select Language:</label>
+            <select name="languages" id="languages" style="margin-right:20px">
+                <option value="en">English</option>
+            </select>
+            <button class="button contact"> Contact >> </button>
+        </div>
     </div>
+
     <div style="display: flex; flex-direction: row; padding-left: 15px;">
-        <div style="width: 100px; height: 40px;padding: 0px 12px;"> </div>
+        <div style="width: 100px; height: 40px;padding-right: 12px;"><embed src="{{ '/assets/images/Ongoingness-logo.svg' | prepend: site.baseurl }}"></div>
         <div style="padding: 0px 12px;"> <img src="{{ '/assets/images/iDi_logo_extended_white.svg' | prepend: site.baseurl }}"> </div>
         <div style="padding: 0px 12px;"> <img src="{{ '/assets/images/openlab-vertical.svg' | prepend: site.baseurl }}"> </div>
     </div>
