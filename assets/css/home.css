@@ -161,6 +161,10 @@ body {
     background-color: #2A7AB0;
 }
 
+.content-header.about {
+    background: #00AA55;
+}
+
 .content-header.diary {
     display: flex;
     flex-direction: row;
@@ -206,6 +210,11 @@ body {
 .gradient-container.contact {
     height: 100%;
     background: transparent linear-gradient(180deg, #6D88911A 0%, #6D889100 50%) 0% 0% no-repeat padding-box;
+}
+
+.gradient-container.about {
+    height: 100%;
+    background: transparent linear-gradient(180deg, #00AA551A 0%, #00AA5500 100%) 0% 0% no-repeat padding-box;
 }
 
 .topic-box {
@@ -407,6 +416,10 @@ body {
     margin-left: 30px;
 }
 
+.title.about {
+    color: #00AA55;
+    margin-left: 20px;
+}
 
 .row {
     display: flex;
@@ -428,4 +441,10 @@ body {
 
 .footer__text__link {
     text-decoration: underline;
+}
+
+.about__text-box {
+    margin: 5px 20px;
+    margin-bottom: 40px;
+    word-break: break-word;
 }
