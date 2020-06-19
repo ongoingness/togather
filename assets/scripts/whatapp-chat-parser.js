@@ -51,7 +51,7 @@ const WhatsAppChatParser = () => {
         const readFile = (file) => {
             const fileReader = new FileReader();
 
-            return new Promise((resolve, reject) => {
+            return new Promise( async(resolve, reject) => {
                 fileReader.onerror = () => {
                     fileReader.abort();
                     reject(new DOMException("Problem parsing input file."));
@@ -63,6 +63,52 @@ const WhatsAppChatParser = () => {
 
                 if(file.type === 'text/plain') {
                     fileReader.readAsText(file);
+                } else if(file.type === 'application/zip') {
+
+                    const jsZip = new JSZip();
+                    const zip = await jsZip.loadAsync(file); 
+                    const result = [];
+                    const files = Object.keys(zip.files);
+                    for(const filename of files) {
+                        const file = zip.files[filename];
+                        if(!file.dir && !filename.includes('__MACOSX/', 0)) {
+
+                            const extention = filename.split('.').pop();
+
+                            console.log(file);
+
+                            const data = await file.async('string');
+    
+                            result.push(result);
+                        }
+                    }
+                    /*
+                    .forEach( async (filename) => {
+                        console.log(filename);
+                        const data = await zip.files[filename].async('string');
+                        console.log(data);
+                        result.push(result);
+                        */
+                        /*
+                        var fileReader = new FileReader();
+                        fileReader.onload = function ( e )
+                        {
+                            //Create JSZip instance
+                            var archive = new JSZip().loadAsync( e.target );
+                    
+                            //Testing that it is loaded correctly
+                            alert( e.target );
+                            alert( archive.file( "hello.txt" ).name );
+                        } 
+
+                        fileReader.readAsDataURL(zip.files[filename]);
+                        const data = await zip.files[filename].async('string');
+                        console.log(data);
+                        */
+                    //});
+                    console.log('yesy yesyse yse ys ')
+                    console.log(result);
+                    resolve(result);      
                 } else {
                     fileReader.readAsDataURL(file); 
                 }

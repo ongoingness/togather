@@ -30,18 +30,7 @@
             ToGather
         </div>
     </div>
-    <div id="myNav" class="overlay">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <div class="overlay-content">
-          <a id="home-a" href="{{ site.url }}{{ site.baseurl }}/">Home</a>
-          <a id="topic-a" href="{{ site.url }}{{ site.baseurl }}/topics">Get a topic</a>
-          <a id="explained-a" href="{{ site.url }}{{ site.baseurl }}/explained">ToGather Explained</a>
-          <a id="instructions-a" href="{{ site.url }}{{ site.baseurl }}/instructions">Instructions</a>
-          <a id="diary-a" href="{{ site.url }}{{ site.baseurl }}/diary">Assemble Diary</a>
-          <a id="about-a" href="{{ site.url }}{{ site.baseurl }}/about">About Us</a>
-        </div>
-    </div>
-
+    {% include nav-overlay.html %}
     <div class="content">
         <div class="content-header topic">
             Get Topic
@@ -73,42 +62,6 @@
             let vh = window.innerHeight * 0.01;
             document.documentElement.style.setProperty('--vh', `${vh}px`);
         });
-
-
-        switch('{{page.url}}') {
-
-            case '/':
-                document.getElementById('home-a').style.textDecoration = 'underline';
-                break;
-
-            case '/topic.html':
-            document.getElementById('topic-a').style.textDecoration = 'underline';
-                break;
-
-            case '/explained.html':
-                document.getElementById('explained-a').style.textDecoration = 'underline';
-                break;
-
-            case '/instructions.html':
-                document.getElementById('instructions-a').style.textDecoration = 'underline';
-                break;
-
-            case '/diary.html':
-                ocument.getElementById('diary-a').style.textDecoration = 'underline';
-                break;
-
-            case '/about.html':
-                document.getElementById('about-a').style.textDecoration = 'underline';
-                break;
-        }
-
-        const openNav = () => {
-            document.getElementById("myNav").style.width = "100%";
-        }
-
-        const closeNav = () => {
-            document.getElementById("myNav").style.width = "0%";
-        }
 
         const shareTopic = () => {
 

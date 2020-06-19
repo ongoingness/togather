@@ -5,10 +5,7 @@ layout: home
     Instructions
 </div>
 <div class="gradient-container instructions">
-    <div class="instructions-video">
-        VIDEO
-    </div>
-    <div class="title instructions" > #1 Get started </div>
+    <div class="title instructions" style="margin-top: 40px;" > #1 Get started </div>
 </div>
 <div class="row">
     <div class="column">
@@ -96,10 +93,7 @@ layout: home
         <div class="chat-image"></div>          
     </div>
 </div>
-<div class="title instructions">#3 Assembling the diary</div>
-<div class="instructions-video">
-    VIDEO
-</div>
+<div class="title instructions" style="margin-top: 40px;">#3 Assembling the diary</div>
 <div style="margin: 0px 20px; margin-bottom: 20px; text-align: center;">
     To turn your group chat on Whatsapp into a diary follow these simple steps:
 </div>
@@ -219,6 +213,8 @@ const shareMessage = () => {
                 `https://api.whatsapp.com/send?text=${encodeURI(text)}`:
                 `https://web.whatsapp.com/send?text=${encodeURI(text)}`;
 
+    closeModal();
+    document.getElementById('name').value = '';
     window.open(link, '_blank');
 }
 

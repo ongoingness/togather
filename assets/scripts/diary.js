@@ -24,6 +24,7 @@ const Diary = () => {
                     case 'upload-files':
                         for(let file of params.files) {
                             if(!STATES.uploadFiles.variables.files.has(file.name)) {
+                                console.log(file.name, file);
                                 STATES.uploadFiles.variables.files.set(file.name, file);
                                 ui.renderFile(file);
                             }
