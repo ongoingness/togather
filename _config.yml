@@ -46,3 +46,5 @@ collections:
   topics:
     output: true
     permalink: /:collection/:name
+
+exclude: ['node_modules', 'webpack.config.js', 'webpack', 'package-lock.json', 'package.json']

@@ -4,3 +4,5 @@ _site
 /test
 *.zip
 .vscode
+node_modules
+
