@@ -1,3 +1,5 @@
+const emojiRegex = require('emoji-regex');
+
 const DiaryModel = () => {
 
     const colors = [
@@ -60,7 +62,44 @@ const DiaryModel = () => {
     }
     */
 
+    const removeEmojiOnlyMessages = () => {
+
+        const regex = emojiRegex();
+        const messagesToBeRemoved = [];
+
+        whatsAppChat.messageMap.forEach( (message, hash) => {
+        
+            const textLinesToBeRemoved = [];
+
+            for(const [index, textLine] of message.text.entries()) {
+  
+               let match;
+               let noEmojis = textLine;
+               while (match = regex.exec(textLine)) {
+                    noEmojis = noEmojis.replace(match[0], '');
+               }
+
+               if(noEmojis === '')
+                    textLinesToBeRemoved.push(index);
+               
+            }
+
+            for(const index of textLinesToBeRemoved)
+                message.text.splice(index, 1);
+  
+            if(message.text.length === 0)
+                messagesToBeRemoved.push(hash);
+
+        });
+
+        for(const hash of messagesToBeRemoved)
+            whatsAppChat.messageMap.delete(hash);
+
+    }
+
     const findTopics = () => {
+
+        console.log(whatsAppChat.messageMap);
 
         const topicRegex = RegExp('https://lapc1995.github.io/while-you-were-fighting/topics/[0-9]+');
 
@@ -428,6 +467,7 @@ const DiaryModel = () => {
         getUsers,
         updateUsername,
         getSelectedMessagesHashes,
+        removeEmojiOnlyMessages,
     };
 }
 

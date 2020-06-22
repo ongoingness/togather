@@ -104,19 +104,6 @@ const DiaryUI = (eventHandler) => {
         
     }
 
-    const renderSiteFooter = (parent) => {
-
-        const footer = document.createElement('div');
-        footer.classList.add('footer');
-        parent.appendChild(footer);
-
-        const footerText = document.createElement('div');
-        footerText.classList.add('footer__text');
-        footerText.innerText = 'ToGather';
-        footer.appendChild(footerText);
-
-    }
-
     const renderUploadFiles = () => {
     
         renderSiteHeader();
@@ -228,6 +215,62 @@ const DiaryUI = (eventHandler) => {
        
     }
 
+    const renderErrorModal = (errorMessage, onClose = undefined) => {
+
+        const modal = document.createElement('div');
+        modal.classList.add('modal');
+        document.body.append(modal);
+
+        const modalContent = document.createElement('div');
+        modalContent.classList.add('modal-content');
+        modal.appendChild(modalContent);
+
+        const closeButton = document.createElement('a');
+        closeButton.classList.add('modal__close-button');
+        closeButton.innerText = '×';
+        closeButton.addEventListener('click', () => {
+            modal.remove();
+            if(onClose != undefined)
+                onClose();
+        });
+        modalContent.appendChild(closeButton);
+
+        const modalText = document.createElement('p');
+        modalText.style.textAlign = 'center';
+        modalText.innerText = errorMessage;
+        modalContent.appendChild(modalText);
+
+        const modalOK = document.createElement('button');
+        modalOK.classList.add('button', 'round', 'pick');
+        modalOK.innerText = 'Okay';
+        modalOK.addEventListener('click', (e) => {
+            modal.remove();
+            if(onClose != undefined)
+                onClose();
+        });
+        modalContent.appendChild(modalOK);
+
+        window.onclick = (event) => {
+            if (event.target == modal) {
+                modal.remove();
+                onClose();
+            }
+        }
+        
+        modal.style.display = 'block';
+    }
+
+    const renderUploadErrorModal = () => {
+
+        const onClose = () => {
+            const button = document.getElementById('startAssembling');
+            button.innerHTML = 'Start Assembling';
+            button.style.width = 'initial';
+            button.disabled = false;
+        }
+        renderErrorModal('No chat file found', onClose);
+
+    };
 
     const renderLoader = (parent) => {
 
@@ -578,11 +621,6 @@ const DiaryUI = (eventHandler) => {
     }
 
     const renderWhoTheDiaryIsFor = (who) => {
-
-        /*
-        window.addEventListener('beforeunload', (e) => {
-            
-        });*/
 
         renderDiaryHeader(document.body, 1);
 
@@ -2471,7 +2509,162 @@ const DiaryUI = (eventHandler) => {
 
     }
 
-  
+    const  renderSiteFooter = (parent) => {
+        const footer = document.createElement('div');
+        footer.classList.add('footer');
+        parent.appendChild(footer);
+
+        const footerText = document.createElement('div');
+        footerText.classList.add('footer__text');
+        footerText.innerText = 'ToGather';
+        footer.appendChild(footerText);
+
+        const footerRow = document.createElement('div');
+        footerRow.classList.add('row');
+        footerRow.style.height = '80px';
+        footer.appendChild(footerRow);
+
+        const footerColumn = document.createElement('div');
+        footerColumn.classList.add('column');
+        footerRow.appendChild(footerColumn);
+
+        const linksContainer = document.createElement('div');
+        linksContainer.style.display = 'flex';
+        linksContainer.style.flexDirection = 'column';
+        linksContainer.style.width = '100px';
+        footerColumn.appendChild(linksContainer);
+
+        const aHome = document.createElement('a');
+        aHome.classList.add('footer__text__small');
+        aHome.href = '{{ site.url }}{{ site.baseurl }}/';
+        aHome.innerText = 'Home';
+        linksContainer.appendChild(aHome);
+
+        const aTopic = document.createElement('a');
+        aTopic.classList.add('footer__text__small');
+        aTopic.href = '{{ site.url }}{{ site.baseurl }}/topics';
+        aTopic .innerText = 'Get a Topic';
+        linksContainer.appendChild(aTopic);
+
+        const aIntro = document.createElement('a');
+        aIntro.classList.add('footer__text__small');
+        aIntro.href = '{{ site.url }}{{ site.baseurl }}/explained';
+        aIntro .innerText = 'Introduction';
+        linksContainer.appendChild(aIntro);
+
+        const aInstructions = document.createElement('a');
+        aInstructions.classList.add('footer__text__small');
+        aInstructions.href = '{{ site.url }}{{ site.baseurl }}/explained';
+        aInstructions.innerText = 'Instructions';
+        linksContainer.appendChild(aInstructions);
+
+        const aDiary = document.createElement('a');
+        aDiary.classList.add('footer__text__small');
+        aDiary.href = '{{ site.url }}{{ site.baseurl }}/diary';
+        aDiary.innerText = 'Assemble Diary';
+        linksContainer.appendChild(aDiary);
+
+        const aAbout = document.createElement('a');
+        aAbout.classList.add('footer__text__small');
+        aAbout.href = '{{ site.url }}{{ site.baseurl }}/about';
+        aAbout.innerText = 'About';
+        linksContainer.appendChild(aAbout);
+
+        const footerColumn2 = document.createElement('div');
+        footerColumn2.classList.add('column');
+        footerColumn2.style.maxWidth = '200px';
+        footerRow.appendChild(footerColumn2);
+
+        const langLabel = document.createElement('label');
+        langLabel.for = 'languages';
+        langLabel.classList.add('footer__text__small');
+        langLabel.style.padding = '0';
+        langLabel.innerText = 'Select Language:';
+        footerColumn2.appendChild(langLabel);
+
+        const langSelect = document.createElement('select');
+        langSelect.id = 'languages';
+        langSelect.style.marginRight = '20px';
+        footerColumn2.appendChild(langSelect);
+
+        const option = document.createElement('option');
+        option.value = 'en';
+        option.innerText = 'English';
+        langSelect.appendChild(option);
+
+        const contactButton = document.createElement('button');
+        contactButton.classList.add('button', 'contact');
+        contactButton.addEventListener('click', () => {
+            location.href='{{ site.url }}{{ site.baseurl }}/contact';
+        });
+        contactButton.innerText = 'Contact >>';
+        footerColumn2.appendChild(contactButton);
+
+        const logoContainer = document.createElement('div');
+        logoContainer.style.display = 'flex';
+        logoContainer.style.flexDirection = 'row';
+        logoContainer.style.flexWrap = 'wrap';
+        logoContainer.style.paddingLeft = '15px';
+        footer.appendChild(logoContainer);
+
+        const img1Container = document.createElement('div');
+        img1Container.style.width = '100px';
+        img1Container.style.height = '40px';
+        img1Container.style.paddingRight = '12px';
+        img1Container.style.paddingBottom = '15px';
+        logoContainer.appendChild(img1Container);
+
+        const img1 = document.createElement('embed');
+        img1.src = "{{ '/assets/images/Ongoingness-logo.svg' | prepend: site.baseurl }}";
+        img1Container.appendChild(img1);
+
+        const img2Container = document.createElement('div');
+        img2Container.style.padding = '0px 12px';
+        img2Container.style.paddingBottom = '15px';
+        logoContainer.appendChild(img2Container);
+
+        const img2 = document.createElement('embed');
+        img2.src = "{{ '/assets/images/iDi_logo_extended_white.svg' | prepend: site.baseurl }}";
+        img2Container.appendChild(img2);
+
+        const img3Container = document.createElement('div');
+        img3Container.style.padding = '0px 12px';
+        img3Container.style.paddingRight = '24px';
+        img3Container.style.paddingBottom = '15px';
+        logoContainer.appendChild(img3Container);
+
+        const img3 = document.createElement('embed');
+        img3.src = "{{ '/assets/images/openlab-vertical.svg' | prepend: site.baseurl }}";
+        img3Container.appendChild(img3);
+
+        const img4Container = document.createElement('div');
+        img4Container.style.width = '125px';
+        img4Container.style.height = '40px'
+        img4Container.style.paddingRight = '12px';
+        img4Container.style.paddingBottom = '15px';
+        logoContainer.appendChild(img4Container);
+
+        const img4 = document.createElement('img');
+        img4.width = '150';
+        img4.height = '40';
+        img4.src = "{{ '/assets/images/unn_logo_white.png' | prepend: site.baseurl }}";
+        img4Container.appendChild(img4);
+
+        const img5Container = document.createElement('div');
+        img5Container.style.width = '120px';
+        img5Container.style.height = '40px'
+        img5Container.style.padding = '0px 12px';
+        img5Container.style.paddingBottom = '15px';
+        logoContainer.appendChild(img5Container);
+
+        const img5 = document.createElement('img');
+        img5.width = '120';
+        img5.height = '40';
+        img5.src = "{{ '/assets/images/NCL_logo_white.png' | prepend: site.baseurl }}";
+        img5Container.appendChild(img5);
+
+    }
+
     return {
 
         renderSiteHeader,
@@ -2517,6 +2710,7 @@ const DiaryUI = (eventHandler) => {
 
         renderPdfPreview,
 
+        renderUploadErrorModal,
     }
 }
 

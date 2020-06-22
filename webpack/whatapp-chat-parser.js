@@ -6,13 +6,11 @@ const WhatsAppChatParser = () => {
     /**
      * Starts the parsing of files of a given input
      * @param {Element Node} filesInput Input from which the files are going to be parsed
-     * @returns {{Map, Map, object}}
+     * @returns { {Map, Map, object} }
      */
     const start =  async (filesInput) => {
 
         const tempFiles = await readFiles(filesInput);
-
-        console.log(tempFiles);
 
         const files = new Map(); 
 
@@ -23,15 +21,20 @@ const WhatsAppChatParser = () => {
 
         let messageMap;
         let users;
-        for(let file of tempFiles) {
-            if(file.file.type === 'text/plain') {
-                const parsedResult = parseMessages(file.fileContent, files);
-                messageMap = parsedResult.messageMap;
-                users = parsedResult.users;
-            }
-        }   
 
-        console.log(messageMap);
+        const textFiles = tempFiles.filter(file => file.file.type === 'text/plain');
+
+        if(textFiles.length === 0) throw 'No chat file found';
+
+        let found = false;
+        for (let i = 0; i < textFiles.length && !found; i++) {
+            const parsedResult = parseMessages(textFiles[i].fileContent, files);
+            messageMap = parsedResult.messageMap;
+            users = parsedResult.users;
+            found = messageMap.size != 0;
+        }
+
+        if(!found) throw 'No chat file found';
 
         return { messageMap, files, users }
     }
@@ -137,12 +140,17 @@ const WhatsAppChatParser = () => {
 
         const fileRegex = RegExp('(([A-Z]{3}\-[0-9]{8}\-[A-Z]{2}[0-9]{4}\..[^ ]*) \(.*\))');
 
+        const fileRegexIOS = RegExp('(([0-9]{8}-[^-]*-[0-9]{4}(?:-[0-9]{2}){5}\..[^ ]*)(?: \(.*\))?)');
+
         const parseMessageBody = (body) => {
 
             let filename = [];
             let text = body;
 
-            const fileRegexResult = fileRegex.exec(text);
+            let fileRegexResult = fileRegex.exec(text);
+            if(fileRegexResult == null) 
+                fileRegexResult = fileRegexIOS.exec(text);
+
             if(fileRegexResult != null) {
                 const [fullLine, fullFilename, tempFilename] = fileRegexResult;
 
@@ -156,7 +164,7 @@ const WhatsAppChatParser = () => {
                     filename.push(hash);
                 }
 
-            }
+            } 
 
             const linkRegexResult = text.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g);
             let links = linkRegexResult != null ? linkRegexResult : [];
@@ -167,6 +175,7 @@ const WhatsAppChatParser = () => {
             const atRegexresult = text.match(/(@[0-9]+)/g);
             let atUser = atRegexresult != null ? atRegexresult : []
 
+            text = text.replace(String.fromCharCode(8206), '');
             return {text, filename, links, atUser}
         };
 
@@ -177,9 +186,8 @@ const WhatsAppChatParser = () => {
         };
 
         const rawMessages = messages.split('\n');
-        console.log(rawMessages);
-        let currentMessage = null;
 
+        let currentMessage = null;
         for(let [index, rawMessage] of rawMessages.entries()) {
 
             const messageStart = messageStartRegex.exec(rawMessage);
@@ -206,7 +214,10 @@ const WhatsAppChatParser = () => {
                 currentMessage.rawText = [body];
 
                 const {text, filename, links, atUser} = parseMessageBody(body);
-                currentMessage.text = [text];
+        
+                currentMessage.text = [];
+                if(text != '')
+                    currentMessage.text.push(text);
                 currentMessage.files = filename;
                 currentMessage.links = links;
                 currentMessage.atUser = atUser;
@@ -220,7 +231,7 @@ const WhatsAppChatParser = () => {
                 if(currentMessage != null) {
                     const {text, filename, links, atUser} = parseMessageBody(rawMessage);
                     if(text != '') 
-                        currentMessage.text.push(text);    //currentMessage.text === '' ? text : ` ${text}`;
+                        currentMessage.text.push(text);  
                     if(rawMessage != '') 
                         currentMessage.rawText.push(rawMessage); //+= `\n${rawMessage}`;
                     currentMessage.files.concat(filename);

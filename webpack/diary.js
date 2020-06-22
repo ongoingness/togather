@@ -29,11 +29,17 @@ const Diary = () => {
                         break;
 
                     case 'start-assembling':
-                        const whatsAppChat = await WhatsAppChatParser().start(Array.from(STATES.uploadFiles.variables.files.values()));              
-                        model.setWhatsAppChat(whatsAppChat);
-                        model.findTopics();
-                        STATES.uploadFiles.variables.files = new Map();
-                        updateState(STATES.diarySteps);
+                        try {
+                            const whatsAppChat = await WhatsAppChatParser().start(Array.from(STATES.uploadFiles.variables.files.values()));              
+                            model.setWhatsAppChat(whatsAppChat);
+                            model.removeEmojiOnlyMessages();
+                            model.findTopics();
+                            STATES.uploadFiles.variables.files = new Map();
+                            updateState(STATES.diarySteps);
+                        } catch (e) {
+                            if(e === 'No chat file found')
+                                ui.renderUploadErrorModal();
+                        }
                         break;
 
                     case 'delete-file':
