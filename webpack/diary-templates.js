@@ -529,14 +529,6 @@ const DiaryTemplates = () => {
     
         return null;
         
-
-        //https://www.spotifycodes.com/downloadCode.php?uri=jpeg%2F000000%2Fwhite%2F640%2Fspotify%3Atrack%3A 2NDJAS0IlvK0UswjMzsac5
-
-        //https://www.spotifycodes.com/downloadCode.php?uri=jpeg%2F000000%2Fwhite%2F640%2Fspotify%3Atrack%3A 7CH99b2i1TXS5P8UUyWtnM
-        
-        //https://open.spotify.com/track/ 7CH99b2i1TXS5P8UUyWtnM ?si=ZMlavzVYQLSMSCfOiJX8LA
-        
-
     }*/
 
     const previewPdf = (doc, pageNum, canvas) => {

@@ -8,7 +8,7 @@ permalink: /diary/
     <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, initial-scale=1.0">
     <title>ToGather</title>
    
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <!--script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script-->
     <link defer href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
     
     <link href="{{ '/assets/css/home.css' | prepend: site.baseurl }}" rel="stylesheet" type="text/css">
@@ -16,6 +16,7 @@ permalink: /diary/
   
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.4.456/pdf.min.js" integrity="sha256-O6polm3ZRTZEOAneYbvsKty3c3KRcDf20McwtlCga5s=" crossorigin="anonymous"></script>
+    
     <script defer src="{{ '/assets/scripts/ostrich-regular-normal.js' | prepend: site.baseurl }}"></script>
     <script defer src="{{ '/assets/scripts/OstrichSans-Black-normal.js' | prepend: site.baseurl }}"></script>
     <script defer src="{{ '/assets/scripts/OpenSans-italic.js' | prepend: site.baseurl }}"></script>
@@ -28,6 +29,7 @@ permalink: /diary/
 
 </head>
 <body id='body'>
+    <div class="loader"> </div>
 
     <script type="module">
         // First we get the viewport height and we multiple it by 1% to get a value for a vh unit

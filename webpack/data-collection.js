@@ -17,9 +17,6 @@ const DataCollection = () => {
             
             x.send();
            
-
-            
-
         });
 
     }
