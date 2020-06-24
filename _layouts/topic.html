@@ -17,6 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
     <link href="{{ '/assets/css/home.css' | prepend: site.baseurl }}" rel="stylesheet" type="text/css">
     <link href="{{ '/assets/css/topic.css' | prepend: site.baseurl }}" rel="stylesheet" type="text/css">
+    <script src="{{ '/assets/scripts/i18n.js' | prepend: site.baseurl }}"></script>
     <title>ToGather</title>
 </head>
 <body>
@@ -32,17 +33,17 @@
     </div>
     {% include nav-overlay.html %}
     <div class="content">
-        <div class="content-header topic">
+        <div id="t0" class="content-header topic">
             Get Topic
         </div>
         <div class="gradient-container topic">
             <div class="topic-box">
                 {{ page.description }}
             </div>
-            <button class="button round pick" onclick="shareTopic()">
+            <button id="t1" class="button round pick" onclick="shareTopic()">
                 Pick this topic
             </button>
-            <button class="button give" onclick="getTopic()">
+            <button id="t2" class="button give" onclick="getTopic()">
                 View another topic
             </button>
         </div>
@@ -62,6 +63,18 @@
             let vh = window.innerHeight * 0.01;
             document.documentElement.style.setProperty('--vh', `${vh}px`);
         });
+
+        const i18n = i18nTools();
+
+        let lang = window.navigator.userLanguage || window.navigator.language;
+        if(!i18n.supportsLanguage(lang)) {
+            lang = 'en';
+        }
+
+        console.log('{{page.url}}')
+
+        i18n.translatePage('{{page.url}}', lang);
+
 
         const shareTopic = () => {
 

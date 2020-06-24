@@ -110,11 +110,3 @@ const i18nTools= () => {
 
 }
 
-const i18n = i18nTools();
-
-let lang = window.navigator.userLanguage || window.navigator.language;
-if(!i18n.supportsLanguage(lang)) {
-    lang = 'en';
-}
-
-console.log(lang);
