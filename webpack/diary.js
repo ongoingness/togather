@@ -362,7 +362,7 @@ const Diary = () => {
         reviewDiary: {
 
             render: async() => {
-                const doc = await templates.generatePDF(model.getTopicsWithMessages());
+                const doc = await templates.generatePDF(model.getDiary());
                 ui.renderReviewDiary();
           
                 for(let i = 1; i <= doc.getNumberOfPages(); i++) {
@@ -396,7 +396,7 @@ const Diary = () => {
                 switch(params.type) {
 
                     case 'download-diary':
-                        const doc = await templates.generatePDF(model.getTopicsWithMessages(), STATES.selectMessages.variables.topic);
+                        const doc = await templates.generatePDF(model.getDiary(), STATES.selectMessages.variables.topic);
                         templates.downloadPdf(doc);
                         updateState(STATES.askFeedback);
                         break;

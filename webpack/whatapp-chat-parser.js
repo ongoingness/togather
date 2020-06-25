@@ -95,7 +95,6 @@ const WhatsAppChatParser = () => {
                                         fileReader2.abort();
                                         reject(new DOMException("Problem parsing input file."));
                                     };
-                    
                                     fileReader2.onload = () => {
                                         resolve(fileReader2.result);
                                     };

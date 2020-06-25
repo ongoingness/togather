@@ -1,13 +1,85 @@
 const DiaryTemplates = () => {
 
-    const generatePDF = async(topics, topicLimit = -1) => {
+    const generatePDF = async(diary, topicLimit = -1) => {
+
+        console.log(diary);
 
         let doc = new jsPDF();
+        doc = coverPages(doc, diary, true);
 
-        for(let i = 0; i <= ( (topicLimit != -1 && topicLimit < topics.length) ? topicLimit : topics.length-1); i++) {
-            doc = topicPage(doc, topics[i], i == 0);
-            doc = await messagePages(doc, topics[i].selectedMessages);
+        for(let i = 0; i <= ( (topicLimit != -1 && topicLimit < diary.topics.length) ? topicLimit : diary.topics.length-1); i++) {
+            doc = topicPage(doc, diary.topics[i]);
+            doc = await messagePages(doc, diary.topics[i].selectedMessages);
         }
+
+        return doc;
+    }
+
+    const coverPages = (doc, data, firstPage = false) => {
+
+        if(!firstPage)
+            doc.addPage('a4', 'portrait');
+
+        doc.setDrawColor(0);
+        doc.setFillColor(0, 121, 125);
+        doc.rect(0, 33.826, 210, 27.174, 'F'); 
+        
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(52);
+        doc.setFontType('normal');
+        doc.setFont('OstrichSans-Black');
+        doc.text(`For ${data.who}`, 105, 54, 'center');
+
+        doc.setTextColor(0, 121, 125);
+        doc.setFontSize(40);
+        doc.setFont('ostrich-regular');
+        doc.text('ToGather', 105, 250, 'center');
+
+        doc.addPage('a4', 'portrait');
+
+        doc.setTextColor(0, 0, 0);
+        doc.setFontSize(20);
+        doc.setFontType('bolditalic');
+        doc.setFont('OpenSans');
+        doc.text(`Dear ${data.who}`, 105, 40, 'center');
+
+        doc.setTextColor(0, 0, 0);
+        doc.setFontSize(20);
+        doc.setFontType('bolditalic');
+        doc.setFont('OpenSans');
+        doc.text('This diary is a collection of messages from:', 105, 80, 'center');
+
+        doc.setTextColor(0, 0, 0);
+        doc.setFontSize(16);
+        doc.setFontType('normal');
+        doc.setFont('OpenSans');
+        let i = 0;
+        let userY = 100;
+        for(const [hash, user] of Object.entries(data.users)) {
+            doc.text(`${user.name}`, i % 2 === 0 ? 75 : 135, userY, 'center');
+            if(i%2 === 1) userY += 10;
+            i++;
+        }
+
+        doc.setTextColor(0, 0, 0);
+        doc.setFontSize(20);
+        doc.setFontType('bolditalic');
+        doc.setFont('OpenSans');
+        doc.text('They capture your time apart during:', 105, 237, 'center');
+
+        doc.setTextColor(0, 0, 0);
+        doc.setFontSize(16);
+        doc.setFontType('normal');
+        doc.setFont('OpenSans');
+        const startDate = new Date(data.startDate);
+        const startDay = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(startDate);
+        const startMonth = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(startDate);
+        const startYear = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(startDate);
+        const endDate = new Date(data.endDate);
+        const endDay = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(endDate);
+        const endMonth = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(endDate);
+        const endYear = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(endDate);
+        doc.text(`${startDay}/${startMonth}/${startYear} - ${endDay}/${endMonth}/${endYear}`, 105, 257, 'center');
 
         return doc;
     }

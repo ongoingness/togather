@@ -449,6 +449,25 @@ const DiaryModel = () => {
 
         return result;
     }
+
+    const getDiary = () => {
+
+        const topics = getTopicsWithMessages();
+        let startDate = undefined;
+        let endDate = undefined;
+        if(topics.length > 0) {
+            startDate = topics[0].timestamp;
+            endDate = topics[topics.length-1].timestamp;
+        }
+
+        return {
+            who,
+            users: getUsers(),
+            startDate,
+            endDate,
+            topics
+        }
+    }
     
 
     return {
@@ -472,6 +491,7 @@ const DiaryModel = () => {
         updateUsername,
         getSelectedMessagesHashes,
         removeEmojiOnlyMessages,
+        getDiary,
     };
 }
 
