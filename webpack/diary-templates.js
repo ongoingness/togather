@@ -1,3 +1,5 @@
+import { file } from "jszip";
+
 const DiaryTemplates = () => {
 
     const generatePDF = async(diary, topicLimit = -1) => {
@@ -640,8 +642,8 @@ const DiaryTemplates = () => {
         
     }
 
-    const downloadPdf = (doc) => {
-        doc.save('test');
+    const downloadPdf = (doc, filename) => {
+        doc.save(filename);
     }
 
     const getDataUriStringPdf = (doc) => {

@@ -397,7 +397,7 @@ const Diary = () => {
 
                     case 'download-diary':
                         const doc = await templates.generatePDF(model.getDiary(), STATES.selectMessages.variables.topic);
-                        templates.downloadPdf(doc);
+                        templates.downloadPdf(doc, `For ${model.getWhoDiaryIsFor()} - ToGather`);
                         updateState(STATES.askFeedback);
                         break;
 
