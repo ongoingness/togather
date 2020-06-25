@@ -895,7 +895,7 @@ const DiaryUI = (eventHandler) => {
 
         const topicHeaderDay =  document.createElement('div');
         topicHeaderDay.classList.add('topic__header__day');
-        topicHeaderDay.innerText = `${i18n.getStringById('day')} ${topicData.day}`;
+        topicHeaderDay.innerText = `Day ${topicData.day}`;
         topicHeader.appendChild(topicHeaderDay);
 
         const date = new Date(topicData.timestamp);
@@ -1604,14 +1604,14 @@ const DiaryUI = (eventHandler) => {
     }
 
     const updateDay = (dayData) => {
-        document.getElementById('dayDisplay').innerText = `${i18n.getStringById('day')} ${dayData.day}`;
+        document.getElementById('dayDisplay').innerText = `Day ${dayData.day}`;
         document.getElementById('dayDisplay').style = `color: ${dayData.color};`
         document.getElementById('dayDisplay').addEventListener('click', e => document.getElementById('topicText').style.height = '100%')
     }
 
     const renderDay = (dayData, allMessagesData, selectedMessages) => {
 
-        document.getElementById('dayDisplay').innerText = `${i18n.getStringById('day')} ${dayData.day}`;
+        document.getElementById('dayDisplay').innerText = `Day ${dayData.day}`;
         document.getElementById('dayDisplay').style = `color: ${dayData.color};`
         document.getElementById('dayDisplay').addEventListener('click', e => document.getElementById('topicText').style.height = '100%')
 
