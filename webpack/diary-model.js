@@ -68,27 +68,31 @@ const DiaryModel = () => {
         const messagesToBeRemoved = [];
 
         whatsAppChat.messageMap.forEach( (message, hash) => {
-        
-            const textLinesToBeRemoved = [];
+       
+            if(message.files.length === 0) {
+ 
+                const textLinesToBeRemoved = [];
 
-            for(const [index, textLine] of message.text.entries()) {
-  
-               let match;
-               let noEmojis = textLine;
-               while (match = regex.exec(textLine)) {
-                    noEmojis = noEmojis.replace(match[0], '');
-               }
+                for(const [index, textLine] of message.text.entries()) {
+    
+                let match;
+                let noEmojis = textLine;
+                while (match = regex.exec(textLine)) {
+                        noEmojis = noEmojis.replace(match[0], '');
+                }
 
-               if(noEmojis === '')
-                    textLinesToBeRemoved.push(index);
-               
+                if(noEmojis === '')
+                        textLinesToBeRemoved.push(index);
+                
+                }
+
+                for(const index of textLinesToBeRemoved)
+                    message.text.splice(index, 1);
+    
+                if(message.text.length === 0)
+                    messagesToBeRemoved.push(hash);
+            
             }
-
-            for(const index of textLinesToBeRemoved)
-                message.text.splice(index, 1);
-  
-            if(message.text.length === 0)
-                messagesToBeRemoved.push(hash);
 
         });
 

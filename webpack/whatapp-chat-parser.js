@@ -53,6 +53,7 @@ const WhatsAppChatParser = () => {
                 };
 
                 fileReader.onload = () => {
+                    console.log(fileReader.result);
                     resolve([{file, fileContent: fileReader.result}]);
                 };
 
@@ -85,9 +86,21 @@ const WhatsAppChatParser = () => {
                             if(type === 'text/plain') {
                                 fileObject.fileContent = await file.async('text');
                             } else {
-                                var data = await file.async('binarystring');
-                                fileObject.fileContent = btoa(data);
-                                 
+                                let blob = await file.async('blob');
+                                blob = blob.slice(0, blob.size, type);
+                                const fileReader2 = new FileReader();
+                                fileReader2.readAsDataURL(blob); 
+                                const result = await new Promise( async(resolve, reject) => {
+                                    fileReader2.onerror = () => {
+                                        fileReader2.abort();
+                                        reject(new DOMException("Problem parsing input file."));
+                                    };
+                    
+                                    fileReader2.onload = () => {
+                                        resolve(fileReader2.result);
+                                    };
+                                });
+                                fileObject.fileContent = result;
                             }
                             result.push(fileObject);        
                         }
