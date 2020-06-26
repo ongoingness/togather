@@ -116,6 +116,10 @@ const Diary = () => {
                         updateState(STATES.topicsFound);
                         break;
 
+                    case 'change-visibility':
+                        model.changeUserMessagesVisibility(params.hash);
+                        break;
+
                 }
 
             }

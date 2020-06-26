@@ -745,11 +745,19 @@ body, textarea, button, input, select, pre {
     outline: none;
 }
 
+.who-contributed__username-input.not-visible {
+    color: lightgray;
+}
+
 .who-contributed__username-edit {
     margin: auto;
     margin-right: 0;
     background: none;
     border: none;
+}
+
+.who-contributed__username-edit.not-visible {
+    opacity: 0.1;
 }
 
 .topic__media {

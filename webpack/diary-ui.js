@@ -717,12 +717,12 @@ const DiaryUI = (eventHandler) => {
 
             const usernameText = document.createElement('input');
             usernameText.classList.add('who-contributed__username-input');
-            usernameText.style.width = `${username.offsetWidth-75}px`;
+            usernameText.style.width = `${username.offsetWidth-115}px`;
             usernameText.value = userData[hash].name;
             usernameText.disabled = true;
             username.appendChild(usernameText);
 
-            window.addEventListener('resize', e => usernameText.style.width = `${username.offsetWidth-75}px`);
+            window.addEventListener('resize', e => usernameText.style.width = `${username.offsetWidth-115}px`);
 
             const usernameEdit = document.createElement('button');
             usernameEdit.classList.add('who-contributed__username-edit');
@@ -734,6 +734,7 @@ const DiaryUI = (eventHandler) => {
                 usernameCheck.style.display = 'block';
                 usernameText.disabled = false;
                 usernameText.focus();
+                userVisibility.disabled = true;
             });
 
             usernameText.addEventListener('keyup', (e) => {
@@ -744,6 +745,7 @@ const DiaryUI = (eventHandler) => {
                     usernameEdit.style.display = 'block';
                     usernameCheck.style.display = 'none';
                     usernameText.disabled = true;
+                    userVisibility.disabled = false;
                     eventHandler(e, {type: `edit-name`, hash, name: usernameText.value})
                 }
             });
@@ -770,6 +772,7 @@ const DiaryUI = (eventHandler) => {
                 usernameEdit.style.display = 'block';
                 usernameCheck.style.display = 'none';
                 usernameText.disabled = true;
+                userVisibility.disabled = false;
                 eventHandler(e, {type: `edit-name`, hash, name: usernameText.value})
             });
 
@@ -779,9 +782,15 @@ const DiaryUI = (eventHandler) => {
                 if(document.getElementById(`${hash}v`).style.display == 'none') {
                     document.getElementById(`${hash}v`).style.display = 'initial';
                     document.getElementById(`${hash}i`).style.display = 'none';
+                    usernameEdit.disabled = true; 
+                    usernameEdit.classList.add('not-visible');
+                    usernameText.classList.add('not-visible');
                 } else {
                     document.getElementById(`${hash}v`).style.display = 'none';
                     document.getElementById(`${hash}i`).style.display = 'initial';
+                    usernameEdit.disabled = false; 
+                    usernameEdit.classList.remove('not-visible');
+                    usernameText.classList.remove('not-visible');
                 }
                 eventHandler(e, {type: `change-visibility`, hash});
             });

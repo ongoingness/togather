@@ -480,10 +480,8 @@ const DiaryModel = () => {
         });
     }
 
-    const changeUserMessagesVisibility = (userHash, visible) => {
-        whatsAppChat.messageMap.forEach( (message, hash) => {
-            if(message.user === userHash) message.visible = visible;
-        });
+    const changeUserMessagesVisibility = (userHash) => {
+        whatsAppChat.users[userHash].visible = !whatsAppChat.users[userHash].visible;
     }
 
     return {
