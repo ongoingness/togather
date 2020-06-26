@@ -469,6 +469,9 @@ const DiaryModel = () => {
         }
     }
     
+    const hideUserMessages = (userHash) => {
+
+    }
 
     return {
         setWhatsAppChat,
