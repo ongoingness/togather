@@ -49,6 +49,7 @@ const DiaryModel = () => {
                     color = colors[Math.floor(Math.random() * colors.length)];
                 }
                 whatsAppChat.users[user].color = color;
+                whatsAppChat.users[user].visible = true;
             }
         }
     }
@@ -103,8 +104,6 @@ const DiaryModel = () => {
 
     const findTopics = () => {
 
-        console.log(whatsAppChat.messageMap);
-
         const topicRegex = RegExp('https://lapc1995.github.io/while-you-were-fighting/topics/[0-9]+');
 
         const tempTopics = [];
@@ -112,30 +111,33 @@ const DiaryModel = () => {
 
         whatsAppChat.messageMap.forEach( (message, hash) => {
 
-            if(message.rawText.length > 0) {
-                const regexResult = topicRegex.exec(message.rawText[0]);
+            if(whatsAppChat.users[message.user].visible) {
 
-                if(regexResult != null) {
+                if(message.rawText.length > 0) {
+                    const regexResult = topicRegex.exec(message.rawText[0]);
 
-                    message.text[1] = message.text[1].slice(7);
-                    message.text.shift();
+                    if(regexResult != null) {
 
-                    if( startDay === -1)
-                        startDay = message.fulltimestamp;
+                        message.text[1] = message.text[1].slice(7);
+                        message.text.shift();
 
-                    let day = Math.floor(((message.fulltimestamp - startDay) / (24 * 60 * 60 * 1000)) + 1);
+                        if( startDay === -1)
+                            startDay = message.fulltimestamp;
 
-                    tempTopics.push({
-                        day,
-                        hash,
-                        color: colors[Math.floor(Math.random() * colors.length)],
-                        messages: [],
-                        selectedMessages: [],
-                    });
+                        let day = Math.floor(((message.fulltimestamp - startDay) / (24 * 60 * 60 * 1000)) + 1);
 
+                        tempTopics.push({
+                            day,
+                            hash,
+                            color: colors[Math.floor(Math.random() * colors.length)],
+                            messages: [],
+                            selectedMessages: [],
+                        });
+
+                    }
                 }
-            }
 
+            }
         });
 
         topics = tempTopics;
@@ -315,8 +317,10 @@ const DiaryModel = () => {
         const messages = [];
 
         whatsAppChat.messageMap.forEach((value, key) => {
-            if(!topics.some(topic => topic.hash === key))
-                messages.push(getMessage(key));
+            if(whatsAppChat.users[value.user].visible) {
+                if(!topics.some(topic => topic.hash === key))
+                    messages.push(getMessage(key));
+            }
         });
 
         return messages;
@@ -469,8 +473,17 @@ const DiaryModel = () => {
         }
     }
     
-    const hideUserMessages = (userHash) => {
 
+    const addVisibilityToMessages = () => {
+        whatsAppChat.messageMap.forEach( (message, hash) => {
+            message.visible = true;
+        });
+    }
+
+    const changeUserMessagesVisibility = (userHash, visible) => {
+        whatsAppChat.messageMap.forEach( (message, hash) => {
+            if(message.user === userHash) message.visible = visible;
+        });
     }
 
     return {
@@ -495,6 +508,7 @@ const DiaryModel = () => {
         getSelectedMessagesHashes,
         removeEmojiOnlyMessages,
         getDiary,
+        changeUserMessagesVisibility,
     };
 }
 

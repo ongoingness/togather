@@ -773,6 +773,42 @@ const DiaryUI = (eventHandler) => {
                 eventHandler(e, {type: `edit-name`, hash, name: usernameText.value})
             });
 
+            const userVisibility = document.createElement('button');
+            userVisibility.classList.add('who-contributed__username-edit');
+            userVisibility.addEventListener('click', (e) => {
+                if(document.getElementById(`${hash}v`).style.display == 'none') {
+                    document.getElementById(`${hash}v`).style.display = 'initial';
+                    document.getElementById(`${hash}i`).style.display = 'none';
+                } else {
+                    document.getElementById(`${hash}v`).style.display = 'none';
+                    document.getElementById(`${hash}i`).style.display = 'initial';
+                }
+                eventHandler(e, {type: `change-visibility`, hash});
+            });
+            username.appendChild(userVisibility);
+
+            const userVisibleImage = document.createElement('i');
+            userVisibleImage.id = `${hash}v`;
+            userVisibleImage.classList.add('far', 'fa-eye');
+            userVisibleImage.style.width = '25px';
+            userVisibleImage.style.height = '25px';
+            userVisibility.appendChild(userVisibleImage);
+
+            const userNotVisibleImage = document.createElement('i');
+            userNotVisibleImage.id = `${hash}i`;
+            userNotVisibleImage.classList.add('far', 'fa-eye-slash');
+            userNotVisibleImage.style.width = '25px';
+            userNotVisibleImage.style.height = '25px';
+            userVisibility.appendChild(userNotVisibleImage);
+
+            if(userData[hash].visible) {
+                userVisibleImage.style.display = 'none';
+                userNotVisibleImage.style.display = 'initial';
+            } else {
+                userVisibleImage.style.display = 'initial';
+                userNotVisibleImage.style.display = 'none';
+            }
+
         }
 
         const helpContent = document.createElement('div');
