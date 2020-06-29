@@ -457,7 +457,18 @@ const Diary = () => {
                 switch(params.type) {
 
                     case 'share':
+                        const link = (navigator.userAgent.match(/Android/i) 
+                                    || navigator.userAgent.match(/webOS/i) 
+                                    || navigator.userAgent.match(/iPhone/i)  
+                                    || navigator.userAgent.match(/iPad/i)  
+                                    || navigator.userAgent.match(/iPod/i) 
+                                    || navigator.userAgent.match(/BlackBerry/i) 
+                                    || navigator.userAgent.match(/Windows Phone/i)) ? 
+                                    `https://api.whatsapp.com/send?text=${encodeURI('https://togather.me/')}`:
+                                    `https://web.whatsapp.com/send?text=${encodeURI('https://togather.me/')}`;
                         
+                        window.open(link, '_blank');
+                        window.location.href = `{{ site.url }}{{ site.baseurl }}/`;
                         break;
 
                     case 'no':
@@ -496,7 +507,7 @@ const Diary = () => {
 
 
     //updateState(STATES.uploadFiles);
-    updateState(STATES.giveFeedback);
+    updateState(STATES.share);
 
 };
 
