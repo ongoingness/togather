@@ -74,32 +74,33 @@ const DiaryUI = (eventHandler) => {
 
         const aTopic = document.createElement('a');
         aTopic.id = 'topic-a';
-        aTopic.href = '{{ site.url }}{{ site.baseurl }}/topics/';
+        aTopic.href = '{{ site.url }}{{ site.baseurl }}/topics';
         aTopic.innerText = 'Get a topic';
         overlayContent.appendChild(aTopic);
 
         const aExpl = document.createElement('a');
         aExpl.id = 'explained-a';
-        aExpl.href = '{{ site.url }}{{ site.baseurl }}/explained/';
-        aExpl.innerText = 'ToGather Explained';
+        aExpl.href = '{{ site.url }}{{ site.baseurl }}/explained';
+        aExpl.innerText = 'Introduction';
         overlayContent.appendChild(aExpl)
 
         const aInst = document.createElement('a');
         aInst.id = 'instructions-a';
-        aInst.href = '{{ site.url }}{{ site.baseurl }}/instructions/'
+        aInst.href = '{{ site.url }}{{ site.baseurl }}/instructions'
         aInst.innerText = 'Instructions';
         overlayContent.appendChild(aInst);
 
         const aDiary = document.createElement('a');
         aDiary.id = 'diary-a'
-        aDiary.href = '{{ site.url }}{{ site.baseurl }}/diary/' 
+        aDiary.href = '{{ site.url }}{{ site.baseurl }}/diary' 
         aDiary.innerText = 'Assemble Diary';
+        aDiary.style.textDecoration = 'underline';
         overlayContent.appendChild(aDiary);
 
         const aAbout = document.createElement('a');
         aAbout.id = 'about-a';
-        aAbout.href = '{{ site.url }}{{ site.baseurl }}/about/';
-        aAbout.innerText = 'About Us';
+        aAbout.href = '{{ site.url }}{{ site.baseurl }}/about';
+        aAbout.innerText = 'About';
         overlayContent.appendChild(aAbout);
         
     }
@@ -196,7 +197,7 @@ const DiaryUI = (eventHandler) => {
         instructionsButton.classList.add('button', 'started', 'small-font');
         instructionsButton.style.marginTop = '4.5vh';
         instructionsButton.innerHTML = 'Full assembling instructions >>';
-        const instructionsButtonClickListener = (e) => location.href='{{ site.url }}{{ site.baseurl }}/instructions/';
+        const instructionsButtonClickListener = (e) => location.href='{{ site.url }}{{ site.baseurl }}/instructions';
         //instructionsButton.addEventListener('click', () => location.href='{{ site.url }}{{ site.baseurl }}/instructions/');
         addEventListener(instructionsButton, 'click', instructionsButtonClickListener);
         gradient.appendChild(instructionsButton);
@@ -206,7 +207,7 @@ const DiaryUI = (eventHandler) => {
         aboutButton.style.marginTop = '3vh';
         aboutButton.style.marginBottom = '6vh';
         aboutButton.innerHTML = 'How we assure your privacy >>';
-        const aboutButtonClickListener = (e) =>  location.href='{{ site.url }}{{ site.baseurl }}/about/';
+        const aboutButtonClickListener = (e) =>  location.href='{{ site.url }}{{ site.baseurl }}/about';
         //aboutButton.addEventListener('click', () => location.href='{{ site.url }}{{ site.baseurl }}/about/');
         addEventListener(aboutButton, 'click', aboutButtonClickListener);
         gradient.appendChild(aboutButton);
@@ -2137,18 +2138,26 @@ const DiaryUI = (eventHandler) => {
         img1Container.style.paddingBottom = '15px';
         logoContainer.appendChild(img1Container);
 
-        const img1 = document.createElement('embed');
+        const ongoingnessLink = document.createElement('a');
+        ongoingnessLink.href = "https://enablingongoingness.com/";
+        img1Container.appendChild(ongoingnessLink);
+
+        const img1 = document.createElement('img');
         img1.src = "{{ '/assets/images/Ongoingness-logo.svg' | prepend: site.baseurl }}";
-        img1Container.appendChild(img1);
+        ongoingnessLink.appendChild(img1);
 
         const img2Container = document.createElement('div');
         img2Container.style.padding = '0px 12px';
         img2Container.style.paddingBottom = '15px';
         logoContainer.appendChild(img2Container);
 
-        const img2 = document.createElement('embed');
+        const idiLink = document.createElement('a');
+        idiLink.href = "https://www.kylemontague.co.uk/";
+        img2Container.appendChild(idiLink);
+
+        const img2 = document.createElement('img');
         img2.src = "{{ '/assets/images/iDi_logo_extended_white.svg' | prepend: site.baseurl }}";
-        img2Container.appendChild(img2);
+        idiLink.appendChild(img2);
 
         const img3Container = document.createElement('div');
         img3Container.style.padding = '0px 12px';
@@ -2156,9 +2165,13 @@ const DiaryUI = (eventHandler) => {
         img3Container.style.paddingBottom = '15px';
         logoContainer.appendChild(img3Container);
 
-        const img3 = document.createElement('embed');
+        const openLabLink = document.createElement('a');
+        openLabLink.href = "https://openlab.ncl.ac.uk/";
+        img3Container.appendChild(openLabLink);
+
+        const img3 = document.createElement('img');
         img3.src = "{{ '/assets/images/openlab-vertical.svg' | prepend: site.baseurl }}";
-        img3Container.appendChild(img3);
+        openLabLink.appendChild(img3);
 
         const img4Container = document.createElement('div');
         img4Container.style.width = '125px';
@@ -2167,11 +2180,15 @@ const DiaryUI = (eventHandler) => {
         img4Container.style.paddingBottom = '15px';
         logoContainer.appendChild(img4Container);
 
+        const northumbriaLink = document.createElement('a');
+        northumbriaLink.href = "https://www.northumbria.ac.uk/";
+        img4Container.appendChild(northumbriaLink);
+
         const img4 = document.createElement('img');
         img4.width = '150';
         img4.height = '40';
         img4.src = "{{ '/assets/images/unn_logo_white.png' | prepend: site.baseurl }}";
-        img4Container.appendChild(img4);
+        northumbriaLink.appendChild(img4);
 
         const img5Container = document.createElement('div');
         img5Container.style.width = '120px';
@@ -2180,11 +2197,15 @@ const DiaryUI = (eventHandler) => {
         img5Container.style.paddingBottom = '15px';
         logoContainer.appendChild(img5Container);
 
+        const newcastleLink = document.createElement('a');
+        newcastleLink.href = "https://www.ncl.ac.uk/";
+        img5Container.appendChild(newcastleLink);
+
         const img5 = document.createElement('img');
         img5.width = '120';
         img5.height = '40';
         img5.src = "{{ '/assets/images/NCL_logo_white.png' | prepend: site.baseurl }}";
-        img5Container.appendChild(img5);
+        newcastleLink.appendChild(img5);
 
     }
 

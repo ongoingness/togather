@@ -356,7 +356,12 @@ body {
     margin: 30px;
 }
 
-.mySlides {display: none;}
+.mySlides {
+    display: none;
+    outline: lightgray;;
+    outline-width: 1px;
+    outline-style: solid;
+}
 
 .slideshow-container {
   max-width: 450px;
