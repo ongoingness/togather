@@ -1978,7 +1978,14 @@ const DiaryUI = (eventHandler) => {
         giveButton.innerText = 'Submit';
         giveButton.addEventListener('click', e => {
             renderButtonLoader(giveButton);
-            eventHandler(e, {type: 'give-feedback', feedback: feedback.value, consent: consent.checked})
+            feedback.style.borderColor = 'initial';
+            if(feedback.value === undefined || feedback.value.trim() === '') {
+                feedback.style.borderColor = 'red';
+                giveButton.innerText = 'Submit';
+                giveButton.disabled = false;
+            } else {
+                eventHandler(e, {type: 'give-feedback', feedback: feedback.value.trim(), consent: consent.checked});
+            }
         });
         centerContainer.appendChild(giveButton);
 

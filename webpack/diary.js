@@ -495,8 +495,8 @@ const Diary = () => {
     const model = DiaryModel();
 
 
-    updateState(STATES.uploadFiles);
-  
+    //updateState(STATES.uploadFiles);
+    updateState(STATES.giveFeedback);
 
 };
 
