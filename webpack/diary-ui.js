@@ -377,7 +377,7 @@ const DiaryUI = (eventHandler) => {
         const text = document.createElement('div');
         text.classList.add('diary-header__text');
         text.style.width = '100%';
-        text.style.paddingTop = '4px';
+        //text.style.paddingTop = '4px';
         text.innerText = 'Assemble Diary';
         centerColumn.appendChild(text);
 
@@ -1572,7 +1572,7 @@ const DiaryUI = (eventHandler) => {
         const prevDay = document.createElement('button');
         prevDay.id = 'prevDay';
         prevDay.classList.add('day-scroller__prev');
-        prevDay.innerHTML = '&#10094;'
+        //prevDay.innerHTML = '&#10094;'
         prevDay.addEventListener('click', (e) => {
             prevDay.disabled = true;
             nextDay.disabled = true;
@@ -1585,6 +1585,10 @@ const DiaryUI = (eventHandler) => {
             eventHandler(e, {type: 'prev-day'})
         });  
         daysLeft.appendChild(prevDay);
+
+        const prevDayInside = document.createElement('div');
+        prevDayInside.innerHTML = '&#10094;'
+        prevDay.appendChild(prevDayInside);
 
         const daysCenter = document.createElement('div');
         daysCenter.classList.add('day-scroller__day-buttons-container__center');
@@ -1602,7 +1606,7 @@ const DiaryUI = (eventHandler) => {
         const nextDay = document.createElement('button');
         nextDay.id = 'nextDay';
         nextDay.classList.add('day-scroller__next');
-        nextDay.innerHTML = '&#10095;'
+        //nextDay.innerHTML = '&#10095;'
         nextDay.addEventListener('click', (e) => {
             
             nextDay.disabled = true;
@@ -1617,6 +1621,10 @@ const DiaryUI = (eventHandler) => {
             eventHandler(e, {type: 'next-day'});
         });  
         daysRight.appendChild(nextDay);
+
+        const nextDayInside = document.createElement('div');
+        nextDayInside.innerHTML = '&#10095;'
+        nextDay.appendChild(nextDayInside );
 
         const dotContainer = document.createElement('div');
         dotContainer.id = 'dotContainer';
@@ -1693,6 +1701,7 @@ const DiaryUI = (eventHandler) => {
 
         const overlayContent = document.createElement('div');
         overlayContent.classList.add('overlay-content', 'privacy');
+        overlayContent.styletop = '35px';
         topicTextOverlay.appendChild(overlayContent);
 
         const topicTextTitle = document.createElement('div');
@@ -1708,6 +1717,18 @@ const DiaryUI = (eventHandler) => {
         topicTextBox.innerText = `"${dayData.text}"`;
         overlayContent.appendChild(topicTextBox);
 
+        const startSelecting = document.createElement('button');
+        startSelecting.classList.add('button', 'round');
+        startSelecting.style.margin = 'auto';
+        startSelecting.style.color = 'white';
+        startSelecting.style.borderColor = 'white';
+        startSelecting.style.borderStyle = 'solid';
+        startSelecting.style.background = '#E26A6A';
+        startSelecting.style.marginTop = '10px';
+        startSelecting.innerText = 'Select Messages';
+        overlayContent.appendChild(startSelecting);
+
+        /*
         const topicCheckBox = document.createElement('div');
         topicCheckBox.classList.add('overlay__text-box');
         overlayContent.appendChild(topicCheckBox);
@@ -1718,6 +1739,7 @@ const DiaryUI = (eventHandler) => {
         checkButtonImage.height = '25';
         checkButtonImage.classList.add('overlay__topic__checkmark');
         topicCheckBox.appendChild(checkButtonImage);
+        */
 
         for(let i = 0; i < dayData.totalOfTopics; i++) {
             const dot = document.createElement('span');
@@ -1730,21 +1752,27 @@ const DiaryUI = (eventHandler) => {
             document.getElementById('dotContainer').appendChild(dot);
         }
 
+        console.log('ss', selectedMessages);
+
         for(let message of allMessagesData) {
 
             const isFromDay = new Date(message.fulltimestamp).getDate() === new Date(dayData.timestamp).getDate();
             let isSelected = false;
             let selectedDay = dayData.day;
             let isSelectedFromThisDay = false;
+            let text = dayData.part === 0 ? `Day ${selectedDay}` : `Day ${selectedDay} #${dayData.part}`;
             if(selectedMessages != undefined) {
                 if(selectedMessages.has(message.hash)) {
                     isSelected = true;
-                    selectedDay = selectedMessages.get(message.hash);
-                    isSelectedFromThisDay = dayData.day === selectedDay;
+                    const {day, part} = selectedMessages.get(message.hash);
+                    isSelectedFromThisDay = dayData.day === day && dayData.part === part;
+                    text = dayData.part === 0 ? `Day ${day}` : `Day ${day} #${part}`;
                 }
             }
 
-            renderChatMessage(message, 'lowerPage', isSelected, isFromDay, `Day ${selectedDay}`, isSelectedFromThisDay);
+            
+
+            renderChatMessage(message, 'lowerPage', isSelected, isFromDay, text, isSelectedFromThisDay);
         }
 
         let dayMessages = document.getElementsByClassName('chat-message day');

@@ -37,6 +37,8 @@ const DiaryModel = () => {
 
     let who;
 
+    let diaryDocument;
+
     const setWhatsAppChat = (tempWhatsAppChat) => {
         whatsAppChat = tempWhatsAppChat;
 
@@ -121,10 +123,15 @@ const DiaryModel = () => {
                         message.text[1] = message.text[1].slice(7);
                         message.text.shift();
 
-                        if(startDay === -1) message.fulltimestamp;
+                        if(startDay === -1) {
+                            const tempDate = new Date(message.fulltimestamp.fulltimestamp);
+                            const startDate = new Date(tempDate.getFullYear(), tempDate.getMonth(), tempDate.getDate(), 0,0,0,0);
+                            startDay = startDate.getTime();
+                        }
                         let day = Math.floor(((message.fulltimestamp - startDay) / (24 * 60 * 60 * 1000)));            
-                        day = day === 0 ? 1 : day + 2;
-            
+                        day = day === 0 ? 1 : day + 1;  
+
+
                         tempTopics.push({
                             day,
                             hash,
@@ -151,9 +158,13 @@ const DiaryModel = () => {
         let startDay = -1;
         for(const topic of topics) {
 
-            if(startDay === -1) startDay = whatsAppChat.messageMap.get(topic.hash).fulltimestamp;
+            if(startDay === -1) {
+                const tempDate = new Date( whatsAppChat.messageMap.get(topic.hash).fulltimestamp);
+                const startDate = new Date(tempDate.getFullYear(), tempDate.getMonth(), tempDate.getDate(), 0,0,0,0);
+                startDay = startDate.getTime();
+            }
             const day = Math.floor(((whatsAppChat.messageMap.get(topic.hash).fulltimestamp - startDay) / (24 * 60 * 60 * 1000)));            
-            topic.day = day === 0 ? 1 : day + 2;
+            topic.day = day === 0 ? 1 : day + 1;
 
         }
       
@@ -492,7 +503,7 @@ const DiaryModel = () => {
         for(const topic of topics) {
 
             for(const selectedMessage of topic.selectedMessages)
-                result.set(selectedMessage, topic.day);
+                result.set(selectedMessage, {day: topic.day, part: topic.part});
 
         }
  
@@ -519,16 +530,13 @@ const DiaryModel = () => {
         }
     }
     
-
-    const addVisibilityToMessages = () => {
-        whatsAppChat.messageMap.forEach( (message, hash) => {
-            message.visible = true;
-        });
-    }
-
     const changeUserMessagesVisibility = (userHash) => {
         whatsAppChat.users[userHash].visible = !whatsAppChat.users[userHash].visible;
     }
+
+    const setDiaryDocument = (doc) => diaryDocument = doc;
+    const getDiaryDocument = () => diaryDocument; 
+
 
     return {
         setWhatsAppChat,
@@ -553,6 +561,8 @@ const DiaryModel = () => {
         removeEmojiOnlyMessages,
         getDiary,
         changeUserMessagesVisibility,
+        setDiaryDocument,
+        getDiaryDocument,
     };
 }
 

@@ -373,6 +373,8 @@ const Diary = () => {
                     case 'go-to-step-5':
                         STATES.selectMessages.variables.topic = 0;
                         STATES.selectMessages.variables.totalOfTopics = 0
+                        const doc = await templates.generatePDF(model.getDiary());
+                        model.setDiaryDocument(doc);
                         updateState(STATES.reviewDiary);
                         break;
 
@@ -383,12 +385,14 @@ const Diary = () => {
         reviewDiary: {
 
             render: async() => {
-                const doc = await templates.generatePDF(model.getDiary());
-                ui.renderReviewDiary();
-          
-                for(let i = 1; i <= doc.getNumberOfPages(); i++) {
-                    const canvas = ui.renderPreviewDiaryPage();
-                    DiaryTemplates().previewPdf(doc, i, canvas);
+                const doc = model.getDiaryDocument();//await templates.generatePDF(model.getDiary());
+                if(doc != undefined) {
+                    ui.renderReviewDiary();
+            
+                    for(let i = 1; i <= doc.getNumberOfPages(); i++) {
+                        const canvas = ui.renderPreviewDiaryPage();
+                        DiaryTemplates().previewPdf(doc, i, canvas);
+                    }
                 }
             },
             eventHandler: (e, params) => {
@@ -425,8 +429,10 @@ const Diary = () => {
                         break;
 
                     case 'download-diary':
-                        const doc = await templates.generatePDF(model.getDiary(), STATES.selectMessages.variables.topic);
-                        templates.downloadPdf(doc, `For ${model.getWhoDiaryIsFor()} - ToGather`);
+                        //const doc = await templates.generatePDF(model.getDiary());
+                        const doc = model.getDiaryDocument();
+                        if(doc != undefined)
+                            templates.downloadPdf(doc, `For ${model.getWhoDiaryIsFor()} - ToGather`);
                         updateState(STATES.askFeedback);
                         break;
 
