@@ -121,16 +121,14 @@ const DiaryModel = () => {
                         message.text[1] = message.text[1].slice(7);
                         message.text.shift();
 
-                        if( startDay === -1)
-                            startDay = message.fulltimestamp;
-
-                        let day = Math.floor(((message.fulltimestamp - startDay) / (24 * 60 * 60 * 1000)) + 1);
-
+                        if(startDay === -1) message.fulltimestamp;
+                        let day = Math.floor(((message.fulltimestamp - startDay) / (24 * 60 * 60 * 1000)));            
+                        day = day === 0 ? 1 : day + 2;
+            
                         tempTopics.push({
                             day,
                             hash,
                             color: colors[Math.floor(Math.random() * colors.length)],
-                            messages: [],
                             selectedMessages: [],
                         });
 
@@ -140,18 +138,61 @@ const DiaryModel = () => {
             }
         });
 
-        topics = tempTopics;
-
-        console.log(topics);
-
-        sortTopicsByTimestamp();
-        findTopicMessages();
-
+        sortTopicsByTimestamp(tempTopics);
+        setTopicsDay(tempTopics);
+        topics = setTopicsPart(tempTopics);
         return tempTopics;
     }
 
-    const sortTopicsByTimestamp = () => topics.sort((a, b) => whatsAppChat.messageMap.get(a.hash).fulltimestamp - whatsAppChat.messageMap.get(b.hash).fulltimestamp);
+    const sortTopicsByTimestamp = (topics) => topics.sort((a, b) => whatsAppChat.messageMap.get(a.hash).fulltimestamp - whatsAppChat.messageMap.get(b.hash).fulltimestamp);
     
+    const setTopicsDay = (topics) => {
+
+        let startDay = -1;
+        for(const topic of topics) {
+
+            if(startDay === -1) startDay = whatsAppChat.messageMap.get(topic.hash).fulltimestamp;
+            const day = Math.floor(((whatsAppChat.messageMap.get(topic.hash).fulltimestamp - startDay) / (24 * 60 * 60 * 1000)));            
+            topic.day = day === 0 ? 1 : day + 2;
+
+        }
+      
+    }
+
+    const setTopicsPart = (topics) => {
+
+        const dayMap = new Map();
+
+        for(const topic of topics) {
+            if(dayMap.has(topic.day)) {
+                dayMap.get(topic.day).push(topic);
+            } else {
+                dayMap.set(topic.day, [topic]);
+            }
+        }
+
+        const resultTopics = [];
+
+        for(const [day, dayTopics] of dayMap.entries()) {
+            if(dayTopics.length === 1) {
+                dayTopics[0].part = 0;
+                resultTopics.push(dayTopics[0]);
+            } else {
+                let part = 1;
+                for(const topic of dayTopics) {
+                    topic.part = part;
+                    resultTopics.push(topic);
+                    part++;
+                }
+            }
+
+        }
+    
+        return resultTopics;
+ 
+    }
+
+    /*
     const findTopicMessages = () => {
 
         if(topics.length == 0) return
@@ -208,6 +249,7 @@ const DiaryModel = () => {
             }
         }
     }
+*/
 
     const getTopic = (index) => {
 
@@ -220,6 +262,7 @@ const DiaryModel = () => {
 
         return {
                 day: topic.day, 
+                part: topic.part,
                 hash: topic.hash,
                 color: topic.color,
                 timestamp: whatsAppChat.messageMap.get(topic.hash).fulltimestamp,
@@ -232,12 +275,7 @@ const DiaryModel = () => {
 
         const topic = getTopic(index);
 
-        const messages = [];
         const selectedMessages = [];
-
-        for(let messageHash of topics[index].messages) {
-            messages.push(getMessage(messageHash));
-        }
 
         for(let messageHash of topics[index].selectedMessages) {
             selectedMessages.push(getMessage(messageHash));
@@ -245,7 +283,6 @@ const DiaryModel = () => {
 
         topic.index = index;
         topic.totalOfTopics = topics.length,
-        topic.messages = messages;
         topic.selectedMessages = selectedMessages; 
 
         return topic;
@@ -291,10 +328,21 @@ const DiaryModel = () => {
             }
             whatsAppChat.messageMap.get(hash).files = files;
         }
+
+        sortTopicsByTimestamp(topics);
+        setTopicsDay(topics);
+        setTopicsPart(topics);
+      
    
     }
 
-    const deleteTopic = (day) => topics.splice(day, 1);
+    const deleteTopic = (day) => {
+        topics.splice(day, 1);
+    
+        sortTopicsByTimestamp(topics);
+        setTopicsDay(topics);
+        setTopicsPart(topics);
+    }
     
     const getMessage = (hash) => {
         const messageObj = {...whatsAppChat.messageMap.get(hash)};
@@ -317,7 +365,7 @@ const DiaryModel = () => {
         const messages = [];
 
         whatsAppChat.messageMap.forEach((value, key) => {
-            if(whatsAppChat.users[value.user].visible) {
+            if(value.user === "" || whatsAppChat.users[value.user].visible) {
                 if(!topics.some(topic => topic.hash === key))
                     messages.push(getMessage(key));
             }
@@ -340,12 +388,13 @@ const DiaryModel = () => {
             topics.push({
                 hash,
                 color: colors[Math.floor(Math.random() * colors.length)],
-                messages: [],
                 selectedMessages: [],
             });
         }
-        sortTopicsByTimestamp();
-        findTopicMessages();
+
+        sortTopicsByTimestamp(topics);
+        setTopicsDay(topics);
+        setTopicsPart(topics);
     }
 
     const createTopic = ({text, timestamp, tempFiles}) => {
@@ -395,14 +444,14 @@ const DiaryModel = () => {
         const topic = {
             hash,
             color: colors[Math.floor(Math.random() * colors.length)],
-            messages: [],
             selectedMessages: [],
         }
 
         topics.push(topic);
 
-        sortTopicsByTimestamp();
-        findTopicMessages();
+        sortTopicsByTimestamp(topics);
+        setTopicsDay(topics);
+        setTopicsPart(topics);
 
     }
 
@@ -410,16 +459,13 @@ const DiaryModel = () => {
 
     const saveSelectedTopicMesssage = (topicIndex, messageHash) => {
         topics[topicIndex].selectedMessages.push(messageHash);
-        console.log( topics[topicIndex].selectedMessages);
         sortMessagesByTimestamp(topics[topicIndex].selectedMessages);
-        console.log(topics[topicIndex].selectedMessages);
     }
 
     const removeSelectedTopicMessage = (topicIndex, messageHash) => {
         const indexToBeRemoved = topics[topicIndex].selectedMessages.indexOf(messageHash);
         topics[topicIndex].selectedMessages.splice(indexToBeRemoved, 1);
         sortMessagesByTimestamp(topics[topicIndex].selectedMessages);
-        console.log(topics[topicIndex].selectedMessages);
     }
 
     const getWhoDiaryIsFor = () => who;

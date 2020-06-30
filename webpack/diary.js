@@ -126,6 +126,7 @@ const Diary = () => {
         },
         topicsFound: {
             render: () => {
+                console.log(model.getTopics())
                ui.renderTopicsFound(model.getTopics());
             },
             eventHandler: (e, params) => {
@@ -179,6 +180,10 @@ const Diary = () => {
             eventHandler: (e, params) => {
 
                 switch(params.type) {
+
+                    case 'stop-assembling':
+                        updateState(STATES.uploadFiles);
+                        break;
                     
                     case 'delete-photo':
                         const media = STATES.writeTopic.variables.tempMedia.get(params.index);
@@ -224,6 +229,10 @@ const Diary = () => {
             eventHandler: (e, params) => {
 
                 switch(params.type) {
+
+                    case 'stop-assembling':
+                        updateState(STATES.uploadFiles);
+                        break;
                     
                     case 'deselected-message':
                         const index = STATES.selectTopicFromChat.variables.selectedMessages.indexOf(params.hash);
@@ -261,6 +270,10 @@ const Diary = () => {
             eventHandler: (e, params) => {
 
                 switch(params.type) {
+
+                    case 'stop-assembling':
+                        updateState(STATES.uploadFiles);
+                        break;
 
                     case 'delete-photo':
                         const media = STATES.editTopic.variables.tempMedia.get(params.index);
@@ -313,6 +326,10 @@ const Diary = () => {
             eventHandler: async(e, params) => {
 
                 switch(params.type) {
+
+                    case 'stop-assembling':
+                        updateState(STATES.uploadFiles);
+                        break;
 
                     case 'next-day':
                         if(STATES.selectMessages.variables.topic < STATES.selectMessages.variables.totalOfTopics-1) {
@@ -378,6 +395,10 @@ const Diary = () => {
 
                 switch(params.type) {
 
+                    case 'stop-assembling':
+                        updateState(STATES.uploadFiles);
+                        break;
+
                     case 'go-to-step-4':
                         updateState(STATES.selectMessages);
                         break;
@@ -399,6 +420,10 @@ const Diary = () => {
 
                 switch(params.type) {
 
+                    case 'stop-assembling':
+                        updateState(STATES.uploadFiles);
+                        break;
+
                     case 'download-diary':
                         const doc = await templates.generatePDF(model.getDiary(), STATES.selectMessages.variables.topic);
                         templates.downloadPdf(doc, `For ${model.getWhoDiaryIsFor()} - ToGather`);
@@ -416,6 +441,10 @@ const Diary = () => {
             eventHandler: (e, params) => {
 
                 switch(params.type) {
+
+                    case 'stop-assembling':
+                        updateState(STATES.uploadFiles);
+                        break;
 
                     case 'give-feedback':
                         updateState(STATES.giveFeedback);
@@ -506,8 +535,7 @@ const Diary = () => {
     const model = DiaryModel();
 
 
-    //updateState(STATES.uploadFiles);
-    updateState(STATES.share);
+    updateState(STATES.uploadFiles);
 
 };
 

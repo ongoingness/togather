@@ -1657,9 +1657,15 @@ const DiaryUI = (eventHandler) => {
 
     const renderDay = (dayData, allMessagesData, selectedMessages) => {
 
-        document.getElementById('dayDisplay').innerText = `Day ${dayData.day}`;
+        document.getElementById('dayDisplay').innerText = `Day ${dayData.part === 0 ? `${dayData.day}` : `${dayData.day} #${dayData.part}`}`;
         document.getElementById('dayDisplay').style = `color: ${dayData.color};`
-        document.getElementById('dayDisplay').addEventListener('click', e => document.getElementById('topicText').style.height = '100%')
+        document.getElementById('dayDisplay').addEventListener('click', e => {
+            const topicText = document.getElementById('topicText');
+            topicText.style.height = topicText.offsetHeight === 0 ? '100%' : '0';
+        });
+
+        document.getElementById('prevDay').disabled = false;
+        document.getElementById('nextDay').disabled = false;
 
         if(dayData.index === 0) { 
 
@@ -1672,13 +1678,10 @@ const DiaryUI = (eventHandler) => {
             document.getElementById('dayDisplay').appendChild(tapImage);
 
             document.getElementById('prevDay').disabled = true;
-            document.getElementById('nextDay').disabled = false;
-        } else if (dayData.index + 1 === dayData.totalOfTopics) {
+        } 
+        
+       if (dayData.index + 1 === dayData.totalOfTopics) {
             document.getElementById('nextDay').disabled = true;
-            document.getElementById('prevDay').disabled = false;
-        } else {
-            document.getElementById('prevDay').disabled = false;
-            document.getElementById('nextDay').disabled = false;
         }
 
         const topicTextOverlay = document.createElement('div');
