@@ -13,7 +13,7 @@ const DiaryTemplates = () => {
             doc = topicPage(doc, diary.topics[i]);
             doc = await messagePages(doc, diary.topics[i].selectedMessages);
         }
-
+    
         return doc;
     }
 
@@ -27,15 +27,15 @@ const DiaryTemplates = () => {
         doc.rect(0, 33.826, 210, 27.174, 'F'); 
         
         doc.setTextColor(255, 255, 255);
-        doc.setFontSize(52);
+        doc.setFontSize(42);
         doc.setFontType('normal');
-        doc.setFont('OstrichSans-Black');
-        doc.text(`For ${data.who}`, 105, 54, 'center');
+        doc.setFont('Oswald-Regular'/*'OstrichSans-Black'*/);
+        doc.text(`For ${data.who}`.toUpperCase(), 105, 54, 'center');
 
         doc.setTextColor(0, 121, 125);
-        doc.setFontSize(40);
-        doc.setFont('ostrich-regular');
-        doc.text('ToGather', 105, 250, 'center');
+        doc.setFontSize(30);
+        doc.setFont('Oswald-ExtraLight'/*'ostrich-regular'*/);
+        doc.text('TOGATHER', 105, 250, 'center');
 
         doc.addPage('a4', 'portrait');
 
@@ -96,18 +96,20 @@ const DiaryTemplates = () => {
         doc.rect(0, 33.826, 210, 27.174, 'F'); 
         
         doc.setTextColor(255, 255, 255);
-        doc.setFontSize(52);
+        doc.setFontSize(42);
         doc.setFontType('normal');
-        doc.setFont('OstrichSans-Black');
-        doc.text(`Day ${data.day}`, 45, 54);
-          
+        doc.setFont(/*'OstrichSans-Black'*/'Oswald-Regular');
+        doc.text((data.part === 0 ? `Day ${data.day}` : `Day ${data.day} - Part ${data.part}`).toUpperCase(), 45, 54);
+ 
+
         doc.setTextColor(0, 0, 0);
         const date = new Date(data.timestamp);
         const day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(date)
         const month = new Intl.DateTimeFormat('en', { month: 'long' }).format(date)
         const year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(date)
-        doc.setFont('ostrich-regular');
-        doc.text(`${day} ${month} ${year}`, 45, 83);
+        doc.setFont('Oswald-ExtraLight'/*'ostrich-regular'*/);
+        doc.setFontSize(40);
+        doc.text((`${day} ${month} ${year}`).toUpperCase(), 45, 83);
                 
         doc.setFontSize(18);
         doc.setFontType('italic');
@@ -181,8 +183,8 @@ const DiaryTemplates = () => {
             doc.setTextColor(255, 255, 255);
             doc.setFontSize(18);
             doc.setFontType('normal');
-            doc.setFont('OstrichSans-Black');
-            doc.text(`${data.user}`,
+            doc.setFont('Oswald-Regular'/*'OstrichSans-Black'*/);
+            doc.text(`${data.user}`.toUpperCase(),
                       column === 'l' ? leftColumnLeftMargin : rightColumnLeftMargin, 
                       (column === 'l' ? yLeft : yRight) + 7.5,
                       'center'

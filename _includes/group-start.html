@@ -1,0 +1,63 @@
+<div style="margin: 0px 20px; margin-bottom: 50px;">
+    <div style="border: 1px dashed #2A7AB0;   
+                margin: 20px 5px;
+                padding: 10px 20px;
+                text-align: center;
+                font: 16px/22px Open Sans;">
+        “Hi everyone, this group is a place where we can share things we would like to capture for [INSERT NAME] in a diary. Every day we will post a topic for inspiration what to message about today. If you have an idea for a topic feel free to share this. Also, if you just have something you want to share for the diary unrelated to the topic please do! As an opening of this group it would be nice to introduce everyone who is part of this, so post a picture of yourself, who you are to [INSERT NAME], and a short personal message for them. “
+        <button class="button round pick" onclick="openModal()" style="margin-top: 20px;">
+            Share message
+        </button>
+    </div>
+</div>
+<div id="nameModal" class="modal">
+    <div class="modal-content">
+        <a class="modal__close-button" onclick="closeModal()">×</a>
+        <p>Please, write the name to who the diary is for:</p>
+        <input id="name" class="modal__input-name" type="text">
+        <button class="button round pick" onclick="shareMessage()" style="margin-top: 20px; margin-bottom: 10px;">
+            Share message
+        </button>
+    </div>
+</div>
+
+<script>
+
+    window.onclick = (event) => {
+        const modal = document.getElementById("nameModal");
+      if (event.target == modal)
+        closeModal()
+    }
+    
+    const openModal = () => {
+        document.getElementById("nameModal").style.display = "block";
+        document.getElementById("name").focus();
+    }
+    
+    const closeModal = () => {
+        document.getElementById("nameModal").style.display = "none";
+    }
+    
+    const shareMessage = () => {
+    
+        let name = document.getElementById('name').value;
+        name = name.trim();
+    
+        const text = `Hi everyone, this group is a place where we can share things we would like to capture for ${name} in a diary. Every day we will post a topic for inspiration what to message about today. If you have an idea for a topic feel free to share this. Also, if you just have something you want to share for the diary unrelated to the topic please do! As an opening of this group it would be nice to introduce everyone who is part of this, so post a picture of yourself, who you are to ${name}, and a short personal message for them.`;
+    
+        const link = (navigator.userAgent.match(/Android/i) 
+                    || navigator.userAgent.match(/webOS/i) 
+                    || navigator.userAgent.match(/iPhone/i)  
+                    || navigator.userAgent.match(/iPad/i)  
+                    || navigator.userAgent.match(/iPod/i) 
+                    || navigator.userAgent.match(/BlackBerry/i) 
+                    || navigator.userAgent.match(/Windows Phone/i)) ? 
+                    `https://api.whatsapp.com/send?text=${encodeURI(text)}`:
+                    `https://web.whatsapp.com/send?text=${encodeURI(text)}`;
+    
+        closeModal();
+        document.getElementById('name').value = '';
+        window.open(link, '_blank');
+    }
+    
+    </script>

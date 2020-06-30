@@ -74,32 +74,33 @@ const DiaryUI = (eventHandler) => {
 
         const aTopic = document.createElement('a');
         aTopic.id = 'topic-a';
-        aTopic.href = '{{ site.url }}{{ site.baseurl }}/topics/';
+        aTopic.href = '{{ site.url }}{{ site.baseurl }}/topics';
         aTopic.innerText = 'Get a topic';
         overlayContent.appendChild(aTopic);
 
         const aExpl = document.createElement('a');
         aExpl.id = 'explained-a';
-        aExpl.href = '{{ site.url }}{{ site.baseurl }}/explained/';
-        aExpl.innerText = 'ToGather Explained';
+        aExpl.href = '{{ site.url }}{{ site.baseurl }}/explained';
+        aExpl.innerText = 'Introduction';
         overlayContent.appendChild(aExpl)
 
         const aInst = document.createElement('a');
         aInst.id = 'instructions-a';
-        aInst.href = '{{ site.url }}{{ site.baseurl }}/instructions/'
+        aInst.href = '{{ site.url }}{{ site.baseurl }}/instructions'
         aInst.innerText = 'Instructions';
         overlayContent.appendChild(aInst);
 
         const aDiary = document.createElement('a');
         aDiary.id = 'diary-a'
-        aDiary.href = '{{ site.url }}{{ site.baseurl }}/diary/' 
+        aDiary.href = '{{ site.url }}{{ site.baseurl }}/diary' 
         aDiary.innerText = 'Assemble Diary';
+        aDiary.style.textDecoration = 'underline';
         overlayContent.appendChild(aDiary);
 
         const aAbout = document.createElement('a');
         aAbout.id = 'about-a';
-        aAbout.href = '{{ site.url }}{{ site.baseurl }}/about/';
-        aAbout.innerText = 'About Us';
+        aAbout.href = '{{ site.url }}{{ site.baseurl }}/about';
+        aAbout.innerText = 'About';
         overlayContent.appendChild(aAbout);
         
     }
@@ -196,7 +197,7 @@ const DiaryUI = (eventHandler) => {
         instructionsButton.classList.add('button', 'started', 'small-font');
         instructionsButton.style.marginTop = '4.5vh';
         instructionsButton.innerHTML = 'Full assembling instructions >>';
-        const instructionsButtonClickListener = (e) => location.href='{{ site.url }}{{ site.baseurl }}/instructions/';
+        const instructionsButtonClickListener = (e) => location.href='{{ site.url }}{{ site.baseurl }}/instructions';
         //instructionsButton.addEventListener('click', () => location.href='{{ site.url }}{{ site.baseurl }}/instructions/');
         addEventListener(instructionsButton, 'click', instructionsButtonClickListener);
         gradient.appendChild(instructionsButton);
@@ -206,7 +207,7 @@ const DiaryUI = (eventHandler) => {
         aboutButton.style.marginTop = '3vh';
         aboutButton.style.marginBottom = '6vh';
         aboutButton.innerHTML = 'How we assure your privacy >>';
-        const aboutButtonClickListener = (e) =>  location.href='{{ site.url }}{{ site.baseurl }}/about/';
+        const aboutButtonClickListener = (e) =>  location.href='{{ site.url }}{{ site.baseurl }}/about';
         //aboutButton.addEventListener('click', () => location.href='{{ site.url }}{{ site.baseurl }}/about/');
         addEventListener(aboutButton, 'click', aboutButtonClickListener);
         gradient.appendChild(aboutButton);
@@ -376,7 +377,7 @@ const DiaryUI = (eventHandler) => {
         const text = document.createElement('div');
         text.classList.add('diary-header__text');
         text.style.width = '100%';
-        text.style.paddingTop = '4px';
+        //text.style.paddingTop = '4px';
         text.innerText = 'Assemble Diary';
         centerColumn.appendChild(text);
 
@@ -717,12 +718,12 @@ const DiaryUI = (eventHandler) => {
 
             const usernameText = document.createElement('input');
             usernameText.classList.add('who-contributed__username-input');
-            usernameText.style.width = `${username.offsetWidth-75}px`;
+            usernameText.style.width = `${username.offsetWidth-115}px`;
             usernameText.value = userData[hash].name;
             usernameText.disabled = true;
             username.appendChild(usernameText);
 
-            window.addEventListener('resize', e => usernameText.style.width = `${username.offsetWidth-75}px`);
+            window.addEventListener('resize', e => usernameText.style.width = `${username.offsetWidth-115}px`);
 
             const usernameEdit = document.createElement('button');
             usernameEdit.classList.add('who-contributed__username-edit');
@@ -734,6 +735,7 @@ const DiaryUI = (eventHandler) => {
                 usernameCheck.style.display = 'block';
                 usernameText.disabled = false;
                 usernameText.focus();
+                userVisibility.disabled = true;
             });
 
             usernameText.addEventListener('keyup', (e) => {
@@ -744,6 +746,7 @@ const DiaryUI = (eventHandler) => {
                     usernameEdit.style.display = 'block';
                     usernameCheck.style.display = 'none';
                     usernameText.disabled = true;
+                    userVisibility.disabled = false;
                     eventHandler(e, {type: `edit-name`, hash, name: usernameText.value})
                 }
             });
@@ -770,8 +773,51 @@ const DiaryUI = (eventHandler) => {
                 usernameEdit.style.display = 'block';
                 usernameCheck.style.display = 'none';
                 usernameText.disabled = true;
+                userVisibility.disabled = false;
                 eventHandler(e, {type: `edit-name`, hash, name: usernameText.value})
             });
+
+            const userVisibility = document.createElement('button');
+            userVisibility.classList.add('who-contributed__username-edit');
+            userVisibility.addEventListener('click', (e) => {
+                if(document.getElementById(`${hash}v`).style.display == 'none') {
+                    document.getElementById(`${hash}v`).style.display = 'initial';
+                    document.getElementById(`${hash}i`).style.display = 'none';
+                    usernameEdit.disabled = true; 
+                    usernameEdit.classList.add('not-visible');
+                    usernameText.classList.add('not-visible');
+                } else {
+                    document.getElementById(`${hash}v`).style.display = 'none';
+                    document.getElementById(`${hash}i`).style.display = 'initial';
+                    usernameEdit.disabled = false; 
+                    usernameEdit.classList.remove('not-visible');
+                    usernameText.classList.remove('not-visible');
+                }
+                eventHandler(e, {type: `change-visibility`, hash});
+            });
+            username.appendChild(userVisibility);
+
+            const userVisibleImage = document.createElement('i');
+            userVisibleImage.id = `${hash}v`;
+            userVisibleImage.classList.add('far', 'fa-eye');
+            userVisibleImage.style.width = '25px';
+            userVisibleImage.style.height = '25px';
+            userVisibility.appendChild(userVisibleImage);
+
+            const userNotVisibleImage = document.createElement('i');
+            userNotVisibleImage.id = `${hash}i`;
+            userNotVisibleImage.classList.add('far', 'fa-eye-slash');
+            userNotVisibleImage.style.width = '25px';
+            userNotVisibleImage.style.height = '25px';
+            userVisibility.appendChild(userNotVisibleImage);
+
+            if(userData[hash].visible) {
+                userVisibleImage.style.display = 'none';
+                userNotVisibleImage.style.display = 'initial';
+            } else {
+                userVisibleImage.style.display = 'initial';
+                userNotVisibleImage.style.display = 'none';
+            }
 
         }
 
@@ -1526,7 +1572,7 @@ const DiaryUI = (eventHandler) => {
         const prevDay = document.createElement('button');
         prevDay.id = 'prevDay';
         prevDay.classList.add('day-scroller__prev');
-        prevDay.innerHTML = '&#10094;'
+        //prevDay.innerHTML = '&#10094;'
         prevDay.addEventListener('click', (e) => {
             prevDay.disabled = true;
             nextDay.disabled = true;
@@ -1539,6 +1585,10 @@ const DiaryUI = (eventHandler) => {
             eventHandler(e, {type: 'prev-day'})
         });  
         daysLeft.appendChild(prevDay);
+
+        const prevDayInside = document.createElement('div');
+        prevDayInside.innerHTML = '&#10094;'
+        prevDay.appendChild(prevDayInside);
 
         const daysCenter = document.createElement('div');
         daysCenter.classList.add('day-scroller__day-buttons-container__center');
@@ -1556,7 +1606,7 @@ const DiaryUI = (eventHandler) => {
         const nextDay = document.createElement('button');
         nextDay.id = 'nextDay';
         nextDay.classList.add('day-scroller__next');
-        nextDay.innerHTML = '&#10095;'
+        //nextDay.innerHTML = '&#10095;'
         nextDay.addEventListener('click', (e) => {
             
             nextDay.disabled = true;
@@ -1571,6 +1621,10 @@ const DiaryUI = (eventHandler) => {
             eventHandler(e, {type: 'next-day'});
         });  
         daysRight.appendChild(nextDay);
+
+        const nextDayInside = document.createElement('div');
+        nextDayInside.innerHTML = '&#10095;'
+        nextDay.appendChild(nextDayInside );
 
         const dotContainer = document.createElement('div');
         dotContainer.id = 'dotContainer';
@@ -1611,9 +1665,15 @@ const DiaryUI = (eventHandler) => {
 
     const renderDay = (dayData, allMessagesData, selectedMessages) => {
 
-        document.getElementById('dayDisplay').innerText = `Day ${dayData.day}`;
+        document.getElementById('dayDisplay').innerText = `Day ${dayData.part === 0 ? `${dayData.day}` : `${dayData.day} #${dayData.part}`}`;
         document.getElementById('dayDisplay').style = `color: ${dayData.color};`
-        document.getElementById('dayDisplay').addEventListener('click', e => document.getElementById('topicText').style.height = '100%')
+        document.getElementById('dayDisplay').addEventListener('click', e => {
+            const topicText = document.getElementById('topicText');
+            topicText.style.height = topicText.offsetHeight === 0 ? '100%' : '0';
+        });
+
+        document.getElementById('prevDay').disabled = false;
+        document.getElementById('nextDay').disabled = false;
 
         if(dayData.index === 0) { 
 
@@ -1626,13 +1686,10 @@ const DiaryUI = (eventHandler) => {
             document.getElementById('dayDisplay').appendChild(tapImage);
 
             document.getElementById('prevDay').disabled = true;
-            document.getElementById('nextDay').disabled = false;
-        } else if (dayData.index + 1 === dayData.totalOfTopics) {
+        } 
+        
+       if (dayData.index + 1 === dayData.totalOfTopics) {
             document.getElementById('nextDay').disabled = true;
-            document.getElementById('prevDay').disabled = false;
-        } else {
-            document.getElementById('prevDay').disabled = false;
-            document.getElementById('nextDay').disabled = false;
         }
 
         const topicTextOverlay = document.createElement('div');
@@ -1644,6 +1701,7 @@ const DiaryUI = (eventHandler) => {
 
         const overlayContent = document.createElement('div');
         overlayContent.classList.add('overlay-content', 'privacy');
+        overlayContent.styletop = '35px';
         topicTextOverlay.appendChild(overlayContent);
 
         const topicTextTitle = document.createElement('div');
@@ -1659,6 +1717,18 @@ const DiaryUI = (eventHandler) => {
         topicTextBox.innerText = `"${dayData.text}"`;
         overlayContent.appendChild(topicTextBox);
 
+        const startSelecting = document.createElement('button');
+        startSelecting.classList.add('button', 'round');
+        startSelecting.style.margin = 'auto';
+        startSelecting.style.color = 'white';
+        startSelecting.style.borderColor = 'white';
+        startSelecting.style.borderStyle = 'solid';
+        startSelecting.style.background = '#E26A6A';
+        startSelecting.style.marginTop = '10px';
+        startSelecting.innerText = 'Select Messages';
+        overlayContent.appendChild(startSelecting);
+
+        /*
         const topicCheckBox = document.createElement('div');
         topicCheckBox.classList.add('overlay__text-box');
         overlayContent.appendChild(topicCheckBox);
@@ -1669,6 +1739,7 @@ const DiaryUI = (eventHandler) => {
         checkButtonImage.height = '25';
         checkButtonImage.classList.add('overlay__topic__checkmark');
         topicCheckBox.appendChild(checkButtonImage);
+        */
 
         for(let i = 0; i < dayData.totalOfTopics; i++) {
             const dot = document.createElement('span');
@@ -1681,21 +1752,27 @@ const DiaryUI = (eventHandler) => {
             document.getElementById('dotContainer').appendChild(dot);
         }
 
+        console.log('ss', selectedMessages);
+
         for(let message of allMessagesData) {
 
             const isFromDay = new Date(message.fulltimestamp).getDate() === new Date(dayData.timestamp).getDate();
             let isSelected = false;
             let selectedDay = dayData.day;
             let isSelectedFromThisDay = false;
+            let text = dayData.part === 0 ? `Day ${selectedDay}` : `Day ${selectedDay} #${dayData.part}`;
             if(selectedMessages != undefined) {
                 if(selectedMessages.has(message.hash)) {
                     isSelected = true;
-                    selectedDay = selectedMessages.get(message.hash);
-                    isSelectedFromThisDay = dayData.day === selectedDay;
+                    const {day, part} = selectedMessages.get(message.hash);
+                    isSelectedFromThisDay = dayData.day === day && dayData.part === part;
+                    text = dayData.part === 0 ? `Day ${day}` : `Day ${day} #${part}`;
                 }
             }
 
-            renderChatMessage(message, 'lowerPage', isSelected, isFromDay, `Day ${selectedDay}`, isSelectedFromThisDay);
+            
+
+            renderChatMessage(message, 'lowerPage', isSelected, isFromDay, text, isSelectedFromThisDay);
         }
 
         let dayMessages = document.getElementsByClassName('chat-message day');
@@ -1932,7 +2009,14 @@ const DiaryUI = (eventHandler) => {
         giveButton.innerText = 'Submit';
         giveButton.addEventListener('click', e => {
             renderButtonLoader(giveButton);
-            eventHandler(e, {type: 'give-feedback', feedback: feedback.value, consent: consent.checked})
+            feedback.style.borderColor = 'initial';
+            if(feedback.value === undefined || feedback.value.trim() === '') {
+                feedback.style.borderColor = 'red';
+                giveButton.innerText = 'Submit';
+                giveButton.disabled = false;
+            } else {
+                eventHandler(e, {type: 'give-feedback', feedback: feedback.value.trim(), consent: consent.checked});
+            }
         });
         centerContainer.appendChild(giveButton);
 
@@ -2092,18 +2176,26 @@ const DiaryUI = (eventHandler) => {
         img1Container.style.paddingBottom = '15px';
         logoContainer.appendChild(img1Container);
 
-        const img1 = document.createElement('embed');
+        const ongoingnessLink = document.createElement('a');
+        ongoingnessLink.href = "https://enablingongoingness.com/";
+        img1Container.appendChild(ongoingnessLink);
+
+        const img1 = document.createElement('img');
         img1.src = "{{ '/assets/images/Ongoingness-logo.svg' | prepend: site.baseurl }}";
-        img1Container.appendChild(img1);
+        ongoingnessLink.appendChild(img1);
 
         const img2Container = document.createElement('div');
         img2Container.style.padding = '0px 12px';
         img2Container.style.paddingBottom = '15px';
         logoContainer.appendChild(img2Container);
 
-        const img2 = document.createElement('embed');
+        const idiLink = document.createElement('a');
+        idiLink.href = "https://www.kylemontague.co.uk/";
+        img2Container.appendChild(idiLink);
+
+        const img2 = document.createElement('img');
         img2.src = "{{ '/assets/images/iDi_logo_extended_white.svg' | prepend: site.baseurl }}";
-        img2Container.appendChild(img2);
+        idiLink.appendChild(img2);
 
         const img3Container = document.createElement('div');
         img3Container.style.padding = '0px 12px';
@@ -2111,9 +2203,13 @@ const DiaryUI = (eventHandler) => {
         img3Container.style.paddingBottom = '15px';
         logoContainer.appendChild(img3Container);
 
-        const img3 = document.createElement('embed');
+        const openLabLink = document.createElement('a');
+        openLabLink.href = "https://openlab.ncl.ac.uk/";
+        img3Container.appendChild(openLabLink);
+
+        const img3 = document.createElement('img');
         img3.src = "{{ '/assets/images/openlab-vertical.svg' | prepend: site.baseurl }}";
-        img3Container.appendChild(img3);
+        openLabLink.appendChild(img3);
 
         const img4Container = document.createElement('div');
         img4Container.style.width = '125px';
@@ -2122,11 +2218,15 @@ const DiaryUI = (eventHandler) => {
         img4Container.style.paddingBottom = '15px';
         logoContainer.appendChild(img4Container);
 
+        const northumbriaLink = document.createElement('a');
+        northumbriaLink.href = "https://www.northumbria.ac.uk/";
+        img4Container.appendChild(northumbriaLink);
+
         const img4 = document.createElement('img');
         img4.width = '150';
         img4.height = '40';
         img4.src = "{{ '/assets/images/unn_logo_white.png' | prepend: site.baseurl }}";
-        img4Container.appendChild(img4);
+        northumbriaLink.appendChild(img4);
 
         const img5Container = document.createElement('div');
         img5Container.style.width = '120px';
@@ -2135,11 +2235,15 @@ const DiaryUI = (eventHandler) => {
         img5Container.style.paddingBottom = '15px';
         logoContainer.appendChild(img5Container);
 
+        const newcastleLink = document.createElement('a');
+        newcastleLink.href = "https://www.ncl.ac.uk/";
+        img5Container.appendChild(newcastleLink);
+
         const img5 = document.createElement('img');
         img5.width = '120';
         img5.height = '40';
         img5.src = "{{ '/assets/images/NCL_logo_white.png' | prepend: site.baseurl }}";
-        img5Container.appendChild(img5);
+        newcastleLink.appendChild(img5);
 
     }
 

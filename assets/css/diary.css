@@ -109,8 +109,16 @@ body, textarea, button, input, select, pre {
 .topic__header__day {
     align-self: center;
     padding-right: 16px;
+    /*
     font: 25px/30px 'Ostrich Sans Black';
+    */
     letter-spacing: 1.25px;
+
+    font-family: 'Oswald';
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 30px;
 }
 
 .topic__header__date {
@@ -280,10 +288,16 @@ body, textarea, button, input, select, pre {
 }
 
 .chat-message__name {
+    /*
     font-family: 'Ostrich Sans Black';
     font-weight: bold;
+    */
     width: 50%;
     align-self: center;
+
+    font-family: 'Oswald';
+    text-transform: uppercase;
+    font-weight: 400;
 }
 
 .chat-message__date {
@@ -334,14 +348,26 @@ body, textarea, button, input, select, pre {
 }
 
 .day-scroller__day-display {
+    /*
     font-family: 'Ostrich Sans Black';
+    */
     font-size: x-large;
     color: black;
     border-style: solid;
     border-color: black;
     border-width: thin;
+    
+    /*
     max-width: 75px;
+    */
+
     margin: auto;
+
+    font-family: 'Oswald';
+    text-transform: uppercase;
+
+    padding: 10px;
+    background: white;
 }
 
 .day-scroller__prev, .day-scroller__next {
@@ -357,8 +383,13 @@ body, textarea, button, input, select, pre {
     border-radius: 30px;
     opacity: 1;
     width: 37px;
-    height: 27px;
     line-height: 27px;
+    /*
+    height: 27px;
+    */
+
+
+    height: 100%;
 }
   
   /* Position the "next button" to the right */
@@ -698,11 +729,21 @@ body, textarea, button, input, select, pre {
     width: 42px;
     height: 42px;
     padding: 0 15px;
-    padding-left: 15px;
+    padding-left: 14px;
+    
+    /*
     font-family: 'Ostrich Sans Black';
     font-size: 35px;
-    font-style: normal;
+    */
+
+    font-family: 'Oswald';
+    font-size: 30px;
+    line-height: 40px;
+    font-weight: 400;
+    letter-spacing: 0.1px;
+    text-transform: uppercase;
     text-align: center;
+    font-style: normal;
 }
 
 .who-contributed__username-list {
@@ -732,8 +773,18 @@ body, textarea, button, input, select, pre {
     width: 60%;
     border: 0;
     text-align: left;
+   
+    /*
     font: 25px/30px 'Ostrich Sans Black';
     letter-spacing: 0.5px;
+    */
+
+    font-family: 'Oswald';
+    font-size: 25px;
+    line-height: 30px;
+    font-weight: 400;
+    letter-spacing: 0.1px;
+    text-transform: uppercase;
 }
 
 .who-contributed__username-input:disabled {
@@ -745,11 +796,19 @@ body, textarea, button, input, select, pre {
     outline: none;
 }
 
+.who-contributed__username-input.not-visible {
+    color: lightgray;
+}
+
 .who-contributed__username-edit {
     margin: auto;
     margin-right: 0;
     background: none;
     border: none;
+}
+
+.who-contributed__username-edit.not-visible {
+    opacity: 0.1;
 }
 
 .topic__media {
@@ -784,9 +843,13 @@ body, textarea, button, input, select, pre {
 .overlay__topic__checkmark {
     margin-top: 20px;
     filter: invert(1);
-    width: 67px;
-    height: 54px;
+    height: 50px;
+    width: 50px;
+    border: medium solid black;
+    padding: 10px;
+    border-radius: 100px;
 }
+
 
 .day-display__tap {
     position: absolute;
@@ -906,9 +969,16 @@ body, textarea, button, input, select, pre {
 
 .selected-text {
     margin: auto;
+    /*
     font: 50px/61px 'Ostrich Sans Black';
+    */
     letter-spacing: 2.5px;
     color: #D1D1D1;
     opacity: 0.9;
+
+    font-family: 'Oswald';
+    text-transform: uppercase;
+    font-size: 50px;
+    line-height: 61px;
 }
 

@@ -6,32 +6,34 @@
       <a id="explained-a" href="{{ site.url }}{{ site.baseurl }}/explained">Introduction</a>
       <a id="instructions-a" href="{{ site.url }}{{ site.baseurl }}/instructions">Instructions</a>
       <a id="diary-a" href="{{ site.url }}{{ site.baseurl }}/diary">Assemble Diary</a>
-      <a id="about-a" href="{{ site.url }}{{ site.baseurl }}/about">About Us</a>
+      <a id="about-a" href="{{ site.url }}{{ site.baseurl }}/about">About</a>
     </div>
 </div>
 <script>
-switch('{{page.url}}') {
-    case '/':
+
+const splittedPageUrl = '{{page.url}}'.split(/[\/.]+/);
+switch(splittedPageUrl[1]) {
+    case '':
         document.getElementById('home-a').style.textDecoration = 'underline';
         break;
-
-    case '/topic.html':
+    
+    case 'topics':
     document.getElementById('topic-a').style.textDecoration = 'underline';
         break;
 
-    case '/explained.html':
+    case 'explained':
         document.getElementById('explained-a').style.textDecoration = 'underline';
         break;
 
-    case '/instructions.html':
+    case 'instructions':
         document.getElementById('instructions-a').style.textDecoration = 'underline';
         break;
 
-    case '/diary.html':
+    case 'diary':
         ocument.getElementById('diary-a').style.textDecoration = 'underline';
         break;
 
-    case '/about.html':
+    case 'about':
         document.getElementById('about-a').style.textDecoration = 'underline';
         break;
 }

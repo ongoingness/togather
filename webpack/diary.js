@@ -116,12 +116,17 @@ const Diary = () => {
                         updateState(STATES.topicsFound);
                         break;
 
+                    case 'change-visibility':
+                        model.changeUserMessagesVisibility(params.hash);
+                        break;
+
                 }
 
             }
         },
         topicsFound: {
             render: () => {
+                console.log(model.getTopics())
                ui.renderTopicsFound(model.getTopics());
             },
             eventHandler: (e, params) => {
@@ -175,6 +180,10 @@ const Diary = () => {
             eventHandler: (e, params) => {
 
                 switch(params.type) {
+
+                    case 'stop-assembling':
+                        updateState(STATES.uploadFiles);
+                        break;
                     
                     case 'delete-photo':
                         const media = STATES.writeTopic.variables.tempMedia.get(params.index);
@@ -220,6 +229,10 @@ const Diary = () => {
             eventHandler: (e, params) => {
 
                 switch(params.type) {
+
+                    case 'stop-assembling':
+                        updateState(STATES.uploadFiles);
+                        break;
                     
                     case 'deselected-message':
                         const index = STATES.selectTopicFromChat.variables.selectedMessages.indexOf(params.hash);
@@ -257,6 +270,10 @@ const Diary = () => {
             eventHandler: (e, params) => {
 
                 switch(params.type) {
+
+                    case 'stop-assembling':
+                        updateState(STATES.uploadFiles);
+                        break;
 
                     case 'delete-photo':
                         const media = STATES.editTopic.variables.tempMedia.get(params.index);
@@ -310,6 +327,10 @@ const Diary = () => {
 
                 switch(params.type) {
 
+                    case 'stop-assembling':
+                        updateState(STATES.uploadFiles);
+                        break;
+
                     case 'next-day':
                         if(STATES.selectMessages.variables.topic < STATES.selectMessages.variables.totalOfTopics-1) {
                             STATES.selectMessages.variables.topic += 1;
@@ -352,6 +373,8 @@ const Diary = () => {
                     case 'go-to-step-5':
                         STATES.selectMessages.variables.topic = 0;
                         STATES.selectMessages.variables.totalOfTopics = 0
+                        const doc = await templates.generatePDF(model.getDiary());
+                        model.setDiaryDocument(doc);
                         updateState(STATES.reviewDiary);
                         break;
 
@@ -362,17 +385,23 @@ const Diary = () => {
         reviewDiary: {
 
             render: async() => {
-                const doc = await templates.generatePDF(model.getDiary());
-                ui.renderReviewDiary();
-          
-                for(let i = 1; i <= doc.getNumberOfPages(); i++) {
-                    const canvas = ui.renderPreviewDiaryPage();
-                    DiaryTemplates().previewPdf(doc, i, canvas);
+                const doc = model.getDiaryDocument();//await templates.generatePDF(model.getDiary());
+                if(doc != undefined) {
+                    ui.renderReviewDiary();
+            
+                    for(let i = 1; i <= doc.getNumberOfPages(); i++) {
+                        const canvas = ui.renderPreviewDiaryPage();
+                        DiaryTemplates().previewPdf(doc, i, canvas);
+                    }
                 }
             },
             eventHandler: (e, params) => {
 
                 switch(params.type) {
+
+                    case 'stop-assembling':
+                        updateState(STATES.uploadFiles);
+                        break;
 
                     case 'go-to-step-4':
                         updateState(STATES.selectMessages);
@@ -395,9 +424,15 @@ const Diary = () => {
 
                 switch(params.type) {
 
+                    case 'stop-assembling':
+                        updateState(STATES.uploadFiles);
+                        break;
+
                     case 'download-diary':
-                        const doc = await templates.generatePDF(model.getDiary(), STATES.selectMessages.variables.topic);
-                        templates.downloadPdf(doc, `For ${model.getWhoDiaryIsFor()} - ToGather`);
+                        //const doc = await templates.generatePDF(model.getDiary());
+                        const doc = model.getDiaryDocument();
+                        if(doc != undefined)
+                            templates.downloadPdf(doc, `For ${model.getWhoDiaryIsFor()} - ToGather`);
                         updateState(STATES.askFeedback);
                         break;
 
@@ -412,6 +447,10 @@ const Diary = () => {
             eventHandler: (e, params) => {
 
                 switch(params.type) {
+
+                    case 'stop-assembling':
+                        updateState(STATES.uploadFiles);
+                        break;
 
                     case 'give-feedback':
                         updateState(STATES.giveFeedback);
@@ -453,7 +492,18 @@ const Diary = () => {
                 switch(params.type) {
 
                     case 'share':
+                        const link = (navigator.userAgent.match(/Android/i) 
+                                    || navigator.userAgent.match(/webOS/i) 
+                                    || navigator.userAgent.match(/iPhone/i)  
+                                    || navigator.userAgent.match(/iPad/i)  
+                                    || navigator.userAgent.match(/iPod/i) 
+                                    || navigator.userAgent.match(/BlackBerry/i) 
+                                    || navigator.userAgent.match(/Windows Phone/i)) ? 
+                                    `https://api.whatsapp.com/send?text=${encodeURI('https://togather.me/')}`:
+                                    `https://web.whatsapp.com/send?text=${encodeURI('https://togather.me/')}`;
                         
+                        window.open(link, '_blank');
+                        window.location.href = `{{ site.url }}{{ site.baseurl }}/`;
                         break;
 
                     case 'no':
@@ -492,7 +542,6 @@ const Diary = () => {
 
 
     updateState(STATES.uploadFiles);
-  
 
 };
 
