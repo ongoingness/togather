@@ -785,6 +785,7 @@ body, textarea, button, input, select, pre {
     font-weight: 400;
     letter-spacing: 0.1px;
     text-transform: uppercase;
+    color: black;
 }
 
 .who-contributed__username-input:disabled {
