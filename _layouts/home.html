@@ -48,7 +48,7 @@
     <script>
 
         var isIE = /*@cc_on!@*/false || !!document.documentMode;
-        if(isIE) window.location.href = "{{ site.baseurl }}/iesupport";
+        if(isIE) window.location = "{{ site.baseurl }}/iesupport";
 
         // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
         let vh = window.innerHeight * 0.01;
