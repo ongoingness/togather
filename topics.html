@@ -10,6 +10,12 @@ permalink: topics/
 </head>
 <body>
     <script>
+        var isIE = /*@cc_on!@*/false || !!document.documentMode;
+        if(isIE) {
+            window.location = "{{ site.baseurl }}/iesupport";
+        }
+    </script>
+    <script>
         let topic = Math.floor(Math.random() * {{ site.topics | size }}) + 1
         window.location.href = `{{ site.url }}{{ site.baseurl }}/topics/${topic}`;
     </script>
