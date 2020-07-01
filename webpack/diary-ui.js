@@ -817,6 +817,9 @@ const DiaryUI = (eventHandler) => {
             } else {
                 userVisibleImage.style.display = 'initial';
                 userNotVisibleImage.style.display = 'none';
+                usernameEdit.disabled = true; 
+                usernameEdit.classList.add('not-visible');
+                usernameText.classList.add('not-visible');
             }
 
         }
