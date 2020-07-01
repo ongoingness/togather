@@ -46,11 +46,18 @@
     {% include footer.html %}
 
     <script>
-        self.location = "www.google.com";
-        window.location = "www.google.com";
+    
+        console.log('aa')
+        var newBody = document.createElement('body');
+            var content = document.createElement('div');
+            content.innerText = 'Trash';
+            newBody.appendChild(content);
+            document.body = newBody;
+
+            console.log('bb')
 
         var isIE = /*@cc_on!@*/false || !!document.documentMode;
-        if(isIE === true) {
+        if(isIE) {
             
             var newBody = document.createElement('body');
             var content = document.createElement('div');
