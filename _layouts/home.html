@@ -81,21 +81,12 @@ console.log('isEdge: ' + isEdge);
 console.log('isEdgeChromium: ' + isEdgeChromium);
 console.log('isBlink: ' + isBlink);
 
-        console.log('aa')
-        var newBody = document.createElement('body');
-            var content = document.createElement('div');
-            content.innerText = 'Trash';
-            newBody.appendChild(content);
-            document.body = newBody;
 
-            console.log('bb')
-
-        var isIE = /*@cc_on!@*/false || !!document.documentMode;
-        if(isIE) {
-            window.location = "{{ site.baseurl }}/iesupport";
-        }
+var isIE = /*@cc_on!@*/false || !!document.documentMode;
+if(isIE) {
+    window.location = "{{ site.baseurl }}/iesupport";
+}
             
-
 </script>
 
     <script>
