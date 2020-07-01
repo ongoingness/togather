@@ -40,10 +40,25 @@ permalink: /diary/
     <div class="loader"> </div>
 
     <script>
+        // Internet Explorer 6-11
         var isIE = /*@cc_on!@*/false || !!document.documentMode;
         if(isIE) {
             window.location = "{{ site.baseurl }}/iesupport";
         }
+
+        // Edge 20+
+        var isEdge = !isIE && !!window.StyleMedia;
+
+        // Chrome 1 - 79
+        var isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
+
+        // Edge (based on chromium) detection
+        var isEdgeChromium = isChrome && (navigator.userAgent.indexOf("Edg") != -1);
+
+        if(isEdge && !isEdgeChromium) {
+            window.location = "{{ site.baseurl }}/edgesupport";
+        }
+
     </script>
 
     <script>
@@ -54,7 +69,6 @@ permalink: /diary/
         document.documentElement.style.setProperty('--vh', `${vh}px`);
 
         // We listen to the resize event
-        
         
         window.addEventListener('resize', () => {
             // We execute the same script as before
