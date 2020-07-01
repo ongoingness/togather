@@ -102,6 +102,12 @@ const DiaryUI = (eventHandler) => {
         aAbout.href = '{{ site.url }}{{ site.baseurl }}/about';
         aAbout.innerText = 'About';
         overlayContent.appendChild(aAbout);
+
+        const aContact = document.createElement('a');
+        aAbout.id = 'contact-a';
+        aAbout.href = '{{ site.url }}{{ site.baseurl }}/contact';
+        aAbout.innerText = 'Contact';
+        overlayContent.appendChild(aContact);
         
     }
 
