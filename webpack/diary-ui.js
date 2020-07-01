@@ -2083,7 +2083,8 @@ const DiaryUI = (eventHandler) => {
 
         const footerRow = document.createElement('div');
         footerRow.classList.add('row');
-        footerRow.style.height = '80px';
+        footerRow.style.height = '100px';
+        footerRow.style.marginBottom = '35px';
         footer.appendChild(footerRow);
 
         const footerColumn = document.createElement('div');
