@@ -92,12 +92,7 @@ console.log('isBlink: ' + isBlink);
 
         var isIE = /*@cc_on!@*/false || !!document.documentMode;
         if(isIE) {
-            
-            var newBody = document.createElement('body');
-            var content = document.createElement('div');
-            content.innerText = 'Trash';
-            newBody.appendChild(content);
-            document.body = newBody;
+            window.location = "{{ site.baseurl }}/iesupport";
         }
             
 
