@@ -1,21 +1,15 @@
-<div style="margin: 0px 20px; margin-bottom: 50px;">
-    <div style="border: 1px dashed #2A7AB0;   
-                margin: 20px 5px;
-                padding: 10px 20px;
-                text-align: center;
-                font: 16px/22px Open Sans;">
-        “Hi everyone, this group is a place where we can share things we would like to capture for [INSERT NAME] in a diary. Every day we will post a topic for inspiration what to message about today. If you have an idea for a topic feel free to share this. Also, if you just have something you want to share for the diary unrelated to the topic please do! As an opening of this group it would be nice to introduce everyone who is part of this, so post a picture of yourself, who you are to [INSERT NAME], and a short personal message for them. “
-        <button class="button round pick" onclick="openModal()" style="margin-top: 20px;">
-            Share message
-        </button>
-    </div>
+<div class="group-start-message">
+    “Hi everyone, this group is a place where we can share things we would like to capture for [INSERT NAME] in a diary. Every day we will post a topic for inspiration what to message about today. If you have an idea for a topic feel free to share this. Also, if you just have something you want to share for the diary unrelated to the topic please do! As an opening of this group it would be nice to introduce everyone who is part of this, so post a picture of yourself, who you are to [INSERT NAME], and a short personal message for them. “
+    <button class="button round pick" onclick="openModal()" style="margin-top: 20px;">
+        Share message
+    </button>
 </div>
 <div id="nameModal" class="modal">
     <div class="modal-content">
         <a class="modal__close-button" onclick="closeModal()">×</a>
         <p>Please, write the name to who the diary is for:</p>
         <input id="name" class="modal__input-name" type="text">
-        <button class="button round pick" onclick="shareMessage()" style="margin-top: 20px; margin-bottom: 10px;">
+        <button class="button round pick" onclick="shareMessage()" style="margin-top: 20px;">
             Share message
         </button>
     </div>

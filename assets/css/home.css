@@ -1,16 +1,7 @@
 ---
 ---
 
-@font-face {
-    font-family: 'Ostrich Sans Black';
-    src: url('../fonts/ostrich-sans/OstrichSans-Black.otf');
-}
-
-@font-face {
-    font-family: 'Ostrich Sans Medium';
-    src: url('../fonts/ostrich-sans/OstrichSans-Medium.otf');
-}
-
+/*@media screen and (max-width: 700px) {*/
 body {
     margin: 0 auto;
     max-width: 700px;
@@ -23,6 +14,7 @@ body {
     height: calc(var(--vh, 1vh) * 100);
 }
 
+
 .header {
     display: flex;
     width: 100%;
@@ -32,10 +24,6 @@ body {
 }
 
 .header__text {
-    /*
-    font-size: 35px;
-    font-family: 'Ostrich Sans Medium';
-    */
     color: rgb(3, 123, 126);
     text-align: center;
     margin: auto;
@@ -62,7 +50,6 @@ body {
 
 .content {
     width: 100%;
-    /*height: 74%;*/
     height: 83%;
     min-height: 400px;
     display: flex;
@@ -78,17 +65,12 @@ body {
 
 .footer {
     width: 100%;
-    /*height: 70px;*/
     background-color: rgb(3, 123, 126);
     margin: auto;
     margin-bottom: 0;
 }
 
 .footer__text {
-    /*
-    font-size: 26px;
-    font-family: 'Ostrich Sans Medium';
-    */
     color: white;
     text-align: left;
     margin: auto;
@@ -122,15 +104,11 @@ body {
 }
   
 .overlay-content {
-    /*
-    font-family: 'Ostrich Sans Medium';
-    */
     position: relative;
     top: 25%;
     width: 100%;
     text-align: center;
     margin-top: 30px;
-
     font-family: 'Oswald';
     font-weight: 200;
     font-size: 10px;
@@ -141,7 +119,6 @@ body {
 .overlay a {
     padding: 15px;
     text-decoration: none;
-    /*font-size: 36px;*/
     font-size: 30px;
     color: white;
     display: block;
@@ -165,13 +142,6 @@ body {
     width: 100%;
     min-height: 41px;
     height: 6%;
-    /*
-    font-family: 'Ostrich Sans Medium';
-    letter-spacing: 1.5px;
-    text-align: center;
-    line-height: 41px;
-    font-size: 30px;
-    */
     color: white;
 
     font-family: 'Oswald';
@@ -213,7 +183,6 @@ body {
     display: flex;
     flex-flow: column;
     width: 100%;
-    /*height: 73vh;*/
     height: 500px;
 }
 
@@ -264,10 +233,10 @@ body {
 .topic-box {
     height: 40%;
     background: white;
-    margin: 4vh 5.5vh;
+    margin: 25px 36px;
     font-size: 18px;
     text-align: center;
-    padding: 2.5vh;
+    padding: 16px;
     overflow: auto;
 }
 
@@ -303,6 +272,12 @@ body {
     background: #7659b6;
     margin: auto;
     margin-top: 20px;
+}
+
+.button.intro {
+    background: #f89406;
+    margin: auto;
+    margin-top: 5px;
 }
 
 .button.started {
@@ -343,11 +318,6 @@ body {
     font-size: 16px;
 }
   
-.explained-box {
-    text-align: center;
-    margin: 50px 20px;
-}
-
 .group-image {
     height: 100%;
     background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/whatsapp-chat–3.png' | prepend: site.baseurl }}') no-repeat;
@@ -368,14 +338,14 @@ body {
 }
 
 .export-chat-image-1 {
-    height: 100%;
+    height: 200px;
     background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/Screen_group_chat-4.png' | prepend: site.baseurl }}') no-repeat;
     background-size: cover;
     background-position-x: right;
 }
 
 .export-chat-image-2 {
-    height: 100%;
+    height: 140px;
     background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/Rectangle_250.png' | prepend: site.baseurl }}') no-repeat;
     background-size: cover;
     background-position-x: right;
@@ -395,10 +365,20 @@ body {
     background-position-x: right;
 }
 
+.step-2-image {
+    height: 100%;
+    max-height: 320px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/inst_step2.png' | prepend: site.baseurl }}') no-repeat;
+    background-size: cover;
+    background-position-x: left;
+}
 
-.explained-box-2 {
-    text-align: center;
-    margin: 30px;
+.step-3-image {
+    height: 100%;
+    max-height: 320px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/inst_step3.png' | prepend: site.baseurl }}') no-repeat;
+    background-size: cover;
+    background-position-x: right;
 }
 
 .mySlides {
@@ -443,16 +423,6 @@ body {
     20%,80% { opacity: 1; }
 }
 
-.instructions-video {
-    background: white;
-    border-style: solid;
-    border-width: 1px;
-    text-align: center;
-    margin: 5vh 2vh;
-    height: 25vh;
-    line-height: 25vh;
-}
-
 .title {
     font-family: 'Open Sans', sans-serif;
     font-size: 20px;
@@ -485,23 +455,51 @@ body {
     flex-direction: column;
 }
 
+.column__text {
+    text-align: left;
+    margin: auto;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.image-column {
+    width: 75%;
+    height: 100%;
+}
+
+.text-box {
+    text-align: left;
+    margin: 0px 20px;
+}
+
+.text-box.page-top {
+    margin: 50px 20px;
+}
+
+.text-box.page-middle {
+    margin-bottom: 50px;
+}
+
+.intro__dots {
+    text-align: center;
+    padding-top: 15px;
+    margin-bottom: 50px;
+}
+
+.group-start-message {
+    border: 1px dashed #2A7AB0;   
+    margin: 0px 20px;
+    margin-bottom: 55px;
+    margin-top: 0px;
+    padding: 10px 20px;
+    padding-bottom: 0;
+    text-align: center;
+    font: 16px/22px Open Sans;
+}
+
 .bold {
     font-weight: bold;
 }
-
-.footer__text__link {
-    text-decoration: underline;
-}
-
-.about__text-box {
-    margin: 5px 20px;
-    margin-bottom: 40px;
-    word-break: break-word;
-}
-
-
-
-
 
 /* The Modal (background) */
 .modal {

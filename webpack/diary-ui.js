@@ -128,7 +128,7 @@ const DiaryUI = (eventHandler) => {
 
         const textBox1 = document.createElement('div');
         textBox1.classList.add('text-box');
-        textBox1.innerText = 'Find your exported WhatsApp group chat files and add them below.';
+        textBox1.innerText = 'Find your exported WhatsApp group chat (including the media files) and add them below.';
         textBox1.style.marginTop = '28px';
         gradient.appendChild(textBox1);
         
@@ -149,13 +149,13 @@ const DiaryUI = (eventHandler) => {
         const textBox2 = document.createElement('div');
         textBox2.classList.add('text-box');
         textBox2.style.marginTop = '0';
-        textBox2.innerText = 'Your conversations stay private as this all happens just on your device, you even don\'t need internet.';
+        textBox2.innerText = 'Your chat messages and media stay private, this all happening on your device and none of your content is being send or shared with us (or anyone else).';
         gradient.appendChild(textBox2);
 
         const selectFilesButton = document.createElement('label');
-        selectFilesButton.classList.add('button', 'round', 'diary','b-gradient');
+        selectFilesButton.classList.add('button', 'round', 'diary', 'small-font');
         selectFilesButton.style.marginTop = '38px'
-        selectFilesButton.innerHTML = 'Select Files';
+        selectFilesButton.innerHTML = 'Select Exported WhatsApp Files';
         gradient.appendChild(selectFilesButton);
 
         const uploadFilesInput = document.createElement('input');
@@ -186,8 +186,10 @@ const DiaryUI = (eventHandler) => {
 
         const startButton = document.createElement('button');
         startButton.id = 'startAssembling';
-        startButton.classList.add('button', 'round', 'diary');
-        startButton.innerHTML = 'Start assembling';
+        startButton.classList.add('button', 'round', 'diary', 'small-font');
+        startButton.style.marginTop = '20px';
+        startButton.style.marginBottom = '50px';
+        startButton.innerHTML = 'Start Assembling the Diary';
         startButton.disabled = true;
 
         const startButtonClickListener = e => {
@@ -1736,19 +1738,6 @@ const DiaryUI = (eventHandler) => {
         startSelecting.style.marginTop = '10px';
         startSelecting.innerText = 'Select Messages';
         overlayContent.appendChild(startSelecting);
-
-        /*
-        const topicCheckBox = document.createElement('div');
-        topicCheckBox.classList.add('overlay__text-box');
-        overlayContent.appendChild(topicCheckBox);
-
-        const checkButtonImage = document.createElement('img');
-        checkButtonImage.src = "{{ '/assets/images/checkmark.svg' | prepend: site.baseurl }}";
-        checkButtonImage.width = '25';
-        checkButtonImage.height = '25';
-        checkButtonImage.classList.add('overlay__topic__checkmark');
-        topicCheckBox.appendChild(checkButtonImage);
-        */
 
         for(let i = 0; i < dayData.totalOfTopics; i++) {
             const dot = document.createElement('span');

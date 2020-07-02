@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lapc1995/while-you-were-fighting.git"
+    "url": "git+https://github.com/lapc1995/togather.git"
   },
   "author": "Luis Carvalho",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/lapc1995/while-you-were-fighting/issues"
+    "url": "https://github.com/lapc1995/togather/issues"
   },
-  "homepage": "https://github.com/lapc1995/while-you-were-fighting#readme",
+  "homepage": "https://github.com/lapc1995/togather#readme",
   "devDependencies": {
     "@babel/core": "^7.10.2",
     "@babel/preset-env": "^7.10.2",
