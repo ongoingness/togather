@@ -21,7 +21,6 @@ const Diary = () => {
                     case 'upload-files':
                         for(let file of params.files) {
                             if(!STATES.uploadFiles.variables.files.has(file.name)) {
-                                console.log(file.name, file);
                                 STATES.uploadFiles.variables.files.set(file.name, file);
                                 ui.renderFile(file);
                             }
@@ -103,7 +102,6 @@ const Diary = () => {
                         updateState(STATES.uploadFiles);
                         break;
 
-                    
                     case 'edit-name':
                         model.updateUsername(params.hash, params.name);
                         break;
@@ -126,8 +124,7 @@ const Diary = () => {
         },
         topicsFound: {
             render: () => {
-                console.log(model.getTopics())
-               ui.renderTopicsFound(model.getTopics());
+                ui.renderTopicsFound(model.getTopics());
             },
             eventHandler: (e, params) => {
                 switch(params.type) {
@@ -291,8 +288,6 @@ const Diary = () => {
                         break;
 
                     case 'done':
-                       console.log(params.topics);
-                       console.log(STATES.editTopic.variables.tempMedia);
                         for(const [index, {text, timestamp}] of params.topics.entries()) {
                             model.updateTopic({
                                 hash: params.hash,
@@ -437,7 +432,6 @@ const Diary = () => {
                         break;
 
                     case 'download-diary':
-                        //const doc = await templates.generatePDF(model.getDiary());
                         const doc = model.getDiaryDocument();
                         if(doc != undefined)
                             templates.downloadPdf(doc, `For ${model.getWhoDiaryIsFor()} - ToGather`);
@@ -480,13 +474,9 @@ const Diary = () => {
                 switch(params.type) {
 
                     case 'give-feedback':
-
                         await DataCollection().sendFeedback(params.feedback, params.consent);
                         updateState(STATES.share);
-                     
-
                         break
-
                 }
 
             }
@@ -527,7 +517,6 @@ const Diary = () => {
 
     const handleEvent = (e, params) => {
         e.stopPropagation();
-        console.log(params);
         currentState.eventHandler(e, params);
     }
 
