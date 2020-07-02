@@ -1864,11 +1864,13 @@ const DiaryUI = (eventHandler) => {
         const lowerPage = document.createElement('div');
         lowerPage.id = 'lowerPage';
         lowerPage.classList.add('lower-page');
+        lowerPage.style.height = '100%';
         content.appendChild(lowerPage);
 
         const pageContainer = document.createElement('div');
         pageContainer.id = 'pageContainer';
         pageContainer.style.margin = '25px';
+        pageContainer.style.height = '100%';
         lowerPage.appendChild(pageContainer);
 
         const helpContent = document.createElement('div');
@@ -1888,6 +1890,17 @@ const DiaryUI = (eventHandler) => {
         
         return canvas;
     }
+
+    const renderPreviewWithDataUri = (dataUri) => {
+
+        const object = document.createElement('object');
+        object.data = dataUri;
+        object.type = 'application/pdf';
+        object.style.width = '100%';
+        object.style.height = '100%'
+        document.getElementById('pageContainer').appendChild(object);
+    }
+
 
     const renderDownloadDiary = () => {
 
@@ -2296,6 +2309,8 @@ const DiaryUI = (eventHandler) => {
         renderPdfPreview,
 
         renderUploadErrorModal,
+
+        renderPreviewWithDataUri,
     }
 }
 

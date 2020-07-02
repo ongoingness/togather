@@ -388,10 +388,15 @@ const Diary = () => {
                 const doc = model.getDiaryDocument();//await templates.generatePDF(model.getDiary());
                 if(doc != undefined) {
                     ui.renderReviewDiary();
-            
-                    for(let i = 1; i <= doc.getNumberOfPages(); i++) {
-                        const canvas = ui.renderPreviewDiaryPage();
-                        DiaryTemplates().previewPdf(doc, i, canvas);
+                    // Safari 3.0+ "[object HTMLElementConstructor]" 
+                    const isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
+                    if(isSafari) {
+                        ui.renderPreviewWithDataUri(templates.getDataUriStringPdf(model.getDiaryDocument()));
+                    } else {
+                        for(let i = 1; i <= doc.getNumberOfPages(); i++) {
+                            const canvas = ui.renderPreviewDiaryPage();
+                            templates.previewPdf(doc, i, canvas);
+                        }
                     }
                 }
             },
