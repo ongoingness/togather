@@ -1739,19 +1739,6 @@ const DiaryUI = (eventHandler) => {
         startSelecting.innerText = 'Select Messages';
         overlayContent.appendChild(startSelecting);
 
-        /*
-        const topicCheckBox = document.createElement('div');
-        topicCheckBox.classList.add('overlay__text-box');
-        overlayContent.appendChild(topicCheckBox);
-
-        const checkButtonImage = document.createElement('img');
-        checkButtonImage.src = "{{ '/assets/images/checkmark.svg' | prepend: site.baseurl }}";
-        checkButtonImage.width = '25';
-        checkButtonImage.height = '25';
-        checkButtonImage.classList.add('overlay__topic__checkmark');
-        topicCheckBox.appendChild(checkButtonImage);
-        */
-
         for(let i = 0; i < dayData.totalOfTopics; i++) {
             const dot = document.createElement('span');
             dot.classList.add('day-scroller__dot');

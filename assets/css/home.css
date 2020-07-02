@@ -1,6 +1,7 @@
 ---
 ---
 
+/*@media screen and (max-width: 700px) {*/
 body {
     margin: 0 auto;
     max-width: 700px;
@@ -12,6 +13,7 @@ body {
 
     height: calc(var(--vh, 1vh) * 100);
 }
+
 
 .header {
     display: flex;
@@ -48,7 +50,6 @@ body {
 
 .content {
     width: 100%;
-    /*height: 74%;*/
     height: 83%;
     min-height: 400px;
     display: flex;
@@ -64,7 +65,6 @@ body {
 
 .footer {
     width: 100%;
-    /*height: 70px;*/
     background-color: rgb(3, 123, 126);
     margin: auto;
     margin-bottom: 0;
@@ -109,7 +109,6 @@ body {
     width: 100%;
     text-align: center;
     margin-top: 30px;
-
     font-family: 'Oswald';
     font-weight: 200;
     font-size: 10px;
@@ -120,7 +119,6 @@ body {
 .overlay a {
     padding: 15px;
     text-decoration: none;
-    /*font-size: 36px;*/
     font-size: 30px;
     color: white;
     display: block;
@@ -185,7 +183,6 @@ body {
     display: flex;
     flex-flow: column;
     width: 100%;
-    /*height: 73vh;*/
     height: 500px;
 }
 
@@ -236,10 +233,10 @@ body {
 .topic-box {
     height: 40%;
     background: white;
-    margin: 4vh 5.5vh;
+    margin: 25px 36px;
     font-size: 18px;
     text-align: center;
-    padding: 2.5vh;
+    padding: 16px;
     overflow: auto;
 }
 
@@ -275,6 +272,12 @@ body {
     background: #7659b6;
     margin: auto;
     margin-top: 20px;
+}
+
+.button.intro {
+    background: #f89406;
+    margin: auto;
+    margin-top: 5px;
 }
 
 .button.started {
@@ -315,11 +318,6 @@ body {
     font-size: 16px;
 }
   
-.explained-box {
-    text-align: center;
-    margin: 50px 20px;
-}
-
 .group-image {
     height: 100%;
     background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/whatsapp-chat–3.png' | prepend: site.baseurl }}') no-repeat;
@@ -383,11 +381,6 @@ body {
     background-position-x: right;
 }
 
-.explained-box-2 {
-    text-align: center;
-    margin: 30px;
-}
-
 .mySlides {
     display: none;
     outline: lightgray;;
@@ -428,16 +421,6 @@ body {
 @keyframes fadeinout {
     0%,100% { opacity: 0; }
     20%,80% { opacity: 1; }
-}
-
-.instructions-video {
-    background: white;
-    border-style: solid;
-    border-width: 1px;
-    text-align: center;
-    margin: 5vh 2vh;
-    height: 25vh;
-    line-height: 25vh;
 }
 
 .title {
@@ -517,20 +500,6 @@ body {
 .bold {
     font-weight: bold;
 }
-
-.footer__text__link {
-    text-decoration: underline;
-}
-
-.about__text-box {
-    margin: 5px 20px;
-    margin-bottom: 40px;
-    word-break: break-word;
-}
-
-
-
-
 
 /* The Modal (background) */
 .modal {

@@ -5,62 +5,6 @@ body, textarea, button, input, select, pre {
     font-family: 'Open Sans', sans-serif;
 }
 
-.base-container {
-    height: 100vh; /* Use vh as a fallback for browsers that do not support Custom Properties */
-    height: calc(var(--vh, 1vh) * 100);
-    margin: 0 auto;
-    max-width: 95vh;
-    width: 100%;
-}
-  
-.base-container__level {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-}
-
-.base-container__header {
-    height: 12%;
-    background: white;
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-}
-
-.base-container__header__text {
-    padding: 20px;
-    padding-top: -10px;
-    font-size: x-small;
-    text-align: center;
-    font-weight: bold;
-}
-
-.base-container__list {
-    height: 78%;
-    padding: 2vh;
-    overflow-y: auto;
-}
-
-.base-container__footer {
-    position: relative;
-    height: 10%;
-    background: white;
-    border-top-style: solid;
-    border-top-width: 1px;
-}
-
-.base-container__footer__item {
-    display: flex;
-    width: 50%;
-    height: 100%;
-    position: relative;
-}
-
-.topic__list__background {
-    background-image: url("{{ '/assets/images/background_pattern_topics.svg' | prepend: site.baseurl }}");
-    background-repeat: repeat-y;
-    background-size: 150%;
-}
-
 .topic {
     border-style: none;
     background: white;
@@ -120,46 +64,9 @@ body, textarea, button, input, select, pre {
     margin: 0 auto;
 }
 
-.topic__add-topic__options {
-    height: 100%;
-    display: flex;
-    align-items: center;
-}
-
-.topic__add-topic__buttons-container {
-    text-align: center;
-    margin: auto;
-}
-
-.topic__write-topic__container {
-    height: 100%;
-    display: flex;
-    width: 100%;
-    align-items: center;
-    flex-direction: column;   
-}
-
-
-.topic__write-topic__date-photo-container {
-    width: 100%;
-}
-
-.topic__write-topic__add-photo-label {
-    float: right;
-    background: white;
-    background-image: url("{{ '/assets/images/photo.svg' | prepend: site.baseurl }}");
-    width: 8vh;
-    height: 6vh;
-    background-size: contain;
-    background-repeat: round;
-    border: none;
-    margin-right: 1vh;
-}
-
 .topic__write-topic__add-photo-input, .upload-files__input {
     display: none;
 }
-
 
 .topic__write-topic__input {
     background: #FFFFFF 0% 0% no-repeat padding-box;
@@ -225,25 +132,16 @@ body, textarea, button, input, select, pre {
     background-size: 150%;
 }
 
-.chat__list__background.no-padding {
-    padding: 0;
-}
-
 .chat-message {
     color: black;
     margin: 10px;
     padding: 10px;
     border-style: none;
-    /*border-radius: 10px;*/
     font-size: 18px;
     background: white;
 }
 
 .chat-message.selected {
-    position: relative;
-}
-
-.chat-message.selected-day {
     position: relative;
 }
 
@@ -255,7 +153,6 @@ body, textarea, button, input, select, pre {
 .chat-message__name {
     width: 50%;
     align-self: center;
-
     font-family: 'Oswald';
     text-transform: uppercase;
     font-weight: 400;
@@ -273,12 +170,6 @@ body, textarea, button, input, select, pre {
     font-size: small;
     color: black;
     word-break: break-word;
-}
-
-.base-container__header__text__override {
-    padding: 0;
-    height: 100%;
-    width: 100%;
 }
 
 .day-scroller__container {
@@ -314,16 +205,9 @@ body, textarea, button, input, select, pre {
     border-style: solid;
     border-color: black;
     border-width: thin;
-    
-    /*
-    max-width: 75px;
-    */
-
     margin: auto;
-
     font-family: 'Oswald';
     text-transform: uppercase;
-
     padding: 10px;
     background: white;
 }
@@ -341,15 +225,9 @@ body, textarea, button, input, select, pre {
     opacity: 1;
     width: 37px;
     line-height: 27px;
-    /*
-    height: 27px;
-    */
-
-
     height: 100%;
 }
   
-  /* Position the "next button" to the right */
 .day-scroller__next {
     right: 0;
 }
@@ -358,11 +236,6 @@ body, textarea, button, input, select, pre {
     left: 0;
 }
   
-  /* On hover, add a black background color with a little bit see-through */
-.day-scroller__prev:hover, .day-scroller__next:hover {
-    /*background-color: rgba(0,0,0,0.8);*/
-}
-
 .day-scroller__prev:disabled, .day-scroller__next:disabled {
     border: 1px solid #C7C7C7;
     color: #C7C7C7;
@@ -379,7 +252,6 @@ body, textarea, button, input, select, pre {
     height: 5px;
     animation: spin 2s linear infinite;
 }
-
 
 .day-scroller__dot-container {
     text-align: center;
@@ -408,95 +280,12 @@ body, textarea, button, input, select, pre {
     background-color: black;
 }
 
-.select-messages__topic-display {
-    background: white;
-    border-style: solid;
-    border-width: 1px;
-    border-top-style: none;
-    padding: 1vh 2vh 1vh 2vh;
-    font-size: small;
-    text-align: center;
-    position: sticky;
-    position: -webkit-sticky;
-    top: 0; /* required */
-    z-index: 1;
-}
-
-.select-messages__action-text {
-    background: white;
-    border-style: dashed;
-    border-width: 1px;
-    font-size: smaller;
-    text-align: center;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, 0%);
-    max-width: 50vh;
-    min-width: 44vh;
-    padding: 0.6vh;
-}
-
-.select-messages__messages-container {
-    overflow-y: auto;
-    height: 100%;
-}
-
-.select-messages__read-more-button, .select-messages__read-less-button  {
-    background: none;
-    border: none;
-    color: blue;
-    cursor: pointer;
-    float: right;
-}
-
-.select-messages__button-container {
-    overflow: hidden;
-    padding-bottom: 1vh;
-    padding-top: 0.5vh;
-}
-
-.select-messages__read-more-button.hidden, .select-messages__read-less-button.hidden {
-    display: none;
-}
-
-.upload-files__label {
-    background: white;
-    padding: 3vh;
-    border-style: solid;
-    border-radius: 20vh;
-    border-width: medium;
-    cursor: pointer;
-}
-
-.preview-container {
-   height: 100%;
-   margin:auto;
-   margin-left: 0;
-   position: relative;
-}
-
 .preview-canvas {
     border: 1px solid black;
     direction: ltr;
     height: auto;
     width: 100%;
 }
-
-.preview-button {
-   position: absolute;
-   bottom: 3vh;
-}
-
-.preview-button.prev {
-    left: 25%;
-}
-
-.preview-button.next {
-    right: 25%;
-}
-
-
-
 
 .text-box {
     margin: 20px 25px;
@@ -672,13 +461,10 @@ body, textarea, button, input, select, pre {
     display: flex;
     flex-direction: row;
     width: 100%;
-    /*min-height: 95px;*/
-    /*height: 19%;*/
     height: 10%;
 }
 
 .button.step-controller__step-button {
-    /*padding: 10px 20px;*/
     padding: 8px 12px;
 }
 
@@ -786,17 +572,6 @@ body, textarea, button, input, select, pre {
     margin: 0 40px;
 }
 
-.overlay__topic__checkmark {
-    margin-top: 20px;
-    filter: invert(1);
-    height: 50px;
-    width: 50px;
-    border: medium solid black;
-    padding: 10px;
-    border-radius: 100px;
-}
-
-
 .day-display__tap {
     position: absolute;
     transform: rotate(290deg);
@@ -817,7 +592,7 @@ body, textarea, button, input, select, pre {
 
 .title.feedback {
     text-align: center;
-    font: 25px/30px 'Ostrich Sans Black';
+    font: bold 18px / 24px "Open Sans";
     letter-spacing: 0.5px;
 }
 
@@ -877,29 +652,6 @@ body, textarea, button, input, select, pre {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-}
-
-@keyframes button-gradient {
-    0% {
-      background: radial-gradient(circle at center, rgba( 255, 125 , 125, 0 ) 0%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%);
-    }
-    25% {
-      background: radial-gradient(circle at center, rgba( 255, 125, 125, 0.3 ) 24%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0) 100%);
-    }
-    50% {
-      background: radial-gradient(circle at center, rgba( 255, 125, 125, 0.5 ) 49%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0) 100%);
-    }
-    75% {
-      background: radial-gradient(circle at center, rgba( 255, 125, 125, 0.8 ) 74%, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0) 100%);
-    }
-    100% {
-      color: #fff;
-      background: radial-gradient(circle at center, #f88 99%, #fff 100%, #fff 100%);
-    }
-  }
-
-.button.b-gradient:visited {
-    animation: button-gradient 0.2s linear;
 }
 
 .selected-container {
