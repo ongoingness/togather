@@ -1,16 +1,6 @@
 ---
 ---
 
-@font-face {
-    font-family: 'Ostrich Sans Black';
-    src: url('../fonts/ostrich-sans/OstrichSans-Black.otf');
-}
-
-@font-face {
-    font-family: 'Ostrich Sans Medium';
-    src: url('../fonts/ostrich-sans/OstrichSans-Medium.otf');
-}
-
 body, textarea, button, input, select, pre {
     font-family: 'Open Sans', sans-serif;
 }
@@ -65,28 +55,6 @@ body, textarea, button, input, select, pre {
     position: relative;
 }
 
-.topic-button, .chat-button {
-    font-family: 'Ostrich Sans Black';
-    margin: auto;
-    font-size: x-large;
-    padding-left: 2vh;
-    padding-right: 2vh;
-    border-style: solid;
-    border-radius: 25px;
-    background: white;
-}
-
-.base-container__footer__item__button {
-    font-family: 'Ostrich Sans Black';
-    margin: auto;
-    font-size: x-large;
-    padding-left: 2vh;
-    padding-right: 2vh;
-    border-style: solid;
-    border-radius: 25px;
-    background: white;
-}
-
 .topic__list__background {
     background-image: url("{{ '/assets/images/background_pattern_topics.svg' | prepend: site.baseurl }}");
     background-repeat: repeat-y;
@@ -109,9 +77,6 @@ body, textarea, button, input, select, pre {
 .topic__header__day {
     align-self: center;
     padding-right: 16px;
-    /*
-    font: 25px/30px 'Ostrich Sans Black';
-    */
     letter-spacing: 1.25px;
 
     font-family: 'Oswald';
@@ -288,10 +253,6 @@ body, textarea, button, input, select, pre {
 }
 
 .chat-message__name {
-    /*
-    font-family: 'Ostrich Sans Black';
-    font-weight: bold;
-    */
     width: 50%;
     align-self: center;
 
@@ -348,9 +309,6 @@ body, textarea, button, input, select, pre {
 }
 
 .day-scroller__day-display {
-    /*
-    font-family: 'Ostrich Sans Black';
-    */
     font-size: x-large;
     color: black;
     border-style: solid;
@@ -372,7 +330,6 @@ body, textarea, button, input, select, pre {
 
 .day-scroller__prev, .day-scroller__next {
     position: relative;
-    font-family: 'Ostrich Sans Medium';
     cursor: pointer;
     color: black;
     font-weight: bold;
@@ -730,12 +687,6 @@ body, textarea, button, input, select, pre {
     height: 42px;
     padding: 0 15px;
     padding-left: 14px;
-    
-    /*
-    font-family: 'Ostrich Sans Black';
-    font-size: 35px;
-    */
-
     font-family: 'Oswald';
     font-size: 30px;
     line-height: 40px;
@@ -773,12 +724,6 @@ body, textarea, button, input, select, pre {
     width: 60%;
     border: 0;
     text-align: left;
-   
-    /*
-    font: 25px/30px 'Ostrich Sans Black';
-    letter-spacing: 0.5px;
-    */
-
     font-family: 'Oswald';
     font-size: 25px;
     line-height: 30px;
@@ -970,9 +915,6 @@ body, textarea, button, input, select, pre {
 
 .selected-text {
     margin: auto;
-    /*
-    font: 50px/61px 'Ostrich Sans Black';
-    */
     letter-spacing: 2.5px;
     color: #D1D1D1;
     opacity: 0.9;

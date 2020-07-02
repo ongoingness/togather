@@ -6,12 +6,12 @@ layout: home
 </div>
 <div class="gradient-container instructions"></div>
 <div>
-    <div class="title instructions" style="margin-top: 40px;" > #1 Get started </div>
+    <div class="title instructions" style="margin-top: 40px;">Getting Started </div>
 </div>
 <div class="row">
     <div class="column">
-        <div style="text-align: left; margin-left: 20px; margin-bottom: 30px;margin-top: 20px;">
-            <span style="font-weight: bold;">Create a group in Whatsapp</span> all the people that want to contribute to this diary.
+        <div class="column__text">
+            Open WhatsApp and create a group with all the people that want to contribute to the diary.
         </div>
         <a href="https://faq.whatsapp.com/en/android/26000123/?category=5245251" target="_blank" style="margin-left: 20px;"> 
             <embed class="phone-image second" src="{{ '/assets/images/tap.svg' | prepend: site.baseurl }}">
@@ -19,152 +19,132 @@ layout: home
         </a>
         <a href="https://faq.whatsapp.com/en/iphone/26000115/?category=5245251" target="_blank" style="margin-left: 20px;"> 
             <embed class="phone-image second" src="{{ '/assets/images/tap.svg' | prepend: site.baseurl }}">
-                How-to for iOS 
+            How-to for iOS 
         </a>
     </div>
-    <div style="width: 75%; height: 100%;">
+    <div class="image-column">
         <div class="group-image"></div>           
     </div>
 </div>
-<div style="margin: 0px 20px; text-align: center;">
-    Let everyone know what this group is about. You can use our example:
+<div class="text-box page-middle">
+    Let everyone know what this group is about and who the diary is for. You can use our example:
 </div>
-<div style="margin: 0px 20px; margin-bottom: 50px;">
-    <div style="border: 1px dashed #2A7AB0;   
-                margin: 20px 5px;
-                padding: 10px 20px;
-                text-align: center;
-                font: 16px/22px Open Sans;">
-        “Hi everyone, this group is a place where we can share things we would like to capture for [INSERT NAME] in a diary. Every day we will post a topic for inspiration what to message about today. If you have an idea for a topic feel free to share this. Also, if you just have something you want to share for the diary unrelated to the topic please do! As an opening of this group it would be nice to introduce everyone who is part of this, so post a picture of yourself, who you are to [INSERT NAME], and a short personal message for them. “
-        <button class="button round pick" onclick="openModal()" style="margin-top: 20px;">
-            Share message
-        </button>
-    </div>
-</div>
-<div class="title instructions" > #2 To-do Daily </div>
-<div class="row" style="margin-bottom: 20px;">
-    <div style="width: 75%; height: 100%;">
+
+{% include group-start.html %}
+
+<div class="title instructions" > To-do Daily </div>
+<div class="row">
+    <div class="image-column">
         <div class="challenge-image"></div>        
     </div>
-    <div style="width: 100%; height: 100%;display: flex;flex-direction: column;">
-        <div style="text-align: center;
-                    margin: auto;
-                    margin-bottom: 40px;
-                    margin-left: 10px;
-                    margin-right: 30px;">
-            Visit us here to <span class="bold">receive a new topic</span> each day. 
-        </div>
-        <div style="text-align: center;
-                    margin: auto;
-                    margin-bottom: 40px;
-                    margin-left: 10px;
-                    margin-right: 30px;">
-            If you are happy with the topic, then click to <span class="bold">share it</span> in your WhatsApp group.
+    <div class="column">
+        <div class="column__text">
+            Visit ToGather each day to receive a new topic or activity for your group.
         </div>
     </div>
 </div>
-<div style="margin: 0px 20px;margin-top: 20px;">
-    When you don’t like the randomly generated topic, then click the button to get a new one.
+<div class="text-box page-middle">
+    We've got lots of topics and activities to keep you and your group busy, or you can create your own. Just share them in your WhatsApp group as a message or photo and encourage the others to respond.
 </div>
-<div style="margin: 20px; margin-bottom: 0px;">
-    <span class="bold">Or create your own topics</span> for the diary. Just share them in your WhatsApp group as a message or photo.
-</div>
-<div style="margin: 20px; font: Italic 18px/24px Open Sans;">
+<div class="text-box page-middle" style="font: Italic 18px/24px Open Sans;">
     TIP: make it easy to find your own topics in the end by starting the message with the words “today’s topic is...”
 </div>
-<div class="row" style="margin-top: 25px;">
+<div class="row">
     <div class="column">
-        <div style="text-align: left; 
-                    margin: auto;
-                    margin-bottom: 40px;
-                    margin-left: 20px;">
-            Everyone can <span class="bold">share responses</span> in the WhatsApp group.
+        <div class="column__text">
+            Everyone should share their responses in the WhatsApp group. 
         </div>
-        <div style="text-align: left;
-                    margin: auto;
-                    margin-bottom: 40px;
-                    margin-left: 20px;">
-            <span class="bold">Repeat this every day</span> for as long as you would like to keep the diary going.
+        <div class="column__text"  >
+            Repeat these steps every day to keep the diary entries going.
         </div>
-        <button class="button give" style="margin-top: 0px; margin-bottom: 32px;" onclick="location.href='{{ site.url }}{{ site.baseurl }}/topics'" type="button">
-            Get a topic >>
+        <button class="button give" onclick="location.href='{{ site.url }}{{ site.baseurl }}/topics'" type="button">
+            Get a topic
         </button>
     </div>
-    <div style="width: 75%; height: 100%;">
+    <div class="image-column">
         <div class="chat-image"></div>          
     </div>
 </div>
-<div class="title instructions" style="margin-top: 40px;">#3 Assembling the diary</div>
-<div style="margin: 0px 20px; margin-bottom: 20px; text-align: center;">
-    To turn your group chat on Whatsapp into a diary follow these simple steps:
+<div class="title instructions">Assembling the diary</div>
+<div class="text-box page-middle">
+    To turn your WhatsApp group chat  into a diary follow these simple steps: 
 </div>
-<div class="row" style="margin-bottom: 20px; height: 350px;">
-    <div style="width: 75%; height: 100%;">
-        <div class="export-chat-image-1" style="height: 200px;"></div> 
-        <div class="export-chat-image-2" style="height: 140px;"></div>           
+<div class="row" style=" height: 350px;">
+    <div class="image-column">
+        <div class="export-chat-image-1"></div> 
+        <div class="export-chat-image-2"></div>           
     </div>
-    <div style="width: 100%; height: 100%;display: flex;flex-direction: column;">
-        <div style="text-align: left;
-                    margin-bottom: 20px;
-                    margin-left: 10px;
-                    margin-right: 20px;">
-            <span class="bold">Export the group chat, including media</span>, and save it on your phone, computer or cloud storage. (e.g. Google Drive, iCloud or Dropbox) 
+    <div class="column">
+        <div class="column__text">
+            1. Export the group chat (including media) and save it on your device or cloud storage (e.g. Google Drive, iCloud or Dropbox).
         </div>
-        <a href="https://faq.whatsapp.com/en/android/23756533/?category=5245251" target="_blank" style="text-align: center;"> 
+        <a class="column__text" href="https://faq.whatsapp.com/en/android/23756533/?category=5245251" target="_blank" style="text-align: center;"> 
             <img class="phone-image second" src="{{ '/assets/images/tap.svg' | prepend: site.baseurl }}">
-            How-to export in Whatsapp 
+            How-to export WhatsApp chats
         </a>
     </div>
 </div>
-<div style="margin: 0px 20px;margin-top: 20px;font: Italic 18px/24px Open Sans;">
+<div class="text-box page-middle" style="font: Italic 18px/24px Open Sans;">
     TIP: Anyone from the WhatsApp group can do this, so ask for help if you are having difficulties.
 </div>
-<div style="margin: 20px; margin-bottom: 0px;">
-    Come back to this website and <span class="bold">upload your exported group chat</span> to our Diary tool. (the photos, videos, gifs and the .txt file that you have saved during the previous step)
+<div class="row">
+    <div class="column">
+        <div class="column__text">
+            2. Visit the ToGather 'Assemble Diary' page and upload your exported group chat. (all of the media and the `chat.txt` file that you saved in the previous step)
+        </div>
+    </div>
+    <div class="image-column">
+        <div class="step-2-image"></div>      
+    </div>
 </div>
-<div style="margin: 20px;font: Italic 18px/24px Open Sans;">
-    Don’t worry, your personal messages and media files are not being uploaded anywhere, everything is happening locally on your device – we don’t collect any personal data. This ensures your conversations stay private and you have full control over who you want to share your diary with.
+<div style="font: Italic 18px/24px Open Sans;">
+    TIP: Don’t worry, your personal messages and media files are not actually being uploaded anywhere. Everything is happening locally on your device – we don’t collect any personal data. This ensures your conversations stay private and you have full control over who you want to share your diary with.
 </div>
-<button class="button about" onclick="location.href='{{ site.url }}{{ site.baseurl }}/about'" type="button" style="font-size: 14px;margin-bottom: 30px;margin-top: 30px;">
-    Learn more about this >>
+<button class="button about" onclick="location.href='{{ site.url }}{{ site.baseurl }}/about'" type="button" style="font-size: 14px;margin-bottom: 50px;margin-top: 30px;">
+    Learn about how the service works
 </button>
-</div>
-<div style="margin: 0px 20px;">
-    Start by telling us <span class="bold">who this diary is for</span> to create a personalized document
+
+<div class="row">
+    <div class="image-column">
+        <div class="step-3-image"></div>      
+    </div>
+    <div class="column">
+        <div class="column__text">
+            3. Personalise the diary by adding your loved one's name to the front cover.
+        </div>
+    </div>
 </div>
 <div class="row" style="margin-top: 25px;">
     <div class="column">
-        <div style="text-align: left; 
-                    margin: auto;
-                    margin-bottom: 40px;
-                    margin-left: 20px;">
-            Then <span class="bold">check the names of all the contributors</span>. We will show you a list of the names we found in your export. Change them to the names you would like to see in the diary.
+        <div class="column__text">
+            4. Check the names of all the contributors. We will show you a list of the names we found in your group. You can edit the names you'll see in the diary (e.g first names only).
         </div>
     </div>
-    <div style="width: 75%; height: 100%;">
+    <div class="image-column">
         <div class="contributed-image"></div>          
     </div>
 </div>
-<div style="margin: 0px 20px; margin-bottom: 50px;">
-    Next we will show you <span class="bold">the topics we could find</span> in the group chat. If there are <span class="bold">topics we missed you can select</span> them from your messages, <span class="bold">or write your own</span>.
+<div class ="text-box page-middle">
+    5. Review the topics we found in the group chat. If there are topics missing you can add them from your messages or type them in.
 </div>
-<div class="row" style="margin-bottom: 20px;height: 400px;">
-    <div style="width: 75%; height: 100%;">
+<div class="row">
+    <div class="image-column">
         <div class="select-messages-image"></div>        
     </div>
-    <div style="width: 100%; height: 100%;display: flex;flex-direction: column;">
-        <div style="margin: auto;
-                    margin-left: 10px;
-                    margin-right: 20px;">
-            For each topic you will be asked to <span class="bold">select which messages you want to add to the diary for that day</span>. Don’t worry if there is a day you didn’t submit anything, everyone deserves a rest, we will skip over those days and the dates will keep counting on.
+    <div class="column">
+        <div class="column__text">
+            6. For each topic you will be asked to select which responses you want to add to the diary for that day.
         </div>
     </div>
 </div>
-<div style="margin: 0px 20px;">
-    When you have done this for every day you want in the diary, <span class="bold">click finish</span>. All your messages will be placed in a template and <span class="bold">your diary will be ready for you to download</span>. You can print and/or forward it to share the diary with your family, friends and loved one.
+<div class="text-box page-middle">
+    TIP: Don’t worry if there is a day you didn’t submit anything, everyone deserves a rest, we will skip over those days and the dates will keep counting on.
+</div>
+<div class="text-box">
+    7.  When you have done this for each day you want in the diary, click the 'finish' button. All of your messages will be placed in a template and your diary will be ready for you to download. You can print and/or forward it to share the diary with your family, friends and loved ones.
 </div>
 <button class="button diary" style="margin-top: 32px; margin-bottom: 60px; padding: 10px;" onclick="location.href='{{ site.url }}{{ site.baseurl }}/diary'" type="button">
-    Assembling the diary >>
+    Assemble Diary
 </button>
 
 
