@@ -4,8 +4,6 @@ const DiaryTemplates = () => {
 
     const generatePDF = async(diary, topicLimit = -1) => {
 
-        console.log(diary);
-
         let doc = new jsPDF();
         doc = coverPages(doc, diary, true);
 
@@ -144,7 +142,6 @@ const DiaryTemplates = () => {
             let createdPage = false;
 
             let expectedSize = column === 'l' ? yLeft : yRight;
-            console.log(expectedSize)
             expectedSize +=  11 + 7;
 
             if(expectedSize > bottomMargin && !createdPage) {
@@ -279,8 +276,6 @@ const DiaryTemplates = () => {
                 mmHeight *= ratio; 
             }
 
-            console.log(mmWidth, mmHeight);
-
             return {w: mmWidth, h: mmHeight};
         }
 
@@ -299,8 +294,6 @@ const DiaryTemplates = () => {
                         mmWidth = lineWidth;
                         mmHeight *= ratio; 
                     }
-        
-                    console.log(mmWidth, mmHeight);
 
                     resolve({w: mmWidth, h: mmHeight});
 
@@ -559,7 +552,6 @@ const DiaryTemplates = () => {
                     doc = await addMessage(doc, message, 'r');
                     lastElemPositon = 'r';
                 } else {
-                    console.log('vs', yLeft, yHeaderRight + 15)
 
                     if(yLeft < yHeaderRight + 15)
                         yLeft = yHeaderRight + 15;

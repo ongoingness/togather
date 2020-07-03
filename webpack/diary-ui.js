@@ -8,14 +8,12 @@ const DiaryUI = (eventHandler) => {
     const addEventListener = (elem, eventType, listener) => {
         elem.addEventListener(eventType, listener);
         eventListeners.push({elem, eventType, listener});
-        console.log(eventListeners);
     }
 
     const removeEventListeners = () => {
         for( const {elem, eventType, listener} of eventListeners)
             elem.removeEventListener(eventType, listener);
         eventListeners.length = 0;
-        console.log(eventListeners);
     }
 
     const renderSiteHeader = () => {
@@ -194,6 +192,7 @@ const DiaryUI = (eventHandler) => {
 
         const startButtonClickListener = e => {
             renderButtonLoader(startButton);
+            window.fathom.trackGoal('6QSZBLZG', 0);
             eventHandler(e, {type: 'start-assembling'});
         };
 
@@ -667,7 +666,7 @@ const DiaryUI = (eventHandler) => {
             }
           });
 
-        inputName.addEventListener('submit', (e) =>  console.log('what'));
+        inputName.addEventListener('submit', (e) =>  {});
         if(who != undefined && who != '')
             inputName.value = who;
         lowerPage.appendChild(inputName);
@@ -1750,8 +1749,6 @@ const DiaryUI = (eventHandler) => {
             document.getElementById('dotContainer').appendChild(dot);
         }
 
-        console.log('ss', selectedMessages);
-
         for(let message of allMessagesData) {
 
             const isFromDay = new Date(message.fulltimestamp).getDate() === new Date(dayData.timestamp).getDate();
@@ -1934,7 +1931,10 @@ const DiaryUI = (eventHandler) => {
         const downloadButton = document.createElement('button');
         downloadButton.classList.add('button', 'round', 'diary');
         downloadButton.innerText = 'Download Diary';
-        downloadButton.addEventListener('click', e => eventHandler(e, {type: 'download-diary'}));
+        downloadButton.addEventListener('click', e => {
+            window.fathom.trackGoal('ZNO1KYRF', 0);
+            eventHandler(e, {type: 'download-diary'});
+        });
         centerContainer.appendChild(downloadButton);
 
     }
@@ -2068,21 +2068,44 @@ const DiaryUI = (eventHandler) => {
         
         const textBox1 = document.createElement('div');
         textBox1.classList.add('text-box');
-        textBox1.innerText = 'Thanks for your feedback! If you have friends or family that might also like Togather share the website with them through this link.';
+        textBox1.style.textAlign ='center';
+        textBox1.innerText = 'Thank you for using Togather! If you have friends or family that might also like Togather share the website with them through these links.';
         textBox1.style.marginTop = '28px';
         centerContainer.appendChild(textBox1);
         
-        const giveButton = document.createElement('button');
-        giveButton.classList.add('button', 'round', 'diary');
-        giveButton.style.backgroundColor = '#00797D';
-        giveButton.innerText = 'Share Togather';
-        giveButton.addEventListener('click', e => eventHandler(e, {type: 'share'}));
-        centerContainer.appendChild(giveButton);
+        const buttonContainer = document.createElement('div');
+        buttonContainer.style.display = 'flex';
+        buttonContainer.style.margin = '30px 0';
+        centerContainer.appendChild(buttonContainer);
+
+        const shareWhatsAppButton = document.createElement('button');
+        shareWhatsAppButton.classList.add('button', 'round');
+        shareWhatsAppButton.style.backgroundColor = '#53ce5e';
+        shareWhatsAppButton.style.borderRadius = '100px';
+        shareWhatsAppButton.style.margin = 'auto';
+        shareWhatsAppButton.style.marginRight = '20px';
+        shareWhatsAppButton.addEventListener('click', e => eventHandler(e, {type: 'share'}));
+        buttonContainer.appendChild(shareWhatsAppButton);
+    
+        const imgWA = document.createElement('img');
+        imgWA.src = 'https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg';
+        imgWA.height = '50';
+        shareWhatsAppButton.appendChild(imgWA);
+
+        const shareTwitterButton = document.createElement('button');
+        shareTwitterButton.classList.add('button', 'round');
+        shareTwitterButton.style.background = "url({{ '/assets/images/Twitter_Social_Icon_Circle_Color.svg' | prepend: site.baseurl }}) no-repeat";
+        shareTwitterButton.style.height = '70px';
+        shareTwitterButton.style.width = '70px';
+        shareTwitterButton.style.margin = 'auto';
+        shareTwitterButton.style.marginLeft = '20px';
+        shareTwitterButton.addEventListener('click', e => eventHandler(e, {type: 'share-twitter'}));
+        buttonContainer.appendChild(shareTwitterButton);
 
         const noButton = document.createElement('button');
         noButton.classList.add('button', 'round', 'diary');
         noButton.style.backgroundColor = '#00797D';
-        noButton.style.marginTop = '25px';
+        noButton.style.marginTop = '75px';
         noButton.innerText = 'No thanks';
         noButton.addEventListener('click', e => eventHandler(e, {type: 'no'}));
         centerContainer.appendChild(noButton);

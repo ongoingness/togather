@@ -432,7 +432,7 @@ const Diary = () => {
                         const doc = model.getDiaryDocument();
                         if(doc != undefined)
                             templates.downloadPdf(doc, `For ${model.getWhoDiaryIsFor()} - ToGather`);
-                        updateState(STATES.askFeedback);
+                        updateState(STATES.share);
                         break;
 
                 }
@@ -501,6 +501,14 @@ const Diary = () => {
                         window.location.href = `{{ site.url }}{{ site.baseurl }}/`;
                         break;
 
+                    case 'share-twitter':
+                        const text = 'Gathering in stories when being together is not possible #togather';
+                        const twitterLink = `https://twitter.com/intent/tweet?text=${encodeURI(text)}&url=https://togather.me`;
+                        window.fathom.trackGoal('LRZPNF3C', 0);
+                        window.open(twitterLink, '_blank');
+                        window.location.href = `{{ site.url }}{{ site.baseurl }}/`;
+                        break
+
                     case 'no':
                         window.location.href = `{{ site.url }}{{ site.baseurl }}/`;
                         break;
@@ -533,7 +541,6 @@ const Diary = () => {
     const templates = DiaryTemplates();
     const ui = DiaryUI(handleEvent);
     const model = DiaryModel();
-
 
     updateState(STATES.uploadFiles);
 

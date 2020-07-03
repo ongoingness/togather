@@ -53,7 +53,6 @@ const WhatsAppChatParser = () => {
                 };
 
                 fileReader.onload = () => {
-                    console.log(fileReader.result);
                     resolve([{file, fileContent: fileReader.result}]);
                 };
 
@@ -114,7 +113,6 @@ const WhatsAppChatParser = () => {
 
         for(let i = 0; i < fileInput.length; i++) {
             let result = await readFile(fileInput[i]);
-            console.log(result);
             files = files.concat(result);
         }
     
