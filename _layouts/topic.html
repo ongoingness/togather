@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
     <link href="{{ '/assets/css/home.css' | prepend: site.baseurl }}" rel="stylesheet" type="text/css">
     <script src="{{ '/assets/scripts/i18n.js' | prepend: site.baseurl }}"></script>
-    <script src="https://cdn.usefathom.com/script.js" site="TBJOLBOD" defer></script>
+    {% include fathom-tracking.html %}
 
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -81,13 +81,13 @@
             lang = 'en';
         }
 
-        console.log('{{page.url}}')
-
         i18n.translatePage('{{page.url}}', lang);
 
 
         const shareTopic = () => {
 
+            window.fathom.trackGoal('JC9ERVWQ', 0);
+            
             const text = `${window.location.href}\nTopic: {{ page.description }}`;
 
             const link = (navigator.userAgent.match(/Android/i) 
@@ -104,7 +104,10 @@
 
         }
 
-        const getTopic = () => window.location.href = `{{ site.url }}{{ site.baseurl }}/topics/`;
+        const getTopic = () => {
+            window.fathom.trackGoal('4VJ1QTJ7', 0);
+            window.location.href = `{{ site.url }}{{ site.baseurl }}/topics/`;
+        }
         
     </script>
 </body>
