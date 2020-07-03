@@ -386,7 +386,12 @@ const Diary = () => {
                     // Safari 3.0+ "[object HTMLElementConstructor]" 
                     //const isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
                     
-                    const isSafari = navigator.userAgent.match(/Safari/i);
+                    const ua = navigator.userAgent;
+                    const hasMozilla = ua.includes('Mozilla');
+                    const hasAppleWebKit = ua.includes('AppleWebKit');
+                    const hasSafari = ua.includes('Safari');
+                    const hasVersion = ua.includes('Version');
+                    const isSafari = hasMozilla && hasAppleWebKit && hasVersion && hasSafari;
                     console.log(isSafari, 'isSafari');
                     if(isSafari) {
                         ui.renderPreviewWithDataUri(templates.getDataUriStringPdf(model.getDiaryDocument()));
