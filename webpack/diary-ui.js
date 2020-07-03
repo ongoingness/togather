@@ -1882,12 +1882,19 @@ const DiaryUI = (eventHandler) => {
 
     const renderPreviewWithDataUri = (dataUri) => {
 
+        const pageContainer = document.getElementById('pageContainer');
+        const lowerPage = document.getElementById('lowerPage');
+        pageContainer.style.height = `${lowerPage.offsetHeight - 50}px`
+
+        window.addEventListener('resize', (e) => pageContainer.style.height = `${lowerPage.offsetHeight - 50}px`);
+
         const object = document.createElement('object');
         object.data = dataUri;
         object.type = 'application/pdf';
         object.style.width = '100%';
         object.style.height = '100%'
-        document.getElementById('pageContainer').appendChild(object);
+        pageContainer.appendChild(object);
+        
     }
 
 
