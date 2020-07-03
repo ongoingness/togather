@@ -3,6 +3,7 @@ import DiaryModel from './diary-model.js';
 import DiaryTemplates from './diary-templates.js';
 import WhatsAppChatParser from './whatapp-chat-parser.js';
 import DataCollection from './data-collection.js';
+import { checkBrowser } from './utils.js';
 
 const Diary = () => {
 
@@ -380,19 +381,10 @@ const Diary = () => {
         reviewDiary: {
 
             render: async() => {
-                const doc = model.getDiaryDocument();//await templates.generatePDF(model.getDiary());
+                const doc = model.getDiaryDocument();
                 if(doc != undefined) {
                     ui.renderReviewDiary();
-                    // Safari 3.0+ "[object HTMLElementConstructor]" 
-                    //const isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
-                    
-                    const ua = navigator.userAgent;
-                    const hasMozilla = ua.includes('Mozilla');
-                    const hasAppleWebKit = ua.includes('AppleWebKit');
-                    const hasSafari = ua.includes('Safari');
-                    const hasVersion = ua.includes('Version');
-                    const isSafari = hasMozilla && hasAppleWebKit && hasVersion && hasSafari;
-                    console.log(isSafari, 'isSafari');
+                    const {isSafari} = checkBrowser();
                     if(isSafari) {
                         ui.renderPreviewWithDataUri(templates.getDataUriStringPdf(model.getDiaryDocument()));
                     } else {
