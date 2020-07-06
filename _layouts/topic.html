@@ -21,7 +21,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <title>ToGather</title>
+    <title>Togather</title>
 </head>
 <body>
     <div class="header">
@@ -31,23 +31,23 @@
             <div class="hamburguer-line"></div>
         </div>
         <div class="header__text">
-            ToGather
+            Togather
         </div>
     </div>
     {% include nav-overlay.html %}
     <div class="content">
         <div id="t0" class="content-header topic">
-            Get a Topic
+            {% t topic.t0 %}
         </div>
         <div class="gradient-container topic">
             <div class="topic-box">
-                {{ page.description }}
+                {% t page.description %}
             </div>
             <button id="t1" class="button round pick" onclick="shareTopic()">
-                Share with your group
+                {% t topic.t1 %}
             </button>
             <button id="t2" class="button give" onclick="getTopic()">
-                Give me a different topic
+                {% t topic.t2 %}
             </button>
         </div>
     </div>
@@ -88,7 +88,7 @@
 
             window.fathom.trackGoal('JC9ERVWQ', 0);
             
-            const text = `${window.location.href}\nTopic: {{ page.description }}`;
+            const text = `${window.location.href}\n{% t topic.t3 %} {{ page.description }}`;
 
             const link = (navigator.userAgent.match(/Android/i) 
                 || navigator.userAgent.match(/webOS/i) 

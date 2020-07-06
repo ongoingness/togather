@@ -42,3 +42,5 @@ exclude: ['node_modules', 'webpack.config.js', 'webpack', 'package-lock.json', '
 languages: ['en', 'pt']
 
 exclude_from_localizations: [webpack', 'assets']
+
+default_locale_in_subfolder: false
