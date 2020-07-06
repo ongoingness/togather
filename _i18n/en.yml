@@ -75,7 +75,7 @@ footer:
 group-start:
     gs1: '“Hi everyone, this group is a place where we can share things we would like to capture for [INSERT NAME] in a diary. Every day we will post a topic for inspiration what to message about today. If you have an idea for a topic feel free to share this. Also, if you just have something you want to share for the diary unrelated to the topic please do! As an opening of this group it would be nice to introduce everyone who is part of this, so post a picture of yourself, who you are to [INSERT NAME], and a short personal message for them.“'
     gs2: Share message
-    gs3: Hi everyone, this group is a place where we can share things we would like to capture for ${name} in a diary. Every day we will post a topic for inspiration what to message about today. If you have an idea for a topic feel free to share this. Also, if you just have something you want to share for the diary unrelated to the topic please do! As an opening of this group it would be nice to introduce everyone who is part of this, so post a picture of yourself, who you are to ${name}, and a short personal message for them.
+    gs3: 'Hi everyone, this group is a place where we can share things we would like to capture for ${name} in a diary. Every day we will post a topic for inspiration what to message about today. If you have an idea for a topic feel free to share this. Also, if you just have something you want to share for the diary unrelated to the topic please do! As an opening of this group it would be nice to introduce everyone who is part of this, so post a picture of yourself, who you are to ${name}, and a short personal message for them.'
     gs4: 'Please, write the name to who the diary is for:'
 
 topic:
@@ -83,6 +83,87 @@ topic:
     t1: Share with your group
     t2: Give me a different topic
     t3: 'Topic:'
+
+diary:
+    uf1: 'Find your exported WhatsApp group chat (including the media files) and add them below.'
+    uf2: 'TIP:'
+    uf3: 'Exported by an Android phone? Select all media files and a .txt file. Exported by an iPhone? Select the .zip file.'
+    uf4: 'Your chat messages and media stay private, this all happening on your device and none of your content is being send or shared with us (or anyone else).'
+    uf5: 'Select Exported WhatsApp Files'
+    uf6: 'No files selected'
+    uf7: 'Start Assembling the Diary'
+    uf8: 'Full assembling instructions'
+    uf9: 'How we assure your privacy'
+
+    uem1: 'No chat file found'
+
+    dh1: 'Assemble Diary'
+    dh2: 'Because of our privacy measures if you quit now, your process cannot be saved. This means when you come back to assemble you have to start over. If you want a break you can leave this website open without losing your progress. Are you sure you want to stop assembling your diary?'
+    dh3: 'Yes, stop assembling'
+    dh4: 'No, continue with the diary'
+
+    ds1: 'Assembling the diary takes 5 steps.'
+    ds2: '#1 Who is the diary for?'
+    ds3: '#2 Check contibuter names'
+    ds4: '#3 Complete topic list'
+    ds5: '#4 Collect responses per day'
+    ds6: '#5 Review and download diary'
+    ds7: 'Here you will see in which step you are.'
+    ds8: 'Go to step 1'
+
+    sc1: 'Step'
+
+    wtdif1: 'Who is this Diary for?'
+    wtdif2: 'The name will be used to create a personal cover and opening page.'
+    wtdif3: 'Type the name here'
+    wtdif4: 'Give the name of your loved one who you are making this diary for. This name will be used on the cover of the final diary and on the first page to create a personal booklet and message for them. We do not save this information, this is all private and just for you and who you choose to share it with.'
+
+    wc1: 'Who contributed to this diary?'
+    wc2: 'We found the following names in the group. Is this list correct?'
+    wc3: 'These are the names of the group members as they are saved on your phone. Make sure the list is complete and that these are the names that you would like to have them in the diary. If you would like to change them, click the pencil button to edit. If you see just a phone number, this person was not saved in your contacts. As we use these names to show who wrote which message take the time to check and edit them.'
+
+    tf1: 'Which topics did you chat about?'
+    tf2: 'We found the following set of topics. Is this list complete?'
+    tf3: 'Select from chat'
+    tf4: 'Write my own'
+    tf5: 'Add Topic'
+    tf6: "The topics we have found are the ones you shared through the Togather website. If you thought of your own topics you can add them here. You can select them from the chat, if you shared them there, or write your own. If there were days that you didn\'t have a topic, but messages were shared, then try to find a description for that. For example; A log of Monday. Or; Some things we liked to share today. This way we can add that day in the diary template."
+
+    t1: 'Day'
+
+    wt1: 'Write your own topic and for which date this was'
+    wt2: 'Write another topic'
+    wt3: "The topics we have found are the ones you shared through the Togather website. If you thought of your own topics you can add them here. You can select them from the chat, if you shared them there, or write your own. If there were days that you didn\'t have a topic, but messages were shared, then try to find a description for that. For example; A log of Monday. Or; Some things we liked to share today. This way we can add that day in the diary template."
+    wt4: 'Back'
+    wt5: 'Add to topics'
+    wt6: 'Done'
+
+    nt1: 'Type your topic description here'
+    nt2: 'Add media'
+
+    stfc1: 'Select the topics you want to add.'
+    stfc2: 'Find the topics that we missed from you WhatsApp group chat. select them to add them to the topic list.'
+    stfc3: 'Back'
+    stfc4: 'Add to topics'
+
+    sm1: 'Select all messages for this day:'
+    sm2: "The topics we have found are the ones you shared through the Togather website. If you thought of your own topics you can add them here. You can select them from the chat, if you shared them there, or write your own. If there were days that you didn\'t have a topic, but messages were shared, then try to find a description for that. For example; A log of Monday. Or; Some things we liked to share today. This way we can add that day in the diary template."
+
+    d1: 'Topic Day'
+    d2: 'Select Messages'
+
+    pp1: 'Download'
+
+    rd1: 'Review your diary, is it complete?'
+    rd2: 'Go through the pages of your diary. Check if all the days, with their topics and messages are there. When you are happy with the diary you can save and download it. If there are things missing, go back to the previous step and add them.'
+    rd3: 'Finish Diary'
+
+    dd1: 'Your diary is ready!'
+    dd2: 'Download your Diary here:'
+    dd3: 'Download Diary'
+
+    s1: 'Thank you for using Togather! If you have friends or family that might also like Togather share the website with them through these links.'
+    s2: 'No thanks'
 
 topics:
     td1: 'Share a photograph of one of your last get-togethers. Describe what we are looking at and why have you chosen it?'

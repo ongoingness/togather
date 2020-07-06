@@ -84,6 +84,88 @@ topic:
     t2: Dá-me um tópico diferente
     t3: 'Tópico:'
 
+diary:
+
+    uf1: PT Find your exported WhatsApp group chat (including the media files) and add them below.
+    uf2: 'PT TIP:'
+    uf3: PT Exported by an Android phone? Select all media files and a .txt file. Exported by an iPhone? Select the .zip file.
+    uf4: PT Your chat messages and media stay private, this all happening on your device and none of your content is being send or shared with us (or anyone else).
+    uf5: PT Select Exported WhatsApp Files
+    uf6: PT No files selected
+    uf7: PT Start Assembling the Diary
+    uf8: PT Full assembling instructions
+    uf9: PT How we assure your privacy
+
+    uem1: PT No chat file found
+
+    dh1: PT Assemble Diary
+    dh2: PT Because of our privacy measures if you quit now, your process cannot be saved. This means when you come back to assemble you have to start over. If you want a break you can leave this website open without losing your progress. Are you sure you want to stop assembling your diary?
+    dh3: PT Yes, stop assembling
+    dh4: PT No, continue with the diary
+
+    ds1: PT Assembling the diary takes 5 steps.
+    ds2: 'PT #1 Who is the diary for?'
+    ds3: 'PT #2 Check contibuter names'
+    ds4: 'PT #3 Complete topic list'
+    ds5: 'PT #4 Collect responses per day'
+    ds6: 'PT #5 Review and download diary'
+    ds7: PT Here you will see in which step you are.
+    ds8: PT Go to step 1
+
+    sc1: 'PT Step'
+
+    wtdif1: PT Who is this Diary for?
+    wtdif2: PT The name will be used to create a personal cover and opening page.
+    wtdif3: PT Type the name here
+    wtdif4: PT Give the name of your loved one who you are making this diary for. This name will be used on the cover of the final diary and on the first page to create a personal booklet and message for them. We do not save this information, this is all private and just for you and who you choose to share it with.
+
+    wc1: PT Who contributed to this diary?
+    wc2: PT We found the following names in the group. Is this list correct?
+    wc3: PT These are the names of the group members as they are saved on your phone. Make sure the list is complete and that these are the names that you would like to have them in the diary. If you would like to change them, click the pencil button to edit. If you see just a phone number, this person was not saved in your contacts. As we use these names to show who wrote which message take the time to check and edit them.
+
+    tf1: PT Which topics did you chat about?
+    tf2: PT We found the following set of topics. Is this list complete?
+    tf3: PT Select from chat
+    tf4: PT Write my own
+    tf5: PT Add Topic
+    tf6: PT The topics we have found are the ones you shared through the Togather website. If you thought of your own topics you can add them here. You can select them from the chat, if you shared them there, or write your own. If there were days that you didn\'t have a topic, but messages were shared, then try to find a description for that. For example; A log of Monday. Or; Some things we liked to share today. This way we can add that day in the diary template.
+
+    t1: PT Day
+
+    wt1: PT Write your own topic and for which date this was
+    wt2: PT Write another topic
+    wt3: PT The topics we have found are the ones you shared through the Togather website. If you thought of your own topics you can add them here. You can select them from the chat, if you shared them there, or write your own. If there were days that you didn\'t have a topic, but messages were shared, then try to find a description for that. For example; A log of Monday. Or; Some things we liked to share today. This way we can add that day in the diary template.
+    wt4: PT Back
+    wt5: PT Add to topics
+    wt6: PT Done
+
+    nt1: PT Type your topic description here
+    nt2: PT Add media
+
+    stfc1: PT Select the topics you want to add.
+    stfc2: PT Find the topics that we missed from you WhatsApp group chat. select them to add them to the topic list.
+    stfc3: PT Back
+    stfc4: PT Add to topics
+
+    sm1: 'PT Select all messages for this day:'
+    sm2: PT The topics we have found are the ones you shared through the Togather website. If you thought of your own topics you can add them here. You can select them from the chat, if you shared them there, or write your own. If there were days that you didn\'t have a topic, but messages were shared, then try to find a description for that. For example; A log of Monday. Or; Some things we liked to share today. This way we can add that day in the diary template.
+
+    d1: PT Topic Day
+    d2: PT Select Messages
+
+    pp1: PT Download
+
+    rd1: PT Review your diary, is it complete?
+    rd2: PT Go through the pages of your diary. Check if all the days, with their topics and messages are there. When you are happy with the diary you can save and download it. If there are things missing, go back to the previous step and add them.
+    rd3: PT Finish Diary
+
+    dd1: PT Your diary is ready!
+    dd2: 'PT Download your Diary here:'
+    dd3: PT Download Diary
+
+    s1: PT Thank you for using Togather! If you have friends or family that might also like Togather share the website with them through these links.
+    s2: PT No thanks
+
 topics:
     td1: 'PT Share a photograph of one of your last get-togethers. Describe what we are looking at and why have you chosen it?'
     td2: 'Share a memorable story about when you were together and why it springs to mind. Do you have any pictures of this?'
