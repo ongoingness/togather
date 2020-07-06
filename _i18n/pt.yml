@@ -1,0 +1,83 @@
+index:
+    home-text: Reunindo histórias quando estar junto não é possivel
+    home-learn-button: Aprenda mais sobre Togather
+    home-topic-button: Obter um tópico
+
+introduction:
+    header: Introdução
+    t1: ToGather makes it easy to capture and share in the time spend apart from your loved ones.
+    t2: Gather a group of friends & family on WhatsApp
+    t3: Get a nostalgic, creative, fun or challenging topics to share with your group
+    t4: Create , capture, write, photograph and share with your group.
+    t5: Come back each day for another new topic to share with your group. Keep this up until you're ready to share all of the stories, photographs and messages with your loved one. ToGather lets you create a personalised diary for them from your WhatsApp group.
+    t6: 'To start create a group in Whatsapp with all the people that want to contribute to this diary. Let everyone know what this group is about. You can use our example:'
+
+instructions:
+    header: Instruçōes
+    t1: Getting Started
+    t2: Open WhatsApp and create a group with all the people that want to contribute to the diary.
+    t3: How-to for Android
+    t4: How-to for iOS 
+    t5: 'Let everyone know what this group is about and who the diary is for. You can use our example:'
+    t6: To-do Daily
+    t7: Visit ToGather each day to receive a new topic or activity for your group.
+    t8: We've got lots of topics and activities to keep you and your group busy, or you can create your own. Just share them in your WhatsApp group as a message or photo and encourage the others to respond.
+    t9: 'TIP: make it easy to find your own topics in the end by starting the message with the words “today’s topic is...”'
+    t10: Everyone should share their responses in the WhatsApp group.
+    t11: Repeat these steps every day to keep the diary entries going.
+    t12: Get a topic
+    t13: Assembling the diary
+    t14: 'To turn your WhatsApp group chat  into a diary follow these simple steps:'
+    t15: 1. Export the group chat (including media) and save it on your device or cloud storage (e.g. Google Drive, iCloud or Dropbox).
+    t16: How-to export WhatsApp chats
+    t17: 'TIP: Anyone from the WhatsApp group can do this, so ask for help if you are having difficulties.'
+    t18: 2. Visit the Togather 'Assemble Diary' page and upload your exported group chat. (all of the media and the `chat.txt` file that you saved in the previous step)
+    t19: 'TIP: Don’t worry, your personal messages and media files are not actually being uploaded anywhere. Everything is happening locally on your device – we don’t collect any personal data. This ensures your conversations stay private and you have full control over who you want to share your diary with.'
+    t20: Learn about how the service works
+    t21: 3. Personalise the diary by adding your loved one's name to the front cover.
+    t22: 4. Check the names of all the contributors. We will show you a list of the names we found in your group. You can edit the names you'll see in the diary (e.g first names only).
+    t23: 5. Review the topics we found in the group chat. If there are topics missing you can add them from your messages or type them in.
+    t24: 6. For each topic you will be asked to select which responses you want to add to the diary for that day.
+    t25: 'TIP: Don’t worry if there is a day you didn’t submit anything, everyone deserves a rest, we will skip over those days and the dates will keep counting on.'
+    t26: 7. When you have done this for each day you want in the diary, click the 'finish' button. All of your messages will be placed in a template and your diary will be ready for you to download. You can print and/or forward it to share the diary with your family, friends and loved ones.
+    t27: Assemble Diary
+
+about:
+    header: Sobre
+    t0: How it began
+    t1: The idea for ToGather was born at the early stages of the COVID-19 lockdown in the UK. We saw an article on the Dutch news where a family kept a diary for their relative in the Intensive Care Unit (ICU) and gave this to her when she was discharged from the hospital. They wrote down what happened to her while she was in the ICU, but also happened in the world outside, weather forecasts, some news items, things the family had done. We thought this was really nice, and we wanted to make this available for people going through similar experiences. 
+    t2: As we realise that going through these trying times, where families and friends get separated, it can leave you feeling powerless. We hope that through getting together as group to engage with these topics and activities provides a space to draw strength from each other and find some light. A space where even though life going on seems weird, you can make shared memories together, with your loved one at the centre of it all. We want to help you to support your family/friends/community to gather in stories when being together is not possible. 
+    t3: Simply put. We have designed Togather to keep your messages and media private. All of your chat messages and media files stay on your device and never get shared or stored by Togather (or anyone else).
+    t4: The only data we capture is through the anonymous site analytics and through our optional feedback form at the end of assembling your diary. We are a team of researchers (details below), that would love to hear about your experiences with ToGather (as well as any suggestions for how to improve it). This is completely voluntary and in no way affects your access to or usage of the ToGather website. To support this feedback and get some insight into how people use ToGather we log which topics are shared – that’s it. We do not record any user data or information that can trace back to anyone. To give you an idea of what data we capture we have created an example of a log for one day, click here to see it.
+    t5: The people behind Togather
+    t6: We are a team of design researchers from Newcastle University and Northumbria University based in Newcastle Upon-Tyne in the United Kingdom. We are part of the research project called Enabling Ongoingness (www.enablingongoingness.com) which explores how we can give new meaning to relationships in the context of end-of life and  bereavement. A large part of this is exploring how people curate the essence of a relationship in media, stories, objects and rituals in everyday life. During the COVID-19 pandemic we were faced with a new global shared experience of fear of loss and grief. It is unlike anything that many of us have experienced before, and has undoubtedly  changed our lives in many ways. Through ToGather we hope that we can help you capture your community bonds in a time where this is not as easy as it was before. If you have any experiences with ToGather that you would like to share with us do not hesitate to reach out. You can either send us a message over e-mail (kyle.montague@northumbria.ac.uk) or fill out our feedback form.
+    t7: Togather
+    t8: ToGather is an online service that aims to bring families and friends together through sharing stories for a loved one. It is built using existing services WhatsApp and GitHub, to make it widely available and free of charge for everyone. We will provided you with daily topics and activities for your family and friends to message about and turn your group conversations into a book or diary to gift, keep and revisit.
+    t9: Your Privacy
+
+contact:
+    header: Contacto
+    t1: ToGather has been developed as a constantly developing freely accessible service. Therefore we are always keen to hear your feedback, ideas, thoughts and experiences. If there is anything you would like to share with us, do not hesitate to reach out!
+    t2: 'You can contact us through:'
+
+nav-overlay:
+    home-a: Início
+    topic-a: Obter um tópico
+    explained-a: Introdução
+    instructions-a: Instruçōes
+    diary-a: Criar Diário
+    about-a: Sobre
+    contact-a: Contacto
+
+footer:
+    t1: 'Selecione Idioma:'
+
+
+
+
+
+
+
+
+
+    

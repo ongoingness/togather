@@ -3,17 +3,17 @@ layout: home
 ---
 
 <div class="content-header explained">
-    Introduction
+    {% t introduction.header %}
 </div>
 <div class="gradient-container explained">
-    <div class="text-box page-top" style="text-align: center;">
-        ToGather makes it easy to capture and share in the time spend apart from your loved ones.
+    <div id="t1" class="text-box page-top" style="text-align: center;">
+        {% t introduction.t1 %}
     </div>
 </div>
 <div class="row">
     <div class="column">
-        <div class="column__text">
-            Gather a group of friends & family on WhatsApp
+        <div id="t2" class="column__text">
+            {% t introduction.t2 %}
         </div>
     </div>
     <div class="image-column">
@@ -25,15 +25,15 @@ layout: home
         <div class="challenge-image"></div>        
     </div>
     <div class="column">
-        <div class="column__text">
-            Get a nostalgic, creative, fun or challenging topics to share with your group
+        <div id="t3" class="column__text">
+            {% t introduction.t3 %}
         </div>
     </div>
 </div>
 <div class="row">
     <div class="column">
-        <div class="column__text">
-            Create , capture, write, photograph and share with your group.
+        <div id="t4" class="column__text">
+            {% t introduction.t4 %}
         </div>
     </div>
     <div style="width: 75%; height: 100%;">
@@ -41,42 +41,42 @@ layout: home
     </div>
 </div>
 
-<div class="text-box page-middle">
-    Come back each day for another new topic to share with your group. Keep this up until you're ready to share all of the stories, photographs and messages with your loved one. ToGather lets you create a personalised diary for them from your WhatsApp group.  
+<div id="t5" class="text-box page-middle">
+    {% t introduction.t5 %}
 </div>
 
 <div>
     <div class="slideshow-container">
         <div class="mySlides fade">
-            <img src="{{ '/assets/images/Diary_mock-up_1.png' | prepend: site.baseurl }}" style="width:100%">
+            <img src="{{ '/assets/images/Diary_mock-up_1.png' | prepend: site.baseurl_root }}" style="width:100%">
         </div>
 
         <div class="mySlides fade">
-            <img src="{{ '/assets/images/Diary_mock-up_2.png' | prepend: site.baseurl }}" style="width:100%">
+            <img src="{{ '/assets/images/Diary_mock-up_2.png' | prepend: site.baseurl_root }}" style="width:100%">
         </div>
 
         <div class="mySlides fade">
-            <img src="{{ '/assets/images/Diary_mock-up_3.png' | prepend: site.baseurl }}" style="width:100%">
+            <img src="{{ '/assets/images/Diary_mock-up_3.png' | prepend: site.baseurl_root }}" style="width:100%">
         </div>
 
         <div class="mySlides fade">
-            <img src="{{ '/assets/images/Diary_mock-up_4.png' | prepend: site.baseurl }}" style="width:100%">
+            <img src="{{ '/assets/images/Diary_mock-up_4.png' | prepend: site.baseurl_root }}" style="width:100%">
         </div>
 
         <div class="mySlides fade">
-            <img src="{{ '/assets/images/Diary_mock-up_5.png' | prepend: site.baseurl }}" style="width:100%">
+            <img src="{{ '/assets/images/Diary_mock-up_5.png' | prepend: site.baseurl_root }}" style="width:100%">
         </div>
 
         <div class="mySlides fade">
-            <img src="{{ '/assets/images/Diary_mock-up_6.png' | prepend: site.baseurl }}" style="width:100%">
+            <img src="{{ '/assets/images/Diary_mock-up_6.png' | prepend: site.baseurl_root }}" style="width:100%">
         </div>
 
         <div class="mySlides fade">
-            <img src="{{ '/assets/images/Diary_mock-up_7.png' | prepend: site.baseurl }}" style="width:100%">
+            <img src="{{ '/assets/images/Diary_mock-up_7.png' | prepend: site.baseurl_root }}" style="width:100%">
         </div>
 
         <div class="mySlides fade">
-            <img src="{{ '/assets/images/Diary_mock-up_8.png' | prepend: site.baseurl }}" style="width:100%">
+            <img src="{{ '/assets/images/Diary_mock-up_8.png' | prepend: site.baseurl_root }}" style="width:100%">
         </div>
 
         <div class="intro__dots">
@@ -91,8 +91,8 @@ layout: home
         </div>
     </div>
 </div>
-<div class="text-box page-middle">
-    To start create a group in Whatsapp with all the people that want to contribute to this diary. Let everyone know what this group is about. You can use our example:
+<div id="t6" class="text-box page-middle">
+    {% t introduction.t6 %}
 </div>
 
 {% include group-start.html %}
