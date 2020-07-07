@@ -20,6 +20,9 @@ const DiaryTemplates = () => {
         if(!firstPage)
             doc.addPage('a4', 'portrait');
 
+        const nameSplit = data.who.split(" ");
+        console.log(nameSplit);
+
         doc.setDrawColor(0);
         doc.setFillColor(0, 121, 125);
         doc.rect(0, 33.826, 210, 27.174, 'F'); 

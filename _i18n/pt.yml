@@ -1,6 +1,7 @@
 global:
     lang-code: pt
-    lang: Português
+    english: English
+    portugues: Português
 
 index:
     home-text: Reunindo histórias quando estar junto não é possivel

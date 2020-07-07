@@ -2188,12 +2188,23 @@ const DiaryUI = (eventHandler) => {
         const langSelect = document.createElement('select');
         langSelect.id = 'languages';
         langSelect.style.marginRight = '20px';
+        langSelect.addEventListener('change', () => window.location.href = langSelect.options[langSelect.selectedIndex].value);
         footerColumn2.appendChild(langSelect);
 
+        let language = window.location.href.trim().split('/').filter(elem => elem != '')[2]
+        language = language === 'diary' ? 'en' : language;
+
         const option = document.createElement('option');
-        option.value = 'en';
-        option.innerText = 'English';
+        option.value = '/diary';
+        option.innerText = '{% t global.english %}';
+        option.selected = language === 'en';
         langSelect.appendChild(option);
+
+        const option2 = document.createElement('option');
+        option2.value = '/pt/diary';
+        option2.innerText = '{% t global.portugues %}';
+        option2.selected = language === 'pt';
+        langSelect.appendChild(option2);
 
         const contactButton = document.createElement('button');
         contactButton.classList.add('button', 'contact');

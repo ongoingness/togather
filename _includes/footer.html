@@ -15,8 +15,9 @@
         </div>
         <div class="column" style="max-width: 200px;">
             <label id="f1" for="languages" class='footer__text__small' style="padding:0;">{% t footer.f1 %}</label>
-            <select name="languages" id="languages" style="height: 22px; margin-right:20px; line-height:22px;">
-                <option value="en">English</option>
+            <select name="languages" id="languages" style="height: 22px; margin-right:20px; line-height:22px;" onChange="window.location.href=this.value">
+                <option value="{{ page.url }}" {% if site.lang == "en" %} selected {% endif %}>{% t global.english %}</option>
+                <option value="/pt{{ page.url }}" {% if site.lang == "pt" %} selected {% endif %}>{% t global.portugues %}</option>
             </select>
             <button class="button contact" onclick="location.href='{{ site.url }}{{ site.baseurl }}/contact'"> {% t nav-overlay.contact-a %} >> </button>
         </div>

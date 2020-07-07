@@ -1,6 +1,7 @@
 global:
     lang-code: en
-    lang: English
+    english: English
+    portugues: Português
 
 index:
     home-text: Gathering in stories when being together is not possible
