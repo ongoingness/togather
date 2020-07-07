@@ -133,13 +133,13 @@ diary:
     tf3: PT Select from chat
     tf4: PT Write my own
     tf5: PT Add Topic
-    tf6: PT The topics we have found are the ones you shared through the Togather website. If you thought of your own topics you can add them here. You can select them from the chat, if you shared them there, or write your own. If there were days that you didn\'t have a topic, but messages were shared, then try to find a description for that. For example; A log of Monday. Or; Some things we liked to share today. This way we can add that day in the diary template.
+    tf6: 'PT The topics we have found are the ones you shared through the Togather website. If you thought of your own topics you can add them here. You can select them from the chat, if you shared them there, or write your own. If there were days that you didn''t have a topic, but messages were shared, then try to find a description for that. For example; A log of Monday. Or; Some things we liked to share today. This way we can add that day in the diary template.'
 
     t1: PT Day
 
     wt1: PT Write your own topic and for which date this was
     wt2: PT Write another topic
-    wt3: PT The topics we have found are the ones you shared through the Togather website. If you thought of your own topics you can add them here. You can select them from the chat, if you shared them there, or write your own. If there were days that you didn\'t have a topic, but messages were shared, then try to find a description for that. For example; A log of Monday. Or; Some things we liked to share today. This way we can add that day in the diary template.
+    wt3: 'PT The topics we have found are the ones you shared through the Togather website. If you thought of your own topics you can add them here. You can select them from the chat, if you shared them there, or write your own. If there were days that you didn''t have a topic, but messages were shared, then try to find a description for that. For example; A log of Monday. Or; Some things we liked to share today. This way we can add that day in the diary template.'
     wt4: PT Back
     wt5: PT Add to topics
     wt6: PT Done
@@ -153,7 +153,7 @@ diary:
     stfc4: PT Add to topics
 
     sm1: 'PT Select all messages for this day:'
-    sm2: PT The topics we have found are the ones you shared through the Togather website. If you thought of your own topics you can add them here. You can select them from the chat, if you shared them there, or write your own. If there were days that you didn\'t have a topic, but messages were shared, then try to find a description for that. For example; A log of Monday. Or; Some things we liked to share today. This way we can add that day in the diary template.
+    sm2: 'PT The topics we have found are the ones you shared through the Togather website. If you thought of your own topics you can add them here. You can select them from the chat, if you shared them there, or write your own. If there were days that you didn''t have a topic, but messages were shared, then try to find a description for that. For example; A log of Monday. Or; Some things we liked to share today. This way we can add that day in the diary template.'
 
     d1: PT Topic Day
     d2: PT Select Messages
