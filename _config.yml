@@ -45,16 +45,13 @@ exclude:
   - vendor/gems/
   - vendor/ruby/
   - node_modules
-  - webpack.config.js 
-  - webpack
-  - package-lock.json 
-  - package.json
-
-exclude:
-
+  - 'webpack.config.js'
+  - 'webpack'
+  - 'package-lock.json' 
+  - 'package.json'
 
 languages: ['en', 'pt']
 
-exclude_from_localizations: [webpack']
+exclude_from_localizations: ['webpack']
 
 default_locale_in_subfolder: false
