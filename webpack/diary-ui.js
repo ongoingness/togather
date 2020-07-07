@@ -44,7 +44,7 @@ const DiaryUI = (eventHandler) => {
 
         const headerText = document.createElement('div');
         headerText.classList.add('header__text');
-        headerText.innerText = 'ToGather';
+        headerText.innerText = 'Togather';
         header.appendChild(headerText);
 
         const nav = document.createElement('div');
@@ -67,44 +67,44 @@ const DiaryUI = (eventHandler) => {
         const aHome = document.createElement('a');
         aHome.id = 'home-a';
         aHome.href = '{{ site.url }}{{ site.baseurl }}/';
-        aHome.innerText = 'Home';
+        aHome.innerText = '{% t nav-overlay.home-a %}';
         overlayContent.appendChild(aHome);
 
         const aTopic = document.createElement('a');
         aTopic.id = 'topic-a';
         aTopic.href = '{{ site.url }}{{ site.baseurl }}/topics';
-        aTopic.innerText = 'Get a topic';
+        aTopic.innerText = '{% t nav-overlay.topic-a %}';
         overlayContent.appendChild(aTopic);
 
         const aExpl = document.createElement('a');
         aExpl.id = 'explained-a';
         aExpl.href = '{{ site.url }}{{ site.baseurl }}/explained';
-        aExpl.innerText = 'Introduction';
+        aExpl.innerText = '{% t nav-overlay.explained-a %}';
         overlayContent.appendChild(aExpl)
 
         const aInst = document.createElement('a');
         aInst.id = 'instructions-a';
         aInst.href = '{{ site.url }}{{ site.baseurl }}/instructions'
-        aInst.innerText = 'Instructions';
+        aInst.innerText = '{% t nav-overlay.instructions-a %}';
         overlayContent.appendChild(aInst);
 
         const aDiary = document.createElement('a');
         aDiary.id = 'diary-a'
         aDiary.href = '{{ site.url }}{{ site.baseurl }}/diary' 
-        aDiary.innerText = 'Assemble Diary';
+        aDiary.innerText = '{% t nav-overlay.diary-a %}';
         aDiary.style.textDecoration = 'underline';
         overlayContent.appendChild(aDiary);
 
         const aAbout = document.createElement('a');
         aAbout.id = 'about-a';
         aAbout.href = '{{ site.url }}{{ site.baseurl }}/about';
-        aAbout.innerText = 'About';
+        aAbout.innerText = '{% t nav-overlay.about-a %}';
         overlayContent.appendChild(aAbout);
 
         const aContact = document.createElement('a');
         aAbout.id = 'contact-a';
         aAbout.href = '{{ site.url }}{{ site.baseurl }}/contact';
-        aAbout.innerText = 'Contact';
+        aAbout.innerText = '{% t nav-overlay.contact-a %}';
         overlayContent.appendChild(aContact);
         
     }
@@ -126,7 +126,7 @@ const DiaryUI = (eventHandler) => {
 
         const textBox1 = document.createElement('div');
         textBox1.classList.add('text-box');
-        textBox1.innerText = 'Find your exported WhatsApp group chat (including the media files) and add them below.';
+        textBox1.innerText = '{% t diary.uf1 %}';
         textBox1.style.marginTop = '28px';
         gradient.appendChild(textBox1);
         
@@ -136,24 +136,24 @@ const DiaryUI = (eventHandler) => {
         gradient.appendChild(dualTextBox);
 
         const dualTextBoxLeft = document.createElement('div');
-        dualTextBoxLeft.innerText = 'TIP:';
+        dualTextBoxLeft.innerText = '{% t diary.uf2 %}';
         dualTextBoxLeft.style.marginRight = '10px';
         dualTextBox.appendChild(dualTextBoxLeft);
 
         const dualTextBoxRight = document.createElement('div');
-        dualTextBoxRight.innerText = 'Exported by an Android phone? Select all media files and a .txt file. Exported by an iPhone? Select the .zip file.';
+        dualTextBoxRight.innerText = '{% t diary.uf3 %}';
         dualTextBox.appendChild(dualTextBoxRight);
 
         const textBox2 = document.createElement('div');
         textBox2.classList.add('text-box');
         textBox2.style.marginTop = '0';
-        textBox2.innerText = 'Your chat messages and media stay private, this all happening on your device and none of your content is being send or shared with us (or anyone else).';
+        textBox2.innerText = '{% t diary.uf4 %}';
         gradient.appendChild(textBox2);
 
         const selectFilesButton = document.createElement('label');
         selectFilesButton.classList.add('button', 'round', 'diary', 'small-font');
         selectFilesButton.style.marginTop = '38px'
-        selectFilesButton.innerHTML = 'Select Exported WhatsApp Files';
+        selectFilesButton.innerHTML = '{% t diary.uf5 %}';
         gradient.appendChild(selectFilesButton);
 
         const uploadFilesInput = document.createElement('input');
@@ -179,7 +179,7 @@ const DiaryUI = (eventHandler) => {
 
         const noFilesSelected = document.createElement('div');
         noFilesSelected.id = 'noFilesSelected';
-        noFilesSelected.innerText = 'No files selected';
+        noFilesSelected.innerText = '{% t diary.uf6 %}';
         filesSelectedContainer.appendChild(noFilesSelected);
 
         const startButton = document.createElement('button');
@@ -187,7 +187,7 @@ const DiaryUI = (eventHandler) => {
         startButton.classList.add('button', 'round', 'diary', 'small-font');
         startButton.style.marginTop = '20px';
         startButton.style.marginBottom = '50px';
-        startButton.innerHTML = 'Start Assembling the Diary';
+        startButton.innerHTML = '{% t diary.uf7 %}';
         startButton.disabled = true;
 
         const startButtonClickListener = e => {
@@ -203,7 +203,7 @@ const DiaryUI = (eventHandler) => {
         const instructionsButton = document.createElement('button');
         instructionsButton.classList.add('button', 'started', 'small-font');
         instructionsButton.style.marginTop = '4.5vh';
-        instructionsButton.innerHTML = 'Full assembling instructions >>';
+        instructionsButton.innerHTML = '{% t diary.uf8 %}';
         const instructionsButtonClickListener = (e) => location.href='{{ site.url }}{{ site.baseurl }}/instructions';
         //instructionsButton.addEventListener('click', () => location.href='{{ site.url }}{{ site.baseurl }}/instructions/');
         addEventListener(instructionsButton, 'click', instructionsButtonClickListener);
@@ -213,7 +213,7 @@ const DiaryUI = (eventHandler) => {
         aboutButton.classList.add('button', 'pick', 'small-font');
         aboutButton.style.marginTop = '3vh';
         aboutButton.style.marginBottom = '6vh';
-        aboutButton.innerHTML = 'How we assure your privacy >>';
+        aboutButton.innerHTML = '{% t diary.uf9 %}';
         const aboutButtonClickListener = (e) =>  location.href='{{ site.url }}{{ site.baseurl }}/about';
         //aboutButton.addEventListener('click', () => location.href='{{ site.url }}{{ site.baseurl }}/about/');
         addEventListener(aboutButton, 'click', aboutButtonClickListener);
@@ -272,11 +272,11 @@ const DiaryUI = (eventHandler) => {
 
         const onClose = () => {
             const button = document.getElementById('startAssembling');
-            button.innerHTML = 'Start Assembling';
+            button.innerHTML = '{% t diary.uf7 %}';
             button.style.width = 'initial';
             button.disabled = false;
         }
-        renderErrorModal('No chat file found', onClose);
+        renderErrorModal('{% t diary.uem1 %}', onClose);
 
     };
 
@@ -384,8 +384,7 @@ const DiaryUI = (eventHandler) => {
         const text = document.createElement('div');
         text.classList.add('diary-header__text');
         text.style.width = '100%';
-        //text.style.paddingTop = '4px';
-        text.innerText = 'Assemble Diary';
+        text.innerText = '{% t diary.dh1 %}';
         centerColumn.appendChild(text);
 
         const rightColumn = document.createElement('div');
@@ -427,20 +426,20 @@ const DiaryUI = (eventHandler) => {
 
             const textContent = document.createElement('div');
             textContent.classList.add('privacy__text');
-            textContent.innerHTML = 'Because of our privacy measures if you quit now, <span class=\'bold\'>your process cannot be saved</span>. This means when you come back to assemble <span class=\'bold\'>you have to start over</span>. If you want a break you can leave this website open without losing your progress. <span class=\'bold\'>Are you sure</span> you want to stop assembling your diary?';
+            textContent.innerHTML = '{% t diary.dh2 %}';
             overlayContent.appendChild(textContent);
     
             const stopButton = document.createElement('button');
             stopButton.classList.add('button', 'round', 'diary');
             stopButton.style.marginTop = '8vh';
-            stopButton.innerHTML = 'Yes, stop assembling';
+            stopButton.innerHTML = '{% t diary.dh3 %}';
             stopButton.addEventListener('click', e => eventHandler(e, {type: 'stop-assembling'}));
             overlayContent.appendChild(stopButton);
 
             const continueButton = document.createElement('button');
             continueButton.classList.add('button', 'round', 'diary');
             continueButton.style.marginTop = '8vh';
-            continueButton.innerHTML = 'No, continue with the diary';
+            continueButton.innerHTML = '{% t diary.dh4 %}';
             continueButton.addEventListener('click', closeNav);
             overlayContent.appendChild(continueButton);
 
@@ -481,7 +480,7 @@ const DiaryUI = (eventHandler) => {
 
         const textBox1 = document.createElement('div');
         textBox1.classList.add('text-box');
-        textBox1.innerHTML = 'Assembling the diary takes <span class=\'bold\'>5 steps</span>.';
+        textBox1.innerHTML = '{% t diary.ds1 %}';
         textBox1.style.marginTop = '28px';
         textBox1.style.marginBottom ='28px';
         textBox1.style.textAlign = 'center';
@@ -493,27 +492,27 @@ const DiaryUI = (eventHandler) => {
 
         const step1 = document.createElement('div');
         step1.classList.add('title', 'diary');
-        step1.innerText = '#1 Who is the diary for?';
+        step1.innerText = '{% t diary.ds2 %}';
         stepsContainer.appendChild(step1);
 
         const step2 = document.createElement('div');
         step2.classList.add('title', 'diary');
-        step2.innerText = '#2 Check contibuter names';
+        step2.innerText = '{% t diary.ds3 %}';
         stepsContainer.appendChild(step2);
 
         const step3 = document.createElement('div');
         step3.classList.add('title', 'diary');
-        step3.innerText = '#3 Complete topic list';
+        step3.innerText = '{% t diary.ds4 %}';
         stepsContainer.appendChild(step3);
 
         const step4 = document.createElement('div');
         step4.classList.add('title', 'diary');
-        step4.innerText = '#4 Collect responses per day';
+        step4.innerText = '{% t diary.ds5 %}';
         stepsContainer.appendChild(step4);
 
         const step5 = document.createElement('div');
         step5.classList.add('title', 'diary');
-        step5.innerText = '#5 Review and download diary';
+        step5.innerText = '{% t diary.ds6 %}';
         stepsContainer.appendChild(step5);
 
         const line = document.createElement('div');
@@ -526,14 +525,14 @@ const DiaryUI = (eventHandler) => {
 
         const stepCounterHelper = document.createElement('div');
         stepCounterHelper.classList.add('diary-steps__step-counter-helper');
-        stepCounterHelper.innerText = 'Here you will see in which step you are.';
+        stepCounterHelper.innerText = '{% t diary.ds7 %}';
         gradient.appendChild(stepCounterHelper);
 
         const goButton = document.createElement('button');
         goButton.classList.add('button', 'round', 'diary');
         goButton.style.marginTop = '130px';
         goButton.style.marginBottom = '30px';
-        goButton.innerHTML = 'Go to step 1';
+        goButton.innerHTML = '{% t diary.ds8 %}';
         goButton.addEventListener('click', e => eventHandler(e, {type: 'go-to-step-1'}));
         gradient.appendChild(goButton);
 
@@ -588,7 +587,7 @@ const DiaryUI = (eventHandler) => {
             previousButton = document.createElement('button');
             previousButton.id = 'leftButton';
             previousButton.classList.add('button', 'round', 'diary', 'step-controller__step-button');
-            previousButton.innerText = `< Step ${step - 1}`;
+            previousButton.innerText = `< {% t diary.sc1 %} ${step - 1}`;
             previousButtonListener = (e) => {
                 renderButtonLoader(previousButton);
                 eventHandler(e, {type: `go-to-step-${step - 1}`})
@@ -616,7 +615,7 @@ const DiaryUI = (eventHandler) => {
         const nextButton = document.createElement('button');
         nextButton.id = 'rightButton';
         nextButton.classList.add('button', 'round', 'diary', 'step-controller__step-button');
-        nextButton.innerText = `Step ${step + 1} >`;
+        nextButton.innerText = `{% t diary.sc1 %} ${step + 1} >`;
 
         const nextButtonListener = (e) => {
             renderButtonLoader(nextButton);
@@ -643,12 +642,12 @@ const DiaryUI = (eventHandler) => {
         const title = document.createElement('div');
         title.classList.add('title', 'diary');
         title.style.marginTop = '16px';
-        title.innerText = 'Who is this Diary for?';
+        title.innerText = '{% t diary.wtdif1 %}';
         upperPage.appendChild(title);
 
         const textBox = document.createElement('div');
         textBox.classList.add('text-box');
-        textBox.innerText = 'The name will be used to create a personal cover and opening page.';
+        textBox.innerText = '{% t diary.wtdif2 %}';
         upperPage.appendChild(textBox);
 
         const lowerPage = document.createElement('div');
@@ -657,7 +656,7 @@ const DiaryUI = (eventHandler) => {
 
         const inputName = document.createElement('input');
         inputName.classList.add('who__input-name');
-        inputName.placeholder = 'Type the name here';
+        inputName.placeholder = '{% t diary.wtdif3 %}';
         inputName.addEventListener('input', () => rightButton.disabled = inputName.value.length === 0);
         inputName.addEventListener('keyup', (e) => {
             if (e.keyCode === 13) {
@@ -673,7 +672,7 @@ const DiaryUI = (eventHandler) => {
 
         const helpText = document.createElement('div');
         helpText.classList.add('privacy__text');
-        helpText.innerHTML = 'Give the name of your loved one who you are making this diary for. This name will be used on the cover of the final diary and on the first page to create a personal booklet and message for them. We do not save this information, this is all private and just for you and who you choose to share it with.';
+        helpText.innerHTML = '{% t diary.wtdif4 %}';
 
         const { rightButton, rightButtonListener } = renderStepController(document.body, 1, helpText);
         rightButton.removeEventListener('click', rightButtonListener);
@@ -701,12 +700,12 @@ const DiaryUI = (eventHandler) => {
         const title = document.createElement('div');
         title.classList.add('title', 'diary');
         title.style.marginTop = '16px';
-        title.innerText = 'Who contributed to this diary?';
+        title.innerText = '{% t diary.wc1 %}';
         upperPage.appendChild(title);
 
         const textBox = document.createElement('div');
         textBox.classList.add('text-box');
-        textBox.innerText = 'We found the following names in the group. Is this list correct?';
+        textBox.innerText = '{% t diary.wc2 %}';
         upperPage.appendChild(textBox);
 
         const lowerPage = document.createElement('div');
@@ -833,7 +832,7 @@ const DiaryUI = (eventHandler) => {
 
         const helpContent = document.createElement('div');
         helpContent.classList.add('privacy__text');
-        helpContent.innerText = 'These are the names of the group members as they are saved on your phone. Make sure the list is complete and that these are the names that you would like to have them in the diary. If you would like to change them, click the pencil button to edit. If you see just a phone number, this person was not saved in your contacts. As we use these names to show who wrote which message take the time to check and edit them.';
+        helpContent.innerText = "{% t diary.wc3 %}";
 
         renderStepController(document.body, 2, helpContent);
     }
@@ -858,12 +857,12 @@ const DiaryUI = (eventHandler) => {
         const title = document.createElement('div');
         title.classList.add('title', 'diary');
         title.style.marginTop = '16px';
-        title.innerText = 'Which topics did you chat about?';
+        title.innerText = '{% t diary.tf1 %}';
         upperPage.appendChild(title);
 
         const textBox = document.createElement('div');
         textBox.classList.add('text-box');
-        textBox.innerText = 'We found the following set of topics. Is this list complete?';
+        textBox.innerText = '{% t diary.tf2 %}';
         upperPage.appendChild(textBox);
 
         const lowerPage = document.createElement('div');
@@ -895,7 +894,7 @@ const DiaryUI = (eventHandler) => {
         const selectFromChatButton = document.createElement('button');
         selectFromChatButton.classList.add('button', 'diary', 'round');
         selectFromChatButton.style.marginBottom = '50px';
-        selectFromChatButton.innerText = 'Select from chat';
+        selectFromChatButton.innerText = '{% t diary.tf3 %}';
         selectFromChatButton.addEventListener('click', (e) => {
             renderButtonLoader(selectFromChatButton);
             eventHandler(e, {type: 'select-from-chat'});
@@ -904,7 +903,7 @@ const DiaryUI = (eventHandler) => {
 
         const writeButton = document.createElement('button');
         writeButton.classList.add('button', 'diary', 'round');
-        writeButton.innerText = 'Write my own';
+        writeButton.innerText = '{% t diary.tf4 %}';
         writeButton.addEventListener('click', (e) => {
             renderButtonLoader(writeButton);
             eventHandler(e, {type: 'write-topic'});
@@ -918,7 +917,7 @@ const DiaryUI = (eventHandler) => {
 
         const addTopicButton  = document.createElement('button');
         addTopicButton.classList.add('topic__add-topic-button');
-        addTopicButton.innerText = 'Add Topic';
+        addTopicButton.innerText = '{% t diary.tf5 %}';
         addTopicButton.addEventListener('click', (e) => overlay.style.width = '100%');              
         addTopicContainer.appendChild(addTopicButton);
 
@@ -931,7 +930,7 @@ const DiaryUI = (eventHandler) => {
 
         const helpContent = document.createElement('div');
         helpContent.classList.add('privacy__text');
-        helpContent.innerText = 'The topics we have found are the ones you shared through the Togather website. If you thought of your own topics you can add them here. You can select them from the chat, if you shared them there, or write your own. If there were days that you didn\'t have a topic, but messages were shared, then try to find a description for that. For example; A log of Monday. Or; Some things we liked to share today. This way we can add that day in the diary template.';
+        helpContent.innerText = "{% t diary.tf6 %}";
 
         const { rightButton } = renderStepController(document.body, 3, helpContent);
         rightButton.disabled = document.getElementsByClassName('topic__header').length === 0;
@@ -951,7 +950,7 @@ const DiaryUI = (eventHandler) => {
 
         const topicHeaderDay =  document.createElement('div');
         topicHeaderDay.classList.add('topic__header__day');
-        topicHeaderDay.innerText = `Day ${topicData.day}`;
+        topicHeaderDay.innerText = `{% t diary.t1 %} ${topicData.day}`;
         topicHeader.appendChild(topicHeaderDay);
 
         const date = new Date(topicData.timestamp);
@@ -1081,7 +1080,7 @@ const DiaryUI = (eventHandler) => {
 
         const textBox = document.createElement('div');
         textBox.classList.add('text-box');
-        textBox.innerText = 'Write your own topic and for which date this was';
+        textBox.innerText = '{% t diary.wt1 %}';
         upperPage.appendChild(textBox);
 
         const lowerPage = document.createElement('div');
@@ -1103,7 +1102,7 @@ const DiaryUI = (eventHandler) => {
 
             const addTopicButton  = document.createElement('button');
             addTopicButton.classList.add('topic__add-topic-button');
-            addTopicButton.innerText = 'Write another topic';
+            addTopicButton.innerText = '{% t diary.wt2 %}';
             addTopicButton.addEventListener('click', (e) => {
                 renderNewTopic(lowerPage, `${newTopicCounter}`);
                 newTopicCounter++;
@@ -1121,11 +1120,11 @@ const DiaryUI = (eventHandler) => {
 
         const helpContent = document.createElement('div');
         helpContent.classList.add('privacy__text');
-        helpContent.innerText = 'The topics we have found are the ones you shared through the Togather website. If you thought of your own topics you can add them here. You can select them from the chat, if you shared them there, or write your own. If there were days that you didn\'t have a topic, but messages were shared, then try to find a description for that. For example; A log of Monday. Or; Some things we liked to share today. This way we can add that day in the diary template.';
+        helpContent.innerText = "{% t diary.wt3 %}";
 
         const {leftButton, rightButton, leftButtonListener, rightButtonListener} = renderStepController(document.body, 3, helpContent);
-        leftButton.innerText = '< Back';
-        rightButton.innerText = topicData == undefined ? 'Add to topics' : 'Done';
+        leftButton.innerText = '< {% t diary.wt4 %}';
+        rightButton.innerText = topicData == undefined ? '{% t diary.wt5 %}' : '{% t diary.wt6 %}';
         if(topicData == undefined) rightButton.style.fontSize = 'large';
 
         rightButton.removeEventListener('click', rightButtonListener);
@@ -1184,7 +1183,7 @@ const DiaryUI = (eventHandler) => {
 
         const topicTextArea = document.createElement('textarea');
         topicTextArea.classList.add('topic__write-topic__input', 'topic__write-topic__textarea');
-        topicTextArea.placeholder = 'Type your topic description here';
+        topicTextArea.placeholder = '{% t diary.nt1 %}';
         topicTextArea.resize = false;
         topicTextArea.style.height = '150px';
         if(topicData != null)
@@ -1212,7 +1211,7 @@ const DiaryUI = (eventHandler) => {
         labelContainer.appendChild(addButtonImage);
 
         const text = document.createElement('span');
-        text.innerText = 'Add media';
+        text.innerText = '{% t diary.nt2 %}';
         labelContainer.appendChild(text);
 
         const addPhotoInput = document.createElement('input');
@@ -1378,7 +1377,7 @@ const DiaryUI = (eventHandler) => {
 
         const textBox = document.createElement('div');
         textBox.classList.add('text-box');
-        textBox.innerText = 'Select the topics you want to add.';
+        textBox.innerText = '{% t diary.stfc1 %}';
         upperPage.appendChild(textBox);
 
         const lowerPage = document.createElement('div');
@@ -1392,11 +1391,11 @@ const DiaryUI = (eventHandler) => {
 
         const helpContent = document.createElement('div');
         helpContent.classList.add('privacy__text');
-        helpContent.innerText = 'Find the topics that we missed from you WhatsApp group chat. select them to add them to the topic list.';
+        helpContent.innerText = "{% t diary.stfc2 %}";
 
         const {leftButton, rightButton, leftButtonListener, rightButtonListener} = renderStepController(document.body, 3, helpContent);
-        leftButton.innerText = '< Back';
-        rightButton.innerText = 'Add to topics';
+        leftButton.innerText = '< {% t diary.stfc3 %}';
+        rightButton.innerText = '{% t diary.stfc4 %}';
         rightButton.style.fontSize = 'large';
 
         rightButton.removeEventListener('click', rightButtonListener);
@@ -1564,7 +1563,7 @@ const DiaryUI = (eventHandler) => {
         const title = document.createElement('div');
         title.classList.add('title', 'diary');
         title.style.marginTop = '16px';
-        title.innerText = 'Select all messages for this day:';
+        title.innerText = '{% t diary.sm1 %}';
         upperPage.appendChild(title);
 
         const dayScrollerContainer = document.createElement('div');
@@ -1651,7 +1650,7 @@ const DiaryUI = (eventHandler) => {
 
         const helpContent = document.createElement('div');
         helpContent.classList.add('privacy__text');
-        helpContent.innerText = 'The topics we have found are the ones you shared through the Togather website. If you thought of your own topics you can add them here. You can select them from the chat, if you shared them there, or write your own. If there were days that you didn\'t have a topic, but messages were shared, then try to find a description for that. For example; A log of Monday. Or; Some things we liked to share today. This way we can add that day in the diary template.';
+        helpContent.innerText = "{% t diary.sm2 %}";
 
         const { rightButton } = renderStepController(document.body, 4, helpContent);
         
@@ -1668,14 +1667,14 @@ const DiaryUI = (eventHandler) => {
     }
 
     const updateDay = (dayData) => {
-        document.getElementById('dayDisplay').innerText = `Day ${dayData.day}`;
+        document.getElementById('dayDisplay').innerText = `{% t diary.t1 %} ${dayData.day}`;
         document.getElementById('dayDisplay').style = `color: ${dayData.color};`
         document.getElementById('dayDisplay').addEventListener('click', e => document.getElementById('topicText').style.height = '100%')
     }
 
     const renderDay = (dayData, allMessagesData, selectedMessages) => {
 
-        document.getElementById('dayDisplay').innerText = `Day ${dayData.part === 0 ? `${dayData.day}` : `${dayData.day} #${dayData.part}`}`;
+        document.getElementById('dayDisplay').innerText = `{% t diary.t1 %} ${dayData.part === 0 ? `${dayData.day}` : `${dayData.day} #${dayData.part}`}`;
         document.getElementById('dayDisplay').style = `color: ${dayData.color};`
         document.getElementById('dayDisplay').addEventListener('click', e => {
             const topicText = document.getElementById('topicText');
@@ -1717,7 +1716,7 @@ const DiaryUI = (eventHandler) => {
         const topicTextTitle = document.createElement('div');
         topicTextTitle.classList.add('overlay__text-box');
         topicTextTitle.style.marginBottom = '20px';
-        topicTextTitle.innerText = `Topic Day ${dayData.day}:`;
+        topicTextTitle.innerText = `{% t diary.d1 %} ${dayData.day}:`;
         overlayContent.appendChild(topicTextTitle);
 
         const topicTextBox = document.createElement('div');
@@ -1735,7 +1734,7 @@ const DiaryUI = (eventHandler) => {
         startSelecting.style.borderStyle = 'solid';
         startSelecting.style.background = '#E26A6A';
         startSelecting.style.marginTop = '10px';
-        startSelecting.innerText = 'Select Messages';
+        startSelecting.innerText = '{% t diary.d2 %}';
         overlayContent.appendChild(startSelecting);
 
         for(let i = 0; i < dayData.totalOfTopics; i++) {
@@ -1755,13 +1754,13 @@ const DiaryUI = (eventHandler) => {
             let isSelected = false;
             let selectedDay = dayData.day;
             let isSelectedFromThisDay = false;
-            let text = dayData.part === 0 ? `Day ${selectedDay}` : `Day ${selectedDay} #${dayData.part}`;
+            let text = dayData.part === 0 ? `{% t diary.t1 %} ${selectedDay}` : `{% t diary.t1 %} ${selectedDay} #${dayData.part}`;
             if(selectedMessages != undefined) {
                 if(selectedMessages.has(message.hash)) {
                     isSelected = true;
                     const {day, part} = selectedMessages.get(message.hash);
                     isSelectedFromThisDay = dayData.day === day && dayData.part === part;
-                    text = dayData.part === 0 ? `Day ${day}` : `Day ${day} #${part}`;
+                    text = dayData.part === 0 ? `{% t diary.t1 %} ${day}` : `{% t diary.t1 %} ${day} #${part}`;
                 }
             }
 
@@ -1822,7 +1821,7 @@ const DiaryUI = (eventHandler) => {
         buttonDownload.style.position = 'absolute';
         buttonDownload.style.bottom = '5vh';
         buttonDownload.style.left = '50%';
-        buttonDownload.innerText = 'Download';
+        buttonDownload.innerText = '{% t diary.pp1 %}';
         div.appendChild(buttonDownload);
 
         return div;
@@ -1844,7 +1843,7 @@ const DiaryUI = (eventHandler) => {
         const title = document.createElement('div');
         title.classList.add('title', 'diary');
         title.style.marginTop = '16px';
-        title.innerText = 'Review your diary, is it complete?';
+        title.innerText = '{% t diary.rd1 %}';
         upperPage.appendChild(title);
 
         const lowerPage = document.createElement('div');
@@ -1861,10 +1860,10 @@ const DiaryUI = (eventHandler) => {
 
         const helpContent = document.createElement('div');
         helpContent.classList.add('privacy__text');
-        helpContent.innerText = 'Go through the pages of your diary. Check if all the days, with their topics and messages are there. When you are happy with the diary you can save and download it. If there are things missing, go back to the previous step and add them.';
+        helpContent.innerText = "{% t diary.rd2 %}";
 
         const {rightButton} = renderStepController(document.body, 5, helpContent);
-        rightButton.innerText = 'Finish Diary';
+        rightButton.innerText = '{% t diary.rd3 %}';
 
     }
 
@@ -1910,7 +1909,7 @@ const DiaryUI = (eventHandler) => {
         const title = document.createElement('div');
         title.classList.add('title', 'diary');
         title.style.marginTop = '16px';
-        title.innerText = 'Your diary is ready!';
+        title.innerText = '{% t diary.dd1 %}';
         upperPage.appendChild(title);
 
         const gradient = document.createElement('div');
@@ -1924,13 +1923,13 @@ const DiaryUI = (eventHandler) => {
         
         const textBox1 = document.createElement('div');
         textBox1.classList.add('text-box');
-        textBox1.innerText = 'Download your Diary here:';
+        textBox1.innerText = '{% t diary.dd2 %}';
         textBox1.style.marginTop = '28px';
         centerContainer.appendChild(textBox1);
         
         const downloadButton = document.createElement('button');
         downloadButton.classList.add('button', 'round', 'diary');
-        downloadButton.innerText = 'Download Diary';
+        downloadButton.innerText = '{% t diary.dd3 %}';
         downloadButton.addEventListener('click', e => {
             window.fathom.trackGoal('ZNO1KYRF', 0);
             eventHandler(e, {type: 'download-diary'});
@@ -2055,7 +2054,7 @@ const DiaryUI = (eventHandler) => {
         const title = document.createElement('div');
         title.classList.add('title', 'diary');
         title.style.marginTop = '16px';
-        title.innerText = 'Your diary is ready!';
+        title.innerText = '{% t diary.dd1 %}';
         upperPage.appendChild(title);
 
         const gradient = document.createElement('div');
@@ -2069,7 +2068,7 @@ const DiaryUI = (eventHandler) => {
         const textBox1 = document.createElement('div');
         textBox1.classList.add('text-box');
         textBox1.style.textAlign ='center';
-        textBox1.innerText = 'Thank you for using Togather! If you have friends or family that might also like Togather share the website with them through these links.';
+        textBox1.innerText = '{% t diary.s1 %}';
         textBox1.style.marginTop = '28px';
         centerContainer.appendChild(textBox1);
         
@@ -2106,7 +2105,7 @@ const DiaryUI = (eventHandler) => {
         noButton.classList.add('button', 'round', 'diary');
         noButton.style.backgroundColor = '#00797D';
         noButton.style.marginTop = '75px';
-        noButton.innerText = 'No thanks';
+        noButton.innerText = '{% t diary.s2 %}';
         noButton.addEventListener('click', e => eventHandler(e, {type: 'no'}));
         centerContainer.appendChild(noButton);
 
@@ -2119,7 +2118,7 @@ const DiaryUI = (eventHandler) => {
 
         const footerText = document.createElement('div');
         footerText.classList.add('footer__text');
-        footerText.innerText = 'ToGather';
+        footerText.innerText = 'Togather';
         footer.appendChild(footerText);
 
         const footerRow = document.createElement('div');
@@ -2141,37 +2140,37 @@ const DiaryUI = (eventHandler) => {
         const aHome = document.createElement('a');
         aHome.classList.add('footer__text__small');
         aHome.href = '{{ site.url }}{{ site.baseurl }}/';
-        aHome.innerText = 'Home';
+        aHome.innerText = '{% t nav-overlay.home-a %}';
         linksContainer.appendChild(aHome);
 
         const aTopic = document.createElement('a');
         aTopic.classList.add('footer__text__small');
         aTopic.href = '{{ site.url }}{{ site.baseurl }}/topics';
-        aTopic .innerText = 'Get a Topic';
+        aTopic .innerText = '{% t nav-overlay.topic-a %}';
         linksContainer.appendChild(aTopic);
 
         const aIntro = document.createElement('a');
         aIntro.classList.add('footer__text__small');
         aIntro.href = '{{ site.url }}{{ site.baseurl }}/explained';
-        aIntro .innerText = 'Introduction';
+        aIntro .innerText = '{% t nav-overlay.explained-a %}';
         linksContainer.appendChild(aIntro);
 
         const aInstructions = document.createElement('a');
         aInstructions.classList.add('footer__text__small');
         aInstructions.href = '{{ site.url }}{{ site.baseurl }}/explained';
-        aInstructions.innerText = 'Instructions';
+        aInstructions.innerText = '{% t nav-overlay.instructions-a %}';
         linksContainer.appendChild(aInstructions);
 
         const aDiary = document.createElement('a');
         aDiary.classList.add('footer__text__small');
         aDiary.href = '{{ site.url }}{{ site.baseurl }}/diary';
-        aDiary.innerText = 'Assemble Diary';
+        aDiary.innerText = '{% t nav-overlay.diary-a %}';
         linksContainer.appendChild(aDiary);
 
         const aAbout = document.createElement('a');
         aAbout.classList.add('footer__text__small');
         aAbout.href = '{{ site.url }}{{ site.baseurl }}/about';
-        aAbout.innerText = 'About';
+        aAbout.innerText = '{% t nav-overlay.about-a %}';
         linksContainer.appendChild(aAbout);
 
         const footerColumn2 = document.createElement('div');
@@ -2183,25 +2182,36 @@ const DiaryUI = (eventHandler) => {
         langLabel.for = 'languages';
         langLabel.classList.add('footer__text__small');
         langLabel.style.padding = '0';
-        langLabel.innerText = 'Select Language:';
+        langLabel.innerText = '{% t footer.f1 %}';
         footerColumn2.appendChild(langLabel);
 
         const langSelect = document.createElement('select');
         langSelect.id = 'languages';
         langSelect.style.marginRight = '20px';
+        langSelect.addEventListener('change', () => window.location.href = langSelect.options[langSelect.selectedIndex].value);
         footerColumn2.appendChild(langSelect);
 
+        let language = window.location.href.trim().split('/').filter(elem => elem != '')[2]
+        language = language === 'diary' ? 'en' : language;
+
         const option = document.createElement('option');
-        option.value = 'en';
-        option.innerText = 'English';
+        option.value = '/diary';
+        option.innerText = '{% t global.english %}';
+        option.selected = language === 'en';
         langSelect.appendChild(option);
+
+        const option2 = document.createElement('option');
+        option2.value = '/pt/diary';
+        option2.innerText = '{% t global.portugues %}';
+        option2.selected = language === 'pt';
+        langSelect.appendChild(option2);
 
         const contactButton = document.createElement('button');
         contactButton.classList.add('button', 'contact');
         contactButton.addEventListener('click', () => {
             location.href='{{ site.url }}{{ site.baseurl }}/contact';
         });
-        contactButton.innerText = 'Contact >>';
+        contactButton.innerText = '{% t nav-overlay.contact-a %} >>';
         footerColumn2.appendChild(contactButton);
 
         const logoContainer = document.createElement('div');

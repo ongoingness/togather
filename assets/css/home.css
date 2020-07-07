@@ -320,47 +320,47 @@ body {
   
 .group-image {
     height: 100%;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/whatsapp-chat–3.png' | prepend: site.baseurl }}') no-repeat;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/whatsapp-chat–3.png' | prepend: site.baseurl_root }}') no-repeat;
     background-size: cover;
 }
 
 .challenge-image {
     height: 100%;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/screen_share_challenge.png' | prepend: site.baseurl }}') no-repeat;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/screen_share_challenge.png' | prepend: site.baseurl_root }}') no-repeat;
     background-size: cover;
     background-position-x: right;
 }
 
 .chat-image {
     height: 100%;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/whatsapp-chat–1.png' | prepend: site.baseurl }}') no-repeat;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/whatsapp-chat–1.png' | prepend: site.baseurl_root }}') no-repeat;
     background-size: cover;
 }
 
 .export-chat-image-1 {
     height: 200px;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/Screen_group_chat-4.png' | prepend: site.baseurl }}') no-repeat;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/Screen_group_chat-4.png' | prepend: site.baseurl_root }}') no-repeat;
     background-size: cover;
     background-position-x: right;
 }
 
 .export-chat-image-2 {
     height: 140px;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/Rectangle_250.png' | prepend: site.baseurl }}') no-repeat;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/Rectangle_250.png' | prepend: site.baseurl_root }}') no-repeat;
     background-size: cover;
     background-position-x: right;
 }
 
 .contributed-image {
     height: 100%;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/Screen_group_chat-5.png' | prepend: site.baseurl }}') no-repeat;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/Screen_group_chat-5.png' | prepend: site.baseurl_root }}') no-repeat;
     background-size: cover;
 }
 
 .select-messages-image {
     height: 100%;
     max-height: 320px;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/Screen_group_chat-6.png' | prepend: site.baseurl }}') no-repeat;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/Screen_group_chat-6.png' | prepend: site.baseurl_root }}') no-repeat;
     background-size: cover;
     background-position-x: right;
 }
@@ -368,7 +368,7 @@ body {
 .step-2-image {
     height: 100%;
     max-height: 320px;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/inst_step2.png' | prepend: site.baseurl }}') no-repeat;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/inst_step2.png' | prepend: site.baseurl_root }}') no-repeat;
     background-size: cover;
     background-position-x: left;
 }
@@ -376,7 +376,7 @@ body {
 .step-3-image {
     height: 100%;
     max-height: 320px;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/inst_step3.png' | prepend: site.baseurl }}') no-repeat;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/inst_step3.png' | prepend: site.baseurl_root }}') no-repeat;
     background-size: cover;
     background-position-x: right;
 }

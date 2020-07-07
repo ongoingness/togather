@@ -3,12 +3,12 @@ layout: home
 ---
 <div class="gradient-container home">
     <div id="home-text" class="text-box" style="margin: auto;text-align: center;">
-        Gathering in stories when being together is not possible
+        {% t index.home-text %}
     </div>
 </div>
 <button id="home-learn-button" class="button intro" style="margin-bottom: 30px;" onclick="location.href='{{ site.url }}{{ site.baseurl }}/explained'">
-    Learn about ToGather
+    {% t index.home-learn-button %}
 </button>
 <button id="home-topic-button" class="button give" style="margin: 30px auto; margin-bottom: 60px;" onclick="location.href='{{ site.url }}{{ site.baseurl }}/topics'">
-    Get a topic
+    {% t index.home-topic-button %}
 </button>

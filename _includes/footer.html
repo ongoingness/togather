@@ -1,31 +1,32 @@
 <div class="footer">
     <div class="footer__text">
-        ToGather
+        Togather
     </div>
     <div class="row" style="height: 100px; margin-bottom: 35px;">
         <div class="column">
             <div style="display: flex; flex-direction: column; width: 100px;">
-                <a class="footer__text__small" href="{{ site.url }}{{ site.baseurl }}/"> Home </a>
-                <a class="footer__text__small" href="{{ site.url }}{{ site.baseurl }}/topics"> Get a Topic </a>
-                <a class="footer__text__small" href="{{ site.url }}{{ site.baseurl }}/explained"> Introduction </a>
-                <a class="footer__text__small" href="{{ site.url }}{{ site.baseurl }}/instructions"> Instructions </a>
-                <a class="footer__text__small" href="{{ site.url }}{{ site.baseurl }}/diary"> Assemble Diary </a>
-                <a class="footer__text__small" href="{{ site.url }}{{ site.baseurl }}/about"> About </a>
+                <a class="footer__text__small" href="{{ site.url }}{{ site.baseurl }}/"> {% t nav-overlay.home-a %} </a>
+                <a class="footer__text__small" href="{{ site.url }}{{ site.baseurl }}/topics"> {% t nav-overlay.topic-a %} </a>
+                <a class="footer__text__small" href="{{ site.url }}{{ site.baseurl }}/explained"> {% t nav-overlay.explained-a %} </a>
+                <a class="footer__text__small" href="{{ site.url }}{{ site.baseurl }}/instructions"> {% t nav-overlay.instructions-a %} </a>
+                <a class="footer__text__small" href="{{ site.url }}{{ site.baseurl }}/diary"> {% t nav-overlay.diary-a %} </a>
+                <a class="footer__text__small" href="{{ site.url }}{{ site.baseurl }}/about"> {% t nav-overlay.about-a %} </a>
             </div>
         </div>
         <div class="column" style="max-width: 200px;">
-            <label for="languages" class='footer__text__small' style="padding:0;">Select Language:</label>
-            <select name="languages" id="languages" style="height: 22px; margin-right:20px; line-height:22px;">
-                <option value="en">English</option>
+            <label id="f1" for="languages" class='footer__text__small' style="padding:0;">{% t footer.f1 %}</label>
+            <select name="languages" id="languages" style="height: 22px; margin-right:20px; line-height:22px;" onChange="window.location.href=this.value">
+                <option value="{{ page.url }}" {% if site.lang == "en" %} selected {% endif %}>{% t global.english %}</option>
+                <option value="/pt{{ page.url }}" {% if site.lang == "pt" %} selected {% endif %}>{% t global.portugues %}</option>
             </select>
-            <button class="button contact" onclick="location.href='{{ site.url }}{{ site.baseurl }}/contact'"> Contact >> </button>
+            <button class="button contact" onclick="location.href='{{ site.url }}{{ site.baseurl }}/contact'"> {% t nav-overlay.contact-a %} >> </button>
         </div>
     </div>
     <div style="display: flex; flex-direction: row; flex-wrap: wrap; padding-left: 15px;">
-        <div style="width: 100px; height: 40px;padding-right: 12px;padding-bottom: 15px;"><a href="https://enablingongoingness.com/"><img src="{{ '/assets/images/Ongoingness-logo.svg' | prepend: site.baseurl }}"></a></div>
-        <div style="padding: 0px 12px; padding-bottom: 15px;"><a href="https://www.kylemontague.co.uk/"><img src="{{ '/assets/images/iDi_logo_extended_white.svg' | prepend: site.baseurl }}"></a></div>
-        <div style="padding: 0px 12px; padding-right: 24px; padding-bottom: 15px;"><a href="https://openlab.ncl.ac.uk/"><img src="{{ '/assets/images/openlab-vertical.svg' | prepend: site.baseurl }}"></a></div>
-        <div style="width: 125px; height: 40px; padding-right: 12px; padding-bottom: 15px;"><a href="https://www.northumbria.ac.uk/"><img width="150" height="40" src="{{ '/assets/images/unn_logo_white.png' | prepend: site.baseurl }}"></a></div>
-        <div style="width: 120px; height: 40px; padding: 0px 12px; padding-bottom: 15px;"><a href="https://www.ncl.ac.uk/"><img width="120" height="40" src="{{ '/assets/images/NCL_logo_white.png' | prepend: site.baseurl }}"></a></div>
+        <div style="width: 100px; height: 40px;padding-right: 12px;padding-bottom: 15px;"><a href="https://enablingongoingness.com/"><img src="{{ '/assets/images/Ongoingness-logo.svg' | prepend: site.baseurl_root }}"></a></div>
+        <div style="padding: 0px 12px; padding-bottom: 15px;"><a href="https://www.kylemontague.co.uk/"><img src="{{ '/assets/images/iDi_logo_extended_white.svg' | prepend: site.baseurl_root }}"></a></div>
+        <div style="padding: 0px 12px; padding-right: 24px; padding-bottom: 15px;"><a href="https://openlab.ncl.ac.uk/"><img src="{{ '/assets/images/openlab-vertical.svg' | prepend: site.baseurl_root }}"></a></div>
+        <div style="width: 125px; height: 40px; padding-right: 12px; padding-bottom: 15px;"><a href="https://www.northumbria.ac.uk/"><img width="150" height="40" src="{{ '/assets/images/unn_logo_white.png' | prepend: site.baseurl_root }}"></a></div>
+        <div style="width: 120px; height: 40px; padding: 0px 12px; padding-bottom: 15px;"><a href="https://www.ncl.ac.uk/"><img width="120" height="40" src="{{ '/assets/images/NCL_logo_white.png' | prepend: site.baseurl_root }}"></a></div>
     </div>
 </div>

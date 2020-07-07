@@ -20,6 +20,9 @@ const DiaryTemplates = () => {
         if(!firstPage)
             doc.addPage('a4', 'portrait');
 
+        const nameSplit = data.who.split(" ");
+        console.log(nameSplit);
+
         doc.setDrawColor(0);
         doc.setFillColor(0, 121, 125);
         doc.rect(0, 33.826, 210, 27.174, 'F'); 
@@ -27,12 +30,12 @@ const DiaryTemplates = () => {
         doc.setTextColor(255, 255, 255);
         doc.setFontSize(42);
         doc.setFontType('normal');
-        doc.setFont('Oswald-Regular'/*'OstrichSans-Black'*/);
-        doc.text(`For ${data.who}`.toUpperCase(), 105, 54, 'center');
+        doc.setFont('Oswald-Regular');
+        doc.text(`{% t templates.c1 %} ${data.who}`.toUpperCase(), 105, 54, 'center');
 
         doc.setTextColor(0, 121, 125);
         doc.setFontSize(30);
-        doc.setFont('Oswald-ExtraLight'/*'ostrich-regular'*/);
+        doc.setFont('Oswald-ExtraLight');
         doc.text('TOGATHER', 105, 250, 'center');
 
         doc.addPage('a4', 'portrait');
@@ -41,13 +44,13 @@ const DiaryTemplates = () => {
         doc.setFontSize(20);
         doc.setFontType('bolditalic');
         doc.setFont('OpenSans');
-        doc.text(`Dear ${data.who}`, 105, 40, 'center');
+        doc.text(`{% t templates.c4 %} ${data.who}`, 105, 40, 'center');
 
         doc.setTextColor(0, 0, 0);
         doc.setFontSize(20);
         doc.setFontType('bolditalic');
         doc.setFont('OpenSans');
-        doc.text('This diary is a collection of messages from:', 105, 80, 'center');
+        doc.text('{% t templates.c2 %}', 105, 80, 'center');
 
         doc.setTextColor(0, 0, 0);
         doc.setFontSize(16);
@@ -65,7 +68,7 @@ const DiaryTemplates = () => {
         doc.setFontSize(20);
         doc.setFontType('bolditalic');
         doc.setFont('OpenSans');
-        doc.text('They capture your time apart during:', 105, 237, 'center');
+        doc.text('{% t templates.c3 %}', 105, 237, 'center');
 
         doc.setTextColor(0, 0, 0);
         doc.setFontSize(16);
@@ -96,16 +99,16 @@ const DiaryTemplates = () => {
         doc.setTextColor(255, 255, 255);
         doc.setFontSize(42);
         doc.setFontType('normal');
-        doc.setFont(/*'OstrichSans-Black'*/'Oswald-Regular');
-        doc.text((data.part === 0 ? `Day ${data.day}` : `Day ${data.day} - Part ${data.part}`).toUpperCase(), 45, 54);
+        doc.setFont('Oswald-Regular');
+        doc.text((data.part === 0 ? `{% t templates.tp1 %} ${data.day}` : `{% t templates.tp1 %} ${data.day} - {% t templates.tp2 %} ${data.part}`).toUpperCase(), 45, 54);
  
 
         doc.setTextColor(0, 0, 0);
         const date = new Date(data.timestamp);
         const day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(date)
-        const month = new Intl.DateTimeFormat('en', { month: 'long' }).format(date)
+        const month = new Intl.DateTimeFormat('{% t global.lang-code %}', { month: 'long' }).format(date)
         const year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(date)
-        doc.setFont('Oswald-ExtraLight'/*'ostrich-regular'*/);
+        doc.setFont('Oswald-ExtraLight');
         doc.setFontSize(40);
         doc.text((`${day} ${month} ${year}`).toUpperCase(), 45, 83);
                 
@@ -180,7 +183,7 @@ const DiaryTemplates = () => {
             doc.setTextColor(255, 255, 255);
             doc.setFontSize(18);
             doc.setFontType('normal');
-            doc.setFont('Oswald-Regular'/*'OstrichSans-Black'*/);
+            doc.setFont('Oswald-Regular');
             doc.text(`${data.user}`.toUpperCase(),
                       column === 'l' ? leftColumnLeftMargin : rightColumnLeftMargin, 
                       (column === 'l' ? yLeft : yRight) + 7.5,

@@ -2,72 +2,72 @@
 layout: home
 ---
 <div class="content-header instructions">
-    Instructions
+    {% t instructions.header %}
 </div>
 <div class="gradient-container instructions"></div>
 <div>
-    <div class="title instructions" style="margin-top: 40px;">Getting Started </div>
+    <div id="t1" class="title instructions" style="margin-top: 40px;"> {% t instructions.t1 %} </div>
 </div>
 <div class="row">
     <div class="column">
-        <div class="column__text" style="margin-bottom: 0;">
-            Open WhatsApp and create a group with all the people that want to contribute to the diary.
+        <div id="t2" class="column__text" style="margin-bottom: 0;">
+            {% t instructions.t2 %}
         </div>
-        <a class="column__text" href="https://faq.whatsapp.com/en/android/26000123/?category=5245251" target="_blank" style="margin-bottom: 0;"> 
-            <embed class="phone-image second" src="{{ '/assets/images/tap.svg' | prepend: site.baseurl }}">
-            How-to for Android
+        <a id="t3" class="column__text" href="https://faq.whatsapp.com/en/android/26000123/?category=5245251" target="_blank" style="margin-bottom: 0;"> 
+            <embed class="phone-image second" src="{{ '/assets/images/tap.svg' | prepend: site.baseurl_root }}">
+            {% t instructions.t3 %}
         </a>
-        <a class="column__text" href="https://faq.whatsapp.com/en/iphone/26000115/?category=5245251" target="_blank" style="margin-top: 0;"> 
-            <embed class="phone-image second" src="{{ '/assets/images/tap.svg' | prepend: site.baseurl }}">
-            How-to for iOS 
+        <a id="t4" class="column__text" href="https://faq.whatsapp.com/en/iphone/26000115/?category=5245251" target="_blank" style="margin-top: 0;"> 
+            <embed class="phone-image second" src="{{ '/assets/images/tap.svg' | prepend: site.baseurl_root }}">
+            {% t instructions.t4 %}
         </a>
     </div>
     <div class="image-column">
         <div class="group-image"></div>           
     </div>
 </div>
-<div class="text-box page-middle">
-    Let everyone know what this group is about and who the diary is for. You can use our example:
+<div id="t5" class="text-box page-middle">
+    {% t instructions.t5 %}
 </div>
 
 {% include group-start.html %}
 
-<div class="title instructions" > To-do Daily </div>
+<div id="t6" class="title instructions" > {% t instructions.t6 %} </div>
 <div class="row">
     <div class="image-column">
         <div class="challenge-image"></div>        
     </div>
     <div class="column">
-        <div class="column__text">
-            Visit ToGather each day to receive a new topic or activity for your group.
+        <div id="t7" class="column__text">
+            {% t instructions.t7 %}
         </div>
     </div>
 </div>
-<div class="text-box page-middle">
-    We've got lots of topics and activities to keep you and your group busy, or you can create your own. Just share them in your WhatsApp group as a message or photo and encourage the others to respond.
+<div id="t8" class="text-box page-middle">
+    {% t instructions.t8 %}
 </div>
-<div class="text-box page-middle" style="font: Italic 18px/24px Open Sans;">
-    TIP: make it easy to find your own topics in the end by starting the message with the words “today’s topic is...”
+<div id="t9" class="text-box page-middle" style="font: Italic 18px/24px Open Sans;">
+    {% t instructions.t9 %}
 </div>
 <div class="row">
     <div class="column">
-        <div class="column__text">
-            Everyone should share their responses in the WhatsApp group. 
+        <div id="t10" class="column__text">
+            {% t instructions.t10 %} 
         </div>
-        <div class="column__text"  >
-            Repeat these steps every day to keep the diary entries going.
+        <div id="11" class="column__text"  >
+            {% t instructions.t11 %}
         </div>
-        <button class="button give" onclick="location.href='{{ site.url }}{{ site.baseurl }}/topics'" type="button">
-            Get a topic
+        <button id="12" class="button give" onclick="location.href='{{ site.url }}{{ site.baseurl }}/topics'" type="button">
+            {% t instructions.t12 %}
         </button>
     </div>
     <div class="image-column">
         <div class="chat-image"></div>          
     </div>
 </div>
-<div class="title instructions">Assembling the diary</div>
-<div class="text-box page-middle">
-    To turn your WhatsApp group chat  into a diary follow these simple steps: 
+<div id="t13" class="title instructions"> {% t instructions.t13 %}</div>
+<div id="t14" class="text-box page-middle">
+    {% t instructions.t14 %}
 </div>
 <div class="row" style=" height: 350px;">
     <div class="image-column">
@@ -75,33 +75,33 @@ layout: home
         <div class="export-chat-image-2"></div>           
     </div>
     <div class="column">
-        <div class="column__text">
-            1. Export the group chat (including media) and save it on your device or cloud storage (e.g. Google Drive, iCloud or Dropbox).
+        <div id="t15" class="column__text">
+            {% t instructions.t15 %}
         </div>
-        <a class="column__text" href="https://faq.whatsapp.com/en/android/23756533/?category=5245251" target="_blank" style="text-align: center;"> 
-            <img class="phone-image second" src="{{ '/assets/images/tap.svg' | prepend: site.baseurl }}">
-            How-to export WhatsApp chats
+        <a id="t16" class="column__text" href="https://faq.whatsapp.com/en/android/23756533/?category=5245251" target="_blank" style="text-align: center;"> 
+            <img class="phone-image second" src="{{ '/assets/images/tap.svg' | prepend: site.baseurl_root }}">
+            {% t instructions.t16 %}
         </a>
     </div>
 </div>
-<div class="text-box page-middle" style="font: Italic 18px/24px Open Sans;">
-    TIP: Anyone from the WhatsApp group can do this, so ask for help if you are having difficulties.
+<div id="t17" class="text-box page-middle" style="font: Italic 18px/24px Open Sans;">
+    {% t instructions.t17 %}
 </div>
 <div class="row">
     <div class="column">
-        <div class="column__text">
-            2. Visit the ToGather 'Assemble Diary' page and upload your exported group chat. (all of the media and the `chat.txt` file that you saved in the previous step)
+        <div id="t18" class="column__text">
+            {% t instructions.t18 %}
         </div>
     </div>
     <div class="image-column">
         <div class="step-2-image"></div>      
     </div>
 </div>
-<div style="font: Italic 18px/24px Open Sans;">
-    TIP: Don’t worry, your personal messages and media files are not actually being uploaded anywhere. Everything is happening locally on your device – we don’t collect any personal data. This ensures your conversations stay private and you have full control over who you want to share your diary with.
+<div id="t19" style="font: Italic 18px/24px Open Sans;">
+    {% t instructions.t19 %}
 </div>
-<button class="button about" onclick="location.href='{{ site.url }}{{ site.baseurl }}/about'" type="button" style="font-size: 14px;margin-bottom: 50px;margin-top: 30px;">
-    Learn about how the service works
+<button id="t20" class="button about" onclick="location.href='{{ site.url }}{{ site.baseurl }}/about'" type="button" style="font-size: 14px;margin-bottom: 50px;margin-top: 30px;">
+    {% t instructions.t20 %}
 </button>
 
 <div class="row">
@@ -109,42 +109,42 @@ layout: home
         <div class="step-3-image"></div>      
     </div>
     <div class="column">
-        <div class="column__text">
-            3. Personalise the diary by adding your loved one's name to the front cover.
+        <div id="t21" class="column__text">
+            {% t instructions.t21 %}
         </div>
     </div>
 </div>
 <div class="row" style="margin-top: 25px;">
     <div class="column">
-        <div class="column__text">
-            4. Check the names of all the contributors. We will show you a list of the names we found in your group. You can edit the names you'll see in the diary (e.g first names only).
+        <div id="t22" class="column__text">
+            {% t instructions.t22 %}
         </div>
     </div>
     <div class="image-column">
         <div class="contributed-image"></div>          
     </div>
 </div>
-<div class ="text-box page-middle">
-    5. Review the topics we found in the group chat. If there are topics missing you can add them from your messages or type them in.
+<div id="t23" class="text-box page-middle">
+    {% t instructions.t23 %}
 </div>
 <div class="row">
     <div class="image-column">
         <div class="select-messages-image"></div>        
     </div>
     <div class="column">
-        <div class="column__text">
-            6. For each topic you will be asked to select which responses you want to add to the diary for that day.
+        <div id="t24" class="column__text">
+            {% t instructions.t24 %}
         </div>
     </div>
 </div>
-<div class="text-box page-middle">
-    TIP: Don’t worry if there is a day you didn’t submit anything, everyone deserves a rest, we will skip over those days and the dates will keep counting on.
+<div id="t25" class="text-box page-middle">
+    {% t instructions.t25 %} 
 </div>
-<div class="text-box">
-    7.  When you have done this for each day you want in the diary, click the 'finish' button. All of your messages will be placed in a template and your diary will be ready for you to download. You can print and/or forward it to share the diary with your family, friends and loved ones.
+<div id="t26" class="text-box">
+    {% t instructions.t26 %}
 </div>
-<button class="button diary" style="margin-top: 32px; margin-bottom: 60px; padding: 10px;" onclick="location.href='{{ site.url }}{{ site.baseurl }}/diary'" type="button">
-    Assemble Diary
+<button id="t27" class="button diary" style="margin-top: 32px; margin-bottom: 60px; padding: 10px;" onclick="location.href='{{ site.url }}{{ site.baseurl }}/diary'" type="button">
+    {% t instructions.t27 %}
 </button>
 
 
