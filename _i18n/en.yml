@@ -1,3 +1,7 @@
+global:
+    lang-code: en
+    lang: English
+
 index:
     home-text: Gathering in stories when being together is not possible
     home-learn-button: Learn about Togather
@@ -164,6 +168,16 @@ diary:
 
     s1: 'Thank you for using Togather! If you have friends or family that might also like Togather share the website with them through these links.'
     s2: 'No thanks'
+
+templates:
+
+    c1: For
+    c2: 'This diary is a collection of messages from:'
+    c3: 'They capture your time apart during:'
+    c4: Dear
+
+    tp1: Day
+    tp2: Part
 
 topics:
     td1: 'Share a photograph of one of your last get-togethers. Describe what we are looking at and why have you chosen it?'

@@ -1,3 +1,7 @@
+global:
+    lang-code: pt
+    lang: Português
+
 index:
     home-text: Reunindo histórias quando estar junto não é possivel
     home-learn-button: Aprenda mais sobre Togather
@@ -165,6 +169,16 @@ diary:
 
     s1: PT Thank you for using Togather! If you have friends or family that might also like Togather share the website with them through these links.
     s2: PT No thanks
+
+templates:
+
+    c1: Para o/a
+    c2: 'Este diário é uma coleção de mensagens de:'
+    c3: 'Elas capturam o teu tempo separado durante:'
+    c4: Querido/a
+
+    tp1: Dia
+    tp2: Parte
 
 topics:
     td1: 'PT Share a photograph of one of your last get-togethers. Describe what we are looking at and why have you chosen it?'
