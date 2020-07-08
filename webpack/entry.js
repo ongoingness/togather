@@ -1,3 +1,3 @@
-import Diary  from "./diary.js";
+import Diary from "./diary.js";
 
 Diary();

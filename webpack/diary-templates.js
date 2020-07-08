@@ -1,6 +1,9 @@
-import { file } from "jszip";
+import * as jsPDF from 'jspdf'
+import loadPdfFonts from './pdfFontsLoader.js'
 
 const DiaryTemplates = () => {
+
+    loadPdfFonts(jsPDF);
 
     const generatePDF = async(diary, topicLimit = -1) => {
 
