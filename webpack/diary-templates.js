@@ -20,18 +20,50 @@ const DiaryTemplates = () => {
         if(!firstPage)
             doc.addPage('a4', 'portrait');
 
+        const forS = '{% t templates.c1 %}';
         const nameSplit = data.who.split(" ");
-        console.log(nameSplit);
+
+        const lineCharLimit = 19;
+        let lineLength = forS.length + 1;
+
+        const lines = [`${forS} `, ''];
+        let fullname = '';
+        let currentLine = 0;
+
+        for(let i = 0; i < nameSplit.length && currentLine < 2; i++) {
+            if(lineLength + nameSplit[i].length > lineCharLimit) {
+                currentLine += 1;
+                lineLength = 0;
+            }
+
+            if(currentLine < 2) {
+                lines[currentLine] += `${nameSplit[i]} `;
+                lineLength += nameSplit[i].length;
+                fullname += `${nameSplit[i]} `;
+            }
+        }
+
+        for(let i = 0; i < lines.length; i++)
+            lines[i] = lines[i].trim();
+
+        fullname = fullname.trim();
+        
+        let headerHeight = 27.174;
+        if(lines[1].length > 0)
+            headerHeight = (headerHeight * 2) - 8;
 
         doc.setDrawColor(0);
         doc.setFillColor(0, 121, 125);
-        doc.rect(0, 33.826, 210, 27.174, 'F'); 
+        doc.rect(0, 33.826, 210, headerHeight, 'F'); 
         
         doc.setTextColor(255, 255, 255);
         doc.setFontSize(42);
         doc.setFontType('normal');
         doc.setFont('Oswald-Regular');
-        doc.text(`{% t templates.c1 %} ${data.who}`.toUpperCase(), 105, 54, 'center');
+        doc.text(`${lines[0]}`.toUpperCase(), 105, 54, 'center');
+
+        if(lines[1].length > 0)
+            doc.text(`${lines[1]}`.toUpperCase(), 105, 74, 'center');
 
         doc.setTextColor(0, 121, 125);
         doc.setFontSize(30);
@@ -44,7 +76,7 @@ const DiaryTemplates = () => {
         doc.setFontSize(20);
         doc.setFontType('bolditalic');
         doc.setFont('OpenSans');
-        doc.text(`{% t templates.c4 %} ${data.who}`, 105, 40, 'center');
+        doc.text(`{% t templates.c4 %} ${fullname}`, 105, 40, 'center');
 
         doc.setTextColor(0, 0, 0);
         doc.setFontSize(20);
@@ -59,7 +91,7 @@ const DiaryTemplates = () => {
         let i = 0;
         let userY = 100;
         for(const [hash, user] of Object.entries(data.users)) {
-            doc.text(`${user.name}`, i % 2 === 0 ? 75 : 135, userY, 'center');
+            doc.text(`${user.name}`, i % 2 === 0 ? 70 : 140, userY, 'center');
             if(i%2 === 1) userY += 10;
             i++;
         }

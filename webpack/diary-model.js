@@ -52,6 +52,10 @@ const DiaryModel = () => {
                 }
                 whatsAppChat.users[user].color = color;
                 whatsAppChat.users[user].visible = true;
+
+                if(whatsAppChat.users[user].name.length > 17) 
+                    whatsAppChat.users[user].name = whatsAppChat.users[user].name.substring(0, 17);
+
             }
         }
     }
