@@ -724,6 +724,7 @@ const DiaryUI = (eventHandler) => {
 
             const usernameText = document.createElement('input');
             usernameText.classList.add('who-contributed__username-input');
+            usernameText.maxLength = '17';
             usernameText.style.width = `${username.offsetWidth-115}px`;
             usernameText.value = userData[hash].name;
             usernameText.disabled = true;

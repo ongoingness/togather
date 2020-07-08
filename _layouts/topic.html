@@ -14,12 +14,9 @@
     <!--meta property="og:site_name" content="While you were fighting"-->
     <meta name="twitter:image:alt" content="Alt text for image">
 
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
-    <link href="{{ '/assets/css/home.css' | prepend: site.baseurl }}" rel="stylesheet" type="text/css">
-    <script src="{{ '/assets/scripts/i18n.js' | prepend: site.baseurl }}"></script>
     {% include fathom-tracking.html %}
-
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    {% include fonts.html %}
+    <link href="{{ '/assets/css/home.css' | prepend: site.baseurl }}" rel="stylesheet" type="text/css">
 
     <title>Togather</title>
 </head>
@@ -73,16 +70,6 @@
             let vh = window.innerHeight * 0.01;
             document.documentElement.style.setProperty('--vh', `${vh}px`);
         });
-
-        const i18n = i18nTools();
-
-        let lang = window.navigator.userLanguage || window.navigator.language;
-        if(!i18n.supportsLanguage(lang)) {
-            lang = 'en';
-        }
-
-        i18n.translatePage('{{page.url}}', lang);
-
 
         const shareTopic = () => {
 

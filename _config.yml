@@ -49,9 +49,9 @@ exclude:
   - 'webpack'
   - 'package-lock.json' 
   - 'package.json'
+  - 'addFrontMatter.js'
+  - 'test'
 
 languages: ['en', 'pt']
 
-exclude_from_localizations: ['webpack']
-
-default_locale_in_subfolder: false
+exclude_from_localizations: []

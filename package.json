@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "emoji-regex": "^9.0.0",
+    "jspdf": "^1.5.3",
     "jszip": "^3.5.0",
     "mime-types": "^2.1.27"
   }
