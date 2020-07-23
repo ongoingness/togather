@@ -92,7 +92,11 @@
         }
 
         const getTopic = () => {
-            window.fathom.trackGoal('4VJ1QTJ7', 0);
+            try {
+                window.fathom.trackGoal('4VJ1QTJ7', 0);
+            } catch (e) {
+                console.log(e);
+            }
             window.location.href = `{{ site.url }}{{ site.baseurl }}/topics/`;
         }
         

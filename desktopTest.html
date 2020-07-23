@@ -1,0 +1,104 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:title" content="Togather">
+    <meta property="og:description" content="Gathering in stories when being together is not possible">
+    <!--meta property="og:image" content="http://euro-travel-example.com/thumbnail.jpg"-->
+    <meta property="og:url" content="{{ site.url }}{{ site.baseurl }}/">
+    <!--meta name="twitter:card" content="summary_large_image"-->
+    <meta property="og:site_name" content="Togather">
+    <meta name="twitter:image:alt" content="Alt text for image">
+
+    {% include fonts.html %}
+    <link href="{{ '/assets/css/home.css' | prepend: site.baseurl }}" rel="stylesheet" type="text/css">
+    <title>Togather</title>
+</head>
+<body style="margin: 0; max-width: 100%;">
+    {% include desktop-header.html %}
+    <div style="display: flex; background: transparent linear-gradient(180deg, #00797D1A 0%, #00797D00 100%) 0% 0% no-repeat padding-box;">
+        <div class="static-page-content" style="width: 700px;margin: 0 auto; background: white; border-style: solid; border-width: 1px; margin: 50px auto;border-color: lightgrey;">
+            <div class="gradient-container home" style="background: white;">
+                <div id="home-text" class="text-box" style="margin: auto;text-align: center;">
+                    {% t index.home-text %}
+                </div>
+            </div>
+            <button id="home-learn-button" class="button intro" style="margin-bottom: 30px;" onclick="location.href='{{ site.url }}{{ site.baseurl }}/explained'">
+                {% t index.home-learn-button %}
+            </button>
+            <button id="home-topic-button" class="button give" style="margin: 30px auto; margin-bottom: 60px;" onclick="location.href='{{ site.url }}{{ site.baseurl }}/topics'">
+                {% t index.home-topic-button %}
+            </button>
+            
+        </div>
+    </div>
+    {% include footer.html %}
+
+<script>
+
+// Opera 8.0+
+//var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+
+// Firefox 1.0+
+//var isFirefox = typeof InstallTrigger !== 'undefined';
+
+// Safari 3.0+ "[object HTMLElementConstructor]" 
+//var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
+
+// Internet Explorer 6-11
+//var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+// Edge 20+
+//var isEdge = !isIE && !!window.StyleMedia;
+
+// Chrome 1 - 79
+//var isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
+
+// Edge (based on chromium) detection
+//var isEdgeChromium = isChrome && (navigator.userAgent.indexOf("Edg") != -1);
+
+// Blink engine detection
+/*
+var isBlink = (isChrome || isOpera) && !!window.CSS;
+
+console.log('Detecting browsers:');
+console.log('isFirefox: ' + isFirefox);
+console.log('isChrome: ' + isChrome);
+console.log('isSafari: ' + isSafari);
+console.log('isOpera: ' + isOpera);
+console.log('isIE: ' + isIE);
+console.log('isEdge: ' + isEdge);
+console.log('isEdgeChromium: ' + isEdgeChromium);
+console.log('isBlink: ' + isBlink);
+*/
+
+var isIE = /*@cc_on!@*/false || !!document.documentMode;
+if(isIE) {
+    window.location = "{{ site.baseurl }}/iesupport";
+}
+            
+</script>
+
+    <script>
+    
+
+
+        // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+        let vh = window.innerHeight * 0.01;
+        // Then we set the value in the --vh custom property to the root of the document
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+        // We listen to the resize event
+        window.addEventListener('resize', () => {
+            // We execute the same script as before
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        });
+    
+    </script>
+</body>
+</html>
