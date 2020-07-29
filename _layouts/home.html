@@ -20,7 +20,8 @@
     <title>Togather</title>
 </head>
 <body>
-    <div class="header">
+    {% include header.html title='Togather' %}
+    <!--div class="header">
         <div class="hamburguer" onclick="openNav()">            
             <div class="hamburguer-line"></div>
             <div class="hamburguer-line"></div>
@@ -29,13 +30,12 @@
         <div class="header__text">
             Togather
         </div>
-    </div>
+    </div-->
     {% include nav-overlay.html %}
     <div class="static-page-content">
         {{ content }}
     </div>
-    {% include footer.html %}
-
+    {% include new-footer.html %}
 <script>
 
 // Opera 8.0+
