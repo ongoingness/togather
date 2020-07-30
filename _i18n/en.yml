@@ -4,9 +4,9 @@ global:
     portugues: Português
 
 index:
-    home-text: Gathering in stories when being together is not possible
+    home-text: Gather in stories when being together is not possible
     home-learn-button: Learn about Togather
-    home-topic-button: Get a topic
+    home-topic-button: Get a Topic!
 
 introduction:
     header: Introduction

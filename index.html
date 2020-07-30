@@ -1,14 +1,18 @@
 ---
 layout: home
 ---
-<div class="gradient-container home">
-    <div id="home-text" class="text-box" style="margin: auto;text-align: center;">
-        {% t index.home-text %}
-    </div>
+<figure style="text-align: center;">
+    <img src="{{ '/assets/images/TOGATHER_LOGO@2x.png' | prepend: site.baseurl_root }}" width="190" height="160" alt="Togather Logo">
+</figure>
+<h3>
+    {% t index.home-text %}
+</h3>
+<div class="index__button-container">
+    <button id="home-learn-button" class="secondary" onclick="location.href='{{ site.url }}{{ site.baseurl }}/topics'">
+        {% t index.home-topic-button %}
+    </button>
+    <button id="home-topic-button" class="primary" onclick="location.href='{{ site.url }}{{ site.baseurl }}/explained'">
+        {% t index.home-learn-button %}
+    </button>
 </div>
-<button id="home-learn-button" class="button intro" style="margin-bottom: 30px;" onclick="location.href='{{ site.url }}{{ site.baseurl }}/explained'">
-    {% t index.home-learn-button %}
-</button>
-<button id="home-topic-button" class="button give" style="margin: 30px auto; margin-bottom: 60px;" onclick="location.href='{{ site.url }}{{ site.baseurl }}/topics'">
-    {% t index.home-topic-button %}
-</button>
+

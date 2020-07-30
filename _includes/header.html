@@ -1,4 +1,4 @@
-<header>
+<header id='header'>
     <div class="header__top">
         <span>{{ include.title }}</span>
         <span class="header__right">
@@ -9,5 +9,58 @@
             </div>
         </span>
     </div>
-    <div class="header__bottom"> </div>
+    <div class="header__bottom"></div>
+    <nav id="myNav" class="overlay">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div class="overlay-content">
+          <a id="home-a" href="{{ site.url }}{{ site.baseurl }}/">{% t nav-overlay.home-a %}</a>
+          <a id="topic-a" href="{{ site.url }}{{ site.baseurl }}/topics">{% t nav-overlay.topic-a %}</a>
+          <a id="explained-a" href="{{ site.url }}{{ site.baseurl }}/explained">{% t nav-overlay.explained-a %}</a>
+          <a id="instructions-a" href="{{ site.url }}{{ site.baseurl }}/instructions">{% t nav-overlay.instructions-a %}</a>
+          <!--a id="diary-a" href="{{ site.url }}{{ site.baseurl }}/diary">{% t nav-overlay.diary-a %}</a-->
+          <!--a id="about-a" href="{{ site.url }}{{ site.baseurl }}/about">{% t nav-overlay.about-a %}</a-->
+          <a id="contact-a" href="{{ site.url }}{{ site.baseurl }}/contact">{% t nav-overlay.contact-a %}</a>
+        </div>
+    </nav>
+    <script>
+
+        const splittedPageUrl = '{{page.url}}'.split(/[\/.]+/);
+        switch(splittedPageUrl[1]) {
+            case '':
+                document.getElementById('home-a').style.textDecoration = 'underline';
+                break;
+            
+            case 'topics':
+            document.getElementById('topic-a').style.textDecoration = 'underline';
+                break;
+        
+            case 'explained':
+                document.getElementById('explained-a').style.textDecoration = 'underline';
+                break;
+        
+            case 'instructions':
+                document.getElementById('instructions-a').style.textDecoration = 'underline';
+                break;
+        
+            case 'diary':
+                ocument.getElementById('diary-a').style.textDecoration = 'underline';
+                break;
+        
+            case 'about':
+                document.getElementById('about-a').style.textDecoration = 'underline';
+                break;
+            
+            case 'contact':
+                document.getElementById('contact-a').style.textDecoration = 'underline';
+                break;
+        }
+        
+        const openNav = () => {
+            document.getElementById("myNav").style.width = "100%";
+        }
+        
+        const closeNav = () => {
+            document.getElementById("myNav").style.width = "0%";
+        }
+        </script>
 </header>

@@ -2,8 +2,10 @@
 ---
 
 :root {
+    --background-color: #F6F6F6;
     --primary-color: #7663A8;
-    --secondary-color: #7663A8CC;
+    --primary-shadow-color: #7663A8CC;
+    --secondary-color: #87428A;
 }
 
 /*@media screen and (max-width: 700px) {*/
@@ -17,11 +19,63 @@ body {
     font-size: 18px;
 
     height: calc(var(--vh, 1vh) * 100);
+    background-color: var(--background-color);
 }
 
 header {
     width: 100%;
     height: 78px;
+    margin-bottom: 60px;
+}
+
+h1 {
+
+}
+
+h3 {
+    text-align: center;
+    font: 20px/26px 'Roboto Condensed';
+    letter-spacing: 0.6px;
+    color: #000000;
+    font-weight: 300;
+ 
+}
+
+button {
+    text-align: center;
+    font: italic 20px/26px Roboto;
+    font-weight: 700; 
+    letter-spacing: 0.4px;
+    color: #FFFFFF;
+    height: 47px;
+    width: 100%;
+    max-width: 360px;
+    border-radius: 47px;
+    border-style: none;
+    cursor: pointer;
+}
+
+button.primary {
+    background-color: var(--primary-color);
+}
+
+button.secondary {
+    background-color: var(--secondary-color);
+}
+
+main {
+    padding: 0px 27px;
+}
+
+
+.index__button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    justify-content: space-between;
+    height: 117px;
+    margin-top: 50px;
 }
 
 .header__top {
@@ -37,7 +91,7 @@ header {
 }
 
 .header__bottom {
-    background-color: var(--secondary-color);
+    background-color: var(--primary-shadow-color);
     height: 10px;
 }
 
@@ -60,30 +114,12 @@ header {
 }
 
 .header__text {
-    /*
-    color: rgb(3, 123, 126);
-    text-align: center;
-    margin: auto;
-
-    font-family: 'Oswald';
-    text-transform: uppercase;
-    font-weight: 200;
-    font-size: 30px;
-    */
     text-align: left;
     font: 32px/43px Roboto Condensed;
     letter-spacing: 0.96px;
 }
 
 .hamburguer-line {
-
-/*
-    width: 35px;
-    height: 3px;
-    background-color: rgb(3, 123, 126);
-    margin: 6.5px 0;
-*/
-
     width: 25px;
     height: 3px;
     background-color: white;
@@ -107,7 +143,7 @@ header {
 }
 
 .static-page-content {
-    width: 100%;
+    /*width: 100%;*/
     min-height: 400px;
     display: flex;
     flex-direction: column;
@@ -145,27 +181,39 @@ header {
     height: 100%;
     width: 0;
     position: fixed;
-    z-index: 1;
+    z-index: 2;
     top: 0;
-    left: 0;
-    background-color: rgb(3, 123, 126);
+    max-width: 700px;
+    /*background-color: rgb(3, 123, 126);*/
+    background-color: var(--primary-color);
     overflow-x: hidden;
     transition: 0.5s;
 }
   
 .overlay-content {
     position: relative;
-    top: 25%;
+    top: 72px;
     width: 100%;
+
+    color: white;
     text-align: center;
-    margin-top: 30px;
-    font-family: 'Oswald';
-    font-weight: 200;
-    font-size: 10px;
-    letter-spacing: 0px;
+    font: 40px/53px Roboto Condensed;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    font-weight: 300;
 
 }
   
+.overlay .closebtn {
+    position: absolute;
+    top: 8px;
+    font-size: 50px;
+    right: 21px;
+    font-family: Roboto;
+    padding: 0;
+
+}
+
 .overlay a {
     padding: 15px;
     text-decoration: none;
@@ -174,6 +222,14 @@ header {
     display: block;
     transition: 0.3s;
     text-transform: uppercase;
+
+    color: white;
+    text-align: center;
+    font: 40px/53px Roboto Condensed;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    font-weight: 400;
+
 }
 
   
@@ -181,12 +237,7 @@ header {
     color: #f1f1f1;
 }
   
-.closebtn {
-    position: absolute;
-    top: 1vh;
-    font-size: 60px;
-    left: 1.2vh;
-}
+
 
 .content-header {
     width: 100%;
