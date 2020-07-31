@@ -2,11 +2,11 @@
     <div class="header__top">
         <span>{{ include.title }}</span>
         <span class="header__right">
-            <div class="header__hamburguer" onclick="openNav()">            
+            <button class="header__hamburguer" aria-label="Open Navigation Bar" onclick="openNav()" tabindex="0">
                 <div class="hamburguer-line"></div>
                 <div class="hamburguer-line"></div>
                 <div class="hamburguer-line"></div>
-            </div>
+            </button>
         </span>
     </div>
     <div class="header__bottom"></div>
@@ -57,10 +57,12 @@
         
         const openNav = () => {
             document.getElementById("myNav").style.width = "100%";
+            document.getElementById("myNav").setAttribute('aria-hidden', false);
         }
         
         const closeNav = () => {
             document.getElementById("myNav").style.width = "0%";
+            document.getElementById("myNav").setAttribute('aria-hidden', true);
         }
         </script>
 </header>

@@ -55,6 +55,12 @@ button {
     cursor: pointer;
 }
 
+button:focus, a:focus {
+    box-shadow: 0 0 0 2px #ffffff, 0 0 3px 5px #3a97f9;
+    outline: 2px dotted transparent;
+    outline-offset: 2px;
+}
+
 button.primary {
     background-color: var(--primary-color);
 }
@@ -85,7 +91,7 @@ main {
     text-align: left;
     font: 32px/68px 'Roboto Condensed';
     letter-spacing: 0.96px;
-    padding: 0px 24px 0px 21px;
+    padding: 0px 18px 0px 21px;
     color: white;
     text-transform: uppercase;
 }
@@ -103,6 +109,12 @@ main {
 
 .header__hamburguer {
     float: right;
+    background: none;
+    width: 37px;
+    height: 33px;
+    padding: 6px;
+    padding-top: 0;
+    border-radius: 0;
 }
 
 .header {
@@ -123,7 +135,7 @@ main {
     width: 25px;
     height: 3px;
     background-color: white;
-    margin: 6px 0;
+    margin-top: 6px;
     border-radius: 25px;
 }
 
@@ -189,19 +201,15 @@ main {
     overflow-x: hidden;
     transition: 0.5s;
 }
-  
+
+
+
+
+
 .overlay-content {
     position: relative;
     top: 72px;
     width: 100%;
-
-    color: white;
-    text-align: center;
-    font: 40px/53px Roboto Condensed;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    font-weight: 300;
-
 }
   
 .overlay .closebtn {
@@ -229,7 +237,6 @@ main {
     letter-spacing: 0.8px;
     text-transform: uppercase;
     font-weight: 400;
-
 }
 
   
