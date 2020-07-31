@@ -200,26 +200,28 @@ main {
     background-color: var(--primary-color);
     overflow-x: hidden;
     transition: 0.5s;
+    visibility: hidden;
 }
-
-
-
-
 
 .overlay-content {
     position: relative;
     top: 72px;
     width: 100%;
 }
-  
-.overlay .closebtn {
-    position: absolute;
-    top: 8px;
-    font-size: 50px;
-    right: 21px;
-    font-family: Roboto;
-    padding: 0;
 
+
+.overlay .close-button{
+    position: absolute;
+    top: 15px;
+    font-size: 50px;
+    right: 18px;
+    font-family: Roboto;
+    padding: 6px;
+    background: none;
+    font-style: normal;
+    width: auto;
+    height: auto;
+    border-radius: 0;
 }
 
 .overlay a {

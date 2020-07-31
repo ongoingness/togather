@@ -2,7 +2,7 @@
     <div class="header__top">
         <span>{{ include.title }}</span>
         <span class="header__right">
-            <button class="header__hamburguer" aria-label="Open Navigation Bar" onclick="openNav()" tabindex="0">
+            <button class="header__hamburguer" aria-label="Open Navigation Overlay" onclick="openNav()" tabindex="0">
                 <div class="hamburguer-line"></div>
                 <div class="hamburguer-line"></div>
                 <div class="hamburguer-line"></div>
@@ -11,7 +11,7 @@
     </div>
     <div class="header__bottom"></div>
     <nav id="myNav" class="overlay">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <button class="close-button" aria-label="Close Navigation Overlay" onclick="closeNav()">&times;</button>
         <div class="overlay-content">
           <a id="home-a" href="{{ site.url }}{{ site.baseurl }}/">{% t nav-overlay.home-a %}</a>
           <a id="topic-a" href="{{ site.url }}{{ site.baseurl }}/topics">{% t nav-overlay.topic-a %}</a>
@@ -55,14 +55,66 @@
                 break;
         }
         
+
+        // Will hold previously focused element
+        let focusedElementBeforeOverlay;
+
+        // Find the modal and its overlay
+        let overlay = document.getElementById("myNav");
+
         const openNav = () => {
+            document.getElementById("myNav").style.visibility = 'visible'
             document.getElementById("myNav").style.width = "100%";
-            document.getElementById("myNav").setAttribute('aria-hidden', false);
+            
+            // Save current focus
+            focusedElementBeforeOverlay = document.activeElement;
+
+            const trapTabKey = (e) => {
+                // Check for TAB key press
+                if (e.keyCode === 9) {
+                    // SHIFT + TAB
+                    if (e.shiftKey) {
+                        if (document.activeElement === firstTabStop) {
+                            e.preventDefault();
+                            lastTabStop.focus();
+                        }
+                    // TAB
+                    } else {
+                        if (document.activeElement === lastTabStop) {
+                            e.preventDefault();
+                            firstTabStop.focus();
+                        }
+                    }
+                }
+                // ESCAPE
+                if (e.keyCode === 27) {
+                    console.log('clise');
+                    closeNav();
+                }
+            }
+            // Listen for and trap the keyboard
+            overlay.addEventListener('keydown', trapTabKey);
+
+            // Listen for indicators to close the modal
+           // modalOverlay.addEventListener('click', closeModal);
+
+            // Find all focusable children
+            var focusableElementsString = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
+            var focusableElements = overlay.querySelectorAll(focusableElementsString);
+            // Convert NodeList to Array
+            focusableElements = Array.prototype.slice.call(focusableElements);
+
+            var firstTabStop = focusableElements[0];
+            var lastTabStop = focusableElements[focusableElements.length - 1];
+
+            // Focus first child
+            firstTabStop.focus();
         }
         
         const closeNav = () => {
+            focusedElementBeforeOverlay.focus();
             document.getElementById("myNav").style.width = "0%";
-            document.getElementById("myNav").setAttribute('aria-hidden', true);
+            document.getElementById("myNav").style.visibility = 'hidden';
         }
         </script>
 </header>
