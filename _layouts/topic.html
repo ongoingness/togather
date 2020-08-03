@@ -1,4 +1,5 @@
 ---
+title: topic.t0
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta property="og:title" content="Togather">
-    <meta property="og:description" content="{{ page.description }}">
+    <meta property="og:description" content="{% t page.description %}">
     <!--meta property="og:image" content="http://euro-travel-example.com/thumbnail.jpg"-->
     <meta property="og:url" content="{{ site.url }}{{ site.baseurl }}/topics/{{page.name}}">
     <!--meta name="twitter:card" content="summary_large_image"-->
@@ -21,35 +22,21 @@
     <title>Togather</title>
 </head>
 <body>
-    <div class="header">
-        <div class="hamburguer" onclick="openNav()">            
-            <div class="hamburguer-line"></div>
-            <div class="hamburguer-line"></div>
-            <div class="hamburguer-line"></div>
+    {% include header.html title=layout.title %}
+    <main class="static-page-content">
+        <div class="topic-box">
+            {% t page.description %}
         </div>
-        <div class="header__text">
-            Togather
-        </div>
-    </div>
-    {% include nav-overlay.html %}
-    <div class="content">
-        <div id="t0" class="content-header topic">
-            {% t topic.t0 %}
-        </div>
-        <div class="gradient-container topic">
-            <div class="topic-box">
-                {% t page.description %}
-            </div>
-            <button id="t1" class="button round pick" onclick="shareTopic()">
+        <div class="button-container">
+            <button id="t1" class="secondary" onclick="shareTopic()">
                 {% t topic.t1 %}
             </button>
-            <button id="t2" class="button give" onclick="getTopic()">
+            <button id="t2" class="primary" onclick="getTopic()">
                 {% t topic.t2 %}
             </button>
         </div>
-    </div>
-    {% include footer.html %}
-
+    </main>
+    {% include new-footer.html %}
     <script>
         var isIE = /*@cc_on!@*/false || !!document.documentMode;
         if(isIE) {
@@ -58,7 +45,6 @@
     </script>
 
     <script>
-
         // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
         let vh = window.innerHeight * 0.01;
         // Then we set the value in the --vh custom property to the root of the document
@@ -75,7 +61,7 @@
 
             window.fathom.trackGoal('JC9ERVWQ', 0);
             
-            const text = `${window.location.href}\n{% t topic.t3 %} {{ page.description }}`;
+            const text = `${window.location.href}\n{% t topic.t3 %} {% t page.description %}`;
 
             const link = (navigator.userAgent.match(/Android/i) 
                 || navigator.userAgent.match(/webOS/i) 

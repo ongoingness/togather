@@ -1,19 +1,21 @@
 ---
 layout: home
-title: Togather
+title: index.header
 ---
-<figure style="text-align: center;">
-    <img src="{{ '/assets/images/TOGATHER_LOGO@2x.png' | prepend: site.baseurl_root }}" width="190" height="160" alt="Togather Logo">
-</figure>
-<h3>
-    {% t index.home-text %}
-</h3>
-<div class="index__button-container">
-    <button id="home-learn-button" class="secondary" onclick="location.href='{{ site.url }}{{ site.baseurl }}/topics'">
-        {% t index.home-topic-button %}
-    </button>
-    <button id="home-topic-button" class="primary" onclick="location.href='{{ site.url }}{{ site.baseurl }}/explained'">
-        {% t index.home-learn-button %}
-    </button>
-</div>
+<main class="static-page-content">
+    <figure style="text-align: center;">
+        <img src="{{ '/assets/images/TOGATHER_LOGO@2x.png' | prepend: site.baseurl_root }}" width="190" height="160" alt="Togather Logo">
+    </figure>
+    <h3>
+        {% t index.home-text %}
+    </h3>
+    <div class="button-container">
+        <button id="home-learn-button" class="secondary" onclick="location.href='{{ site.url }}{{ site.baseurl }}/topics'">
+            {% t index.home-topic-button %}
+        </button>
+        <button id="home-topic-button" class="primary" onclick="location.href='{{ site.url }}{{ site.baseurl }}/explained'">
+            {% t index.home-learn-button %}
+        </button>
+    </div>
+</main>
 

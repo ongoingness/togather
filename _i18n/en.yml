@@ -4,6 +4,7 @@ global:
     portugues: Português
 
 index:
+    header: Togather
     home-text: Gather in stories when being together is not possible
     home-learn-button: Learn about Togather
     home-topic-button: Get a Topic!
