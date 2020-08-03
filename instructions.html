@@ -1,152 +1,157 @@
 ---
 layout: home
+title: instructions.header
 ---
-<div class="content-header instructions">
-    {% t instructions.header %}
-</div>
-<div class="gradient-container instructions"></div>
-<div>
-    <div id="t1" class="title instructions" style="margin-top: 40px;"> {% t instructions.t1 %} </div>
-</div>
-<div class="row">
-    <div class="column">
-        <div id="t2" class="column__text" style="margin-bottom: 0;">
-            {% t instructions.t2 %}
+<main class="static-page-content" style="padding: 0">
+    <h2 id="t1" class="title instructions"> {% t instructions.t1 %} </h2>
+    <div class="row main-padding-left">
+        <div class="column">
+            <div id="t2" class="column__text left top">{% t instructions.t2 %}</div>
+            <ul class="column__text left bottom">
+                <li>
+                    <a id="t3" class="column__text left" href="https://faq.whatsapp.com/en/android/26000123/?category=5245251" target="_blank" style="margin-bottom: 0;"> 
+                        {% t instructions.t3 %}
+                    </a>
+                </li>
+                <li>
+                    <a id="t4" class="column__text left" href="https://faq.whatsapp.com/en/iphone/26000115/?category=5245251" target="_blank" style="margin-bottom: 0;"> 
+                        {% t instructions.t4 %}
+                    </a>
+                </li>
+            </ul>
         </div>
-        <a id="t3" class="column__text" href="https://faq.whatsapp.com/en/android/26000123/?category=5245251" target="_blank" style="margin-bottom: 0;"> 
-            <embed class="phone-image second" src="{{ '/assets/images/tap.svg' | prepend: site.baseurl_root }}">
-            {% t instructions.t3 %}
-        </a>
-        <a id="t4" class="column__text" href="https://faq.whatsapp.com/en/iphone/26000115/?category=5245251" target="_blank" style="margin-top: 0;"> 
-            <embed class="phone-image second" src="{{ '/assets/images/tap.svg' | prepend: site.baseurl_root }}">
-            {% t instructions.t4 %}
-        </a>
+        <div class="image-column">
+            <div class="group-image"></div>           
+        </div>
     </div>
-    <div class="image-column">
-        <div class="group-image"></div>           
+    
+    <div id="t5" class="text-box" style="margin-bottom: 10px;">
+        {% t instructions.t5 %}
     </div>
-</div>
-<div id="t5" class="text-box page-middle">
-    {% t instructions.t5 %}
-</div>
+    {% include group-start.html %}
 
-{% include group-start.html %}
-
-<div id="t6" class="title instructions" > {% t instructions.t6 %} </div>
-<div class="row">
-    <div class="image-column">
-        <div class="challenge-image"></div>        
-    </div>
-    <div class="column">
-        <div id="t7" class="column__text">
-            {% t instructions.t7 %}
+    <h2 id="t6" class="title instructions" > {% t instructions.t6 %} </h2>
+    <div class="row main-padding-right">
+        <div class="image-column">
+            <div class="challenge-image"></div>        
+        </div>
+        <div class="column">
+            <div id="t7" class="column__text right">
+                {% t instructions.t7 %}
+            </div>
         </div>
     </div>
-</div>
-<div id="t8" class="text-box page-middle">
-    {% t instructions.t8 %}
-</div>
-<div id="t9" class="text-box page-middle" style="font: Italic 18px/24px Open Sans;">
-    {% t instructions.t9 %}
-</div>
-<div class="row">
-    <div class="column">
-        <div id="t10" class="column__text">
-            {% t instructions.t10 %} 
+    <div id="t8" class="text-box page-middle">
+        {% t instructions.t8 %}
+    </div>
+    <div id="t9" class="text-box page-middle italic">
+        {% t instructions.t9 %}
+    </div>
+    <div class="row main-padding-left">
+        <div class="column">
+            <div id="t10" class="column__text left top">
+                {% t instructions.t10 %} 
+            </div>
+            <div id="11" class="column__text left middle">
+                {% t instructions.t11 %}
+            </div>
+            <div class="column__text left bottom">
+                <button id="12" class="primary" onclick="location.href='{{ site.url }}{{ site.baseurl }}/topics'" type="button" style="margin-right: 20px;">
+                    {% t instructions.t12 %}
+                </button>
+            </div>
         </div>
-        <div id="11" class="column__text"  >
-            {% t instructions.t11 %}
+        <div class="image-column">
+            <div class="chat-image"></div>          
         </div>
-        <button id="12" class="button give" onclick="location.href='{{ site.url }}{{ site.baseurl }}/topics'" type="button">
-            {% t instructions.t12 %}
+    </div>
+    <h2 id="t13" class="title instructions"> {% t instructions.t13 %}</h2>
+    <div id="t14" class="text-box" style="margin-bottom: 10px">
+        {% t instructions.t14 %}
+    </div>
+    <div class="row main-padding-right" style=" height: 350px;">
+        <div class="image-column">
+            <div class="export-chat-image-1"></div> 
+            <div class="export-chat-image-2"></div>           
+        </div>
+        <div class="column">
+            <div id="t15" class="column__text right top">
+                {% t instructions.t15 %}
+            </div>
+            <ul class="column__text right bottom">
+                <li>
+                    <a id="t16" href="https://faq.whatsapp.com/en/android/23756533/?category=5245251" target="_blank" style="text-align: center;"> 
+                        {% t instructions.t16 %}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="t17" class="text-box page-middle italic">
+        {% t instructions.t17 %}
+    </div>
+    <div class="row main-padding-left">
+        <div class="column">
+            <div id="t18" class="column__text left">
+                {% t instructions.t18 %}
+            </div>
+        </div>
+        <div class="image-column">
+            <div class="step-2-image"></div>      
+        </div>
+    </div>
+    <div id="t19" class="text-box italic"> {% t instructions.t19 %} </div>
+    <div class="text-box" style="text-align: center;">
+        <button id="t20" class="primary" onclick="location.href='{{ site.url }}{{ site.baseurl }}/about'" type="button" style="font-size: 14px;margin-bottom: 50px;margin-top: 30px;">
+            {% t instructions.t20 %}
         </button>
     </div>
-    <div class="image-column">
-        <div class="chat-image"></div>          
-    </div>
-</div>
-<div id="t13" class="title instructions"> {% t instructions.t13 %}</div>
-<div id="t14" class="text-box page-middle">
-    {% t instructions.t14 %}
-</div>
-<div class="row" style=" height: 350px;">
-    <div class="image-column">
-        <div class="export-chat-image-1"></div> 
-        <div class="export-chat-image-2"></div>           
-    </div>
-    <div class="column">
-        <div id="t15" class="column__text">
-            {% t instructions.t15 %}
-        </div>
-        <a id="t16" class="column__text" href="https://faq.whatsapp.com/en/android/23756533/?category=5245251" target="_blank" style="text-align: center;"> 
-            <img class="phone-image second" src="{{ '/assets/images/tap.svg' | prepend: site.baseurl_root }}">
-            {% t instructions.t16 %}
-        </a>
-    </div>
-</div>
-<div id="t17" class="text-box page-middle" style="font: Italic 18px/24px Open Sans;">
-    {% t instructions.t17 %}
-</div>
-<div class="row">
-    <div class="column">
-        <div id="t18" class="column__text">
-            {% t instructions.t18 %}
-        </div>
-    </div>
-    <div class="image-column">
-        <div class="step-2-image"></div>      
-    </div>
-</div>
-<div id="t19" style="font: Italic 18px/24px Open Sans;">
-    {% t instructions.t19 %}
-</div>
-<button id="t20" class="button about" onclick="location.href='{{ site.url }}{{ site.baseurl }}/about'" type="button" style="font-size: 14px;margin-bottom: 50px;margin-top: 30px;">
-    {% t instructions.t20 %}
-</button>
 
-<div class="row">
-    <div class="image-column">
-        <div class="step-3-image"></div>      
-    </div>
-    <div class="column">
-        <div id="t21" class="column__text">
-            {% t instructions.t21 %}
+    <div class="row main-padding-right">
+        <div class="image-column">
+            <div class="step-3-image"></div>      
+        </div>
+        <div class="column">
+            <div id="t21" class="column__text right">
+                {% t instructions.t21 %}
+            </div>
         </div>
     </div>
-</div>
-<div class="row" style="margin-top: 25px;">
-    <div class="column">
-        <div id="t22" class="column__text">
-            {% t instructions.t22 %}
+    <div class="row main-padding-left" style="margin-top: 25px;">
+        <div class="column">
+            <div id="t22" class="column__text left">
+                {% t instructions.t22 %}
+            </div>
+        </div>
+        <div class="image-column">
+            <div class="contributed-image"></div>          
         </div>
     </div>
-    <div class="image-column">
-        <div class="contributed-image"></div>          
+    <div id="t23" class="text-box page-middle">
+        {% t instructions.t23 %}
     </div>
-</div>
-<div id="t23" class="text-box page-middle">
-    {% t instructions.t23 %}
-</div>
-<div class="row">
-    <div class="image-column">
-        <div class="select-messages-image"></div>        
-    </div>
-    <div class="column">
-        <div id="t24" class="column__text">
-            {% t instructions.t24 %}
+    <div class="row main-padding-right">
+        <div class="image-column">
+            <div class="select-messages-image"></div>        
+        </div>
+        <div class="column">
+            <div id="t24" class="column__text right">
+                {% t instructions.t24 %}
+            </div>
         </div>
     </div>
-</div>
-<div id="t25" class="text-box page-middle">
-    {% t instructions.t25 %} 
-</div>
-<div id="t26" class="text-box">
-    {% t instructions.t26 %}
-</div>
-<button id="t27" class="button diary" style="margin-top: 32px; margin-bottom: 60px; padding: 10px;" onclick="location.href='{{ site.url }}{{ site.baseurl }}/diary'" type="button">
-    {% t instructions.t27 %}
-</button>
-
+    <div id="t25" class="text-box page-middle italic">
+        {% t instructions.t25 %} 
+    </div>
+    <div id="t26" class="text-box">
+        {% t instructions.t26 %}
+    </div>
+    <div class="text-box" style="text-align: center;margin-top: 32px;">
+        <button id="t27" class="primary" onclick="location.href='{{ site.url }}{{ site.baseurl }}/diary'" type="button">
+            {% t instructions.t27 %}
+        </button>
+    </div>
+</main>
 
 
 

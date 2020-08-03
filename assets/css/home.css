@@ -6,6 +6,7 @@
     --primary-color: #7663A8;
     --primary-shadow-color: #7663A8CC;
     --secondary-color: #87428A;
+    --title-color: #445364;
     --main-padding: 27px;
 }
 
@@ -33,6 +34,14 @@ header {
 
 h1 {
 
+}
+
+h2 {
+    font: 20px/26px Roboto;
+    letter-spacing: 0.4px;
+    color: var(--title-color);
+    font-weight: bold;
+    font-style: italic;
 }
 
 h3 {
@@ -75,6 +84,11 @@ button.secondary {
 main {
     padding: 0px 27px;
 }
+
+ul {
+    list-style-image: url("{{ '/assets/images/tap.svg' | prepend: site.baseurl_root }}");
+}
+
 
 .main-padding {
     padding: 0px var(--main-padding);
@@ -461,28 +475,28 @@ main {
 
 .export-chat-image-1 {
     height: 200px;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/Screen_group_chat-4.png' | prepend: site.baseurl_root }}') no-repeat;
+    background: linear-gradient(to bottom, rgba(246, 246, 246, 1) 5%, rgba(246, 246, 246, 0) 20%, rgba(246, 246, 246, 0) 50%, rgba(246, 246, 246, 0) 80%, rgba(246, 246, 246, 1) 95%), url('{{ '/assets/images/Screen_group_chat-4.png' | prepend: site.baseurl_root }}') no-repeat;
     background-size: cover;
     background-position-x: right;
 }
 
 .export-chat-image-2 {
     height: 140px;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/Rectangle_250.png' | prepend: site.baseurl_root }}') no-repeat;
+    background: linear-gradient(to bottom, rgba(246, 246, 246, 1) 5%, rgba(246, 246, 246, 0) 20%, rgba(246, 246, 246, 0) 50%, rgba(246, 246, 246, 0) 80%, rgba(246, 246, 246, 1) 95%), url('{{ '/assets/images/Rectangle_250.png' | prepend: site.baseurl_root }}') no-repeat;
     background-size: cover;
     background-position-x: right;
 }
 
 .contributed-image {
     height: 100%;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/Screen_group_chat-5.png' | prepend: site.baseurl_root }}') no-repeat;
+    background: linear-gradient(to bottom, rgba(246, 246, 246, 1) 5%, rgba(246, 246, 246, 0) 20%, rgba(246, 246, 246, 0) 50%, rgba(246, 246, 246, 0) 80%, rgba(246, 246, 246, 1) 95%), url('{{ '/assets/images/Screen_group_chat-5.png' | prepend: site.baseurl_root }}') no-repeat;
     background-size: cover;
 }
 
 .select-messages-image {
     height: 100%;
     max-height: 320px;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/Screen_group_chat-6.png' | prepend: site.baseurl_root }}') no-repeat;
+    background: linear-gradient(to bottom, rgba(246, 246, 246, 1) 5%, rgba(246, 246, 246, 0) 20%, rgba(246, 246, 246, 0) 50%, rgba(246, 246, 246, 0) 80%, rgba(246, 246, 246, 1) 95%), url('{{ '/assets/images/Screen_group_chat-6.png' | prepend: site.baseurl_root }}') no-repeat;
     background-size: cover;
     background-position-x: right;
 }
@@ -490,7 +504,7 @@ main {
 .step-2-image {
     height: 100%;
     max-height: 320px;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/inst_step2.png' | prepend: site.baseurl_root }}') no-repeat;
+    background: linear-gradient(to bottom, rgba(246, 246, 246, 1) 5%, rgba(246, 246, 246, 0) 20%, rgba(246, 246, 246, 0) 50%, rgba(246, 246, 246, 0) 80%, rgba(246, 246, 246, 1) 95%), url('{{ '/assets/images/inst_step2.png' | prepend: site.baseurl_root }}') no-repeat;
     background-size: cover;
     background-position-x: left;
 }
@@ -498,7 +512,7 @@ main {
 .step-3-image {
     height: 100%;
     max-height: 320px;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 95%), url('{{ '/assets/images/inst_step3.png' | prepend: site.baseurl_root }}') no-repeat;
+    background: linear-gradient(to bottom, rgba(246, 246, 246, 1) 5%, rgba(246, 246, 246, 0) 20%, rgba(246, 246, 246, 0) 50%, rgba(246, 246, 246, 0) 80%, rgba(246, 246, 246, 1) 95%), url('{{ '/assets/images/inst_step3.png' | prepend: site.baseurl_root }}') no-repeat;
     background-size: cover;
     background-position-x: right;
 }
@@ -546,16 +560,18 @@ main {
 }
 
 .title {
+    /*
     font-family: 'Open Sans', sans-serif;
     font-size: 20px;
     font-style: italic;
     font-weight: bold;
     margin-bottom: 12px;
+    */
 }
 
 .title.instructions {
-    color: #2A7AB0;
-    margin-left: 20px;
+    color: var(--title-color);
+    margin-left: var(--main-padding);
 }
 
 .title.about {
@@ -592,6 +608,19 @@ main {
     margin-right: 0;
 }
 
+.column__text.top {
+    margin-bottom: 10px;
+}
+.column__text.middle {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.column__text.bottom {
+    margin-top: 0;
+    margin-bottom: auto;
+}
+
 .image-column {
     width: 75%;
     height: 100%;
@@ -610,6 +639,12 @@ main {
     margin-bottom: 50px;
 }
 
+.text-box.italic {
+    font: 18px/24px Roboto;
+    letter-spacing: 0.36px;
+    font-style: italic;
+}
+
 .intro__dots {
     text-align: center;
     padding-top: 15px;
@@ -617,14 +652,21 @@ main {
 }
 
 .group-start-message {
-    border: 1px dashed #2A7AB0;   
-    margin: 0px 20px;
+    display: flex;
+    flex-direction: column;
+    margin: 0px 27px;
     margin-bottom: 55px;
     margin-top: 0px;
     padding: 10px 20px;
     padding-bottom: 0;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px dashed #707070;
+    border-radius: 4px;
     text-align: center;
-    font: 16px/22px Open Sans;
+    font: 16px/21px Roboto;
+    letter-spacing: 0px;
+    color: #000000;
+    font-weight: 300;
 }
 
 .bold {
