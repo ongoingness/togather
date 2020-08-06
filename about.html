@@ -1,31 +1,77 @@
 ---
 layout: home
+title: about.header
 ---
-<div class="content-header about">
-    {% t about.header %}
-</div>
-<div style="position: relative;">
-    <div class="gradient-container about" style="position: absolute; height: 300px;"> </div>
-    <div id="t0" class="title about" style="margin-top: 40px;">{% t about.t0 %}</div>
-    <div id="t1" class="text-box" style="margin-bottom: 20px;">
-        {% t about.t1 %}
+<main class="static-page-content">
+    <h2 id="t0" class="page-start"> {% t about.t0 %} </h2>
+    <p id="t1">{% t about.t1 %}</p>
+    <p id="t2">{% t about.t2 %}</p>
+    <h2 id="t9">{% t about.t9 %}</h2>
+    <p id="t3">{% t about.t3 %}</p>
+    <p id="t4">{% t about.t4 %}</p>
+    <h2 id="t5">{% t about.t5 %}</h2>
+    <p id="t6">{% t about.t6 %}</p>
+    <div class="about__people-table">
+        <div class="about__people-card">
+            <div class="about__people-card__image">
+                <figure style="margin: 0;">
+                    <img src="{{ '/assets/images/luis_profile.png' | prepend: site.baseurl_root }}" width="83" height="83">
+                </figure>
+            </div>
+            <div>
+                <div class="about__people-card__name">Luís Carvalho</div>
+                <div class="about__people-card__position">{% t about.t11 %}</div>
+            </div>
+        </div>
+        <div class="about__people-card">
+            <div class="about__people-card__image">
+                <figure style="margin: 0;">
+                    <img src="{{ '/assets/images/linnea_profile.png' | prepend: site.baseurl_root }}" width="83" height="83">
+                </figure>
+            </div>
+            <div>
+                <div class="about__people-card__name">Linnea Groot</div>
+                <div class="about__people-card__position">{% t about.t11 %}</div>
+            </div>
+        </div>
+        <div class="about__people-card">
+            <div class="about__people-card__image">
+                <figure style="margin: 0;">
+                    <img src="{{ '/assets/images/kyle_profile.png' | prepend: site.baseurl_root }}" width="83" height="83">
+                </figure>
+            </div>
+            <div>
+                <div class="about__people-card__name">Kyle Montague</div>
+                <div class="about__people-card__position">{% t about.t12 %}</div>
+            </div>
+        </div>
+        <div class="about__people-card">
+            <div class="about__people-card__image">
+                <figure style="margin: 0;">
+                    <img src="{{ '/assets/images/jayne_profile.png' | prepend: site.baseurl_root }}" width="83" height="83">
+                </figure>
+            </div>
+            <div>
+                <div class="about__people-card__name">Jayne Wallace</div>
+                <div class="about__people-card__position">{% t about.t13 %}</div>
+            </div>
+        </div>
+        <div class="about__people-card">
+            <div class="about__people-card__image">
+                <figure style="margin: 0;">
+                    <img src="{{ '/assets/images/josh_profile.png' | prepend: site.baseurl_root }}" width="83" height="83">
+                </figure>
+            </div>
+            <div>
+                <div class="about__people-card__name">Josh South</div>
+                <div class="about__people-card__position">{% t about.t11 %}</div>
+            </div>
+        </div>
     </div>
-    <div id="t2" class="text-box page-middle">
-        {% t about.t2 %}
-    </div>
-    <div id="t9" class="title about">{% t about.t9 %}</div>
-    <div id="t3" class="text-box" style="margin-bottom: 20px;">
-        {% t about.t3 %}
-    </div>
-    <div id="t4" class="text-box page-middle">
-        {% t about.t4 %}
-    </div>
-    <div id="t5" class="title about">{% t about.t5 %}</div>
-    <div id="t6" class="text-box page-middle"> 
-        {% t about.t6 %}
-    </div>
-    <div id="t7" class="title about">{% t about.t7 %}</div>
-    <div id="t8" class="text-box page-middle">
-        {% t about.t8 %}
-    </div>
-</div>
+    <p id="t10">{% t about.t10 %}</p>
+    <h2 id="t7">{% t about.t7 %}</h2>
+    <p id="t8">{% t about.t8 %}</p>
+</main>
+
+
+
