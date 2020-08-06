@@ -734,6 +734,7 @@ p {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin-bottom: 20px;
 }
 
 .about__people-card {
@@ -753,16 +754,14 @@ p {
     text-align: left;
     font: 25px/39px Roboto Condensed;
     letter-spacing: 0.6px;
-    color: #445364;
+    color: var(--title-color);
     text-transform: uppercase;
-    opacity: 1;
 }
 
 .about__people-card__position {
     text-align: left;
     font: 18px/24px Roboto Condensed;
     letter-spacing: 0.9px;
-    color: #445364;
-    opacity: 1;
+    color: var(--title-color);
     font-style: italic;
 }
