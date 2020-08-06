@@ -13,16 +13,31 @@
     <!--meta name="twitter:card" content="summary_large_image"-->
     <meta property="og:site_name" content="Togather">
     <meta name="twitter:image:alt" content="Alt text for image">
-    {% include favicon.html %}
-    {% include fathom-tracking.html %}
+
     {% include fonts.html %}
     <link href="{{ '/assets/css/home.css' | prepend: site.baseurl }}" rel="stylesheet" type="text/css">
     <title>Togather</title>
 </head>
-<body>
-    {% include header.html title=page.title %}
-    {{ content }}
-    {% include new-footer.html %}
+<body style="margin: 0; max-width: 100%;">
+    {% include desktop-header.html %}
+    <div style="display: flex; background: transparent linear-gradient(180deg, #00797D1A 0%, #00797D00 100%) 0% 0% no-repeat padding-box;">
+        <div class="static-page-content" style="width: 700px;margin: 0 auto; background: white; border-style: solid; border-width: 1px; margin: 50px auto;border-color: lightgrey;">
+            <div class="gradient-container home" style="background: white;">
+                <div id="home-text" class="text-box" style="margin: auto;text-align: center;">
+                    {% t index.home-text %}
+                </div>
+            </div>
+            <button id="home-learn-button" class="button intro" style="margin-bottom: 30px;" onclick="location.href='{{ site.url }}{{ site.baseurl }}/explained'">
+                {% t index.home-learn-button %}
+            </button>
+            <button id="home-topic-button" class="button give" style="margin: 30px auto; margin-bottom: 60px;" onclick="location.href='{{ site.url }}{{ site.baseurl }}/topics'">
+                {% t index.home-topic-button %}
+            </button>
+            
+        </div>
+    </div>
+    {% include footer.html %}
+
 <script>
 
 // Opera 8.0+

@@ -4,9 +4,10 @@ global:
     portugues: Português
 
 index:
-    home-text: Gathering in stories when being together is not possible
+    header: Togather
+    home-text: Gather in stories when being together is not possible
     home-learn-button: Learn about Togather
-    home-topic-button: Get a topic
+    home-topic-button: Get a Topic!
 
 introduction:
     header: Introduction
@@ -55,10 +56,19 @@ about:
     t3: Simply put. We have designed Togather to keep your messages and media private. All of your chat messages and media files stay on your device and never get shared or stored by Togather (or anyone else).
     t4: The only data we capture is through the anonymous site analytics and through our optional feedback form at the end of assembling your diary. We are a team of researchers (details below), that would love to hear about your experiences with ToGather (as well as any suggestions for how to improve it). This is completely voluntary and in no way affects your access to or usage of the ToGather website. To support this feedback and get some insight into how people use ToGather we log which topics are shared – that’s it. We do not record any user data or information that can trace back to anyone. To give you an idea of what data we capture we have created an example of a log for one day, click here to see it.
     t5: The people behind Togather
-    t6: We are a team of design researchers from Newcastle University and Northumbria University based in Newcastle Upon-Tyne in the United Kingdom. We are part of the research project called Enabling Ongoingness (www.enablingongoingness.com) which explores how we can give new meaning to relationships in the context of end-of life and  bereavement. A large part of this is exploring how people curate the essence of a relationship in media, stories, objects and rituals in everyday life. During the COVID-19 pandemic we were faced with a new global shared experience of fear of loss and grief. It is unlike anything that many of us have experienced before, and has undoubtedly  changed our lives in many ways. Through ToGather we hope that we can help you capture your community bonds in a time where this is not as easy as it was before. If you have any experiences with ToGather that you would like to share with us do not hesitate to reach out. You can either send us a message over e-mail (kyle.montague@northumbria.ac.uk) or fill out our feedback form.
+    t6: We are a team of design researchers from Newcastle University and Northumbria University based in Newcastle Upon-Tyne in the United Kingdom. 
     t7: Togather
     t8: ToGather is an online service that aims to bring families and friends together through sharing stories for a loved one. It is built using existing services WhatsApp and GitHub, to make it widely available and free of charge for everyone. We will provided you with daily topics and activities for your family and friends to message about and turn your group conversations into a book or diary to gift, keep and revisit.
     t9: Your Privacy
+    t10: We are part of the research project called Enabling Ongoingness (www.enablingongoingness.com) which explores how we can give new meaning to relationships in the context of end-of life and  bereavement. A large part of this is exploring how people curate the essence of a relationship in media, stories, objects and rituals in everyday life. During the COVID-19 pandemic we were faced with a new global shared experience of fear of loss and grief. It is unlike anything that many of us have experienced before, and has undoubtedly  changed our lives in many ways. Through ToGather we hope that we can help you capture your community bonds in a time where this is not as easy as it was before. If you have any experiences with ToGather that you would like to share with us do not hesitate to reach out. You can either send us a message over e-mail (kyle.montague@northumbria.ac.uk) or fill out our feedback form.
+    t11: Researcher
+    t12: Associate Professor
+    t13: Professor
+    t14: Luis' Profile Photograph
+    t15: Linnea's Profile Photograph
+    t16: Kyle's Profile Photograph
+    t17: Jayne's Profile Photograph
+    t18: Josh's Profile Photograph
 
 contact:
     header: Contact
