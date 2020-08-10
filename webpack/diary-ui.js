@@ -16,8 +16,160 @@ const DiaryUI = (eventHandler) => {
         eventListeners.length = 0;
     }
 
-    const renderSiteHeader = () => {
+    const renderSiteHeader = (title) => {
 
+        // Will hold previously focused element
+        let focusedElementBeforeOverlay;
+
+        const openNav = () => {
+            document.getElementById("myNav").style.visibility = 'visible'
+            document.getElementById("myNav").style.width = "100%";
+            
+            // Save current focus
+            focusedElementBeforeOverlay = document.activeElement;
+
+            const trapTabKey = (e) => {
+                // Check for TAB key press
+                if (e.keyCode === 9) {
+                    // SHIFT + TAB
+                    if (e.shiftKey) {
+                        if (document.activeElement === firstTabStop) {
+                            e.preventDefault();
+                            lastTabStop.focus();
+                        }
+                    // TAB
+                    } else {
+                        if (document.activeElement === lastTabStop) {
+                            e.preventDefault();
+                            firstTabStop.focus();
+                        }
+                    }
+                }
+                // ESCAPE
+                if (e.keyCode === 27) {
+                    console.log('clise');
+                    closeNav();
+                }
+            }
+            // Listen for and trap the keyboard
+            nav.addEventListener('keydown', trapTabKey);
+
+            // Listen for indicators to close the modal
+           // modalOverlay.addEventListener('click', closeModal);
+
+            // Find all focusable children
+            var focusableElementsString = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
+            var focusableElements = nav.querySelectorAll(focusableElementsString);
+            // Convert NodeList to Array
+            focusableElements = Array.prototype.slice.call(focusableElements);
+
+            var firstTabStop = focusableElements[0];
+            var lastTabStop = focusableElements[focusableElements.length - 1];
+
+            // Focus first child
+            firstTabStop.focus();
+        }
+
+        const closeNav = () => {
+            focusedElementBeforeOverlay.focus();
+            document.getElementById("myNav").style.width = "0%";
+            document.getElementById("myNav").style.visibility = 'hidden';
+        }
+
+        const header = document.createElement('header');
+        header.id = 'header';
+        body.append(header);
+
+        const headerTop = document.createElement('div');
+        headerTop.classList.add('header__top');
+        header.append(headerTop);
+
+        const spanTitle = document.createElement('span');
+        spanTitle.innerText = title;
+        headerTop.append(spanTitle);
+
+        const spanHeaderRight = document.createElement('span');
+        spanHeaderRight.classList.add('header__right');
+        headerTop.append(spanHeaderRight);
+
+        const hamburguer = document.createElement('button');
+        hamburguer.classList.add('header__hamburguer');
+        hamburguer.tabIndex = 0;
+        hamburguer.setAttribute('aria-label', 'Open Navigation Overlay');
+        hamburguer.addEventListener('click', openNav);
+        spanHeaderRight.appendChild(hamburguer);
+        
+        for(let i = 0; i < 3; i++) {
+            const hamLine = document.createElement('div');
+            hamLine.classList.add('hamburguer-line');
+            hamburguer.appendChild(hamLine);
+        }
+
+        const headerButton = document.createElement('div');
+        headerButton.classList.add('header__bottom');
+        header.append(headerButton);
+
+        const nav = document.createElement('div');
+        nav.id = 'myNav';
+        nav.classList.add('overlay');
+        header.appendChild(nav);
+
+        const closeNavButton = document.createElement('button');
+        closeNavButton.classList.add('close-button');
+        closeNavButton.setAttribute('aria-label', 'Close Navigation Overlay');
+        closeNavButton.addEventListener('click', closeNav);
+        closeNavButton.innerHTML = '&times;';
+        nav.append(closeNavButton);
+
+        const overlayContent = document.createElement('div');
+        overlayContent.classList.add('overlay-content');
+        nav.append(overlayContent);
+
+        const aHome = document.createElement('a');
+        aHome.id = 'home-a';
+        aHome.href = '{{ site.url }}{{ site.baseurl }}/';
+        aHome.innerText = '{% t nav-overlay.home-a %}';
+        overlayContent.appendChild(aHome);
+
+        const aTopic = document.createElement('a');
+        aTopic.id = 'topic-a';
+        aTopic.href = '{{ site.url }}{{ site.baseurl }}/topics';
+        aTopic.innerText = '{% t nav-overlay.topic-a %}';
+        overlayContent.appendChild(aTopic);
+
+        const aExpl = document.createElement('a');
+        aExpl.id = 'explained-a';
+        aExpl.href = '{{ site.url }}{{ site.baseurl }}/explained';
+        aExpl.innerText = '{% t nav-overlay.explained-a %}';
+        overlayContent.appendChild(aExpl)
+
+        const aInst = document.createElement('a');
+        aInst.id = 'instructions-a';
+        aInst.href = '{{ site.url }}{{ site.baseurl }}/instructions'
+        aInst.innerText = '{% t nav-overlay.instructions-a %}';
+        overlayContent.appendChild(aInst);
+
+        const aDiary = document.createElement('a');
+        aDiary.id = 'diary-a'
+        aDiary.href = '{{ site.url }}{{ site.baseurl }}/diary' 
+        aDiary.innerText = '{% t nav-overlay.diary-a %}';
+        aDiary.style.textDecoration = 'underline';
+        overlayContent.appendChild(aDiary);
+
+        const aAbout = document.createElement('a');
+        aAbout.id = 'about-a';
+        aAbout.href = '{{ site.url }}{{ site.baseurl }}/about';
+        aAbout.innerText = '{% t nav-overlay.about-a %}';
+        overlayContent.appendChild(aAbout);
+
+        const aContact = document.createElement('a');
+        aAbout.id = 'contact-a';
+        aAbout.href = '{{ site.url }}{{ site.baseurl }}/contact';
+        aAbout.innerText = '{% t nav-overlay.contact-a %}';
+        overlayContent.appendChild(aContact);
+        
+
+        /*
         const header = document.createElement('div');
         header.classList.add('header');
         document.body.appendChild(header);
@@ -106,7 +258,7 @@ const DiaryUI = (eventHandler) => {
         aAbout.href = '{{ site.url }}{{ site.baseurl }}/contact';
         aAbout.innerText = '{% t nav-overlay.contact-a %}';
         overlayContent.appendChild(aContact);
-        
+        */
     }
 
     const renderUploadFiles = () => {
