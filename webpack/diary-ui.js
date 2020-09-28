@@ -261,31 +261,205 @@ const DiaryUI = (eventHandler) => {
         */
     }
 
+    const renderSiteFooter = () => {
+
+        const footer = document.createElement('footer');
+        footer.style = "height: 378px; width: 100%; color: white; margin-top: 90px;"
+        document.body.append(footer);
+
+        const div1 = document.createElement('div');
+        div1.style = "position: relative; width: 100%; height: 30px;"
+        footer.append(div1);
+
+        const contactButton = document.createElement('button');
+        contactButton.style = "background-color: #d9b43c; z-index: 1;position: absolute;border: none;top: 0;right: 25px;font-size: 16px;font-weight: bold;color: #2b2b2b;border-radius: 15px;width: 100px;height: 30px;";
+        contactButton.innerText = "Contact Us";
+        div1.append(contactButton);
+
+        const div2 = document.createElement('div');
+        div2.style = "background-color: #d9b43c;bottom: 0px;height: 10px;position: absolute;width: 100%;z-index: 0;"
+        div1.append(div2);
+        
+        const div3 = document.createElement('div');
+        div3.style = "background: #596a84; height: 348px; width: 100%;";
+        footer.append(div3);
+
+        const div4 = document.createElement('div');
+        div4.style = "text-align: center;padding: 20px;"
+        div3.append(div4);
+
+        const imgLogo = document.createElement('img');
+        imgLogo.src = "{{ '/assets/images/TOGATHER_LOGO_reverse.png' | prepend: site.baseurl_root }}";
+        imgLogo.width = "80";
+        imgLogo.style = "opacity: 0.5"
+        imgLogo.alt="Togather Logo"
+        div4.append(imgLogo);
+
+        const togatherNameLogo = document.createElement('h3');
+        togatherNameLogo.style = "font: 32px/24px 'Roboto Condensed';letter-spacing: 0.96px;margin: 0;color: white;text-transform: uppercase;margin-top: 10px;";
+        togatherNameLogo.innerText = "Togather";
+        div4.append(togatherNameLogo);
+
+        const div5 = document.createElement('div');
+        div5.classList.add("row");
+        div5.style = "height: 120px; margin-bottom: 35px;";
+        div3.append(div5);
+
+        const div6 = document.createElement('div');
+        div6.classList.add("column");
+        div5.append(div6);
+
+        const div7 = document.createElement('div');
+        div7.style = "display: flex; flex-direction: column; width: 100px;";
+        div6.append(div7);
+
+        const a1 = document.createElement('a');
+        a1.classList.add("footer__text__small");
+        a1.href = "{{ site.url }}{{ site.baseurl }}/";
+        a1.innerText = "{% t nav-overlay.home-a %}";
+        div7.append(a1);
+
+        const a2 = document.createElement('a');
+        a2.classList.add("footer__text__small");
+        a2.href = "{{ site.url }}{{ site.baseurl }}/topics";
+        a2.innerText = "{% t nav-overlay.topic-a %}";
+        div7.append(a2);
+
+        const a3 = document.createElement('a');
+        a3.classList.add("footer__text__small");
+        a3.href = "{{ site.url }}{{ site.baseurl }}/explained";
+        a3.innerText = "{% t nav-overlay.explained-a %}";
+        div7.append(a3);
+
+        const a4 = document.createElement('a');
+        a4.classList.add("footer__text__small");
+        a4.href = "{{ site.url }}{{ site.baseurl }}/instructions";
+        a4.innerText = "{% t nav-overlay.instructions-a %}";
+        div7.append(a4);
+     
+        const a5 = document.createElement('a');
+        a5.classList.add("footer__text__small");
+        a5.href = "{{ site.url }}{{ site.baseurl }}/diary";
+        a5.innerText = "{% t nav-overlay.diary-a %}";
+        div7.append(a5);
+
+        const a6 = document.createElement('a');
+        a6.classList.add("footer__text__small");
+        a6.href = "{{ site.url }}{{ site.baseurl }}/about";
+        a6.innerText = "{% t nav-overlay.about-a %}";
+        div7.append(a6);
+                   
+        const a7 = document.createElement('a');
+        a7.classList.add("footer__text__small");
+        a7.href = "{{ site.url }}{{ site.baseurl }}/contact";
+        a7.innerText = "{% t nav-overlay.contact-a %}";
+        div7.append(a7);
+                   
+        const div8 = document.createElement('div');
+        div8.classList.add("column");
+        div8.style = "max-width: 200px;"
+        div5.append(div8);
+
+        const languageLabel = document.createElement('label');
+        languageLabel.id = "f1";
+        languageLabel.for = "languages" 
+        languageLabel.classList.add("footer__text__small");
+        languageLabel.style = "padding: 0;"
+        languageLabel.innerText = "{% t footer.f1 %}";
+        div8.append(languageLabel);
+
+        const languageSelect = document.createElement('select');
+        languageSelect.name = "languages";
+        languageSelect.id = "languages";
+        languageSelect.style = "height: 22px; margin-right:20px; line-height:22px;";
+        languageSelect.addEventListener('change', () => window.location.href = languageSelect.options[languageSelect.selectedIndex].value);
+
+        div8.append(languageSelect);
+
+        let language = window.location.href.trim().split('/').filter(elem => elem != '')[2]
+        language = language === 'diary' ? 'en' : language;
+
+        const option1 = document.createElement('option');
+        option1.value = "/diary";
+        option1.selected = language === 'en'
+        option1.innerText = "{% t global.english %}";
+        languageSelect.append(option1);
+
+        const option2 = document.createElement('option');
+        option2.value = "/pt/diary";
+        option2.selected = language === 'pt';
+        option2.innerText = "{% t global.portugues %}";
+        languageSelect.append(option2);
+
+        const div9 = document.createElement('div');
+        div9.style = "text-align: center;";
+        div3.append(div9);
+
+        const div10 = document.createElement('div');
+        div10.style = "display: flex; flex-direction: row; flex-wrap: wrap; padding: 0px 15px;";
+        div9.append(div10);
+
+        const div11 = document.createElement('div');
+        div11.style = "margin: auto; margin-right: 20px;";
+        div10.append(div11);
+
+        const aProjectLogo = document.createElement('a');
+        aProjectLogo.href = "https://enablingongoingness.com/";
+        div11.append(aProjectLogo);
+
+        const imgProjectLogo = document.createElement('img');
+        imgProjectLogo.src = "{{ '/assets/images/Ongoingness-logo.svg' | prepend: site.baseurl_root }}";
+        imgProjectLogo.height = "30";
+        imgProjectLogo.alt = "Enabling Ongoingness Project Logo";
+        aProjectLogo.append(imgProjectLogo);
+
+        const div12 = document.createElement('div');
+        div12.style = "margin: auto 0;";
+        div10.append(div12);
+
+        const aTeamLogo = document.createElement('a');
+        aTeamLogo.href = "https://www.kylemontague.co.uk/#team";
+        div12.append(aTeamLogo);
+
+        const imgTeamLogo = document.createElement('img');
+        imgTeamLogo.src = "{{ '/assets/images/iDi_logo_extended_white.svg' | prepend: site.baseurl_root }}";
+        imgTeamLogo.height = "30";
+        imgTeamLogo.alt = "Inclusive Design & Innovation (IDI) research group Logo";
+        aTeamLogo.append(imgTeamLogo);
+
+        const div13 = document.createElement('div');
+        div13.style = "margin: auto; margin-left: 20px;";
+        div10.append(div13);
+
+        const aNorthumbriaLogo = document.createElement('a');
+        aNorthumbriaLogo.href = "https://www.northumbria.ac.uk/";
+        div13.append(aNorthumbriaLogo);
+
+        const imgNorthumbriaLogo = document.createElement('img');
+        imgNorthumbriaLogo.src = "{{ '/assets/images/unn_logo_white.png' | prepend: site.baseurl_root }}";
+        imgNorthumbriaLogo.height = "30";
+        imgNorthumbriaLogo.alt = "Northumbria University Logo";
+        aNorthumbriaLogo.append(imgNorthumbriaLogo);
+
+    }
+
     const renderUploadFiles = () => {
     
-        renderSiteHeader();
+        renderSiteHeader("{% t diary.dh1 %}");
 
-        renderDiaryHeader(document.body);
-
-        const content = document.createElement('div');
-        content.classList.add('content');
+        const content = document.createElement('main');
+        //content.classList.add('content');
         content.style.height = 'initial';
         document.body.appendChild(content);
 
-        const gradient = document.createElement('div');
-        gradient.classList.add('gradient-container', 'diary');
-        content.appendChild(gradient);
-
         const textBox1 = document.createElement('div');
-        textBox1.classList.add('text-box');
         textBox1.innerText = '{% t diary.uf1 %}';
-        textBox1.style.marginTop = '28px';
-        gradient.appendChild(textBox1);
+        content.appendChild(textBox1);
         
         const dualTextBox = document.createElement('div');
         dualTextBox.classList.add('dual-text-box', 'text-box');
-        dualTextBox.style = 'font-style: italic; margin-top: 0;';
-        gradient.appendChild(dualTextBox);
+        dualTextBox.style = 'font-style: italic; margin-right: 0; margin-left: 0px; font-weight: 400;';
+        content.appendChild(dualTextBox);
 
         const dualTextBoxLeft = document.createElement('div');
         dualTextBoxLeft.innerText = '{% t diary.uf2 %}';
@@ -297,16 +471,19 @@ const DiaryUI = (eventHandler) => {
         dualTextBox.appendChild(dualTextBoxRight);
 
         const textBox2 = document.createElement('div');
-        textBox2.classList.add('text-box');
         textBox2.style.marginTop = '0';
         textBox2.innerText = '{% t diary.uf4 %}';
-        gradient.appendChild(textBox2);
+        content.appendChild(textBox2);
+
+        const selectContainer = document.createElement('div');
+        selectContainer.style = "height: 47px; display: flex; margin-top: 38px;"
+        content.append(selectContainer);
 
         const selectFilesButton = document.createElement('label');
-        selectFilesButton.classList.add('button', 'round', 'diary', 'small-font');
-        selectFilesButton.style.marginTop = '38px'
+        selectFilesButton.classList.add('button', "secondary", 'small-font');
+        selectFilesButton.style = "margin: auto; line-height: 47px;";
         selectFilesButton.innerHTML = '{% t diary.uf5 %}';
-        gradient.appendChild(selectFilesButton);
+        selectContainer.appendChild(selectFilesButton);
 
         const uploadFilesInput = document.createElement('input');
         uploadFilesInput.id = 'uploadFilesInput';
@@ -327,18 +504,23 @@ const DiaryUI = (eventHandler) => {
         const filesSelectedContainer = document.createElement('div');
         filesSelectedContainer.id = 'filesSelected';
         filesSelectedContainer.classList.add('files-selected-container', 'text-box');
-        gradient.appendChild(filesSelectedContainer);
+        content.appendChild(filesSelectedContainer);
 
         const noFilesSelected = document.createElement('div');
         noFilesSelected.id = 'noFilesSelected';
+        noFilesSelected.style = 'font: italic normal normal 18px/24px Roboto; letter-spacing: 0.36px; color: black; opacity: 1;';
         noFilesSelected.innerText = '{% t diary.uf6 %}';
         filesSelectedContainer.appendChild(noFilesSelected);
 
+        const buttonContainer = document.createElement('div');
+        buttonContainer.style = "display: flex; flex-direction: column;";
+        content.append(buttonContainer);
+
         const startButton = document.createElement('button');
         startButton.id = 'startAssembling';
-        startButton.classList.add('button', 'round', 'diary', 'small-font');
-        startButton.style.marginTop = '20px';
-        startButton.style.marginBottom = '50px';
+        startButton.classList.add("third", 'small-font');
+        startButton.style.margin = 'auto';
+        startButton.style.marginBottom = '20px';
         startButton.innerHTML = '{% t diary.uf7 %}';
         startButton.disabled = true;
 
@@ -350,28 +532,31 @@ const DiaryUI = (eventHandler) => {
 
         //startButton.addEventListener('click', e => eventHandler(e, {type: 'start-assembling'}));
         addEventListener(startButton, 'click', startButtonClickListener);
-        gradient.appendChild(startButton);
+        buttonContainer.appendChild(startButton);
 
-        const instructionsButton = document.createElement('button');
-        instructionsButton.classList.add('button', 'started', 'small-font');
-        instructionsButton.style.marginTop = '4.5vh';
+        const instructionsButton = document.createElement('button');        
+        instructionsButton.classList.add('outline', 'small-font');
+        instructionsButton.style.margin = 'auto';
+        instructionsButton.style.marginTop = '20px';
         instructionsButton.innerHTML = '{% t diary.uf8 %}';
         const instructionsButtonClickListener = (e) => location.href='{{ site.url }}{{ site.baseurl }}/instructions';
         //instructionsButton.addEventListener('click', () => location.href='{{ site.url }}{{ site.baseurl }}/instructions/');
         addEventListener(instructionsButton, 'click', instructionsButtonClickListener);
-        gradient.appendChild(instructionsButton);
+        buttonContainer.appendChild(instructionsButton);
 
         const aboutButton = document.createElement('button');
-        aboutButton.classList.add('button', 'pick', 'small-font');
-        aboutButton.style.marginTop = '3vh';
-        aboutButton.style.marginBottom = '6vh';
+        aboutButton.classList.add('outline', 'small-font');
+        aboutButton.style.margin = 'auto';
+        aboutButton.style.marginTop = '20px';
         aboutButton.innerHTML = '{% t diary.uf9 %}';
         const aboutButtonClickListener = (e) =>  location.href='{{ site.url }}{{ site.baseurl }}/about';
         //aboutButton.addEventListener('click', () => location.href='{{ site.url }}{{ site.baseurl }}/about/');
         addEventListener(aboutButton, 'click', aboutButtonClickListener);
-        gradient.appendChild(aboutButton);
+        buttonContainer.appendChild(aboutButton);
 
-        renderSiteFooter(document.body);
+        //renderSiteFooter(document.body);
+
+        renderSiteFooter();
        
     }
 
@@ -493,6 +678,11 @@ const DiaryUI = (eventHandler) => {
         fileElem.innerText = file.name;
         fileElemContainer.appendChild(fileElem);
 
+        const fileElemDeleteButtonContainer = document.createElement('div');
+        fileElemDeleteButtonContainer.style.height = '100%';
+        fileElemDeleteButtonContainer.style.margin = 'auto';
+        fileElemContainer.append(fileElemDeleteButtonContainer);
+
         const fileElemDeleteButton = document.createElement('button');
         fileElemDeleteButton.classList.add('file-element__delete-button');
         fileElemDeleteButton.addEventListener('click', (e) => {
@@ -505,7 +695,7 @@ const DiaryUI = (eventHandler) => {
 
             eventHandler(e, {type: 'delete-file', filename: file.name});
         });
-        fileElemContainer.appendChild(fileElemDeleteButton);
+        fileElemDeleteButtonContainer.appendChild(fileElemDeleteButton);
 
         const deleteButtonImage = document.createElement('img');
         deleteButtonImage.src = "{{ '/assets/images/delete.svg' | prepend: site.baseurl }}";
@@ -2263,7 +2453,7 @@ const DiaryUI = (eventHandler) => {
         centerContainer.appendChild(noButton);
 
     }
-
+/*
     const  renderSiteFooter = (parent) => {
         const footer = document.createElement('div');
         footer.classList.add('footer');
@@ -2451,6 +2641,7 @@ const DiaryUI = (eventHandler) => {
         newcastleLink.appendChild(img5);
 
     }
+*/
 
     return {
 

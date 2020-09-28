@@ -6,6 +6,7 @@
     --primary-color: #7663A8;
     --primary-shadow-color: #7663A8CC;
     --secondary-color: #87428A;
+    --third-color: #5A6B84;
     --title-color: #445364;
     --main-padding: 27px;
 }
@@ -57,7 +58,7 @@ h3 {
  
 }
 
-button {
+button, .button {
     text-align: center;
     font: italic 20px/26px Roboto;
     font-weight: 700; 
@@ -77,11 +78,11 @@ button:focus, a:focus {
     outline-offset: 2px;
 }
 
-button.primary {
+button.primary, .button.primary {
     background-color: var(--primary-color);
 }
 
-button.secondary {
+button.secondary, .button.secondary {
     background-color: var(--secondary-color);
 }
 
@@ -381,7 +382,7 @@ p {
     letter-spacing: 0.64px;
     font-weight: 300;
 }
-
+/*
 .button {
     display: flex;
     text-align: center;
@@ -392,7 +393,7 @@ p {
     font-style: italic;
     font-size: 20px;
     font-weight: lighter;
-}
+}*/
 
 .button.round {
     border-radius: 73px;
@@ -448,15 +449,15 @@ p {
     margin-top: 20px;
 }
 
-.button:disabled {
-    background-color: #C7C7C7;
+button:disabled, .button:disabled  {
+    background-color: #C7C7C7 !important;
 }
 
 .button:hover {
     cursor: pointer;
 }
 
-.button.small-font {
+button.small-font, .button.small-font {
     font-size: 16px;
 }
   
