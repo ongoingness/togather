@@ -707,6 +707,108 @@ const DiaryUI = (eventHandler) => {
 
     const renderDiaryHeader = (parent, step) => {
 
+        const header = document.createElement('header');
+        header.id = 'header';
+        parent.append(header);
+
+        const headerTop = document.createElement('div');
+        headerTop.classList.add('header__top');
+        header.append(headerTop);
+
+        const spanTitle = document.createElement('span');
+        spanTitle.innerText = step;
+        headerTop.append(spanTitle);
+
+        const spanHeaderRight = document.createElement('span');
+        spanHeaderRight.classList.add('header__right');
+        spanHeaderRight.style.display = "flex";
+        headerTop.append(spanHeaderRight);
+
+        const headerBottom = document.createElement('div');
+        headerBottom.classList.add('header__bottom');
+        header.append(headerBottom);
+
+        const openNav = () => {
+            console.log('heheheha');
+            document.getElementById('closeNav').style.width = '100%';
+        }
+
+        const closeNav = () => {
+            document.getElementById('closeNav').style.width = '0%';
+        }
+
+        const nav = document.createElement('div');
+        nav.id = 'closeNav';
+        nav.classList.add('overlay', 'privacy');
+        nav.style.visibility = "visible";
+        document.body.appendChild(nav);
+
+        window.addEventListener('resize', (e) => overlayContent.style.minWidth = `${document.body.offsetWidth}px`);
+
+        //const closeNavElemContainer = document.createElement('div');
+        //nav.append(closeNavElemContainer);
+
+        const closeNavElem = document.createElement('a');
+        closeNavElem.href = 'javascript:void(0)';
+        closeNavElem.classList.add('closebtn', 'close-diary');
+        closeNavElem.addEventListener('click', closeNav);
+        closeNavElem.innerHTML = '&times;';
+        nav.appendChild(closeNavElem);
+
+        const overlayContent = document.createElement('div');
+        overlayContent.id = 'exitContent';
+        overlayContent.classList.add('overlay-content', 'privacy');
+        overlayContent.style.minWidth = `${document.body.offsetWidth}px`;
+        nav.appendChild(overlayContent);
+
+        const textContent = document.createElement('div');
+        textContent.classList.add('privacy__text');
+        textContent.innerHTML = '{% t diary.dh2 %}';
+        overlayContent.appendChild(textContent);
+
+        const buttonContainer = document.createElement('div');
+        buttonContainer.style.display = 'flex';
+        buttonContainer.style.flexDirection = 'column';
+        buttonContainer.style.margin = '0 27px';
+        buttonContainer.style.marginTop = '57px';
+        overlayContent.appendChild(buttonContainer);
+
+        const stopButton = document.createElement('button');
+        stopButton.classList.add('secondary');
+        stopButton.style.margin = 'auto';
+        stopButton.innerHTML = '{% t diary.dh3 %}';
+        stopButton.addEventListener('click', e => eventHandler(e, {type: 'stop-assembling'}));
+        buttonContainer.appendChild(stopButton);
+
+        const continueButton = document.createElement('button');
+        continueButton.classList.add('primary');
+        continueButton.style.margin = 'auto';
+        continueButton.style.marginTop = '20px';
+        continueButton.innerHTML = '{% t diary.dh4 %}';
+        continueButton.addEventListener('click', closeNav);
+        buttonContainer.appendChild(continueButton);
+
+        /*
+        const closeDiary = document.createElement('a');
+        closeDiary.classList.add('diary-header__close-button');
+        closeDiary.addEventListener('click', openNav);
+        closeDiary.innerHTML = '&times;';
+        leftColumn.appendChild(closeDiary);
+        */
+
+        const closeDiary  = document.createElement('button');
+        closeDiary.style.background = 'none';
+        closeDiary.style.padding = '6px';
+        closeDiary.style.font = '50px/28px Roboto';
+        closeDiary.tabIndex = 0;
+        closeDiary.innerHTML = '&times;';
+        closeDiary.setAttribute('aria-label', 'Open Navigation Overlay');
+        closeDiary.addEventListener('click', openNav);
+        spanHeaderRight.appendChild(closeDiary);
+        
+
+        /*
+
         const assembleHeader = document.createElement('div');
         assembleHeader.classList.add('content-header', 'diary');
         parent.appendChild(assembleHeader);
@@ -797,40 +899,28 @@ const DiaryUI = (eventHandler) => {
             rightColumn.appendChild(stepCounter);
 
         }
+        */
   
     }
 
     const renderDiarySteps = () => {
 
-        const container = document.createElement('div');
-        container.style.width = '100%';
-        container.style.height = '100%';
-        container.style.position = 'relative';
-        container.style.overflowX = 'hidden';
-        document.body.appendChild(container); 
-
-        renderDiaryHeader(container);
+        renderDiaryHeader(document.body, "Assemble Diary");
         
-        const content = document.createElement('div');
-        content.classList.add('content');
-        content.style.height = '94%';
-        container.appendChild(content);
-
-        const gradient = document.createElement('div');
-        gradient.classList.add('gradient-container', 'diary');
-        content.appendChild(gradient);
+        const content = document.createElement('main');
+        content.style.display = 'flex';
+        content.style.flexDirection = 'column';
+        document.body.appendChild(content);
 
         const textBox1 = document.createElement('div');
-        textBox1.classList.add('text-box');
         textBox1.innerHTML = '{% t diary.ds1 %}';
-        textBox1.style.marginTop = '28px';
+        textBox1.style.margin = 'auto';
         textBox1.style.marginBottom ='28px';
-        textBox1.style.textAlign = 'center';
-        gradient.appendChild(textBox1);
+        content.appendChild(textBox1);
 
         const stepsContainer = document.createElement('div');
         stepsContainer.classList.add('diary-steps__steps-container');
-        gradient.appendChild(stepsContainer);
+        content.appendChild(stepsContainer);
 
         const step1 = document.createElement('div');
         step1.classList.add('title', 'diary');
@@ -857,26 +947,13 @@ const DiaryUI = (eventHandler) => {
         step5.innerText = '{% t diary.ds6 %}';
         stepsContainer.appendChild(step5);
 
-        const line = document.createElement('div');
-        line.classList.add('diary-steps__vertical-line');
-        gradient.appendChild(line);
-
-        const circle = document.createElement('div');
-        circle.classList.add('diary-steps__circle');
-        gradient.appendChild(circle);
-
-        const stepCounterHelper = document.createElement('div');
-        stepCounterHelper.classList.add('diary-steps__step-counter-helper');
-        stepCounterHelper.innerText = '{% t diary.ds7 %}';
-        gradient.appendChild(stepCounterHelper);
-
         const goButton = document.createElement('button');
-        goButton.classList.add('button', 'round', 'diary');
-        goButton.style.marginTop = '130px';
-        goButton.style.marginBottom = '30px';
+        goButton.classList.add('secondary');
+        goButton.style.margin = 'auto';
+        goButton.style.marginTop = '40px';
         goButton.innerHTML = '{% t diary.ds8 %}';
         goButton.addEventListener('click', e => eventHandler(e, {type: 'go-to-step-1'}));
-        gradient.appendChild(goButton);
+        content.appendChild(goButton);
 
     }
 

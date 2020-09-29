@@ -119,7 +119,7 @@ diary:
 
     ds1: 'Assembling the diary takes 5 steps.'
     ds2: '#1 Who is the diary for?'
-    ds3: '#2 Check contibuter names'
+    ds3: '#2 Check contributer names'
     ds4: '#3 Complete topic list'
     ds5: '#4 Collect responses per day'
     ds6: '#5 Review and download diary'

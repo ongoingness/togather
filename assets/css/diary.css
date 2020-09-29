@@ -337,25 +337,42 @@ body, textarea, button, input, select, pre {
 
 
 .overlay.privacy {
-    background: white;
+    background: #F6F6F6;
     z-index: 99;
 }
 
 .closebtn.close-diary{
+    /*
     color: #E26A6A;
     margin: 0;
     padding: 0;
     font-size: 50px;
     left: 5px;
+    */
+    display: block;
+    position: relative;
+    float: right;
+    padding: 6px;
+    font: 50px / 28px Roboto;
+    right: 16px;
+    top: 15px;
+    color: black;
 }
 
 .privacy__text {
+    /*
     font-family: 'Open Sans', sans-serif;
     font-size: 20px;
     font-style: italic;
     margin-left: 25px;
     margin-right: 25px;
     text-align: left;
+    */
+    text-align: left;
+    font: italic normal normal 20px/26px Roboto;
+    letter-spacing: 0.4px;
+    color: #000000;
+    margin: 0 27px;
 }
 
 .bold {
@@ -363,7 +380,7 @@ body, textarea, button, input, select, pre {
 }
 
 .overlay-content.privacy {
-    top: 65px;
+    top: 90px;
     max-width: 600px;
     margin: 0 auto;
 }
@@ -377,9 +394,12 @@ body, textarea, button, input, select, pre {
 }
 
 .title.diary{
-    color: #E26A6A;
-    margin-bottom: 10px;
+    /*color: #E26A6A; */
+    font: italic normal bold 20px/27px Open Sans;
+    margin-bottom: 20px;
 }
+
+
 
 .diary-steps__vertical-line {
     position: absolute;
