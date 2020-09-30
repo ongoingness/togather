@@ -705,10 +705,12 @@ const DiaryUI = (eventHandler) => {
 
     }
 
-    const renderDiaryHeader = (parent, step) => {
+    const renderDiaryHeader = (parent, step, noMargin = false) => {
 
         const header = document.createElement('header');
         header.id = 'header';
+        if(noMargin)
+            header.style.marginBottom = '0px';
         parent.append(header);
 
         const headerTop = document.createElement('div');
@@ -729,7 +731,6 @@ const DiaryUI = (eventHandler) => {
         header.append(headerBottom);
 
         const openNav = () => {
-            console.log('heheheha');
             document.getElementById('closeNav').style.width = '100%';
         }
 
@@ -996,6 +997,7 @@ const DiaryUI = (eventHandler) => {
         parent.appendChild(container);
 
         const column1 = document.createElement('div');
+        column1.style.display = 'flex';
         column1.style.width ='40%'
         column1.style.margin = 'auto';
         container.appendChild(column1);
@@ -1005,7 +1007,7 @@ const DiaryUI = (eventHandler) => {
         if(step > 1) {
             previousButton = document.createElement('button');
             previousButton.id = 'leftButton';
-            previousButton.classList.add('button', 'round', 'diary', 'step-controller__step-button');
+            previousButton.classList.add('third', 'step-controller__step-button');
             previousButton.innerText = `< {% t diary.sc1 %} ${step - 1}`;
             previousButtonListener = (e) => {
                 renderButtonLoader(previousButton);
@@ -1016,24 +1018,26 @@ const DiaryUI = (eventHandler) => {
         }
 
         const column2 = document.createElement('div');
+        column2.style.display = 'flex';
         column2.style.width ='20%'
         column2.style.margin = 'auto';
         container.appendChild(column2);
 
         const helpButton = document.createElement('button');
-        helpButton.classList.add('button', 'round', 'diary', 'step-controller__help-button');
+        helpButton.classList.add('outline', 'step-controller__help-button');
         helpButton.innerText = '?';
         helpButton.addEventListener('click', openNav);
         column2.appendChild(helpButton);
 
         const column3 = document.createElement('div');
+        column3.style.display = 'flex';
         column3.style.width ='40%'
         column3.style.margin = 'auto';
         container.appendChild(column3);
 
         const nextButton = document.createElement('button');
         nextButton.id = 'rightButton';
-        nextButton.classList.add('button', 'round', 'diary', 'step-controller__step-button');
+        nextButton.classList.add('third', 'step-controller__step-button');
         nextButton.innerText = `{% t diary.sc1 %} ${step + 1} >`;
 
         const nextButtonListener = (e) => {
@@ -1048,7 +1052,7 @@ const DiaryUI = (eventHandler) => {
 
     const renderWhoTheDiaryIsFor = (who) => {
 
-        renderDiaryHeader(document.body, 1);
+        renderDiaryHeader(document.body, "#1/5", true);
 
         const content = document.createElement('div');
         content.classList.add('content');
