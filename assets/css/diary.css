@@ -1,9 +1,10 @@
 ---
 ---
-
+/*
 body, textarea, button, input, select, pre {
-    font-family: 'Open Sans', sans-serif;
+   font-family: 'Open Sans', sans-serif;
 }
+*/
 
 .topic {
     border-style: none;
@@ -321,37 +322,57 @@ body, textarea, button, input, select, pre {
 
 .file-element {
     text-align: left;
-    font-size: 12px;
+    font-size: 16px;
     padding: 9.5px;
     width: 90%;
 }
 
 .file-element__delete-button {
-    margin: auto;
-    background: white;
     border: none;
+    background: none;
+    outline: none;
+    width: 60px;
+    padding: 9.5px;
 }
 
+
 .overlay.privacy {
-    background: white;
+    background: #F6F6F6;
     z-index: 99;
 }
 
 .closebtn.close-diary{
+    /*
     color: #E26A6A;
     margin: 0;
     padding: 0;
     font-size: 50px;
     left: 5px;
+    */
+    display: block;
+    position: relative;
+    float: right;
+    padding: 6px;
+    font: 50px / 28px Roboto;
+    right: 16px;
+    top: 15px;
+    color: black;
 }
 
 .privacy__text {
+    /*
     font-family: 'Open Sans', sans-serif;
     font-size: 20px;
     font-style: italic;
     margin-left: 25px;
     margin-right: 25px;
     text-align: left;
+    */
+    text-align: left;
+    font: italic normal normal 20px/26px Roboto;
+    letter-spacing: 0.4px;
+    color: #000000;
+    margin: 0 27px;
 }
 
 .bold {
@@ -359,7 +380,7 @@ body, textarea, button, input, select, pre {
 }
 
 .overlay-content.privacy {
-    top: 65px;
+    top: 90px;
     max-width: 600px;
     margin: 0 auto;
 }
@@ -373,9 +394,12 @@ body, textarea, button, input, select, pre {
 }
 
 .title.diary{
-    color: #E26A6A;
-    margin-bottom: 10px;
+    /*color: #E26A6A; */
+    font: italic normal bold 20px/27px Open Sans;
+    margin-bottom: 20px;
 }
+
+
 
 .diary-steps__vertical-line {
     position: absolute;
@@ -436,7 +460,7 @@ body, textarea, button, input, select, pre {
 .lower-page {
     display: flex;
     flex-direction: column;
-    background-image: url("{{ '/assets/images/background_pattern_chat.svg' | prepend: site.baseurl }}");
+    background-image: url("{{ '/assets/images/background_yellow.png' | prepend: site.baseurl }}");
     background-repeat: repeat-y;
     background-size: 300%;
     overflow-y: auto;
@@ -464,20 +488,23 @@ body, textarea, button, input, select, pre {
     height: 10%;
 }
 
-.button.step-controller__step-button {
+button.step-controller__step-button, .button.step-controller__step-button {
     padding: 8px 12px;
+    max-width: 150px;
+    margin: auto;
 }
 
-.button.step-controller__help-button {
+button.step-controller__help-button, .button.step-controller__help-button {
+    margin: auto;
     width: 42px;
     height: 42px;
-    padding: 0 15px;
-    padding-left: 14px;
-    font-family: 'Oswald';
+    /* padding: 0 15px; */
+    padding-left: 7px;
+    /* font-family: 'Oswald'; */
     font-size: 30px;
-    line-height: 40px;
-    font-weight: 400;
-    letter-spacing: 0.1px;
+    /* line-height: 40px; */
+    /* font-weight: 400; */
+    /* letter-spacing: 0.1px; */
     text-transform: uppercase;
     text-align: center;
     font-style: normal;
@@ -677,3 +704,11 @@ body, textarea, button, input, select, pre {
     line-height: 61px;
 }
 
+.button.outline, button.outline {
+    border: 2px solid var(--third-color); 
+    color: var(--third-color);
+}
+
+button.third, .button.third {
+    background-color: var(--third-color);
+}
