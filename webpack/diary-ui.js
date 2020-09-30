@@ -975,17 +975,17 @@ const DiaryUI = (eventHandler) => {
         nav.style.opacity = '0.95';
         parent.appendChild(nav);
 
+        const overlayContent = document.createElement('div');
+        overlayContent.classList.add('overlay-content', 'privacy');
+        overlayContent.style.minWidth = `${document.body.offsetWidth}px`;
+        nav.appendChild(overlayContent);
+
         const closeNavElem = document.createElement('a');
         closeNavElem.href = 'javascript:void(0)';
         closeNavElem.classList.add('closebtn', 'close-helper');
         closeNavElem.addEventListener('click', closeNav);
         closeNavElem.innerHTML = '&times;';
         nav.appendChild(closeNavElem);
-
-        const overlayContent = document.createElement('div');
-        overlayContent.classList.add('overlay-content', 'privacy');
-        overlayContent.style.minWidth = `${document.body.offsetWidth}px`;
-        nav.appendChild(overlayContent);
 
         window.addEventListener('resize', (e) => overlayContent.style.minWidth = `${document.body.offsetWidth}px`);
 
@@ -1110,7 +1110,7 @@ const DiaryUI = (eventHandler) => {
 
     const renderWhoContributed = (userData) => {
 
-        renderDiaryHeader(document.body, 2);
+        renderDiaryHeader(document.body, '#2/5', true);
 
         const content = document.createElement('div');
         content.classList.add('content');
@@ -1268,7 +1268,7 @@ const DiaryUI = (eventHandler) => {
 
     const renderTopicsFound = (topics) => {
 
-        renderDiaryHeader(document.body, 3);
+        renderDiaryHeader(document.body, '#3/5', true);
 
         const content = document.createElement('div');
         content.classList.add('content');
@@ -1336,6 +1336,7 @@ const DiaryUI = (eventHandler) => {
 
         const addTopicContainer =  document.createElement('div');
         addTopicContainer.style.width = 'fit-content';
+        addTopicContainer.style.padding = '0 15px';
         addTopicContainer.classList.add('topic');
         lowerPage.appendChild(addTopicContainer);
 
@@ -1521,6 +1522,7 @@ const DiaryUI = (eventHandler) => {
             const addTopicContainer =  document.createElement('div');
             addTopicContainer.id = 'addTopic';
             addTopicContainer.style.width = 'fit-content';
+            addTopicContainer.style.padding = '0 15px';
             addTopicContainer.classList.add('topic');
             lowerPage.appendChild(addTopicContainer);
 

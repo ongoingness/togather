@@ -236,7 +236,7 @@ p {
     background-color: var(--primary-color);
     overflow-x: hidden;
     transition: 0.5s;
-    visibility: hidden;
+    visibility: visible/*hidden*/;
 }
 
 .overlay-content {
