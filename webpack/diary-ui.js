@@ -1315,24 +1315,29 @@ const DiaryUI = (eventHandler) => {
 
         window.addEventListener('resize', (e) => overlayContent.style.minWidth = `${document.body.offsetWidth}px`);
 
+
+        const buttonContainer = document.createElement('div');
+        buttonContainer.style.margin = '0 27px';
+        overlayContent.append(buttonContainer);
+
         const selectFromChatButton = document.createElement('button');
-        selectFromChatButton.classList.add('button', 'diary', 'round');
-        selectFromChatButton.style.marginBottom = '50px';
+        selectFromChatButton.classList.add('secondary');
+        selectFromChatButton.style.marginBottom = '20px';
         selectFromChatButton.innerText = '{% t diary.tf3 %}';
         selectFromChatButton.addEventListener('click', (e) => {
             renderButtonLoader(selectFromChatButton);
             eventHandler(e, {type: 'select-from-chat'});
         }); 
-        overlayContent.appendChild(selectFromChatButton);
+        buttonContainer.appendChild(selectFromChatButton);
 
         const writeButton = document.createElement('button');
-        writeButton.classList.add('button', 'diary', 'round');
+        writeButton.classList.add('primary');
         writeButton.innerText = '{% t diary.tf4 %}';
         writeButton.addEventListener('click', (e) => {
             renderButtonLoader(writeButton);
             eventHandler(e, {type: 'write-topic'});
         }); 
-        overlayContent.appendChild(writeButton);
+        buttonContainer.appendChild(writeButton);
 
         const addTopicContainer =  document.createElement('div');
         addTopicContainer.style.width = 'fit-content';
@@ -1493,7 +1498,7 @@ const DiaryUI = (eventHandler) => {
 
     const renderWriteTopic = (topicData) => {
 
-        renderDiaryHeader(document.body, 3);
+        renderDiaryHeader(document.body, '#3/5', false);
 
         const content = document.createElement('div');
         content.classList.add('content');
@@ -1791,7 +1796,7 @@ const DiaryUI = (eventHandler) => {
 
     const renderSelectTopicFromChat = (chatData) => {
 
-        renderDiaryHeader(document.body, 3);
+        renderDiaryHeader(document.body, "#3/5", true);
 
         const content = document.createElement('div');
         content.classList.add('content');
@@ -1822,7 +1827,7 @@ const DiaryUI = (eventHandler) => {
         const {leftButton, rightButton, leftButtonListener, rightButtonListener} = renderStepController(document.body, 3, helpContent);
         leftButton.innerText = '< {% t diary.stfc3 %}';
         rightButton.innerText = '{% t diary.stfc4 %}';
-        rightButton.style.fontSize = 'large';
+        rightButton.classList.add('small-font');
 
         rightButton.removeEventListener('click', rightButtonListener);
         const newRightButtonListener = (e) => {

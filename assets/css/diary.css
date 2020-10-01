@@ -16,13 +16,14 @@ body, textarea, button, input, select, pre {
 .topic__header, .chat-message__header {
     display: flex;
     position: relative;
-    height: 30px;
+    /*min-height: 30px;*/
+    margin-bottom: 14px;
 }
 
 .topic__header__day {
     padding-right: 10px;
     text-align: left;
-    font: normal normal bold 25px/33px Roboto;
+    font: normal normal 500 25px/33px Roboto;
     letter-spacing: 1.25px;
     text-transform: uppercase;
 }
@@ -141,7 +142,7 @@ body, textarea, button, input, select, pre {
 .chat-message {
     color: black;
     margin: 10px;
-    padding: 10px;
+    padding: 12px 20px 18px 20px;/*10px*/
     border-style: none;
     font-size: 18px;
     background: white;
@@ -158,10 +159,17 @@ body, textarea, button, input, select, pre {
 
 .chat-message__name {
     width: 50%;
-    align-self: center;
+    /*
+     align-self: center;
     font-family: 'Oswald';
     text-transform: uppercase;
     font-weight: 400;
+    */
+
+    text-align: left;
+    font: normal normal 500 20px/26px Roboto;
+    letter-spacing: 1px;
+    
 }
 
 .chat-message__date {
@@ -169,13 +177,16 @@ body, textarea, button, input, select, pre {
     width: 50%;
     text-align: right;
     font-weight: 100;
-    align-self: center;
+   /* align-self: center; */
 }
 
 .chat-message__text {
     font-size: small;
     color: black;
     word-break: break-word;
+
+    font: normal normal 300 16px/21px Roboto;
+    letter-spacing: 0px;
 }
 
 .day-scroller__container {
@@ -717,7 +728,7 @@ button.step-controller__help-button, .button.step-controller__help-button {
     color: #D1D1D1;
     opacity: 0.9;
 
-    font-family: 'Oswald';
+    /*font-family: 'Oswald';*/
     text-transform: uppercase;
     font-size: 50px;
     line-height: 61px;
