@@ -9,8 +9,9 @@ body, textarea, button, input, select, pre {
 .topic {
     border-style: none;
     background: white;
-    padding: 10px 15px;
+    padding: 20px;
     margin: 10px 15px;
+    padding-bottom: 24px;
 }
 
 .topic__header, .chat-message__header {
@@ -78,10 +79,17 @@ body, textarea, button, input, select, pre {
 .topic__write-topic__input {
     background: #FFFFFF 0% 0% no-repeat padding-box;
     border: 1.5px dashed #707070;
+    /*
     font: Italic 16px/22px Open Sans;
     color: #606060;
+    */
     padding: 10px;
     margin-bottom: 10px;
+
+    
+    text-align: left;
+    font: italic normal normal 18px/24px Roboto;
+    letter-spacing: 0.36px;
 }
 
 .topic__write-topic__date {
@@ -191,7 +199,8 @@ body, textarea, button, input, select, pre {
 
 .day-scroller__container {
     width: 100%;
-    height: 100%;
+    position: relative;
+    /*height: 100%;*/
 }
 
 .day-scroller__day-buttons-container {
@@ -223,15 +232,27 @@ body, textarea, button, input, select, pre {
     border-color: black;
     border-width: thin;
     margin: auto;
+    /*
     font-family: 'Oswald';
     text-transform: uppercase;
-    padding: 10px;
+       padding: 10px;
+    */
+ 
     background: white;
+
+    text-align: center;
+    font: normal normal 300 24px/32px Roboto Condensed;
+    letter-spacing: 0.48px;
+    border-radius: 100px;
+    width: 100px;
+
 }
 
 .day-scroller__prev, .day-scroller__next {
-    position: relative;
+    position: absolute;
+    top: 10px;
     cursor: pointer;
+    /*
     color: black;
     font-weight: bold;
     font-size: 18px;
@@ -243,6 +264,20 @@ body, textarea, button, input, select, pre {
     width: 37px;
     line-height: 27px;
     height: 100%;
+*/
+
+    height: 34px;
+    width: 34px;
+    color: black;
+    border-style: solid;
+    border-color: black;
+    border-width: thin;
+    margin: auto;
+    background: white;
+    text-align: center;
+    font: normal normal normal 28px/28px Roboto;
+    letter-spacing: 0.48px;
+    border-radius: 100px;
 }
   
 .day-scroller__next {
@@ -277,8 +312,8 @@ body, textarea, button, input, select, pre {
 
 .day-scroller__dot {
     cursor: pointer;
-    height: 10px;
-    width: 10px;
+    height: 8px;
+    width: 8px;
     margin: 0 2px;
     background-color: white;
     border-radius: 50%;
@@ -306,6 +341,7 @@ body, textarea, button, input, select, pre {
 
 .text-box {
     margin: 20px 25px;
+    text-align: center;
 }
 
 .dual-text-box {
@@ -396,7 +432,7 @@ body, textarea, button, input, select, pre {
 }
 
 .overlay-content.privacy {
-    top: 90px;
+    top: 40px;
     max-width: 600px;
     margin: 0 auto;
 }
@@ -610,8 +646,8 @@ button.step-controller__help-button, .button.step-controller__help-button {
 
 
 .overlay.topic-text {
-    background: #E26A6A 0% 0% no-repeat padding-box;
-    opacity: 0.95;
+    background: var(--third-color) 0% 0% no-repeat padding-box;
+    opacity: 0.98;
     height: 100%;
     width: 100%;
     overflow-y: hidden;
@@ -621,11 +657,16 @@ button.step-controller__help-button, .button.step-controller__help-button {
 
 .overlay__text-box {
     text-align: center;
+    /*
     font: Bold Italic 20px/27px Open Sans;
     letter-spacing: 0px;
+    */
     color: #FFFFFF;
     opacity: 1;
     margin: 0 40px;
+
+    font: italic normal 500 20px/26px Roboto;
+    letter-spacing: 0.4px;
 }
 
 .day-display__tap {
@@ -633,8 +674,18 @@ button.step-controller__help-button, .button.step-controller__help-button {
     transform: rotate(290deg);
     width: 35px;
     height: 35px;
-    top: -12px;
-    right: -25px;
+    top: 6px;
+    right: -9px;
+}
+
+.day-display__tap__instructions {
+    position: absolute;
+    font: italic normal normal 14px/16px Roboto Condensed;
+    letter-spacing: 0.28px;
+    color: var(--secondary-color);
+    width: 55px;
+    right: -50px;
+    top: 32px;
 }
    
 .feedback__container {
@@ -718,20 +769,28 @@ button.step-controller__help-button, .button.step-controller__help-button {
     width: 100%;
     top: 0;
     left: 0;
-    background: #707070 0% 0% no-repeat padding-box;
-    opacity: 0.8;
+    background: var(--third-color) 0% 0% no-repeat padding-box;
+    opacity: 0.9;
 }
 
 .selected-text {
     margin: auto;
+    /*
     letter-spacing: 2.5px;
     color: #D1D1D1;
     opacity: 0.9;
 
-    /*font-family: 'Oswald';*/
+    font-family: 'Oswald';
     text-transform: uppercase;
     font-size: 50px;
     line-height: 61px;
+    */
+
+    font: normal normal 500 40px/53px Roboto;
+    letter-spacing: 0.8px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    opacity: 0.9;
 }
 
 .button.outline, button.outline {

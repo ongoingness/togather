@@ -1498,7 +1498,7 @@ const DiaryUI = (eventHandler) => {
 
     const renderWriteTopic = (topicData) => {
 
-        renderDiaryHeader(document.body, '#3/5', false);
+        renderDiaryHeader(document.body, '#3/5', true);
 
         const content = document.createElement('div');
         content.classList.add('content');
@@ -1556,7 +1556,7 @@ const DiaryUI = (eventHandler) => {
         const {leftButton, rightButton, leftButtonListener, rightButtonListener} = renderStepController(document.body, 3, helpContent);
         leftButton.innerText = '< {% t diary.wt4 %}';
         rightButton.innerText = topicData == undefined ? '{% t diary.wt5 %}' : '{% t diary.wt6 %}';
-        if(topicData == undefined) rightButton.style.fontSize = 'large';
+        if(topicData == undefined) rightButton.classList.add('small-font');//rightButton.style.fontSize = 'large';
 
         rightButton.removeEventListener('click', rightButtonListener);
         const newRightButtonListener = (e) => {
@@ -1981,7 +1981,7 @@ const DiaryUI = (eventHandler) => {
 
     const renderSelectMessages = (dayData, allMessagesData, selectedMessagesHashes) => {
 
-        renderDiaryHeader(document.body, 4);
+        renderDiaryHeader(document.body, "#4/5", true);
 
         const content = document.createElement('div');
         content.classList.add('content');
@@ -1990,12 +1990,6 @@ const DiaryUI = (eventHandler) => {
         const upperPage = document.createElement('div');
         upperPage.classList.add('upper-page');
         content.appendChild(upperPage);
-
-        const title = document.createElement('div');
-        title.classList.add('title', 'diary');
-        title.style.marginTop = '16px';
-        title.innerText = '{% t diary.sm1 %}';
-        upperPage.appendChild(title);
 
         const dayScrollerContainer = document.createElement('div');
         dayScrollerContainer.classList.add('day-scroller__container');
@@ -2027,7 +2021,7 @@ const DiaryUI = (eventHandler) => {
         daysLeft.appendChild(prevDay);
 
         const prevDayInside = document.createElement('div');
-        prevDayInside.innerHTML = '&#10094;'
+        prevDayInside.innerHTML = '<'//'&#10094;'
         prevDay.appendChild(prevDayInside);
 
         const daysCenter = document.createElement('div');
@@ -2063,13 +2057,19 @@ const DiaryUI = (eventHandler) => {
         daysRight.appendChild(nextDay);
 
         const nextDayInside = document.createElement('div');
-        nextDayInside.innerHTML = '&#10095;'
+        nextDayInside.innerHTML = '>'//'&#10095;'
         nextDay.appendChild(nextDayInside );
 
         const dotContainer = document.createElement('div');
         dotContainer.id = 'dotContainer';
         dotContainer.classList.add('day-scroller__dot-container');
         dayScrollerContainer.appendChild(dotContainer);
+
+        const title = document.createElement('div');
+        title.style.marginTop = '13px';
+        title.style.marginBottom = '13px';
+        title.innerText = '{% t diary.sm1 %}';
+        upperPage.appendChild(title);
 
         const lowerPage = document.createElement('div');
         lowerPage.id = 'lowerPage';
@@ -2099,17 +2099,17 @@ const DiaryUI = (eventHandler) => {
 
     const updateDay = (dayData) => {
         document.getElementById('dayDisplay').innerText = `{% t diary.t1 %} ${dayData.day}`;
-        document.getElementById('dayDisplay').style = `color: ${dayData.color};`
+        //document.getElementById('dayDisplay').style = `color: ${dayData.color};`
         document.getElementById('dayDisplay').addEventListener('click', e => document.getElementById('topicText').style.height = '100%')
     }
 
     const renderDay = (dayData, allMessagesData, selectedMessages) => {
 
         document.getElementById('dayDisplay').innerText = `{% t diary.t1 %} ${dayData.part === 0 ? `${dayData.day}` : `${dayData.day} #${dayData.part}`}`;
-        document.getElementById('dayDisplay').style = `color: ${dayData.color};`
+        //document.getElementById('dayDisplay').style = `color: ${dayData.color};`
         document.getElementById('dayDisplay').addEventListener('click', e => {
             const topicText = document.getElementById('topicText');
-            topicText.style.height = topicText.offsetHeight === 0 ? '100%' : '0';
+            topicText.style.height = topicText.offsetHeight === 0 ? `${document.getElementById('lowerPage').offsetHeight}px` : '0';
         });
 
         document.getElementById('prevDay').disabled = false;
@@ -2119,11 +2119,16 @@ const DiaryUI = (eventHandler) => {
 
             document.getElementById('dayDisplay').style.position = 'relative';
             const tapImage = document.createElement('img');
-            tapImage.src = "{{ '/assets/images/tap.svg' | prepend: site.baseurl }}";
+            tapImage.src = "{{ '/assets/images/tap_test.svg' | prepend: site.baseurl }}";
             tapImage.width = '25';
             tapImage.height = '25';
             tapImage.classList.add('day-display__tap');
             document.getElementById('dayDisplay').appendChild(tapImage);
+
+            const tapInstructions = document.createElement('div');
+            tapInstructions.classList.add('day-display__tap__instructions');
+            tapInstructions.innerText = 'Click to see topic';
+            document.getElementById('dayDisplay').appendChild(tapInstructions);
 
             document.getElementById('prevDay').disabled = true;
         } 
@@ -2132,16 +2137,21 @@ const DiaryUI = (eventHandler) => {
             document.getElementById('nextDay').disabled = true;
         }
 
+        //console.log(document.getElementsByClassName('upper-page')[0].offsetHeight);
+
         const topicTextOverlay = document.createElement('div');
         topicTextOverlay.id = 'topicText';
         topicTextOverlay.classList.add('overlay', 'topic-text');
+        topicTextOverlay.style.height = `${ (document.body.offsetHeight * 0.78 - 132)}px`
         lowerPage.appendChild(topicTextOverlay);
+        window.addEventListener('resize', e => topicTextOverlay.style.height = `${document.getElementById('lowerPage').offsetHeight}px`);
 
         topicTextOverlay.addEventListener('click', e =>  document.getElementById('topicText').style.height = '0%')
 
         const overlayContent = document.createElement('div');
         overlayContent.classList.add('overlay-content', 'privacy');
-        overlayContent.styletop = '35px';
+        overlayContent.style.display = 'flex';
+        overlayContent.style.flexDirection = 'column';
         topicTextOverlay.appendChild(overlayContent);
 
         const topicTextTitle = document.createElement('div');
@@ -2158,15 +2168,24 @@ const DiaryUI = (eventHandler) => {
         overlayContent.appendChild(topicTextBox);
 
         const startSelecting = document.createElement('button');
-        startSelecting.classList.add('button', 'round');
+        //startSelecting.classList.add('button', 'round');
         startSelecting.style.margin = 'auto';
         startSelecting.style.color = 'white';
-        startSelecting.style.borderColor = 'white';
-        startSelecting.style.borderStyle = 'solid';
-        startSelecting.style.background = '#E26A6A';
+        //startSelecting.style.borderColor = 'white';
+        //startSelecting.style.borderStyle = 'solid';
+        //startSelecting.style.background = '#E26A6A';
         startSelecting.style.marginTop = '10px';
-        startSelecting.innerText = '{% t diary.d2 %}';
-        overlayContent.appendChild(startSelecting);
+        startSelecting.style.background = 'none';
+        startSelecting.style.padding = '6px';
+        startSelecting.style.font = '50px / 28px Roboto'
+        startSelecting.style.width = '40px';
+        startSelecting.style.bottom = '10px';
+        startSelecting.style.position = 'absolute';
+        startSelecting.style.left = '50%';
+        startSelecting.style.transform = 'translate(-50%, 0)';
+
+        startSelecting.innerText = '×'//'{% t diary.d2 %}';
+        topicTextOverlay.appendChild(startSelecting);
 
         for(let i = 0; i < dayData.totalOfTopics; i++) {
             const dot = document.createElement('span');
@@ -2216,10 +2235,10 @@ const DiaryUI = (eventHandler) => {
         const nextDayLoader = nextDay.getElementsByClassName('day-scroller__button__loader');
         
         if(prevDayLoader.length > 0)
-            prevDay.innerHTML = '&#10094;'
+            prevDay.innerHTML = '<'
 
         if (nextDayLoader.length > 0)
-            nextDay.innerHTML = '&#10095;'
+            nextDay.innerHTML = '>'
         
     }
 
@@ -2261,7 +2280,7 @@ const DiaryUI = (eventHandler) => {
 
     const renderReviewDiary = () => {
 
-        renderDiaryHeader(document.body, 5);
+        renderDiaryHeader(document.body, "#5/5", true);
 
         const content = document.createElement('div');
         content.classList.add('content');
