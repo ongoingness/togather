@@ -642,7 +642,7 @@ const DiaryTemplates = () => {
         const pdfData = doc.output('arraybuffer');
         
         // The workerSrc property shall be specified.
-        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.4.456/pdf.worker.js';
+        pdfjsLib.GlobalWorkerOptions.workerSrc = "{{ '/assets/scripts/pdf.worker.js' | prepend: site.baseurl_root }}";
         
         // Asynchronous download of PDF
         var loadingTask = pdfjsLib.getDocument(pdfData);

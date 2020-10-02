@@ -335,8 +335,9 @@ body, textarea, button, input, select, pre {
 .preview-canvas {
     border: 1px solid black;
     direction: ltr;
-    height: auto;
-    width: 100%;
+    height: 90%;
+    width: auto;
+    margin: auto;
 }
 
 .text-box {
@@ -802,3 +803,19 @@ button.step-controller__help-button, .button.step-controller__help-button {
 button.third, .button.third {
     background-color: var(--third-color);
 }
+
+
+.diary-page-button {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    background: none;
+    color: var(--secondary-color);
+    width: 45px;
+    font-size: 45px;
+    padding: 0;
+}
+
+.diary-page-button.next {
+    right: 0;
+} 
