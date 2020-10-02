@@ -674,6 +674,48 @@ const DiaryTemplates = () => {
         
     }
 
+    const startPreviewPdfWorker = (doc) => {
+        const pdfData = doc.output('arraybuffer');
+        
+        // The workerSrc property shall be specified.
+        pdfjsLib.GlobalWorkerOptions.workerSrc = "{{ '/assets/scripts/pdf.worker.js' | prepend: site.baseurl_root }}";
+        
+        return pdfjsLib.getDocument(pdfData);
+    }
+
+    const destroyPreviewPdfWorker = (worker) => worker.destroy(); 
+
+    const previewPdf2 = (doc, pageNum, canvas, loadingTask) => {
+
+  
+        loadingTask.promise.then(function(pdf) {
+          
+          var pageNumber = pageNum > pdf.numPages || pageNum < 1 || pageNum === undefined ? pdf.numPages : pageNum;
+          pdf.getPage(pageNumber).then(function(page) {
+
+            var context = canvas.getContext('2d');
+        
+            var viewport = page.getViewport({scale: 10});
+            canvas.width = viewport.width;
+            canvas.height = viewport.height;
+            //canvas.style.height = "100%";
+
+            var renderContext = {
+              canvasContext: context,
+              viewport: viewport
+            };
+            var renderTask = page.render(renderContext);
+            renderTask.promise.then(function () {
+            
+            });
+          });
+        }, function (reason) {
+          // PDF loading error
+          console.error(reason);
+        });
+        
+    }
+
     const downloadPdf = (doc, filename) => {
         doc.save(filename);
     }
@@ -685,8 +727,15 @@ const DiaryTemplates = () => {
     return {
         generatePDF,
         previewPdf,
+        previewPdf2,
+
         downloadPdf,
         getDataUriStringPdf,
+
+
+        startPreviewPdfWorker,
+        destroyPreviewPdfWorker,
+
     }
 }
 

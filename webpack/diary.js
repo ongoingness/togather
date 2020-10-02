@@ -382,22 +382,25 @@ const Diary = () => {
             variables: {
                 currentPage: 1,
                 canvas: undefined,
+                loadingTask: undefined,
             },
             render: async() => {
                 const doc = model.getDiaryDocument();
+                const worker = templates.startPreviewPdfWorker(doc);
+
                 if(doc != undefined) {
                     ui.renderReviewDiary();
                     const {isSafari} = checkBrowser();
                     if(isSafari) {
                         ui.renderPreviewWithDataUri(templates.getDataUriStringPdf(model.getDiaryDocument()));
                     } else {
-                        STATES.reviewDiary.variables.canvas = ui.renderPreviewDiaryPage();
-                        templates.previewPdf(doc, 1, STATES.reviewDiary.variables.canvas);
-                        /*
+                        //STATES.reviewDiary.variables.canvas = ui.renderPreviewDiaryPage();
+                        //templates.previewPdf2(doc, 1, STATES.reviewDiary.variables.canvas, STATES.reviewDiary.variables.loadingTask);
+                        
                         for(let i = 1; i <= doc.getNumberOfPages(); i++) {
                             const canvas = ui.renderPreviewDiaryPage();
-                            templates.previewPdf(doc, i, canvas);
-                        }*/
+                            templates.previewPdf2(doc, i, canvas, worker);
+                        }
                     }
                 }
             },
@@ -407,12 +410,13 @@ const Diary = () => {
 
                     case 'next-page':
                         STATES.reviewDiary.variables.currentPage += 1;
-                        templates.previewPdf(model.getDiaryDocument(), STATES.reviewDiary.variables.currentPage, STATES.reviewDiary.variables.canvas);
+                        STATES.reviewDiary.variables.loadingTask.destroy();
+                        //templates.previewPdf2(model.getDiaryDocument(), STATES.reviewDiary.variables.currentPage, STATES.reviewDiary.variables.canvas, STATES.reviewDiary.variables.loadingTask);
                         break;
 
                     case 'previous-page':
                         STATES.reviewDiary.variables.currentPage -= 1;
-                        templates.previewPdf(model.getDiaryDocument(), STATES.reviewDiary.variables.currentPage, STATES.reviewDiary.variables.canvas);
+                        templates.previewPdf2(model.getDiaryDocument(), STATES.reviewDiary.variables.currentPage, STATES.reviewDiary.variables.canvas, STATES.reviewDiary.variables.loadingTask);
                         break;
 
                     case 'stop-assembling':
