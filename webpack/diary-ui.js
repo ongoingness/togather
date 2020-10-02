@@ -2291,8 +2291,9 @@ const DiaryUI = (eventHandler) => {
         content.appendChild(upperPage);
 
         const title = document.createElement('div');
-        title.classList.add('title', 'diary');
+        //title.classList.add('title', 'diary');
         title.style.marginTop = '16px';
+        title.style.marginBottom = '20px';
         title.innerText = '{% t diary.rd1 %}';
         upperPage.appendChild(title);
 
@@ -2300,12 +2301,36 @@ const DiaryUI = (eventHandler) => {
         lowerPage.id = 'lowerPage';
         lowerPage.classList.add('lower-page');
         lowerPage.style.height = '100%';
+        lowerPage.style.position = 'relative';
         content.appendChild(lowerPage);
+
+
+        const prevDiaryPage = document.createElement('button');
+        prevDiaryPage.classList.add('diary-page-button');
+        lowerPage.append(prevDiaryPage);
+
+        const prevDiaryPageIcon = document.createElement('div');
+        prevDiaryPageIcon.classList.add('fas', 'fa-chevron-left');
+        prevDiaryPage.addEventListener('click', (e) => eventHandler(e, {type: 'previous-page'}));  
+        prevDiaryPage.append(prevDiaryPageIcon);
+
+        const nextDiaryPage = document.createElement('button');
+        nextDiaryPage.classList.add('diary-page-button', 'next');
+        nextDiaryPage.addEventListener('click', (e) => eventHandler(e, {type: 'next-page'}));  
+        lowerPage.append(nextDiaryPage);
+
+        const nextDiaryPageIcon = document.createElement('div');
+        nextDiaryPageIcon.classList.add('fas', 'fa-chevron-right');
+        nextDiaryPage.append(nextDiaryPageIcon);
+
+      
+        
 
         const pageContainer = document.createElement('div');
         pageContainer.id = 'pageContainer';
-        pageContainer.style.margin = '25px';
+        pageContainer.style.display = 'flex';
         pageContainer.style.height = '100%';
+        pageContainer.style.margin = 'auto';
         lowerPage.appendChild(pageContainer);
 
         const helpContent = document.createElement('div');
