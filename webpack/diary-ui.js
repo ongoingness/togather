@@ -2342,10 +2342,10 @@ const DiaryUI = (eventHandler) => {
 
     }
 
-    const renderPreviewDiaryPage = (pageNumber, display) => {
+    const renderPreviewDiaryPage = (canvasId, display) => {
 
         const canvas = document.createElement('canvas');
-        canvas.id = `page${pageNumber}`;
+        canvas.id = canvasId;
         canvas.classList.add('preview-canvas');
         canvas.style.display = display ? 'block' : 'none';
         document.getElementById('pageContainer').appendChild(canvas);
@@ -2353,12 +2353,12 @@ const DiaryUI = (eventHandler) => {
         return canvas;
     }
 
-    const displayPreviewPage = (pageNumber) => {
-        document.getElementById(`page${pageNumber}`).style.display = 'block';
+    const displayPreviewCanvas = (canvasId) => {
+        document.getElementById(canvasId).style.display = 'block';
     }
 
-    const hidePreviewPage = (pageNumber) => {
-        document.getElementById(`page${pageNumber}`).style.display = 'none';
+    const hidePreviewCanvas = (canvasId) => {
+        document.getElementById(canvasId).style.display = 'none';
     }
 
     const renderPreviewWithDataUri = (dataUri) => {
@@ -2822,8 +2822,8 @@ const DiaryUI = (eventHandler) => {
         clearDay,
 
         renderPdfPreview,
-        displayPreviewPage,
-        hidePreviewPage,
+        displayPreviewCanvas,
+        hidePreviewCanvas,
 
         renderUploadErrorModal,
 
