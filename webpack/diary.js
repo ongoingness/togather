@@ -382,11 +382,12 @@ const Diary = () => {
             variables: {
                 currentPage: 1,
                 canvas: undefined,
-                loadingTask: undefined,
+                worker: undefined,
+                pages:  undefined
             },
             render: async() => {
                 const doc = model.getDiaryDocument();
-                const worker = templates.startPreviewPdfWorker(doc);
+                STATES.reviewDiary.variables.worker = templates.startPreviewPdfWorker(doc);
 
                 if(doc != undefined) {
                     ui.renderReviewDiary();
@@ -394,13 +395,19 @@ const Diary = () => {
                     if(isSafari) {
                         ui.renderPreviewWithDataUri(templates.getDataUriStringPdf(model.getDiaryDocument()));
                     } else {
-                        //STATES.reviewDiary.variables.canvas = ui.renderPreviewDiaryPage();
+                        STATES.reviewDiary.variables.canvas = ui.renderPreviewDiaryPage();
                         //templates.previewPdf2(doc, 1, STATES.reviewDiary.variables.canvas, STATES.reviewDiary.variables.loadingTask);
-                        
+                        //const canvas = ui.renderPreviewDiaryPage();
+                        STATES.reviewDiary.variables.pages = await templates.previewPdf4(STATES.reviewDiary.variables.worker);
+                   
+                        templates.renderPageToCanvas(STATES.reviewDiary.variables.pages[STATES.reviewDiary.variables.currentPage], STATES.reviewDiary.variables.canvas);
+
+                        //pages[STATES.reviewDiary.variables.currentPage].renderFunction(pages[STATES.reviewDiary.variables.currentPage].renderContext);
+                        /*
                         for(let i = 1; i <= doc.getNumberOfPages(); i++) {
                             const canvas = ui.renderPreviewDiaryPage();
-                            await templates.previewPdf2(doc, i, canvas, worker);
-                        }
+                            await templates.previewPdf2(doc, i, canvas, STATES.reviewDiary.variables.worker);
+                        }*/
                     }
                 }
             },
@@ -410,25 +417,27 @@ const Diary = () => {
 
                     case 'next-page':
                         STATES.reviewDiary.variables.currentPage += 1;
-                        STATES.reviewDiary.variables.loadingTask.destroy();
-                        //templates.previewPdf2(model.getDiaryDocument(), STATES.reviewDiary.variables.currentPage, STATES.reviewDiary.variables.canvas, STATES.reviewDiary.variables.loadingTask);
+                        templates.renderPageToCanvas(STATES.reviewDiary.variables.pages[STATES.reviewDiary.variables.currentPage], STATES.reviewDiary.variables.canvas);
                         break;
 
                     case 'previous-page':
                         STATES.reviewDiary.variables.currentPage -= 1;
-                        templates.previewPdf2(model.getDiaryDocument(), STATES.reviewDiary.variables.currentPage, STATES.reviewDiary.variables.canvas, STATES.reviewDiary.variables.loadingTask);
+                        templates.renderPageToCanvas(STATES.reviewDiary.variables.pages[STATES.reviewDiary.variables.currentPage], STATES.reviewDiary.variables.canvas);
                         break;
 
                     case 'stop-assembling':
                         updateState(STATES.uploadFiles);
+                        templates.destroyPreviewPdfWorker(STATES.reviewDiary.variables.worker);
                         break;
 
                     case 'go-to-step-4':
                         updateState(STATES.selectMessages);
+                        templates.destroyPreviewPdfWorker(STATES.reviewDiary.variables.worker);
                         break;
 
                     case 'go-to-step-6':
                         updateState(STATES.downloadDiary);
+                        templates.destroyPreviewPdfWorker(STATES.reviewDiary.variables.worker);
                         break;
                 
                 }

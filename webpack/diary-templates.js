@@ -690,21 +690,22 @@ const DiaryTemplates = () => {
   
         return loadingTask.promise.then(function(pdf) {
           
-          var pageNumber = pageNum > pdf.numPages || pageNum < 1 || pageNum === undefined ? pdf.numPages : pageNum;
+          const pageNumber = pageNum > pdf.numPages || pageNum < 1 || pageNum === undefined ? pdf.numPages : pageNum;
           pdf.getPage(pageNumber).then(function(page) {
 
-            var context = canvas.getContext('2d');
+            const context = canvas.getContext('2d');
         
-            var viewport = page.getViewport({scale: 10});
+            const viewport = page.getViewport({scale: 10});
             canvas.width = viewport.width;
             canvas.height = viewport.height;
             //canvas.style.height = "100%";
 
-            var renderContext = {
+            const renderContext = {
               canvasContext: context,
               viewport: viewport
             };
-            var renderTask = page.render(renderContext);
+            const renderTask = page.render(renderContext);
+
             renderTask.promise.then(function () {
             
             });
@@ -714,6 +715,125 @@ const DiaryTemplates = () => {
           console.error(reason);
         });
         
+    }
+
+    const previewPdf3 = async (doc, pageNum, canvas, worker) => {
+
+       
+
+        const promise = new Promise( (resolve, error) => {
+            
+            worker.promise.then( async(pdf) => {
+
+                const renderPromises = {};
+          
+                for(let i = 1; i < pdf.numPages; i++) {
+
+                    /*
+                    pdf.getPage(i).then( (page) => {
+      
+                        const context = canvas.getContext('2d');
+                    
+                        const viewport = page.getViewport({scale: 10});
+                        canvas.width = viewport.width;
+                        canvas.height = viewport.height;
+                        //canvas.style.height = "100%";
+            
+                        const renderContext = {
+                          canvasContext: context,
+                          viewport: viewport
+                        };
+            
+                        //const renderTask = page.render(renderContext);
+                        renderPromises[i] = {renderFunction: page.render, renderContext};
+                        console.log(renderPromises);
+                      });*/
+
+                    const page = await pdf.getPage(i);
+                    const context = canvas.getContext('2d');
+                    
+                    const viewport = page.getViewport({scale: 10});
+                    canvas.width = viewport.width;
+                    canvas.height = viewport.height;
+                    //canvas.style.height = "100%";
+        
+                    const renderContext = {
+                      canvasContext: context,
+                      viewport: viewport
+                    };
+        
+                    //const renderTask = page.render(renderContext);
+                    renderPromises[i] = {renderFunction: page.render, renderContext};
+                    console.log(renderPromises);
+
+                }
+                resolve(renderPromises);
+
+            }, function (reason) {
+            // PDF loading error
+            console.error(reason);
+            });
+
+
+
+        });
+
+
+        const result = await promise;
+
+        console.log(result);
+
+        return result ;
+        
+    }
+
+    const previewPdf4 = async (worker) => {
+
+        const promise = new Promise( (resolve, error) => {
+            
+            worker.promise.then( async(pdf) => {
+
+                const renderPages= {};
+          
+                for(let i = 1; i < pdf.numPages; i++) {
+                    const page = await pdf.getPage(i);
+                    renderPages[i] = page;
+                    console.log(renderPages);
+                }
+                resolve(renderPages);
+
+            }, function (reason) {
+            // PDF loading error
+            console.error(reason);
+            });
+
+
+
+        });
+
+
+        const result = await promise;
+
+        console.log(result);
+
+        return result ;
+        
+    }
+
+    const renderPageToCanvas = (page, canvas) => {
+        const context = canvas.getContext('2d');
+        
+        const viewport = page.getViewport({scale: 10});
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+        //canvas.style.height = "100%";
+
+        const renderContext = {
+          canvasContext: context,
+          viewport: viewport
+        };
+        const renderTask = page.render(renderContext);
+        return renderTask.promise;
     }
 
     const downloadPdf = (doc, filename) => {
@@ -728,6 +848,10 @@ const DiaryTemplates = () => {
         generatePDF,
         previewPdf,
         previewPdf2,
+        previewPdf3,
+
+        previewPdf4,
+        renderPageToCanvas,
 
         downloadPdf,
         getDataUriStringPdf,
