@@ -688,7 +688,7 @@ const DiaryTemplates = () => {
     const previewPdf2 = (doc, pageNum, canvas, loadingTask) => {
 
   
-        loadingTask.promise.then(function(pdf) {
+        return loadingTask.promise.then(function(pdf) {
           
           var pageNumber = pageNum > pdf.numPages || pageNum < 1 || pageNum === undefined ? pdf.numPages : pageNum;
           pdf.getPage(pageNumber).then(function(page) {

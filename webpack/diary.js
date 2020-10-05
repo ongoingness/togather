@@ -399,7 +399,7 @@ const Diary = () => {
                         
                         for(let i = 1; i <= doc.getNumberOfPages(); i++) {
                             const canvas = ui.renderPreviewDiaryPage();
-                            templates.previewPdf2(doc, i, canvas, worker);
+                            await templates.previewPdf2(doc, i, canvas, worker);
                         }
                     }
                 }
