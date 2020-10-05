@@ -381,7 +381,7 @@ const Diary = () => {
         reviewDiary: {
             variables: {
                 currentPage: 1,
-                canvas: undefined,
+                canvas: [],
                 worker: undefined,
                 pages:  undefined
             },
@@ -395,12 +395,16 @@ const Diary = () => {
                     if(isSafari) {
                         ui.renderPreviewWithDataUri(templates.getDataUriStringPdf(model.getDiaryDocument()));
                     } else {
-                        STATES.reviewDiary.variables.canvas = ui.renderPreviewDiaryPage();
+                        //STATES.reviewDiary.variables.canvas = ui.renderPreviewDiaryPage();
+                        const c = ui.renderPreviewDiaryPage();
+
+
                         //templates.previewPdf2(doc, 1, STATES.reviewDiary.variables.canvas, STATES.reviewDiary.variables.loadingTask);
                         //const canvas = ui.renderPreviewDiaryPage();
                         STATES.reviewDiary.variables.pages = await templates.previewPdf4(STATES.reviewDiary.variables.worker);
                    
-                        templates.renderPageToCanvas(STATES.reviewDiary.variables.pages[STATES.reviewDiary.variables.currentPage], STATES.reviewDiary.variables.canvas);
+                        templates.renderPageToCanvas(STATES.reviewDiary.variables.pages[STATES.reviewDiary.variables.currentPage], c);
+                        STATES.reviewDiary.variables.canvas.push(c);
 
                         //pages[STATES.reviewDiary.variables.currentPage].renderFunction(pages[STATES.reviewDiary.variables.currentPage].renderContext);
                         /*
@@ -416,13 +420,19 @@ const Diary = () => {
                 switch(params.type) {
 
                     case 'next-page':
-                        STATES.reviewDiary.variables.currentPage += 1;
-                        templates.renderPageToCanvas(STATES.reviewDiary.variables.pages[STATES.reviewDiary.variables.currentPage], STATES.reviewDiary.variables.canvas);
+                        console.log( model.getDiaryDocument().getNumberOfPages(), STATES.reviewDiary.variables.currentPage);
+                        if(STATES.reviewDiary.variables.currentPage < model.getDiaryDocument().getNumberOfPages()-1){
+                            STATES.reviewDiary.variables.currentPage += 1;
+                            const c = ui.renderPreviewDiaryPage();
+                            templates.renderPageToCanvas(STATES.reviewDiary.variables.pages[STATES.reviewDiary.variables.currentPage], c);
+                        }
                         break;
 
                     case 'previous-page':
-                        STATES.reviewDiary.variables.currentPage -= 1;
-                        templates.renderPageToCanvas(STATES.reviewDiary.variables.pages[STATES.reviewDiary.variables.currentPage], STATES.reviewDiary.variables.canvas);
+                        if(STATES.reviewDiary.variables.currentPage > 0){
+                            STATES.reviewDiary.variables.currentPage -= 1;
+                            templates.renderPageToCanvas(STATES.reviewDiary.variables.pages[STATES.reviewDiary.variables.currentPage], STATES.reviewDiary.variables.canvas);
+                        }
                         break;
 
                     case 'stop-assembling':
