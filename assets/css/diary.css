@@ -693,9 +693,9 @@ button.step-controller__help-button, .button.step-controller__help-button {
     display: flex;
     flex-direction: column;
     margin: auto;
-    font: bold 18px / 24px "Open Sans";
-    margin-left: 30px;
-    margin-right: 30px;
+    margin-top: 0px;
+    margin-left: 27px;
+    margin-right: 27px;
 }
 
 .title.feedback {
@@ -708,6 +708,9 @@ button.step-controller__help-button, .button.step-controller__help-button {
     resize: none;
     height: 200px;
     margin-bottom: 20px;
+    border-style: dashed;
+    border-width: medium;
+    font: normal normal normal 16px/21px Roboto Condensed;
 }
 
 .feedback__checkbox {

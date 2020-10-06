@@ -2381,133 +2381,134 @@ const DiaryUI = (eventHandler) => {
 
     const renderDownloadDiary = () => {
 
-        renderDiaryHeader(document.body, 5);
+        renderDiaryHeader(document.body, "#5/5", false);
 
         const content = document.createElement('div');
         content.classList.add('content');
         document.body.appendChild(content);
 
         const upperPage = document.createElement('div');
-        upperPage.classList.add('upper-page');
+        //upperPage.classList.add('upper-page');
         content.appendChild(upperPage);
 
         const title = document.createElement('div');
-        title.classList.add('title', 'diary');
-        title.style.marginTop = '16px';
+        title.classList.add();
+        title.style.textAlign = 'center';
+        title.style.font = 'normal normal 300 32px/43px Roboto Condensed';
+        title.style.letterSpacing = '0.64px';
         title.innerText = '{% t diary.dd1 %}';
         upperPage.appendChild(title);
 
-        const gradient = document.createElement('div');
-        gradient.classList.add('gradient-container', 'diary');
-        content.appendChild(gradient);
-
         const centerContainer = document.createElement('div');
         centerContainer.style.margin = 'auto';
-        centerContainer.style.font = 'Bold 18px/24px Open Sans';
-        gradient.appendChild(centerContainer);
-        
-        const textBox1 = document.createElement('div');
-        textBox1.classList.add('text-box');
-        textBox1.innerText = '{% t diary.dd2 %}';
-        textBox1.style.marginTop = '28px';
-        centerContainer.appendChild(textBox1);
-        
+        centerContainer.style.marginLeft = '27px';
+        centerContainer.style.marginRight = '27px';
+        centerContainer.style.marginTop = '27px';
+        content.appendChild(centerContainer);
+
+        const buttonContainer = document.createElement('div');
+        buttonContainer.style.display = 'flex';
+        buttonContainer.style.flexDirection = 'row';
+        centerContainer.append(buttonContainer);
+                
         const downloadButton = document.createElement('button');
-        downloadButton.classList.add('button', 'round', 'diary');
+        downloadButton.classList.add('secondary');
+        downloadButton.style.margin = 'auto';
         downloadButton.innerText = '{% t diary.dd3 %}';
         downloadButton.addEventListener('click', e => {
-            window.fathom.trackGoal('ZNO1KYRF', 0);
+            try {
+                window.fathom.trackGoal('ZNO1KYRF', 0);
+            } catch (e) {
+                console.log('Fathom disabled')
+            }
             eventHandler(e, {type: 'download-diary'});
         });
-        centerContainer.appendChild(downloadButton);
+        buttonContainer.appendChild(downloadButton);
 
     }
 
     const renderAskFeedback = () => {
 
-        renderDiaryHeader(document.body, 5);
+        renderDiaryHeader(document.body, "#5/5", false);
 
         const content = document.createElement('div');
         content.classList.add('content');
         document.body.appendChild(content);
 
         const upperPage = document.createElement('div');
-        upperPage.classList.add('upper-page');
         content.appendChild(upperPage);
 
         const title = document.createElement('div');
-        title.classList.add('title', 'diary');
-        title.style.marginTop = '16px';
+        title.classList.add();
+        title.style.textAlign = 'center';
+        title.style.font = 'normal normal 300 32px/43px Roboto Condensed';
+        title.style.letterSpacing = '0.64px';
         title.innerText = 'Your diary is ready!';
         upperPage.appendChild(title);
 
-        const gradient = document.createElement('div');
-        gradient.classList.add('gradient-container', 'diary');
-        content.appendChild(gradient);
-
         const centerContainer = document.createElement('div');
         centerContainer.style.margin = 'auto';
-        gradient.appendChild(centerContainer);
+        centerContainer.style.marginLeft = '27px';
+        centerContainer.style.marginRight = '27px';
+        centerContainer.style.marginTop = '27px';
+        content.appendChild(centerContainer);
         
         const textBox1 = document.createElement('div');
-        textBox1.classList.add('text-box');
         textBox1.innerText = 'Thanks for using Togather, as we are curious to how you have experienced living with togather, we are keen to hear your thoughts!';
-        textBox1.style.marginTop = '28px';
+        textBox1.style.margin = '28px 0';
+        textBox1.style.marginBottom = '40px';
+        textBox1.style.textAlign = 'center';
         centerContainer.appendChild(textBox1);
+
+        const buttonContainer = document.createElement('div');
+        buttonContainer.style.display = 'flex';
+        buttonContainer.style.flexDirection = 'column';
+        centerContainer.append(buttonContainer);
         
         const giveButton = document.createElement('button');
-        giveButton.classList.add('button', 'round', 'diary');
-        giveButton.style.backgroundColor = '#00797D';
+        giveButton.classList.add('secondary');
+        giveButton.style.margin = 'auto';
         giveButton.innerText = 'Give Feedback';
         giveButton.addEventListener('click', e => eventHandler(e, {type: 'give-feedback'}));
-        centerContainer.appendChild(giveButton);
+        buttonContainer.appendChild(giveButton);
 
         const noButton = document.createElement('button');
-        noButton.classList.add('button', 'round', 'diary');
-        noButton.style.backgroundColor = '#00797D';
+        noButton.classList.add('primary');
+        noButton.style.margin = 'auto';
         noButton.style.marginTop = '25px';
         noButton.innerText = 'No thanks';
         noButton.addEventListener('click', e => eventHandler(e, {type: 'no'}));
-        centerContainer.appendChild(noButton);
+        buttonContainer.appendChild(noButton);
     }
 
     const renderGiveFeedback = () => {
+
+        renderDiaryHeader(document.body, "", false);
 
         const content = document.createElement('div');
         content.classList.add('content');
         document.body.appendChild(content);
 
-        const gradient = document.createElement('div');
-        gradient.classList.add('gradient-container', 'diary');
-        content.appendChild(gradient);
-
         const centerContainer = document.createElement('div');
         centerContainer.classList.add('feedback__container');
-        gradient.appendChild(centerContainer);7
+        content.appendChild(centerContainer);
 
-        const title = document.createElement('div');
-        title.classList.add('title', 'feedback');
-        title.style.marginTop = '25px';
-        title.innerText = 'Feedback Form';
-        centerContainer.appendChild(title);
+        const textBox1 = document.createElement('div');
+        textBox1.innerText = 'Please write your feedback in the box below:';
+        textBox1.style.margin = '28px 0';
+        textBox1.style.marginBottom = '40px';
+        textBox1.style.marginTop = '0px';
+        textBox1.style.textAlign = 'center';
+        centerContainer.appendChild(textBox1);
         
         const feedback = document.createElement('textarea');
         feedback.classList.add('feedback__textarea');
+        feedback.placeholder = 'Type Here'
         centerContainer.appendChild(feedback);
-        
-        const consentLabel = document.createElement('label');
-        consentLabel.classList.add('feedback__label');
-        consentLabel.innerText = 'Consent text! Do I consent?';
-        centerContainer.appendChild(consentLabel);
-
-        const consent = document.createElement('input');
-        consent.classList.add('feedback__checkbox');
-        consent.type = 'checkbox';
-        consentLabel.appendChild(consent);
-        
+         
         const giveButton = document.createElement('button');
-        giveButton.classList.add('button', 'round', 'diary');
-        giveButton.style.backgroundColor = '#00797D';
+        giveButton.classList.add('secondary');
+        giveButton.style.margin = 'auto';
         giveButton.innerText = 'Submit';
         giveButton.addEventListener('click', e => {
             renderButtonLoader(giveButton);
@@ -2517,65 +2518,64 @@ const DiaryUI = (eventHandler) => {
                 giveButton.innerText = 'Submit';
                 giveButton.disabled = false;
             } else {
-                eventHandler(e, {type: 'give-feedback', feedback: feedback.value.trim(), consent: consent.checked});
+                eventHandler(e, {type: 'give-feedback', feedback: feedback.value.trim()});
             }
         });
         centerContainer.appendChild(giveButton);
 
     }
 
-    const renderShare = () => {
+    const renderShare = (titleText) => {
 
-        renderDiaryHeader(document.body, 5);
+        renderDiaryHeader(document.body, '#5/5', false);
 
         const content = document.createElement('div');
         content.classList.add('content');
         document.body.appendChild(content);
 
         const upperPage = document.createElement('div');
-        upperPage.classList.add('upper-page');
         content.appendChild(upperPage);
 
         const title = document.createElement('div');
-        title.classList.add('title', 'diary');
-        title.style.marginTop = '16px';
-        title.innerText = '{% t diary.dd1 %}';
+        title.classList.add();
+        title.style.textAlign = 'center';
+        title.style.font = 'normal normal 300 32px/43px Roboto Condensed';
+        title.style.letterSpacing = '0.64px';
+        title.innerText = titleText;
         upperPage.appendChild(title);
-
-        const gradient = document.createElement('div');
-        gradient.classList.add('gradient-container', 'diary');
-        content.appendChild(gradient);
 
         const centerContainer = document.createElement('div');
         centerContainer.style.margin = 'auto';
-        gradient.appendChild(centerContainer);
+        centerContainer.style.marginLeft = '27px';
+        centerContainer.style.marginRight = '27px';
+        centerContainer.style.marginTop = '27px';
+        centerContainer.style.display = 'flex';
+        centerContainer.style.flexDirection = 'column';
+        content.appendChild(centerContainer);
         
         const textBox1 = document.createElement('div');
-        textBox1.classList.add('text-box');
-        textBox1.style.textAlign ='center';
         textBox1.innerText = '{% t diary.s1 %}';
-        textBox1.style.marginTop = '28px';
+        textBox1.style.marginBottom = '40px';
+        textBox1.style.textAlign = 'center';
         centerContainer.appendChild(textBox1);
-        
+
         const buttonContainer = document.createElement('div');
         buttonContainer.style.display = 'flex';
-        buttonContainer.style.margin = '30px 0';
-        centerContainer.appendChild(buttonContainer);
+        buttonContainer.style.flexDirection = 'row';
+        centerContainer.append(buttonContainer);
 
         const shareWhatsAppButton = document.createElement('button');
-        shareWhatsAppButton.classList.add('button', 'round');
-        shareWhatsAppButton.style.backgroundColor = '#53ce5e';
+        shareWhatsAppButton.style.background = "url({{ '/assets/images/WhatsApp_Logo_2.png' | prepend: site.baseurl }}) no-repeat";
+        shareWhatsAppButton.style.height = '70px';
+        shareWhatsAppButton.style.width = '70px';
+        shareWhatsAppButton.style.backgroundPosition = 'center';
+        shareWhatsAppButton.style.backgroundSize = 'cover';
         shareWhatsAppButton.style.borderRadius = '100px';
         shareWhatsAppButton.style.margin = 'auto';
         shareWhatsAppButton.style.marginRight = '20px';
         shareWhatsAppButton.addEventListener('click', e => eventHandler(e, {type: 'share'}));
         buttonContainer.appendChild(shareWhatsAppButton);
     
-        const imgWA = document.createElement('img');
-        imgWA.src = 'https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg';
-        imgWA.height = '50';
-        shareWhatsAppButton.appendChild(imgWA);
-
         const shareTwitterButton = document.createElement('button');
         shareTwitterButton.classList.add('button', 'round');
         shareTwitterButton.style.background = "url({{ '/assets/images/Twitter_Social_Icon_Circle_Color.svg' | prepend: site.baseurl }}) no-repeat";
@@ -2587,14 +2587,15 @@ const DiaryUI = (eventHandler) => {
         buttonContainer.appendChild(shareTwitterButton);
 
         const noButton = document.createElement('button');
-        noButton.classList.add('button', 'round', 'diary');
-        noButton.style.backgroundColor = '#00797D';
+        noButton.classList.add('primary');
+        noButton.style.margin = 'auto';
         noButton.style.marginTop = '75px';
         noButton.innerText = '{% t diary.s2 %}';
         noButton.addEventListener('click', e => eventHandler(e, {type: 'no'}));
-        centerContainer.appendChild(noButton);
-
+        centerContainer.appendChild(noButton);   
     }
+
+
 /*
     const  renderSiteFooter = (parent) => {
         const footer = document.createElement('div');
