@@ -509,18 +509,18 @@ const Diary = () => {
                         break;
 
                     case 'stop-assembling':
-                        updateState(STATES.uploadFiles);
                         templates.destroyPreviewPdfWorker(STATES.reviewDiary.variables.worker);
+                        updateState(STATES.uploadFiles);
                         break;
 
                     case 'go-to-step-4':
-                        updateState(STATES.selectMessages);
                         templates.destroyPreviewPdfWorker(STATES.reviewDiary.variables.worker);
+                        updateState(STATES.selectMessages);
                         break;
 
                     case 'go-to-step-6':
-                        updateState(STATES.downloadDiary);
                         templates.destroyPreviewPdfWorker(STATES.reviewDiary.variables.worker);
+                        updateState(STATES.downloadDiary);
                         break;
                 
                 }
@@ -592,7 +592,7 @@ const Diary = () => {
         },
         share: {
             render: () => {
-                ui.renderShare();
+                ui.renderShare(previousState === STATES.giveFeedback ? 'Thanks for your feedback!' : '{% t diary.dd1 %}');
             },
             eventHandler: (e, params) => {
 
@@ -610,7 +610,6 @@ const Diary = () => {
                                     `https://web.whatsapp.com/send?text=${encodeURI('https://togather.me/')}`;
                         
                         window.open(link, '_blank');
-                        window.location.href = `{{ site.url }}{{ site.baseurl }}/`;
                         break;
 
                     case 'share-twitter':
@@ -618,7 +617,6 @@ const Diary = () => {
                         const twitterLink = `https://twitter.com/intent/tweet?text=${encodeURI(text)}&url=https://togather.me`;
                         window.fathom.trackGoal('LRZPNF3C', 0);
                         window.open(twitterLink, '_blank');
-                        window.location.href = `{{ site.url }}{{ site.baseurl }}/`;
                         break
 
                     case 'no':
@@ -631,6 +629,7 @@ const Diary = () => {
     }
 
     let currentState = STATES.topicsFound;
+    let previousState;
 
     const handleEvent = (e, params) => {
         e.stopPropagation();
@@ -638,12 +637,14 @@ const Diary = () => {
     }
 
     const updateState = (newState) => {
+        previousState = currentState;
         currentState = newState;
         ui.clearPage();
         currentState.render();
     }
 
     const updateStateWithParameters = (newState, parameters) => {
+        previousState = currentState;
         currentState = newState;
         currentState['parameters'] = parameters;
         ui.clearPage();
