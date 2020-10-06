@@ -448,18 +448,22 @@ const Diary = () => {
 
                     case 'next-page':
               
-                        if(STATES.reviewDiary.variables.currentPage < model.getDiaryDocument().getNumberOfPages()-1){
-                            console.log(STATES.reviewDiary.variables.canvasOrder);
+                        if(STATES.reviewDiary.variables.currentPage + 1 <= model.getDiaryDocument().getNumberOfPages()){
+                            console.log('start', STATES.reviewDiary.variables.canvasOrder, model.getDiaryDocument().getNumberOfPages(), STATES.reviewDiary.variables.currentPage);
                             ui.hidePreviewCanvas(STATES.reviewDiary.variables.canvasOrder[1]);
                             STATES.reviewDiary.variables.currentPage += 1;
                             ui.displayPreviewCanvas(STATES.reviewDiary.variables.canvasOrder[2]);
-
-                            if(STATES.reviewDiary.variables.currentPage < model.getDiaryDocument().getNumberOfPages()-1) {
-                                const nextCanvas = `${STATES.reviewDiary.variables.canvasOrder[0]}`;
-                                STATES.reviewDiary.variables.canvasOrder.shift();
-                                STATES.reviewDiary.variables.canvasOrder.push(nextCanvas);
+                            console.log('end', STATES.reviewDiary.variables.canvasOrder, model.getDiaryDocument().getNumberOfPages(), STATES.reviewDiary.variables.currentPage);
+                            
+                            const nextCanvas = `${STATES.reviewDiary.variables.canvasOrder[0]}`;
+                            STATES.reviewDiary.variables.canvasOrder.shift();
+                            STATES.reviewDiary.variables.canvasOrder.push(nextCanvas);
+                            
+                            if(STATES.reviewDiary.variables.currentPage + 1 <= model.getDiaryDocument().getNumberOfPages()) {
+                                console.log('end2', STATES.reviewDiary.variables.canvasOrder, model.getDiaryDocument().getNumberOfPages(), STATES.reviewDiary.variables.currentPage);
                                 templates.renderPageToCanvas(STATES.reviewDiary.variables.pages[STATES.reviewDiary.variables.currentPage + 1], STATES.reviewDiary.variables.canvas.get(nextCanvas));
                             }
+                            console.log('');
 
                             /*
                             ui.hidePreviewPage(STATES.reviewDiary.variables.currentPage);
@@ -478,17 +482,20 @@ const Diary = () => {
                         break;
 
                     case 'previous-page':
-                        console.log('what??')
-                        if(STATES.reviewDiary.variables.currentPage > 1){
-                            console.log(STATES.reviewDiary.variables.canvasOrder);
+                        
+                        if(STATES.reviewDiary.variables.currentPage - 1 >= 1){
+                            console.log('start', STATES.reviewDiary.variables.canvasOrder, model.getDiaryDocument().getNumberOfPages(), STATES.reviewDiary.variables.currentPage);
                             ui.hidePreviewCanvas(STATES.reviewDiary.variables.canvasOrder[1]);
                             STATES.reviewDiary.variables.currentPage -= 1;
                             ui.displayPreviewCanvas(STATES.reviewDiary.variables.canvasOrder[0]);
+                            console.log('end', STATES.reviewDiary.variables.canvasOrder, model.getDiaryDocument().getNumberOfPages(), STATES.reviewDiary.variables.currentPage);
+                            
+                            const nextCanvas = `${STATES.reviewDiary.variables.canvasOrder[2]}`;
+                            STATES.reviewDiary.variables.canvasOrder.pop();
+                            STATES.reviewDiary.variables.canvasOrder.unshift(nextCanvas);
 
-                            if(STATES.reviewDiary.variables.currentPage > 1) {
-                                const nextCanvas = `${STATES.reviewDiary.variables.canvasOrder[2]}`;
-                                STATES.reviewDiary.variables.canvasOrder.pop();
-                                STATES.reviewDiary.variables.canvasOrder.unshift(nextCanvas);
+                            if(STATES.reviewDiary.variables.currentPage - 1 >= 1) {
+                                console.log('end2', STATES.reviewDiary.variables.canvasOrder, model.getDiaryDocument().getNumberOfPages(), STATES.reviewDiary.variables.currentPage);
                                 templates.renderPageToCanvas(STATES.reviewDiary.variables.pages[STATES.reviewDiary.variables.currentPage - 1], STATES.reviewDiary.variables.canvas.get(nextCanvas));
                             }
 

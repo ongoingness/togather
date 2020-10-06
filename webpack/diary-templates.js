@@ -795,7 +795,7 @@ const DiaryTemplates = () => {
 
                 const renderPages= {};
           
-                for(let i = 1; i < pdf.numPages; i++) {
+                for(let i = 1; i <= pdf.numPages; i++) {
                     const page = await pdf.getPage(i);
                     renderPages[i] = page;
                     console.log(renderPages);
