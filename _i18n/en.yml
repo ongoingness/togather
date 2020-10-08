@@ -2,6 +2,7 @@ global:
     lang-code: en
     english: English
     portugues: Português
+    nederlands: Nederlands
 
 index:
     header: Togather
@@ -82,7 +83,7 @@ nav-overlay:
     instructions-a: Instructions
     diary-a: Assemble Diary
     about-a: About
-    contact-a: Contact
+    contact-a: Contact Us
 
 footer:
     f1: 'Select Language:'

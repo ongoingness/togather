@@ -128,7 +128,6 @@ const DiaryUI = (eventHandler) => {
 
         window.addEventListener('resize', (e) => overlayContent.style.minWidth = `${document.body.offsetWidth}px`);
 
-
         const aHome = document.createElement('a');
         aHome.id = 'home-a';
         aHome.href = '{{ site.url }}{{ site.baseurl }}/';
@@ -268,39 +267,39 @@ const DiaryUI = (eventHandler) => {
     const renderSiteFooter = () => {
 
         const footer = document.createElement('footer');
-        footer.style = "height: 378px; width: 100%; color: white; margin-top: 90px;"
         document.body.append(footer);
 
         const div1 = document.createElement('div');
-        div1.style = "position: relative; width: 100%; height: 30px;"
+        div1.classList.add('footer__upper-container');
         footer.append(div1);
 
         const contactButton = document.createElement('button');
-        contactButton.style = "background-color: #d9b43c; z-index: 1;position: absolute;border: none;top: 0;right: 25px;font-size: 16px;font-weight: bold;color: #2b2b2b;border-radius: 15px;width: 100px;height: 30px;";
-        contactButton.innerText = "Contact Us";
+        contactButton.classList.add('footer__contact-button');
+        contactButton.innerText = "{% t nav-overlay.contact-a %}";
+        contactButton.addEventListener('click', () => location.href='{{ site.url }}{{ site.baseurl }}/contact');
         div1.append(contactButton);
 
         const div2 = document.createElement('div');
-        div2.style = "background-color: #d9b43c;bottom: 0px;height: 10px;position: absolute;width: 100%;z-index: 0;"
+        div2.classList.add('footer__border');
         div1.append(div2);
         
         const div3 = document.createElement('div');
-        div3.style = "background: #596a84; height: 348px; width: 100%;";
+        div3.classList.add('footer__lower-container');
         footer.append(div3);
 
         const div4 = document.createElement('div');
-        div4.style = "text-align: center;padding: 20px;"
+        div4.classList.add('footer__logo-container');
         div3.append(div4);
 
         const imgLogo = document.createElement('img');
+        imgLogo.classList.add('footer__logo');
         imgLogo.src = "{{ '/assets/images/TOGATHER_LOGO_reverse.png' | prepend: site.baseurl_root }}";
         imgLogo.width = "80";
-        imgLogo.style = "opacity: 0.5"
         imgLogo.alt="Togather Logo"
         div4.append(imgLogo);
 
         const togatherNameLogo = document.createElement('h3');
-        togatherNameLogo.style = "font: 32px/24px 'Roboto Condensed';letter-spacing: 0.96px;margin: 0;color: white;text-transform: uppercase;margin-top: 10px;";
+        togatherNameLogo.classList.add('footer__logo__title');
         togatherNameLogo.innerText = "Togather";
         div4.append(togatherNameLogo);
 
@@ -310,11 +309,12 @@ const DiaryUI = (eventHandler) => {
         div3.append(div5);
 
         const div6 = document.createElement('div');
+        div6.id = "sitemap";
         div6.classList.add("column");
         div5.append(div6);
 
         const div7 = document.createElement('div');
-        div7.style = "display: flex; flex-direction: column; width: 100px;";
+        div7.classList.add('footer__links-container');
         div6.append(div7);
 
         const a1 = document.createElement('a');
@@ -360,45 +360,71 @@ const DiaryUI = (eventHandler) => {
         div7.append(a7);
                    
         const div8 = document.createElement('div');
-        div8.classList.add("column");
-        div8.style = "max-width: 200px;"
+        div8.classList.add("column", "language-column");
         div5.append(div8);
 
-        const languageLabel = document.createElement('label');
-        languageLabel.id = "f1";
-        languageLabel.for = "languages" 
-        languageLabel.classList.add("footer__text__small");
-        languageLabel.style = "padding: 0;"
-        languageLabel.innerText = "{% t footer.f1 %}";
-        div8.append(languageLabel);
+        const openLanguageModal = () => document.getElementById("languageModal").style.display = "block";
+    
+        const closeLanguageModal = () => document.getElementById("languageModal").style.display = "none";
+    
+        const languageModal = document.createElement('languageModal');
+        languageModal.id = 'languageModal';
+        languageModal.classList.add('modal');
+        document.body.appendChild(languageModal);
+        
+        const modalContent = document.createElement('modal-content');
+        modalContent.classList.add('modal-content');
+        languageModal.append(modalContent);
 
-        const languageSelect = document.createElement('select');
-        languageSelect.name = "languages";
-        languageSelect.id = "languages";
-        languageSelect.style = "height: 22px; margin-right:20px; line-height:22px;";
-        languageSelect.addEventListener('change', () => window.location.href = languageSelect.options[languageSelect.selectedIndex].value);
+        const closeModalButton = document.createElement('a');
+        closeModalButton.classList.add('modal__close-button');
+        closeModalButton.addEventListener('click', closeLanguageModal);
+        closeModalButton.innerText = '×';
+        modalContent.append(closeModalButton);
 
-        div8.append(languageSelect);
+        const modalP = document.createElement('p');
+        modalP.style.color = 'black';
+        modalP.style.textAlign = 'center';
+        modalP.innerText = '{% t footer.f1 %}';
+        modalContent.append(modalP);
+        
+        const languageList = document.createElement('div');
+        languageList.id = 'languageList';
+        languageList.style.position = 'relative';
+        modalContent.append(languageList);
 
-        let language = window.location.href.trim().split('/').filter(elem => elem != '')[2]
-        language = language === 'diary' ? 'en' : language;
+        const buttonEN = document.createElement('a');
+        buttonEN.href = '/diary/';
+        buttonEN.innerText = '{% t global.english %}';
+        languageList.append(buttonEN);
 
-        const option1 = document.createElement('option');
-        option1.value = "/diary";
-        option1.selected = language === 'en'
-        option1.innerText = "{% t global.english %}";
-        languageSelect.append(option1);
+        const buttonPT = document.createElement('a');
+        buttonPT.href = '/pt/diary/';
+        buttonPT.innerText = '{% t global.portugues %}';
+        languageList.append(buttonPT);
 
-        const option2 = document.createElement('option');
-        option2.value = "/pt/diary";
-        option2.selected = language === 'pt';
-        option2.innerText = "{% t global.portugues %}";
-        languageSelect.append(option2);
+        const buttonNL = document.createElement('a');
+        buttonNL.href = '/nl/diary/';
+        buttonNL.innerText = '{% t global.nederlands %}';
+        languageList.append(buttonNL);
+
+        window.onclick = (event) => {
+            const modal = document.getElementById("languageModal");
+            if (event.target == modal)
+                closeLanguageModal()
+        }
+        
+        const languageButton = document.createElement('button');
+        languageButton.classList.add('language-button');
+        languageButton.innerText = '{% t footer.f1 %} {{site.lang}}';
+        languageButton.addEventListener('click', openLanguageModal);
+
+        div8.append(languageButton);
 
         const div9 = document.createElement('div');
         div9.style = "text-align: center;";
         div3.append(div9);
-
+        
         const div10 = document.createElement('div');
         div10.style = "display: flex; flex-direction: row; flex-wrap: wrap; padding: 0px 15px;";
         div9.append(div10);

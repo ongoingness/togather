@@ -1,0 +1,184 @@
+global:
+    lang-code: nl
+    english: English
+    portugues: Português
+    nederlands: Nederlands
+
+index:
+    home-text: Samenkomen in verhalen wanneer samen zijn niet mogelijk is
+    home-learn-button: Lees meer over Togather
+    home-topic-button: Nieuw onderwerp!
+
+introduction:
+    header: Introductie
+    t1: Togather maakt het makkelijk om de tijd apart van je dierbaren vast te leggen en te delen.
+    t2: Verzamel een groep van vrienden en familie op WhatsApp
+    t3: Krijg nostalgische, creatieve, grappige of uitdagende onderwerpen om te delen in de groep.
+    t4: Creëer, leg vast, schrijf, fotografeer en deel met jouw groep.
+    t5: Kom elke dag terug voor een nieuw onderwerp. Ga zo door totdat je klaar bent om alle verhalen, foto's en berichten met je dierbaren te delen. Met Togather kan je een persoonlijk dagboek voor hen maken vanuit je WhatsApp-groep.
+    t6: 'Begin met het maken van een groep in Whatsapp met alle mensen die willen bijdragen aan dit dagboek. Laat iedereen weten waar deze groep voor is. Je kunt ons voorbeeld gebruiken:'
+
+instructions:
+    header: Instructies
+    t1: Om te beginnen
+    t2: Open WhatsApp en maak een groep met alle mensen die willen bijdragen aan het dagboek.
+    t3: "Stap-voor-stap: Android"
+    t4: "Stap-voor-stap: iOS"
+    t5: 'Laat iedereen weten waar deze groep voor is en voor wie het dagboek bedoeld is. Je kunt ons voorbeeld gebruiken: '
+    t6: Dagelijks
+    t7: Bezoek Togather elke dag om een ​​nieuw onderwerp of nieuwe activiteit voor uw groep te ontvangen.
+    t8: Wij hebben veel onderwerpen en activiteiten om jij en je groep bezig te houden, of je kunt geheel eigen onderwerpen maken. Deel ze in je WhatsApp-groep als een bericht of foto en moedig de anderen aan om te reageren.
+    t9: "PS: maak het gemakkelijk om aan het einde je eigen bedachte onderwerpen te vinden door het bericht te beginnen met de woorden "het onderwerp van vandaag is ..."
+    t10: Iedereen kan hun antwoorden delen in de WhatsApp-groep.
+    t11: Herhaal deze stappen elke dag om het dagboek gaande te houden.
+    t12: Krijg een onderwerp
+    t13: Het dagboek samenstellen
+    t14: 'Volg deze stappen om van jouw WhatsApp groepschat een dagboek te maken:'
+    t15: 1. Exporteer de groepschat (inclusief media) en sla deze op op je apparaat of cloudopslag (bijv. Google Drive, iCloud of Dropbox).
+    t16: "Stap-voor-stap: WhatsApp-chats exporteren"
+    t17: 'PS: iedereen in de WhatsApp groep kan dit, dus vraag gerust om hulp.'
+    t18: 2. Bezoek de Togather 'Dagboek Samenstellen'-pagina en upload de geëxporteerde groepschat. (alle media en het `chat.txt`-bestand dat u in de vorige stap heeft opgeslagen)
+    t19: 'PS: geen zorgen, je persoonlijke berichten en mediabestanden worden eigenlijk nergens geüpload. Alles gebeurt lokaal op je apparaat - wij verzamelen geen persoonlijke gegevens. Zo blijven je gesprekken privé en heb je de volledige controle over met wie jij jullie dagboek wilt delen. '
+    t20: Meer informatie over hoe de service werkt
+    t21: 3. Personaliseer het dagboek door de naam van je dierbare op de voorkant te plaatsen.
+    t22: 4. Controleer de namen van iedereen die heeft bijgedragen. We laten je een lijst zien met de namen die we in je groep hebben gevonden. Je kan de namen veranderen naar hoe jullie ze in het dagboek willen zien (bijvoorbeeld alleen voornamen).
+    t23: 5. Bekijk de onderwerpen die we in de groepschat hebben gevonden. Als er onderwerpen ontbreken, kan je deze toevoegen door ze uit de berichten in de chat te selecteren of door ze zelf te schrijven.
+    t24: 6. Voor elk onderwerp wordt je gevraagd te selecteren welke reacties je voor die dag aan het dagboek wilt toevoegen.
+    t25: 'Ps: Maak je geen zorgen als er een dag is dat jullie niets hebben gestuurd, iedereen verdient rust, we slaan die dagen dan gewoon over.'
+    t26: 7. Als je dit voor elke gewenste dag voor het dagboek hebt gedaan, klik je op de knop 'voltooien'. Al de berichten worden in een opmaak geplaatst en je dagboek is klaar om te downloaden. Jullie kunnen het afdrukken en / of doorsturen om het dagboek te delen met familie, vrienden en dierbaren.
+    t27: Dagboek samenstellen
+
+about:
+    header: Over Togather
+    t0: Hoe het begon
+    t1: Het idee voor ToGather werd geboren in de vroege stadia van de COVID-19 lockdown in het Verengid Koninkrijk. Wij zagen een artikel in het Nederlandse nieuws waarin een gezin een dagboek bijhield voor hun familielid op de Intensive Care (IC) en dit aan haar gaf toen ze uit het ziekenhuis werd ontslagen. Ze schreven op wat er met haar was gebeurd terwijl ze op de IC lag, maar ook wat er daarbuiten gebeurde, weersvoorspellingen, nieuwsberichten, en dingen die de familie had gedaan. Wij vonden dit erg bijzonder, en wilden dit gebaar beschikbaar maken voor mensen die soortgelijke ervaringen meemaken.
+    t2: Nu we deze moeilijke tijden meemaken, waarin families en vrienden elkaar soms lange tijd niet kunnen zien, realiseren wij dat dit je een machteloos gevoel kan geven. Wij hopen dat door als groep (digitaal) samen te komen om met deze onderwerpen en activiteiten bezig te zijn, er ruimte ontstaat om kracht te putten uit elkaar en wat verlichting te vinden. Een plek waar je, hoewel het leven raar lijkt, samen herinneringen kunt delen en maken, met altijd jullie dierbare in het middelpunt. Wij willen jullie helpen om jullie familie / vrienden / gemeenschap te ondersteunen door te verzamelen in verhalen wanneer samen zijn niet mogelijk is.
+    t3: "Simpel gezegd: Togather is ontworpen om jullie berichten en media privé te houden. Al uw chat berichten en media bestanden blijven op uw apparaat en worden nooit gedeeld of opgeslagen door Togather (of iemand anders)."
+    t4: De enige gegevens die we verzamelen zijn anonieme website gebruikerspatronen en reacties op ons optionele feedback formulier aan het einde van het samenstellen van uw dagboek. Wij zijn een team van onderzoekers (details hieronder), die graag zouden willen horen over jullie ervaringen met Togather (evenals eventuele suggesties om deze service te verbeteren). Dit is volledig vrijwillig en heeft geen enkele invloed op uw toegang tot, of gebruik van, de Togather website. Om deze feedback te ondersteunen en inzicht te krijgen in hoe mensen ToGather gebruiken, verzamelen wij welke onderwerpen worden gedeeld - dat is alles. Wij registreren geen gebruikersgegevens of informatie die naar iemand kan worden herleid. Om je een idee te geven van welke gegevens wij vastleggen, hebben wij een voorbeeld van een logboek voor één dag gemaakt, klik hier om het te zien.
+    t5: De mensen achter Togather
+    t6: Wij zijn een team van designers en onderzoekers van Northumbria University gevestigd in Newcastle Upon Tyne in het Verenigd Koninkrijk. We maken deel uit van het onderzoeksproject Enabling Ongoingness (www.enablingongoingness.com) dat onderzoekt hoe wij relaties een nieuwe betekenis kunnen geven in de context van levenseinde en rouwverwerking. Een groot deel hiervan is het onderzoeken van hoe mensen de essentie van een relatie vastleggen en verzamelen in media, verhalen, objecten en rituelen in het dagelijks leven. Tijdens de COVID-19-pandemie werden we geconfronteerd met een nieuwe wereldwijde gedeelde ervaring van angst voor verlies en verdriet. Het is anders dan alles wat velen van ons eerder hebben meegemaakt, en heeft ongetwijfeld ons leven op veel manieren veranderd. Via Togather hopen wij dat wij jou kunnen helpen jouw gemeenschapsbanden vast te leggen in een tijd waarin dit niet zo eenvoudig is als voorheen. Als je ervaringen met Togather hebt die je met ons wilt delen, aarzel dan niet om contact op te nemen. U kunt ons een bericht sturen via e-mail (kyle.montague@northumbria.ac.uk) of door ons feedback formulier in te vullen.
+    t7: Togather
+    t8: Togather is een online dienst die als doel heeft families en vrienden bij elkaar te brengen door verhalen te delen voor een dierbare. Het is gemaakt met behulp van bestaande diensten zoals WhatsApp en GitHub, om het voor iedereen gratis en overal beschikbaar te maken. Wij zullen je voorzien van dagelijkse onderwerpen en activiteiten om met familie en vrienden over te berichten. Deze groepsgesprekken kunnen vervolgens in een boek of dagboek omgezet kunnen worden om cadeau te doen, te bewaren en opnieuw te bezoeken.
+    t9: Uw privacy
+
+contact:
+    header: Contact
+    t1: ToGather is opgezet als een vrij toegankelijke dienst die voortdurend blijft ontwikkelen. Daarom zijn wij altijd benieuwd naar jouw feedback, ideeën, gedachten en ervaringen. Als je iets met ons wilt delen, aarzel dan niet om contact op te nemen!
+    t2: 'Neem contact met ons op via:'
+
+nav-overlay:
+    home-a: Home
+    topic-a: Krijg een onderwerp
+    explained-a: Introductie
+    instructions-a: Instructies
+    diary-a: Dagboek samenstellen
+    about-a: Over Togather
+    contact-a: Contact
+
+footer:
+    f1: 'Selecteer Taal:'
+
+group-start:
+    gs1: 'Hoi allemaal, deze groep is een plek waar wij dingen kunnen delen die we graag willen vastleggen voor [GEEF NAAM] in een dagboek. Elke dag zullen wij een onderwerp delen als een suggestie voor een gesprek die dag. Als je een idee hebt voor een onderwerp, deel dit dan gerust. En als je gewoon iets hebt dat je wilt delen voor het dagboek dat niets met het onderwerp te maken heeft, dat mag ook! Om te beginnen zou het leuk zijn als iedereen zich voorstelt: dus plaats een foto van jezelf, wie je bent voor [GEEF NAAM], en een kort persoonlijk bericht voor hen.'
+    gs2: Bericht delen
+    gs3: 'Hoi allemaal, deze groep is een plek waar wij dingen kunnen delen die we graag willen vastleggen voor ${name} in een dagboek. Elke dag zullen wij een onderwerp delen als een suggestie voor een gesprek die dag. Als je een idee hebt voor een onderwerp, deel dit dan gerust. En als je gewoon iets hebt dat je wilt delen voor het dagboek dat niets met het onderwerp te maken heeft, dat mag ook! Om te beginnen zou het leuk zijn als iedereen zich voorstelt: dus plaats een foto van jezelf, wie je bent voor ${name}, en een kort persoonlijk bericht voor hen.'
+    gs4: 'Schrijf hier de naam voor wie het dagboek is:'
+
+topic:
+    t0: Krijg een onderwerp
+    t1: Deel met de groep
+    t2: Geef mij een ander onderwerp
+    t3: 'Onderwerp:'
+
+diary:
+    uf1: 'Vind jouw geëxporteerde WhatsApp groepschat (inclusief de mediabestanden) en voeg ze hieronder toe.'
+    uf2: 'PS:'
+    uf3: 'Geëxporteerd met een Android-telefoon? Selecteer alle mediabestanden en een .txt-bestand. Geëxporteerd met een iPhone? Selecteer het .zip-bestand. '
+    uf4: 'Je chatberichten en media blijven privé, dit gebeurt allemaal op uw apparaat en geen van uw inhoud wordt met ons (of iemand anders) verzonden of gedeeld.'
+    uf5: 'Selecteer geëxporteerde WhatsApp-bestanden'
+    uf6: 'Geen bestanden geselecteerd'
+    uf7: 'Begin met het samenstellen van het dagboek'
+    uf8: 'Gedetailleerde instructies'
+    uf9: 'Hoe wij uw privacy waarborgen'
+
+    uem1: 'Geen chat bestand gevonden'
+
+    dh1: 'Dagboek samenstellen'
+    dh2: 'Vanwege onze privacy maatregelen kan jouw voortgang niet worden opgeslagen als je nu stopt. Dit betekent dat als je terugkomt om je dagboek samen te stellen, je opnieuw moet beginnen. Als je een pauze wilt, kan je deze website open laten zonder je voortgang te verliezen. Weet je zeker dat je wilt stoppen met het samenstellen van je dagboek? '
+    dh3: 'Ja, stop met samenstellen'
+    dh4: 'Nee, ga verder met het dagboek'
+
+    ds1: 'Het samenstellen van het dagboek heeft 5 stappen.'
+    ds2: '# 1 Voor wie is het dagboek?'
+    ds3: '# 2 Controleer namen van bijdragers'
+    ds4: '# 3 Selecteer gebruikte onderwerpen'
+    ds5: '# 4 Verzamel reacties per dag'
+    ds6: '# 5 Bekijk en download dagboek'
+    ds7: 'Hier zie je in welke stap je zit.'
+    ds8: 'Ga naar stap 1'
+
+    sc1: 'Stap'
+
+    wtdif1: 'Voor wie is dit dagboek?'
+    wtdif2: 'Deze naam wordt gebruikt om een ​​persoonlijke omslag en openingspagina te maken.'
+    wtdif3: 'Typ hier de naam'
+    wtdif4: 'Noem de naam van de dierbare voor wie jij dit dagboek maakt. Deze naam wordt gebruikt op de omslag van het dagboek en op de eerste pagina om een ​​persoonlijk boekje en bericht voor hen te maken. Wij slaan deze informatie niet op, dit is allemaal privé en alleen voor jou en met wie je ervoor kiest om het te delen. '
+
+    wc1: 'Wie heeft bijgedragen aan dit dagboek?'
+    wc2: 'Wij vonden de volgende namen in de groep. Is deze lijst correct? '
+    wc3: 'Dit zijn de namen van de groepsleden zoals ze op je telefoon zijn opgeslagen. Zorg ervoor dat de lijst compleet is en dat dit de namen zijn die je graag in het dagboek wilt zien. Als je ze wilt wijzigen, klik op de potlood-knop om ze te bewerken. Als je alleen een telefoonnummer ziet, is deze persoon niet opgeslagen in uw contacten. Gezien wij deze namen gebruiken om te laten zien wie welk bericht heeft geschreven, neem vooral de tijd om ze te controleren en bewerken. '
+
+    tf1: 'Over welke onderwerpen heb je gesproken?'
+    tf2: 'We hebben de volgende reeks onderwerpen gevonden. Is deze lijst compleet? '
+    tf3: 'Selecteer uit chat'
+    tf4: 'Schrijf mijn eigen'
+    tf5: 'Onderwerp toevoegen'
+    tf6: 'De onderwerpen die wij hebben gevonden, zijn degene die je hebt gedeeld via de Togather-website. Als je aan je eigen onderwerpen hebt gedacht, kun je deze hier toevoegen. Je kunt ze selecteren in de chat, als je ze daar hebt gedeeld, of je eigen schrijven. Als er dagen waren dat je geen onderwerp had, maar berichten werden gedeeld, probeer daar dan een beschrijving voor te vinden. Bijvoorbeeld: "een logboek van maandag", of "dingen die wij vandaag wilden delen. Zo kunnen we die dag toevoegen aan het dagboek. '
+
+    t1: 'Dag'
+
+    wt1: 'Schrijf je eigen onderwerp en voor welke datum dit was'
+    wt2: 'Schrijf een ander onderwerp'
+    wt3: 'De onderwerpen die wij hebben gevonden, zijn degene die je hebt gedeeld via de Togather-website. Als je aan je eigen onderwerpen hebt gedacht, kun je deze hier toevoegen. Je kunt ze selecteren in de chat, als je ze daar hebt gedeeld, of je eigen schrijven. Als er dagen waren dat je geen onderwerp had, maar berichten werden gedeeld, probeer daar dan een beschrijving voor te vinden. Bijvoorbeeld: "een logboek van maandag", of "dingen die wij vandaag wilden delen. Zo kunnen we die dag toevoegen aan het dagboek. '
+    wt4: 'Terug'
+    wt5: 'Toevoegen aan onderwerpen'
+    wt6: 'Klaar'
+
+    nt1: 'Beschrijf het onderwerp hier'
+    nt2: 'Media toevoegen'
+
+    stfc1: 'Selecteer de onderwerpen die u wilt toevoegen.'
+    stfc2: 'Vind de onderwerpen die wij hebben gemist in jullie WhatsApp groepschat. Selecteer ze om ze toe te voegen aan de lijst met onderwerpen. '
+    stfc3: 'Terug'
+    stfc4: 'Toevoegen aan onderwerpen'
+
+    sm1: 'Selecteer alle berichten voor deze dag:'
+    sm2: 'De onderwerpen die wij hebben gevonden, zijn degene die jullie hebben gedeeld via de Togather-website. Als jullie eigen onderwerpen hebben bedacht, kun je deze hier toevoegen. Je kunt ze selecteren in de chat, als ze daar zijn gedeeld, of ze zelf schrijven. Als er dagen waren dat je geen onderwerp had, maar dat er wel berichten werden gedeeld, probeer daar dan een beschrijving voor te vinden. Bijvoorbeeld: "een logboek van maandag", of "dingen die wij vandaag wilden delen". Zo kunnen we die dag toevoegen aan het dagboek. '
+
+    d1: 'Onderwerp dag'
+    d2: 'Selecteer berichten'
+
+    pp1: 'Downloaden'
+
+    rd1: 'Bekijk het dagboek, is het compleet?'
+    rd2: 'Blader door de pagina's van het dagboek. Controleer of alle dagen, met hun onderwerpen en berichten, er zijn. Als je tevreden bent met het dagboek, kan je het opslaan en downloaden. Als er dingen ontbreken, ga dan terug naar de vorige stap en voeg ze toe. '
+    rd3: 'Dagboek voltooien'
+
+    dd1: 'Je dagboek is klaar!'
+    dd2: 'Download hier het dagboek:'
+    dd3: 'Dagboek downloaden'
+
+    s1: 'Bedankt voor het gebruik van Togather! Als je vrienden of familie hebt die Togather misschien ook leuk vinden, deel de website dan met hen via deze link. '
+    s2: 'Nee bedankt'
+
+templates:
+    c1: Voor
+    c2: 'Dit dagboek is een verzameling van berichten van:'
+    c3: 'Zij hebben jullie tijd apart vast gelegd tijdens:'
+    c4: Beste
+
+    tp1: Dag
+    tp2: Deel
+
+topics: ss
+    

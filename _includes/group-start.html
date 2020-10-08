@@ -9,7 +9,7 @@
         <a class="modal__close-button" onclick="closeModal()">×</a>
         <p id="gs4">{% t group-start.gs4 %}</p>
         <input id="name" class="modal__input-name" type="text">
-        <button class="button round pick" onclick="shareMessage()" style="margin-top: 20px;">
+        <button class="primary" onclick="shareMessage()" style="margin-top: 20px;">
             {% t group-start.gs2 %}
         </button>
     </div>
@@ -34,8 +34,12 @@
     
     const shareMessage = () => {
 
-        window.fathom.trackGoal('81PEBYZD', 0);
-        
+        try {
+            window.fathom.trackGoal('81PEBYZD', 0);
+        } catch(e) {
+            console.log("Fathom disabled!")
+        }
+
         let name = document.getElementById('name').value;
         name = name.trim();
     

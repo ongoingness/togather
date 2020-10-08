@@ -1,0 +1,27 @@
+<button class="language-button" onclick="openLanguageModal()"> {% t footer.f1 %} {{site.lang}} </button>
+
+<div id="languageModal" class="modal">
+    <div class="modal-content">
+        <a class="modal__close-button" onclick="closeLanguageModal()">×</a>
+        <p style="color: black; text-align: center;">{% t footer.f1 %}</p>
+        <div id="languageList" style="position: relative;">
+            <a href="{{ page.url }}" {% if site.lang == "en" %} selected {% endif %}>{% t global.english %}</a>
+            <a href="/pt{{ page.url }}" {% if site.lang == "pt" %} selected {% endif %}>{% t global.portugues %}</a>
+            <a href="/nl{{ page.url }}" {% if site.lang == "nl" %} selected {% endif %}>{% t global.nederlands %}</a>
+        </div>        
+    </div>
+</div>
+
+<script>
+
+    window.onclick = (event) => {
+        const modal = document.getElementById("languageModal");
+        if (event.target == modal)
+            closeLanguageModal()
+    }
+    
+    const openLanguageModal = () => document.getElementById("languageModal").style.display = "block";
+
+    const closeLanguageModal = () => document.getElementById("languageModal").style.display = "none";
+
+</script>
