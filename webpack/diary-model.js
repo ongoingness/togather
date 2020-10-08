@@ -37,6 +37,8 @@ const DiaryModel = () => {
 
     let who;
 
+    let title;
+
     let diaryDocument;
 
     const setWhatsAppChat = (tempWhatsAppChat) => {
@@ -489,6 +491,12 @@ const DiaryModel = () => {
         who = newWho;
     }
 
+    const getDiaryTitle = () => title;
+
+    const setDiaryTitle = (newTitle) => {
+        title = newTitle;
+    }
+
     const getUsers = () => {
         const result = {...whatsAppChat.users};
         if(result.numbers != undefined)
@@ -546,6 +554,8 @@ const DiaryModel = () => {
         setWhatsAppChat,
         setWhoDiaryIsFor,
         getWhoDiaryIsFor,
+        getDiaryTitle,
+        setDiaryTitle,
         findTopics,
         getTopic,
         getTopicWithMessages,

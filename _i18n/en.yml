@@ -2,6 +2,7 @@ global:
     lang-code: en
     english: English
     portugues: Português
+    nederlands: Nederlands
 
 index:
     header: Togather
@@ -82,7 +83,7 @@ nav-overlay:
     instructions-a: Instructions
     diary-a: Assemble Diary
     about-a: About
-    contact-a: Contact
+    contact-a: Contact Us
 
 footer:
     f1: 'Select Language:'
@@ -132,6 +133,7 @@ diary:
     wtdif2: 'The name will be used to create a personal cover and opening page.'
     wtdif3: 'Type the name here'
     wtdif4: 'Give the name of your loved one who you are making this diary for. This name will be used on the cover of the final diary and on the first page to create a personal booklet and message for them. We do not save this information, this is all private and just for you and who you choose to share it with.'
+    wtdif5: 'Type the title here'
 
     wc1: 'Who contributed to this diary?'
     wc2: 'We found the following names in the group. Is this list correct?'

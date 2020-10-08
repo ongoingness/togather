@@ -2,6 +2,7 @@ global:
     lang-code: pt
     english: English
     portugues: Português
+    nederlands: Nederlands
 
 index:
     header: Togather
