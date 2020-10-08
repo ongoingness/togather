@@ -72,7 +72,8 @@ const Diary = () => {
         },
         whoTheDiaryIsFor: {
             render: () => {
-                ui.renderWhoTheDiaryIsFor(model.getWhoDiaryIsFor());
+                console.log(model.getDiaryTitle());
+                ui.renderWhoTheDiaryIsFor(model.getWhoDiaryIsFor(), model.getDiaryTitle());
             },
             eventHandler: (e, params) => {
             
@@ -84,6 +85,7 @@ const Diary = () => {
 
                     case 'go-to-step-2':
                         model.setWhoDiaryIsFor(params.who);
+                        model.setDiaryTitle(params.diaryTitle);
                         updateState(STATES.whoContributed);
                         break;
 

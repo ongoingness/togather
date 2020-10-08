@@ -9,6 +9,13 @@ title: index.header
     <h3>
         {% t index.home-text %}
     </h3>
+
+
+    <!--video id="video" width="320" height="240" controls>
+        <source src="{{ '/assets/videos/togather_intro_2.mp4' | prepend: site.baseurl_root }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video-->
+
     <div class="button-container">
         <button id="home-learn-button" class="secondary" onclick="location.href='{{ site.url }}{{ site.baseurl }}/topics'">
             {% t index.home-topic-button %}
@@ -17,5 +24,19 @@ title: index.header
             {% t index.home-learn-button %}
         </button>
     </div>
+
+    <script>
+        /*
+    const video = document.getElementById('video');
+
+    video.addEventListener('loadeddata', function() {
+        video.play();
+    });
+
+    video.addEventListener('pause', function() {
+        video.play();
+});*/
+    </script>
+
 </main>
 

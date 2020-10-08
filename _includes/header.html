@@ -12,7 +12,7 @@
     <div class="header__bottom"></div>
     <nav id="myNav" class="overlay">
         <button class="close-button" aria-label="Close Navigation Overlay" onclick="closeNav()">&times;</button>
-        <div class="overlay-content">
+        <div id="myNavContent" class="overlay-content">
           <a id="home-a" href="{{ site.url }}{{ site.baseurl }}/">{% t nav-overlay.home-a %}</a>
           <a id="topic-a" href="{{ site.url }}{{ site.baseurl }}/topics">{% t nav-overlay.topic-a %}</a>
           <a id="explained-a" href="{{ site.url }}{{ site.baseurl }}/explained">{% t nav-overlay.explained-a %}</a>
@@ -23,6 +23,13 @@
         </div>
     </nav>
     <script>
+
+
+        const overlayContent = document.getElementById('myNavContent'); 
+
+        overlayContent.style.minWidth = `${document.body.offsetWidth}px`;
+        window.addEventListener('resize', (e) => overlayContent.style.minWidth = `${document.body.offsetWidth}px`);
+
 
         const splittedPageUrl = '{{page.url}}'.split(/[\/.]+/);
         switch(splittedPageUrl[1]) {

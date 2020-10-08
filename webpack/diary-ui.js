@@ -123,7 +123,11 @@ const DiaryUI = (eventHandler) => {
 
         const overlayContent = document.createElement('div');
         overlayContent.classList.add('overlay-content');
+        overlayContent.style.minWidth = `${document.body.offsetWidth}px`;
         nav.append(overlayContent);
+
+        window.addEventListener('resize', (e) => overlayContent.style.minWidth = `${document.body.offsetWidth}px`);
+
 
         const aHome = document.createElement('a');
         aHome.id = 'home-a';
@@ -448,7 +452,6 @@ const DiaryUI = (eventHandler) => {
         renderSiteHeader("{% t diary.dh1 %}");
 
         const content = document.createElement('main');
-        //content.classList.add('content');
         content.style.height = 'initial';
         document.body.appendChild(content);
 
@@ -467,6 +470,7 @@ const DiaryUI = (eventHandler) => {
         dualTextBox.appendChild(dualTextBoxLeft);
 
         const dualTextBoxRight = document.createElement('div');
+        dualTextBox.style.textAlign = "left";
         dualTextBoxRight.innerText = '{% t diary.uf3 %}';
         dualTextBox.appendChild(dualTextBoxRight);
 
@@ -523,10 +527,14 @@ const DiaryUI = (eventHandler) => {
         startButton.style.marginBottom = '20px';
         startButton.innerHTML = '{% t diary.uf7 %}';
         startButton.disabled = true;
-
+    
         const startButtonClickListener = e => {
             renderButtonLoader(startButton);
-            window.fathom.trackGoal('6QSZBLZG', 0);
+            try {
+                window.fathom.trackGoal('6QSZBLZG', 0);
+            } catch (e) {
+                console.log('Fathom Disabled');
+            }
             eventHandler(e, {type: 'start-assembling'});
         };
 
@@ -659,7 +667,12 @@ const DiaryUI = (eventHandler) => {
         button.style.width = `${button.offsetWidth}px`;
         button.innerText = '';
 
-        const icon = document.createElement('i');
+        /*
+        const iconContainer = document.createElement('div');
+        iconContainer.classList.add('button-loader-container');
+        button.append(iconContainer);
+*/
+        const icon = document.createElement('div');
         icon.classList.add('button-loader');
         button.appendChild(icon);
     }
@@ -775,14 +788,14 @@ const DiaryUI = (eventHandler) => {
         overlayContent.appendChild(buttonContainer);
 
         const stopButton = document.createElement('button');
-        stopButton.classList.add('secondary');
+        stopButton.classList.add('secondary', 'small-font');
         stopButton.style.margin = 'auto';
         stopButton.innerHTML = '{% t diary.dh3 %}';
         stopButton.addEventListener('click', e => eventHandler(e, {type: 'stop-assembling'}));
         buttonContainer.appendChild(stopButton);
 
         const continueButton = document.createElement('button');
-        continueButton.classList.add('primary');
+        continueButton.classList.add('primary', 'small-font');
         continueButton.style.margin = 'auto';
         continueButton.style.marginTop = '20px';
         continueButton.innerHTML = '{% t diary.dh4 %}';
@@ -953,11 +966,13 @@ const DiaryUI = (eventHandler) => {
         goButton.style.margin = 'auto';
         goButton.style.marginTop = '40px';
         goButton.innerHTML = '{% t diary.ds8 %}';
-        goButton.addEventListener('click', e => eventHandler(e, {type: 'go-to-step-1'}));
+        goButton.addEventListener('click', e => {
+            renderButtonLoader(goButton);
+            eventHandler(e, {type: 'go-to-step-1'})
+        });
         content.appendChild(goButton);
 
     }
-
 
     const renderStepController = (parent, step, helpContent) => {
 
@@ -1050,7 +1065,7 @@ const DiaryUI = (eventHandler) => {
         return {leftButton: previousButton, leftButtonListener: previousButtonListener, rightButton: nextButton, rightButtonListener: nextButtonListener};
     }
 
-    const renderWhoTheDiaryIsFor = (who) => {
+    const renderWhoTheDiaryIsFor = (who, diaryTitle) => {
 
         renderDiaryHeader(document.body, "#1/5", true);
 
@@ -1079,6 +1094,7 @@ const DiaryUI = (eventHandler) => {
 
         const inputName = document.createElement('input');
         inputName.classList.add('who__input-name');
+        inputName.style.margin = '50px auto';
         inputName.placeholder = '{% t diary.wtdif3 %}';
         inputName.addEventListener('input', () => rightButton.disabled = inputName.value.length === 0);
         inputName.addEventListener('keyup', (e) => {
@@ -1086,12 +1102,20 @@ const DiaryUI = (eventHandler) => {
                 e.preventDefault();
                 inputName.blur();
             }
-          });
-
+        });
         inputName.addEventListener('submit', (e) =>  {});
         if(who != undefined && who != '')
             inputName.value = who;
         lowerPage.appendChild(inputName);
+
+        const inputDiaryTitle = document.createElement('input');
+        inputDiaryTitle.classList.add('who__input-name');
+        inputDiaryTitle.style.marginTop = '0px';
+        inputDiaryTitle.placeholder = '{% t diary.wtdif5 %}';
+        inputDiaryTitle.addEventListener('submit', (e) =>  {});
+        if(diaryTitle != undefined && diaryTitle != '')
+            inputDiaryTitle.value = diaryTitle;
+        lowerPage.appendChild(inputDiaryTitle);
 
         const helpText = document.createElement('div');
         helpText.classList.add('privacy__text');
@@ -1101,7 +1125,7 @@ const DiaryUI = (eventHandler) => {
         rightButton.removeEventListener('click', rightButtonListener);
         rightButton.addEventListener('click', e => {
             renderButtonLoader(rightButton);
-            eventHandler(e, {type: `go-to-step-2`, who: inputName.value})
+            eventHandler(e, {type: `go-to-step-2`, who: inputName.value, diaryTitle: inputDiaryTitle.value})
         });
 
         if(inputName.value == undefined || inputName.value == '')
@@ -2152,6 +2176,7 @@ const DiaryUI = (eventHandler) => {
         overlayContent.classList.add('overlay-content', 'privacy');
         overlayContent.style.display = 'flex';
         overlayContent.style.flexDirection = 'column';
+        overlayContent.style.top = '40px';
         topicTextOverlay.appendChild(overlayContent);
 
         const topicTextTitle = document.createElement('div');
@@ -2162,7 +2187,7 @@ const DiaryUI = (eventHandler) => {
 
         const topicTextBox = document.createElement('div');
         topicTextBox.classList.add('overlay__text-box');
-        topicTextBox.style.maxHeight = '250px';
+        topicTextBox.style.maxHeight = '220px';
         topicTextBox.style.overflowY = 'auto';
         topicTextBox.innerText = `"${dayData.text}"`;
         overlayContent.appendChild(topicTextBox);
