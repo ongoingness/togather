@@ -414,12 +414,17 @@ const Diary = () => {
                         STATES.reviewDiary.variables.canvas.set('cb', cb);
                         STATES.reviewDiary.variables.canvas.set('cc', cc);
 
+                        templates.renderPageToCanvas(STATES.reviewDiary.variables.pages[1], cb);
+
+                        ui.displayPreviewCanvas(STATES.reviewDiary.variables.canvasOrder[1]);
+
+
+
+                        /*
                         templates.renderPageToCanvas(STATES.reviewDiary.variables.pages[STATES.reviewDiary.variables.currentPage], cb);
                         if(STATES.reviewDiary.variables.currentPage + 1 < model.getDiaryDocument().getNumberOfPages()-1) {
                             templates.renderPageToCanvas(STATES.reviewDiary.variables.pages[2], cc);
-                        }
-
-                        ui.displayPreviewCanvas(STATES.reviewDiary.variables.canvasOrder[1]);
+                        }*/
 
                         //STATES.reviewDiary.variables.canvas = ui.renderPreviewDiaryPage();
                         
@@ -451,6 +456,9 @@ const Diary = () => {
                     case 'next-page':
               
                         if(STATES.reviewDiary.variables.currentPage + 1 <= model.getDiaryDocument().getNumberOfPages()){
+                            STATES.reviewDiary.variables.currentPage += 1;
+                            templates.renderPageToCanvas(STATES.reviewDiary.variables.pages[STATES.reviewDiary.variables.currentPage], STATES.reviewDiary.variables.canvas.get(STATES.reviewDiary.variables.canvasOrder[1]));
+                            /*
                             console.log('start', STATES.reviewDiary.variables.canvasOrder, model.getDiaryDocument().getNumberOfPages(), STATES.reviewDiary.variables.currentPage);
                             ui.hidePreviewCanvas(STATES.reviewDiary.variables.canvasOrder[1]);
                             STATES.reviewDiary.variables.currentPage += 1;
@@ -465,7 +473,7 @@ const Diary = () => {
                                 console.log('end2', STATES.reviewDiary.variables.canvasOrder, model.getDiaryDocument().getNumberOfPages(), STATES.reviewDiary.variables.currentPage);
                                 templates.renderPageToCanvas(STATES.reviewDiary.variables.pages[STATES.reviewDiary.variables.currentPage + 1], STATES.reviewDiary.variables.canvas.get(nextCanvas));
                             }
-                            console.log('');
+                            console.log('');*/
 
                             /*
                             ui.hidePreviewPage(STATES.reviewDiary.variables.currentPage);
@@ -486,6 +494,9 @@ const Diary = () => {
                     case 'previous-page':
                         
                         if(STATES.reviewDiary.variables.currentPage - 1 >= 1){
+                            STATES.reviewDiary.variables.currentPage -= 1;
+                            templates.renderPageToCanvas(STATES.reviewDiary.variables.pages[STATES.reviewDiary.variables.currentPage], STATES.reviewDiary.variables.canvas.get(STATES.reviewDiary.variables.canvasOrder[1]));
+                            /*
                             console.log('start', STATES.reviewDiary.variables.canvasOrder, model.getDiaryDocument().getNumberOfPages(), STATES.reviewDiary.variables.currentPage);
                             ui.hidePreviewCanvas(STATES.reviewDiary.variables.canvasOrder[1]);
                             STATES.reviewDiary.variables.currentPage -= 1;
@@ -500,6 +511,7 @@ const Diary = () => {
                                 console.log('end2', STATES.reviewDiary.variables.canvasOrder, model.getDiaryDocument().getNumberOfPages(), STATES.reviewDiary.variables.currentPage);
                                 templates.renderPageToCanvas(STATES.reviewDiary.variables.pages[STATES.reviewDiary.variables.currentPage - 1], STATES.reviewDiary.variables.canvas.get(nextCanvas));
                             }
+                            */
 
 /*
                             ui.hidePreviewPage(STATES.reviewDiary.variables.currentPage);
