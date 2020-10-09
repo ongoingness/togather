@@ -404,9 +404,9 @@ const Diary = () => {
                 //doc.output('dataurlnewwindow');
                 //<html><style>html, body { padding: 0; margin: 0; } iframe { width: 100%; height: 100%; border: 0;}  </style><body><iframe src="' + this.output("datauristring") + '"></iframe></body></html>'
                 
-                console.log(doc.output("datauristring"));
+                //console.log(doc.output("datauristring"));
                 
-                STATES.reviewDiary.variables.worker = templates.startPreviewPdfWorker(doc);
+                //STATES.reviewDiary.variables.worker = templates.startPreviewPdfWorker(doc);
 
                 if(doc != undefined) {
                     ui.renderReviewDiary();
@@ -465,7 +465,7 @@ const Diary = () => {
             eventHandler: (e, params) => {
 
                 switch(params.type) {
-
+/*
                     case 'next-page':
               
                         if(STATES.reviewDiary.variables.currentPage + 1 <= model.getDiaryDocument().getNumberOfPages()){
@@ -501,14 +501,15 @@ const Diary = () => {
                                 */
                             //const c = ui.renderPreviewDiaryPage();
                             //templates.renderPageToCanvas(STATES.reviewDiary.variables.pages[STATES.reviewDiary.variables.currentPage], c);
-                        }
-                        break;
-
+ //                       }
+ //                       break;
+/*
                     case 'previous-page':
-                        
+                    
                         if(STATES.reviewDiary.variables.currentPage - 1 >= 1){
                             STATES.reviewDiary.variables.currentPage -= 1;
                             templates.renderPageToCanvas(STATES.reviewDiary.variables.pages[STATES.reviewDiary.variables.currentPage], STATES.reviewDiary.variables.canvas.get(STATES.reviewDiary.variables.canvasOrder[1]));
+                            */
                             /*
                             console.log('start', STATES.reviewDiary.variables.canvasOrder, model.getDiaryDocument().getNumberOfPages(), STATES.reviewDiary.variables.currentPage);
                             ui.hidePreviewCanvas(STATES.reviewDiary.variables.canvasOrder[1]);
@@ -532,21 +533,23 @@ const Diary = () => {
                             ui.displayPreviewPage(STATES.reviewDiary.variables.currentPage);
 */
                             //templates.renderPageToCanvas(STATES.reviewDiary.variables.pages[STATES.reviewDiary.variables.currentPage], STATES.reviewDiary.variables.canvas);
-                        }
-                        break;
+//                        }
+//                        break;
+
+                    
 
                     case 'stop-assembling':
-                        templates.destroyPreviewPdfWorker(STATES.reviewDiary.variables.worker);
+                       // templates.destroyPreviewPdfWorker(STATES.reviewDiary.variables.worker);
                         updateState(STATES.uploadFiles);
                         break;
 
                     case 'go-to-step-4':
-                        templates.destroyPreviewPdfWorker(STATES.reviewDiary.variables.worker);
+                        //templates.destroyPreviewPdfWorker(STATES.reviewDiary.variables.worker);
                         updateState(STATES.selectMessages);
                         break;
 
                     case 'go-to-step-6':
-                        templates.destroyPreviewPdfWorker(STATES.reviewDiary.variables.worker);
+                        //templates.destroyPreviewPdfWorker(STATES.reviewDiary.variables.worker);
                         updateState(STATES.downloadDiary);
                         break;
                 
