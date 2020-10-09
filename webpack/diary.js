@@ -398,15 +398,22 @@ const Diary = () => {
                 STATES.reviewDiary.variables.canvasOrder = ['ca','cb','cc'];
 
                 const doc = model.getDiaryDocument();
-                doc.output('dataurlnewwindow');
+               // var string = doc.output('datauristring');
+                //var embed = "<embed width='100%' height='100%' src='" + string + "'/>"
+
+                //doc.output('dataurlnewwindow');
+                //<html><style>html, body { padding: 0; margin: 0; } iframe { width: 100%; height: 100%; border: 0;}  </style><body><iframe src="' + this.output("datauristring") + '"></iframe></body></html>'
+                
+                console.log(doc.output("datauristring"));
                 
                 STATES.reviewDiary.variables.worker = templates.startPreviewPdfWorker(doc);
 
                 if(doc != undefined) {
                     ui.renderReviewDiary();
-                    const {isSafari} = checkBrowser();
-                    if(isSafari) {
-                        ui.renderPreviewWithDataUri(templates.getDataUriStringPdf(model.getDiaryDocument()));
+                   // const {isSafari} = checkBrowser();
+                   // if(isSafari) {
+                        //ui.renderPreviewWithDataUri(templates.getDataUriStringPdf(model.getDiaryDocument()));
+                    /*
                     } else {
                         STATES.reviewDiary.variables.pages = await templates.previewPdf4(STATES.reviewDiary.variables.worker);
                         const ca =  ui.renderPreviewDiaryPage('ca', false);
@@ -419,7 +426,7 @@ const Diary = () => {
                         templates.renderPageToCanvas(STATES.reviewDiary.variables.pages[1], cb);
 
                         ui.displayPreviewCanvas(STATES.reviewDiary.variables.canvasOrder[1]);
-
+*/
 
 
                         /*
@@ -448,7 +455,7 @@ const Diary = () => {
                    
                         
 
-                    }
+                    //}
                 }
             },
             eventHandler: (e, params) => {
