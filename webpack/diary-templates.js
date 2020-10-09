@@ -23,6 +23,8 @@ const DiaryTemplates = () => {
         if(!firstPage)
             doc.addPage('a4', 'portrait');
 
+        //if(data.title != undefined || data.title != '')
+
         const forS = '{% t templates.c1 %}';
         const nameSplit = data.who.split(" ");
 

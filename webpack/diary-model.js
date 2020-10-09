@@ -534,6 +534,7 @@ const DiaryModel = () => {
         }
 
         return {
+            title,
             who,
             users: getUsers(),
             startDate,
