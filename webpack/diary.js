@@ -410,11 +410,15 @@ const Diary = () => {
 
                 if(doc != undefined) {
                     ui.renderReviewDiary();
-                   // const {isSafari} = checkBrowser();
-                   // if(isSafari) {
-                        //ui.renderPreviewWithDataUri(templates.getDataUriStringPdf(model.getDiaryDocument()));
-                    /*
+                    
+                    const {isSafari} = checkBrowser();
+                    if(isSafari) {
+                        ui.renderPreviewWithDataUri(templates.getDataUriStringPdf(doc));
+                    
                     } else {
+                        ui.renderPreviewOnIframeWithDataUri(templates.getDataUriStringPdf(doc));
+                    }
+                        /*
                         STATES.reviewDiary.variables.pages = await templates.previewPdf4(STATES.reviewDiary.variables.worker);
                         const ca =  ui.renderPreviewDiaryPage('ca', false);
                         const cb =  ui.renderPreviewDiaryPage('cb', false);
