@@ -398,6 +398,8 @@ const Diary = () => {
                 STATES.reviewDiary.variables.canvasOrder = ['ca','cb','cc'];
 
                 const doc = model.getDiaryDocument();
+                doc.output('dataurlnewwindow');
+                
                 STATES.reviewDiary.variables.worker = templates.startPreviewPdfWorker(doc);
 
                 if(doc != undefined) {
