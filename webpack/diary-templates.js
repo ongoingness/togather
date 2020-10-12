@@ -269,7 +269,7 @@ const DiaryTemplates = () => {
                     sizes.push(fitDimensions(media.data));
                 } else if (media.type.includes('video')) {
                     const frame = await getFrameFromVideo(media);
-                    sizes.push(fitDimensions(frame));
+                    sizes.push(fitDimensions(frame.data));
                 }
             
             }
@@ -290,10 +290,10 @@ const DiaryTemplates = () => {
 
                 } else if (media.type.includes('video')) {
      
-                    const frame = await getFilmRollFromVideoAsync(media, 3,3);               
-                    const {w,h} = await fitDimensions2(frame);
+                    const frame = await getFrameFromVideo(media, 0.1)//await getFilmRollFromVideoAsync(media, 3,3);               
+                    const {w,h} = await fitDimensions2(frame.data);
                     if((side === 'l' ? yLeft : yRight) + h > bottomMargin) doc = newPage(doc);
-                    doc.addImage(frame, 'PNG', side === 'l' ? leftColumnContentMargin : rightColumnContentMargin, side === 'l' ? yLeft : yRight, w, h);
+                    doc.addImage(frame.data, 'PNG', side === 'l' ? leftColumnContentMargin : rightColumnContentMargin, side === 'l' ? yLeft : yRight, w, h);
                     if(side === 'l') yLeft += h; else yRight += h;
                      
                 }
@@ -366,12 +366,18 @@ const DiaryTemplates = () => {
             video.currentTime = time;
 
             return new Promise((resolve, reject) => {
+                
+                let done = false;
+
                 video.oncanplay = (e) => {
-                    canvas.getContext("2d").drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
-                    const result = canvas.toDataURL()
-                    canvas.remove();
-                    video.remove();
-                    resolve({data: result, w: video.videoWidth, h: video.videoHeight, time});
+                    if(!done) {
+                        done = true;
+                        canvas.getContext("2d").drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+                        const result = canvas.toDataURL()
+                        canvas.remove();
+                        video.remove();
+                        resolve({data: result, w: video.videoWidth, h: video.videoHeight, time});
+                    }
                 }
             });
         }
