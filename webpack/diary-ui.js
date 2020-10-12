@@ -2401,6 +2401,8 @@ const DiaryUI = (eventHandler) => {
         iframe.src = dataUri;
         iframe.style.height = '100%';
         document.getElementById('lowerPage').append(iframe);
+
+        
        
     }
 
