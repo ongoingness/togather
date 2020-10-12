@@ -416,7 +416,13 @@ const Diary = () => {
                         ui.renderPreviewWithDataUri(templates.getDataUriStringPdf(doc));
                     
                     } else {
-                        ui.renderPreviewOnIframeWithDataUri(templates.getDataUriStringPdf(doc));
+                        const t = doc.output('blob');
+                        var url = URL.createObjectURL(t);
+                        window.open(url);
+                        //console.log(t);
+                        //ui.renderPreviewOnIframeWithDataUri(url);
+
+                        //ui.renderPreviewOnIframeWithDataUri(templates.getDataUriStringPdf(doc));
                     }
                         /*
                         STATES.reviewDiary.variables.pages = await templates.previewPdf4(STATES.reviewDiary.variables.worker);
