@@ -12,6 +12,9 @@
     --main-padding: 27px;
 }
 
+* {
+    overscroll-behavior: none;
+}
 
 body {
     margin: 0 auto;
