@@ -18,6 +18,20 @@ const DiaryTemplates = () => {
         return doc;
     }
 
+    const generatePreview = async(diary, topicLimit = -1) => {
+
+        let doc = new jsPDF();
+        doc = coverPages(doc, diary, true);
+
+        for(let i = 0; i <= ( (topicLimit != -1 && topicLimit < diary.topics.length) ? topicLimit : diary.topics.length-1); i++) {
+            doc = topicPage(doc, diary.topics[i]);
+            doc = await messagePages(doc, diary.topics[i].selectedMessages, true);
+        }
+    
+        return doc;
+
+    }
+
     const coverPages = (doc, data, firstPage = false) => {
 
         if(!firstPage)
@@ -157,7 +171,7 @@ const DiaryTemplates = () => {
         return doc;
     }
 
-    const messagePages = async(doc, messages) => {
+    const messagePages = async(doc, messages, preview = false) => {
 
         const topMargin = 11;
         const bottomMargin = 286;
@@ -253,7 +267,8 @@ const DiaryTemplates = () => {
 
             }
 
-            doc = await addMedia(doc, data.files, column);
+            if(!preview)
+                doc = await addMedia(doc, data.files, column);
 
             return doc;
         
@@ -854,6 +869,8 @@ const DiaryTemplates = () => {
 
     return {
         generatePDF,
+        generatePreview,
+
         previewPdf,
         previewPdf2,
         previewPdf3,

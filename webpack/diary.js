@@ -373,7 +373,7 @@ const Diary = () => {
                         STATES.selectMessages.variables.totalOfTopics = 0
                         const doc = await templates.generatePDF(model.getDiary());
                         model.setDiaryDocument(doc);
-                        updateState(STATES.reviewDiary);
+                        updateState(STATES.downloadDiary);
                         break;
 
                 }
@@ -416,11 +416,12 @@ const Diary = () => {
                         ui.renderPreviewWithDataUri(templates.getDataUriStringPdf(doc));
                     
                     } else {
-                        const t = doc.output('blob');
-                        var url = URL.createObjectURL(t);
-                        window.open(url);
+                        const previewDoc = await templates.generatePreview(model.getDiary());
+                        //const t = previewDoc.output('blob');
+                        //var url = URL.createObjectURL(t);
+                        //window.open(url);
                         //console.log(t);
-                        //ui.renderPreviewOnIframeWithDataUri(url);
+                        ui.renderPreviewOnIframeWithDataUri(templates.getDataUriStringPdf(doc));
 
                         //ui.renderPreviewOnIframeWithDataUri(templates.getDataUriStringPdf(doc));
                     }
@@ -566,23 +567,68 @@ const Diary = () => {
         },
         downloadDiary: {
             render: () => {
-                ui.renderDownloadDiary();
+                ui.renderDownloadDiary(model.getParticipate());
             },
             eventHandler: async(e,params) => {
-
+         
                 switch(params.type) {
 
                     case 'stop-assembling':
                         updateState(STATES.uploadFiles);
                         break;
 
+                    case 'participate':
+                        if(params.value != undefined)
+                            model.setParticipate(params.value);
+
+                        if(params.value === 'yes') {
+                            try {
+                                window.fathom.trackGoal('DL2DCGWK', 0);
+                            } catch (e) {
+                                console.log('Fathom Disabled');
+                            }
+                            const doc = model.getDiaryDocument();
+                            if(doc != undefined)
+                                templates.downloadPdf(doc, `For ${model.getWhoDiaryIsFor()} - Togather`);
+                            ui.openShareModal();
+                            window.open('https://forms.office.com/Pages/ResponsePage.aspx?id=3c9X5zUfV0Svj3ycaxQ344vudz6_WkxDk-JGl5ZcZlhURjBMRFhSOTY3S0VLTjE0VVpEMUVNQ1c3VS4u', '_blank');
+                        }
+                        break;
+
                     case 'download-diary':
                         const doc = model.getDiaryDocument();
                         if(doc != undefined)
                             templates.downloadPdf(doc, `For ${model.getWhoDiaryIsFor()} - ToGather`);
-                        updateState(STATES.share);
                         break;
 
+                    case 'share':
+                        const link = (navigator.userAgent.match(/Android/i) 
+                                    || navigator.userAgent.match(/webOS/i) 
+                                    || navigator.userAgent.match(/iPhone/i)  
+                                    || navigator.userAgent.match(/iPad/i)  
+                                    || navigator.userAgent.match(/iPod/i) 
+                                    || navigator.userAgent.match(/BlackBerry/i) 
+                                    || navigator.userAgent.match(/Windows Phone/i)) ? 
+                                    `https://api.whatsapp.com/send?text=${encodeURI('https://togather.me/')}`:
+                                    `https://web.whatsapp.com/send?text=${encodeURI('https://togather.me/')}`;
+                        
+                        window.open(link, '_blank');
+                        break;
+    
+                    case 'share-twitter':
+                        const text = 'Gathering in stories when being together is not possible #togather';
+                        const twitterLink = `https://twitter.com/intent/tweet?text=${encodeURI(text)}&url=https://togather.me`;
+                        window.fathom.trackGoal('LRZPNF3C', 0);
+                        window.open(twitterLink, '_blank');
+                        break
+
+                    case  'go-to-step-4':
+                        updateState(STATES.selectMessages);
+                        break;
+
+                    case 'go-to-step-6':
+                        updateState(STATES.uploadFiles);
+                        break;
                 }
 
             }
@@ -692,7 +738,7 @@ const Diary = () => {
     const model = DiaryModel();
 
     updateState(STATES.uploadFiles);
-
+    //updateState(STATES.downloadDiary);
 };
 
 export default Diary;
