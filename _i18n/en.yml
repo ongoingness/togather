@@ -173,14 +173,14 @@ diary:
 
     rd1: 'Review your diary, is it complete?'
     rd2: 'Go through the pages of your diary. Check if all the days, with their topics and messages are there. When you are happy with the diary you can save and download it. If there are things missing, go back to the previous step and add them.'
-    rd3: 'Finish Diary'
+    rd3: 'Home'
 
     dd1: 'Your diary is ready!'
     dd2: 'Download your Diary here:'
     dd3: 'Download Diary'
 
     s1: 'Thank you for using Togather! If you have friends or family that might also like Togather share the website with them through these links.'
-    s2: 'Return to homepage'
+    s2: 'No, thank you!'
 
 templates:
 

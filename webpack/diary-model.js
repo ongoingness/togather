@@ -41,6 +41,8 @@ const DiaryModel = () => {
 
     let diaryDocument;
 
+    let participate;
+
     const setWhatsAppChat = (tempWhatsAppChat) => {
         whatsAppChat = tempWhatsAppChat;
 
@@ -550,6 +552,9 @@ const DiaryModel = () => {
     const setDiaryDocument = (doc) => diaryDocument = doc;
     const getDiaryDocument = () => diaryDocument; 
 
+    const setParticipate = (tempParticipate) => participate = tempParticipate;
+    const getParticipate = () => participate; 
+
 
     return {
         setWhatsAppChat,
@@ -578,6 +583,8 @@ const DiaryModel = () => {
         changeUserMessagesVisibility,
         setDiaryDocument,
         getDiaryDocument,
+        setParticipate,
+        getParticipate,
     };
 }
 

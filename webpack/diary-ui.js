@@ -2443,32 +2443,119 @@ const DiaryUI = (eventHandler) => {
     }
 
 
-    const renderDownloadDiary = () => {
+    const renderDownloadDiary = (participate) => {
 
-        renderDiaryHeader(document.body, "#5/5", false);
+        renderDiaryHeader(document.body, "#5/5", true);
+
+        const {openShareModal, closeShareModal} = renderShareModal();
 
         const content = document.createElement('div');
         content.classList.add('content');
         document.body.appendChild(content);
 
         const upperPage = document.createElement('div');
-        //upperPage.classList.add('upper-page');
         content.appendChild(upperPage);
 
         const title = document.createElement('div');
+        title.id = 'pageTitle';
         title.classList.add();
         title.style.textAlign = 'center';
         title.style.font = 'normal normal 300 32px/43px Roboto Condensed';
         title.style.letterSpacing = '0.64px';
-        title.innerText = '{% t diary.dd1 %}';
+        title.style.paddingTop = '20px';
+        title.innerText = participate === undefined ? 'Your diary is almost ready!' : '{% t diary.dd1 %}';
         upperPage.appendChild(title);
 
         const centerContainer = document.createElement('div');
         centerContainer.style.margin = 'auto';
         centerContainer.style.marginLeft = '27px';
         centerContainer.style.marginRight = '27px';
-        centerContainer.style.marginTop = '27px';
+        centerContainer.style.marginTop = '20px';
         content.appendChild(centerContainer);
+
+        const textBox1 = document.createElement('div');
+        textBox1.innerText = 'Thanks for using Togather, we would like to invite you to take part in our research study. Before you decide to participate (or not), we would like you to understand why the research is being done and what it would involve for you. Would you like to know more?';
+        
+        
+        
+        
+        //'Thanks for using Togather, as we are curious to how you have experienced living with togather, we are keen to hear your thoughts!';
+        textBox1.style.marginBottom = '20px';
+        textBox1.style.textAlign = 'center';
+        textBox1.style.fontSize = '18px';
+        centerContainer.appendChild(textBox1);
+
+        const form = document.createElement('form');
+        form.style.display = 'flex';
+        form.style.flexDirection = 'column';
+        centerContainer.appendChild(form);
+
+        const optionsContainer = document.createElement('div');
+        optionsContainer.style.margin = 'auto';
+        optionsContainer.style.marginBottom = '20px';
+        form.append(optionsContainer);
+
+        const yesRadioButton = document.createElement('input');
+        yesRadioButton.type = 'radio';
+        yesRadioButton.id = 'yes';
+        yesRadioButton.name = 'participate';
+        yesRadioButton.value = 'yes';
+        yesRadioButton.checked = participate != undefined && participate === 'yes';
+        yesRadioButton.addEventListener('change', () => {
+            document.getElementById('submitButtonParticipation').disabled = false;
+        })
+        optionsContainer.append(yesRadioButton);
+
+        const labelYesButton = document.createElement('label');
+        labelYesButton.for = 'yes';
+        labelYesButton.innerText = 'Yes';
+        labelYesButton.style.marginRight = '20px';
+        optionsContainer.append(labelYesButton);
+
+        const noRadioButton = document.createElement('input');
+        noRadioButton.type = 'radio';
+        noRadioButton.id = 'no';
+        noRadioButton.name = 'participate';
+        noRadioButton.value = 'no';
+        noRadioButton.checked = participate != undefined && participate === 'no';
+        noRadioButton.style.marginLeft = '20px';
+        noRadioButton.addEventListener('change', () => {
+            document.getElementById('submitButtonParticipation').disabled = false;
+        })
+        optionsContainer.append(noRadioButton);
+
+        const labelNoButton = document.createElement('label');
+        labelNoButton.for = 'no';
+        labelNoButton.innerText = 'No';
+        optionsContainer.append(labelNoButton);
+
+        const buttonContainer1 = document.createElement('div');
+        buttonContainer1.style.display = 'flex';
+        buttonContainer1.style.flexDirection = 'row';
+        form.append(buttonContainer1);
+                
+        const submitButton = document.createElement('button');
+        submitButton.classList.add('primary');
+        submitButton.id = 'submitButtonParticipation';
+        submitButton.style.margin = 'auto';
+        submitButton.innerText = 'Submit';
+        submitButton.disabled = true;
+
+        submitButton.addEventListener('click', e => {
+            e.preventDefault();
+            let value = undefined;
+            const radios = document.getElementsByName('participate');
+            for (var i = 0, length = radios.length; i < length && value === undefined; i++) {
+                if (radios[i].checked) {
+                  value = radios[i].value;
+                }
+            }
+            downloadButton.style.display = 'block';
+            title.innerText = '{% t diary.dd1 %}';
+            submitButton.disabled = true;
+            eventHandler(e, {type: 'participate', value});
+        });
+        buttonContainer1.appendChild(submitButton);
 
         const buttonContainer = document.createElement('div');
         buttonContainer.style.display = 'flex';
@@ -2476,10 +2563,14 @@ const DiaryUI = (eventHandler) => {
         centerContainer.append(buttonContainer);
                 
         const downloadButton = document.createElement('button');
+        downloadButton.id = 'downloadButton';
         downloadButton.classList.add('secondary');
+        downloadButton.style.display =  participate === undefined ? 'none' : 'block';
         downloadButton.style.margin = 'auto';
+        downloadButton.style.marginTop = '20px';
         downloadButton.innerText = '{% t diary.dd3 %}';
         downloadButton.addEventListener('click', e => {
+            openShareModal();
             try {
                 window.fathom.trackGoal('ZNO1KYRF', 0);
             } catch (e) {
@@ -2488,6 +2579,9 @@ const DiaryUI = (eventHandler) => {
             eventHandler(e, {type: 'download-diary'});
         });
         buttonContainer.appendChild(downloadButton);
+
+        const {rightButton} = renderStepController(document.body, 5);
+        rightButton.innerText = '{% t diary.rd3 %}';
 
     }
 
@@ -2543,6 +2637,9 @@ const DiaryUI = (eventHandler) => {
         noButton.innerText = 'No thanks';
         noButton.addEventListener('click', e => eventHandler(e, {type: 'no'}));
         buttonContainer.appendChild(noButton);
+
+
+
     }
 
     const renderGiveFeedback = () => {
@@ -2659,6 +2756,78 @@ const DiaryUI = (eventHandler) => {
         centerContainer.appendChild(noButton);   
     }
 
+    const renderShareModal = () => {
+
+        const openShareModal = () => document.getElementById("shareModal").style.display = "block";
+    
+        const closeShareModal = () => document.getElementById("shareModal").style.display = "none";
+    
+        const shareModal = document.createElement('shareModal');
+        shareModal.id = 'shareModal';
+        shareModal.classList.add('modal');
+        document.body.appendChild(shareModal);
+        
+        const modalContent = document.createElement('modal-content');
+        modalContent.classList.add('modal-content');
+        shareModal.append(modalContent);
+        
+        const centerContainer = document.createElement('div');
+        centerContainer.style.marginTop = '30px';
+        centerContainer.style.display = 'flex';
+        centerContainer.style.flexDirection = 'column';
+        modalContent.appendChild(centerContainer);
+        
+        const textBox1 = document.createElement('div');
+        textBox1.innerText = '{% t diary.s1 %}';
+        textBox1.style.marginBottom = '40px';
+        textBox1.style.textAlign = 'center';
+        centerContainer.appendChild(textBox1);
+
+        const buttonContainer = document.createElement('div');
+        buttonContainer.style.display = 'flex';
+        buttonContainer.style.flexDirection = 'row';
+        centerContainer.append(buttonContainer);
+
+        const shareWhatsAppButton = document.createElement('button');
+        shareWhatsAppButton.style.background = "url({{ '/assets/images/WhatsApp_Logo_2.png' | prepend: site.baseurl }}) no-repeat";
+        shareWhatsAppButton.style.height = '70px';
+        shareWhatsAppButton.style.width = '70px';
+        shareWhatsAppButton.style.backgroundPosition = 'center';
+        shareWhatsAppButton.style.backgroundSize = 'cover';
+        shareWhatsAppButton.style.borderRadius = '100px';
+        shareWhatsAppButton.style.margin = 'auto';
+        shareWhatsAppButton.style.marginRight = '20px';
+        shareWhatsAppButton.addEventListener('click', e => eventHandler(e, {type: 'share'}));
+        buttonContainer.appendChild(shareWhatsAppButton);
+    
+        const shareTwitterButton = document.createElement('button');
+        shareTwitterButton.classList.add('button', 'round');
+        shareTwitterButton.style.background = "url({{ '/assets/images/Twitter_Social_Icon_Circle_Color.svg' | prepend: site.baseurl }}) no-repeat";
+        shareTwitterButton.style.height = '70px';
+        shareTwitterButton.style.width = '70px';
+        shareTwitterButton.style.margin = 'auto';
+        shareTwitterButton.style.marginLeft = '20px';
+        shareTwitterButton.addEventListener('click', e => eventHandler(e, {type: 'share-twitter'}));
+        buttonContainer.appendChild(shareTwitterButton);
+
+        const noButton = document.createElement('button');
+        noButton.classList.add('primary');
+        noButton.style.margin = 'auto';
+        noButton.style.marginTop = '20px';
+        noButton.innerText = '{% t diary.s2 %}';
+        noButton.addEventListener('click', e => closeShareModal());
+        centerContainer.appendChild(noButton);   
+
+        window.onclick = (event) => {
+            const modal = document.getElementById("shareModal");
+            if (event.target == modal)
+                closeShareModal()
+        }
+        
+        return {openShareModal, closeShareModal};
+    }
+
+    
 
 /*
     const  renderSiteFooter = (parent) => {
@@ -2850,6 +3019,10 @@ const DiaryUI = (eventHandler) => {
     }
 */
 
+    const openShareModal = () => {
+        document.getElementById("shareModal").style.display = "block";
+    };
+
     return {
 
         renderSiteHeader,
@@ -2895,6 +3068,8 @@ const DiaryUI = (eventHandler) => {
         renderPreviewWithDataUri,
 
         renderPreviewOnIframeWithDataUri,
+
+        openShareModal,
     }
 }
 
