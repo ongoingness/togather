@@ -37,31 +37,60 @@ const DiaryTemplates = () => {
         if(!firstPage)
             doc.addPage('a4', 'portrait');
 
-        //if(data.title != undefined || data.title != '')
-
-        const forS = '{% t templates.c1 %}';
         const nameSplit = data.who.split(" ");
 
         const lineCharLimit = 19;
-        let lineLength = forS.length + 1;
+        let lineLength = 1;
 
-        const lines = [`${forS} `, ''];
+        const lines = ['', ''];
         let fullname = '';
         let currentLine = 0;
 
-        for(let i = 0; i < nameSplit.length && currentLine < 2; i++) {
-            if(lineLength + nameSplit[i].length > lineCharLimit) {
-                currentLine += 1;
-                lineLength = 0;
+        if(data.title != undefined && data.title != "") {
+           
+            const titleSplit = data.title.split(" ");
+            for(let i = 0; i < titleSplit.length && currentLine < 2; i++) {
+                if(lineLength + titleSplit[i].length > lineCharLimit) {
+                    currentLine += 1;
+                    lineLength = 0;
+                }
+
+                if(currentLine < 2) {
+                    lines[currentLine] += `${titleSplit[i]} `;
+                    lineLength += titleSplit[i].length;
+                }
             }
 
-            if(currentLine < 2) {
-                lines[currentLine] += `${nameSplit[i]} `;
-                lineLength += nameSplit[i].length;
-                fullname += `${nameSplit[i]} `;
+            let lineLengthName = 0;
+            let currentLineName = 0
+            for(let i = 0; i < nameSplit.length; i++) {
+                if(lineLengthName + nameSplit[i].length > lineCharLimit) {
+                    currentLineName  += 1;
+                    lineLengthName = 0;
+                }
+
+                if(currentLine < 2) {
+                    fullname += `${nameSplit[i]} `;
+                }
+            }
+
+        } else { 
+            const forS = '{% t templates.c1 %}';
+            lineLength = forS.length + 1;
+            lines[0] += `${forS} `;
+            for(let i = 0; i < nameSplit.length && currentLine < 2; i++) {
+                if(lineLength + nameSplit[i].length > lineCharLimit) {
+                    currentLine += 1;
+                    lineLength = 0;
+                }
+
+                if(currentLine < 2) {
+                    lines[currentLine] += `${nameSplit[i]} `;
+                    lineLength += nameSplit[i].length;
+                    fullname += `${nameSplit[i]} `;
+                }
             }
         }
-
         for(let i = 0; i < lines.length; i++)
             lines[i] = lines[i].trim();
 

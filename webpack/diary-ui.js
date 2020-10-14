@@ -1120,6 +1120,7 @@ const DiaryUI = (eventHandler) => {
 
         const inputName = document.createElement('input');
         inputName.classList.add('who__input-name');
+        inputName.setAttribute('maxlength', '19');
         inputName.style.margin = '50px auto';
         inputName.placeholder = '{% t diary.wtdif3 %}';
         inputName.addEventListener('input', () => rightButton.disabled = inputName.value.length === 0);
@@ -1136,6 +1137,7 @@ const DiaryUI = (eventHandler) => {
 
         const inputDiaryTitle = document.createElement('input');
         inputDiaryTitle.classList.add('who__input-name');
+        inputDiaryTitle.setAttribute('maxlength', '19');
         inputDiaryTitle.style.marginTop = '0px';
         inputDiaryTitle.placeholder = '{% t diary.wtdif5 %}';
         inputDiaryTitle.addEventListener('submit', (e) =>  {});
@@ -2213,7 +2215,7 @@ const DiaryUI = (eventHandler) => {
 
         const topicTextBox = document.createElement('div');
         topicTextBox.classList.add('overlay__text-box');
-        topicTextBox.style.maxHeight = '220px';
+        topicTextBox.style.maxHeight = '160px';
         topicTextBox.style.overflowY = 'auto';
         topicTextBox.innerText = `"${dayData.text}"`;
         overlayContent.appendChild(topicTextBox);
@@ -2460,21 +2462,21 @@ const DiaryUI = (eventHandler) => {
         title.id = 'pageTitle';
         title.classList.add();
         title.style.textAlign = 'center';
-        title.style.font = 'normal normal 300 32px/43px Roboto Condensed';
+        title.style.font = 'normal normal 300 25px/43px Roboto Condensed';
         title.style.letterSpacing = '0.64px';
-        title.style.paddingTop = '20px';
+        title.style.paddingTop = '15px';
         title.innerText = participate === undefined ? 'Your diary is almost ready!' : '{% t diary.dd1 %}';
         upperPage.appendChild(title);
 
         const centerContainer = document.createElement('div');
         centerContainer.style.margin = 'auto';
-        centerContainer.style.marginLeft = '27px';
-        centerContainer.style.marginRight = '27px';
-        centerContainer.style.marginTop = '20px';
+        centerContainer.style.marginLeft = '20px';
+        centerContainer.style.marginRight = '20px';
+        centerContainer.style.marginTop = '15px';
         content.appendChild(centerContainer);
 
         const textBox1 = document.createElement('div');
-        textBox1.innerText = 'Thanks for using Togather, we would like to invite you to take part in our research study. Before you decide to participate (or not), we would like you to understand why the research is being done and what it would involve for you. Would you like to know more?';
+        textBox1.innerText = 'Thanks for using Togather, we would like to invite you to take part in our research study. Before you decide to participate (or not), we would like you to understand why the research is being done and what it would involve for you.';
         
         
         
@@ -2482,7 +2484,7 @@ const DiaryUI = (eventHandler) => {
         //'Thanks for using Togather, as we are curious to how you have experienced living with togather, we are keen to hear your thoughts!';
         textBox1.style.marginBottom = '20px';
         textBox1.style.textAlign = 'center';
-        textBox1.style.fontSize = '18px';
+        textBox1.style.fontSize = '16px';
         centerContainer.appendChild(textBox1);
 
         const form = document.createElement('form');
@@ -2490,9 +2492,14 @@ const DiaryUI = (eventHandler) => {
         form.style.flexDirection = 'column';
         centerContainer.appendChild(form);
 
+        const textbox3 = document.createElement('div');
+        textbox3.style.textAlign = 'center';
+        textbox3.innerText = 'Would you like to know more?';
+        form.append(textbox3);
+
         const optionsContainer = document.createElement('div');
         optionsContainer.style.margin = 'auto';
-        optionsContainer.style.marginBottom = '20px';
+        //optionsContainer.style.marginBottom = '20px';
         form.append(optionsContainer);
 
         const yesRadioButton = document.createElement('input');
@@ -2502,6 +2509,7 @@ const DiaryUI = (eventHandler) => {
         yesRadioButton.value = 'yes';
         yesRadioButton.checked = participate != undefined && participate === 'yes';
         yesRadioButton.addEventListener('change', () => {
+            divWarning.innerText = '(On Submit, the diary will be downloaded and a page with further instructions will be opened)';
             document.getElementById('submitButtonParticipation').disabled = false;
         })
         optionsContainer.append(yesRadioButton);
@@ -2520,6 +2528,7 @@ const DiaryUI = (eventHandler) => {
         noRadioButton.checked = participate != undefined && participate === 'no';
         noRadioButton.style.marginLeft = '20px';
         noRadioButton.addEventListener('change', () => {
+            divWarning.innerText = '';
             document.getElementById('submitButtonParticipation').disabled = false;
         })
         optionsContainer.append(noRadioButton);
@@ -2528,6 +2537,15 @@ const DiaryUI = (eventHandler) => {
         labelNoButton.for = 'no';
         labelNoButton.innerText = 'No';
         optionsContainer.append(labelNoButton);
+
+        const divWarning = document.createElement('div');
+        divWarning.id = 'warning';
+        divWarning.style.width = '100%';
+        divWarning.style.height = '30px';
+        divWarning.style.fontSize = '13px';
+        divWarning.style.lineHeight = '13px';
+        divWarning.style.textAlign = 'center';
+        form.append(divWarning);
 
         const buttonContainer1 = document.createElement('div');
         buttonContainer1.style.display = 'flex';
@@ -2567,7 +2585,7 @@ const DiaryUI = (eventHandler) => {
         downloadButton.classList.add('secondary');
         downloadButton.style.display =  participate === undefined ? 'none' : 'block';
         downloadButton.style.margin = 'auto';
-        downloadButton.style.marginTop = '20px';
+        downloadButton.style.marginTop = '15px';
         downloadButton.innerText = '{% t diary.dd3 %}';
         downloadButton.addEventListener('click', e => {
             openShareModal();
