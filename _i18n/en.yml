@@ -18,6 +18,9 @@ introduction:
     t4: Create , capture, write, photograph and share with your group.
     t5: Come back each day for another new topic to share with your group. Keep this up until you're ready to share all of the stories, photographs and messages with your loved one. ToGather lets you create a personalised diary for them from your WhatsApp group.
     t6: 'To start create a group in Whatsapp with all the people that want to contribute to this diary. Let everyone know what this group is about. You can use our example:'
+    t7: WhatsApp's group particpant menu
+    t8: Page of this website with a topic
+    t9: Chat of an WhatsApp group
 
 instructions:
     header: Instructions
@@ -52,14 +55,14 @@ instructions:
 about:
     header: About
     t0: How it began
-    t1: The idea for ToGather was born at the early stages of the COVID-19 lockdown in the UK. We saw an article on the Dutch news where a family kept a diary for their relative in the Intensive Care Unit (ICU) and gave this to her when she was discharged from the hospital. They wrote down what happened to her while she was in the ICU, but also happened in the world outside, weather forecasts, some news items, things the family had done. We thought this was really nice, and we wanted to make this available for people going through similar experiences. 
+    t1: The idea for Togather was born at the early stages of the COVID-19 lockdown in the UK. We saw an article on the Dutch news where a family kept a diary for their relative in the Intensive Care Unit (ICU) and gave this to her when she was discharged from the hospital. They wrote down what happened to her while she was in the ICU, but also happened in the world outside, weather forecasts, some news items, things the family had done. We thought this was really nice, and we wanted to make this available for people going through similar experiences. 
     t2: As we realise that going through these trying times, where families and friends get separated, it can leave you feeling powerless. We hope that through getting together as group to engage with these topics and activities provides a space to draw strength from each other and find some light. A space where even though life going on seems weird, you can make shared memories together, with your loved one at the centre of it all. We want to help you to support your family/friends/community to gather in stories when being together is not possible. 
     t3: Simply put. We have designed Togather to keep your messages and media private. All of your chat messages and media files stay on your device and never get shared or stored by Togather (or anyone else).
     t4: The only data we capture is through the anonymous site analytics and through our optional feedback form at the end of assembling your diary. We are a team of researchers (details below), that would love to hear about your experiences with ToGather (as well as any suggestions for how to improve it). This is completely voluntary and in no way affects your access to or usage of the ToGather website. To support this feedback and get some insight into how people use ToGather we log which topics are shared – that’s it. We do not record any user data or information that can trace back to anyone. To give you an idea of what data we capture we have created an example of a log for one day, click here to see it.
     t5: The people behind Togather
     t6: We are a team of design researchers from Newcastle University and Northumbria University based in Newcastle Upon-Tyne in the United Kingdom. 
     t7: Togather
-    t8: ToGather is an online service that aims to bring families and friends together through sharing stories for a loved one. It is built using existing services WhatsApp and GitHub, to make it widely available and free of charge for everyone. We will provided you with daily topics and activities for your family and friends to message about and turn your group conversations into a book or diary to gift, keep and revisit.
+    t8: Togather is an online service that aims to bring families and friends together through sharing stories for a loved one. It is built using existing services WhatsApp and GitHub, to make it widely available and free of charge for everyone. We will provided you with daily topics and activities for your family and friends to message about and turn your group conversations into a book or diary to gift, keep and revisit.
     t9: Your Privacy
     t10: We are part of the research project called Enabling Ongoingness (www.enablingongoingness.com) which explores how we can give new meaning to relationships in the context of end-of life and  bereavement. A large part of this is exploring how people curate the essence of a relationship in media, stories, objects and rituals in everyday life. During the COVID-19 pandemic we were faced with a new global shared experience of fear of loss and grief. It is unlike anything that many of us have experienced before, and has undoubtedly  changed our lives in many ways. Through ToGather we hope that we can help you capture your community bonds in a time where this is not as easy as it was before. If you have any experiences with ToGather that you would like to share with us do not hesitate to reach out. You can either send us a message over e-mail (kyle.montague@northumbria.ac.uk) or fill out our feedback form.
     t11: Researcher
@@ -87,6 +90,10 @@ nav-overlay:
 
 footer:
     f1: 'Select Language:'
+    f2: 'Togather Logo'
+    f3: 'Enabling Ongoingness Project Logo'
+    f4: 'Inclusive Design & Innovation (IDI) research group Logo'
+    f5: 'Northumbria University Logo'
 
 group-start:
     gs1: '“Hi everyone, this group is a place where we can share things we would like to capture for [INSERT NAME] in a diary. Every day we will post a topic for inspiration what to message about today. If you have an idea for a topic feel free to share this. Also, if you just have something you want to share for the diary unrelated to the topic please do! To see what is possible to create using messages captured here, check this video:<a href=https://www.youtube.com/watch?v=BUJLK6aTBkQ>https://www.youtube.com/watch?v=BUJLK6aTBkQ</a>.  As an opening of this group it would be nice to introduce everyone who is part of this, so post a picture of yourself, who you are to [INSERT NAME], and a short personal message for them.“'
@@ -165,6 +172,7 @@ diary:
 
     sm1: 'Select all messages for this day:'
     sm2: 'The topics we have found are the ones you shared through the Togather website. If you thought of your own topics you can add them here. You can select them from the chat, if you shared them there, or write your own. If there were days that you didn''t have a topic, but messages were shared, then try to find a description for that. For example; A log of Monday. Or; Some things we liked to share today. This way we can add that day in the diary template.'
+    sm3: 'Click to see topic'
 
     d1: 'Topic Day'
     d2: 'Select Messages'
@@ -178,6 +186,13 @@ diary:
     dd1: 'Your diary is ready!'
     dd2: 'Download your Diary here:'
     dd3: 'Download Diary'
+    dd4: 'Your diary is almost ready!'
+    dd5: 'Thanks for using Togather, we would like to invite you to take part in our research study. Before you decide to participate (or not), we would like you to understand why the research is being done and what it would involve for you.'
+    dd6: 'Would you like to know more?'
+    dd7: '(On Submit, the diary will be downloaded and a page with further instructions will be opened)'
+    dd8: 'Yes'
+    dd9: 'No'
+    dd10: 'Submit'
 
     s1: 'Thank you for using Togather! If you have friends or family that might also like Togather share the website with them through these links.'
     s2: 'No, thank you!'
@@ -191,6 +206,13 @@ templates:
 
     tp1: Day
     tp2: Part
+
+error:
+    e1: Okay
+
+edge-support:
+    es1: 'Assembling Diary not supported on your current version of Microsoft Edge'
+    es2: 'Click below to update Edge to its latest version'
 
 topics:
     td1: 'Share a photograph of one of your last get-togethers. Describe what we are looking at and why have you chosen it?'

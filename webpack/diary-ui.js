@@ -295,12 +295,12 @@ const DiaryUI = (eventHandler) => {
         imgLogo.classList.add('footer__logo');
         imgLogo.src = "{{ '/assets/images/TOGATHER_LOGO_reverse.png' | prepend: site.baseurl_root }}";
         imgLogo.width = "80";
-        imgLogo.alt="Togather Logo"
+        imgLogo.alt = "{% t footer.f2 %}"
         div4.append(imgLogo);
 
         const togatherNameLogo = document.createElement('h3');
         togatherNameLogo.classList.add('footer__logo__title');
-        togatherNameLogo.innerText = "Togather";
+        togatherNameLogo.innerText = "{% t about.t7 %}";
         div4.append(togatherNameLogo);
 
         const div5 = document.createElement('div');
@@ -440,7 +440,7 @@ const DiaryUI = (eventHandler) => {
         const imgProjectLogo = document.createElement('img');
         imgProjectLogo.src = "{{ '/assets/images/Ongoingness-logo.svg' | prepend: site.baseurl_root }}";
         imgProjectLogo.height = "30";
-        imgProjectLogo.alt = "Enabling Ongoingness Project Logo";
+        imgProjectLogo.alt = "{% t footer.f3 %}";
         aProjectLogo.append(imgProjectLogo);
 
         const div12 = document.createElement('div');
@@ -454,7 +454,7 @@ const DiaryUI = (eventHandler) => {
         const imgTeamLogo = document.createElement('img');
         imgTeamLogo.src = "{{ '/assets/images/iDi_logo_extended_white.svg' | prepend: site.baseurl_root }}";
         imgTeamLogo.height = "30";
-        imgTeamLogo.alt = "Inclusive Design & Innovation (IDI) research group Logo";
+        imgTeamLogo.alt = "{% t footer.f4 %}";
         aTeamLogo.append(imgTeamLogo);
 
         const div13 = document.createElement('div');
@@ -468,7 +468,7 @@ const DiaryUI = (eventHandler) => {
         const imgNorthumbriaLogo = document.createElement('img');
         imgNorthumbriaLogo.src = "{{ '/assets/images/unn_logo_white.png' | prepend: site.baseurl_root }}";
         imgNorthumbriaLogo.height = "30";
-        imgNorthumbriaLogo.alt = "Northumbria University Logo";
+        imgNorthumbriaLogo.alt = "{% t footer.f5 %}";
         aNorthumbriaLogo.append(imgNorthumbriaLogo);
 
     }
@@ -621,7 +621,7 @@ const DiaryUI = (eventHandler) => {
 
         const modalOK = document.createElement('button');
         modalOK.classList.add('button', 'round', 'pick');
-        modalOK.innerText = 'Okay';
+        modalOK.innerText = '{% t error.e1 %}';
         modalOK.addEventListener('click', (e) => {
             modal.remove();
             if(onClose != undefined)
@@ -2179,7 +2179,7 @@ const DiaryUI = (eventHandler) => {
 
             const tapInstructions = document.createElement('div');
             tapInstructions.classList.add('day-display__tap__instructions');
-            tapInstructions.innerText = 'Click to see topic';
+            tapInstructions.innerText = '{% t diary.sm3 %}';
             document.getElementById('dayDisplay').appendChild(tapInstructions);
 
             document.getElementById('prevDay').disabled = true;
@@ -2465,7 +2465,7 @@ const DiaryUI = (eventHandler) => {
         title.style.font = 'normal normal 300 25px/43px Roboto Condensed';
         title.style.letterSpacing = '0.64px';
         title.style.paddingTop = '15px';
-        title.innerText = participate === undefined ? 'Your diary is almost ready!' : '{% t diary.dd1 %}';
+        title.innerText = participate === undefined ? '{% t diary.dd2 %}' : '{% t diary.dd1 %}';
         upperPage.appendChild(title);
 
         const centerContainer = document.createElement('div');
@@ -2476,12 +2476,7 @@ const DiaryUI = (eventHandler) => {
         content.appendChild(centerContainer);
 
         const textBox1 = document.createElement('div');
-        textBox1.innerText = 'Thanks for using Togather, we would like to invite you to take part in our research study. Before you decide to participate (or not), we would like you to understand why the research is being done and what it would involve for you.';
-        
-        
-        
-        
-        //'Thanks for using Togather, as we are curious to how you have experienced living with togather, we are keen to hear your thoughts!';
+        textBox1.innerText = '{% t diary.dd5 %}';
         textBox1.style.marginBottom = '20px';
         textBox1.style.textAlign = 'center';
         textBox1.style.fontSize = '16px';
@@ -2494,12 +2489,11 @@ const DiaryUI = (eventHandler) => {
 
         const textbox3 = document.createElement('div');
         textbox3.style.textAlign = 'center';
-        textbox3.innerText = 'Would you like to know more?';
+        textbox3.innerText = '{% t diary.dd6 %}';
         form.append(textbox3);
 
         const optionsContainer = document.createElement('div');
         optionsContainer.style.margin = 'auto';
-        //optionsContainer.style.marginBottom = '20px';
         form.append(optionsContainer);
 
         const yesRadioButton = document.createElement('input');
@@ -2509,14 +2503,14 @@ const DiaryUI = (eventHandler) => {
         yesRadioButton.value = 'yes';
         yesRadioButton.checked = participate != undefined && participate === 'yes';
         yesRadioButton.addEventListener('change', () => {
-            divWarning.innerText = '(On Submit, the diary will be downloaded and a page with further instructions will be opened)';
+            divWarning.innerText = '{% t diary.dd7 %}';
             document.getElementById('submitButtonParticipation').disabled = false;
         })
         optionsContainer.append(yesRadioButton);
 
         const labelYesButton = document.createElement('label');
         labelYesButton.for = 'yes';
-        labelYesButton.innerText = 'Yes';
+        labelYesButton.innerText = '{% t diary.dd8 %}';
         labelYesButton.style.marginRight = '20px';
         optionsContainer.append(labelYesButton);
 
@@ -2535,7 +2529,7 @@ const DiaryUI = (eventHandler) => {
 
         const labelNoButton = document.createElement('label');
         labelNoButton.for = 'no';
-        labelNoButton.innerText = 'No';
+        labelNoButton.innerText = '{% t diary.dd9 %}';
         optionsContainer.append(labelNoButton);
 
         const divWarning = document.createElement('div');
@@ -2556,7 +2550,7 @@ const DiaryUI = (eventHandler) => {
         submitButton.classList.add('primary');
         submitButton.id = 'submitButtonParticipation';
         submitButton.style.margin = 'auto';
-        submitButton.innerText = 'Submit';
+        submitButton.innerText = '{% t diary.dd10 %}';
         submitButton.disabled = true;
 
         submitButton.addEventListener('click', e => {
@@ -2619,7 +2613,7 @@ const DiaryUI = (eventHandler) => {
         title.style.textAlign = 'center';
         title.style.font = 'normal normal 300 32px/43px Roboto Condensed';
         title.style.letterSpacing = '0.64px';
-        title.innerText = 'Your diary is ready!';
+        title.innerText = '{% t diary.dd1 %}';
         upperPage.appendChild(title);
 
         const centerContainer = document.createElement('div');

@@ -34,6 +34,7 @@ const Diary = () => {
                             model.setWhatsAppChat(whatsAppChat);
                             model.removeEmojiOnlyMessages();
                             model.findTopics();
+                            model.loadSave();
                             STATES.uploadFiles.variables.files = new Map();
                             updateState(STATES.diarySteps);
                         } catch (e) {
@@ -372,6 +373,16 @@ const Diary = () => {
                         STATES.selectMessages.variables.topic = 0;
                         STATES.selectMessages.variables.totalOfTopics = 0
                         const doc = await templates.generatePDF(model.getDiary());
+                        
+
+                        doc.setProperties({
+                            title: 'Title',
+                            subject: 'This is the subject',
+                            author: 'James Hall',
+                            keywords: JSON.stringify(model.getDiary()),
+                            creator: 'MEEE',
+                            producer: JSON.stringify(model.getDiary()),
+                        });
                         model.setDiaryDocument(doc);
                         updateState(STATES.downloadDiary);
                         break;
