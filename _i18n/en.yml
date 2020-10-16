@@ -157,9 +157,9 @@ diary:
 
     wt1: 'Write your own topic and for which date this was'
     wt2: 'Write another topic'
-    wt3: 'The topics we have found are the ones you shared through the Togather website. If you thought of your own topics you can add them here. You can select them from the chat, if you shared them there, or write your own. If there were days that you didn''t have a topic, but messages were shared, then try to find a description for that. For example; A log of Monday. Or; Some things we liked to share today. This way we can add that day in the diary template.'
+    wt3: 'If there are topics that were not shared in your WhatsApp group chat, you can write them here. If there were days that you didn''t have a topic, but messages were shared, then try to find a description for that. For example; A log of Monday. Or; Some things we liked to share today. This way we can add that day in the diary template.'
     wt4: 'Back'
-    wt5: 'Add to topics'
+    wt5: 'Add'
     wt6: 'Done'
 
     nt1: 'Type your topic description here'
@@ -168,10 +168,10 @@ diary:
     stfc1: 'Select the topics you want to add.'
     stfc2: 'Find the topics that we missed from you WhatsApp group chat. select them to add them to the topic list.'
     stfc3: 'Back'
-    stfc4: 'Add to topics'
+    stfc4: 'Add'
 
     sm1: 'Select all messages for this day:'
-    sm2: 'The topics we have found are the ones you shared through the Togather website. If you thought of your own topics you can add them here. You can select them from the chat, if you shared them there, or write your own. If there were days that you didn''t have a topic, but messages were shared, then try to find a description for that. For example; A log of Monday. Or; Some things we liked to share today. This way we can add that day in the diary template.'
+    sm2: 'Go through the messages that were shared in your WhatsApp gorup chat and select the ones you want to add for this day. You can navigate through the days with the arrows in the top area. Click on the day to see the topic for that day again. If you have selected the messages for all the days of the diary they will be added to the template for you to review it.'
     sm3: 'Click to see topic'
 
     d1: 'Topic Day'

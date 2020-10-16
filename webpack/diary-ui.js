@@ -1088,7 +1088,7 @@ const DiaryUI = (eventHandler) => {
         nextButton.addEventListener('click', nextButtonListener);
         column3.appendChild(nextButton);
 
-        return {leftButton: previousButton, leftButtonListener: previousButtonListener, rightButton: nextButton, rightButtonListener: nextButtonListener};
+        return {leftButton: previousButton, leftButtonListener: previousButtonListener, rightButton: nextButton, rightButtonListener: nextButtonListener, helpButton};
     }
 
     const renderWhoTheDiaryIsFor = (who, diaryTitle) => {
@@ -1363,13 +1363,14 @@ const DiaryUI = (eventHandler) => {
         const overlayContent = document.createElement('div');
         overlayContent.classList.add('overlay-content', 'topic__options');
         overlayContent.style.minWidth = `${document.body.offsetWidth}px`;
+        overlayContent.style.display = 'flex';
         overlay.appendChild(overlayContent);
 
         window.addEventListener('resize', (e) => overlayContent.style.minWidth = `${document.body.offsetWidth}px`);
 
 
         const buttonContainer = document.createElement('div');
-        buttonContainer.style.margin = '0 27px';
+        buttonContainer.style.margin = '0 auto';
         overlayContent.append(buttonContainer);
 
         const selectFromChatButton = document.createElement('button');
@@ -1432,14 +1433,16 @@ const DiaryUI = (eventHandler) => {
 
         const topicHeaderDay =  document.createElement('div');
         topicHeaderDay.classList.add('topic__header__day');
-        topicHeaderDay.innerText = `{% t diary.t1 %} ${topicData.day}`;
+        topicHeaderDay.innerText = `${new Date(topicData.timestamp).toLocaleDateString(undefined, { year: undefined, month: '2-digit', day: '2-digit' })}`;//`{% t diary.t1 %} ${topicData.day}`;
         topicHeader.appendChild(topicHeaderDay);
 
+        /*
         const date = new Date(topicData.timestamp);
         const topicHeaderDate =  document.createElement('div');
         topicHeaderDate.classList.add('topic__header__date');
         topicHeaderDate.innerText = `${date.toLocaleDateString()}`;
         topicHeader.appendChild(topicHeaderDate);
+        */
 
         const topicHeaderEditButton = document.createElement('button');
         topicHeaderEditButton.classList.add('topic__header__edit-button');
@@ -2150,14 +2153,16 @@ const DiaryUI = (eventHandler) => {
     }
 
     const updateDay = (dayData) => {
-        document.getElementById('dayDisplay').innerText = `{% t diary.t1 %} ${dayData.day}`;
+        document.getElementById('dayDisplay').innerText = `${new Date(dayData.timestamp).toLocaleDateString(undefined, { year: undefined, month: '2-digit', day: '2-digit' })}`//`{% t diary.t1 %} ${dayData.day}`;
         //document.getElementById('dayDisplay').style = `color: ${dayData.color};`
         document.getElementById('dayDisplay').addEventListener('click', e => document.getElementById('topicText').style.height = '100%')
     }
 
     const renderDay = (dayData, allMessagesData, selectedMessages) => {
 
-        document.getElementById('dayDisplay').innerText = `{% t diary.t1 %} ${dayData.part === 0 ? `${dayData.day}` : `${dayData.day} #${dayData.part}`}`;
+        const stringDate =`${new Date(dayData.timestamp).toLocaleDateString(undefined, { year: undefined, month: '2-digit', day: '2-digit' })}`;
+
+        document.getElementById('dayDisplay').innerText = /*{% t diary.t1 %}*/ `${dayData.part === 0 ? /*`${dayData.day}`*/ stringDate : `${stringDate} #${dayData.part}`}`;
         //document.getElementById('dayDisplay').style = `color: ${dayData.color};`
         document.getElementById('dayDisplay').addEventListener('click', e => {
             const topicText = document.getElementById('topicText');
@@ -2210,7 +2215,7 @@ const DiaryUI = (eventHandler) => {
         const topicTextTitle = document.createElement('div');
         topicTextTitle.classList.add('overlay__text-box');
         topicTextTitle.style.marginBottom = '20px';
-        topicTextTitle.innerText = `{% t diary.d1 %} ${dayData.day}:`;
+        topicTextTitle.innerText = `{% t topic.t3 %} ${dayData.part === 0 ? stringDate : `${stringDate} #${dayData.part}`}`;/*`{% t diary.d1 %} ${dayData.day}:`*/
         overlayContent.appendChild(topicTextTitle);
 
         const topicTextBox = document.createElement('div');
@@ -2257,13 +2262,21 @@ const DiaryUI = (eventHandler) => {
             let isSelected = false;
             let selectedDay = dayData.day;
             let isSelectedFromThisDay = false;
-            let text = dayData.part === 0 ? `{% t diary.t1 %} ${selectedDay}` : `{% t diary.t1 %} ${selectedDay} #${dayData.part}`;
+
+            let stringDate = new Date(dayData.timestamp).toLocaleDateString(undefined, { year: undefined, month: '2-digit', day: '2-digit' })
+
+            //let text = dayData.part === 0 ? `{% t diary.t1 %} ${selectedDay}` : `{% t diary.t1 %} ${selectedDay} #${dayData.part}`;
+            let text = dayData.part === 0 ? `${stringDate}` : `${stringDate} #${dayData.part}`;
+            
             if(selectedMessages != undefined) {
                 if(selectedMessages.has(message.hash)) {
                     isSelected = true;
-                    const {day, part} = selectedMessages.get(message.hash);
+                    const {day, part, timestamp} = selectedMessages.get(message.hash);
                     isSelectedFromThisDay = dayData.day === day && dayData.part === part;
-                    text = dayData.part === 0 ? `{% t diary.t1 %} ${day}` : `{% t diary.t1 %} ${day} #${part}`;
+                    //text = dayData.part === 0 ? `{% t diary.t1 %} ${day}`: `${stringDate} #${part}`;
+                    
+                    stringDate = new Date(timestamp).toLocaleDateString(undefined, { year: undefined, month: '2-digit', day: '2-digit' })
+                    text = part === 0 ? `${stringDate}`: `${stringDate} #${part}`;
                 }
             }
 
@@ -2592,8 +2605,9 @@ const DiaryUI = (eventHandler) => {
         });
         buttonContainer.appendChild(downloadButton);
 
-        const {rightButton} = renderStepController(document.body, 5);
+        const {leftButton, rightButton, helpButton} = renderStepController(document.body, 5);
         rightButton.innerText = '{% t diary.rd3 %}';
+        helpButton.remove();
 
     }
 

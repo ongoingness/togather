@@ -517,7 +517,7 @@ const DiaryModel = () => {
         for(const topic of topics) {
 
             for(const selectedMessage of topic.selectedMessages)
-                result.set(selectedMessage, {day: topic.day, part: topic.part});
+                result.set(selectedMessage, {day: topic.day, part: topic.part, timestamp: whatsAppChat.messageMap.get(topic.hash).fulltimestamp});
 
         }
  
@@ -688,6 +688,15 @@ const DiaryModel = () => {
 
     }
 
+    const deleteAll = () => {
+        whatsAppChat = undefined;
+        topics = [];
+        who = undefined;
+        title = undefined;
+        diaryDocument = undefined;
+        participate = undefined;
+    }
+
     return {
         setWhatsAppChat,
         setWhoDiaryIsFor,
@@ -720,6 +729,8 @@ const DiaryModel = () => {
 
 
         loadSave,
+
+        deleteAll,
     };
 }
 

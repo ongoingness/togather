@@ -34,7 +34,7 @@ const Diary = () => {
                             model.setWhatsAppChat(whatsAppChat);
                             model.removeEmojiOnlyMessages();
                             model.findTopics();
-                            model.loadSave();
+                            //model.loadSave();
                             STATES.uploadFiles.variables.files = new Map();
                             updateState(STATES.diarySteps);
                         } catch (e) {
@@ -60,6 +60,7 @@ const Diary = () => {
                 switch(params.type) {
                     
                     case 'stop-assembling':
+                        model.deleteAll();
                         updateState(STATES.uploadFiles);
                         break;
 
@@ -73,7 +74,6 @@ const Diary = () => {
         },
         whoTheDiaryIsFor: {
             render: () => {
-                console.log(model.getDiaryTitle());
                 ui.renderWhoTheDiaryIsFor(model.getWhoDiaryIsFor(), model.getDiaryTitle());
             },
             eventHandler: (e, params) => {
@@ -81,6 +81,7 @@ const Diary = () => {
                 switch(params.type) {
 
                     case 'stop-assembling':
+                        model.deleteAll();
                         updateState(STATES.uploadFiles);
                         break;
 
@@ -103,6 +104,7 @@ const Diary = () => {
                 switch(params.type) {
 
                     case 'stop-assembling':
+                        model.deleteAll();
                         updateState(STATES.uploadFiles);
                         break;
 
@@ -134,6 +136,7 @@ const Diary = () => {
                 switch(params.type) {
                   
                     case 'stop-assembling':
+                        model.deleteAll();
                         updateState(STATES.uploadFiles);
                         break;
 
@@ -183,6 +186,7 @@ const Diary = () => {
                 switch(params.type) {
 
                     case 'stop-assembling':
+                        model.deleteAll();
                         updateState(STATES.uploadFiles);
                         break;
                     
@@ -232,6 +236,7 @@ const Diary = () => {
                 switch(params.type) {
 
                     case 'stop-assembling':
+                        model.deleteAll();
                         updateState(STATES.uploadFiles);
                         break;
                     
@@ -273,6 +278,7 @@ const Diary = () => {
                 switch(params.type) {
 
                     case 'stop-assembling':
+                        model.deleteAll();
                         updateState(STATES.uploadFiles);
                         break;
 
@@ -327,6 +333,7 @@ const Diary = () => {
                 switch(params.type) {
 
                     case 'stop-assembling':
+                        model.deleteAll();
                         updateState(STATES.uploadFiles);
                         break;
 
@@ -374,7 +381,7 @@ const Diary = () => {
                         STATES.selectMessages.variables.totalOfTopics = 0
                         const doc = await templates.generatePDF(model.getDiary());
                         
-
+/*
                         doc.setProperties({
                             title: 'Title',
                             subject: 'This is the subject',
@@ -383,6 +390,7 @@ const Diary = () => {
                             creator: 'MEEE',
                             producer: JSON.stringify(model.getDiary()),
                         });
+                        */
                         model.setDiaryDocument(doc);
                         updateState(STATES.downloadDiary);
                         break;
@@ -558,6 +566,7 @@ const Diary = () => {
 
                     case 'stop-assembling':
                        // templates.destroyPreviewPdfWorker(STATES.reviewDiary.variables.worker);
+                        model.deleteAll();
                         updateState(STATES.uploadFiles);
                         break;
 
@@ -585,6 +594,7 @@ const Diary = () => {
                 switch(params.type) {
 
                     case 'stop-assembling':
+                        model.deleteAll();
                         updateState(STATES.uploadFiles);
                         break;
 
@@ -653,6 +663,7 @@ const Diary = () => {
                 switch(params.type) {
 
                     case 'stop-assembling':
+                        model.deleteAll();
                         updateState(STATES.uploadFiles);
                         break;
 
