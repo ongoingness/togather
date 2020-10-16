@@ -16,11 +16,12 @@ introduction:
     t2: Gather a group of friends & family on WhatsApp
     t3: Get a nostalgic, creative, fun or challenging topics to share with your group
     t4: Create , capture, write, photograph and share with your group.
-    t5: Come back each day for another new topic to share with your group. Keep this up until you're ready to share all of the stories, photographs and messages with your loved one. ToGather lets you create a personalised diary for them from your WhatsApp group.
+    t5: Come back each day for another new topic to share with your group.
     t6: 'To start create a group in Whatsapp with all the people that want to contribute to this diary. Let everyone know what this group is about. You can use our example:'
     t7: WhatsApp's group particpant menu
     t8: Page of this website with a topic
     t9: Chat of an WhatsApp group
+    t10: Togather will help you, every week or every couple of days, to create a personalized diary from your WhatsApp group chat to share with your loved one. 
 
 instructions:
     header: Instructions
@@ -44,13 +45,15 @@ instructions:
     t18: 2. Visit the ToGather 'Assemble Diary' page and upload your exported group chat. (all of the media and the `chat.txt` file that you saved in the previous step)
     t19: 'TIP: Don’t worry, your personal messages and media files are not actually being uploaded anywhere. Everything is happening locally on your device – we don’t collect any personal data. This ensures your conversations stay private and you have full control over who you want to share your diary with.'
     t20: Learn about how the service works
-    t21: 3. Personalise the diary by adding your loved one's name to the front cover.
+    t21: 3. Personalise the diary by adding your loved one's name, and a title to the front cover.
     t22: 4. Check the names of all the contributors. We will show you a list of the names we found in your group. You can edit the names you'll see in the diary (e.g first names only).
-    t23: 5. Review the topics we found in the group chat. If there are topics missing you can add them from your messages or type them in.
+    t23: 5. Review the topics we found in the group chat. If there are topics missing you can add them from your messages or type them in. If there are ones that have already been included in previous diaries, simply delete them.
     t24: 6. For each topic you will be asked to select which responses you want to add to the diary for that day.
     t25: 'TIP: Don’t worry if there is a day you didn’t submit anything, everyone deserves a rest, we will skip over those days and the dates will keep counting on.'
     t26: 7. When you have done this for each day you want in the diary, click the 'finish' button. All of your messages will be placed in a template and your diary will be ready for you to download. You can print and/or forward it to share the diary with your family, friends and loved ones.
     t27: Assemble Diary
+    t28: 'TIP: We recommend to do this weekly, or even daily, so WhatsApp can export all your messages and so you have something to share more often.' 
+    t29: 'TIP II: If you find there are messages or media missing after having exported a chat, this is likely due to the limit of WhatsApp on export file size. In this case, export the chat WIHTOUT media, and retrieve the media seperately from your phone, or download them via web.WhatsApp on your computer.'
 
 about:
     header: About

@@ -602,17 +602,11 @@ const DiaryUI = (eventHandler) => {
 
         const modalContent = document.createElement('div');
         modalContent.classList.add('modal-content');
+        modalContent.style.borderRadius = '15px';
+        modalContent.style.paddingTop = '40px';
         modal.appendChild(modalContent);
 
-        const closeButton = document.createElement('a');
-        closeButton.classList.add('modal__close-button');
-        closeButton.innerText = '×';
-        closeButton.addEventListener('click', () => {
-            modal.remove();
-            if(onClose != undefined)
-                onClose();
-        });
-        modalContent.appendChild(closeButton);
+  
 
         const modalText = document.createElement('p');
         modalText.style.textAlign = 'center';
@@ -620,7 +614,7 @@ const DiaryUI = (eventHandler) => {
         modalContent.appendChild(modalText);
 
         const modalOK = document.createElement('button');
-        modalOK.classList.add('button', 'round', 'pick');
+        modalOK.classList.add('primary');
         modalOK.innerText = '{% t error.e1 %}';
         modalOK.addEventListener('click', (e) => {
             modal.remove();
@@ -644,7 +638,6 @@ const DiaryUI = (eventHandler) => {
         const onClose = () => {
             const button = document.getElementById('startAssembling');
             button.innerHTML = '{% t diary.uf7 %}';
-            button.style.width = 'initial';
             button.disabled = false;
         }
         renderErrorModal('{% t diary.uem1 %}', onClose);
