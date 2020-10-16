@@ -180,22 +180,29 @@ const DiaryTemplates = () => {
         doc.setFontSize(42);
         doc.setFontType('normal');
         doc.setFont('Oswald-Regular');
-        doc.text((data.part === 0 ? `{% t templates.tp1 %} ${data.day}` : `{% t templates.tp1 %} ${data.day} - {% t templates.tp2 %} ${data.part}`).toUpperCase(), 45, 54);
- 
 
-        doc.setTextColor(0, 0, 0);
         const date = new Date(data.timestamp);
         const day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(date)
         const month = new Intl.DateTimeFormat('{% t global.lang-code %}', { month: 'long' }).format(date)
         const year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(date)
+        doc.text((data.part === 0 ? `${day} ${month} ${year}` : `${day} ${month} ${year} - {% t templates.tp2 %} ${data.part}`).toUpperCase(), 45, 54);
+        //doc.text((data.part === 0 ? `{% t templates.tp1 %} ${data.day}` : `{% t templates.tp1 %} ${data.day} - {% t templates.tp2 %} ${data.part}`).toUpperCase(), 45, 54);
+ 
+        
+        doc.setTextColor(0, 0, 0);
+        //const date = new Date(data.timestamp);
+        //const day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(date)
+        //const month = new Intl.DateTimeFormat('{% t global.lang-code %}', { month: 'long' }).format(date)
+        //const year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(date)
         doc.setFont('Oswald-ExtraLight');
         doc.setFontSize(40);
-        doc.text((`${day} ${month} ${year}`).toUpperCase(), 45, 83);
+       // doc.text((`${day} ${month} ${year}`).toUpperCase(), 45, 83);
+        
                 
         doc.setFontSize(18);
         doc.setFontType('italic');
         doc.setFont('OpenSans');
-        doc.text(data.text, 42, 127.021, {maxWidth: 126});
+        doc.text(data.text, 42, /*127.021*/ 100, {maxWidth: 126});
 
         return doc;
     }

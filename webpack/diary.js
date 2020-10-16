@@ -4,6 +4,7 @@ import DiaryTemplates from './diary-templates.js';
 import WhatsAppChatParser from './whatapp-chat-parser.js';
 import DataCollection from './data-collection.js';
 import { checkBrowser } from './utils.js';
+import { file } from 'jszip';
 
 const Diary = () => {
 
@@ -34,6 +35,7 @@ const Diary = () => {
                             model.setWhatsAppChat(whatsAppChat);
                             model.removeEmojiOnlyMessages();
                             model.findTopics();
+                            //model.loadSave();
                             STATES.uploadFiles.variables.files = new Map();
                             updateState(STATES.diarySteps);
                         } catch (e) {
@@ -59,6 +61,7 @@ const Diary = () => {
                 switch(params.type) {
                     
                     case 'stop-assembling':
+                        model.deleteAll();
                         updateState(STATES.uploadFiles);
                         break;
 
@@ -72,7 +75,6 @@ const Diary = () => {
         },
         whoTheDiaryIsFor: {
             render: () => {
-                console.log(model.getDiaryTitle());
                 ui.renderWhoTheDiaryIsFor(model.getWhoDiaryIsFor(), model.getDiaryTitle());
             },
             eventHandler: (e, params) => {
@@ -80,6 +82,7 @@ const Diary = () => {
                 switch(params.type) {
 
                     case 'stop-assembling':
+                        model.deleteAll();
                         updateState(STATES.uploadFiles);
                         break;
 
@@ -102,6 +105,7 @@ const Diary = () => {
                 switch(params.type) {
 
                     case 'stop-assembling':
+                        model.deleteAll();
                         updateState(STATES.uploadFiles);
                         break;
 
@@ -133,6 +137,7 @@ const Diary = () => {
                 switch(params.type) {
                   
                     case 'stop-assembling':
+                        model.deleteAll();
                         updateState(STATES.uploadFiles);
                         break;
 
@@ -182,6 +187,7 @@ const Diary = () => {
                 switch(params.type) {
 
                     case 'stop-assembling':
+                        model.deleteAll();
                         updateState(STATES.uploadFiles);
                         break;
                     
@@ -231,6 +237,7 @@ const Diary = () => {
                 switch(params.type) {
 
                     case 'stop-assembling':
+                        model.deleteAll();
                         updateState(STATES.uploadFiles);
                         break;
                     
@@ -272,6 +279,7 @@ const Diary = () => {
                 switch(params.type) {
 
                     case 'stop-assembling':
+                        model.deleteAll();
                         updateState(STATES.uploadFiles);
                         break;
 
@@ -326,6 +334,7 @@ const Diary = () => {
                 switch(params.type) {
 
                     case 'stop-assembling':
+                        model.deleteAll();
                         updateState(STATES.uploadFiles);
                         break;
 
@@ -372,6 +381,17 @@ const Diary = () => {
                         STATES.selectMessages.variables.topic = 0;
                         STATES.selectMessages.variables.totalOfTopics = 0
                         const doc = await templates.generatePDF(model.getDiary());
+                        
+/*
+                        doc.setProperties({
+                            title: 'Title',
+                            subject: 'This is the subject',
+                            author: 'James Hall',
+                            keywords: JSON.stringify(model.getDiary()),
+                            creator: 'MEEE',
+                            producer: JSON.stringify(model.getDiary()),
+                        });
+                        */
                         model.setDiaryDocument(doc);
                         updateState(STATES.downloadDiary);
                         break;
@@ -547,6 +567,7 @@ const Diary = () => {
 
                     case 'stop-assembling':
                        // templates.destroyPreviewPdfWorker(STATES.reviewDiary.variables.worker);
+                        model.deleteAll();
                         updateState(STATES.uploadFiles);
                         break;
 
@@ -574,6 +595,7 @@ const Diary = () => {
                 switch(params.type) {
 
                     case 'stop-assembling':
+                        model.deleteAll();
                         updateState(STATES.uploadFiles);
                         break;
 
@@ -597,11 +619,15 @@ const Diary = () => {
 
                     case 'download-diary':
                         const doc = model.getDiaryDocument();
-                        if(doc != undefined)
-                            templates.downloadPdf(doc, `For ${model.getWhoDiaryIsFor()} - ToGather`);
+                        if(doc != undefined) {
+                            const filename = `${model.getDiaryTitle() != undefined ? model.getDiaryTitle() : `{% t templates.c1 %} ${model.getWhoDiaryIsFor}`} - Togather`;
+                            templates.downloadPdf(doc,  filename);
+                        }    
                         break;
 
                     case 'share':
+                        const textW = '{% t diary.s3 %}'
+
                         const link = (navigator.userAgent.match(/Android/i) 
                                     || navigator.userAgent.match(/webOS/i) 
                                     || navigator.userAgent.match(/iPhone/i)  
@@ -609,16 +635,24 @@ const Diary = () => {
                                     || navigator.userAgent.match(/iPod/i) 
                                     || navigator.userAgent.match(/BlackBerry/i) 
                                     || navigator.userAgent.match(/Windows Phone/i)) ? 
-                                    `https://api.whatsapp.com/send?text=${encodeURI('https://togather.me/')}`:
-                                    `https://web.whatsapp.com/send?text=${encodeURI('https://togather.me/')}`;
-                        
+                                    `https://api.whatsapp.com/send?text=${encodeURI(textW)}`:
+                                    `https://web.whatsapp.com/send?text=${encodeURI(textW)}`;
+                        try {
+                            window.fathom.trackGoal('LRZPNF3C', 0);
+                        } catch(e) {
+                            console.log("Fathom disabled");
+                        }
                         window.open(link, '_blank');
                         break;
     
                     case 'share-twitter':
                         const text = 'Gathering in stories when being together is not possible #togather';
                         const twitterLink = `https://twitter.com/intent/tweet?text=${encodeURI(text)}&url=https://togather.me`;
-                        window.fathom.trackGoal('LRZPNF3C', 0);
+                        try {
+                            window.fathom.trackGoal('LRZPNF3C', 0);
+                        } catch(e) {
+                            console.log("Fathom disabled");
+                        }
                         window.open(twitterLink, '_blank');
                         break
 
@@ -627,6 +661,7 @@ const Diary = () => {
                         break;
 
                     case 'go-to-step-6':
+                        model.deleteAll();
                         updateState(STATES.uploadFiles);
                         break;
                 }
@@ -642,6 +677,7 @@ const Diary = () => {
                 switch(params.type) {
 
                     case 'stop-assembling':
+                        model.deleteAll();
                         updateState(STATES.uploadFiles);
                         break;
 
@@ -678,9 +714,13 @@ const Diary = () => {
             },
             eventHandler: (e, params) => {
 
+              
+
                 switch(params.type) {
 
                     case 'share':
+                        const textW = '{% t diary.s3 %}'
+
                         const link = (navigator.userAgent.match(/Android/i) 
                                     || navigator.userAgent.match(/webOS/i) 
                                     || navigator.userAgent.match(/iPhone/i)  
@@ -688,8 +728,8 @@ const Diary = () => {
                                     || navigator.userAgent.match(/iPod/i) 
                                     || navigator.userAgent.match(/BlackBerry/i) 
                                     || navigator.userAgent.match(/Windows Phone/i)) ? 
-                                    `https://api.whatsapp.com/send?text=${encodeURI('https://togather.me/')}`:
-                                    `https://web.whatsapp.com/send?text=${encodeURI('https://togather.me/')}`;
+                                    `https://api.whatsapp.com/send?text=${encodeURI(textW)}`:
+                                    `https://web.whatsapp.com/send?text=${encodeURI(textW)}`;
                         
                         window.open(link, '_blank');
                         break;

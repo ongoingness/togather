@@ -114,7 +114,7 @@ const DiaryModel = () => {
 
     const findTopics = () => {
 
-        const topicRegex = RegExp('https://lapc1995.github.io/while-you-were-fighting/topics/[0-9]+');
+        const topicRegex = RegExp('https://togather.me/topics/[0-9]+');
 
         const tempTopics = [];
         let startDay = -1;
@@ -517,7 +517,7 @@ const DiaryModel = () => {
         for(const topic of topics) {
 
             for(const selectedMessage of topic.selectedMessages)
-                result.set(selectedMessage, {day: topic.day, part: topic.part});
+                result.set(selectedMessage, {day: topic.day, part: topic.part, timestamp: whatsAppChat.messageMap.get(topic.hash).fulltimestamp});
 
         }
  
@@ -526,7 +526,6 @@ const DiaryModel = () => {
     }
 
     const getDiary = () => {
-
         const topics = getTopicsWithMessages();
         let startDate = undefined;
         let endDate = undefined;
@@ -555,6 +554,148 @@ const DiaryModel = () => {
     const setParticipate = (tempParticipate) => participate = tempParticipate;
     const getParticipate = () => participate; 
 
+    const loadSave = async () => {
+
+        console.log(whatsAppChat);
+
+        whatsAppChat.files.forEach( async(value, key, map) => {
+            console.log(value, key);
+
+            if(value.type.includes('pdf')) {
+
+                fetch(value.data)
+                .then(res => res.blob())
+                .then( r => {
+                    
+
+                    
+                    const e = new FileReader();
+                    e.readAsArrayBuffer(r);
+        
+                    e.onload = () => {
+                  
+                       pdfjsLib.GlobalWorkerOptions.workerSrc = "{{ '/assets/scripts/pdf.worker.js' | prepend: site.baseurl_root }}";
+               
+                        // Asynchronous download of PDF
+                        var loadingTask = pdfjsLib.getDocument(e.result);
+                        loadingTask.promise.then(function(pdf) {
+                            
+                            let pdfDoc = pdf;
+                            console.log(pdfDoc);
+                            pdfDoc.getMetadata().then(function(stuff) {
+                                const saved = JSON.parse(stuff.info.Keywords);
+
+                                console.log(saved);
+                        
+                                title = saved.title;
+                                who = saved.who;
+                                loadUsers(saved.users); 
+                                loadTopics(saved.topics);                              
+
+                                console.log(topics);
+
+                            }).catch(function(err) {
+                            console.log('Error getting meta data');
+                            console.log(err);
+                            });
+                        }, function (reason) {
+                        // PDF loading error
+                        console.error(reason);
+                        });
+                    };
+                
+                
+                });
+
+
+    
+    
+    
+            }
+
+        });
+      
+        
+
+
+
+
+    }
+
+
+    const loadUsers = (savedData) => {
+
+        for (let hash in savedData) {
+            if(whatsAppChat.users[hash] != undefined) {
+                whatsAppChat.users[hash].name = savedData[hash].name;
+                whatsAppChat.users[hash].color = savedData[hash].color;
+                whatsAppChat.users[hash].visible = savedData[hash].visible;
+            }
+        }
+
+    }
+/*
+    topics
+    0:
+        color: "#406098"
+        day: 1
+        hash: -1494631525
+        part: 0
+        selectedMessages:
+            0: 1969578367
+            1: 803672663
+        
+
+    saved topics
+
+    0:
+        color: "#34385e"
+        day: 1
+        files: []
+        hash: -1494631525
+        index: 0
+        part: 0
+        selectedMessages: Array(2)
+            0:
+                atUser: []
+                color: "#aa2e00"
+                files: []
+                fulltimestamp: 1588253160000
+                hash: 1337773772
+                index: 87
+                links: []
+                rawText: ["looks great"]
+                text: ["looks great"]
+                user: "Jayne Wallace"
+*/
+
+    const loadTopics = (savedData) => {
+
+
+        for (let i = 0; i < savedData.length; i++) {
+
+            const topicIndex = topics.findIndex((elem) => elem.hash === savedData[i].hash);
+            if(topicIndex != -1) {
+                topics[topicIndex].day = savedData[i].day;
+                topics[topicIndex].part = savedData[i].part;
+                topics[topicIndex].color = savedData[i].color;
+                for(let m of savedData[i].selectedMessages) {
+                    topics[topicIndex].selectedMessages.push(m.hash);
+                }
+            }
+            
+        }
+
+    }
+
+    const deleteAll = () => {
+        whatsAppChat = undefined;
+        topics = [];
+        who = undefined;
+        title = undefined;
+        diaryDocument = undefined;
+        participate = undefined;
+    }
 
     return {
         setWhatsAppChat,
@@ -585,6 +726,11 @@ const DiaryModel = () => {
         getDiaryDocument,
         setParticipate,
         getParticipate,
+
+
+        loadSave,
+
+        deleteAll,
     };
 }
 
