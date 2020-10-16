@@ -648,6 +648,7 @@ const Diary = () => {
                         break;
 
                     case 'go-to-step-6':
+                        model.deleteAll();
                         updateState(STATES.uploadFiles);
                         break;
                 }

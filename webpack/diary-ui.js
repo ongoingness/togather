@@ -2201,7 +2201,11 @@ const DiaryUI = (eventHandler) => {
         topicTextOverlay.classList.add('overlay', 'topic-text');
         topicTextOverlay.style.height = `${ (document.body.offsetHeight * 0.78 - 132)}px`
         lowerPage.appendChild(topicTextOverlay);
-        window.addEventListener('resize', e => topicTextOverlay.style.height = `${document.getElementById('lowerPage').offsetHeight}px`);
+        window.addEventListener('resize', e => {
+            const lowerPage = document.getElementById('lowerPage');
+            if(topicTextOverlay != undefined &&  lowerPage != undefined) 
+                topicTextOverlay.style.height = `${lowerPage.offsetHeight}px`
+        });
 
         topicTextOverlay.addEventListener('click', e =>  document.getElementById('topicText').style.height = '0%')
 
@@ -2478,7 +2482,7 @@ const DiaryUI = (eventHandler) => {
         title.style.font = 'normal normal 300 25px/43px Roboto Condensed';
         title.style.letterSpacing = '0.64px';
         title.style.paddingTop = '15px';
-        title.innerText = participate === undefined ? '{% t diary.dd2 %}' : '{% t diary.dd1 %}';
+        title.innerText = participate === undefined ? '{% t diary.dd4 %}' : '{% t diary.dd1 %}';
         upperPage.appendChild(title);
 
         const centerContainer = document.createElement('div');

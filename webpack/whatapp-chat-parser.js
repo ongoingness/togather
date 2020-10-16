@@ -105,7 +105,6 @@ const WhatsAppChatParser = () => {
                             result.push(fileObject);        
                         }
                     }
-                    console.log(result);
                     resolve(result);      
                 } else {
                     fileReader.readAsDataURL(file); 
