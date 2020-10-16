@@ -73,9 +73,11 @@ const WhatsAppChatParser = () => {
                             const ext = filename.split('.').pop();
                             const type = mime.lookup(ext);
 
+                            const cleanFilename = filename.split('/').pop();
+
                             const fileObject = {
                                 file: {
-                                    name: filename,
+                                    name: cleanFilename,
                                     size: file._data.uncompressedSize,
                                     type
                                 },
@@ -103,6 +105,7 @@ const WhatsAppChatParser = () => {
                             result.push(fileObject);        
                         }
                     }
+                    console.log(result);
                     resolve(result);      
                 } else {
                     fileReader.readAsDataURL(file); 
