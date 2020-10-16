@@ -99,9 +99,9 @@ footer:
     f5: 'Northumbria University Logo'
 
 group-start:
-    gs1: '“Hi everyone, this group is a place where we can share things we would like to capture for [INSERT NAME] in a diary. Every day we will post a topic for inspiration what to message about today. If you have an idea for a topic feel free to share this. Also, if you just have something you want to share for the diary unrelated to the topic please do! To see what is possible to create using messages captured here, check this video:<a href=https://www.youtube.com/watch?v=BUJLK6aTBkQ>https://www.youtube.com/watch?v=BUJLK6aTBkQ</a>.  As an opening of this group it would be nice to introduce everyone who is part of this, so post a picture of yourself, who you are to [INSERT NAME], and a short personal message for them.“'
+    gs1: '“Have you seen Togather (<a href=https://www.youtube.com/watch?v=BUJLK6aTBkQ>https://www.youtube.com/watch?v=BUJLK6aTBkQ</a>)? It’s a website that will let us convert our WhatsApp messages into a diary. It would be great if we could make one for [INSERT NAME]. As an opening it would be nice to introduce everyone, so post a picture of yourself with a short personal message for ${name}. Then we can start sharing messages about the topics from Togather or topics we think of ourselves.“'
     gs2: Share message
-    gs3: 'Hi everyone, this group is a place where we can share things we would like to capture for ${name} in a diary. Every day we will post a topic for inspiration what to message about today. If you have an idea for a topic feel free to share this. Also, if you just have something you want to share for the diary unrelated to the topic please do! To see what is possible to create using messages captured here, check this video: https://www.youtube.com/watch?v=BUJLK6aTBkQ. As an opening of this group it would be nice to introduce everyone who is part of this, so post a picture of yourself, who you are to ${name}, and a short personal message for them.'
+    gs3: 'Have you seen Togather ( https://www.youtube.com/watch?v=BUJLK6aTBkQ )? It’s a website that will let us convert our WhatsApp messages into a diary. It would be great if we could make one for ${name}. As an opening it would be nice to introduce everyone, so post a picture of yourself with a short personal message for ${name}. Then we can start sharing messages about the topics from Togather or topics we think of ourselves.'
     gs4: 'Please, write the name to who the diary is for:'
 
 topic:
@@ -199,6 +199,7 @@ diary:
 
     s1: 'Thank you for using Togather! If you have friends or family that might also like Togather share the website with them through these links.'
     s2: 'No, thank you!'
+    s3: 'Have you seen Togather (https://www.youtube.com/watch?v=BUJLK6aTBkQ)? It’s a website that will let you convert messages from a WhatsApp group chat into a diary. I just made a diary with it, and I thought you might like it as well.'
 
 templates:
 
