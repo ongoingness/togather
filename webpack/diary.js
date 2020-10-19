@@ -610,8 +610,15 @@ const Diary = () => {
                                 console.log('Fathom Disabled');
                             }
                             const doc = model.getDiaryDocument();
-                            if(doc != undefined)
-                                templates.downloadPdf(doc, `For ${model.getWhoDiaryIsFor()} - Togather`);
+                            if(doc != undefined) {
+                                try {
+                                    window.fathom.trackGoal('ZNO1KYRF', 0);
+                                } catch (e) {
+                                    console.log('Fathom Disabled');
+                                }
+                                const filename1 = `${model.getDiaryTitle() != undefined && model.getDiaryTitle().trim() != ''  ? model.getDiaryTitle() : `{% t templates.c1 %} ${model.getWhoDiaryIsFor()}`} - Togather`;
+                                templates.downloadPdf(doc, filename1);
+                            }
                             ui.openShareModal();
                             window.open('https://forms.office.com/Pages/ResponsePage.aspx?id=3c9X5zUfV0Svj3ycaxQ344vudz6_WkxDk-JGl5ZcZlhURjBMRFhSOTY3S0VLTjE0VVpEMUVNQ1c3VS4u', '_blank');
                         }
@@ -620,7 +627,7 @@ const Diary = () => {
                     case 'download-diary':
                         const doc = model.getDiaryDocument();
                         if(doc != undefined) {
-                            const filename = `${model.getDiaryTitle() != undefined ? model.getDiaryTitle() : `{% t templates.c1 %} ${model.getWhoDiaryIsFor}`} - Togather`;
+                            const filename = `${model.getDiaryTitle() != undefined && model.getDiaryTitle().trim() != '' ? model.getDiaryTitle() : `{% t templates.c1 %} ${model.getWhoDiaryIsFor()}`} - Togather`;
                             templates.downloadPdf(doc,  filename);
                         }    
                         break;
