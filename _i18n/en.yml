@@ -207,7 +207,7 @@ diary:
 
     s1: 'Thank you for using Togather! If you have friends or family that might also like Togather share the website with them through these links.'
     s2: 'No, thank you!'
-    s3: 'Have you seen Togather (https://www.youtube.com/watch?v=BUJLK6aTBkQ)? It’s a website that will let you convert messages from a WhatsApp group chat into a diary. I just made a diary with it, and I thought you might like it as well.'
+    s3: 'Have you seen Togather (https://togather.me/explained)? It’s a website that will let you convert messages from a WhatsApp group chat into a diary. I just made a diary with it, and I thought you might like it as well.'
 
 templates:
 
@@ -247,7 +247,6 @@ topics:
     td18: 'Take a group photo of all of you together with the objects you can find in your home (who is who and why?).'
     td19: 'Share a photo of you with your loved one (and others in this group) when you were younger and try to recreate that photo at home. Use stand-ins if needed, get creative!'
     td20: 'Build a story, involving the members of this group, that would make your loved one laugh. Each follow with one or more sentences ending in a cliffhanger. The first kicks of with "once upon a time…"'
-
     td21: 'What would your loved one think about yesterdays messages? Try to write their response as they would and take a photo of how their face would look when reading them.'
     td22: 'What fond memory from something you did together as a group would you like to recreate? (Have a go at it).'
     td23: 'What have you missed most during your time apart and why?'

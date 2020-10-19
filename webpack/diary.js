@@ -646,7 +646,8 @@ const Diary = () => {
                         break;
     
                     case 'share-twitter':
-                        const text = 'Gathering in stories when being together is not possible #togather';
+                        //const text = 'Gathering in stories when being together is not possible #togather';
+                        const text = '{% t diary.s3 %} #togather';
                         const twitterLink = `https://twitter.com/intent/tweet?text=${encodeURI(text)}&url=https://togather.me`;
                         try {
                             window.fathom.trackGoal('LRZPNF3C', 0);
