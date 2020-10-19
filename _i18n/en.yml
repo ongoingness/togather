@@ -22,6 +22,14 @@ introduction:
     t8: Page of this website with a topic
     t9: Chat of an WhatsApp group
     t10: Togather will help you, every week or every couple of days, to create a personalized diary from your WhatsApp group chat to share with your loved one. 
+    t11: Cover Page of Diary
+    t12: Diary Page 1
+    t13: Diary Page 2
+    t14: Diary Page 3
+    t15: Diary Page 4
+    t16: Diary Page 5
+    t17: Diary Page 6
+    t18: Diary Page 7
 
 instructions:
     header: Instructions
@@ -219,41 +227,37 @@ edge-support:
     es2: 'Click below to update Edge to its latest version'
 
 topics:
-    td1: 'Share a photograph of one of your last get-togethers. Describe what we are looking at and why have you chosen it?'
-    td2: 'Share a memorable story about when you were together and why it springs to mind. Do you have any pictures of this?'
-    td3: 'Each share a song that makes you happy and one that reminds you of your loved one, and explain why. Gather all these songs into a shared playlist, for example on Spotify. Include a link to this playlist here in the diary.'
-    td4: 'Share something that happens today that you would like to share with your loved one.'
-    td5: 'Toast to your loved one and tell your most cringeworthy story involving them.'
-    td6: 'Capture the weather in a poem and a mysterious photo'
+    td1: 'Share a memorable story about when you were together and why it springs to mind. Do you have any pictures of this?'
+    td2: 'Each share a song that makes you happy and reminds you of your loved one, and explain why.'
+    td3: 'Share something that happens today that you would like to share with your loved one.'
+    td4: 'Toast to your loved one and tell your most cringeworthy story involving them.'
+    td5: 'Share your favourite memory of you and your loved one and/or group.'
+    td6: 'Capture the weather in a poem and a mysterious photo.'
     td7: 'What was the highlight of your day? Why?'
-    td8: 'Spoiler Alert! Document something they might have missed on their favourite T.V. show, the news, sports match etc.'
-    td9: 'Write a review and take a photo of something you ate today.'
-    td10: 'Capture something you did today that your loved one would never have done. (something you  watched, a hobby, a website you visited, a sport, etc.)'
+    td8: 'Write a review and take a photo of something you ate today.'
+    td9: 'Capture something you did today that your loved one would never have done.'
+    td10: 'Document something you experienced / saw / heard today that surprised you, or made you think of your loved one or this group.'
     td11: 'Have a go at starting your day how your loved one normally would. How did it work for you?'
     td12: 'Eat or drink something today that they really like, capture yourself doing it and describe what it is and in which context you had it'
-    td13: 'Have your tea or coffee today how they like it, what did you think of it?'
-    td14: 'Try one of their hobbies today and capture yourself doing it, how did it work out for you?'
-    td15: 'Try to match your outfits today in the favourite color of your loved one.'
+    td13: 'Try one of their hobbies today and capture yourself doing it, how did it work out for you?'
+    td14: 'Try to match your outfits today in the favourite color of your loved one.'
+    td15: 'Print out, or draw, a picture of your loved ones face and take a photo of every member in your household with it.'
     td16: '"Put on a brave face" - make your face look brave, take a photo in the mirror and share your "brave face" (for example put on some lipstick, or use some tape to shape your face).'
-    td17: 'Take some time to write your loved ones name in bubble writing and decorate it. share the result.'
-    td18: 'Make a drawing of something that would make your loved one laugh and stick it in your window (take a photo and describe it).'
-    td19: 'Make the face of your loved one in a loo role tube.'
-    td20: 'Take a group photo of all of you together with the objects you can find in your home (who is who and why?).'
-    td21: 'Hydrate! Start a group challenge to drink 2 liters of water today. Take a photo to promote the drinking of water.'
-    td22: 'Try to walk as many stairs as you can today. How many did you get? What was the most challenging one?'
-    td23: 'Give everyone in this group a compliment (including yourself), start with your loved one in the hospital.'
-    td24: 'Capture your outing today (draw your route on a map, take a picture, get creative).'
-    td25: 'Treat yourself and share this moment.'
-    td26: 'Give yourself a break. Plan something to do that relaxes you and put aside some time today to do it. (what was it)'
-    td27: 'Write a list of things you are grateful for.'
-    td28: 'What would your loved one think about yesterdays responses? Try to write it as they would say it and take a photo of how their face would look while doing it.'
-    td29: 'What fond memory from something you did together as a group would you like to recreate? (Have a go at it)'
-    td30: 'When you can all get together again, what is the first thing you would like to do?'
-    td31: 'Imagine you and your loved one on a sandwich, how would you be described as on a menu?'
-    td32: 'Imagine you and your loved one in a song, what would be the title and the chorus of this song? If you feel creative, design an album cover for you.'
-    td33: 'Imagine you and your loved one as a cone of icecream, what flavours would you be?'
-    td34: 'Imagine you and your loved one as one super hero, what would be your name and super power?'
-    td35: 'Imagine you and your loved one as  a tv show, what roles would you play?'
+    td17: 'Make the face of your loved one in a loo role tube.'
+    td18: 'Take a group photo of all of you together with the objects you can find in your home (who is who and why?).'
+    td19: 'Share a photo of you with your loved one (and others in this group) when you were younger and try to recreate that photo at home. Use stand-ins if needed, get creative!'
+    td20: 'Build a story, involving the members of this group, that would make your loved one laugh. Each follow with one or more sentences ending in a cliffhanger. The first kicks of with "once upon a time…"'
+
+    td21: 'What would your loved one think about yesterdays messages? Try to write their response as they would and take a photo of how their face would look when reading them.'
+    td22: 'What fond memory from something you did together as a group would you like to recreate? (Have a go at it).'
+    td23: 'What have you missed most during your time apart and why?'
+    td24: 'What have you learned from your loved one, someone in this group, or by your time spent apart.'
+    td25: 'What would be the first thing you would do with your loved one when you can all be together again?'
+    td26: 'Imagine you and your loved one on a sandwich, how would you be described as on a menu?'
+    td27: 'Imagine you and your loved one in a song, what would be the title and the chorus of this song? If you feel creative, design an album cover for you.'
+    td28: 'Imagine you and your loved one as a cone of icecream, what flavours would you be?'
+    td29: 'Imagine you and your loved one as one super hero, what would be your name and super power?'
+    td30: 'Imagine you and your loved one as  a tv show, what roles would you play?'
 
 
 
