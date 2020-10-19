@@ -107,7 +107,7 @@ footer:
     f5: 'Northumbria University Logo'
 
 group-start:
-    gs1: '“Have you seen Togather (<a href=https://www.youtube.com/watch?v=BUJLK6aTBkQ>https://www.youtube.com/watch?v=BUJLK6aTBkQ</a>)? It’s a website that will let us convert our WhatsApp messages into a diary. It would be great if we could make one for [INSERT NAME]. As an opening it would be nice to introduce everyone, so post a picture of yourself with a short personal message for ${name}. Then we can start sharing messages about the topics from Togather or topics we think of ourselves.“'
+    gs1: '“Have you seen Togather (<a href=https://www.youtube.com/watch?v=BUJLK6aTBkQ>https://www.youtube.com/watch?v=BUJLK6aTBkQ</a>)? It’s a website that will let us convert our WhatsApp messages into a diary. It would be great if we could make one for [INSERT NAME]. As an opening it would be nice to introduce everyone, so post a picture of yourself with a short personal message for [INSERT NAME]. Then we can start sharing messages about the topics from Togather or topics we think of ourselves.“'
     gs2: Share message
     gs3: 'Have you seen Togather ( https://www.youtube.com/watch?v=BUJLK6aTBkQ )? It’s a website that will let us convert our WhatsApp messages into a diary. It would be great if we could make one for ${name}. As an opening it would be nice to introduce everyone, so post a picture of yourself with a short personal message for ${name}. Then we can start sharing messages about the topics from Togather or topics we think of ourselves.'
     gs4: 'Please, write the name to who the diary is for:'
