@@ -166,9 +166,9 @@ const DiaryUI = (eventHandler) => {
         overlayContent.appendChild(aAbout);
 
         const aContact = document.createElement('a');
-        aAbout.id = 'contact-a';
-        aAbout.href = '{{ site.url }}{{ site.baseurl }}/contact';
-        aAbout.innerText = '{% t nav-overlay.contact-a %}';
+        aContact.id = 'contact-a';
+        aContact.href = '{{ site.url }}{{ site.baseurl }}/contact';
+        aContact.innerText = '{% t nav-overlay.contact-a %}';
         overlayContent.appendChild(aContact);
         
 

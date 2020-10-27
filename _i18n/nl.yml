@@ -108,9 +108,9 @@ footer:
     f5: 'Northumbria University Logo'
 
 group-start:
-    gs1: '"Hebben jullie Togather gezien (<a href=https://www.youtube.com/watch?v=BUJLK6aTBkQ> https://www.youtube.com/watch?v=BUJLK6aTBkQ </a>)? Het is een website waarmee we onze WhatsApp-berichten kunnen omzetten in een dagboek. Het zou fantastisch zijn als we er een zouden kunnen maken voor [GEEF NAAM]. Als opening zou het leuk zijn om iedereen voor te stellen, dus stuur een foto van jezelf met een korte persoonlijke boodschap voor [GEEF NAAM]. Dan kunnen we berichten gaan delen over de onderwerpen van Togather of onderwerpen die we zelf bedenken."'
+    gs1: '"Hebben jullie Togather gezien (<span><a href=https://youtu.be/BUJLK6aTBkQ> https://youtu.be/BUJLK6aTBkQ </a></span>)? Het is een website waarmee we onze WhatsApp-berichten kunnen omzetten in een dagboek. Het zou fantastisch zijn als we er een zouden kunnen maken voor [GEEF NAAM]. Als opening zou het leuk zijn om iedereen voor te stellen, dus stuur een foto van jezelf met een korte persoonlijke boodschap voor [GEEF NAAM]. Dan kunnen we berichten gaan delen over de onderwerpen van Togather of onderwerpen die we zelf bedenken."'
     gs2: Bericht delen
-    gs3: 'Hebben jullie Togather gezien ( href=https://www.youtube.com/watch?v=BUJLK6aTBkQ> https://www.youtube.com/watch?v=BUJLK6aTBkQ )? Het is een website waarmee we onze WhatsApp-berichten kunnen omzetten in een dagboek. Het zou fantastisch zijn als we er een zouden kunnen maken voor ${name}. Als opening zou het leuk zijn om iedereen voor te stellen, dus stuur een foto van jezelf met een korte persoonlijke boodschap voor ${name}. Dan kunnen we berichten gaan delen over de onderwerpen van Togather of onderwerpen die we zelf bedenken.'
+    gs3: 'Hebben jullie Togather gezien ( https://youtu.be/BUJLK6aTBkQ )? Het is een website waarmee we onze WhatsApp-berichten kunnen omzetten in een dagboek. Het zou fantastisch zijn als we er een zouden kunnen maken voor ${name}. Als opening zou het leuk zijn om iedereen voor te stellen, dus stuur een foto van jezelf met een korte persoonlijke boodschap voor ${name}. Dan kunnen we berichten gaan delen over de onderwerpen van Togather of onderwerpen die we zelf bedenken.'
     gs4: 'Schrijf hier de naam voor wie het dagboek is:'
 
 topic:
