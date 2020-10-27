@@ -104,6 +104,12 @@ title: introduction.header
     <div id="t6" class="text-box page-middle">
         {% t introduction.t6 %}
     </div>
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0px 27px 50px;">
+        <button id="home-topic-button" class="primary" onclick="location.href='{{ site.url }}{{ site.baseurl }}/instructions'">
+            {% t index.home-learn-button %}
+        </button>
+    </div>
+
 
     {% include group-start.html %}
 </main>

@@ -382,7 +382,7 @@ const Diary = () => {
                         STATES.selectMessages.variables.totalOfTopics = 0
                         const doc = await templates.generatePDF(model.getDiary());
                         
-/*
+
                         doc.setProperties({
                             title: 'Title',
                             subject: 'This is the subject',
@@ -391,7 +391,8 @@ const Diary = () => {
                             creator: 'MEEE',
                             producer: JSON.stringify(model.getDiary()),
                         });
-                        */
+                        
+
                         model.setDiaryDocument(doc);
                         updateState(STATES.downloadDiary);
                         break;
