@@ -746,7 +746,11 @@ const Diary = () => {
                     case 'share-twitter':
                         const text = 'Gathering in stories when being together is not possible #togather';
                         const twitterLink = `https://twitter.com/intent/tweet?text=${encodeURI(text)}&url=https://togather.me`;
-                        window.fathom.trackGoal('LRZPNF3C', 0);
+                        try {
+                            window.fathom.trackGoal('LRZPNF3C', 0);
+                        } catch (e) {
+                            console.log('fathom disabled');
+                        }
                         window.open(twitterLink, '_blank');
                         break
 

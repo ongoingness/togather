@@ -58,9 +58,11 @@ title: topic.t0
         });
 
         const shareTopic = () => {
-
-            window.fathom.trackGoal('JC9ERVWQ', 0);
-            
+            try {           
+                window.fathom.trackGoal('JC9ERVWQ', 0);
+            } catch(e) {
+                console.log('fathom disabled');
+            }
             const text = `${window.location.href}\n{% t topic.t3 %} {% t page.description %}`;
 
             const link = (navigator.userAgent.match(/Android/i) 
@@ -74,14 +76,14 @@ title: topic.t0
                 `https://web.whatsapp.com/send?text=${encodeURI(text)}`;
 
             window.open(link, '_blank');
-
+            
         }
 
         const getTopic = () => {
             try {
                 window.fathom.trackGoal('4VJ1QTJ7', 0);
             } catch (e) {
-                console.log(e);
+                console.log('fathom disabled');
             }
             window.location.href = `{{ site.url }}{{ site.baseurl }}/topics/`;
         }
