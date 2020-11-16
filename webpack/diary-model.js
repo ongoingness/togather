@@ -1,4 +1,5 @@
-const emojiRegex = require('emoji-regex');
+const emojiRegex = require('emoji-regex/RGI_Emoji.js');
+const emojiRegexText = require('emoji-regex/text.js');
 
 const DiaryModel = () => {
 
@@ -76,39 +77,73 @@ const DiaryModel = () => {
     const removeEmojiOnlyMessages = () => {
 
         const regex = emojiRegex();
+        const regexText = emojiRegexText();
         const messagesToBeRemoved = [];
 
         whatsAppChat.messageMap.forEach( (message, hash) => {
        
-            if(message.files.length === 0) {
+            //if(message.files.length === 0) {
  
                 const textLinesToBeRemoved = [];
 
-                for(const [index, textLine] of message.text.entries()) {
+                for(let [index, textLine] of message.text.entries()) {
     
                 let match;
                 let noEmojis = textLine;
                 while (match = regex.exec(textLine)) {
                         noEmojis = noEmojis.replace(match[0], '');
+                        //console.log(match);
                 }
+                
+                message.text[index] = noEmojis;
+                if(message.rawText.length > message.text.length) {
+                    message.rawText[index + 1] = noEmojis;
+                } else {
+                    message.rawText[index] = noEmojis;
+                }
+              
 
-                if(noEmojis === '')
+                if(noEmojis === '' && message.files.length === 0)
                         textLinesToBeRemoved.push(index);
                 
+
+                //Secound try to get all the emojis
+                //CAUTION IT ALSO TRIES TO GET NUMBERS AND SYMBOLS ??RANDOMLY??
+                while (match = regexText.exec(noEmojis)) {
+                    if(Number.isNaN(Number(match[0]))) {
+                        noEmojis = noEmojis.replace(match[0], '');
+                        console.log(match);
+                    }
+                }
+                message.text[index] = noEmojis;
+                if(message.rawText.length > message.text.length) {
+                    message.rawText[index + 1] = noEmojis;
+                } else {
+                    message.rawText[index] = noEmojis;
+                }
+
+
                 }
 
                 for(const index of textLinesToBeRemoved)
                     message.text.splice(index, 1);
     
-                if(message.text.length === 0)
+                if(message.text.length === 0 && message.files.length === 0)
                     messagesToBeRemoved.push(hash);
             
-            }
+            //}
 
         });
 
         for(const hash of messagesToBeRemoved)
             whatsAppChat.messageMap.delete(hash);
+
+        console.log(whatsAppChat.messageMap);
+
+
+
+
+
 
     }
 
