@@ -28,7 +28,7 @@
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
-    "emoji-regex": "^9.0.0",
+    "emoji-regex": "^9.2.0",
     "jspdf": "^1.5.3",
     "jszip": "^3.5.0",
     "mime-types": "^2.1.27"

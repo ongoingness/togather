@@ -241,7 +241,7 @@ const DiaryTemplates = () => {
 
             let splittedLines = [];
             for(let i = 0; i < data.text.length; i++) {
-
+                console.log(data.text[i]);
                 const splittedLinesTemp = doc.splitTextToSize(data.text[i].replace(/[^\x20-\x7E]/g, ''), lineLength).filter(line => line != '');
 
                 expectedSize += splittedLinesTemp.length * lineHeight;
