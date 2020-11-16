@@ -114,7 +114,8 @@ const DiaryModel = () => {
 
     const findTopics = () => {
 
-        const topicRegex = RegExp('https://togather.me/topics/[0-9]+');
+        //const topicRegex = RegExp('https://togather.me/topics/[0-9]+');
+        const topicRegex = RegExp('https:\/\/togather\.me\/(?:[a-z]+\/)?topics\/[0-9]+');
 
         const tempTopics = [];
         let startDay = -1;
@@ -127,8 +128,12 @@ const DiaryModel = () => {
                     const regexResult = topicRegex.exec(message.rawText[0]);
 
                     if(regexResult != null) {
-
-                        message.text[1] = message.text[1].slice(7);
+                   
+                        //Remove topic word
+                        const splittedText = message.text[1].split(':');
+                        splittedText.shift();
+                        message.text[1] = splittedText.join(':');//message.text[1].slice(7);
+               
                         message.text.shift();
 
                         if(startDay === -1) {
