@@ -12,68 +12,68 @@ index:
 
 introduction:
     header: Introduction
-    t1: Togather makes it easy to capture and share in the time spend apart from your loved ones.
+    t1: Togather makes it easy to create a booklet over WhatsApp during time spend apart for your loved ones.
     t2: Gather a group of friends & family on WhatsApp
     t3: Get a nostalgic, creative, fun or challenging topics to share with your group
     t4: Create, capture, write, photograph and share with your group.
     t5: Come back each day for another new topic to share with your group.
-    t6: 'To start create a group in Whatsapp with all the people that want to contribute to this diary. Let everyone know what this group is about. You can use our example:'
+    t6: 'To start create a group in Whatsapp with all the people that want to contribute to this booklet. Let everyone know what this group is about. You can use our example:'
     t7: WhatsApp's group particpant menu
     t8: Page of this website with a topic
     t9: Chat of an WhatsApp group
-    t10: Togather will help you, every week or every couple of days, to create a personalized diary from your WhatsApp group chat to share with your loved one. 
-    t11: Cover Page of Diary
-    t12: Diary Page 1
-    t13: Diary Page 2
-    t14: Diary Page 3
-    t15: Diary Page 4
-    t16: Diary Page 5
-    t17: Diary Page 6
-    t18: Diary Page 7
+    t10: Togather will help you to create a personalized booklet from your WhatsApp group chat to share with your loved one, no designer or technical skills needed. 
+    t11: Cover Page of booklet
+    t12: Booklet Page 1
+    t13: Booklet Page 2
+    t14: Booklet Page 3
+    t15: Booklet Page 4
+    t16: Booklet Page 5
+    t17: Booklet Page 6
+    t18: Booklet Page 7
 
 instructions:
     header: Instructions
     t1: Getting Started
-    t2: Open WhatsApp and create a group with all the people that want to contribute to the diary.
+    t2: Open WhatsApp and create a group with all the people that want to contribute to the booklet.
     t3: How-to for Android
     t4: How-to for iOS 
-    t5: 'Let everyone know what this group is about and who the diary is for. You can use our example:'
+    t5: 'Let everyone know what this group is about and who the booklet is for. You can use our example:'
     t6: To-do Daily
     t7: Visit ToGather each day to receive a new topic or activity for your group.
     t8: We've got lots of topics and activities to keep you and your group busy, or you can create your own. Just share them in your WhatsApp group as a message or photo and encourage the others to respond.
     t9: 'TIP: make it easy to find your own topics in the end by starting the message with the words “today’s topic is...”'
-    t10: Everyone should share their responses in the WhatsApp group.
-    t11: Repeat these steps every day to keep the diary entries going.
+    t10: Everyone can share their responses in the WhatsApp group.
+    t11: Repeat these steps and select later on which messages go in the booklet.
     t12: Get a topic
-    t13: Assembling the diary
-    t14: 'To turn your WhatsApp group chat  into a diary follow these simple steps:'
+    t13: Assembling the booklet
+    t14: 'To turn your WhatsApp group chat  into a booklet follow these simple steps:'
     t15: 1. Export the group chat (including media) and save it on your device or cloud storage (e.g. Google Drive, iCloud or Dropbox).
     t16: How-to export WhatsApp chats
     t17: 'TIP: Anyone from the WhatsApp group can do this, so ask for help if you are having difficulties.'
-    t18: 2. Visit the ToGather 'Assemble Diary' page and upload your exported group chat. (all of the media and the `chat.txt` file that you saved in the previous step)
-    t19: 'TIP: Don’t worry, your personal messages and media files are not actually being uploaded anywhere. Everything is happening locally on your device – we don’t collect any personal data. This ensures your conversations stay private and you have full control over who you want to share your diary with.'
+    t18: 2. Visit the ToGather 'Assemble Booklet' page and upload your exported group chat. (all of the media and the `chat.txt` file that you saved in the previous step)
+    t19: 'TIP: Don’t worry, your personal messages and media files are not actually being uploaded anywhere. Everything is happening locally on your device – we don’t collect any personal data. This ensures your conversations stay private and you have full control over who you want to share your booklet with.'
     t20: Learn about how the service works
-    t21: 3. Personalise the diary by adding your loved one's name, and a title to the front cover.
-    t22: 4. Check the names of all the contributors. We will show you a list of the names we found in your group. You can edit the names you'll see in the diary (e.g first names only).
+    t21: 3. Personalise the booklet by adding your loved one's name, and a title to the front cover.
+    t22: 4. Check the names of all the contributors. We will show you a list of the names we found in your group. You can edit the names you'll see in the booklet (e.g first names only).
     t23: 5. Review the topics we found in the group chat. If there are topics missing you can add them from your messages or type them in. If there are ones that have already been included in previous diaries, simply delete them.
-    t24: 6. For each topic you will be asked to select which responses you want to add to the diary for that day.
+    t24: 6. For each topic you will be asked to select which responses you want to add to the booklet for that day.
     t25: 'TIP: Don’t worry if there is a day you didn’t submit anything, everyone deserves a rest, we will skip over those days and the dates will keep counting on.'
-    t26: 7. When you have done this for each day you want in the diary, click the 'finish' button. All of your messages will be placed in a template and your diary will be ready for you to download. You can print and/or forward it to share the diary with your family, friends and loved ones.
-    t27: Assemble Diary
+    t26: 7. When you have done this for each day you want in the booklet, click the 'finish' button. All of your messages will be placed in a pre-designed template and your booklet will be ready for you to download. You can print and/or forward it to share the booklet with your family, friends and loved ones.
+    t27: Assemble Booklet
     t28: 'TIP: We recommend to do this weekly, or even daily, so WhatsApp can export all your messages and so you have something to share more often.' 
     t29: 'TIP II: If you find there are messages or media missing after having exported a chat, this is likely due to the limit of WhatsApp on export file size. In this case, export the chat WIHTOUT media, and retrieve the media seperately from your phone, or download them via web.WhatsApp on your computer.'
 
 about:
     header: About
     t0: How it began
-    t1: The idea for Togather was born at the early stages of the COVID-19 lockdown in the UK. We saw an article on the Dutch news where a family kept a diary for their relative in the Intensive Care Unit (ICU) and gave this to her when she was discharged from the hospital. They wrote down what happened to her while she was in the ICU, but also happened in the world outside, weather forecasts, some news items, things the family had done. We thought this was really nice, and we wanted to make this available for people going through similar experiences. 
+    t1: The idea for Togather was born at the early stages of the COVID-19 lockdown in the UK. We saw an article on the Dutch news where a family kept a booklet for their relative in the Intensive Care Unit (ICU) and gave this to her when she was discharged from the hospital. They wrote down what happened to her while she was in the ICU, but also happened in the world outside, weather forecasts, some news items, things the family had done. We thought this was really nice, and we wanted to make this available for people going through similar experiences. 
     t2: As we realise that going through these trying times, where families and friends get separated, it can leave you feeling powerless. We hope that through getting together as group to engage with these topics and activities provides a space to draw strength from each other and find some light. A space where even though life going on seems weird, you can make shared memories together, with your loved one at the centre of it all. We want to help you to support your family/friends/community to gather in stories when being together is not possible. 
     t3: Simply put. We have designed Togather to keep your messages and media private. All of your chat messages and media files stay on your device and never get shared or stored by Togather (or anyone else).
-    t4: The only data we capture is through the anonymous site analytics and through our optional feedback form at the end of assembling your diary. We are a team of researchers (details below), that would love to hear about your experiences with ToGather (as well as any suggestions for how to improve it). This is completely voluntary and in no way affects your access to or usage of the ToGather website. To support this feedback and get some insight into how people use ToGather we log which topics are shared – that’s it. We do not record any user data or information that can trace back to anyone. To give you an idea of what data we capture we have created an example of a log for one day, click here to see it.
+    t4: The only data we capture is through the anonymous site analytics and through our optional feedback form at the end of assembling your booklet. We are a team of researchers (details below), that would love to hear about your experiences with ToGather (as well as any suggestions for how to improve it). This is completely voluntary and in no way affects your access to or usage of the ToGather website. To support this feedback and get some insight into how people use ToGather we log which topics are shared – that’s it. We do not record any user data or information that can trace back to anyone. To give you an idea of what data we capture we have created an example of a log for one day, click here to see it.
     t5: The people behind Togather
     t6: We are a team of design researchers from Newcastle University and Northumbria University based in Newcastle Upon-Tyne in the United Kingdom. 
     t7: Togather
-    t8: Togather is an online service that aims to bring families and friends together through sharing stories for a loved one. It is built using existing services WhatsApp and GitHub, to make it widely available and free of charge for everyone. We will provided you with daily topics and activities for your family and friends to message about and turn your group conversations into a book or diary to gift, keep and revisit.
+    t8: Togather is an online service that aims to bring families and friends together through sharing stories for a loved one. It is built using existing services WhatsApp and GitHub, to make it widely available and free of charge for everyone. We will provided you with daily topics and activities for your family and friends to message about and turn your group conversations into a book or booklet to gift, keep and revisit.
     t9: Your Privacy
     t10: We are part of the research project called Enabling Ongoingness (www.enablingongoingness.com) which explores how we can give new meaning to relationships in the context of end-of life and  bereavement. A large part of this is exploring how people curate the essence of a relationship in media, stories, objects and rituals in everyday life. During the COVID-19 pandemic we were faced with a new global shared experience of fear of loss and grief. It is unlike anything that many of us have experienced before, and has undoubtedly  changed our lives in many ways. Through ToGather we hope that we can help you capture your community bonds in a time where this is not as easy as it was before. If you have any experiences with ToGather that you would like to share with us do not hesitate to reach out. You can either send us a message over e-mail (kyle.montague@northumbria.ac.uk) or fill out our feedback form.
     t11: Researcher
@@ -95,7 +95,7 @@ nav-overlay:
     topic-a: Get a topic
     explained-a: Introduction
     instructions-a: Instructions
-    diary-a: Assemble Diary
+    diary-a: Assemble Booklet
     about-a: About
     contact-a: Contact Us
 
@@ -107,10 +107,10 @@ footer:
     f5: 'Northumbria University Logo'
 
 group-start:
-    gs1: '“Have you seen Togather (<span><a href=https://youtu.be/BUJLK6aTBkQ>https://youtu.be/BUJLK6aTBkQ</a></span>)? It’s a website that will let us convert our WhatsApp messages into a diary. It would be great if we could make one for [INSERT NAME]. As an opening it would be nice to introduce everyone, so post a picture of yourself with a short personal message for [INSERT NAME]. Then we can start sharing messages about the topics from Togather or topics we think of ourselves.“'
+    gs1: '“Have you seen Togather (<span><a href=https://youtu.be/BUJLK6aTBkQ>https://youtu.be/BUJLK6aTBkQ</a></span>)? It’s a website that will let us convert our WhatsApp messages into a booklet. It would be great if we could make one for [INSERT NAME]. As an opening it would be nice to start with a personal greeting and a picture. Then we can start sharing messages about the topics from Togather or topics we think of ourselves. We can select which messages will go into the booklet in the end, so speak freely ;)“'
     gs2: Share message
-    gs3: 'Have you seen Togather ( https://youtu.be/BUJLK6aTBkQ )? It’s a website that will let us convert our WhatsApp messages into a diary. It would be great if we could make one for ${name}. As an opening it would be nice to introduce everyone, so post a picture of yourself with a short personal message for ${name}. Then we can start sharing messages about the topics from Togather or topics we think of ourselves.'
-    gs4: 'Please, write the name to who the diary is for:'
+    gs3: 'Have you seen Togather (<span><a href=https://youtu.be/BUJLK6aTBkQ>https://youtu.be/BUJLK6aTBkQ</a></span>)? It’s a website that will let us convert our WhatsApp messages into a booklet. It would be great if we could make one for [INSERT NAME]. As an opening it would be nice to start with a personal greeting and a picture. Then we can start sharing messages about the topics from Togather or topics we think of ourselves. We can select which messages will go into the booklet in the end, so speak freely ;)'
+    gs4: 'Please, write the name to who the booklet is for:'
 
 topic:
     t0: Get a Topic
@@ -125,50 +125,50 @@ diary:
     uf4: 'Your chat messages and media stay private, this all happening on your device and none of your content is being send or shared with us (or anyone else).'
     uf5: 'Select Exported WhatsApp Files'
     uf6: 'No files selected'
-    uf7: 'Start Assembling the Diary'
+    uf7: 'Start Assembling the Booklet'
     uf8: 'Full assembling instructions'
     uf9: 'How we assure your privacy'
 
     uem1: 'No chat file found'
 
-    dh1: 'Assemble Diary'
-    dh2: 'Because of our privacy measures if you quit now, your process cannot be saved. This means when you come back to assemble you have to start over. If you want a break you can leave this website open without losing your progress. Are you sure you want to stop assembling your diary?'
+    dh1: 'Assemble Booklet'
+    dh2: 'Because of our privacy measures if you quit now, your process cannot be saved. This means when you come back to assemble you have to start over. If you want a break you can leave this website open without losing your progress. Are you sure you want to stop assembling your booklet?'
     dh3: 'Yes, stop assembling'
-    dh4: 'No, continue with the diary'
+    dh4: 'No, continue with the booklet'
 
-    ds1: 'Assembling the diary takes 5 steps.'
-    ds2: '#1 Who is the diary for?'
+    ds1: 'Assembling the booklet takes 5 steps.'
+    ds2: '#1 Who is the booklet for?'
     ds3: '#2 Check contributer names'
     ds4: '#3 Complete topic list'
     ds5: '#4 Collect responses per day'
-    ds6: '#5 Review and download diary'
+    ds6: '#5 Review and download booklet'
     ds7: 'Here you will see in which step you are.'
     ds8: 'Go to step 1'
 
     sc1: 'Step'
 
-    wtdif1: 'Who is this Diary for?'
+    wtdif1: 'Who is this booklet for?'
     wtdif2: 'The name will be used to create a personal cover and opening page.'
     wtdif3: 'Type the name here'
-    wtdif4: 'Give the name of your loved one who you are making this diary for. This name will be used on the cover of the final diary and on the first page to create a personal booklet and message for them. We do not save this information, this is all private and just for you and who you choose to share it with.'
+    wtdif4: 'Give the name of your loved one who you are making this booklet for. This name will be used on the cover of the final booklet and on the first page to create a personal booklet and message for them. We do not save this information, this is all private and just for you and who you choose to share it with.'
     wtdif5: 'Type the title here'
 
-    wc1: 'Who contributed to this diary?'
+    wc1: 'Who contributed to this booklet?'
     wc2: 'We found the following names in the group. Is this list correct?'
-    wc3: 'These are the names of the group members as they are saved on your phone. Make sure the list is complete and that these are the names that you would like to have them in the diary. If you would like to change them, click the pencil button to edit. If you see just a phone number, this person was not saved in your contacts. As we use these names to show who wrote which message take the time to check and edit them.'
+    wc3: 'These are the names of the group members as they are saved on your phone. Make sure the list is complete and that these are the names that you would like to have them in the booklet. If you would like to change them, click the pencil button to edit. If you see just a phone number, this person was not saved in your contacts. As we use these names to show who wrote which message take the time to check and edit them.'
 
     tf1: 'Which topics did you chat about?'
     tf2: 'We found the following set of topics. Is this list complete?'
     tf3: 'Select from chat'
     tf4: 'Write my own'
     tf5: 'Add Topic'
-    tf6: 'The topics we have found are the ones you shared through the Togather website. If you thought of your own topics you can add them here. You can select them from the chat, if you shared them there, or write your own. If there were days that you didn''t have a topic, but messages were shared, then try to find a description for that. For example; A log of Monday. Or; Some things we liked to share today. This way we can add that day in the diary template.'
+    tf6: 'The topics we have found are the ones you shared through the Togather website. If you thought of your own topics you can add them here. You can select them from the chat, if you shared them there, or write your own. If there were days that you didn''t have a topic, but messages were shared, then try to find a description for that. For example; A log of Monday. Or; Some things we liked to share today. This way we can add that day in the booklet template.'
 
     t1: 'Day'
 
     wt1: 'Write your own topic and for which date this was'
     wt2: 'Write another topic'
-    wt3: 'If there are topics that were not shared in your WhatsApp group chat, you can write them here. If there were days that you didn''t have a topic, but messages were shared, then try to find a description for that. For example; A log of Monday. Or; Some things we liked to share today. This way we can add that day in the diary template.'
+    wt3: 'If there are topics that were not shared in your WhatsApp group chat, you can write them here. If there were days that you didn''t have a topic, but messages were shared, then try to find a description for that. For example; A log of Monday. Or; Some things we liked to share today. This way we can add that day in the booklet template.'
     wt4: 'Back'
     wt5: 'Add'
     wt6: 'Done'
@@ -182,7 +182,7 @@ diary:
     stfc4: 'Add'
 
     sm1: 'Select all messages for this day:'
-    sm2: 'Go through the messages that were shared in your WhatsApp gorup chat and select the ones you want to add for this day. You can navigate through the days with the arrows in the top area. Click on the day to see the topic for that day again. If you have selected the messages for all the days of the diary they will be added to the template for you to review it.'
+    sm2: 'Go through the messages that were shared in your WhatsApp gorup chat and select the ones you want to add for this day. You can navigate through the days with the arrows in the top area. Click on the day to see the topic for that day again. If you have selected the messages for all the days of the booklet they will be added to the template for you to review it.'
     sm3: 'Click to see topic'
 
     d1: 'Topic Day'
@@ -190,29 +190,29 @@ diary:
 
     pp1: 'Download'
 
-    rd1: 'Review your diary, is it complete?'
-    rd2: 'Go through the pages of your diary. Check if all the days, with their topics and messages are there. When you are happy with the diary you can save and download it. If there are things missing, go back to the previous step and add them.'
+    rd1: 'Review your booklet, is it complete?'
+    rd2: 'Go through the pages of your booklet. Check if all the days, with their topics and messages are there. When you are happy with the booklet you can save and download it. If there are things missing, go back to the previous step and add them.'
     rd3: 'Home'
 
-    dd1: 'Your diary is ready!'
-    dd2: 'Download your Diary here:'
-    dd3: 'Download Diary'
-    dd4: 'Your diary is almost ready!'
+    dd1: 'Your booklet is ready!'
+    dd2: 'Download your booklet here:'
+    dd3: 'Download booklet'
+    dd4: 'Your booklet is almost ready!'
     dd5: 'Thanks for using Togather, we would like to invite you to take part in our research study. Before you decide to participate (or not), we would like you to understand why the research is being done and what it would involve for you.'
     dd6: 'Would you like to know more?'
-    dd7: '(On Submit, the diary will be downloaded and a page with further instructions will be opened)'
+    dd7: '(On Submit, the booklet will be downloaded and a page with further instructions will be opened)'
     dd8: 'Yes'
     dd9: 'No'
     dd10: 'Submit'
 
     s1: 'Thank you for using Togather! If you have friends or family that might also like Togather share the website with them through these links.'
     s2: 'No, thank you!'
-    s3: 'Have you seen Togather (https://togather.me/explained)? It’s a website that will let you convert messages from a WhatsApp group chat into a diary. I just made a diary with it, and I thought you might like it as well.'
+    s3: 'Have you seen Togather (https://togather.me/explained)? It’s a website that will let you convert messages from a WhatsApp group chat into a booklet. I just made a booklet with it, and I thought you might like it as well.'
 
 templates:
 
     c1: For
-    c2: 'This diary is a collection of messages from:'
+    c2: 'This booklet is a collection of messages from:'
     c3: 'They capture your time apart during:'
     c4: Dear
 
@@ -223,7 +223,7 @@ error:
     e1: Okay
 
 edge-support:
-    es1: 'Assembling Diary not supported on your current version of Microsoft Edge'
+    es1: 'Assembling Booklet not supported on your current version of Microsoft Edge'
     es2: 'Click below to update Edge to its latest version'
 
 topics:
