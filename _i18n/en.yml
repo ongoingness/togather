@@ -109,7 +109,7 @@ footer:
 group-start:
     gs1: '“Have you seen Togather (<span><a href=https://youtu.be/BUJLK6aTBkQ>https://youtu.be/BUJLK6aTBkQ</a></span>)? It’s a website that will let us convert our WhatsApp messages into a booklet. It would be great if we could make one for [INSERT NAME]. As an opening it would be nice to start with a personal greeting and a picture. Then we can start sharing messages about the topics from Togather or topics we think of ourselves. We can select which messages will go into the booklet in the end, so speak freely ;)“'
     gs2: Share message
-    gs3: 'Have you seen Togather (<span><a href=https://youtu.be/BUJLK6aTBkQ>https://youtu.be/BUJLK6aTBkQ</a></span>)? It’s a website that will let us convert our WhatsApp messages into a booklet. It would be great if we could make one for [INSERT NAME]. As an opening it would be nice to start with a personal greeting and a picture. Then we can start sharing messages about the topics from Togather or topics we think of ourselves. We can select which messages will go into the booklet in the end, so speak freely ;)'
+    gs3: 'Have you seen Togather (https://youtu.be/BUJLK6aTBkQ)? It’s a website that will let us convert our WhatsApp messages into a booklet. It would be great if we could make one for ${name}. As an opening it would be nice to start with a personal greeting and a picture. Then we can start sharing messages about the topics from Togather or topics we think of ourselves. We can select which messages will go into the booklet in the end, so speak freely ;)'
     gs4: 'Please, write the name to who the booklet is for:'
 
 topic:
