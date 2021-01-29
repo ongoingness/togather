@@ -156,6 +156,7 @@ diary:
     wc1: 'Who contributed to this diary?'
     wc2: 'We found the following names in the group. Is this list correct?'
     wc3: 'These are the names of the group members as they are saved on your phone. Make sure the list is complete and that these are the names that you would like to have them in the diary. If you would like to change them, click the pencil button to edit. If you see just a phone number, this person was not saved in your contacts. As we use these names to show who wrote which message take the time to check and edit them.'
+    wc4: ' - Hide/Show messages of this person'
 
     tf1: 'Which topics did you chat about?'
     tf2: 'We found the following set of topics. Is this list complete?'

@@ -157,6 +157,7 @@ diary:
     wc1: 'Wie heeft bijgedragen aan dit boekje?'
     wc2: 'Wij vonden de volgende namen in de groep. Is deze lijst correct? '
     wc3: 'Dit zijn de namen van de groepsleden zoals ze op je telefoon zijn opgeslagen. Zorg ervoor dat de lijst compleet is en dat dit de namen zijn die je graag in het boekje wilt zien. Als je ze wilt wijzigen, klik op de potlood-knop om ze te bewerken. Als je alleen een telefoonnummer ziet, is deze persoon niet opgeslagen in uw contacten. Gezien wij deze namen gebruiken om te laten zien wie welk bericht heeft geschreven, neem vooral de tijd om ze te controleren en bewerken. '
+    wc4: ' - Hide/Show messages of this person'
 
     tf1: 'Over welke onderwerpen heb je gesproken?'
     tf2: 'We hebben de volgende reeks onderwerpen gevonden. Is deze lijst compleet? '

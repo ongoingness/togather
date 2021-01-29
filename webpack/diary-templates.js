@@ -139,9 +139,11 @@ const DiaryTemplates = () => {
         let i = 0;
         let userY = 100;
         for(const [hash, user] of Object.entries(data.users)) {
-            doc.text(`${user.name}`, i % 2 === 0 ? 70 : 140, userY, 'center');
-            if(i%2 === 1) userY += 10;
-            i++;
+            if(user.visible) {
+                doc.text(`${user.name}`, i % 2 === 0 ? 70 : 140, userY, 'center');
+                if(i%2 === 1) userY += 10;
+                i++;
+            }
         }
 
         doc.setTextColor(0, 0, 0);

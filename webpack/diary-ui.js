@@ -1296,12 +1296,36 @@ const DiaryUI = (eventHandler) => {
                 usernameEdit.classList.add('not-visible');
                 usernameText.classList.add('not-visible');
             }
-
         }
 
         const helpContent = document.createElement('div');
         helpContent.classList.add('privacy__text');
         helpContent.innerText = "{% t diary.wc3 %}";
+
+        const buttonInfoContainer = document.createElement('div');
+        buttonInfoContainer.style.marginTop = "10px";
+        const editInfoButton = document.createElement('p');
+        buttonInfoContainer.appendChild(editInfoButton);
+
+        const userNotVisibleImage = document.createElement('i');
+        userNotVisibleImage.classList.add('far', 'fa-eye-slash');
+        userNotVisibleImage.style.width = '20px';
+        userNotVisibleImage.style.height = '20px';
+        editInfoButton.appendChild(userNotVisibleImage);
+
+        const textNode = document.createTextNode("/");
+        editInfoButton.appendChild(textNode);
+
+        const userVisibleImage = document.createElement('i');
+        userVisibleImage.classList.add('far', 'fa-eye');
+        userVisibleImage.style.width = '20px';
+        userVisibleImage.style.height = '20px';
+        editInfoButton.appendChild(userVisibleImage);
+
+        const textNodeVisible = document.createTextNode("{% t diary.wc4 %}");
+        editInfoButton.appendChild(textNodeVisible);
+
+        helpContent.append(buttonInfoContainer);
 
         renderStepController(document.body, 2, helpContent);
     }
