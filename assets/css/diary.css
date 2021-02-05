@@ -841,3 +841,8 @@ button.third, .button.third {
 } 
 
   
+#uploadFilesInputText {
+    margin: auto;
+    line-height: 47px;
+    padding: 0 20px 0 20px;
+}

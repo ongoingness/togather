@@ -1,5 +1,6 @@
 global:
-    lang-code: en
+    css: '/assets/css/nl.css'
+    lang-code: nl
     english: English
     portugues: Português
     nederlands: Nederlands
@@ -167,6 +168,7 @@ diary:
     tf6: 'De onderwerpen die wij hebben gevonden, zijn degene die je hebt gedeeld via de Togather-website. Als je aan je eigen onderwerpen hebt gedacht, kun je deze hier toevoegen. Je kunt ze selecteren in de chat, als je ze daar hebt gedeeld, of je eigen schrijven. Als er dagen waren dat je geen onderwerp had, maar berichten werden gedeeld, probeer daar dan een beschrijving voor te vinden. Bijvoorbeeld: ''een logboek van maandag'', of ''dingen die wij vandaag wilden delen''. Zo kunnen we die dag toevoegen aan het boekje.'
 
     t1: 'Dag'
+    t2: 'Onderwerp'
 
     wt1: 'Schrijf je eigen onderwerp en voor welke datum dit was'
     wt2: 'Schrijf een ander onderwerp'

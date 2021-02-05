@@ -85,6 +85,7 @@ const DiaryUI = (eventHandler) => {
         header.append(headerTop);
 
         const spanTitle = document.createElement('span');
+        spanTitle.classList.add('header__top__text');
         spanTitle.innerText = title;
         headerTop.append(spanTitle);
 
@@ -510,8 +511,9 @@ const DiaryUI = (eventHandler) => {
         content.append(selectContainer);
 
         const selectFilesButton = document.createElement('label');
+        selectFilesButton.id = 'uploadFilesInputText'
         selectFilesButton.classList.add('button', "secondary", 'small-font');
-        selectFilesButton.style = "margin: auto; line-height: 47px;";
+        //selectFilesButton.style = "margin: auto; line-height: 47px;";
         selectFilesButton.innerHTML = '{% t diary.uf5 %}';
         selectContainer.appendChild(selectFilesButton);
 
@@ -751,6 +753,7 @@ const DiaryUI = (eventHandler) => {
 
         const spanTitle = document.createElement('span');
         spanTitle.innerText = step;
+        spanTitle.classList.add('header__top__text');
         headerTop.append(spanTitle);
 
         const spanHeaderRight = document.createElement('span');
@@ -938,7 +941,7 @@ const DiaryUI = (eventHandler) => {
 
     const renderDiarySteps = () => {
 
-        renderDiaryHeader(document.body, "Assemble Diary");
+        renderDiaryHeader(document.body, "{% t diary.dh1 %}");
         
         const content = document.createElement('main');
         content.style.display = 'flex';
@@ -1921,7 +1924,7 @@ const DiaryUI = (eventHandler) => {
 
     }
 
-    const renderChatMessage = (messageData, messageListId, isSelected = false, isFromDay = false, selectString = 'Topic', isSelectedFromThisDay = false) => {
+    const renderChatMessage = (messageData, messageListId, isSelected = false, isFromDay = false, selectString = '{% t diary.t2 %}', isSelectedFromThisDay = false) => {
         
         const chatMessage = document.createElement('div');
         chatMessage.classList.add('chat-message');

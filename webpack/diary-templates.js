@@ -14,6 +14,7 @@ const DiaryTemplates = () => {
             doc = topicPage(doc, diary.topics[i]);
             doc = await messagePages(doc, diary.topics[i].selectedMessages);
         }
+        
     
         return doc;
     }
@@ -305,6 +306,7 @@ const DiaryTemplates = () => {
 
             }
 
+           
             if(!preview)
                 doc = await addMedia(doc, data.files, column);
 

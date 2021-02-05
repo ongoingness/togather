@@ -1,4 +1,5 @@
 global:
+    css: '/assets/css/en.css'
     lang-code: en
     english: English
     portugues: Português
@@ -18,7 +19,7 @@ introduction:
     t4: Create, capture, write, photograph and share with your group.
     t5: Come back each day for another new topic to share with your group.
     t6: 'To start create a group in Whatsapp with all the people that want to contribute to this booklet. Let everyone know what this group is about. You can use our example:'
-    t7: WhatsApp's group particpant menu
+    t7: WhatsApp's group participant menu
     t8: Page of this website with a topic
     t9: Chat of an WhatsApp group
     t10: Togather will help you to create a personalized booklet from your WhatsApp group chat to share with your loved one, no designer or technical skills needed. 
@@ -61,7 +62,7 @@ instructions:
     t26: 7. When you have done this for each day you want in the booklet, click the 'finish' button. All of your messages will be placed in a pre-designed template and your booklet will be ready for you to download. You can print and/or forward it to share the booklet with your family, friends and loved ones.
     t27: Assemble Booklet
     t28: 'TIP: We recommend to do this weekly, or even daily, so WhatsApp can export all your messages and so you have something to share more often.' 
-    t29: 'TIP II: If you find there are messages or media missing after having exported a chat, this is likely due to the limit of WhatsApp on export file size. In this case, export the chat WIHTOUT media, and retrieve the media seperately from your phone, or download them via web.WhatsApp on your computer.'
+    t29: 'TIP II: If you find there are messages or media missing after having exported a chat, this is likely due to the limit of WhatsApp on export file size. In this case, export the chat WITHOUT media, and retrieve the media separately from your phone, or download them via web.WhatsApp on your computer.'
 
 about:
     header: About
@@ -166,6 +167,7 @@ diary:
     tf6: 'The topics we have found are the ones you shared through the Togather website. If you thought of your own topics you can add them here. You can select them from the chat, if you shared them there, or write your own. If there were days that you didn''t have a topic, but messages were shared, then try to find a description for that. For example; A log of Monday. Or; Some things we liked to share today. This way we can add that day in the booklet template.'
 
     t1: 'Day'
+    t2: 'Topic'
 
     wt1: 'Write your own topic and for which date this was'
     wt2: 'Write another topic'
@@ -178,12 +180,12 @@ diary:
     nt2: 'Add media'
 
     stfc1: 'Select the topics you want to add.'
-    stfc2: 'Find the topics that we missed from you WhatsApp group chat. select them to add them to the topic list.'
+    stfc2: 'Find the topics that we missed from your WhatsApp group chat. Select them to add them to the topic list.'
     stfc3: 'Back'
     stfc4: 'Add'
 
     sm1: 'Select all messages for this day:'
-    sm2: 'Go through the messages that were shared in your WhatsApp gorup chat and select the ones you want to add for this day. You can navigate through the days with the arrows in the top area. Click on the day to see the topic for that day again. If you have selected the messages for all the days of the booklet they will be added to the template for you to review it.'
+    sm2: 'Go through the messages that were shared in your WhatsApp group chat and select the ones you want to add for this day. You can navigate through the days with the arrows in the top area. Click on the day to see the topic for that day again. If you have selected the messages for all the days of the booklet they will be added to the template for you to review it.'
     sm3: 'Click to see topic'
 
     d1: 'Topic Day'
