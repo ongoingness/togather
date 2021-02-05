@@ -1,5 +1,6 @@
 global:
-    lang-code: en
+    css: '/assets/css/pt.css'
+    lang-code: pt
     english: English
     portugues: Português
     nederlands: Nederlands
@@ -16,13 +17,13 @@ introduction:
     t2: Reúna um grupo de amigos e familiares no WhatsApp
     t3: Obtenha um tópico nostálgico, criativo, divertido ou desafiador para partilhar com seu grupo
     t4: Crie, capture, escreva, fotografe e partilhe com seu grupo.
-    t5: Retorne todos os dias para outro tópico novo para partilhar com seu grupo.
-    t6: 'To start create a group in Whatsapp with all the people that want to contribute to this diary. Let everyone know what this group is about. You can use our example:'
-    t7: WhatsApp's group particpant menu
-    t8: Page of this website with a topic
-    t9: Chat of an WhatsApp group
-    t10: Togather will help you, every week or every couple of days, to create a personalized diary from your WhatsApp group chat to share with your loved one. 
-    t11: Cover Page of Diary
+    t5: Volte todos os dias para outro tópico novo para partilhar com seu grupo.
+    t6: 'Para começar, crie um grupo no WhatsApp com todas as pessoas que queriam contributir para este diário. Deixe que todos saibam do que se trata este group. Você pode user o nosso exemplo:'
+    t7: Menu de participantes do grupo do WhatsApp
+    t8: Página deste site com um tópico
+    t9: Chat de um grupo no WhatsApp
+    t10: Togather irá ajudá-lo, todas as semanas ou a cada dois dias, a criar um diário personalizado do seu chat em grupo do WhatsApp para compartilhar com os seus entes queridos.
+    t11: Capa do diário
     t12: Diário Página 1
     t13: Diário Página 2
     t14: Diário Página 3
@@ -32,234 +33,236 @@ introduction:
     t18: Diário Página 7
 
 instructions:
-    header: Instructions
-    t1: Getting Started
-    t2: Open WhatsApp and create a group with all the people that want to contribute to the diary.
-    t3: How-to for Android
-    t4: How-to for iOS 
-    t5: 'Let everyone know what this group is about and who the diary is for. You can use our example:'
-    t6: To-do Daily
-    t7: Visit ToGather each day to receive a new topic or activity for your group.
-    t8: We've got lots of topics and activities to keep you and your group busy, or you can create your own. Just share them in your WhatsApp group as a message or photo and encourage the others to respond.
-    t9: 'TIP: make it easy to find your own topics in the end by starting the message with the words “today’s topic is...”'
-    t10: Everyone should share their responses in the WhatsApp group.
-    t11: Repeat these steps every day to keep the diary entries going.
-    t12: Get a topic
-    t13: Assembling the diary
-    t14: 'To turn your WhatsApp group chat  into a diary follow these simple steps:'
-    t15: 1. Export the group chat (including media) and save it on your device or cloud storage (e.g. Google Drive, iCloud or Dropbox).
-    t16: How-to export WhatsApp chats
-    t17: 'TIP: Anyone from the WhatsApp group can do this, so ask for help if you are having difficulties.'
-    t18: 2. Visit the ToGather 'Assemble Diary' page and upload your exported group chat. (all of the media and the `chat.txt` file that you saved in the previous step)
-    t19: 'TIP: Don’t worry, your personal messages and media files are not actually being uploaded anywhere. Everything is happening locally on your device – we don’t collect any personal data. This ensures your conversations stay private and you have full control over who you want to share your diary with.'
-    t20: Learn about how the service works
-    t21: 3. Personalise the diary by adding your loved one's name, and a title to the front cover.
-    t22: 4. Check the names of all the contributors. We will show you a list of the names we found in your group. You can edit the names you'll see in the diary (e.g first names only).
-    t23: 5. Review the topics we found in the group chat. If there are topics missing you can add them from your messages or type them in. If there are ones that have already been included in previous diaries, simply delete them.
-    t24: 6. For each topic you will be asked to select which responses you want to add to the diary for that day.
-    t25: 'TIP: Don’t worry if there is a day you didn’t submit anything, everyone deserves a rest, we will skip over those days and the dates will keep counting on.'
-    t26: 7. When you have done this for each day you want in the diary, click the 'finish' button. All of your messages will be placed in a template and your diary will be ready for you to download. You can print and/or forward it to share the diary with your family, friends and loved ones.
-    t27: Assemble Diary
-    t28: 'TIP: We recommend to do this weekly, or even daily, so WhatsApp can export all your messages and so you have something to share more often.' 
-    t29: 'TIP II: If you find there are messages or media missing after having exported a chat, this is likely due to the limit of WhatsApp on export file size. In this case, export the chat WIHTOUT media, and retrieve the media seperately from your phone, or download them via web.WhatsApp on your computer.'
+    header: Instruçōes
+    t1: Guia de Introdução
+    t2: Abra o WhatsApp e crie um grupo com todas as pessoas que desejam contribuir para o diário.
+    t3: Como fazer no Android
+    t4: Como fazer no iOS
+    t5: 'Deixe que todos saibam do que se trata este group. Você pode user o nosso exemplo:'
+    t6: Tarefas Diárias
+    t7: Visite o Togather a cada dia para receber um novo tópico ou atividade para o seu grupo.
+    t8: Temos muitos tópicos e atividades para manter você e o seu grupo ocupados, ou você pode criar o seus próprios. Basta partilhá-los no seu grupo de WhatsApp como uma mensagem ou foto e encorajar os outros a responder.
+    t9: 'DICA: torne mais fácil encontrar os seus próprios tópicos no final, iniciando a mensagem com as palavras "o tópico de hoje é ..."'
+    t10: Todos devem partilhar as suas respostas no grupo WhatsApp.
+    t11: Repita estas etapas todos os dias para manter um registo actualizado no diário.
+    t12: Obter um tópico
+    t13: Construir diário
+    t14: 'Para transformar o seu chat de grupo do WhatsApp num diário siga estes simples passos:'
+    t15: 1. Exporte o seu chat de grupo (incluido ficheiros) and guarde-os no seu dispositivo or armazenamento cloud (e.g. Google Drive, iCloud or Dropbox).
+    t16: Como exportar os chats de WhatsApp
+    t17: 'DICA: Qualquer pessoa no grupo do WhatsApp pode fazer isto, por isso peca ajuda se estiver com dificuldades.'
+    t18: 2. Visite a página 'Construir diário' e carregue o seu chat de grupo que exportou. (todos os ficheiros de mídia e o ficheiro `chat.txt` que você guardou no passo anterior)
+    t19: 'DICA: Não se preocupe, as suas messages pessoais e os seus ficheiros mídia não estão na verdade a ser guardados em lado nenhum. Tudo está a acontecer localmente no seu dispositivo - nós não recolhemos qualquer tipo de dados pessoais. Isto garante que as suas conversas permaneçem privadas e que você mantenha um controlo total sobre com quem deseja partilhar o seu diário com.'
+    t20: Saibe como o serviço funciona
+    t21: 3. Personalize o diário adicionando o nome do seu ente querido e um título à capa.
+    t22: 4. Verifique os nomes de todos os colaboradores. Mostraremos uma lista dos nomes que encontramos no seu grupo. Você pode editar os nomes que verá no diário (por exemplo, apenas os primeiros nomes).
+    t23: 5. Reveja os tópicos que encontramos no chat de grupo. Se faltem tópicos, você pode adicioná-los das suas mensagens ou escrever novos. Se houver alguns que já tenham sido incluídos em diários anteriores, simplesmente remova-os.
+    t24: 6. Para cada tópico, você será solicitado a selecionar as respostas que deseja adicionar ao diário naquele dia.
+    t25: 'DICA: Não se preocupe se existem um dia que você não enviou nada, toda a gente merece um descanso, vamos saltar esses dias e as datas vão continuar a ser contadas.'    
+    t26: 7. Quando você tiver feito isso para cada dia que deseja ter no diário, clique no botão 'Terminar'. Todas as suas mensagens serão colocadas num modelo e seu diário estará pronto para download. Você pode imprimir e/ou partilhar o diário com a sua família, os seus amigos e pos seus entes queridos.
+    t27: Construir diário
+    t28: 'DICA: Recomendamos fazer isto semanalmente, ou mesmo diariamente, para que o WhatsApp possa exportar todas as suas mensagens e você tenha algo para partilhar com mais frequência.'
+    t29: 'DICA II: Se você achar que faltam mensagens ou mídia após ter exportado um chat, isto provavelmente deve-se ao limite do WhatsApp no tamanho do arquivo de exportação. Neste caso, exporte o chat SEM mídia e recupere a mídia separadamente do seu telefone, ou faça download via web.WhatsApp no seu computador. '
 
 about:
-    header: About
-    t0: How it began
-    t1: The idea for Togather was born at the early stages of the COVID-19 lockdown in the UK. We saw an article on the Dutch news where a family kept a diary for their relative in the Intensive Care Unit (ICU) and gave this to her when she was discharged from the hospital. They wrote down what happened to her while she was in the ICU, but also happened in the world outside, weather forecasts, some news items, things the family had done. We thought this was really nice, and we wanted to make this available for people going through similar experiences. 
-    t2: As we realise that going through these trying times, where families and friends get separated, it can leave you feeling powerless. We hope that through getting together as group to engage with these topics and activities provides a space to draw strength from each other and find some light. A space where even though life going on seems weird, you can make shared memories together, with your loved one at the centre of it all. We want to help you to support your family/friends/community to gather in stories when being together is not possible. 
-    t3: Simply put. We have designed Togather to keep your messages and media private. All of your chat messages and media files stay on your device and never get shared or stored by Togather (or anyone else).
-    t4: The only data we capture is through the anonymous site analytics and through our optional feedback form at the end of assembling your diary. We are a team of researchers (details below), that would love to hear about your experiences with ToGather (as well as any suggestions for how to improve it). This is completely voluntary and in no way affects your access to or usage of the ToGather website. To support this feedback and get some insight into how people use ToGather we log which topics are shared – that’s it. We do not record any user data or information that can trace back to anyone. To give you an idea of what data we capture we have created an example of a log for one day, click here to see it.
-    t5: The people behind Togather
-    t6: We are a team of design researchers from Newcastle University and Northumbria University based in Newcastle Upon-Tyne in the United Kingdom. 
+    header: Sobre
+    t0: Como começou
+    t1: A ideia para o Togather nasceu durante as fazes iniciais da quarentena geral devido COVID-19 no Reino Unido. Vimos uma reportagem num noticiário holandês em que uma família fez um diário para o seu familiar que se entrecontrava na Unidade de Cuidados Intensivos (UCI) e que lhe foi entrege quando ela teve alta hostipalar. Eles anotaram o que aconteceu com ela enquanto esteve na UCI, mas também o aconteceu no mundo lá fora, previsões do tempo, algumas notícias, coisas que a família tinha feito. Achamos isto muito bom e queríamos disponibilizar algo para pessoas que passam por experiências semelhantes.
+    t2: Ao apercebemos-nos que passar por este tempos difíceis, onde famílias e amigos estão separados, pode nos fazer sentir impotentes. Nós esperamos que através de nos reunirmos como um grupo, para nos envolbermos com esses tópicos e atividades, proporcionemos um espaço para extrair forças uns dos outros e encontrar algum conforto. Um espaço onde mesmo onde a vida pareça estranha, você podem partilhar memórias juntos com o seu entre querido no centro de tudo. Queremos ajudá-lo a apoiar a sua família/amigos/comunidade para reunir histórias quando estar junto não é possivel.
+    t3: De forma simples, nós desenvolvemos o Togather para manter todas as suas mensagens e conteúdos privados. Todas as suas mensagens do chat e ficheiros multimédia ficam no seu dispositivo e num são partilhados ou guardados pelo Togather (ou qualquer outra pessoa).
+    t4: Os únicos dados que capturamos são feitos através the sites anonímos de analytics e através do nosso formulário de feedback opcional depois de construir o seu diário. Nós somos uma equipa de investigadores (detalhes abaixo), que adoraria ouvir um as suas experiências com o Togather (assim como qualquer sugestōes sobre como o melhorar). Isto é completamente voluntário e de nenhuma forma afecta o sei acesso ou uso do site do Togather. Para suportar este feedback e obter algum conhecimento de como as pessoal usam o Togather, nós registamos quais os tópicos que são partilhados - e é só isso. Nós não registamos qualquer tipo de dados dos utilizador ou informação que permitam descobrir o alguém. Para ter uma ideia de quais os dados que capturamos, criamos um exemplo de um registo para um dia, clique aqui para ver.
+    t5: As pessoas por trás do Togather
+    t6: Nós somos uma equipa de investigadores de design da Northumbria University, basedos em Newcastle Upon-Tyne no Reino Unido.
     t7: Togather
-    t8: Togather is an online service that aims to bring families and friends together through sharing stories for a loved one. It is built using existing services WhatsApp and GitHub, to make it widely available and free of charge for everyone. We will provided you with daily topics and activities for your family and friends to message about and turn your group conversations into a book or diary to gift, keep and revisit.
-    t9: Your Privacy
-    t10: We are part of the research project called Enabling Ongoingness (www.enablingongoingness.com) which explores how we can give new meaning to relationships in the context of end-of life and  bereavement. A large part of this is exploring how people curate the essence of a relationship in media, stories, objects and rituals in everyday life. During the COVID-19 pandemic we were faced with a new global shared experience of fear of loss and grief. It is unlike anything that many of us have experienced before, and has undoubtedly  changed our lives in many ways. Through ToGather we hope that we can help you capture your community bonds in a time where this is not as easy as it was before. If you have any experiences with ToGather that you would like to share with us do not hesitate to reach out. You can either send us a message over e-mail (kyle.montague@northumbria.ac.uk) or fill out our feedback form.
-    t11: Researcher
+    t8: Togather é um serviço online que visa reunir familiares e amigos por meio de partilha de histórias para um pessoa ente querida. Foi construindo usado os serviços de WhatApp e GitHub, para torná-lo amplemente disponível e gratuito para todos. Nós forneceremos-lhe tópicos diários e actividades para a sua familia e amigos partilharem e tornarem as vossas conversas the grupo num livro ou diário para dar como presente, guardar e revisitar.
+    t9: A sua Privacidade
+    t10: Nós fazemos parte de um projecto de investigação chamado Enabling Ongoingness (www.enablingongoingness.com) que explora como podemos dar um novo significado ao nossos relacionamentos no contexto de fim-de-vida e de luto. Um grande parte disto é explorar como as pessoas capturam a essência de um relacionamento em conteúdos multimédia, histórias, objectos e rituais no seu dia-a-dia. Durante a pandemia de COVID-19 fomos confrotandos com uma nova experiência global de medo de perda e luto. É diferente de tudo o que muito de nós já experienciámos e sem dúvida mudou a nossas vidas de muitas maneiras. Através do Togather, esperamos ajudar a si capturar os seus laços comunitários numa época em que isso não é tão fácil como antes. Se você tiver alguma experiência com o Togather que gostasse de partilhar connosco, não hesite em nos contactar. Você pode enviar-nos uma mensagem por e-mail (kyle.montague@northumbria.ac.uk) ou preencher o nosso formulário de feedback.
+    t11: Investigador
     t12: Associate Professor
     t13: Professor
-    t14: Luis' Profile Photograph
-    t15: Linnea's Profile Photograph
-    t16: Kyle's Profile Photograph
-    t17: Jayne's Profile Photograph
-    t18: Josh's Profile Photograph
+    t14: Fotografia de perfil fo Luís
+    t15: Fotografia de perfil da Linnea
+    t16: Fotografia de perfil do Kyle
+    t17: Fotografia de perfil Jayne
+    t18: Fotografia de perfil Josh
 
 contact:
-    header: Contact
-    t1: ToGather has been developed as a constantly developing freely accessible service. Therefore we are always keen to hear your feedback, ideas, thoughts and experiences. If there is anything you would like to share with us, do not hesitate to reach out!
-    t2: 'You can contact us through:'
+    header: Contactos
+    t1: Togather foi desenvolvido como um serviço em constante desenvolvimento e de acesso livre. Assim sendo, estamos sempre dispostos a ouvir o seu feedback, ideias, pensamentos e experiências. Se houver algo que você gostasse de partilhar connosco, não heiste em nos contactar!
+    t2: 'Você pode nos contactar através:'
 
 nav-overlay:
-    home-a: Home
-    topic-a: Get a topic
-    explained-a: Introduction
-    instructions-a: Instructions
-    diary-a: Assemble Diary
-    about-a: About
-    contact-a: Contact Us
+    home-a: Início
+    topic-a: Obter Tópico
+    explained-a: Introdução
+    instructions-a: Instruçōes
+    diary-a: Construir Diário
+    about-a: Sobre
+    contact-a: Contactos
 
 footer:
-    f1: 'Select Language:'
-    f2: 'Togather Logo'
-    f3: 'Enabling Ongoingness Project Logo'
-    f4: 'Inclusive Design & Innovation (IDI) research group Logo'
-    f5: 'Northumbria University Logo'
+    f1: 'Selecionar Linguagem:'
+    f2: 'Logo do Togather'
+    f3: 'Logo do projecto Enabling Ongoingness'
+    f4: 'Logo do grupo de investigação Inclusive Design & Innovation (IDI)'
+    f5: 'Logo da Northumbria University'
 
 group-start:
-    gs1: '“Have you seen Togather (<span><a href=https://youtu.be/BUJLK6aTBkQ>https://youtu.be/BUJLK6aTBkQ</a></span>)? It’s a website that will let us convert our WhatsApp messages into a diary. It would be great if we could make one for [INSERT NAME]. As an opening it would be nice to introduce everyone, so post a picture of yourself with a short personal message for [INSERT NAME]. Then we can start sharing messages about the topics from Togather or topics we think of ourselves.“'
-    gs2: Share message
-    gs3: 'Have you seen Togather ( https://youtu.be/BUJLK6aTBkQ )? It’s a website that will let us convert our WhatsApp messages into a diary. It would be great if we could make one for ${name}. As an opening it would be nice to introduce everyone, so post a picture of yourself with a short personal message for ${name}. Then we can start sharing messages about the topics from Togather or topics we think of ourselves.'
-    gs4: 'Please, write the name to who the diary is for:'
+    gs1: '“Já viram o Togather (<span><a href=https://youtu.be/BUJLK6aTBkQ>https://youtu.be/BUJLK6aTBkQ</a></span>)? É um site que permite converter as nossas mensagens de WhatApp num diário. Seria ótimo se fizessemos um para o/a [INSERIR NOME]. Para começar seria bom uma introdução de todos, portanto postem uma imagem de vocês com uma mensagem pequena e pessoal para o/a [INSERIR NOME]. E depois podemos começar a partilhar mensagens sobre os tópicos do Togather ou tópicos que inventarmos nós mesmos.“'
+    gs2: Partilhar mensagem
+    gs3: '“Já viram o Togather ( https://youtu.be/BUJLK6aTBkQ )? É um site que permite converter as nossas mensagens de WhatApp num diário. Seria ótimo se fizessemos um para o/a ${name}. Para começar seria bom uma introdução de todos, portanto postem uma imagem de vocês com uma mensagem pequena e pessoal para o/a ${name}. E depois podemos começar a partilhar mensagens sobre os tópicos do Togather ou tópicos que inventarmos nós mesmos.“'
+    gs4: 'Por favor, escreva o nome de para quem é esse diário:' 
 
 topic:
-    t0: Get a Topic
-    t1: Share with your group
-    t2: Give me a different topic
-    t3: 'Topic:'
+    t0: Obter Tópico
+    t1: Partilhar tópico com grupo
+    t2: Dá-me um tópico diferente
+    t3: 'Tópico:'
 
 diary:
-    uf1: 'Find your exported WhatsApp group chat (including the media files) and add them below.'
-    uf2: 'TIP:'
-    uf3: 'Exported by an Android phone? Select all media files and a .txt file. Exported by an iPhone? Select the .zip file.'
-    uf4: 'Your chat messages and media stay private, this all happening on your device and none of your content is being send or shared with us (or anyone else).'
-    uf5: 'Select Exported WhatsApp Files'
-    uf6: 'No files selected'
-    uf7: 'Start Assembling the Diary'
-    uf8: 'Full assembling instructions'
-    uf9: 'How we assure your privacy'
+    uf1: 'Encontre o seu chat de grupo WhatsApp exportado (incluindo ficheiros multimédia) e adicione-os abaixo '
+    uf2: 'DICA:'
+    uf3: 'Exportado num telefone Android? Selecione todos os ficheiros multimédia e o ficheiro .txt. Exportado num iPhone? Selecione o ficheiro .zip'
+    uf4: 'As suas mensagem de chat e ficheiros permanecem privados, tudo isto está acontencer no seu dispositivo e nenhum conteúdo está a ser enviado ou partilhado connosco (ou qualquer outra pessoa)'
+    uf5: 'Selecione os ficheiros exportados do WhatsApp'
+    uf6: 'Nenhum ficheiro selecionado'
+    uf7: 'Começar a construir o diário'
+    uf8: 'Instruçōes completas de construição'
+    uf9: 'Como asseguramos a sua privacidade'
 
-    uem1: 'No chat file found'
+    uem1: 'Nenhum ficheiro de chat encontrado'
 
-    dh1: 'Assemble Diary'
-    dh2: 'Because of our privacy measures if you quit now, your process cannot be saved. This means when you come back to assemble you have to start over. If you want a break you can leave this website open without losing your progress. Are you sure you want to stop assembling your diary?'
-    dh3: 'Yes, stop assembling'
-    dh4: 'No, continue with the diary'
+    dh1: 'Construir Diário'
+    dh2: 'Por causa das nossas medidas de privacidade se desistir agora, o seu progresso não poderá ser guardado. Isto significa que quando voltar para construir o diário terá de começar do início. Se quiser fazer uma pausa pode deixar o site aberto sem perder qualquer progresso. Tem a certeza que deseja parar de construir o seu diário?'
 
-    ds1: 'Assembling the diary takes 5 steps.'
-    ds2: '#1 Who is the diary for?'
-    ds3: '#2 Check contributer names'
-    ds4: '#3 Complete topic list'
-    ds5: '#4 Collect responses per day'
-    ds6: '#5 Review and download diary'
-    ds7: 'Here you will see in which step you are.'
-    ds8: 'Go to step 1'
+    dh3: 'Sim, parar de construir'
+    dh4: 'Não, continuar o diário'
 
-    sc1: 'Step'
+    ds1: 'Construir o diário são 5 passos'
+    ds2: '#1 Para quem é o diário?'
+    ds3: '#2 Verificar os nomes dos contribuidores'
+    ds4: '#3 Completar a lista de tópicos'
+    ds5: '#4 Selecione respostas por dia'
+    ds6: '#5 Reveja e faça download do diário'
+    ds7: 'Aqui verá em que passo se encontra.'
+    ds8: 'Vá para o passo 1'
 
-    wtdif1: 'Who is this Diary for?'
-    wtdif2: 'The name will be used to create a personal cover and opening page.'
-    wtdif3: 'Type the name here'
-    wtdif4: 'Give the name of your loved one who you are making this diary for. This name will be used on the cover of the final diary and on the first page to create a personal booklet and message for them. We do not save this information, this is all private and just for you and who you choose to share it with.'
-    wtdif5: 'Type the title here'
+    sc1: 'Passo'
 
-    wc1: 'Who contributed to this diary?'
-    wc2: 'We found the following names in the group. Is this list correct?'
-    wc3: 'These are the names of the group members as they are saved on your phone. Make sure the list is complete and that these are the names that you would like to have them in the diary. If you would like to change them, click the pencil button to edit. If you see just a phone number, this person was not saved in your contacts. As we use these names to show who wrote which message take the time to check and edit them.'
-    wc4: ' - Hide/Show messages of this person'
+    wtdif1: 'Para quem é o diário?'
+    wtdif2: 'O nome vai ser usado para criar uma capa e primera página personalizada.'
+    wtdif3: 'Escreva o nome aqui'
+    wtdif4: 'Dê o nome do seu ente querido para quem está a fazer este diário. O nome será usado na capa do diário final e na primeira página para criar um livro personalizado e uma mensagem para eles.'
 
-    tf1: 'Which topics did you chat about?'
-    tf2: 'We found the following set of topics. Is this list complete?'
-    tf3: 'Select from chat'
-    tf4: 'Write my own'
-    tf5: 'Add Topic'
-    tf6: 'The topics we have found are the ones you shared through the Togather website. If you thought of your own topics you can add them here. You can select them from the chat, if you shared them there, or write your own. If there were days that you didn''t have a topic, but messages were shared, then try to find a description for that. For example; A log of Monday. Or; Some things we liked to share today. This way we can add that day in the diary template.'
+    wtdif5: 'Escreva o título aqui'
 
-    t1: 'Day'
+    wc1: 'Quem contribui para o diário?'
+    wc2: 'Descobrimos a seguinte lista de nomes no grupo. Esta lista está correta?'
+    wc3: 'Este são os nomes dos membros do grupo como estavam guardados no seus telemóvel. Verifique que a lista está completa e que estes säo os nomes que você deseja ter no diário. Se quiser alterá-los, clique no lápis para editar. Se apenas vir o número de telemóvel, esta pessoa não esta guardada nos seus contatos. Como usamos este nomes para mostrar quem escreveu quais mensagens, verifique e edite-os com calma.' 
+    wc4: ' - Esconder/Mostrar as mensagens desta pessoa'
 
-    wt1: 'Write your own topic and for which date this was'
-    wt2: 'Write another topic'
-    wt3: 'If there are topics that were not shared in your WhatsApp group chat, you can write them here. If there were days that you didn''t have a topic, but messages were shared, then try to find a description for that. For example; A log of Monday. Or; Some things we liked to share today. This way we can add that day in the diary template.'
-    wt4: 'Back'
-    wt5: 'Add'
-    wt6: 'Done'
+    tf1: 'Sobre que tópicos falaram?'
+    tf2: 'Encontramos o seguinte conjunto de tópicos. Esta lista está completa?'
+    tf3: 'Selecionar do chat'
+    tf4: 'Escrever o meu próprio'
+    tf5: 'Adicionar tópico'
+    tf6: 'Os tópicos que encontrámos säo os quais você partilhou através do site do Togather. Se pensou nos seus próprios tópicos, pode adicioná-los aqui. Você pode selecioná-los do chat, se os partilhou lá ou se escreveu os seus próprios. Se houve dias em que nāo tinha tópico, mas mensagens foram partilhadas, tente encontrar uma descriçāo para isso. Por exemplo; Um registo de Segunda-feira. Ou; Algumas coisas que partilhámos hoje. Desta forma nós podemos adicionar esse dia ao livro.' 
 
-    nt1: 'Type your topic description here'
-    nt2: 'Add media'
+    t1: 'Dia'
+    t2: 'Tópico'
 
-    stfc1: 'Select the topics you want to add.'
-    stfc2: 'Find the topics that we missed from you WhatsApp group chat. select them to add them to the topic list.'
-    stfc3: 'Back'
-    stfc4: 'Add'
+    wt1: 'Escreva o seu próprio tópico e em que data foi'
+    wt2: 'Escreva outro tópico'
+    wt3: 'Se houver tópicos que nāo foram partilhados no chat de grupo do WhatApp, pode escreve-los aqui. Se houve dias em que nāo tinha tópico, mas mensagens foram partilhadas, tente encontrar uma descriçāo para isso. Por exemplo; Um registo de Segunda-feira. Ou; Algumas coisas que partilhámos hoje. Desta forma nós podemos adicionar esse dia ao livro.' 
 
-    sm1: 'Select all messages for this day:'
-    sm2: 'Go through the messages that were shared in your WhatsApp gorup chat and select the ones you want to add for this day. You can navigate through the days with the arrows in the top area. Click on the day to see the topic for that day again. If you have selected the messages for all the days of the diary they will be added to the template for you to review it.'
-    sm3: 'Click to see topic'
+    wt4: 'Retroceder'
+    wt5: 'Adicionar'
+    wt6: 'Feito'
 
-    d1: 'Topic Day'
-    d2: 'Select Messages'
+    nt1: 'Escreva aqui a sua descrição do tópico'
+    nt2: 'Adicionar ficheiro'
+
+    stfc1: 'Selecione os tópicos que quer adicionar.'
+    stfc2: 'Encontre os tópicos que nāo encontramos no seu chat de grupo. Selecione-os para os adicionar à lista de tópicos.'
+    stfc3: 'Retroceder'
+    stfc4: 'Adicionar'
+
+    sm1: 'Selecione todas as mensagens para este dia:'
+    sm2: 'Percorra as mensagens que foram partilhadas no seu chat de grupo e selecione aquelas que pertende adicionar a este dia. Pode navegar pelos dias usando as setas no topo da página. Clique no dia para ver o tópico desse dia outra vez. Se selecionou as mensagens para todos os dia do livro, eles serāo adicionados ao modelo para você rever.'
+    sm3: 'Clique para o ver o tópico'
+
+    d1: 'Dia de Tópico'
+    d2: 'Selecionar mensagens'
 
     pp1: 'Download'
 
-    rd1: 'Review your diary, is it complete?'
-    rd2: 'Go through the pages of your diary. Check if all the days, with their topics and messages are there. When you are happy with the diary you can save and download it. If there are things missing, go back to the previous step and add them.'
-    rd3: 'Home'
+    rd1: 'Reveja o seu livro, está completo?'
+    rd2: 'Percorra todas as páginas do seu livro. Verifique que todos os dias, os seus tópicos e mensagens estão lá. Quando estive safisfeito com o seu livro, você pode guardá-lo and fazer download. Se faltarem coisas, retroceda para o passo anterior e adicione-as.'
+    rd3: 'Início'
 
-    dd1: 'Your diary is ready!'
-    dd2: 'Download your Diary here:'
-    dd3: 'Download Diary'
-    dd4: 'Your diary is almost ready!'
-    dd5: 'Thanks for using Togather, we would like to invite you to take part in our research study. Before you decide to participate (or not), we would like you to understand why the research is being done and what it would involve for you.'
-    dd6: 'Would you like to know more?'
-    dd7: '(On Submit, the diary will be downloaded and a page with further instructions will be opened)'
-    dd8: 'Yes'
-    dd9: 'No'
-    dd10: 'Submit'
+    dd1: 'O livro está pronto!'
+    dd2: 'Download your booklet here: Faça download do seu livro aqui:'
+    dd3: 'Download livro'
+    dd4: 'Os seu livro está quase pronto!'
+    dd5: 'Obrigado por usar o Togather, gostaríamos de convidá-lo a participar no nossa insvestigação. Antes de decidir participar (ou não), gostaríamos que percebesse a razão pela qual a pesquisa está a ser feita e o que envolveria para si.'
+    dd6: 'Gostaria de saber mais?'
+    dd7: '(Quando submeter, o download do livro será feito e uma página com mais instruçōes será aberta)'
+    dd8: 'Sim'
+    dd9: 'Não'
+    dd10: 'Submeter'
 
-    s1: 'Thank you for using Togather! If you have friends or family that might also like Togather share the website with them through these links.'
-    s2: 'No, thank you!'
-    s3: 'Have you seen Togather (https://togather.me/explained)? It’s a website that will let you convert messages from a WhatsApp group chat into a diary. I just made a diary with it, and I thought you might like it as well.'
+    s1: 'Obrigado por usar o Togather! Se tem amigos e familia que talvez gostem também do Togather, partilhe o site com eles através destes links.'
+    s2: 'Não, obrigado!'
+    s3: 'Já viste o Togather (https://togather.me/explained)? Este site permite converter mensagens de um chat de grupo do WhatsApp num livro. Eu acabei de fazer um livro com site, e acho que talvez também gostes.'
 
 templates:
 
-    c1: For
-    c2: 'This diary is a collection of messages from:'
-    c3: 'They capture your time apart during:'
-    c4: Dear
+    c1: Para o/a
+    c2: 'Este livro é uma coleção de mensagens de:'
+    c3: 'Eles capturam o seu tempo separados durante:'
+    c4: Querido/a
 
-    tp1: Day
-    tp2: Part
+    tp1: Dia
+    tp2: Parte
 
 error:
     e1: Okay
 
 edge-support:
-    es1: 'Assembling Diary not supported on your current version of Microsoft Edge'
-    es2: 'Click below to update Edge to its latest version'
+    es1: 'Construir Diário não é suportado na sua current versão do Microsoft Edge'
+    es2: 'Clique abaixo para actualizar o Edge para a sua ultima versão'
 
 topics:
-    td1: 'Share a memorable story about when you were together and why it springs to mind. Do you have any pictures of this?'
-    td2: 'Each share a song that makes you happy and reminds you of your loved one, and explain why.'
-    td3: 'Share something that happens today that you would like to share with your loved one.'
-    td4: 'Toast to your loved one and tell your most cringeworthy story involving them.'
-    td5: 'Share your favourite memory of you and your loved one and/or group.'
-    td6: 'Capture the weather in a poem and a mysterious photo.'
-    td7: 'What was the highlight of your day? Why?'
-    td8: 'Write a review and take a photo of something you ate today.'
-    td9: 'Capture something you did today that your loved one would never have done.'
-    td10: 'Document something you experienced / saw / heard today that surprised you, or made you think of your loved one or this group.'
-    td11: 'Have a go at starting your day how your loved one normally would. How did it work for you?'
-    td12: 'Eat or drink something today that they really like, capture yourself doing it and describe what it is and in which context you had it'
-    td13: 'Try one of their hobbies today and capture yourself doing it, how did it work out for you?'
-    td14: 'Try to match your outfits today in the favourite color of your loved one.'
-    td15: 'Print out, or draw, a picture of your loved ones face and take a photo of every member in your household with it.'
+    td1: 'Partilha uma história memorável sobre quando estiveram juntos e o porque dela ter sugido na tua mente. Tens algumas fotos disto?'
+    td2: 'Que cada um partilhe uma música que te faça feliz e que te relembra o teu ente querido, e explica porque'
+    td3: 'Partilha algo que aconteça hoje e que gostarias que o de partilhar com o teu ente querido.'
+    td4: 'Faz um brinde ao seu ente querido e conta a tua história mais ridícula que o envolva'
+    td5: 'Partilha a tua memória favoria de ti com o teu ente querido e/ou grupo.' 
+    td6: 'Captura o tempo num poema e uma foto misteriosa'
+    td7: 'Qual foi o ponto alto do teu dia? Por quê?'
+    td8: 'Escreve uma review e tira uma foto de algo que tenhas comido hoje.'
+    td9: 'Captura algo tenhas feito hoje que teu ente querido nunca tenha feito.'
+    td10: 'Documenta algo que tenhas experienciado / visto / ouvido hoje que te tenha surpreendido, ou que tenha te feito lembrar do teu ente querido ou deste grupo'
+    td11: 'Experimenta começar o dia como o teu ente querido faria normalmente. Como funcionou para ti?'
+    td12: Come ou bebe algo hoje que de eles gostam muito, captura-te a faze-lo e descreve o que é e em que contexto é que o fizeste'
+    td13: 'Hoje tenta do dos seus hobbies e captura-te a faze-lo, como foi para ti?'
+    td14: 'Hoje tenta combinar as tuas roupas com a favorita do teu ente querido.'
+    td15: 'Imprime ou desenha uma imagem da cara dos teus entes queridos e tira uma foto de cada membro da tua casa com ela.'
     td16: '"Put on a brave face" - make your face look brave, take a photo in the mirror and share your "brave face" (for example put on some lipstick, or use some tape to shape your face).'
-    td17: 'Make the face of your loved one in a loo role tube.'
-    td18: 'Take a group photo of all of you together with the objects you can find in your home (who is who and why?).'
-    td19: 'Share a photo of you with your loved one (and others in this group) when you were younger and try to recreate that photo at home. Use stand-ins if needed, get creative!'
-    td20: 'Build a story, involving the members of this group, that would make your loved one laugh. Each follow with one or more sentences ending in a cliffhanger. The first kicks of with "once upon a time…"'
-    td21: 'What would your loved one think about yesterdays messages? Try to write their response as they would and take a photo of how their face would look when reading them.'
-    td22: 'What fond memory from something you did together as a group would you like to recreate? (Have a go at it).'
-    td23: 'What have you missed most during your time apart and why?'
-    td24: 'What have you learned from your loved one, someone in this group, or by your time spent apart.'
-    td25: 'What would be the first thing you would do with your loved one when you can all be together again?'
-    td26: 'Imagine you and your loved one on a sandwich, how would you be described as on a menu?'
-    td27: 'Imagine you and your loved one in a song, what would be the title and the chorus of this song? If you feel creative, design an album cover for you.'
-    td28: 'Imagine you and your loved one as a cone of icecream, what flavours would you be?'
-    td29: 'Imagine you and your loved one as one super hero, what would be your name and super power?'
-    td30: 'Imagine you and your loved one as  a tv show, what roles would you play?'
-
-
+    td17: 'Faz a cara do teu ente querido num tubo de papel higiênico.'
+    td18: 'Tira uma foto de grupo de todos vocês juntos usando objectos que encontres na tua casa (quem é quem e porque?)'
+    td19: 'Partilha uma foto de ti com teu ente querido (e os restantes membros do grupo) quando eras mais novo e tenta recriar essa foto em casa. Substitui pessoas se necessário, sê criativo!'
+    td20: 'Constrói uma história, envolvendo os membros deste grupo, que os faria o teu ente querido rir. Cada um cria uma ou mais frases, terminando num cliffhanger. O primeiro começa com "Era uma vez..."'
+    td21: 'O que pensaria o teu ente querido sobre as mensagens de ontem? Tenta escrever uma resposta como ele faria e tira uma foto de como a cara dele seria ao lê-las'
+    td22: 'Que boa memória de algo que fizeram juntos como um grupo gostariam de recriar? (Experimenta!).'
+    td23: 'Do que é que sentiste mais falta durate este periodo que estiveram separados e porque?'
+    td24: 'O que é que aprendeste do teu ente querido, de alguém do grupo, ou do tempo que estiveram separados.'
+    td25: 'Qual seria a primeria que farias com o teu ente querido quando estiverem todos juntos outra vez?'
+    td26: 'Imagina-te a ti e ao teu ente querido numa sanduíche, como seriam descritos num menu?'
+    td27: 'Imagina-te a ti e ao teu ente querido numa música, qual seria o título e qual seria o refrão desta música? Se te sentires criativo, cria uma capa para o album da música.'
+    td28: 'Imagina-te a ti e ao teu ente querido como um cone de gelado, que sabores seriam?'
+    td29: 'Imagina-te a ti e ao teu ente querido como um super herói, qual seria o vosso nome e super poder?'
+    td30: 'Imagina-te a ti e ao teu ente querido como um programa de tv, que papéis vocês desempenharia?'
 
 
 
