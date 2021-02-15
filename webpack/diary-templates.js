@@ -108,7 +108,7 @@ const DiaryTemplates = () => {
         doc.setTextColor(255, 255, 255);
         doc.setFontSize(42);
         doc.setFontType('normal');
-        doc.setFont('Oswald-Regular');
+        doc.setFont(/*'Oswald-Regular'*/ 'Roboto-Regular');
         doc.text(`${lines[0]}`.toUpperCase(), 105, 54, 'center');
 
         if(lines[1].length > 0)
@@ -245,8 +245,8 @@ const DiaryTemplates = () => {
             let splittedLines = [];
             for(let i = 0; i < data.text.length; i++) {
                 console.log(data.text[i]);
-                const splittedLinesTemp = doc.splitTextToSize(data.text[i].replace(/[^\x20-\x7E]/g, ''), lineLength).filter(line => line != '');
-
+                const splittedLinesTemp = doc.splitTextToSize(data.text[i]/*.replace(/[^\x20-\x7E]/g, '')*/, lineLength).filter(line => line != '');
+                console.log(splittedLinesTemp)
                 expectedSize += splittedLinesTemp.length * lineHeight;
                 if(i === 0 && expectedSize > bottomMargin && !createdPage) {
                     doc = newPage(doc);
@@ -273,7 +273,7 @@ const DiaryTemplates = () => {
             doc.setTextColor(255, 255, 255);
             doc.setFontSize(18);
             doc.setFontType('normal');
-            doc.setFont('Oswald-Regular');
+            doc.setFont(/*'Oswald-Regular'*/'Roboto-Regular');
             doc.text(`${data.user}`.toUpperCase(),
                       column === 'l' ? leftColumnLeftMargin : rightColumnLeftMargin, 
                       (column === 'l' ? yLeft : yRight) + 7.5,
