@@ -108,7 +108,7 @@ const DiaryTemplates = () => {
         doc.setTextColor(255, 255, 255);
         doc.setFontSize(42);
         doc.setFontType('normal');
-        doc.setFont(/*'Oswald-Regular'*/ 'Roboto-Regular');
+        doc.setFont(/*'Oswald-Regular'*/ 'RobotoCondensed-Regular');
         doc.text(`${lines[0]}`.toUpperCase(), 105, 54, 'center');
 
         if(lines[1].length > 0)
@@ -273,7 +273,7 @@ const DiaryTemplates = () => {
             doc.setTextColor(255, 255, 255);
             doc.setFontSize(18);
             doc.setFontType('normal');
-            doc.setFont(/*'Oswald-Regular'*/'Roboto-Regular');
+            doc.setFont(/*'Oswald-Regular'*/'RobotoCondensed-Regular');
             doc.text(`${data.user}`.toUpperCase(),
                       column === 'l' ? leftColumnLeftMargin : rightColumnLeftMargin, 
                       (column === 'l' ? yLeft : yRight) + 7.5,
