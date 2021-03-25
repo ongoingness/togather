@@ -1,3 +1,5 @@
 import Diary from "./diary.js";
 
-Diary();
+window.onload = () => {
+    Diary();
+}

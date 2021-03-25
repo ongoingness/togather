@@ -9,10 +9,11 @@ module.exports = {
       filename: "bundle.js",
       path: path.resolve(__dirname, 'assets', 'scripts')
     },
+      /*
     plugins: [
         new webpack.BannerPlugin("---\n---")
     ],
-    /*
+  
     module: {
         rules: [
           {

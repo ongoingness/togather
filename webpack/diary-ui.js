@@ -47,7 +47,6 @@ const DiaryUI = (eventHandler) => {
                 }
                 // ESCAPE
                 if (e.keyCode === 27) {
-                    console.log('clise');
                     closeNav();
                 }
             }
@@ -78,7 +77,7 @@ const DiaryUI = (eventHandler) => {
 
         const header = document.createElement('header');
         header.id = 'header';
-        body.append(header);
+        document.body.append(header);
 
         const headerTop = document.createElement('div');
         headerTop.classList.add('header__top');
@@ -2213,8 +2212,6 @@ const DiaryUI = (eventHandler) => {
        if (dayData.index + 1 === dayData.totalOfTopics) {
             document.getElementById('nextDay').disabled = true;
         }
-
-        //console.log(document.getElementsByClassName('upper-page')[0].offsetHeight);
 
         const topicTextOverlay = document.createElement('div');
         topicTextOverlay.id = 'topicText';

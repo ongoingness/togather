@@ -39,7 +39,6 @@ const WhatsAppChatParser = () => {
                         messageMap.set(key, value);
                 });
                 for(const user in parsedResult.users) {
-                    console.log(user)
                     if(user === "numbers") {
                         for(const number of (parsedResult.users[user])) {
                             if(!users.numbers.includes(number))
@@ -51,13 +50,7 @@ const WhatsAppChatParser = () => {
                         }
                     }
                 }
-
             }
-
-       
-            //messageMap = parsedResult.messageMap;
-            //users = parsedResult.users;
-            //found = messageMap.size != 0;
         }
 
         if(!found) throw 'No chat file found';

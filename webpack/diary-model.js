@@ -120,7 +120,6 @@ const DiaryModel = () => {
                 let noEmojis = textLine;
                 while (match = regex.exec(textLine)) {
                         noEmojis = noEmojis.replace(match[0], '');
-                        //console.log(match);
                 }
                 
                 message.text[index] = noEmojis;
@@ -140,7 +139,6 @@ const DiaryModel = () => {
                 while (match = regexText.exec(noEmojis)) {
                     if(Number.isNaN(Number(match[0]))) {
                         noEmojis = noEmojis.replace(match[0], '');
-                        console.log(match);
                     }
                 }
                 message.text[index] = noEmojis;
@@ -165,13 +163,6 @@ const DiaryModel = () => {
 
         for(const hash of messagesToBeRemoved)
             whatsAppChat.messageMap.delete(hash);
-
-        console.log(whatsAppChat.messageMap);
-
-
-
-
-
 
     }
 
@@ -628,10 +619,7 @@ const DiaryModel = () => {
 
     const loadSave = async () => {
 
-        console.log(whatsAppChat);
-
         whatsAppChat.files.forEach( async(value, key, map) => {
-            console.log(value, key);
 
             if(value.type.includes('pdf')) {
 
@@ -653,18 +641,13 @@ const DiaryModel = () => {
                         loadingTask.promise.then(function(pdf) {
                             
                             let pdfDoc = pdf;
-                            console.log(pdfDoc);
                             pdfDoc.getMetadata().then(function(stuff) {
                                 const saved = JSON.parse(stuff.info.Keywords);
 
-                                console.log(saved);
-                        
                                 title = saved.title;
                                 who = saved.who;
                                 loadUsers(saved.users); 
                                 loadTopics(saved.topics);                              
-
-                                console.log(topics);
 
                             }).catch(function(err) {
                             console.log('Error getting meta data');

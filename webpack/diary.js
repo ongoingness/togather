@@ -414,8 +414,7 @@ const Diary = () => {
                 //doc.output('dataurlnewwindow');
                 //<html><style>html, body { padding: 0; margin: 0; } iframe { width: 100%; height: 100%; border: 0;}  </style><body><iframe src="' + this.output("datauristring") + '"></iframe></body></html>'
                 
-                //console.log(doc.output("datauristring"));
-                
+            
                 //STATES.reviewDiary.variables.worker = templates.startPreviewPdfWorker(doc);
 
                 if(doc != undefined) {
@@ -430,7 +429,6 @@ const Diary = () => {
                         //const t = previewDoc.output('blob');
                         //var url = URL.createObjectURL(t);
                         //window.open(url);
-                        //console.log(t);
                         ui.renderPreviewOnIframeWithDataUri(templates.getDataUriStringPdf(doc));
 
                         //ui.renderPreviewOnIframeWithDataUri(templates.getDataUriStringPdf(doc));
@@ -464,7 +462,6 @@ const Diary = () => {
                         //STATES.reviewDiary.variables.canvas.set(STATES.reviewDiary.variables.currentPage, c);
 
                         //const d = c.toDataURL("image/png");
-                        //console.log(d);
                         /*
                         if(STATES.reviewDiary.variables.currentPage + 1 < model.getDiaryDocument().getNumberOfPages()-1) {
                             const c2 = ui.renderPreviewDiaryPage(2, false);
@@ -489,21 +486,17 @@ const Diary = () => {
                             STATES.reviewDiary.variables.currentPage += 1;
                             templates.renderPageToCanvas(STATES.reviewDiary.variables.pages[STATES.reviewDiary.variables.currentPage], STATES.reviewDiary.variables.canvas.get(STATES.reviewDiary.variables.canvasOrder[1]));
                             /*
-                            console.log('start', STATES.reviewDiary.variables.canvasOrder, model.getDiaryDocument().getNumberOfPages(), STATES.reviewDiary.variables.currentPage);
                             ui.hidePreviewCanvas(STATES.reviewDiary.variables.canvasOrder[1]);
                             STATES.reviewDiary.variables.currentPage += 1;
                             ui.displayPreviewCanvas(STATES.reviewDiary.variables.canvasOrder[2]);
-                            console.log('end', STATES.reviewDiary.variables.canvasOrder, model.getDiaryDocument().getNumberOfPages(), STATES.reviewDiary.variables.currentPage);
                             
                             const nextCanvas = `${STATES.reviewDiary.variables.canvasOrder[0]}`;
                             STATES.reviewDiary.variables.canvasOrder.shift();
                             STATES.reviewDiary.variables.canvasOrder.push(nextCanvas);
                             
                             if(STATES.reviewDiary.variables.currentPage + 1 <= model.getDiaryDocument().getNumberOfPages()) {
-                                console.log('end2', STATES.reviewDiary.variables.canvasOrder, model.getDiaryDocument().getNumberOfPages(), STATES.reviewDiary.variables.currentPage);
                                 templates.renderPageToCanvas(STATES.reviewDiary.variables.pages[STATES.reviewDiary.variables.currentPage + 1], STATES.reviewDiary.variables.canvas.get(nextCanvas));
-                            }
-                            console.log('');*/
+                            }*/
 
                             /*
                             ui.hidePreviewPage(STATES.reviewDiary.variables.currentPage);
@@ -528,18 +521,15 @@ const Diary = () => {
                             templates.renderPageToCanvas(STATES.reviewDiary.variables.pages[STATES.reviewDiary.variables.currentPage], STATES.reviewDiary.variables.canvas.get(STATES.reviewDiary.variables.canvasOrder[1]));
                             */
                             /*
-                            console.log('start', STATES.reviewDiary.variables.canvasOrder, model.getDiaryDocument().getNumberOfPages(), STATES.reviewDiary.variables.currentPage);
                             ui.hidePreviewCanvas(STATES.reviewDiary.variables.canvasOrder[1]);
                             STATES.reviewDiary.variables.currentPage -= 1;
                             ui.displayPreviewCanvas(STATES.reviewDiary.variables.canvasOrder[0]);
-                            console.log('end', STATES.reviewDiary.variables.canvasOrder, model.getDiaryDocument().getNumberOfPages(), STATES.reviewDiary.variables.currentPage);
                             
                             const nextCanvas = `${STATES.reviewDiary.variables.canvasOrder[2]}`;
                             STATES.reviewDiary.variables.canvasOrder.pop();
                             STATES.reviewDiary.variables.canvasOrder.unshift(nextCanvas);
 
                             if(STATES.reviewDiary.variables.currentPage - 1 >= 1) {
-                                console.log('end2', STATES.reviewDiary.variables.canvasOrder, model.getDiaryDocument().getNumberOfPages(), STATES.reviewDiary.variables.currentPage);
                                 templates.renderPageToCanvas(STATES.reviewDiary.variables.pages[STATES.reviewDiary.variables.currentPage - 1], STATES.reviewDiary.variables.canvas.get(nextCanvas));
                             }
                             */
@@ -738,7 +728,7 @@ const Diary = () => {
                         try {
                             window.fathom.trackGoal('LRZPNF3C', 0);
                         } catch (e) {
-                            console.log('fathom disabled');
+                            console.log('Fathom disabled');
                         }
                         window.open(twitterLink, '_blank');
                         break

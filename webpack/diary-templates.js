@@ -1,4 +1,4 @@
-import * as jsPDF from 'jspdf'
+import jsPDF from 'jspdf'
 import loadPdfFonts from './pdfFontsLoader.js'
 
 const DiaryTemplates = () => {
@@ -107,8 +107,8 @@ const DiaryTemplates = () => {
         
         doc.setTextColor(255, 255, 255);
         doc.setFontSize(42);
-        doc.setFontType('normal');
-        doc.setFont(/*'Oswald-Regular'*/ 'RobotoCondensed-Regular');
+        //doc.setFontType('normal');
+        doc.setFont(/*'Oswald-Regular'*/ 'RobotoCondensed-Regular', 'normal');
         doc.text(`${lines[0]}`.toUpperCase(), 105, 54, 'center');
 
         if(lines[1].length > 0)
@@ -123,20 +123,20 @@ const DiaryTemplates = () => {
 
         doc.setTextColor(0, 0, 0);
         doc.setFontSize(20);
-        doc.setFontType('bolditalic');
-        doc.setFont('OpenSans');
+        //doc.setFontType('bolditalic');
+        doc.setFont('OpenSans', 'bolditalic');
         doc.text(`{% t templates.c4 %} ${fullname}`, 105, 40, 'center');
 
         doc.setTextColor(0, 0, 0);
         doc.setFontSize(20);
-        doc.setFontType('bolditalic');
-        doc.setFont('OpenSans');
+        //doc.setFontType('bolditalic');
+        doc.setFont('OpenSans', 'bolditalic');
         doc.text('{% t templates.c2 %}', 105, 80, 'center');
 
         doc.setTextColor(0, 0, 0);
         doc.setFontSize(16);
-        doc.setFontType('normal');
-        doc.setFont('OpenSans');
+        //doc.setFontType('normal');
+        doc.setFont('OpenSans', 'normal');
         let i = 0;
         let userY = 100;
         for(const [hash, user] of Object.entries(data.users)) {
@@ -149,14 +149,14 @@ const DiaryTemplates = () => {
 
         doc.setTextColor(0, 0, 0);
         doc.setFontSize(20);
-        doc.setFontType('bolditalic');
-        doc.setFont('OpenSans');
+        //doc.setFontType('bolditalic');
+        doc.setFont('OpenSans', 'bolditalic');
         doc.text('{% t templates.c3 %}', 105, 237, 'center');
 
         doc.setTextColor(0, 0, 0);
         doc.setFontSize(16);
-        doc.setFontType('normal');
-        doc.setFont('OpenSans');
+        //doc.setFontType('normal');
+        doc.setFont('OpenSans', 'normal');
         const startDate = new Date(data.startDate);
         const startDay = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(startDate);
         const startMonth = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(startDate);
@@ -181,8 +181,8 @@ const DiaryTemplates = () => {
         
         doc.setTextColor(255, 255, 255);
         doc.setFontSize(42);
-        doc.setFontType('normal');
-        doc.setFont('Oswald-Regular');
+        //doc.setFontType('normal');
+        doc.setFont('Oswald-Regular', 'normal');
 
         const date = new Date(data.timestamp);
         const day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(date)
@@ -203,8 +203,8 @@ const DiaryTemplates = () => {
         
                 
         doc.setFontSize(18);
-        doc.setFontType('italic');
-        doc.setFont('OpenSans');
+        //doc.setFontType('italic');
+        doc.setFont('OpenSans', 'italic');
         doc.text(data.text, 42, /*127.021*/ 100, {maxWidth: 126});
 
         return doc;
@@ -244,9 +244,7 @@ const DiaryTemplates = () => {
 
             let splittedLines = [];
             for(let i = 0; i < data.text.length; i++) {
-                console.log(data.text[i]);
                 const splittedLinesTemp = doc.splitTextToSize(data.text[i]/*.replace(/[^\x20-\x7E]/g, '')*/, lineLength).filter(line => line != '');
-                console.log(splittedLinesTemp)
                 expectedSize += splittedLinesTemp.length * lineHeight;
                 if(i === 0 && expectedSize > bottomMargin && !createdPage) {
                     doc = newPage(doc);
@@ -272,8 +270,8 @@ const DiaryTemplates = () => {
             
             doc.setTextColor(255, 255, 255);
             doc.setFontSize(18);
-            doc.setFontType('normal');
-            doc.setFont(/*'Oswald-Regular'*/'RobotoCondensed-Regular');
+            //doc.setFontType('normal');
+            doc.setFont(/*'Oswald-Regular'*/'RobotoCondensed-Regular', 'normal');
             doc.text(`${data.user}`.toUpperCase(),
                       column === 'l' ? leftColumnLeftMargin : rightColumnLeftMargin, 
                       (column === 'l' ? yLeft : yRight) + 7.5,
@@ -290,8 +288,8 @@ const DiaryTemplates = () => {
         
             doc.setTextColor(0, 0, 0);
             doc.setFontSize(12);
-            doc.setFontType('normal');
-            doc.setFont('OpenSans');
+            //doc.setFontType('normal');
+            doc.setFont('OpenSans', 'normal');
 
             for(let line of splittedLines) {
 
@@ -809,7 +807,6 @@ const DiaryTemplates = () => {
             
                         //const renderTask = page.render(renderContext);
                         renderPromises[i] = {renderFunction: page.render, renderContext};
-                        console.log(renderPromises);
                       });*/
 
                     const page = await pdf.getPage(i);
@@ -827,7 +824,6 @@ const DiaryTemplates = () => {
         
                     //const renderTask = page.render(renderContext);
                     renderPromises[i] = {renderFunction: page.render, renderContext};
-                    console.log(renderPromises);
 
                 }
                 resolve(renderPromises);
@@ -841,10 +837,7 @@ const DiaryTemplates = () => {
 
         });
 
-
         const result = await promise;
-
-        console.log(result);
 
         return result ;
         
@@ -861,7 +854,6 @@ const DiaryTemplates = () => {
                 for(let i = 1; i <= pdf.numPages; i++) {
                     const page = await pdf.getPage(i);
                     renderPages[i] = page;
-                    console.log(renderPages);
                 }
                 resolve(renderPages);
 
@@ -876,8 +868,6 @@ const DiaryTemplates = () => {
 
 
         const result = await promise;
-
-        console.log(result);
 
         return result ;
         
