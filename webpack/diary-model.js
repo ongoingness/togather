@@ -3,7 +3,7 @@ const emojiRegexText = require('emoji-regex/text.js');
 
 const DiaryModel = () => {
 
-    const colors = [
+    let colors = [
         '#007a7d',
         '#008000',
         '#5a781d',
@@ -47,14 +47,42 @@ const DiaryModel = () => {
     const setWhatsAppChat = (tempWhatsAppChat) => {
         whatsAppChat = tempWhatsAppChat;
 
-        const colorsPicked = []
-    
         for(let user in whatsAppChat.users) {
             if( user != 'numbers') {
-                let color = colors[Math.floor(Math.random() * colors.length)];
-                while(colorsPicked.includes(color)) {
-                    color = colors[Math.floor(Math.random() * colors.length)];
+
+                if(colors.length === 0) {
+                    colors = [
+                        '#007a7d',
+                        '#008000',
+                        '#5a781d',
+                        '#113321',
+                        '#315131',
+                        '#2a7ab0',
+                        '#406098',
+                        '#0000e0',
+                        '#34385e',
+                        '#0a3055',
+                        '#004055',
+                        '#004055',
+                        '#7659b6',
+                        '#886288',
+                        '#a74165',
+                        '#591d77',
+                        '#3c1362',
+                        '#8d6708',
+                        '#554800',
+                        '#2a2400',
+                        '#d43900',
+                        '#aa5d00',
+                        '#aa5535',
+                        '#aa2e00',
+                        '#5c0819',
+                        '#b11030'
+                    ];
                 }
+
+                let color = colors[Math.floor(Math.random() * colors.length)];
+                colors = colors.filter(item => item != color);
                 whatsAppChat.users[user].color = color;
                 whatsAppChat.users[user].visible = true;
 
@@ -340,7 +368,7 @@ const DiaryModel = () => {
             selectedMessages.push(getMessage(messageHash));
         }
 
-        selectedMessages.sort((a,b) => a.fulltimestamp - b.fulltimestamp);
+        selectedMessages.sort((a,b) => (a.fulltimestamp + a.index) - (b.fulltimestamp + b.index));
 
         topic.index = index;
         topic.totalOfTopics = topics.length,
@@ -432,7 +460,7 @@ const DiaryModel = () => {
             }
         });
         
-        messages.sort((a,b) => a.fulltimestamp - b.fulltimestamp );
+        messages.sort((a,b) => (a.fulltimestamp + a.index) - (b.fulltimestamp + b.index));
         
         return messages;
     
