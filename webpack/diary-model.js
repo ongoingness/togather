@@ -340,6 +340,8 @@ const DiaryModel = () => {
             selectedMessages.push(getMessage(messageHash));
         }
 
+        selectedMessages.sort((a,b) => a.fulltimestamp - b.fulltimestamp);
+
         topic.index = index;
         topic.totalOfTopics = topics.length,
         topic.selectedMessages = selectedMessages; 
@@ -429,7 +431,9 @@ const DiaryModel = () => {
                     messages.push(getMessage(key));
             }
         });
-
+        
+        messages.sort((a,b) => a.fulltimestamp - b.fulltimestamp );
+        
         return messages;
     
     }

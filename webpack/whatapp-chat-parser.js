@@ -19,19 +19,45 @@ const WhatsAppChatParser = () => {
                 files.set(hashCode(fileContent), { name, type, data: fileContent});
         }
 
-        let messageMap;
-        let users;
+        let messageMap = new Map();
+        let users = {
+            numbers: []
+        };
 
         const textFiles = tempFiles.filter(file => file.file.type === 'text/plain');
 
         if(textFiles.length === 0) throw 'No chat file found';
 
         let found = false;
-        for (let i = 0; i < textFiles.length && !found; i++) {
+        for (let i = 0; i < textFiles.length; i++) {
             const parsedResult = parseMessages(textFiles[i].fileContent, files);
-            messageMap = parsedResult.messageMap;
-            users = parsedResult.users;
-            found = messageMap.size != 0;
+            if(parsedResult.messageMap.size > 0) { //it is a valid message text file
+                found = true;
+
+                parsedResult.messageMap.forEach((value, key) => {
+                    if(!messageMap.has(key))
+                        messageMap.set(key, value);
+                });
+                for(const user in parsedResult.users) {
+                    console.log(user)
+                    if(user === "numbers") {
+                        for(const number of (parsedResult.users[user])) {
+                            if(!users.numbers.includes(number))
+                                users.numbers.push(number)
+                        }
+                    } else {
+                        if(!users.hasOwnProperty(user)) {
+                            users[user] = parsedResult.users[user];
+                        }
+                    }
+                }
+
+            }
+
+       
+            //messageMap = parsedResult.messageMap;
+            //users = parsedResult.users;
+            //found = messageMap.size != 0;
         }
 
         if(!found) throw 'No chat file found';
