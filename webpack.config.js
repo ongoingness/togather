@@ -9,6 +9,11 @@ module.exports = {
       filename: "bundle.js",
       path: path.resolve(__dirname, 'assets', 'scripts')
     },
+    resolve: {
+      fallback: {
+        "path": require.resolve("path-browserify")
+      }
+    }
       /*
     plugins: [
         new webpack.BannerPlugin("---\n---")
