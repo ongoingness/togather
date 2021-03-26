@@ -1,4 +1,10 @@
 
+
+/**
+ * Checks which is the user's browser.
+ * @author Luis Carvalho
+ * @returns {BrowserCheck} object containing individual checks for each browser.
+ */
 const checkBrowser = () => {
 
     const ua = navigator.userAgent;

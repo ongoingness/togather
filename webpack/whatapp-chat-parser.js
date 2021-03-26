@@ -1,14 +1,19 @@
 import mime from 'mime-types';
 import JSZip from 'jszip';
 
+
+/**
+ * Parser for WhatsApp chat exports.
+ * @author Luis Carvalho
+ */
 const WhatsAppChatParser = () => {
 
     /**
-     * Starts the parsing of files of a given input
-     * @param {Element Node} filesInput Input from which the files are going to be parsed
-     * @returns { {Map, Map, object} }
+     * Starts parsing the files of a given input.
+     * @param {Element Node} filesInput input DOM element from which the files are going to be parsed.
+     * @returns {WhatsAppChat} object containg the messages, files and users.
      */
-    const start =  async (filesInput) => {
+    const start = async (filesInput) => {
 
         const tempFiles = await readFiles(filesInput);
 
@@ -58,6 +63,11 @@ const WhatsAppChatParser = () => {
         return { messageMap, files, users }
     }
 
+    /**
+     * Reads all the files from an input element. Can read zip files and the files within.
+     * @param {Element Node} fileInput input DOM element from which the files are going to be parsed.
+     * @returns {[InputFile]} list of files from the input element.
+     */
     const readFiles = async(fileInput) => {
 
         let files = [];
@@ -136,38 +146,23 @@ const WhatsAppChatParser = () => {
             let result = await readFile(fileInput[i]);
             files = files.concat(result);
         }
-    
+  
         return files;
     }
 
-    /*
-        Message structure
-        {
-            index: int
-            fulltimestamp: long
-            user: string
-            text: string
-            file: string 
-            links: [
-                { 
-                    url: !!!!!!!!!!!!!!!
-                    type:!!!!!!!!!!!!!!!!!!!!!!!
-                }
-            ]
-            hash: string
-            rawText: string
-            atUser: []
-        }
-    */
 
+    /**
+     * Parses the messages and links found file references to exsting files.
+     * @param {string} messages content of a text file. 
+     * @param {Map<string, DiaryFile>} files files found by the parser.
+     * @returns {{Map<string, Message>, Users}}
+     */
     const parseMessages = (messages, files) => {
 
         const users = {
             numbers: [],
         };
         const messageMap = new Map();
-
-        //const messageStartRegex = RegExp('[\[]?([0-9]{2})\/([0-9]{2})\/([0-9]{2,4})\, ([0-9]{2}\:[0-9]{2}(?:\:[0-9]{2})?)\]? (?:- )?([^:]+)\: (.*)');
 
         const messageStartRegex = RegExp('[\[]?([0-9]{2})[\/\-]([0-9]{2})[\/\-]([0-9]{2,4})\,? ([0-9]{2}\:[0-9]{2}(?:\:[0-9]{2})?)\]? (?:- )?([^:]+)\: (.*)');
 
@@ -228,9 +223,10 @@ const WhatsAppChatParser = () => {
 
                 const [fullLine, day, month, year, fullTime, username, body] = messageStart;
 
-                if(currentMessage != null) 
+                if(currentMessage != null) {
                     messageMap.set(currentMessage.hash, {...currentMessage});
-                
+                }
+
                 currentMessage = {};
                 currentMessage.index = index;
                 currentMessage.hash = hashCode(rawMessage);
@@ -266,7 +262,7 @@ const WhatsAppChatParser = () => {
                     if(text != '') 
                         currentMessage.text.push(text);  
                     if(rawMessage != '') 
-                        currentMessage.rawText.push(rawMessage); //+= `\n${rawMessage}`;
+                        currentMessage.rawText.push(rawMessage);
                     currentMessage.files.concat(filename);
                     currentMessage.links = currentMessage.links.concat(links);
                     currentMessage.atUser = currentMessage.atUser.concat(atUser);
@@ -288,6 +284,11 @@ const WhatsAppChatParser = () => {
 
     };
 
+    /**
+     * Given a string creates a hash.
+     * @param {string} s string to be ashed.
+     * @returns {number} hash of the string.
+     */
     const hashCode = (s) => {
         let h;
         for(let i = 0; i < s.length; i++) 

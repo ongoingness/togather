@@ -1,3 +1,10 @@
+/**
+ * Contains all calls to render the diary pages and manipluate the DOM.
+ * Plugs all events from the DOM to given event handler.
+ * @author Luis Carvalho
+ * @param {*} eventHandler 
+ * @returns 
+ */
 const DiaryUI = (eventHandler) => {
 
     /*
@@ -16,6 +23,10 @@ const DiaryUI = (eventHandler) => {
         eventListeners.length = 0;
     }
 
+    /**
+     * Render the site header.
+     * @param {string} title title to be displayed in the header. 
+     */
     const renderSiteHeader = (title) => {
 
         // Will hold previously focused element
@@ -170,100 +181,12 @@ const DiaryUI = (eventHandler) => {
         aContact.href = '{{ site.url }}{{ site.baseurl }}/contact';
         aContact.innerText = '{% t nav-overlay.contact-a %}';
         overlayContent.appendChild(aContact);
-        
-
-        /*
-        const header = document.createElement('div');
-        header.classList.add('header');
-        document.body.appendChild(header);
-
-        const openNav = () => {
-            document.getElementById("myNav").style.width = "100%";
-        }
-
-        const closeNav = () => {
-            document.getElementById("myNav").style.width = "0%";
-        }
-
-        const hamburguer = document.createElement('div');
-        hamburguer.classList.add('hamburguer');
-        //hamburguer.addEventListener('click', openNav);
-        addEventListener(hamburguer, 'click', openNav);
-        header.appendChild(hamburguer);
-        
-        for(let i = 0; i < 3; i++) {
-            const hamLine = document.createElement('div');
-            hamLine.classList.add('hamburguer-line');
-            hamburguer.appendChild(hamLine);
-        }
-
-        const headerText = document.createElement('div');
-        headerText.classList.add('header__text');
-        headerText.innerText = 'Togather';
-        header.appendChild(headerText);
-
-        const nav = document.createElement('div');
-        nav.id = 'myNav';
-        nav.classList.add('overlay');
-        document.body.appendChild(nav);
-
-        const closeNavElem = document.createElement('a');
-        closeNavElem.href = 'javascript:void(0)';
-        closeNavElem.classList.add('closebtn');
-        //closeNavElem.addEventListener('click', closeNav);
-        addEventListener(closeNavElem, 'click', closeNav)
-        closeNavElem.innerHTML = '&times;';
-        nav.appendChild(closeNavElem);
-
-        const overlayContent = document.createElement('div');
-        overlayContent.classList.add('overlay-content');
-        nav.appendChild(overlayContent);
-
-        const aHome = document.createElement('a');
-        aHome.id = 'home-a';
-        aHome.href = '{{ site.url }}{{ site.baseurl }}/';
-        aHome.innerText = '{% t nav-overlay.home-a %}';
-        overlayContent.appendChild(aHome);
-
-        const aTopic = document.createElement('a');
-        aTopic.id = 'topic-a';
-        aTopic.href = '{{ site.url }}{{ site.baseurl }}/topics';
-        aTopic.innerText = '{% t nav-overlay.topic-a %}';
-        overlayContent.appendChild(aTopic);
-
-        const aExpl = document.createElement('a');
-        aExpl.id = 'explained-a';
-        aExpl.href = '{{ site.url }}{{ site.baseurl }}/explained';
-        aExpl.innerText = '{% t nav-overlay.explained-a %}';
-        overlayContent.appendChild(aExpl)
-
-        const aInst = document.createElement('a');
-        aInst.id = 'instructions-a';
-        aInst.href = '{{ site.url }}{{ site.baseurl }}/instructions'
-        aInst.innerText = '{% t nav-overlay.instructions-a %}';
-        overlayContent.appendChild(aInst);
-
-        const aDiary = document.createElement('a');
-        aDiary.id = 'diary-a'
-        aDiary.href = '{{ site.url }}{{ site.baseurl }}/diary' 
-        aDiary.innerText = '{% t nav-overlay.diary-a %}';
-        aDiary.style.textDecoration = 'underline';
-        overlayContent.appendChild(aDiary);
-
-        const aAbout = document.createElement('a');
-        aAbout.id = 'about-a';
-        aAbout.href = '{{ site.url }}{{ site.baseurl }}/about';
-        aAbout.innerText = '{% t nav-overlay.about-a %}';
-        overlayContent.appendChild(aAbout);
-
-        const aContact = document.createElement('a');
-        aAbout.id = 'contact-a';
-        aAbout.href = '{{ site.url }}{{ site.baseurl }}/contact';
-        aAbout.innerText = '{% t nav-overlay.contact-a %}';
-        overlayContent.appendChild(aContact);
-        */
+    
     }
 
+    /**
+     * Renders the footer of the site.
+     */
     const renderSiteFooter = () => {
 
         const footer = document.createElement('footer');
@@ -473,6 +396,9 @@ const DiaryUI = (eventHandler) => {
 
     }
 
+    /**
+     * Renders page where files are uploaded.
+     */
     const renderUploadFiles = () => {
     
         renderSiteHeader("{% t diary.dh1 %}");
@@ -512,7 +438,6 @@ const DiaryUI = (eventHandler) => {
         const selectFilesButton = document.createElement('label');
         selectFilesButton.id = 'uploadFilesInputText'
         selectFilesButton.classList.add('button', "secondary", 'small-font');
-        //selectFilesButton.style = "margin: auto; line-height: 47px;";
         selectFilesButton.innerHTML = '{% t diary.uf5 %}';
         selectContainer.appendChild(selectFilesButton);
 
@@ -589,12 +514,15 @@ const DiaryUI = (eventHandler) => {
         addEventListener(aboutButton, 'click', aboutButtonClickListener);
         buttonContainer.appendChild(aboutButton);
 
-        //renderSiteFooter(document.body);
-
         renderSiteFooter();
        
     }
 
+    /**
+     * Renders a warning modal displaying a error message.
+     * @param {string} errorMessage text to be displayed in the warning. 
+     * @param {Function} onClose function to be called when the modal is closed. 
+     */
     const renderErrorModal = (errorMessage, onClose = undefined) => {
 
         const modal = document.createElement('div');
@@ -606,8 +534,6 @@ const DiaryUI = (eventHandler) => {
         modalContent.style.borderRadius = '15px';
         modalContent.style.paddingTop = '40px';
         modal.appendChild(modalContent);
-
-  
 
         const modalText = document.createElement('p');
         modalText.style.textAlign = 'center';
@@ -634,6 +560,9 @@ const DiaryUI = (eventHandler) => {
         modal.style.display = 'block';
     }
 
+    /**
+     * Renders the upload error modal.
+     */
     const renderUploadErrorModal = () => {
 
         const onClose = () => {
@@ -645,58 +574,24 @@ const DiaryUI = (eventHandler) => {
 
     };
 
-    const renderLoader = (parent) => {
-
-        const openLoader = () => {
-            document.getElementById('loader').style.width = '100%';
-        }
-
-        const closeLoader = () => {
-            document.getElementById('loader').style.width = '0%';
-        }
-
-        const nav = document.createElement('div');
-        nav.id = 'loader';
-        nav.classList.add('overlay', 'privacy');
-        nav.style.opacity = '0.95';
-        parent.appendChild(nav);
-
-        const overlayContent = document.createElement('div');
-        overlayContent.classList.add('overlay-content', 'privacy');
-        overlayContent.style.minWidth = `${document.body.offsetWidth}px`;
-        overlayContent.style.height = '100%';
-        overlayContent.style.top = '0';
-        nav.appendChild(overlayContent);
-
-        window.addEventListener('resize', (e) => overlayContent.style.minWidth = `${document.body.offsetWidth}px`);
-
-        const container = document.createElement('div');
-        container.classList.add('step-controller__container');
-        container.style.height = '100%';
-        overlayContent.appendChild(container);
-
-        const loader = document.createElement('div');
-        loader.classList.add('loader');
-        container.append(loader);
-
-        return {openLoader, closeLoader};
-    }
-
+    /**
+     * Renders a loader in an existing button.
+     * @param {HTMLButtonElement} button the button where the loader will be displayed.
+     */
     const renderButtonLoader = (button) => {
         button.disabled = true;
         button.style.width = `${button.offsetWidth}px`;
         button.innerText = '';
 
-        /*
-        const iconContainer = document.createElement('div');
-        iconContainer.classList.add('button-loader-container');
-        button.append(iconContainer);
-*/
         const icon = document.createElement('div');
         icon.classList.add('button-loader');
         button.appendChild(icon);
     }
 
+    /**
+     * Renders an element with the name of the file.
+     * @param {File} file file whose name will be displayed.
+     */
     const renderFile = (file) => {
 
         document.getElementById('noFilesSelected').style.display = 'none';
@@ -738,6 +633,12 @@ const DiaryUI = (eventHandler) => {
 
     }
 
+    /**
+     * Renders the diary header in a parent.
+     * @param {HTMLElement} parent element where the header will be added.
+     * @param {number} step step of the assembling process. 
+     * @param {boolean} noMargin true if the is no margin in the page. 
+     */
     const renderDiaryHeader = (parent, step, noMargin = false) => {
 
         const header = document.createElement('header');
@@ -780,9 +681,6 @@ const DiaryUI = (eventHandler) => {
 
         window.addEventListener('resize', (e) => overlayContent.style.minWidth = `${document.body.offsetWidth}px`);
 
-        //const closeNavElemContainer = document.createElement('div');
-        //nav.append(closeNavElemContainer);
-
         const closeNavElem = document.createElement('a');
         closeNavElem.href = 'javascript:void(0)';
         closeNavElem.classList.add('closebtn', 'close-diary');
@@ -823,14 +721,6 @@ const DiaryUI = (eventHandler) => {
         continueButton.addEventListener('click', closeNav);
         buttonContainer.appendChild(continueButton);
 
-        /*
-        const closeDiary = document.createElement('a');
-        closeDiary.classList.add('diary-header__close-button');
-        closeDiary.addEventListener('click', openNav);
-        closeDiary.innerHTML = '&times;';
-        leftColumn.appendChild(closeDiary);
-        */
-
         const closeDiary  = document.createElement('button');
         closeDiary.style.background = 'none';
         closeDiary.style.padding = '6px';
@@ -841,103 +731,11 @@ const DiaryUI = (eventHandler) => {
         closeDiary.addEventListener('click', openNav);
         spanHeaderRight.appendChild(closeDiary);
         
-
-        /*
-
-        const assembleHeader = document.createElement('div');
-        assembleHeader.classList.add('content-header', 'diary');
-        parent.appendChild(assembleHeader);
-
-        const leftColumn = document.createElement('div');
-        leftColumn.style.width = '20%';
-        leftColumn.style.display = 'flex';
-        leftColumn.style.margin = 'auto';
-        assembleHeader.appendChild(leftColumn);
-
-        const centerColumn = document.createElement('div');
-        centerColumn.style.width = '60%';
-        centerColumn.style.display = 'flex';
-        centerColumn.style.margin = 'auto';
-        assembleHeader.appendChild(centerColumn);
-
-        const text = document.createElement('div');
-        text.classList.add('diary-header__text');
-        text.style.width = '100%';
-        text.innerText = '{% t diary.dh1 %}';
-        centerColumn.appendChild(text);
-
-        const rightColumn = document.createElement('div');
-        rightColumn.style.width = '20%';
-        rightColumn.style.display = 'flex';
-        rightColumn.style.margin = 'auto';
-        assembleHeader.appendChild(rightColumn);
-
-        if(step != undefined) {
-
-            const openNav = () => {
-          
-                document.getElementById('privacyNav').style.width = '100%';
-            }
-
-            const closeNav = () => {
-                document.getElementById('privacyNav').style.width = '0%';
-            }
-
-            const nav = document.createElement('div');
-            nav.id = 'privacyNav';
-            nav.classList.add('overlay', 'privacy');
-            document.body.appendChild(nav);
-
-            window.addEventListener('resize', (e) => overlayContent.style.minWidth = `${document.body.offsetWidth}px`);
-
-            const closeNavElem = document.createElement('a');
-            closeNavElem.href = 'javascript:void(0)';
-            closeNavElem.classList.add('closebtn', 'close-diary');
-            closeNavElem.addEventListener('click', closeNav);
-            closeNavElem.innerHTML = '&times;';
-            nav.appendChild(closeNavElem);
-
-            const overlayContent = document.createElement('div');
-            overlayContent.id = 'exitContent';
-            overlayContent.classList.add('overlay-content', 'privacy');
-            overlayContent.style.minWidth = `${document.body.offsetWidth}px`;
-            nav.appendChild(overlayContent);
-
-            const textContent = document.createElement('div');
-            textContent.classList.add('privacy__text');
-            textContent.innerHTML = '{% t diary.dh2 %}';
-            overlayContent.appendChild(textContent);
-    
-            const stopButton = document.createElement('button');
-            stopButton.classList.add('button', 'round', 'diary');
-            stopButton.style.marginTop = '8vh';
-            stopButton.innerHTML = '{% t diary.dh3 %}';
-            stopButton.addEventListener('click', e => eventHandler(e, {type: 'stop-assembling'}));
-            overlayContent.appendChild(stopButton);
-
-            const continueButton = document.createElement('button');
-            continueButton.classList.add('button', 'round', 'diary');
-            continueButton.style.marginTop = '8vh';
-            continueButton.innerHTML = '{% t diary.dh4 %}';
-            continueButton.addEventListener('click', closeNav);
-            overlayContent.appendChild(continueButton);
-
-            const closeDiary = document.createElement('a');
-            closeDiary.classList.add('diary-header__close-button');
-            closeDiary.addEventListener('click', openNav);
-            closeDiary.innerHTML = '&times;';
-            leftColumn.appendChild(closeDiary);
-    
-            const stepCounter = document.createElement('div');
-            stepCounter.classList.add('diary-header__step-counter');
-            stepCounter.innerText = `#${step}/5`;
-            rightColumn.appendChild(stepCounter);
-
-        }
-        */
-  
     }
 
+    /**
+     * Renders the page with the diary assembling step.
+     */
     const renderDiarySteps = () => {
 
         renderDiaryHeader(document.body, "{% t diary.dh1 %}");
@@ -995,6 +793,13 @@ const DiaryUI = (eventHandler) => {
 
     }
 
+    /**
+     * Element with buttons to control the process through the assembling.
+     * @param {HTMLElement} parent element where this will be added.
+     * @param {number} step step of the assembling process. 
+     * @param {HTMLElement} helpContent content to be displayed when the help button is pressed. 
+     * @returns {StepControllerButtons} object with the buttons and functions in this element.
+     */
     const renderStepController = (parent, step, helpContent) => {
 
         const openNav = () => {
@@ -1086,6 +891,11 @@ const DiaryUI = (eventHandler) => {
         return {leftButton: previousButton, leftButtonListener: previousButtonListener, rightButton: nextButton, rightButtonListener: nextButtonListener, helpButton};
     }
 
+    /**
+     * Renders the page who is the diary for.
+     * @param {string} who 
+     * @param {string} diaryTitle 
+     */
     const renderWhoTheDiaryIsFor = (who, diaryTitle) => {
 
         renderDiaryHeader(document.body, "#1/5", true);
@@ -1155,6 +965,10 @@ const DiaryUI = (eventHandler) => {
             rightButton.disabled = true;
     }
 
+    /**
+     * Renders the page with the contributers.
+     * @param {ParserUser} userData object with the contributer..
+     */
     const renderWhoContributed = (userData) => {
 
         renderDiaryHeader(document.body, '#2/5', true);
@@ -1332,11 +1146,18 @@ const DiaryUI = (eventHandler) => {
         renderStepController(document.body, 2, helpContent);
     }
 
+    /**
+     * Clears listeners and remove everything inside the body element.
+     */
     const clearPage = () => {
         removeEventListeners();
         removeChildren('body');
     }
 
+    /**
+     * Renders page with all existing topics.
+     * @param {[Topic]} topics list of topics.
+     */
     const renderTopicsFound = (topics) => {
 
         renderDiaryHeader(document.body, '#3/5', true);
@@ -1438,6 +1259,11 @@ const DiaryUI = (eventHandler) => {
         rightButton.disabled = document.getElementsByClassName('topic__header').length === 0;
     }
 
+    /**
+     * Renders a single topic.
+     * @param {number} day relative day of the topics
+     * @param {Topic} topicData object containg the topic data.
+     */
     const renderTopic = (day, topicData) => {
             
         const lowerPage = document.getElementById('lowerPage');
@@ -1454,14 +1280,6 @@ const DiaryUI = (eventHandler) => {
         topicHeaderDay.classList.add('topic__header__day');
         topicHeaderDay.innerText = `${new Date(topicData.timestamp).toLocaleDateString(undefined, { year: undefined, month: '2-digit', day: '2-digit' })}`;//`{% t diary.t1 %} ${topicData.day}`;
         topicHeader.appendChild(topicHeaderDay);
-
-        /*
-        const date = new Date(topicData.timestamp);
-        const topicHeaderDate =  document.createElement('div');
-        topicHeaderDate.classList.add('topic__header__date');
-        topicHeaderDate.innerText = `${date.toLocaleDateString()}`;
-        topicHeader.appendChild(topicHeaderDate);
-        */
 
         const topicHeaderEditButton = document.createElement('button');
         topicHeaderEditButton.classList.add('topic__header__edit-button');
@@ -1546,6 +1364,10 @@ const DiaryUI = (eventHandler) => {
         }    
     }
 
+    /**
+     * Renders a list of topics.
+     * @param {[Topic]} topics topics to be rendered.
+     */
     const renderTopics = (topics) => {
 
         for(let i = 0; i < topics.length; i++) {
@@ -1555,10 +1377,17 @@ const DiaryUI = (eventHandler) => {
 
     }
 
+    /**
+     * Removes rendered topics.
+     */
     const removeTopics = () => {
         removeChildren('lowerPage');
     }
 
+    /**
+     * Removes the children elements from a given DOM element.
+     * @param {string} id id of the element whose children will be removed.
+     */
     const removeChildren = (id) => {
 
         const myNode = document.getElementById(id);
@@ -1570,6 +1399,10 @@ const DiaryUI = (eventHandler) => {
 
     }
 
+    /**
+     * Renders the write a topic page.
+     * @param {Topic?} topicData data of an exsting topic, null if writting a new topic.
+     */
     const renderWriteTopic = (topicData) => {
 
         renderDiaryHeader(document.body, '#3/5', true);
@@ -1666,6 +1499,11 @@ const DiaryUI = (eventHandler) => {
 
     }
 
+    /**
+     * Renders in a list a newly added topic.
+     * @param {Topic} topicData data of the new topic.
+     * @param {number} index index pf the new topic. 
+     */
     const renderNewTopic = (topicData, index) => {
 
         const container = document.createElement('div');
@@ -1789,7 +1627,12 @@ const DiaryUI = (eventHandler) => {
         }
     }
 
-
+    /**
+     * Render a media file to an DOM element.
+     * @param {File} file file content with metadata.
+     * @param {HTMLElement} parent DOM Element where the photo will be added.
+     * @param {number} index index associated with the image.
+     */
     const renderAddedPhoto = (file, parent, index) => {
   
         const photoContainer = document.createElement('div');
@@ -1856,18 +1699,25 @@ const DiaryUI = (eventHandler) => {
 
     }
 
+    /* 
     const startChatUI = () => {
 
         document.getElementById('baseList').classList.add('chat__list__background');
     
     }
+    */
 
+    /*
     const removeChatUI = () => {
 
         document.getElementById('baseList').classList.remove('chat__list__background');
 
-    }
+    }*/
 
+    /**
+     * Render page to select topics from chat.
+     * @param {[Message]} chatData messages from the chat. 
+     */
     const renderSelectTopicFromChat = (chatData) => {
 
         renderDiaryHeader(document.body, "#3/5", true);
@@ -1923,6 +1773,15 @@ const DiaryUI = (eventHandler) => {
 
     }
 
+    /**
+     * Renders a chat message in a list.
+     * @param {Message} messageData message data. 
+     * @param {string} messageListId id of DOM Element list where the message in rendered.
+     * @param {boolean} isSelected true if the message is selected. 
+     * @param {boolean} isFromDay true if the message is from a day. 
+     * @param {string} selectString string to be displayed if the message is selected. 
+     * @param {boolean} isSelectedFromThisDay true is the message was selected from the current day. 
+     */
     const renderChatMessage = (messageData, messageListId, isSelected = false, isFromDay = false, selectString = '{% t diary.t2 %}', isSelectedFromThisDay = false) => {
         
         const chatMessage = document.createElement('div');
@@ -2049,10 +1908,20 @@ const DiaryUI = (eventHandler) => {
         }
     }
 
+    /**
+     * Renders the page to edit an existing topic.
+     * @param {Topic} topicData 
+     */
     const renderEditTopic = (topicData) => {
         renderWriteTopic(topicData);
     }
 
+    /**
+     * Renders page to select messages per topic.
+     * @param {TopicWithMessages} dayData All data of the current topic.
+     * @param {[Message]} allMessagesData All messages.
+     * @param {Map<string, object>} selectedMessagesHashes hashes of all messages associated with the topic.
+     */
     const renderSelectMessages = (dayData, allMessagesData, selectedMessagesHashes) => {
 
         renderDiaryHeader(document.body, "#4/5", true);
@@ -2080,7 +1949,6 @@ const DiaryUI = (eventHandler) => {
         const prevDay = document.createElement('button');
         prevDay.id = 'prevDay';
         prevDay.classList.add('day-scroller__prev');
-        //prevDay.innerHTML = '&#10094;'
         prevDay.addEventListener('click', (e) => {
             prevDay.disabled = true;
             nextDay.disabled = true;
@@ -2095,7 +1963,7 @@ const DiaryUI = (eventHandler) => {
         daysLeft.appendChild(prevDay);
 
         const prevDayInside = document.createElement('div');
-        prevDayInside.innerHTML = '<'//'&#10094;'
+        prevDayInside.innerHTML = '<'
         prevDay.appendChild(prevDayInside);
 
         const daysCenter = document.createElement('div');
@@ -2114,7 +1982,6 @@ const DiaryUI = (eventHandler) => {
         const nextDay = document.createElement('button');
         nextDay.id = 'nextDay';
         nextDay.classList.add('day-scroller__next');
-        //nextDay.innerHTML = '&#10095;'
         nextDay.addEventListener('click', (e) => {
             
             nextDay.disabled = true;
@@ -2131,7 +1998,7 @@ const DiaryUI = (eventHandler) => {
         daysRight.appendChild(nextDay);
 
         const nextDayInside = document.createElement('div');
-        nextDayInside.innerHTML = '>'//'&#10095;'
+        nextDayInside.innerHTML = '>';
         nextDay.appendChild(nextDayInside );
 
         const dotContainer = document.createElement('div');
@@ -2163,6 +2030,9 @@ const DiaryUI = (eventHandler) => {
 
     }
 
+    /**
+     * Clear the current day data from the select messages page.
+     */
     const clearDay = () => {
 
         document.getElementById('dayDisplay').innerText = '';
@@ -2171,18 +2041,24 @@ const DiaryUI = (eventHandler) => {
 
     }
 
+ /*
     const updateDay = (dayData) => {
         document.getElementById('dayDisplay').innerText = `${new Date(dayData.timestamp).toLocaleDateString(undefined, { year: undefined, month: '2-digit', day: '2-digit' })}`//`{% t diary.t1 %} ${dayData.day}`;
         //document.getElementById('dayDisplay').style = `color: ${dayData.color};`
         document.getElementById('dayDisplay').addEventListener('click', e => document.getElementById('topicText').style.height = '100%')
-    }
+    }*/
 
+    /**
+     * Renders the data of the current topic and list of the messages.
+     * @param {TopicWithMessages} dayData All data of the current topic.
+     * @param {[Message]} allMessagesData All messages.
+     * @param {Map<string, object>} selectedMessagesHashes hashes of all messages associated with the topic.
+     */
     const renderDay = (dayData, allMessagesData, selectedMessages) => {
 
         const stringDate =`${new Date(dayData.timestamp).toLocaleDateString(undefined, { year: undefined, month: '2-digit', day: '2-digit' })}`;
 
-        document.getElementById('dayDisplay').innerText = /*{% t diary.t1 %}*/ `${dayData.part === 0 ? /*`${dayData.day}`*/ stringDate : `${stringDate} #${dayData.part}`}`;
-        //document.getElementById('dayDisplay').style = `color: ${dayData.color};`
+        document.getElementById('dayDisplay').innerText = `${dayData.part === 0 ? stringDate : `${stringDate} #${dayData.part}`}`;
         document.getElementById('dayDisplay').addEventListener('click', e => {
             const topicText = document.getElementById('topicText');
             topicText.style.height = topicText.offsetHeight === 0 ? `${document.getElementById('lowerPage').offsetHeight}px` : '0';
@@ -2236,7 +2112,7 @@ const DiaryUI = (eventHandler) => {
         const topicTextTitle = document.createElement('div');
         topicTextTitle.classList.add('overlay__text-box');
         topicTextTitle.style.marginBottom = '20px';
-        topicTextTitle.innerText = `{% t topic.t3 %} ${dayData.part === 0 ? stringDate : `${stringDate} #${dayData.part}`}`;/*`{% t diary.d1 %} ${dayData.day}:`*/
+        topicTextTitle.innerText = `{% t topic.t3 %} ${dayData.part === 0 ? stringDate : `${stringDate} #${dayData.part}`}`;
         overlayContent.appendChild(topicTextTitle);
 
         const topicTextBox = document.createElement('div');
@@ -2247,12 +2123,8 @@ const DiaryUI = (eventHandler) => {
         overlayContent.appendChild(topicTextBox);
 
         const startSelecting = document.createElement('button');
-        //startSelecting.classList.add('button', 'round');
         startSelecting.style.margin = 'auto';
         startSelecting.style.color = 'white';
-        //startSelecting.style.borderColor = 'white';
-        //startSelecting.style.borderStyle = 'solid';
-        //startSelecting.style.background = '#E26A6A';
         startSelecting.style.marginTop = '10px';
         startSelecting.style.background = 'none';
         startSelecting.style.padding = '6px';
@@ -2263,7 +2135,7 @@ const DiaryUI = (eventHandler) => {
         startSelecting.style.left = '50%';
         startSelecting.style.transform = 'translate(-50%, 0)';
 
-        startSelecting.innerText = '×'//'{% t diary.d2 %}';
+        startSelecting.innerText = '×';
         topicTextOverlay.appendChild(startSelecting);
 
         for(let i = 0; i < dayData.totalOfTopics; i++) {
@@ -2286,22 +2158,17 @@ const DiaryUI = (eventHandler) => {
 
             let stringDate = new Date(dayData.timestamp).toLocaleDateString(undefined, { year: undefined, month: '2-digit', day: '2-digit' })
 
-            //let text = dayData.part === 0 ? `{% t diary.t1 %} ${selectedDay}` : `{% t diary.t1 %} ${selectedDay} #${dayData.part}`;
             let text = dayData.part === 0 ? `${stringDate}` : `${stringDate} #${dayData.part}`;
             
             if(selectedMessages != undefined) {
                 if(selectedMessages.has(message.hash)) {
                     isSelected = true;
                     const {day, part, timestamp} = selectedMessages.get(message.hash);
-                    isSelectedFromThisDay = dayData.day === day && dayData.part === part;
-                    //text = dayData.part === 0 ? `{% t diary.t1 %} ${day}`: `${stringDate} #${part}`;
-                    
+                    isSelectedFromThisDay = dayData.day === day && dayData.part === part;    
                     stringDate = new Date(timestamp).toLocaleDateString(undefined, { year: undefined, month: '2-digit', day: '2-digit' })
                     text = part === 0 ? `${stringDate}`: `${stringDate} #${part}`;
                 }
             }
-
-            
 
             renderChatMessage(message, 'lowerPage', isSelected, isFromDay, text, isSelectedFromThisDay);
         }
@@ -2329,18 +2196,26 @@ const DiaryUI = (eventHandler) => {
         
     }
 
+    /*
     const renderFullTopic = (text) => {
         document.getElementById('topicDisplayText').innerText = text;
         document.getElementById('readMoreButton').classList.add('hidden');
         document.getElementById('readLessButton').classList.remove('hidden');
-    } 
+    } */
 
+    /*
     const renderShortTopic = (text) => {
         document.getElementById('topicDisplayText').innerText = text.substring(0, 80);
         document.getElementById('readLessButton').classList.add('hidden');
         document.getElementById('readMoreButton').classList.remove('hidden');
-    } 
+    }
+    */
 
+    /**
+     * Renders a preview of the pdf in a div.
+     * @param {string} pdfData the base64 string with the pdf data.
+     * @returns {HTMLDivElement} div with a iframe displaying the pdf.
+     */
     const renderPdfPreview = (pdfData) => {
 
         const div = document.createElement('div');
@@ -2365,6 +2240,9 @@ const DiaryUI = (eventHandler) => {
 
     }
 
+    /**
+     * Renders the page to preview the pdf.
+     */
     const renderReviewDiary = () => {
 
         renderDiaryHeader(document.body, "#5/5", true);
@@ -2378,7 +2256,6 @@ const DiaryUI = (eventHandler) => {
         content.appendChild(upperPage);
 
         const title = document.createElement('div');
-        //title.classList.add('title', 'diary');
         title.style.marginTop = '16px';
         title.style.marginBottom = '20px';
         title.innerText = '{% t diary.rd1 %}';
@@ -2391,8 +2268,7 @@ const DiaryUI = (eventHandler) => {
         lowerPage.style.position = 'relative';
         content.appendChild(lowerPage);
 
-/*
-
+        /*
         const prevDiaryPage = document.createElement('button');
         prevDiaryPage.classList.add('diary-page-button');
         lowerPage.append(prevDiaryPage);
@@ -2411,16 +2287,14 @@ const DiaryUI = (eventHandler) => {
         nextDiaryPageIcon.classList.add('fas', 'fa-chevron-right');
         nextDiaryPage.append(nextDiaryPageIcon);
 
-      
-        
-
         const pageContainer = document.createElement('div');
         pageContainer.id = 'pageContainer';
         pageContainer.style.display = 'flex';
         pageContainer.style.height = '100%';
         pageContainer.style.margin = 'auto';
         lowerPage.appendChild(pageContainer);
-*/
+        */
+
         const helpContent = document.createElement('div');
         helpContent.classList.add('privacy__text');
         helpContent.innerText = "{% t diary.rd2 %}";
@@ -2430,6 +2304,10 @@ const DiaryUI = (eventHandler) => {
 
     }
 
+    /**
+     * Renders a preview of the pdf using its data uri.
+     * @param {string} dataUri content of the pdf in a data uri.
+     */
     const renderPreviewOnIframeWithDataUri = (dataUri) => {
 
         const iframe = document.createElement('iframe');
@@ -2438,10 +2316,14 @@ const DiaryUI = (eventHandler) => {
         iframe.style.height = '100%';
         document.getElementById('lowerPage').append(iframe);
 
-        
-       
     }
 
+    /**
+     * Creates a canvas to display a single pdf page.
+     * @param {string} canvasId id of the canvas.
+     * @param {boolean} display true if the canvas is visible. 
+     * @returns {HTMLCanvasElement} canvas with the given id.
+     */
     const renderPreviewDiaryPage = (canvasId, display) => {
 
         const canvas = document.createElement('canvas');
@@ -2453,14 +2335,26 @@ const DiaryUI = (eventHandler) => {
         return canvas;
     }
 
+    /**
+     * Makes a canvas visible.
+     * @param {string} canvasId id of the canvas. 
+     */
     const displayPreviewCanvas = (canvasId) => {
         document.getElementById(canvasId).style.display = 'block';
     }
 
+    /**
+     * Hides a canvas.
+     * @param {string} canvasId id of the canvas. 
+     */
     const hidePreviewCanvas = (canvasId) => {
         document.getElementById(canvasId).style.display = 'none';
     }
 
+    /**
+     * Renders a preview of the pdf using its data uri.
+     * @param {string} dataUri content of the pdf in a data uri.
+     */
     const renderPreviewWithDataUri = (dataUri) => {
 
         const pageContainer = document.getElementById('pageContainer');
@@ -2478,7 +2372,10 @@ const DiaryUI = (eventHandler) => {
         
     }
 
-
+    /**
+     * Renders the download page. Asks if the users wants to participate in the study.
+     * @param {string} participate "yes" if the user wants to participate in the study.
+     */
     const renderDownloadDiary = (participate) => {
 
         renderDiaryHeader(document.body, "#5/5", true);
@@ -2632,6 +2529,9 @@ const DiaryUI = (eventHandler) => {
 
     }
 
+    /**
+     * Renders a page  that askes the user for feedback.
+     */
     const renderAskFeedback = () => {
 
         renderDiaryHeader(document.body, "#5/5", false);
@@ -2685,10 +2585,11 @@ const DiaryUI = (eventHandler) => {
         noButton.addEventListener('click', e => eventHandler(e, {type: 'no'}));
         buttonContainer.appendChild(noButton);
 
-
-
     }
 
+    /**
+     * Renders page where the user can write its feedback.
+     */
     const renderGiveFeedback = () => {
 
         renderDiaryHeader(document.body, "", false);
@@ -2733,6 +2634,10 @@ const DiaryUI = (eventHandler) => {
 
     }
 
+    /**
+     * Renders a page with social media sharing buttons.
+     * @param {string} titleText title to be displayed in the page. 
+     */
     const renderShare = (titleText) => {
 
         renderDiaryHeader(document.body, '#5/5', false);
@@ -2803,11 +2708,15 @@ const DiaryUI = (eventHandler) => {
         centerContainer.appendChild(noButton);   
     }
 
+    /**
+     * Creates a modal containing social media sharing links.
+     * @returns {ShareModalFunctions}
+     */
     const renderShareModal = () => {
 
-        const openShareModal = () => document.getElementById("shareModal").style.display = "block";
+        const openShareModal = () => {document.getElementById("shareModal").style.display = "block"};
     
-        const closeShareModal = () => document.getElementById("shareModal").style.display = "none";
+        const closeShareModal = () => {document.getElementById("shareModal").style.display = "none"};
     
         const shareModal = document.createElement('shareModal');
         shareModal.id = 'shareModal';
@@ -2874,198 +2783,9 @@ const DiaryUI = (eventHandler) => {
         return {openShareModal, closeShareModal};
     }
 
-    
-
-/*
-    const  renderSiteFooter = (parent) => {
-        const footer = document.createElement('div');
-        footer.classList.add('footer');
-        parent.appendChild(footer);
-
-        const footerText = document.createElement('div');
-        footerText.classList.add('footer__text');
-        footerText.innerText = 'Togather';
-        footer.appendChild(footerText);
-
-        const footerRow = document.createElement('div');
-        footerRow.classList.add('row');
-        footerRow.style.height = '100px';
-        footerRow.style.marginBottom = '35px';
-        footer.appendChild(footerRow);
-
-        const footerColumn = document.createElement('div');
-        footerColumn.classList.add('column');
-        footerRow.appendChild(footerColumn);
-
-        const linksContainer = document.createElement('div');
-        linksContainer.style.display = 'flex';
-        linksContainer.style.flexDirection = 'column';
-        linksContainer.style.width = '100px';
-        footerColumn.appendChild(linksContainer);
-
-        const aHome = document.createElement('a');
-        aHome.classList.add('footer__text__small');
-        aHome.href = '{{ site.url }}{{ site.baseurl }}/';
-        aHome.innerText = '{% t nav-overlay.home-a %}';
-        linksContainer.appendChild(aHome);
-
-        const aTopic = document.createElement('a');
-        aTopic.classList.add('footer__text__small');
-        aTopic.href = '{{ site.url }}{{ site.baseurl }}/topics';
-        aTopic .innerText = '{% t nav-overlay.topic-a %}';
-        linksContainer.appendChild(aTopic);
-
-        const aIntro = document.createElement('a');
-        aIntro.classList.add('footer__text__small');
-        aIntro.href = '{{ site.url }}{{ site.baseurl }}/explained';
-        aIntro .innerText = '{% t nav-overlay.explained-a %}';
-        linksContainer.appendChild(aIntro);
-
-        const aInstructions = document.createElement('a');
-        aInstructions.classList.add('footer__text__small');
-        aInstructions.href = '{{ site.url }}{{ site.baseurl }}/explained';
-        aInstructions.innerText = '{% t nav-overlay.instructions-a %}';
-        linksContainer.appendChild(aInstructions);
-
-        const aDiary = document.createElement('a');
-        aDiary.classList.add('footer__text__small');
-        aDiary.href = '{{ site.url }}{{ site.baseurl }}/diary';
-        aDiary.innerText = '{% t nav-overlay.diary-a %}';
-        linksContainer.appendChild(aDiary);
-
-        const aAbout = document.createElement('a');
-        aAbout.classList.add('footer__text__small');
-        aAbout.href = '{{ site.url }}{{ site.baseurl }}/about';
-        aAbout.innerText = '{% t nav-overlay.about-a %}';
-        linksContainer.appendChild(aAbout);
-
-        const footerColumn2 = document.createElement('div');
-        footerColumn2.classList.add('column');
-        footerColumn2.style.maxWidth = '200px';
-        footerRow.appendChild(footerColumn2);
-
-        const langLabel = document.createElement('label');
-        langLabel.for = 'languages';
-        langLabel.classList.add('footer__text__small');
-        langLabel.style.padding = '0';
-        langLabel.innerText = '{% t footer.f1 %}';
-        footerColumn2.appendChild(langLabel);
-
-        const langSelect = document.createElement('select');
-        langSelect.id = 'languages';
-        langSelect.style.marginRight = '20px';
-        langSelect.addEventListener('change', () => window.location.href = langSelect.options[langSelect.selectedIndex].value);
-        footerColumn2.appendChild(langSelect);
-
-        let language = window.location.href.trim().split('/').filter(elem => elem != '')[2]
-        language = language === 'diary' ? 'en' : language;
-
-        const option = document.createElement('option');
-        option.value = '/diary';
-        option.innerText = '{% t global.english %}';
-        option.selected = language === 'en';
-        langSelect.appendChild(option);
-
-        const option2 = document.createElement('option');
-        option2.value = '/pt/diary';
-        option2.innerText = '{% t global.portugues %}';
-        option2.selected = language === 'pt';
-        langSelect.appendChild(option2);
-
-        const contactButton = document.createElement('button');
-        contactButton.classList.add('button', 'contact');
-        contactButton.addEventListener('click', () => {
-            location.href='{{ site.url }}{{ site.baseurl }}/contact';
-        });
-        contactButton.innerText = '{% t nav-overlay.contact-a %} >>';
-        footerColumn2.appendChild(contactButton);
-
-        const logoContainer = document.createElement('div');
-        logoContainer.style.display = 'flex';
-        logoContainer.style.flexDirection = 'row';
-        logoContainer.style.flexWrap = 'wrap';
-        logoContainer.style.paddingLeft = '15px';
-        footer.appendChild(logoContainer);
-
-        const img1Container = document.createElement('div');
-        img1Container.style.width = '100px';
-        img1Container.style.height = '40px';
-        img1Container.style.paddingRight = '12px';
-        img1Container.style.paddingBottom = '15px';
-        logoContainer.appendChild(img1Container);
-
-        const ongoingnessLink = document.createElement('a');
-        ongoingnessLink.href = "https://enablingongoingness.com/";
-        img1Container.appendChild(ongoingnessLink);
-
-        const img1 = document.createElement('img');
-        img1.src = "{{ '/assets/images/Ongoingness-logo.svg' | prepend: site.baseurl }}";
-        ongoingnessLink.appendChild(img1);
-
-        const img2Container = document.createElement('div');
-        img2Container.style.padding = '0px 12px';
-        img2Container.style.paddingBottom = '15px';
-        logoContainer.appendChild(img2Container);
-
-        const idiLink = document.createElement('a');
-        idiLink.href = "https://www.kylemontague.co.uk/";
-        img2Container.appendChild(idiLink);
-
-        const img2 = document.createElement('img');
-        img2.src = "{{ '/assets/images/iDi_logo_extended_white.svg' | prepend: site.baseurl }}";
-        idiLink.appendChild(img2);
-
-        const img3Container = document.createElement('div');
-        img3Container.style.padding = '0px 12px';
-        img3Container.style.paddingRight = '24px';
-        img3Container.style.paddingBottom = '15px';
-        logoContainer.appendChild(img3Container);
-
-        const openLabLink = document.createElement('a');
-        openLabLink.href = "https://openlab.ncl.ac.uk/";
-        img3Container.appendChild(openLabLink);
-
-        const img3 = document.createElement('img');
-        img3.src = "{{ '/assets/images/openlab-vertical.svg' | prepend: site.baseurl }}";
-        openLabLink.appendChild(img3);
-
-        const img4Container = document.createElement('div');
-        img4Container.style.width = '125px';
-        img4Container.style.height = '40px'
-        img4Container.style.paddingRight = '12px';
-        img4Container.style.paddingBottom = '15px';
-        logoContainer.appendChild(img4Container);
-
-        const northumbriaLink = document.createElement('a');
-        northumbriaLink.href = "https://www.northumbria.ac.uk/";
-        img4Container.appendChild(northumbriaLink);
-
-        const img4 = document.createElement('img');
-        img4.width = '150';
-        img4.height = '40';
-        img4.src = "{{ '/assets/images/unn_logo_white.png' | prepend: site.baseurl }}";
-        northumbriaLink.appendChild(img4);
-
-        const img5Container = document.createElement('div');
-        img5Container.style.width = '120px';
-        img5Container.style.height = '40px'
-        img5Container.style.padding = '0px 12px';
-        img5Container.style.paddingBottom = '15px';
-        logoContainer.appendChild(img5Container);
-
-        const newcastleLink = document.createElement('a');
-        newcastleLink.href = "https://www.ncl.ac.uk/";
-        img5Container.appendChild(newcastleLink);
-
-        const img5 = document.createElement('img');
-        img5.width = '120';
-        img5.height = '40';
-        img5.src = "{{ '/assets/images/NCL_logo_white.png' | prepend: site.baseurl }}";
-        newcastleLink.appendChild(img5);
-
-    }
-*/
-
+    /**
+     * Open the share modal.
+     */
     const openShareModal = () => {
         document.getElementById("shareModal").style.display = "block";
     };

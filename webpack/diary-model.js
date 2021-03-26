@@ -1,6 +1,12 @@
+import jsPDF from 'jspdf';
+
 const emojiRegex = require('emoji-regex/RGI_Emoji.js');
 const emojiRegexText = require('emoji-regex/text.js');
 
+/**
+ * Serve as the store for the Diary Assembler.
+ * @author Luis Carvalho
+ */
 const DiaryModel = () => {
 
     let colors = [
@@ -44,6 +50,10 @@ const DiaryModel = () => {
 
     let participate;
 
+    /**
+     * Stores the parsed data from the Whatapp files and atributes a color to each user.
+     * @param {WhatsAppChat} tempWhatsAppChat object containg messages, users and files outputed by the parser. 
+     */
     const setWhatsAppChat = (tempWhatsAppChat) => {
         whatsAppChat = tempWhatsAppChat;
 
@@ -92,16 +102,10 @@ const DiaryModel = () => {
             }
         }
     }
-    /*
-    //Topic structure
-    {
-        day:
-        hash: string or text: string 
-        messages: [hash]
-        selectedMessages: [hash]
-    }
-    */
-
+ 
+    /**
+     * Removes emojis from messages and deletes messages at contain only emojis. 
+     */
     const removeEmojiOnlyMessages = () => {
 
         const regex = emojiRegex();
@@ -110,12 +114,10 @@ const DiaryModel = () => {
 
         whatsAppChat.messageMap.forEach( (message, hash) => {
        
-            //if(message.files.length === 0) {
- 
-                const textLinesToBeRemoved = [];
+            const textLinesToBeRemoved = [];
 
-                for(let [index, textLine] of message.text.entries()) {
-    
+            for(let [index, textLine] of message.text.entries()) {
+
                 let match;
                 let noEmojis = textLine;
                 while (match = regex.exec(textLine)) {
@@ -128,12 +130,11 @@ const DiaryModel = () => {
                 } else {
                     message.rawText[index] = noEmojis;
                 }
-              
+            
 
                 if(noEmojis === '' && message.files.length === 0)
                         textLinesToBeRemoved.push(index);
                 
-
                 //Secound try to get all the emojis
                 //CAUTION IT ALSO TRIES TO GET NUMBERS AND SYMBOLS ??RANDOMLY??
                 while (match = regexText.exec(noEmojis)) {
@@ -147,18 +148,14 @@ const DiaryModel = () => {
                 } else {
                     message.rawText[index] = noEmojis;
                 }
+            }
 
+            for(const index of textLinesToBeRemoved)
+                message.text.splice(index, 1);
 
-                }
-
-                for(const index of textLinesToBeRemoved)
-                    message.text.splice(index, 1);
-    
-                if(message.text.length === 0 && message.files.length === 0)
-                    messagesToBeRemoved.push(hash);
+            if(message.text.length === 0 && message.files.length === 0)
+                messagesToBeRemoved.push(hash);
             
-            //}
-
         });
 
         for(const hash of messagesToBeRemoved)
@@ -166,9 +163,12 @@ const DiaryModel = () => {
 
     }
 
+    /**
+     * Finds topics in the messages through the presence of links to the website.
+     * @returns {[Topic]} The list of found topics.
+     */
     const findTopics = () => {
 
-        //const topicRegex = RegExp('https://togather.me/topics/[0-9]+');
         const topicRegex = RegExp('https:\/\/togather\.me\/(?:[a-z]+\/)?topics\/[0-9]+');
 
         const tempTopics = [];
@@ -186,7 +186,7 @@ const DiaryModel = () => {
                         //Remove topic word
                         const splittedText = message.text[1].split(':');
                         splittedText.shift();
-                        message.text[1] = splittedText.join(':');//message.text[1].slice(7);
+                        message.text[1] = splittedText.join(':');
                
                         message.text.shift();
 
@@ -197,7 +197,6 @@ const DiaryModel = () => {
                         }
                         let day = Math.floor(((message.fulltimestamp - startDay) / (24 * 60 * 60 * 1000)));            
                         day = day === 0 ? 1 : day + 1;  
-
 
                         tempTopics.push({
                             day,
@@ -218,8 +217,17 @@ const DiaryModel = () => {
         return tempTopics;
     }
 
+    /**
+     * Sorts by ascending order of the timestamps whe topics.
+     * @param {[Topic]} topics the topics to be the sorted.
+     * @returns {[Topic]}  the topics sorted.
+     */
     const sortTopicsByTimestamp = (topics) => topics.sort((a, b) => whatsAppChat.messageMap.get(a.hash).fulltimestamp - whatsAppChat.messageMap.get(b.hash).fulltimestamp);
     
+    /**
+     * Sets the relative day of the topic starting from the oldest topic.
+     * @param {[Topic]} topics list of topics to have the day set.
+     */
     const setTopicsDay = (topics) => {
 
         let startDay = -1;
@@ -237,6 +245,11 @@ const DiaryModel = () => {
       
     }
 
+    /**
+     * Sets the part field in a topic, if there are more than one topic in a day.
+     * @param {[Topic]} topics topics to have the part field set.
+     * @returns {[Topic]} list of topics with the part field set.
+     */
     const setTopicsPart = (topics) => {
 
         const dayMap = new Map();
@@ -270,65 +283,11 @@ const DiaryModel = () => {
  
     }
 
-    /*
-    const findTopicMessages = () => {
-
-        if(topics.length == 0) return
-
-        const messages = Array.from(whatsAppChat.messageMap.values());
-        let topicMessageIndex = 0;
-    
-        let startDay = -1;
-
-        for(let i = 0; i < topics.length; i++) {
-
-            topics[i].messages = [];
-            topics[i].selectedMessages = [];
-
-            if(startDay === -1) startDay = whatsAppChat.messageMap.get(topics[i].hash).fulltimestamp;
-            topics[i].day = Math.floor(((whatsAppChat.messageMap.get(topics[i].hash).fulltimestamp- startDay) / (24 * 60 * 60 * 1000)) + 1);
-
-            const topic = whatsAppChat.messageMap.get(topics[i].hash);
-
-            if(i + 1 == topics.length) {
-        
-                for(let j = topicMessageIndex; j < messages.length; j++) {
-                    const message = messages[j];
-                    if(message.hash != topic.hash && message.fulltimestamp >= topic.fulltimestamp) {
-                        topics[i].messages.push(message.hash);
-                    }
-                }
-
-            } else {
-
-                const nextTopic = whatsAppChat.messageMap.get(topics[i+1].hash);
-                const nextTopicTimestampPlusDay = new Date(nextTopic.fulltimestamp);
-                nextTopicTimestampPlusDay.setDate(nextTopicTimestampPlusDay.getDate() + 1);
-                let nextTopicMessageIndexFound = false;
-
-                for(let j = topicMessageIndex; j < messages.length; j++) {
-                   
-                    if(messages[j].hash != topic.hash) {
-
-                        if(messages[j].fulltimestamp >= topic.fulltimestamp) {
-                            
-                            if(messages[j].fulltimestamp >= nextTopic.fulltimestamp && !nextTopicMessageIndexFound) {
-                                nextTopicMessageIndexFound = true;
-                                topicMessageIndex = j;
-                            }
-
-                            if(messages[j].fulltimestamp <= nextTopicTimestampPlusDay.getTime()) {
-                                topics[i].messages.push(messages[j].hash);
-                            } 
-
-                        } 
-                    }
-                }
-            }
-        }
-    }
-*/
-
+    /**
+     * Gets a topic given its unique index.
+     * @param {number} index index of the topic
+     * @returns {Topic} topic with the given index.
+     */
     const getTopic = (index) => {
 
         const topic = topics[index];
@@ -349,6 +308,11 @@ const DiaryModel = () => {
             };
     }
 
+    /**
+     * Get a topic with the messages given a index,
+     * @param {number} index Unique index of the topic.
+     * @returns {TopicWithMessages} object with the topic data and messages.
+     */
     const getTopicWithMessages = (index) => {
 
         const topic = getTopic(index);
@@ -363,11 +327,15 @@ const DiaryModel = () => {
 
         topic.index = index;
         topic.totalOfTopics = topics.length,
-        topic.selectedMessages = selectedMessages; 
+        topic.selectedMessages = selectedMessages;
 
         return topic;
     }
 
+    /**
+     * Gets a list of all topics.
+     * @returns {[Topic]} list of topics.
+     */
     const getTopics = () => {
 
         const resultTopics = [];
@@ -378,6 +346,10 @@ const DiaryModel = () => {
             return resultTopics;
     }
 
+    /**
+     * Gets a list of all topics with all the messages associated.
+     * @returns {[TopicWithMessages]} List of topics with messages.
+     */
     const getTopicsWithMessages = () => {
         const fullTopics = [];
         for(let i = 0; i < topics.length; i++)
@@ -385,6 +357,10 @@ const DiaryModel = () => {
         return fullTopics;
     }
 
+    /**
+     * Upated the content of a topic.
+     * @param {object} param0 contains the hash, text, timestamp and files to update the topic. 
+     */
     const updateTopic = ({hash, text, timestamp, tempFiles}) => {
         
         const splittedText = text.split('\n'); 
@@ -413,9 +389,12 @@ const DiaryModel = () => {
         setTopicsDay(topics);
         setTopicsPart(topics);
       
-   
     }
 
+    /**
+     * Deletes a topic given its day.
+     * @param {number} day day of the topic to be deleted.
+     */
     const deleteTopic = (day) => {
         topics.splice(day, 1);
     
@@ -424,6 +403,11 @@ const DiaryModel = () => {
         setTopicsPart(topics);
     }
     
+    /**
+     * Get a message given a hash.
+     * @param {number} hash  hash of the message to be get.
+     * @returns {Message} message with the given hash. 
+     */
     const getMessage = (hash) => {
         const messageObj = {...whatsAppChat.messageMap.get(hash)};
         const hashUser = messageObj.user;
@@ -440,6 +424,10 @@ const DiaryModel = () => {
         return messageObj;
     }
 
+    /**
+     * Gets all messages in ascending order.
+     * @returns {[Message]} all messages.
+     */
     const getMessages = () => {
 
         const messages = [];
@@ -457,6 +445,11 @@ const DiaryModel = () => {
     
     }
 
+    /**
+     * Given a string creates a hash.
+     * @param {string} s string to be ashed.
+     * @returns {number} hash of the string.
+     */
     const hashCode = (s) => {
         let h;
         for(let i = 0; i < s.length; i++) 
@@ -465,6 +458,10 @@ const DiaryModel = () => {
         return h;
     }
 
+    /**
+     * Given a list of hashes it creates topics.
+     * @param {[number]} hashList list of number hashes.
+     */
     const createTopicsFromHashes = (hashList) => {
         for(let hash of hashList) {
             topics.push({
@@ -479,6 +476,10 @@ const DiaryModel = () => {
         setTopicsPart(topics);
     }
 
+    /**
+     * Creates a new topic.
+     * @param {object} param0 contains the text, timestamp and files to be associated to the new topic. 
+     */
     const createTopic = ({text, timestamp, tempFiles}) => {
 
         const hash = hashCode(`topic${timestamp}${text}`);
@@ -537,31 +538,66 @@ const DiaryModel = () => {
 
     }
 
+    /**
+     * Sorts all messages by ascending order.
+     * @param {[number]} hashList list of message hashes.
+     * @returns {[number]} list of hashes sorted.
+     */
     const sortMessagesByTimestamp = (hashList) => hashList.sort((a, b) => whatsAppChat.messageMap.get(a).fulltimestamp - whatsAppChat.messageMap.get(b).fulltimestamp);
 
+    /**
+     * Associates a message to a topic.
+     * @param {number} topicIndex index identifier of the topic.
+     * @param {number} messageHash hash identifier of the message.
+     */
     const saveSelectedTopicMesssage = (topicIndex, messageHash) => {
         topics[topicIndex].selectedMessages.push(messageHash);
         sortMessagesByTimestamp(topics[topicIndex].selectedMessages);
     }
 
+    /**
+     * Removes a message from a topic.
+     * @param {number} topicIndex index identifier of the topic.
+     * @param {number} messageHash hash identifier of the message.
+     */
     const removeSelectedTopicMessage = (topicIndex, messageHash) => {
         const indexToBeRemoved = topics[topicIndex].selectedMessages.indexOf(messageHash);
         topics[topicIndex].selectedMessages.splice(indexToBeRemoved, 1);
         sortMessagesByTimestamp(topics[topicIndex].selectedMessages);
     }
 
+    /**
+     * Gets name of who the diary is for.
+     * @returns {string} name of who the diary is for.
+     */
     const getWhoDiaryIsFor = () => who;
 
+    /**
+     * Sets who the diary is for.
+     * @param {string} newWho new name to be associated. 
+     */
     const setWhoDiaryIsFor = (newWho) => {
         who = newWho;
     }
 
+    /**
+     * Gets the title of the diary
+     * @returns {string} title of the diary.
+     */
     const getDiaryTitle = () => title;
 
+    /**
+     * Sets the diary's title.
+     * @param {string} newTitle the new diary title. 
+     */
     const setDiaryTitle = (newTitle) => {
         title = newTitle;
     }
 
+    /**
+     * Gets an object with the users.
+     * @returns {Users}
+     */
     const getUsers = () => {
         const result = {...whatsAppChat.users};
         if(result.numbers != undefined)
@@ -569,10 +605,19 @@ const DiaryModel = () => {
         return result;
     };
 
+    /**
+     * Updates the name of a user.
+     * @param {number} hash identifier of the user. 
+     * @param {string} name new name of the user.
+     */
     const updateUsername = (hash, name) => {
         whatsAppChat.users[hash].name = name;
     }
 
+    /**
+     * Gets a map of all message hashes associated with topics.
+     * @returns {Map<string, object>} map with the hash as the key and the message as the value.
+     */
     const getSelectedMessagesHashes = () => {
 
         const result = new Map();
@@ -583,11 +628,14 @@ const DiaryModel = () => {
                 result.set(selectedMessage, {day: topic.day, part: topic.part, timestamp: whatsAppChat.messageMap.get(topic.hash).fulltimestamp});
 
         }
- 
 
         return result;
     }
 
+    /**
+     * Gets all data of a diary.
+     * @returns {object}  object containing all diary data.
+     */
     const getDiary = () => {
         const topics = getTopicsWithMessages();
         let startDate = undefined;
@@ -607,16 +655,42 @@ const DiaryModel = () => {
         }
     }
     
+    /**
+     * Changes the visibility of all messages associated to a user.
+     * @param {string} userHash the user unique hash.
+     */
     const changeUserMessagesVisibility = (userHash) => {
         whatsAppChat.users[userHash].visible = !whatsAppChat.users[userHash].visible;
     }
 
-    const setDiaryDocument = (doc) => diaryDocument = doc;
+    /**
+     * Stores the pdf document.
+     * @param {jsPDF} doc pdf document.
+     */
+    const setDiaryDocument = (doc) => { diaryDocument = doc };
+
+    /**
+     * Gets the pdf document.
+     * @returns {jsPDF} pdf document.
+     */
     const getDiaryDocument = () => diaryDocument; 
 
-    const setParticipate = (tempParticipate) => participate = tempParticipate;
+    /**
+     * Set if the users wants to participant in the study.
+     * @param {string} tempParticipate "yes" if the user wants to participate in the study.
+     */    
+    const setParticipate = (tempParticipate) => {participate = tempParticipate};
+
+    /**
+     * Get if the user wants to participate in the study.
+     * @returns {string} represents the intend of participating in the study.
+     */
     const getParticipate = () => participate; 
 
+
+    /**
+     * Loads the metadata in pdf into a new diary assembly process. 
+     */
     const loadSave = async () => {
 
         whatsAppChat.files.forEach( async(value, key, map) => {
@@ -626,8 +700,6 @@ const DiaryModel = () => {
                 fetch(value.data)
                 .then(res => res.blob())
                 .then( r => {
-                    
-
                     
                     const e = new FileReader();
                     e.readAsArrayBuffer(r);
@@ -658,26 +730,15 @@ const DiaryModel = () => {
                         console.error(reason);
                         });
                     };
-                
-                
                 });
-
-
-    
-    
-    
             }
-
         });
-      
-        
-
-
-
-
     }
 
-
+    /**
+     * Sets the users from the pdf metadata.
+     * @param {object} savedData metadata from the pdf.
+     */
     const loadUsers = (savedData) => {
 
         for (let hash in savedData) {
@@ -724,9 +785,11 @@ const DiaryModel = () => {
                 user: "Jayne Wallace"
 */
 
+    /**
+     * Loads topics from the pdf metadata.
+     * @param {object} savedData metadata from the pdf.
+     */
     const loadTopics = (savedData) => {
-
-
         for (let i = 0; i < savedData.length; i++) {
 
             const topicIndex = topics.findIndex((elem) => elem.hash === savedData[i].hash);
@@ -737,12 +800,13 @@ const DiaryModel = () => {
                 for(let m of savedData[i].selectedMessages) {
                     topics[topicIndex].selectedMessages.push(m.hash);
                 }
-            }
-            
+            }   
         }
-
     }
 
+    /**
+     * Deletes all data stored.
+     */
     const deleteAll = () => {
         whatsAppChat = undefined;
         topics = [];

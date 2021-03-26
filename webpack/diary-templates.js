@@ -1,10 +1,20 @@
 import jsPDF from 'jspdf'
 import loadPdfFonts from './pdfFontsLoader.js'
 
+/**
+ * 
+ * @author Luis Carvalho
+ */
 const DiaryTemplates = () => {
 
     loadPdfFonts(jsPDF);
 
+    /**
+     * Generates a pdf given the diary data.
+     * @param {object} diary data from the diary 
+     * @param {number} topicLimit limits of topics to be rendered into the pdf. -1 if no limit.
+     * @returns {Promise<jsPDF>} the pdf document.
+     */
     const generatePDF = async(diary, topicLimit = -1) => {
 
         let doc = new jsPDF();
@@ -14,11 +24,16 @@ const DiaryTemplates = () => {
             doc = topicPage(doc, diary.topics[i]);
             doc = await messagePages(doc, diary.topics[i].selectedMessages);
         }
-        
     
         return doc;
     }
 
+    /**
+     * Generates the preview of the diary without images.
+     * @param {jsPdf} diary data from the diary 
+     * @param {number} topicLimit limits of topics to be rendered into the pdf. -1 if no limit.
+     * @returns {Promise<jsPDF>} the pdf document for preview.
+     */
     const generatePreview = async(diary, topicLimit = -1) => {
 
         let doc = new jsPDF();
@@ -33,6 +48,13 @@ const DiaryTemplates = () => {
 
     }
 
+    /**
+     * Generated the cover pages of the diary.
+     * @param {jsPdf} doc the pdf document. 
+     * @param {object} data content to be added to the pdf.
+     * @param {boolean} firstPage true if it is the first page of the pdf.
+     * @returns {jsPDF} pdf document with the new pages.
+     */
     const coverPages = (doc, data, firstPage = false) => {
 
         if(!firstPage)
@@ -107,8 +129,7 @@ const DiaryTemplates = () => {
         
         doc.setTextColor(255, 255, 255);
         doc.setFontSize(42);
-        //doc.setFontType('normal');
-        doc.setFont(/*'Oswald-Regular'*/ 'RobotoCondensed-Regular', 'normal');
+        doc.setFont('RobotoCondensed-Regular', 'normal');
         doc.text(`${lines[0]}`.toUpperCase(), 105, 54, 'center');
 
         if(lines[1].length > 0)
@@ -123,19 +144,16 @@ const DiaryTemplates = () => {
 
         doc.setTextColor(0, 0, 0);
         doc.setFontSize(20);
-        //doc.setFontType('bolditalic');
         doc.setFont('OpenSans', 'bolditalic');
         doc.text(`{% t templates.c4 %} ${fullname}`, 105, 40, 'center');
 
         doc.setTextColor(0, 0, 0);
         doc.setFontSize(20);
-        //doc.setFontType('bolditalic');
         doc.setFont('OpenSans', 'bolditalic');
         doc.text('{% t templates.c2 %}', 105, 80, 'center');
 
         doc.setTextColor(0, 0, 0);
         doc.setFontSize(16);
-        //doc.setFontType('normal');
         doc.setFont('OpenSans', 'normal');
         let i = 0;
         let userY = 100;
@@ -149,13 +167,11 @@ const DiaryTemplates = () => {
 
         doc.setTextColor(0, 0, 0);
         doc.setFontSize(20);
-        //doc.setFontType('bolditalic');
         doc.setFont('OpenSans', 'bolditalic');
         doc.text('{% t templates.c3 %}', 105, 237, 'center');
 
         doc.setTextColor(0, 0, 0);
         doc.setFontSize(16);
-        //doc.setFontType('normal');
         doc.setFont('OpenSans', 'normal');
         const startDate = new Date(data.startDate);
         const startDay = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(startDate);
@@ -170,6 +186,13 @@ const DiaryTemplates = () => {
         return doc;
     }
 
+    /**
+     * Generates a topic page.
+     * @param {jsPDF} doc the pdf document. 
+     * @param {object} data content to be added to the pdf.
+     * @param {boolean} firstPage true if it is the first page of the pdf.
+     * @returns {jsPDF} pdf document with the new pages.
+     */
     const topicPage = (doc, data, firstPage = false) => {
 
         if(!firstPage)
@@ -181,7 +204,6 @@ const DiaryTemplates = () => {
         
         doc.setTextColor(255, 255, 255);
         doc.setFontSize(42);
-        //doc.setFontType('normal');
         doc.setFont('Oswald-Regular', 'normal');
 
         const date = new Date(data.timestamp);
@@ -189,35 +211,31 @@ const DiaryTemplates = () => {
         const month = new Intl.DateTimeFormat('{% t global.lang-code %}', { month: 'long' }).format(date)
         const year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(date)
         doc.text((data.part === 0 ? `${day} ${month} ${year}` : `${day} ${month} ${year} - {% t templates.tp2 %} ${data.part}`).toUpperCase(), 45, 54);
-        //doc.text((data.part === 0 ? `{% t templates.tp1 %} ${data.day}` : `{% t templates.tp1 %} ${data.day} - {% t templates.tp2 %} ${data.part}`).toUpperCase(), 45, 54);
  
-        
         doc.setTextColor(0, 0, 0);
-        //const date = new Date(data.timestamp);
-        //const day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(date)
-        //const month = new Intl.DateTimeFormat('{% t global.lang-code %}', { month: 'long' }).format(date)
-        //const year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(date)
         doc.setFont('Oswald-ExtraLight');
         doc.setFontSize(40);
-       // doc.text((`${day} ${month} ${year}`).toUpperCase(), 45, 83);
-        
                 
         doc.setFontSize(18);
-        //doc.setFontType('italic');
         doc.setFont('OpenSans', 'italic');
-        doc.text(data.text, 42, /*127.021*/ 100, {maxWidth: 126});
+        doc.text(data.text, 42, 100, {maxWidth: 126});
 
         return doc;
     }
 
+    /**
+     * Generates the message pages.
+     * @param {jsPdf} doc pdf document. 
+     * @param {[Message]} messages list of messages to be rendered. 
+     * @param {boolean} preview true if in preview mode, does not show images.
+     * @returns {Promise<jsPDF>} the pdf with new the pages.
+     */
     const messagePages = async(doc, messages, preview = false) => {
 
         const topMargin = 11;
         const bottomMargin = 286;
         const leftColumnLeftMargin = 53;
-        const leftColumnRightMargin = 5;
         const rightColumnLeftMargin = 148.875;
-        const rightColumnRightMargin = 5;
         const lineLength = 87.77;
         const lineHeight = 5;
 
@@ -244,7 +262,7 @@ const DiaryTemplates = () => {
 
             let splittedLines = [];
             for(let i = 0; i < data.text.length; i++) {
-                const splittedLinesTemp = doc.splitTextToSize(data.text[i]/*.replace(/[^\x20-\x7E]/g, '')*/, lineLength).filter(line => line != '');
+                const splittedLinesTemp = doc.splitTextToSize(data.text[i], lineLength).filter(line => line != '');
                 expectedSize += splittedLinesTemp.length * lineHeight;
                 if(i === 0 && expectedSize > bottomMargin && !createdPage) {
                     doc = newPage(doc);
@@ -270,8 +288,7 @@ const DiaryTemplates = () => {
             
             doc.setTextColor(255, 255, 255);
             doc.setFontSize(18);
-            //doc.setFontType('normal');
-            doc.setFont(/*'Oswald-Regular'*/'RobotoCondensed-Regular', 'normal');
+            doc.setFont('RobotoCondensed-Regular', 'normal');
             doc.text(`${data.user}`.toUpperCase(),
                       column === 'l' ? leftColumnLeftMargin : rightColumnLeftMargin, 
                       (column === 'l' ? yLeft : yRight) + 7.5,
@@ -288,7 +305,6 @@ const DiaryTemplates = () => {
         
             doc.setTextColor(0, 0, 0);
             doc.setFontSize(12);
-            //doc.setFontType('normal');
             doc.setFont('OpenSans', 'normal');
 
             for(let line of splittedLines) {
@@ -304,7 +320,6 @@ const DiaryTemplates = () => {
 
             }
 
-           
             if(!preview)
                 doc = await addMedia(doc, data.files, column);
 
@@ -330,6 +345,13 @@ const DiaryTemplates = () => {
             return sizes;
         }
 
+        /**
+         * Adds media files to the pdf.
+         * @param {jsPdf} doc pdf document.
+         * @param {object} files files to be added to the page 
+         * @param {string} side side of the page to be added, l - left, r - right.
+         * @returns {Promise<jsPDF>} pdf document with the media added.
+         */
         const addMedia = async(doc, files, side) => {
 
             for(let media of files) {
@@ -355,6 +377,12 @@ const DiaryTemplates = () => {
             return doc;
         }
         
+        /**
+         * Finds the dimensions of a media file, in a given line width, while perserving the ratio.
+         * @param {obeject} media 
+         * @param {number} lineWidth length of the text line. 
+         * @returns {MediaDimensions} the dimensions of media file in pixels.
+         */
         const fitDimensions = (media, lineWidth = lineLength) => {
 
             let img = new Image();
@@ -372,6 +400,12 @@ const DiaryTemplates = () => {
             return {w: mmWidth, h: mmHeight};
         }
 
+        /**
+         * Finds the dimensions of a media file, in a given line width, while perserving the ratio.
+         * @param {obeject} media 
+         * @param {number} lineWidth length of the text line. 
+         * @returns {Promise<MediaDimensions>} the dimensions of media file in pixels.
+         */
         const fitDimensions2 = async(media, lineWidth = lineLength) => {
 
             let img = new Image();
@@ -397,6 +431,12 @@ const DiaryTemplates = () => {
             return result;
         }
 
+        /**
+         * Gets a frame from a specific time given a video file.
+         * @param {object} media video file.
+         * @param {number} time time of the frame in seconds.
+         * @returns {Promise<FrameData>} frame plus data associated.
+         */
         const getFrameFromVideo = (media, time=0.0) => {
 
             const video = document.createElement('video');
@@ -435,9 +475,14 @@ const DiaryTemplates = () => {
             });
         }
 
+        /**
+         * Gets frames asynchronously from a video to fit a grid.
+         * @param {object} media video data. 
+         * @param {number} columns number of columns of the grid.
+         * @param {number} rows number of row of the grid.
+         * @returns {Promise<[FrameData]>} list with the frames.
+         */
         const getFramesAsync = async(media, columns, rows) => {
-
-            console.time('frameAsync');
 
             const video = document.createElement('video');
             video.style.display = 'none';
@@ -464,35 +509,13 @@ const DiaryTemplates = () => {
    
         }
 
-        const getFramesSync = async(media, columns, rows) => {
-
-            console.time('frameSync');
-
-            const video = document.createElement('video');
-            video.style.display = 'none';
-            const source = document.createElement('source');
-            source.src = media.data;
-            video.appendChild(source);
-            document.body.append(video);
-
-            return new Promise ((resolve, reject) => {
-
-                video.oncanplay = async(e) => {
-                    const frames = [];
-                    const sliceLength = video.duration / (columns * rows);
-
-                    for(let i = 0.01 ; i < video.duration; i += sliceLength) {
-                        const frame = await getFrameFromVideo(media, i);
-                        frames.push(frame);
-                    }
-        
-                    console.timeEnd('frameSync');
-                    resolve(frames);
-                }
-            });
-   
-        }
-
+        /**
+         * Creates a a image containing frames from a video.
+         * @param {object} media video data. 
+         * @param {number} columns number of columns of the grid.
+         * @param {number} rows number of row of the grid.
+         * @returns {Promise<string>} image containing all the frames in a grid.
+         */
         const getFilmRollFromVideo = async(media, columns, rows) => {
             
             console.time('roll');
@@ -556,6 +579,13 @@ const DiaryTemplates = () => {
             });
         }
 
+        /**
+         * Creates a a image containing frames from a video.
+         * @param {object} media video data. 
+         * @param {number} columns number of columns of the grid.
+         * @param {number} rows number of row of the grid.
+         * @returns {Promise<string>} image containing all the frames in a grid.
+         */
         const getFilmRollFromVideoAsync = async(media, columns, rows) => {
         
             console.time('rollAsync');
@@ -698,6 +728,12 @@ const DiaryTemplates = () => {
         
     }*/
 
+    /**
+     * Renders the pdf in a canvas for preview.
+     * @param {pdfPdf} doc pdf document.
+     * @param {number} pageNum Number of pages to be rendered.
+     * @param {HTMLCanvasElement} canvas canvas here the pdf will be rendered.
+     */
     const previewPdf = (doc, pageNum, canvas) => {
 
         const pdfData = doc.output('arraybuffer');
@@ -735,6 +771,11 @@ const DiaryTemplates = () => {
         
     }
 
+    /**
+     * Starts a worker to preview the pdf. 
+     * @param {jsPdf} doc pdf document.
+     * @returns {Worker} worker ready to load the pdf.
+     */
     const startPreviewPdfWorker = (doc) => {
         const pdfData = doc.output('arraybuffer');
         
@@ -744,10 +785,19 @@ const DiaryTemplates = () => {
         return pdfjsLib.getDocument(pdfData);
     }
 
-    const destroyPreviewPdfWorker = (worker) => worker.destroy(); 
+    /**
+     * Destroys a given worker.
+     * @param {Worker} worker to be destroyed.
+     */
+    const destroyPreviewPdfWorker = (worker) => { worker.destroy() }; 
 
-    const previewPdf2 = (doc, pageNum, canvas, loadingTask) => {
-
+    /**
+     * Renders the pdf in a canvas for preview.
+     * @param {number} pageNum Number of pages to be rendered.
+     * @param {HTMLCanvasElement} canvas canvas here the pdf will be rendered.
+     * @param {Worker} worker worker ready to load the pdf.
+     */
+    const previewPdf2 = (pageNum, canvas, loadingTask) => {
   
         return loadingTask.promise.then(function(pdf) {
           
@@ -778,9 +828,12 @@ const DiaryTemplates = () => {
         
     }
 
-    const previewPdf3 = async (doc, pageNum, canvas, worker) => {
-
-       
+    /**
+     * Renders the pdf in a canvas for preview.
+     * @param {HTMLCanvasElement} canvas canvas here the pdf will be rendered.
+     * @param {Worker} worker worker ready to load the pdf.
+     */
+    const previewPdf3 = async (canvas, worker) => {
 
         const promise = new Promise( (resolve, error) => {
             
@@ -843,6 +896,10 @@ const DiaryTemplates = () => {
         
     }
 
+    /**
+     * Renders the pdf for preview.
+     * @param {Worker} worker worker ready to load the pdf.
+     */
     const previewPdf4 = async (worker) => {
 
         const promise = new Promise( (resolve, error) => {
@@ -861,9 +918,6 @@ const DiaryTemplates = () => {
             // PDF loading error
             console.error(reason);
             });
-
-
-
         });
 
 
@@ -873,6 +927,12 @@ const DiaryTemplates = () => {
         
     }
 
+    /**
+     * 
+     * @param {*} page 
+     * @param {*} canvas 
+     * @returns 
+     */
     const renderPageToCanvas = (page, canvas) => {
         const context = canvas.getContext('2d');
         
@@ -889,10 +949,20 @@ const DiaryTemplates = () => {
         return renderTask.promise;
     }
 
+    /**
+     * Download the pdf document.
+     * @param {jsPdf} doc pdf document 
+     * @param {string} filename name for the downloaded document. 
+     */
     const downloadPdf = (doc, filename) => {
         doc.save(filename);
     }
 
+    /**
+     * Generates a string uri from the pdf document.
+     * @param {jsPdf} doc 
+     * @returns {string} string representation of the pdf document.
+     */
     const getDataUriStringPdf = (doc) => {
         return doc.output('datauristring');
     }

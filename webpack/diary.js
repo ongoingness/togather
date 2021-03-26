@@ -6,8 +6,15 @@ import DataCollection from './data-collection.js';
 import { checkBrowser } from './utils.js';
 import { file } from 'jszip';
 
+/**
+ * State machine that controls what is rendered and handles the user input.
+ * @author Luis Carvalho
+ */
 const Diary = () => {
 
+    /**
+     * All the states.
+     */
     const STATES = {
         uploadFiles: {
             variables: {
@@ -742,9 +749,15 @@ const Diary = () => {
         },
     }
 
-    let currentState = STATES.topicsFound;
+
+    let currentState = STATES.uploadFiles;
     let previousState;
 
+    /**
+     * 
+     * @param {Event} e 
+     * @param {object} params 
+     */
     const handleEvent = (e, params) => {
         e.stopPropagation();
         currentState.eventHandler(e, params);
@@ -770,7 +783,6 @@ const Diary = () => {
     const model = DiaryModel();
 
     updateState(STATES.uploadFiles);
-    //updateState(STATES.downloadDiary);
 };
 
 export default Diary;

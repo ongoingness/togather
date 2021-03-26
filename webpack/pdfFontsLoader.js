@@ -1,3 +1,8 @@
+/**
+ * Loads all the fonts used to generated the pdfs.
+ * Initial files created with: https://rawgit.com/MrRio/jsPDF/master/fontconverter/fontconverter.html 
+ * @author Luis Carvalho
+ */
 module.exports = loadPdfFonts = (jsPDF) => {
 
     const fontsLoaders = [
