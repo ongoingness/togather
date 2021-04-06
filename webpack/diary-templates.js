@@ -204,7 +204,7 @@ const DiaryTemplates = () => {
         
         doc.setTextColor(255, 255, 255);
         doc.setFontSize(42);
-        doc.setFont('Oswald-Regular', 'normal');
+        doc.setFont(/*'Oswald-Regular'*/'RobotoCondensed-Regular', 'normal');
 
         const date = new Date(data.timestamp);
         const day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(date)
@@ -213,7 +213,7 @@ const DiaryTemplates = () => {
         doc.text((data.part === 0 ? `${day} ${month} ${year}` : `${day} ${month} ${year} - {% t templates.tp2 %} ${data.part}`).toUpperCase(), 45, 54);
  
         doc.setTextColor(0, 0, 0);
-        doc.setFont('Oswald-ExtraLight');
+        doc.setFont('Oswald-ExtraLight', 'normal');
         doc.setFontSize(40);
                 
         doc.setFontSize(18);

@@ -846,3 +846,10 @@ button.third, .button.third {
     line-height: 47px;
     padding: 0 20px 0 20px;
 }
+
+
+#download-main-text {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 16px;
+}

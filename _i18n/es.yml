@@ -1,0 +1,265 @@
+global:
+    css: '/assets/css/es.css'
+    lang-code: es
+    english: English
+    portugues: Português
+    nederlands: Nederlands
+    greek: ελληνικά
+    spanish: Español
+ 
+index:
+    header: Togather
+    home-text: Reúnanse en historias cuando no sea ​​posible estar juntos
+    home-learn-button: Más información sobre Togather
+    home-topic-button: ¡Obtén un tema!
+
+introduction:
+    header: Introducción
+    t1: Togather facilita la creación de un folleto en WhatsApp durante el tiempo que pasan separados para sus seres queridos.
+    t2: Reúna a un grupo de amigos y familiares en WhatsApp
+    t3: Obtén temas nostálgicos, creativos, divertidos o desafiantes para compartir con tu grupo
+    t4: Crea, captura, escribe, fotografía y comparte con tu grupo.
+    t5: Regrese todos los días para buscar otro tema nuevo para compartir con su grupo.
+    t6: 'Para empezar a crear un grupo en Whatsapp con todas las personas que quieran contribuir a este folleto. Hágales saber a todos de qué se trata este grupo. Puede utilizar nuestro ejemplo: '
+    t7: menú de participantes del grupo de WhatsApp
+    t8: página de este sitio web con un tema
+    t9: Chat de un grupo de WhatsApp
+    t10: Togather lo ayudará a crear un folleto personalizado desde su chat grupal de WhatsApp para compartir con su ser querido, sin necesidad de diseñador o habilidades técnicas.
+    t11: Portada del folleto
+    t12: Folleto Página 1
+    t13: Folleto página 2
+    t14: Folleto Página 3
+    t15: Folleto página 4
+    t16: Página 5 del folleto
+    t17: Folleto, página 6
+    t18: Folleto Página 7
+
+instructions:
+    header: Instrucciones
+    t1: Primeros pasos
+    t2: Abra WhatsApp y cree un grupo con todas las personas que quieran contribuir al folleto.
+    t3: Procedimientos para Android
+    t4: Procedimientos para iOS
+    t5: 'Deje que todos sepan de qué se trata este grupo y para quién es el folleto. Puede utilizar nuestro ejemplo:'
+    t6: Tareas diarias
+    t7: Visite ToGather todos los días para recibir un nuevo tema o actividad para su grupo.
+    t8: Tenemos muchos temas y actividades para que usted y su grupo estén ocupados, o puede crear los suyos propios. Solo compártelos en tu grupo de WhatsApp como un mensaje o una foto y anima a los demás a responder.
+    t9: 'SUGERENCIA: facilita la búsqueda de tus propios temas al final comenzando el mensaje con las palabras "el tema de hoy es ..."'
+    t10: Todos pueden compartir sus respuestas en el grupo de WhatsApp.
+    t11: Repita estos pasos y seleccione más adelante los mensajes que se incluirán en el folleto.
+    t12: Obtener un tema
+    t13: Montaje del folleto
+    t14: 'Para convertir su chat grupal de WhatsApp en un folleto, siga estos sencillos pasos:'
+    t15: 1. Exporte el chat grupal (incluidos los medios) y guárdelo en su dispositivo o almacenamiento en la nube ( por ejemplo, Google Drive, iCloud o Dropbox).
+    t16: Cómo exportar chats de WhatsApp
+    t17: 'SUGERENCIA: Cualquiera del grupo de WhatsApp puede hacer esto, así que pida ayuda si tiene dificultades.'
+    t18: 2. Visite la página 'Ensamblar folleto' de ToGather y cargue su chat grupal exportado. ( todos los medios y el archivo `chat.txt` que guardó en el paso anterior)
+    t19: 'SUGERENCIA: No se preocupe, sus mensajes personales y archivos multimedia no se cargan en ninguna parte. Todo sucede localmente en su dispositivo; no recopilamos ningún dato personal. Esto garantiza que sus conversaciones se mantengan privadas y que tenga control total sobre con quién desea compartir su folleto.'
+    T20: aprender acerca de cómo los servicios de obras
+    t21: 3. Personalice el folleto agregando el nombre de su ser querido y un título en la portada.
+    t22: 4. Verifique los nombres de todos los contribuyentes. Le mostraremos una lista de los nombres que encontramos en su grupo. Puede editar los nombres que verá en el folleto ( por ejemplo , solo los nombres).
+    t23: 5. Revise los temas que encontramos en el chat grupal. Si faltan temas, puede agregarlos de sus mensajes o escribirlos. Si hay algunos que ya se han incluido en diarios anteriores, simplemente elimínelos.
+    t24: 6. Para cada tema, se le pedirá que seleccione las respuestas que desea agregar al folleto para ese día.
+    t25: 'CONSEJO: No te preocupes si hay un día en el que no enviaste nada, todos merecen un descanso, saltaremos esos días y las fechas seguirán contando.'
+    t26: "7. Cuando haya hecho esto para cada día que desee en el folleto, haga clic en el botón 'finalizar'. Todos sus mensajes se colocarán en una plantilla prediseñada y su folleto estará listo para que lo descargue. Puede imprimirlo y / o reenviarlo para compartir el folleto con su familia, amigos y seres queridos."
+    t27: Ensamblar folleto
+    t28: 'SUGERENCIA: Recomendamos hacer esto semanalmente, o incluso diariamente, para que WhatsApp pueda exportar todos sus mensajes y así tenga algo que compartir con más frecuencia.'
+    t29: 'SUGERENCIA II: Si descubre que faltan mensajes o medios después de haber exportado un chat, es probable que se deba al límite de WhatsApp en el tamaño del archivo de exportación. En este caso, exporte el chat SIN medios y recupere los medios por separado desde su teléfono, o descárguelos a través de web.WhatsApp en su computadora.'
+
+about:
+    header: Acerca de
+    t0: Cómo empezó
+    t1: La idea de Togather nació en las primeras etapas del bloqueo de COVID-19 en el Reino Unido. Vimos un artículo sobre las noticias holandesas donde una familia guardaba un folleto para su pariente en la Unidad de Cuidados Intensivos (UCI) y se lo entregaba cuando le dieron el alta del hospital. Anotaron lo que le sucedió mientras estaba en la UCI, pero también lo que sucedió en el mundo exterior, pronósticos del tiempo, algunas noticias, cosas que había hecho la familia. Pensamos que esto era realmente bueno y queríamos que esto estuviera disponible para personas que atraviesan experiencias similares.
+    t2: Cuando nos damos cuenta de que atravesar estos tiempos difíciles, en los que las familias y los amigos se separan, puede hacer que te sientas impotente. Esperamos que al reunirnos como grupo para participar en estos temas y actividades proporcione un espacio para sacar fuerzas unos de otros y encontrar algo de luz. Un espacio donde, aunque la vida parezca extraña, pueden compartir recuerdos juntos, con su ser querido en el centro de todo. Queremos ayudarlo a apoyar a su familia / amigos / comunidad para que se reúnan en historias cuando no es posible estar juntos.
+    t3: En pocas palabras. Hemos diseñado Togather para mantener la privacidad de sus mensajes y medios. Todos sus mensajes de chat y archivos multimedia permanecen en su dispositivo y nunca serán compartidos o almacenados por Togather (o cualquier otra persona).
+    t4: Los únicos datos que capturamos son a través del análisis anónimo del sitio y a través de nuestro formulario de comentarios opcional al final de la preparación de su folleto. Somos un equipo de investigadores (detalles a continuación), al que le encantaría conocer sus experiencias con ToGather (así como cualquier sugerencia sobre cómo mejorarlo). Esto es completamente voluntario y de ninguna manera afecta su acceso o uso del sitio web de ToGather . Para respaldar estos comentarios y obtener una idea de cómo las personas usan ToGather , registramos qué temas se comparten, eso es todo. No registramos ningún dato de usuario o información que pueda rastrear a alguien. Para darle una idea de qué datos capturamos hemos creado un ejemplo de un registro para un día, haga clic aquí para verlo.
+    t5: La gente detrás de Togather
+    t6: Somos un equipo de investigadores de diseño de la Universidad de Newcastle y la Universidad de Northumbria con sede en Newcastle Upon-Tyne en el Reino Unido.
+    t7: Togather
+    t8: Togather es un servicio en línea que tiene como objetivo unir a familias y amigos a través del intercambio de historias para un ser querido. Está construido utilizando los servicios existentes WhatsApp y GitHub, para que esté ampliamente disponible y de forma gratuita para todos. Le proporcionaremos temas y actividades diarios para que su familia y amigos puedan enviar mensajes y convertir sus conversaciones grupales en un libro o folleto para regalar, conservar y volver a visitar.
+    t9: Tu privacidad
+    t10: Somos parte del proyecto de investigación llamado Enabling Ongoingness (www.enablingongoingness.com) que explora cómo podemos dar un nuevo significado a las relaciones en el contexto del final de la vida y el duelo . Una gran parte de esto consiste en explorar cómo las personas conservan la esencia de una relación en los medios, las historias, los objetos y los rituales de la vida cotidiana. Durante la pandemia de COVID-19 nos enfrentamos a una nueva experiencia global compartida de miedo a la pérdida y al dolor. No se parece a nada que muchos de nosotros hayamos experimentado antes y, sin duda , ha cambiado nuestras vidas de muchas maneras. A través de ToGather , esperamos poder ayudarlo a capturar los lazos de su comunidad en un momento en el que esto no es tan fácil como antes. Si tiene alguna experiencia con ToGather que le gustaría compartir con nosotros, no dude en comunicarse con nosotros. Puede enviarnos un mensaje por correo electrónico (kyle.montague@northumbria.ac.uk) o completar nuestro formulario de comentarios.
+    t11: Investigador
+    t12: Profesor asociado
+    t13: Profesor
+    t14: Fotografía de perfil de Luis
+    t15: Fotografía de perfil de Linnea
+    t16: Fotografía de perfil de Kyle
+    t17: Fotografía de perfil de Jayne
+    t18: Fotografía de perfil de Josh
+ 
+contact:
+    header: Contacto
+    t1: ToGather se ha desarrollado como un servicio de libre acceso en constante desarrollo. Por lo tanto , siempre estamos ansiosos por escuchar sus comentarios, ideas, pensamientos y experiencias. Si hay algo que le gustaría compartir con nosotros, ¡no dude en contactarnos!
+    t2: 'Puede contactarnos a través de:'
+
+nav-overlay:
+    home-a: Inicio
+    topic-a: Obtén un tema
+    explained-a: Introducción
+    instructions-a: Instrucciones
+    diary-a: Ensamblar folleto
+    about-a: Acerca de
+    contact-a: Contacto con nosotros
+
+footer:
+    f1: 'Seleccionar idioma:'
+    f2: 'Logotipo de Togather'
+    f3: 'Habilitación del logotipo del proyecto de continuidad '
+    f4: 'Logotipo del grupo de investigación de Diseño e Innovación Inclusivos (IDI)'
+    f5: 'Logotipo de la Universidad de Northumbria'
+
+group start:
+    gs1: '“¿Has visto a Togather (<span> <a href=https://youtu.be/BUJLK6aTBkQ> https://youtu.be/BUJLK6aTBkQ </a> </span>)? Es un sitio web que nos permitirá convertir nuestros mensajes de WhatsApp en un folleto. Sería genial si pudiéramos hacer uno para [INSERT NAME]. Como apertura, sería bueno comenzar con un saludo personal y una foto. Luego, podemos comenzar a compartir mensajes sobre los temas de Togather o temas que pensamos en nosotros mismos. Podemos seleccionar qué mensajes irán al final del folleto, así que hable libremente ;) “ '
+    gs2: compartir mensaje
+    gs3: '¿Has visto a Togather (https://youtu.be/BUJLK6aTBkQ)? Es un sitio web que nos permitirá convertir nuestros mensajes de WhatsApp en un folleto. Sería genial si pudiéramos hacer uno para $ {name}. Como apertura, sería bueno comenzar con un saludo personal y una foto. Luego, podemos comenzar a compartir mensajes sobre los temas de Togather o temas que pensamos en nosotros mismos. Podemos seleccionar qué mensajes irán al final del folleto, así que hable libremente;) '
+    gs4: 'Por favor, escriba el nombre para quién es el folleto:'
+
+topic:
+    t0: Obtener un tema
+    t1: Comparte con tu grupo
+    t2: Dame un tema diferente
+    t3: 'Tema:'
+
+diary:
+    uf1: 'Encuentra tu chat grupal de WhatsApp exportado (incluidos los archivos multimedia) y agrégalos a continuación.'
+    uf2: 'SUGERENCIA:'
+    uf3: '¿Exportado por un teléfono Android? Seleccione todos los archivos multimedia y un archivo .txt. ¿Exportado por un iPhone? Seleccione el archivo .zip. '
+    uf4: 'Sus mensajes de chat y medios permanecen privados, todo esto sucede en su dispositivo y nada de su contenido se envía ni se comparte con nosotros (ni con nadie más).'
+    uf5: 'Seleccionar archivos de WhatsApp exportados '
+    uf6: 'No hay archivos seleccionados'
+    uf7: 'Comience a ensamblar el folleto'
+    uf8: 'Instrucciones de montaje completas'
+    uf9: 'Cómo aseguramos su privacidad'
+
+    uem1: 'No se encontró archivo de chat '
+
+    dh1: 'Ensamblar folleto'
+    dh2: 'Debido a nuestras medidas de privacidad, si sale ahora, su proceso no se puede guardar. Esto significa que cuando vuelvas a montar tienes que empezar de nuevo. Si quieres un descanso puedes dejar este sitio web abierto sin perder tu progreso. ¿Está seguro de que quiere dejar de preparar su folleto?'
+    dh3: 'Sí, deja de ensamblar'
+    dh4: 'No, continúe con el folleto'
+
+    ds1: "El montaje del folleto requiere 5 pasos."
+    ds2: '# 1 ¿Para quién es el folleto?'
+    ds3: '# 2 Verifique los nombres de los contribuyentes '
+    ds4: '# 3 Lista completa de temas'
+    ds5: '# 4 Recopilar respuestas por día'
+    ds6: '# 5 Revisión y descarga del folleto'
+    ds7: 'Aquí verá en qué paso se encuentra.'
+    ds8: 'Vaya al paso 1'
+
+    sc1: 'Paso'
+
+    wtdif1: '¿Para quién es este folleto?'
+    wtdif2: 'El nombre se usará para crear una portada personal y una página de apertura.'
+    wtdif3: 'Escriba el nombre aquí'
+    wtdif4: 'Dé el nombre de su ser querido para quien está haciendo este folleto. Este nombre se utilizará en la portada del folleto final y en la primera página para crear un folleto personal y un mensaje para ellos. No guardamos esta información, todo esto es privado y solo para ti y con quién eliges compartirlo.'
+    wtdif5: 'Escriba el título aquí'
+
+    wc1: '¿Quién contribuyó a este folleto?'
+    wc2: 'Encontramos los siguientes nombres en el grupo. ¿Es correcta esta lista?'
+    wc3: 'Estos son los nombres de los miembros del grupo tal como están guardados en su teléfono. Asegúrese de que la lista esté completa y de que estos son los nombres que le gustaría tener en el folleto. Si desea cambiarlos, haga clic en el botón del lápiz para editar. Si solo ve un número de teléfono, esta persona no se guardó en sus contactos. Como usamos estos nombres para mostrar quién escribió qué mensaje, tómese el tiempo para verificarlos y editarlos.'
+    wc4: '- Ocultar / Mostrar mensajes de esta persona'
+
+    tf1: '¿Sobre qué temas conversaste?'
+    tf2: 'Encontramos el siguiente conjunto de temas. ¿Esta lista está completa?'
+    tf3: 'Seleccionar del chat'
+    tf4: 'Escribe el mío '
+    tf5: 'Agregar tema'
+    tf6: 'Los temas que hemos encontrado son los que compartió a través del sitio web de Togather. Si pensó en sus propios temas, puede agregarlos aquí. Usted puede seleccionarlos en el chat, si los hay compartido, o escribir el suyo propio. Si hubo días en los que no tenía un tema, pero se compartieron mensajes, intente encontrar una descripción para eso. Por ejemplo; Un diario del lunes. O; Algunas cosas que nos gustó compartir hoy. De esta manera podemos agregar ese día en la plantilla del folleto.'
+
+    t1: 'Día'
+    t2: 'Tema'
+
+    wt1: 'Escribe tu propio tema y para qué fecha fue'
+    wt2: 'Escribe otro tema'
+    wt3: 'Si hay temas que no fueron compartidos en su chat grupal de WhatsApp, puede escribirlos aquí. Si hubo días en los que no tenía un tema, pero se compartieron mensajes, intente encontrar una descripción para eso. Por ejemplo; Un diario del lunes. O; Algunas cosas que nos gustó compartir hoy. De esta manera podemos agregar ese día en la plantilla del folleto.'
+    wt4: 'Atrás'
+    wt5: ' Agregar'
+    wt6: ' Hecho'
+
+    nt1: 'Escriba la descripción de su tema aquí'
+    nt2: 'Agregar medios'
+
+    stfc1: 'Seleccione los temas que desea agregar.'
+    stfc2: 'Encuentra los temas que nos perdimos de tu chat grupal de WhatsApp. Selecciónelos para agregarlos a la lista de temas.'
+    stfc3: 'Atrás'
+    stfc4: ' Agregar'
+
+    sm1: 'Seleccionar todos los mensajes para este día:'
+    sm2: 'Revise los mensajes que se compartieron en su chat grupal de WhatsApp y seleccione los que desea agregar para este día. Puede navegar por los días con las flechas en el área superior . Haga clic en el día para volver a ver el tema de ese día. Si ha seleccionado los mensajes para todos los días del folleto , se agregarán a la plantilla para que los revise. '
+    sm3: 'Haga clic para ver el tema'
+
+    d1: 'Día del tema'
+    d2: 'Seleccionar mensajes'
+
+    pp1: 'Descargar'
+
+    rd1: 'Revise su folleto, ¿está completo?'
+    rd2: 'Revise las páginas de su folleto. Comprueba si están todos los días, con sus temas y mensajes. Cuando esté satisfecho con el folleto, puede guardarlo y descargarlo. Si faltan cosas, vuelva al paso anterior y agréguelas.'
+    rd3: 'Inicio'
+
+    dd1: '¡Su folleto está listo!'
+    dd2: 'Descargue su folleto aquí:'
+    dd3: 'Descargar folleto'
+    dd4: '¡Su folleto está casi listo!'
+    dd5: 'Gracias por usar Togather, nos gustaría invitarlo a participar en nuestro estudio de investigación. Antes de que decida participar (o no), nos gustaría que entendiera por qué se está realizando la investigación y qué implicaría para usted.'
+    dd6: '¿Le gustaría saber más?'
+    dd7: '(Al enviar, el folleto se descargará y se abrirá una página con más instrucciones)'
+    dd8: 'Sí'
+    dd9: 'No'
+    dd10: ' Enviar'
+
+    s1: '¡Gracias por usar Togather! Si tiene amigos o familiares a los que también les podría gustar Togather, comparta el sitio web con ellos a través de estos enlaces.'
+    s2: '¡No, gracias!'
+    s3: '¿Has visto a Togather (https://togather.me/explained)? Es un sitio web que le permitirá convertir mensajes de un chat grupal de WhatsApp en un folleto. Acabo de hacer un folleto con él y pensé que a usted también le podría gustar.'
+
+templates:
+
+    c1: Para
+    c2: 'Este folleto es una colección de mensajes de:'
+    c3: 'Capturan su tiempo separados durante:'
+    c4: Estimado
+
+    tp1: Día
+    tp2: parte
+
+ 
+error:
+    e1: De acuerdo
+
+edge-support:
+    es1: 'Folleto de ensamblaje no compatible con su versión actual de Microsoft Edge'
+    es2: 'Haga clic a continuación para actualizar Edge a su última versión'
+
+topics:
+    td1: 'Comparta una historia memorable sobre cuando estuvieron juntos y por qué me viene a la mente. ¿Tienes fotos de esto?'
+    td2: 'Cada uno comparte una canción que te hace feliz y te recuerda a tu ser querido , y explica por qué.'
+    td3: 'Comparta algo que suceda hoy que le gustaría compartir con su ser querido.'
+    td4: "Brinde por su ser querido y cuente la historia más vergonzosa que lo involucre."
+    td5: 'Comparta su recuerdo favorito de usted y su ser querido y / o grupo.'
+    td6: 'Captura el clima en un poema y una foto misteriosa.'
+    td7: '¿Cuál fue el punto culminante de tu día? ¿Por qué?'
+    td8: 'Escribe una reseña y toma una foto de algo que comiste hoy.'
+    td9: 'Capture algo que hizo hoy y que su ser querido nunca habría hecho.'
+    td10: 'Documente algo que experimentó / vio / escuchó hoy que lo sorprendió o lo hizo pensar en su ser querido o en este grupo.'
+    td11: 'Intente comenzar el día como lo haría normalmente su ser querido. ¿Cómo funcionó para ti?'
+    td12: 'Come o bebe algo hoy que les guste mucho, capturate a ti mismo haciéndolo y describe qué es y en qué contexto lo tenías.'
+    td13: 'Prueba uno de sus pasatiempos hoy y captura tu propia actividad, ¿cómo te fue?'
+    td14: 'Intenta combinar tus atuendos hoy en el color favorito de tu ser querido.'
+    td15: 'Imprima o dibuje una imagen de la cara de sus seres queridos y tome una foto de todos los miembros de su hogar con ella.'
+    td16: '"Pon una cara valiente": haz que tu cara se vea valiente, tómate una foto en el espejo y comparte tu "cara valiente" (por ejemplo, ponte un lápiz labial o usa cinta adhesiva para moldear tu rostro).'
+    td17: 'Pon la cara de tu ser querido en un tubo de papel higiénico.'
+    td18: 'Haz una foto grupal de todos ustedes junto con los objetos que puedan encontrar en su casa (¿quién es quién y por qué?).'
+    td19: 'Comparte una foto tuya con tu ser querido (y otras personas de este grupo) cuando eras más joven y trata de recrear esa foto en casa. Use suplentes si es necesario, ¡sea creativo!'
+    td20: 'Construya una historia, que involucre a los miembros de este grupo, que haga reír a su ser querido. Cada uno sigue con una o más oraciones que terminan en suspenso . Las primeras patadas de con "érase una vez ..."'
+    td21: '¿Qué pensaría tu ser querido sobre los mensajes de ayer ? Trate de escribir su respuesta como lo harían ellos y tome una foto de cómo se vería su cara al leerlos.'
+    td22: '¿Qué buen recuerdo de algo que hicieron juntos como grupo le gustaría recrear? (Pruébalo).'
+    td23: '¿Qué es lo que más extrañaste durante el tiempo que estuvieron separados y por qué?'
+    td24: "¿Qué ha aprendido de su ser querido, de alguien de este grupo o del tiempo que pasaron separados?"
+    td25: '¿Qué sería lo primero que harías con tu ser querido cuando pudieran estar todos juntos de nuevo?'
+    td26: 'Imagínense a usted y a su ser querido en un sándwich, ¿cómo lo describirían en un menú?'
+    td27: 'Imagínense a usted y a su ser querido en una canción, ¿cuál sería el título y el coro de esta canción? Si se siente creativo, diseñe la portada de un álbum para usted.'
+    td28: 'Imagínense a usted y a su ser querido como un cono de helado , ¿qué sabores serían?'
+    td29: 'Imagínense a usted y a su ser querido como un superhéroe , ¿cuál sería su nombre y superpoder?'
+    td30: 'Imagínense a usted y a su ser querido como un programa de televisión, ¿qué papeles interpretarían?'

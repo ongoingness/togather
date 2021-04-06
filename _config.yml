@@ -52,6 +52,6 @@ exclude:
   - 'addFrontMatter.js'
   - 'test'
 
-languages: ['en', 'pt', 'nl']
+languages: ['en', 'pt', 'nl', 'el', 'es']
 
 exclude_from_localizations: []

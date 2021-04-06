@@ -331,6 +331,16 @@ const DiaryUI = (eventHandler) => {
         buttonNL.innerText = '{% t global.nederlands %}';
         languageList.append(buttonNL);
 
+        const buttonEL = document.createElement('a');
+        buttonEL.href = '/el/diary/';
+        buttonEL.innerText = '{% t global.greek %}';
+        languageList.append(buttonEL);
+
+        const buttonES = document.createElement('a');
+        buttonES.href = '/es/diary/';
+        buttonES.innerText = '{% t global.spanish %}';
+        languageList.append(buttonES);
+
         window.onclick = (event) => {
             const modal = document.getElementById("languageModal");
             if (event.target == modal)
@@ -2407,10 +2417,8 @@ const DiaryUI = (eventHandler) => {
         content.appendChild(centerContainer);
 
         const textBox1 = document.createElement('div');
+        textBox1.id = "download-main-text";
         textBox1.innerText = '{% t diary.dd5 %}';
-        textBox1.style.marginBottom = '20px';
-        textBox1.style.textAlign = 'center';
-        textBox1.style.fontSize = '16px';
         centerContainer.appendChild(textBox1);
 
         const form = document.createElement('form');
@@ -2419,6 +2427,7 @@ const DiaryUI = (eventHandler) => {
         centerContainer.appendChild(form);
 
         const textbox3 = document.createElement('div');
+        textbox3.id = "download-form-text";
         textbox3.style.textAlign = 'center';
         textbox3.innerText = '{% t diary.dd6 %}';
         form.append(textbox3);
@@ -2809,20 +2818,14 @@ const DiaryUI = (eventHandler) => {
 
         clearPage,
 
-        updateDay,
-
         renderTopicsFound,
         renderWriteTopic,
         renderEditTopic,
         renderTopics,
         removeTopics,
 
-        startChatUI,
-        removeChatUI,
         renderSelectTopicFromChat,
         renderSelectMessages,
-        renderFullTopic,
-        renderShortTopic,
         renderDay,
         clearDay,
 

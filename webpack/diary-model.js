@@ -245,6 +245,7 @@ const DiaryModel = () => {
       
     }
 
+    
     /**
      * Sets the part field in a topic, if there are more than one topic in a day.
      * @param {[Topic]} topics topics to have the part field set.

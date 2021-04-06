@@ -4,6 +4,8 @@ global:
     english: English
     portugues: Português
     nederlands: Nederlands
+    greek: ελληνικά
+    spanish: Español
 
 index:
     header: Togather

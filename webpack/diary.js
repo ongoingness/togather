@@ -2,7 +2,6 @@ import DiaryUI from './diary-ui.js';
 import DiaryModel from './diary-model.js';
 import DiaryTemplates from './diary-templates.js';
 import WhatsAppChatParser from './whatapp-chat-parser.js';
-import DataCollection from './data-collection.js';
 import { checkBrowser } from './utils.js';
 import { file } from 'jszip';
 
@@ -696,7 +695,7 @@ const Diary = () => {
                 switch(params.type) {
 
                     case 'give-feedback':
-                        await DataCollection().sendFeedback(params.feedback, params.consent);
+                        //await DataCollection().sendFeedback(params.feedback, params.consent);
                         updateState(STATES.share);
                         break
                 }
