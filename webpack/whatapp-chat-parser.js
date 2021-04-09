@@ -168,28 +168,56 @@ const WhatsAppChatParser = () => {
 
         const fileRegex = RegExp('(([A-Z]{3}\-[0-9]{8}\-[A-Z]{2}[0-9]{4}\..[^ ]*) \(.*\))');
 
-        const fileRegexIOS = RegExp('(([0-9]{8}-[^-]*-[0-9]{4}(?:-[0-9]{2}){5}\..[^ ]*)(?: \(.*\))?)');
+        //const fileRegexIOS = RegExp('(([0-9]{8}-[^-]*-[0-9]{4}(?:-[0-9]{2}){5}\..[^ ]*)(?: \(.*\))?)');
+        const fileRegexIOS = RegExp('(\<[a-z]*\: )?([0-9]{8}-[^-]*-[0-9]{4}(?:-[0-9]{2}){5}\..[^ \>]*)(?: \(.*\))?(\>)?');
 
         const parseMessageBody = (body) => {
 
             let filename = [];
             let text = body;
 
+            let isIOS = false;
+
             let fileRegexResult = fileRegex.exec(text);
-            if(fileRegexResult == null) 
+            if(fileRegexResult == null) {
                 fileRegexResult = fileRegexIOS.exec(text);
+                isIOS = true;
+            }
 
             if(fileRegexResult != null) {
-                const [fullLine, fullFilename, tempFilename] = fileRegexResult;
 
-                let hash;
-                files.forEach((value, key) => {
-                    if(value.name === tempFilename) hash = key;
-                });
+                if(!isIOS) {
 
-                if(hash != undefined) {
-                    text = text.replace(fullFilename, '');
-                    filename.push(hash);
+                    const [fullLine, fullFilename, tempFilename] = fileRegexResult;
+
+                    let hash;
+                    files.forEach((value, key) => {
+                        if(value.name === tempFilename) hash = key;
+                    });
+
+                    if(hash != undefined) {
+                        text = text.replace(fullFilename, '');
+                        filename.push(hash);
+                    }
+
+                } else {
+                
+                    const [fullLine, initialMessage, fullFilename, lastAngleBracket] = fileRegexResult.filter((elem) => elem != null);
+
+                    let hash;
+                    files.forEach((value, key) => {
+                        if(value.name === fullFilename) hash = key;
+                    });
+
+                    if(hash != undefined) {
+                        console.log(text, initialMessage, fullFilename, lastAngleBracket, fileRegexResult);
+                        text = text.replace(initialMessage, '');
+                        text = text.replace(lastAngleBracket, '');
+                        text = text.replace(fullFilename, '');
+                        console.log(text);
+                        filename.push(hash);
+                    }
+
                 }
 
             } 
