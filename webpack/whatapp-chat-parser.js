@@ -210,11 +210,9 @@ const WhatsAppChatParser = () => {
                     });
 
                     if(hash != undefined) {
-                        console.log(text, initialMessage, fullFilename, lastAngleBracket, fileRegexResult);
                         text = text.replace(initialMessage, '');
                         text = text.replace(lastAngleBracket, '');
                         text = text.replace(fullFilename, '');
-                        console.log(text);
                         filename.push(hash);
                     }
 
