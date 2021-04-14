@@ -1,0 +1,37 @@
+
+@media only screen and (max-width: 600px) {
+
+    button, button.small-font {
+        font-size: 14px;
+    }
+
+    #t17, #t23 {
+        margin-top: 40px;
+    }
+
+    .header__top__text {
+        font-size: 25px;
+    }
+
+    #uploadFilesInputText {
+        line-height: 24px;
+        font-size: 13px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+}
+
+.day-display__tap__instructions {
+    width: 80px;
+    right: -70px;
+    top: 42px;
+}
+
+button.step-controller__step-button, .button.step-controller__step-button  {
+    font-size: 14px;
+}
+
+.language-button {
+    height: 60px;
+}

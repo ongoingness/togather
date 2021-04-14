@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="el"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Togather | Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Togather" />
+<meta property="og:locale" content="el" />
+<meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description." />
+<meta property="og:description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description." />
+<link rel="canonical" href="/el/404.html" />
+<meta property="og:url" content="/el/404.html" />
+<meta property="og:site_name" content="Togather" />
+<script type="application/ld+json">
+{"description":"Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.","url":"/el/404.html","@type":"WebPage","headline":"Togather","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/el/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/el/feed.xml" title="Togather" /></head>
+<body><header id='header'>
+    <div class="header__top">
+        <span class="header__top__text"></span>
+        <span class="header__right">
+            <button class="header__hamburguer" aria-label="Open Navigation Overlay" onclick="openNav()" tabindex="0">
+                <div class="hamburguer-line"></div>
+                <div class="hamburguer-line"></div>
+                <div class="hamburguer-line"></div>
+            </button>
+        </span>
+    </div>
+    <div class="header__bottom"></div>
+    <nav id="myNav" class="overlay">
+        <button class="close-button" aria-label="Close Navigation Overlay" onclick="closeNav()">&times;</button>
+        <div id="myNavContent" class="overlay-content">
+          <a id="home-a" href="/el/">Σπίτι</a>
+          <a id="topic-a" href="/el/topics">Λάβετε ένα θέμα</a>
+          <a id="explained-a" href="/el/explained">Εισαγωγή</a>
+          <a id="instructions-a" href="/el/instructions">Οδηγίες</a>
+          <a id="diary-a" href="/el/diary">Συγκεντρώστε το λεύκωμα</a>
+          <a id="about-a" href="/el/about">Σχετικά</a>
+          <a id="contact-a" href="/el/contact">Επικοινωνήστε μαζί μας</a>
+        </div>
+    </nav>
+    <script>
+
+        const overlayContent = document.getElementById('myNavContent'); 
+
+        overlayContent.style.minWidth = `${document.body.offsetWidth}px`;
+        window.addEventListener('resize', (e) => overlayContent.style.minWidth = `${document.body.offsetWidth}px`);
+
+        const splittedPageUrl = '/404.html'.split(/[\/.]+/);
+        switch(splittedPageUrl[1]) {
+            case '':
+                document.getElementById('home-a').style.textDecoration = 'underline';
+                break;
+            
+            case 'topics':
+            document.getElementById('topic-a').style.textDecoration = 'underline';
+                break;
+        
+            case 'explained':
+                document.getElementById('explained-a').style.textDecoration = 'underline';
+                break;
+        
+            case 'instructions':
+                document.getElementById('instructions-a').style.textDecoration = 'underline';
+                break;
+     
+            case 'diary':
+                ocument.getElementById('diary-a').style.textDecoration = 'underline';
+                break;
+        
+            case 'about':
+                document.getElementById('about-a').style.textDecoration = 'underline';
+                break;
+                
+            
+            case 'contact':
+                document.getElementById('contact-a').style.textDecoration = 'underline';
+                break;
+        }
+        
+
+        // Will hold previously focused element
+        let focusedElementBeforeOverlay;
+
+        // Find the modal and its overlay
+        let overlay = document.getElementById("myNav");
+
+        const openNav = () => {
+            document.getElementById("myNav").style.visibility = 'visible'
+            document.getElementById("myNav").style.width = "100%";
+            
+            // Save current focus
+            focusedElementBeforeOverlay = document.activeElement;
+
+            const trapTabKey = (e) => {
+                // Check for TAB key press
+                if (e.keyCode === 9) {
+                    // SHIFT + TAB
+                    if (e.shiftKey) {
+                        if (document.activeElement === firstTabStop) {
+                            e.preventDefault();
+                            lastTabStop.focus();
+                        }
+                    // TAB
+                    } else {
+                        if (document.activeElement === lastTabStop) {
+                            e.preventDefault();
+                            firstTabStop.focus();
+                        }
+                    }
+                }
+                // ESCAPE
+                if (e.keyCode === 27) {
+                    console.log('clise');
+                    closeNav();
+                }
+            }
+            // Listen for and trap the keyboard
+            overlay.addEventListener('keydown', trapTabKey);
+
+            // Listen for indicators to close the modal
+           // modalOverlay.addEventListener('click', closeModal);
+
+            // Find all focusable children
+            var focusableElementsString = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
+            var focusableElements = overlay.querySelectorAll(focusableElementsString);
+            // Convert NodeList to Array
+            focusableElements = Array.prototype.slice.call(focusableElements);
+
+            var firstTabStop = focusableElements[0];
+            var lastTabStop = focusableElements[focusableElements.length - 1];
+
+            // Focus first child
+            firstTabStop.focus();
+        }
+        
+        const closeNav = () => {
+            focusedElementBeforeOverlay.focus();
+            document.getElementById("myNav").style.width = "0%";
+            document.getElementById("myNav").style.visibility = 'hidden';
+        }
+        </script>
+</header><main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <script>
+  window.location.href = `/el/`;
+</script>
+
+      </div>
+    </main><div class="footer">
+    <div class="footer__text">
+        Togather
+    </div>
+    <div class="row" style="height: 100px; margin-bottom: 35px;">
+        <div class="column">
+            <div style="display: flex; flex-direction: column; width: 100px;">
+                <a class="footer__text__small" href="/el/"> Σπίτι </a>
+                <a class="footer__text__small" href="/el/topics"> Λάβετε ένα θέμα </a>
+                <a class="footer__text__small" href="/el/explained"> Εισαγωγή </a>
+                <a class="footer__text__small" href="/el/instructions"> Οδηγίες </a>
+                <a class="footer__text__small" href="/el/diary"> Συγκεντρώστε το λεύκωμα </a>
+                <a class="footer__text__small" href="/el/about"> Σχετικά </a>
+            </div>
+        </div>
+        <div class="column" style="max-width: 200px;">
+            <label id="f1" for="languages" class='footer__text__small' style="padding:0;">Επιλογή γλώσσας:</label>
+            <select name="languages" id="languages" style="height: 22px; margin-right:20px; line-height:22px;" onChange="window.location.href=this.value">
+                <option value="/404.html" >English</option>
+                <option value="/pt/404.html" >Português</option>
+            </select>
+            <button class="button contact" onclick="location.href='/el/contact'"> Επικοινωνήστε μαζί μας >> </button>
+        </div>
+    </div>
+    <div style="display: flex; flex-direction: row; flex-wrap: wrap; padding-left: 15px;">
+        <div style="width: 100px; height: 40px;padding-right: 12px;padding-bottom: 15px;"><a href="https://enablingongoingness.com/"><img src="/assets/images/Ongoingness-logo.svg"></a></div>
+        <div style="padding: 0px 12px; padding-bottom: 15px;"><a href="https://www.kylemontague.co.uk/"><img src="/assets/images/iDi_logo_extended_white.svg"></a></div>
+        <div style="padding: 0px 12px; padding-right: 24px; padding-bottom: 15px;"><a href="https://openlab.ncl.ac.uk/"><img src="/assets/images/openlab-vertical.svg"></a></div>
+        <div style="width: 125px; height: 40px; padding-right: 12px; padding-bottom: 15px;"><a href="https://www.northumbria.ac.uk/"><img width="150" height="40" src="/assets/images/unn_logo_white.png"></a></div>
+        <div style="width: 120px; height: 40px; padding: 0px 12px; padding-bottom: 15px;"><a href="https://www.ncl.ac.uk/"><img width="120" height="40" src="/assets/images/NCL_logo_white.png"></a></div>
+    </div>
+</div></body>
+
+</html>

@@ -1,0 +1,25 @@
+@media only screen and (max-width: 600px) {
+
+    button, button.small-font {
+        font-size: 14px;
+    }
+
+    .header__top__text {
+        font-size: 20px;
+    }
+
+    #uploadFilesInputText {
+        line-height: 24px;
+        font-size: 13px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    #t23 {
+        margin-top: 100px;
+    }
+
+    .title.diary {
+        font-size: 14px;
+    }
+}

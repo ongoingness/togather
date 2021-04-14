@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, initial-scale=1.0">
+    
+    <meta name="title" content="Togather">
+<meta name="description" content="Reúnanse en historias cuando no sea ​​posible estar juntos">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://togather.me/">
+<meta property="og:title" content="Togather">
+<meta property="og:description" content="Reúnanse en historias cuando no sea ​​posible estar juntos">
+<meta property="og:image" content="https://togather.me/assets/images/meta.png">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://togather.me/">
+<meta property="twitter:title" content="Togather">
+<meta property="twitter:description" content="Reúnanse en historias cuando no sea ​​posible estar juntos">
+<meta property="twitter:image" content="https://togather.me/assets/images/meta.png">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#7663a8">
+<meta name="msapplication-TileColor" content="#7663a8">
+<meta name="theme-color" content="#ffffff">
+
+    <script src="https://cdn.usefathom.com/script.js" site="TBJOLBOD" included-domains="togather.me" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+    <link href="/assets/css/home.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/diary.css" rel="stylesheet" type="text/css">
+    <link href= "/es/assets/css/es.css" rel="stylesheet" type="text/css">
+
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.4.456/pdf.min.js" integrity="sha256-O6polm3ZRTZEOAneYbvsKty3c3KRcDf20McwtlCga5s=" crossorigin="anonymous"></script>
+    
+    <script src="/es/assets/scripts/vendors-node_modules_canvg_lib_index_es_js.bundle.js"></script>
+    <script src="/es/assets/scripts/vendors-node_modules_dompurify_dist_purify_js.bundle.js"></script>
+    <script src="/es/assets/scripts/vendors-node_modules_html2canvas_dist_html2canvas_js.bundle.js"></script>
+    <script src="/es/assets/scripts/bundle.js"></script>
+
+    <title>Togather</title>
+</head>
+<body id='body'>
+    <div class="loader"> </div>
+
+    <script>
+
+        // Internet Explorer 6-11
+        var isIE = /*@cc_on!@*/false || !!document.documentMode;
+        if(isIE) {
+            window.location = "/es/iesupport";
+        }
+
+        // Edge 20+
+        var isEdge = !isIE && !!window.StyleMedia;
+
+        // Chrome 1 - 79
+        var isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
+
+        // Edge (based on chromium) detection
+        var isEdgeChromium = isChrome && (navigator.userAgent.indexOf("Edg") != -1);
+
+        if(isEdge && !isEdgeChromium) {
+            window.location = "/es/edgesupport";
+        }
+
+    </script>
+
+    <script>
+
+        // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+        let vh = window.innerHeight * 0.01;
+        // Then we set the value in the --vh custom property to the root of the document
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+        // We listen to the resize event
+        
+        window.addEventListener('resize', () => {
+            // We execute the same script as before
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        });
+      
+    </script>
+
+</body>
+</html>

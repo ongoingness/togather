@@ -1,0 +1,66 @@
+.footer__contact-button {
+    font-size: 11px;
+    height: 60px;
+    top: -30px;
+}
+
+.day-display__tap__instructions {
+    font-size: 10px;
+}
+
+button.third, .button.third {
+    font-size: 14px;
+}
+
+.header__top__text {
+    font-size: 20px;
+}
+
+
+
+@media screen and (max-width: 445px) {
+    .header__top__text {
+        font-size: 16px;
+    }
+    #uploadFilesInputText {
+        font-size: 10px;
+    }
+
+    button.small-font, .button.small-font {
+        font-size: 12px;
+    }
+
+    button {
+        font-size: 14px;
+    }
+
+    #t13 {
+        margin-top: 70px;
+    }
+
+    #t23 {
+        margin-top: 35px;
+    }
+    
+    #t19 {
+        margin-top: 40px;
+    }
+
+    .text-box {
+        font-size: 17px;
+    }
+
+    #download-main-text {
+        font-size: 14px;
+    }
+
+    #download-form-text {
+        font-size: 17px;
+    }
+
+    #warning {
+        margin-bottom: 25px;
+    }
+
+
+  }

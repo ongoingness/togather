@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="title" content="Togather">
+<meta name="description" content="Gather in stories when being together is not possible">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://togather.me/">
+<meta property="og:title" content="Togather">
+<meta property="og:description" content="Gather in stories when being together is not possible">
+<meta property="og:image" content="https://togather.me/assets/images/meta.png">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://togather.me/">
+<meta property="twitter:title" content="Togather">
+<meta property="twitter:description" content="Gather in stories when being together is not possible">
+<meta property="twitter:image" content="https://togather.me/assets/images/meta.png">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#7663a8">
+<meta name="msapplication-TileColor" content="#7663a8">
+<meta name="theme-color" content="#ffffff">
+
+    <script src="https://cdn.usefathom.com/script.js" site="TBJOLBOD" included-domains="togather.me" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="/assets/css/home.css" rel="stylesheet" type="text/css">
+    <link href= " /assets/css/en.css" rel="stylesheet" type="text/css">
+    
+    <title>Togather</title>
+</head>
+<body>
+    <header id='header'>
+    <div class="header__top">
+        <span class="header__top__text">Instructions</span>
+        <span class="header__right">
+            <button class="header__hamburguer" aria-label="Open Navigation Overlay" onclick="openNav()" tabindex="0">
+                <div class="hamburguer-line"></div>
+                <div class="hamburguer-line"></div>
+                <div class="hamburguer-line"></div>
+            </button>
+        </span>
+    </div>
+    <div class="header__bottom"></div>
+    <nav id="myNav" class="overlay">
+        <button class="close-button" aria-label="Close Navigation Overlay" onclick="closeNav()">&times;</button>
+        <div id="myNavContent" class="overlay-content">
+          <a id="home-a" href="/">Home</a>
+          <a id="topic-a" href="/topics">Get a topic</a>
+          <a id="explained-a" href="/explained">Introduction</a>
+          <a id="instructions-a" href="/instructions">Instructions</a>
+          <a id="diary-a" href="/diary">Assemble Booklet</a>
+          <a id="about-a" href="/about">About</a>
+          <a id="contact-a" href="/contact">Contact Us</a>
+        </div>
+    </nav>
+    <script>
+
+        const overlayContent = document.getElementById('myNavContent'); 
+
+        overlayContent.style.minWidth = `${document.body.offsetWidth}px`;
+        window.addEventListener('resize', (e) => overlayContent.style.minWidth = `${document.body.offsetWidth}px`);
+
+        const splittedPageUrl = '/instructions.html'.split(/[\/.]+/);
+        switch(splittedPageUrl[1]) {
+            case '':
+                document.getElementById('home-a').style.textDecoration = 'underline';
+                break;
+            
+            case 'topics':
+            document.getElementById('topic-a').style.textDecoration = 'underline';
+                break;
+        
+            case 'explained':
+                document.getElementById('explained-a').style.textDecoration = 'underline';
+                break;
+        
+            case 'instructions':
+                document.getElementById('instructions-a').style.textDecoration = 'underline';
+                break;
+     
+            case 'diary':
+                ocument.getElementById('diary-a').style.textDecoration = 'underline';
+                break;
+        
+            case 'about':
+                document.getElementById('about-a').style.textDecoration = 'underline';
+                break;
+                
+            
+            case 'contact':
+                document.getElementById('contact-a').style.textDecoration = 'underline';
+                break;
+        }
+        
+
+        // Will hold previously focused element
+        let focusedElementBeforeOverlay;
+
+        // Find the modal and its overlay
+        let overlay = document.getElementById("myNav");
+
+        const openNav = () => {
+            document.getElementById("myNav").style.visibility = 'visible'
+            document.getElementById("myNav").style.width = "100%";
+            
+            // Save current focus
+            focusedElementBeforeOverlay = document.activeElement;
+
+            const trapTabKey = (e) => {
+                // Check for TAB key press
+                if (e.keyCode === 9) {
+                    // SHIFT + TAB
+                    if (e.shiftKey) {
+                        if (document.activeElement === firstTabStop) {
+                            e.preventDefault();
+                            lastTabStop.focus();
+                        }
+                    // TAB
+                    } else {
+                        if (document.activeElement === lastTabStop) {
+                            e.preventDefault();
+                            firstTabStop.focus();
+                        }
+                    }
+                }
+                // ESCAPE
+                if (e.keyCode === 27) {
+                    console.log('clise');
+                    closeNav();
+                }
+            }
+            // Listen for and trap the keyboard
+            overlay.addEventListener('keydown', trapTabKey);
+
+            // Listen for indicators to close the modal
+           // modalOverlay.addEventListener('click', closeModal);
+
+            // Find all focusable children
+            var focusableElementsString = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
+            var focusableElements = overlay.querySelectorAll(focusableElementsString);
+            // Convert NodeList to Array
+            focusableElements = Array.prototype.slice.call(focusableElements);
+
+            var firstTabStop = focusableElements[0];
+            var lastTabStop = focusableElements[focusableElements.length - 1];
+
+            // Focus first child
+            firstTabStop.focus();
+        }
+        
+        const closeNav = () => {
+            focusedElementBeforeOverlay.focus();
+            document.getElementById("myNav").style.width = "0%";
+            document.getElementById("myNav").style.visibility = 'hidden';
+        }
+        </script>
+</header>
+    <main class="static-page-content" style="padding: 0">
+    <h2 id="t1" class="title instructions"> Getting Started </h2>
+    <div class="row main-padding-left">
+        <div class="column">
+            <div id="t2" class="column__text left top">Open WhatsApp and create a group with all the people that want to contribute to the booklet.</div>
+            <ul class="column__text left bottom">
+                <li>
+                    <a id="t3" class="column__text left" href="https://faq.whatsapp.com/en/android/26000123/?category=5245251" target="_blank" style="margin-bottom: 0;"> 
+                        How-to for Android
+                    </a>
+                </li>
+                <li>
+                    <a id="t4" class="column__text left" href="https://faq.whatsapp.com/en/iphone/26000115/?category=5245251" target="_blank" style="margin-bottom: 0;"> 
+                        How-to for iOS
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="image-column">
+            <div class="group-image"></div>           
+        </div>
+    </div>
+    
+    <div id="t5" class="text-box" style="margin-bottom: 10px;">
+        Let everyone know what this group is about and who the booklet is for. You can use our example:
+    </div>
+    <div id="gs1" class="group-start-message">
+    “Have you seen Togather (<span><a href=https://youtu.be/BUJLK6aTBkQ>https://youtu.be/BUJLK6aTBkQ</a></span>)? It’s a website that will let us convert our WhatsApp messages into a booklet. It would be great if we could make one for [INSERT NAME]. As an opening it would be nice to start with a personal greeting and a picture. Then we can start sharing messages about the topics from Togather or topics we think of ourselves. We can select which messages will go into the booklet in the end, so speak freely ;)“
+    <button id="gs2" class="primary" onclick="openModal()" style="margin: 20px auto;">
+        Share message
+    </button>
+</div>
+<div id="nameModal" class="modal">
+    <div class="modal-content">
+        <a class="modal__close-button" onclick="closeModal()">×</a>
+        <p id="gs4">Please, write the name to who the booklet is for:</p>
+        <input id="name" class="modal__input-name" type="text">
+        <button class="primary" onclick="shareMessage()" style="margin-top: 20px;">
+            Share message
+        </button>
+    </div>
+</div>
+
+<script>
+
+    window.onclick = (event) => {
+        const modal = document.getElementById("nameModal");
+      if (event.target == modal)
+        closeModal()
+    }
+    
+    const openModal = () => {
+        document.getElementById("nameModal").style.display = "block";
+        document.getElementById("name").focus();
+    }
+    
+    const closeModal = () => {
+        document.getElementById("nameModal").style.display = "none";
+    }
+    
+    const shareMessage = () => {
+
+        try {
+            window.fathom.trackGoal('81PEBYZD', 0);
+        } catch(e) {
+            console.log("Fathom disabled!")
+        }
+
+        let name = document.getElementById('name').value;
+        name = name.trim();
+    
+        const text = `Have you seen Togather (https://youtu.be/BUJLK6aTBkQ)? It’s a website that will let us convert our WhatsApp messages into a booklet. It would be great if we could make one for ${name}. As an opening it would be nice to start with a personal greeting and a picture. Then we can start sharing messages about the topics from Togather or topics we think of ourselves. We can select which messages will go into the booklet in the end, so speak freely ;)`;
+    
+        const link = (navigator.userAgent.match(/Android/i) 
+                    || navigator.userAgent.match(/webOS/i) 
+                    || navigator.userAgent.match(/iPhone/i)  
+                    || navigator.userAgent.match(/iPad/i)  
+                    || navigator.userAgent.match(/iPod/i) 
+                    || navigator.userAgent.match(/BlackBerry/i) 
+                    || navigator.userAgent.match(/Windows Phone/i)) ? 
+                    `https://api.whatsapp.com/send?text=${encodeURI(text)}`:
+                    `https://web.whatsapp.com/send?text=${encodeURI(text)}`;
+    
+        closeModal();
+        document.getElementById('name').value = '';
+        window.open(link, '_blank');
+    }
+    
+    </script>
+
+    <h2 id="t6" class="title instructions" > To-do Daily </h2>
+    <div class="row main-padding-right">
+        <div class="image-column">
+            <div class="challenge-image"></div>        
+        </div>
+        <div class="column">
+            <div id="t7" class="column__text right">
+                Visit ToGather each day to receive a new topic or activity for your group.
+            </div>
+        </div>
+    </div>
+    <div id="t8" class="text-box page-middle">
+        We've got lots of topics and activities to keep you and your group busy, or you can create your own. Just share them in your WhatsApp group as a message or photo and encourage the others to respond.
+    </div>
+    <div id="t9" class="text-box page-middle italic">
+        TIP: make it easy to find your own topics in the end by starting the message with the words “today’s topic is...”
+    </div>
+    <div class="row main-padding-left">
+        <div class="column">
+            <div id="t10" class="column__text left top">
+                Everyone can share their responses in the WhatsApp group. 
+            </div>
+            <div id="11" class="column__text left middle">
+                Repeat these steps and select later on which messages go in the booklet.
+            </div>
+            <div class="column__text left bottom">
+                <button id="12" class="primary" onclick="location.href='/topics'" type="button" style="margin-right: 20px;">
+                    Get a topic
+                </button>
+            </div>
+        </div>
+        <div class="image-column">
+            <div class="chat-image"></div>          
+        </div>
+    </div>
+    <h2 id="t13" class="title instructions"> Assembling the booklet</h2>
+    <div id="t14" class="text-box" style="margin-bottom: 10px">
+        To turn your WhatsApp group chat  into a booklet follow these simple steps:
+    </div>
+    <div class="row main-padding-right" style=" height: 350px;">
+        <div class="image-column">
+            <div class="export-chat-image-1"></div> 
+            <div class="export-chat-image-2"></div>           
+        </div>
+        <div class="column">
+            <div id="t15" class="column__text right top">
+                1. Export the group chat (including media) and save it on your device or cloud storage (e.g. Google Drive, iCloud or Dropbox).
+            </div>
+            <ul class="column__text right bottom">
+                <li>
+                    <a id="t16" href="https://faq.whatsapp.com/en/android/23756533/?category=5245251" target="_blank" style="text-align: center;"> 
+                        How-to export WhatsApp chats
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="t28" class="text-box page-middle italic" style="margin-bottom: 30px">
+        TIP: We recommend to do this weekly, or even daily, so WhatsApp can export all your messages and so you have something to share more often.
+    </div>
+    <div id="t17" class="text-box page-middle italic">
+        TIP: Anyone from the WhatsApp group can do this, so ask for help if you are having difficulties.
+    </div>
+    <!--div id="t29" class="text-box page-middle italic">
+        TIP II: If you find there are messages or media missing after having exported a chat, this is likely due to the limit of WhatsApp on export file size. In this case, export the chat WITHOUT media, and retrieve the media separately from your phone, or download them via web.WhatsApp on your computer.
+    </div-->
+    <div class="row main-padding-left">
+        <div class="column">
+            <div id="t18" class="column__text left">
+                2. Visit the ToGather 'Assemble Booklet' page and upload your exported group chat. (all of the media and the `chat.txt` file that you saved in the previous step)
+            </div>
+        </div>
+        <div class="image-column">
+            <div class="step-2-image"></div>      
+        </div>
+    </div>
+    <div id="t19" class="text-box italic"> TIP: Don’t worry, your personal messages and media files are not actually being uploaded anywhere. Everything is happening locally on your device – we don’t collect any personal data. This ensures your conversations stay private and you have full control over who you want to share your booklet with. </div>
+    <div class="text-box" style="text-align: center;">
+        <button id="t20" class="primary" onclick="location.href='/about'" type="button" style="font-size: 14px;margin-bottom: 50px;margin-top: 30px;">
+            Learn about how the service works
+        </button>
+    </div>
+
+    <div class="row main-padding-right">
+        <div class="image-column">
+            <div class="step-3-image"></div>      
+        </div>
+        <div class="column">
+            <div id="t21" class="column__text right">
+                3. Personalise the booklet by adding your loved one's name, and a title to the front cover.
+            </div>
+        </div>
+    </div>
+    <div class="row main-padding-left" style="margin-top: 25px;">
+        <div class="column">
+            <div id="t22" class="column__text left">
+                4. Check the names of all the contributors. We will show you a list of the names we found in your group. You can edit the names you'll see in the booklet (e.g first names only).
+            </div>
+        </div>
+        <div class="image-column">
+            <div class="contributed-image"></div>          
+        </div>
+    </div>
+    <div id="t23" class="text-box page-middle">
+        5. Review the topics we found in the group chat. If there are topics missing you can add them from your messages or type them in. If there are ones that have already been included in previous diaries, simply delete them.
+    </div>
+    <div class="row main-padding-right">
+        <div class="image-column">
+            <div class="select-messages-image"></div>        
+        </div>
+        <div class="column">
+            <div id="t24" class="column__text right">
+                6. For each topic you will be asked to select which responses you want to add to the booklet for that day.
+            </div>
+        </div>
+    </div>
+    <div id="t25" class="text-box page-middle italic">
+        TIP: Don’t worry if there is a day you didn’t submit anything, everyone deserves a rest, we will skip over those days and the dates will keep counting on. 
+    </div>
+    <div id="t26" class="text-box">
+        7. When you have done this for each day you want in the booklet, click the 'finish' button. All of your messages will be placed in a pre-designed template and your booklet will be ready for you to download. You can print and/or forward it to share the booklet with your family, friends and loved ones.
+    </div>
+    <div class="text-box" style="text-align: center;margin-top: 32px;">
+        <button id="t27" class="primary" onclick="location.href='/diary'" type="button">
+            Assemble Booklet
+        </button>
+    </div>
+</main>
+
+
+
+
+    <footer>
+    <div class="footer__upper-container">
+        <button class="footer__contact-button" onclick="location.href='/contact'">Contact Us</button>
+        <div class="footer__border"></div>
+    </div>
+    <div class="footer__lower-container">
+        <div class="footer__logo-container">
+            <img class="footer__logo" src="/assets/images/TOGATHER_LOGO_reverse.png" width="80" alt="Togather Logo">
+            <h3 class="footer__logo__title">Togather</h3>
+        </div>
+        <div class="row" style="height: 120px; margin-bottom: 35px;">
+            <div id="sitemap" class="column">
+                <div class="footer__links-container">
+                    <a class="footer__text__small" href="/"> Home </a>
+                    <a class="footer__text__small" href="/topics"> Get a topic </a>
+                    <a class="footer__text__small" href="/explained"> Introduction </a>
+                    <a class="footer__text__small" href="/instructions"> Instructions </a>
+                    <a class="footer__text__small" href="/diary"> Assemble Booklet </a>
+                    <a class="footer__text__small" href="/about"> About </a>
+                    <a class="footer__text__small" href="/contact"> Contact Us </a>
+                </div>
+            </div>
+            <div class="column language-column">
+                <button class="language-button" onclick="openLanguageModal()"> Select Language: en </button>
+
+<div id="languageModal" class="modal">
+    <div class="modal-content">
+        <a class="modal__close-button" onclick="closeLanguageModal()">×</a>
+        <p style="color: black; text-align: center;">Select Language:</p>
+        <div id="languageList" style="position: relative;">
+            <a href="/instructions.html"  selected >English</a>
+            <a href="/pt/instructions.html" >Português</a>
+            <a href="/nl/instructions.html" >Nederlands</a>
+            <a href="/el/instructions.html" >ελληνικά</a>
+            <a href="/es/instructions.html" >Español</a>
+        </div>        
+    </div>
+</div>
+
+<script>
+
+    window.onclick = (event) => {
+        const modal = document.getElementById("languageModal");
+        if (event.target == modal)
+            closeLanguageModal()
+    }
+    
+    const openLanguageModal = () => document.getElementById("languageModal").style.display = "block";
+
+    const closeLanguageModal = () => document.getElementById("languageModal").style.display = "none";
+
+</script>
+            </div>
+        </div>
+        <div class="footer__logo__container">
+            <div class="footer__logo__row">
+                <div style="margin: auto; margin-right: 20px;"><a href="https://enablingongoingness.com/"><img src="/assets/images/Ongoingness-logo.svg" height="30"  alt="Enabling Ongoingness Project Logo"></a></div>
+                <div style="margin: auto 0;"><a href="https://www.kylemontague.co.uk/#team"><img src="/assets/images/iDi_logo_extended_white.svg" height="30" alt="Inclusive Design & Innovation (IDI) research group Logo"></a></div>
+                <div style="margin: auto; margin-left: 20px;"><a href="https://www.northumbria.ac.uk/"><img height="30" src="/assets/images/unn_logo_white.png" alt="Northumbria University Logo"></a></div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script>
+
+// Opera 8.0+
+//var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+
+// Firefox 1.0+
+//var isFirefox = typeof InstallTrigger !== 'undefined';
+
+// Safari 3.0+ "[object HTMLElementConstructor]" 
+//var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
+
+// Internet Explorer 6-11
+//var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+// Edge 20+
+//var isEdge = !isIE && !!window.StyleMedia;
+
+// Chrome 1 - 79
+//var isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
+
+// Edge (based on chromium) detection
+//var isEdgeChromium = isChrome && (navigator.userAgent.indexOf("Edg") != -1);
+
+// Blink engine detection
+/*
+var isBlink = (isChrome || isOpera) && !!window.CSS;
+
+console.log('Detecting browsers:');
+console.log('isFirefox: ' + isFirefox);
+console.log('isChrome: ' + isChrome);
+console.log('isSafari: ' + isSafari);
+console.log('isOpera: ' + isOpera);
+console.log('isIE: ' + isIE);
+console.log('isEdge: ' + isEdge);
+console.log('isEdgeChromium: ' + isEdgeChromium);
+console.log('isBlink: ' + isBlink);
+*/
+
+var isIE = /*@cc_on!@*/false || !!document.documentMode;
+if(isIE) {
+    window.location = "/iesupport";
+}
+            
+</script>
+
+    <script>
+    
+
+
+        // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+        let vh = window.innerHeight * 0.01;
+        // Then we set the value in the --vh custom property to the root of the document
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+        // We listen to the resize event
+        window.addEventListener('resize', () => {
+            // We execute the same script as before
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        });
+    
+    </script>
+
+    <script>
+        /*
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", function() {
+                navigator.serviceWorker
+                .register("/serviceWorker.js")
+                .then(res => console.log("service worker registered"))
+                .catch(err => console.log("service worker not registered", err));
+            });
+        }
+        */
+    </script>
+</body>
+</html>

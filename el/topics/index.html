@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToGather</title>
+</head>
+<body>
+    <script>
+        var isIE = /*@cc_on!@*/false || !!document.documentMode;
+        if(isIE) {
+            window.location = "/el/iesupport";
+        }
+    </script>
+    <script>
+        let topic = Math.floor(Math.random() * 30) + 1
+        window.location.href = `/el/topics/${topic}`;
+    </script>
+</body>
+</html>

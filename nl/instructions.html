@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="title" content="Togather">
+<meta name="description" content="Samenkomen in verhalen wanneer samen zijn niet mogelijk is">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://togather.me/">
+<meta property="og:title" content="Togather">
+<meta property="og:description" content="Samenkomen in verhalen wanneer samen zijn niet mogelijk is">
+<meta property="og:image" content="https://togather.me/assets/images/meta.png">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://togather.me/">
+<meta property="twitter:title" content="Togather">
+<meta property="twitter:description" content="Samenkomen in verhalen wanneer samen zijn niet mogelijk is">
+<meta property="twitter:image" content="https://togather.me/assets/images/meta.png">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#7663a8">
+<meta name="msapplication-TileColor" content="#7663a8">
+<meta name="theme-color" content="#ffffff">
+
+    <script src="https://cdn.usefathom.com/script.js" site="TBJOLBOD" included-domains="togather.me" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="/nl/assets/css/home.css" rel="stylesheet" type="text/css">
+    <link href= " /nl/assets/css/nl.css" rel="stylesheet" type="text/css">
+    
+    <title>Togather</title>
+</head>
+<body>
+    <header id='header'>
+    <div class="header__top">
+        <span class="header__top__text">Instructies</span>
+        <span class="header__right">
+            <button class="header__hamburguer" aria-label="Open Navigation Overlay" onclick="openNav()" tabindex="0">
+                <div class="hamburguer-line"></div>
+                <div class="hamburguer-line"></div>
+                <div class="hamburguer-line"></div>
+            </button>
+        </span>
+    </div>
+    <div class="header__bottom"></div>
+    <nav id="myNav" class="overlay">
+        <button class="close-button" aria-label="Close Navigation Overlay" onclick="closeNav()">&times;</button>
+        <div id="myNavContent" class="overlay-content">
+          <a id="home-a" href="/nl/">Home</a>
+          <a id="topic-a" href="/nl/topics">Krijg een onderwerp</a>
+          <a id="explained-a" href="/nl/explained">Introductie</a>
+          <a id="instructions-a" href="/nl/instructions">Instructies</a>
+          <a id="diary-a" href="/nl/diary">Boekje samenstellen</a>
+          <a id="about-a" href="/nl/about">Over Togather</a>
+          <a id="contact-a" href="/nl/contact">Contact</a>
+        </div>
+    </nav>
+    <script>
+
+        const overlayContent = document.getElementById('myNavContent'); 
+
+        overlayContent.style.minWidth = `${document.body.offsetWidth}px`;
+        window.addEventListener('resize', (e) => overlayContent.style.minWidth = `${document.body.offsetWidth}px`);
+
+        const splittedPageUrl = '/instructions.html'.split(/[\/.]+/);
+        switch(splittedPageUrl[1]) {
+            case '':
+                document.getElementById('home-a').style.textDecoration = 'underline';
+                break;
+            
+            case 'topics':
+            document.getElementById('topic-a').style.textDecoration = 'underline';
+                break;
+        
+            case 'explained':
+                document.getElementById('explained-a').style.textDecoration = 'underline';
+                break;
+        
+            case 'instructions':
+                document.getElementById('instructions-a').style.textDecoration = 'underline';
+                break;
+     
+            case 'diary':
+                ocument.getElementById('diary-a').style.textDecoration = 'underline';
+                break;
+        
+            case 'about':
+                document.getElementById('about-a').style.textDecoration = 'underline';
+                break;
+                
+            
+            case 'contact':
+                document.getElementById('contact-a').style.textDecoration = 'underline';
+                break;
+        }
+        
+
+        // Will hold previously focused element
+        let focusedElementBeforeOverlay;
+
+        // Find the modal and its overlay
+        let overlay = document.getElementById("myNav");
+
+        const openNav = () => {
+            document.getElementById("myNav").style.visibility = 'visible'
+            document.getElementById("myNav").style.width = "100%";
+            
+            // Save current focus
+            focusedElementBeforeOverlay = document.activeElement;
+
+            const trapTabKey = (e) => {
+                // Check for TAB key press
+                if (e.keyCode === 9) {
+                    // SHIFT + TAB
+                    if (e.shiftKey) {
+                        if (document.activeElement === firstTabStop) {
+                            e.preventDefault();
+                            lastTabStop.focus();
+                        }
+                    // TAB
+                    } else {
+                        if (document.activeElement === lastTabStop) {
+                            e.preventDefault();
+                            firstTabStop.focus();
+                        }
+                    }
+                }
+                // ESCAPE
+                if (e.keyCode === 27) {
+                    console.log('clise');
+                    closeNav();
+                }
+            }
+            // Listen for and trap the keyboard
+            overlay.addEventListener('keydown', trapTabKey);
+
+            // Listen for indicators to close the modal
+           // modalOverlay.addEventListener('click', closeModal);
+
+            // Find all focusable children
+            var focusableElementsString = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
+            var focusableElements = overlay.querySelectorAll(focusableElementsString);
+            // Convert NodeList to Array
+            focusableElements = Array.prototype.slice.call(focusableElements);
+
+            var firstTabStop = focusableElements[0];
+            var lastTabStop = focusableElements[focusableElements.length - 1];
+
+            // Focus first child
+            firstTabStop.focus();
+        }
+        
+        const closeNav = () => {
+            focusedElementBeforeOverlay.focus();
+            document.getElementById("myNav").style.width = "0%";
+            document.getElementById("myNav").style.visibility = 'hidden';
+        }
+        </script>
+</header>
+    <main class="static-page-content" style="padding: 0">
+    <h2 id="t1" class="title instructions"> Om te beginnen </h2>
+    <div class="row main-padding-left">
+        <div class="column">
+            <div id="t2" class="column__text left top">Open WhatsApp en maak een groep met alle mensen die willen bijdragen aan het Boekje.</div>
+            <ul class="column__text left bottom">
+                <li>
+                    <a id="t3" class="column__text left" href="https://faq.whatsapp.com/en/android/26000123/?category=5245251" target="_blank" style="margin-bottom: 0;"> 
+                        Stap-voor-stap: Android
+                    </a>
+                </li>
+                <li>
+                    <a id="t4" class="column__text left" href="https://faq.whatsapp.com/en/iphone/26000115/?category=5245251" target="_blank" style="margin-bottom: 0;"> 
+                        Stap-voor-stap: iOS
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="image-column">
+            <div class="group-image"></div>           
+        </div>
+    </div>
+    
+    <div id="t5" class="text-box" style="margin-bottom: 10px;">
+        Laat iedereen weten waar deze groep voor is en voor wie het boekje bedoeld is. Je kunt ons voorbeeld gebruiken: 
+    </div>
+    <div id="gs1" class="group-start-message">
+    "Hebben jullie Togather gezien (<span><a href=https://youtu.be/BUJLK6aTBkQ> https://youtu.be/BUJLK6aTBkQ </a></span>)? Het is een website waarmee we onze WhatsApp-berichten kunnen omzetten in een boekje. Het zou fantastisch zijn als we er een zouden kunnen maken voor [GEEF NAAM]. Als opening zou het leuk zijn als iedereen een persoonlijke groet en een foto stuurt. Dan kunnen we daarna berichten gaan delen over de onderwerpen van Togather of onderwerpen die we zelf bedenken. We kunnen uiteindelijk kiezen welke berichtjes in het boekje komen, dus klets er gewoon op los ;)"
+    <button id="gs2" class="primary" onclick="openModal()" style="margin: 20px auto;">
+        Bericht delen
+    </button>
+</div>
+<div id="nameModal" class="modal">
+    <div class="modal-content">
+        <a class="modal__close-button" onclick="closeModal()">×</a>
+        <p id="gs4">Schrijf hier de naam voor wie het boekje is:</p>
+        <input id="name" class="modal__input-name" type="text">
+        <button class="primary" onclick="shareMessage()" style="margin-top: 20px;">
+            Bericht delen
+        </button>
+    </div>
+</div>
+
+<script>
+
+    window.onclick = (event) => {
+        const modal = document.getElementById("nameModal");
+      if (event.target == modal)
+        closeModal()
+    }
+    
+    const openModal = () => {
+        document.getElementById("nameModal").style.display = "block";
+        document.getElementById("name").focus();
+    }
+    
+    const closeModal = () => {
+        document.getElementById("nameModal").style.display = "none";
+    }
+    
+    const shareMessage = () => {
+
+        try {
+            window.fathom.trackGoal('81PEBYZD', 0);
+        } catch(e) {
+            console.log("Fathom disabled!")
+        }
+
+        let name = document.getElementById('name').value;
+        name = name.trim();
+    
+        const text = `Hebben jullie Togather gezien ( https://youtu.be/BUJLK6aTBkQ )? Het is een website waarmee we onze WhatsApp-berichten kunnen omzetten in een boekje. Het zou fantastisch zijn als we er een zouden kunnen maken voor ${name}. Als opening zou het leuk zijn als iedereen een persoonlijke groet en een foto stuurt. Dan kunnen we daarna berichten gaan delen over de onderwerpen van Togather of onderwerpen die we zelf bedenken. We kunnen uiteindelijk kiezen welke berichtjes in het boekje komen, dus klets er gewoon op los ;)`;
+    
+        const link = (navigator.userAgent.match(/Android/i) 
+                    || navigator.userAgent.match(/webOS/i) 
+                    || navigator.userAgent.match(/iPhone/i)  
+                    || navigator.userAgent.match(/iPad/i)  
+                    || navigator.userAgent.match(/iPod/i) 
+                    || navigator.userAgent.match(/BlackBerry/i) 
+                    || navigator.userAgent.match(/Windows Phone/i)) ? 
+                    `https://api.whatsapp.com/send?text=${encodeURI(text)}`:
+                    `https://web.whatsapp.com/send?text=${encodeURI(text)}`;
+    
+        closeModal();
+        document.getElementById('name').value = '';
+        window.open(link, '_blank');
+    }
+    
+    </script>
+
+    <h2 id="t6" class="title instructions" > Dagelijks </h2>
+    <div class="row main-padding-right">
+        <div class="image-column">
+            <div class="challenge-image"></div>        
+        </div>
+        <div class="column">
+            <div id="t7" class="column__text right">
+                Bezoek Togather elke dag om een ​​nieuw onderwerp of nieuwe activiteit voor uw groep te ontvangen.
+            </div>
+        </div>
+    </div>
+    <div id="t8" class="text-box page-middle">
+        Wij hebben veel onderwerpen en activiteiten om jij en je groep bezig te houden, of je kunt geheel eigen onderwerpen maken. Deel ze in je WhatsApp-groep als een bericht of foto en moedig de anderen aan om te reageren.
+    </div>
+    <div id="t9" class="text-box page-middle italic">
+        PS: maak het gemakkelijk om aan het einde je eigen bedachte onderwerpen te vinden door het bericht te beginnen met de woorden "het onderwerp van vandaag is ..."
+    </div>
+    <div class="row main-padding-left">
+        <div class="column">
+            <div id="t10" class="column__text left top">
+                Iedereen kan hun antwoorden delen in de WhatsApp-groep. 
+            </div>
+            <div id="11" class="column__text left middle">
+                Herhaal deze stappen en kies aan het einde welke berichten in het boekje komen.
+            </div>
+            <div class="column__text left bottom">
+                <button id="12" class="primary" onclick="location.href='/nl/topics'" type="button" style="margin-right: 20px;">
+                    Krijg een onderwerp
+                </button>
+            </div>
+        </div>
+        <div class="image-column">
+            <div class="chat-image"></div>          
+        </div>
+    </div>
+    <h2 id="t13" class="title instructions"> Het boekje samenstellen</h2>
+    <div id="t14" class="text-box" style="margin-bottom: 10px">
+        Volg deze stappen om van jouw WhatsApp groepschat een boekje te maken:
+    </div>
+    <div class="row main-padding-right" style=" height: 350px;">
+        <div class="image-column">
+            <div class="export-chat-image-1"></div> 
+            <div class="export-chat-image-2"></div>           
+        </div>
+        <div class="column">
+            <div id="t15" class="column__text right top">
+                1. Exporteer de groepschat (inclusief media) en sla deze op op je apparaat of cloudopslag (bijv. Google Drive, iCloud of Dropbox).
+            </div>
+            <ul class="column__text right bottom">
+                <li>
+                    <a id="t16" href="https://faq.whatsapp.com/en/android/23756533/?category=5245251" target="_blank" style="text-align: center;"> 
+                        Stap-voor-stap: WhatsApp-chats exporteren
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="t28" class="text-box page-middle italic" style="margin-bottom: 30px">
+        TIP: We raden aan om dit wekelijks of zelfs dagelijks te doen, zodat WhatsApp al je berichten kan exporteren en je vaker iets hebt om te delen.
+    </div>
+    <div id="t17" class="text-box page-middle italic">
+        PS: iedereen in de WhatsApp groep kan dit, dus vraag gerust om hulp.
+    </div>
+    <!--div id="t29" class="text-box page-middle italic">
+        TIP II: Als je merkt dat er berichten of media ontbreken nadat je een chat hebt geëxporteerd, komt dit waarschijnlijk door de limiet van WhatsApp voor de exportbestandsgrootte. Exporteer in dat geval de chat ZONDER media, en zoek de media in je telefoon geheugen, of download ze via web.WhatsApp op je computer.
+    </div-->
+    <div class="row main-padding-left">
+        <div class="column">
+            <div id="t18" class="column__text left">
+                2. Bezoek de Togather 'Boekje Samenstellen'-pagina en upload de geëxporteerde groepschat. (alle media en het `chat.txt`-bestand dat u in de vorige stap heeft opgeslagen)
+            </div>
+        </div>
+        <div class="image-column">
+            <div class="step-2-image"></div>      
+        </div>
+    </div>
+    <div id="t19" class="text-box italic"> PS: geen zorgen, je persoonlijke berichten en mediabestanden worden eigenlijk nergens geüpload. Alles gebeurt lokaal op je apparaat - wij verzamelen geen persoonlijke gegevens. Zo blijven je gesprekken privé en heb je de volledige controle over met wie jij jullie boekje wilt delen.  </div>
+    <div class="text-box" style="text-align: center;">
+        <button id="t20" class="primary" onclick="location.href='/nl/about'" type="button" style="font-size: 14px;margin-bottom: 50px;margin-top: 30px;">
+            Meer informatie over hoe de service werkt
+        </button>
+    </div>
+
+    <div class="row main-padding-right">
+        <div class="image-column">
+            <div class="step-3-image"></div>      
+        </div>
+        <div class="column">
+            <div id="t21" class="column__text right">
+                3. Personaliseer het boekje door de naam van je dierbare en een titel op de voorkant te plaatsen.
+            </div>
+        </div>
+    </div>
+    <div class="row main-padding-left" style="margin-top: 25px;">
+        <div class="column">
+            <div id="t22" class="column__text left">
+                4. Controleer de namen van iedereen die heeft bijgedragen. We laten je een lijst zien met de namen die we in je groep hebben gevonden. Je kan de namen veranderen naar hoe jullie ze in het boekje willen zien (bijvoorbeeld alleen voornamen).
+            </div>
+        </div>
+        <div class="image-column">
+            <div class="contributed-image"></div>          
+        </div>
+    </div>
+    <div id="t23" class="text-box page-middle">
+        5. Bekijk de onderwerpen die we in de groepschat hebben gevonden. Als er onderwerpen ontbreken, kan je deze toevoegen door ze uit de berichten in de chat te selecteren of door ze zelf te schrijven. Als er onderwerpen tussen staan die al in eerdere boekje zaten dan kun je deze gewoon verwijderen.
+    </div>
+    <div class="row main-padding-right">
+        <div class="image-column">
+            <div class="select-messages-image"></div>        
+        </div>
+        <div class="column">
+            <div id="t24" class="column__text right">
+                6. Voor elk onderwerp wordt je gevraagd te selecteren welke reacties je voor die dag aan het boekje wilt toevoegen.
+            </div>
+        </div>
+    </div>
+    <div id="t25" class="text-box page-middle italic">
+        Ps: Maak je geen zorgen als er een dag is dat jullie niets hebben gestuurd, iedereen verdient rust, we slaan die dagen dan gewoon over. 
+    </div>
+    <div id="t26" class="text-box">
+        7. Als je dit voor elke gewenste dag voor het boekje hebt gedaan, klik je op de knop 'voltooien'. Al de berichten worden in een opmaak geplaatst en je boekje is klaar om te downloaden. Jullie kunnen het afdrukken en / of doorsturen om het boekje te delen met familie, vrienden en dierbaren.
+    </div>
+    <div class="text-box" style="text-align: center;margin-top: 32px;">
+        <button id="t27" class="primary" onclick="location.href='/nl/diary'" type="button">
+            Boekje samenstellen
+        </button>
+    </div>
+</main>
+
+
+
+
+    <footer>
+    <div class="footer__upper-container">
+        <button class="footer__contact-button" onclick="location.href='/nl/contact'">Contact</button>
+        <div class="footer__border"></div>
+    </div>
+    <div class="footer__lower-container">
+        <div class="footer__logo-container">
+            <img class="footer__logo" src="/assets/images/TOGATHER_LOGO_reverse.png" width="80" alt="Togather Logo">
+            <h3 class="footer__logo__title">Togather</h3>
+        </div>
+        <div class="row" style="height: 120px; margin-bottom: 35px;">
+            <div id="sitemap" class="column">
+                <div class="footer__links-container">
+                    <a class="footer__text__small" href="/nl/"> Home </a>
+                    <a class="footer__text__small" href="/nl/topics"> Krijg een onderwerp </a>
+                    <a class="footer__text__small" href="/nl/explained"> Introductie </a>
+                    <a class="footer__text__small" href="/nl/instructions"> Instructies </a>
+                    <a class="footer__text__small" href="/nl/diary"> Boekje samenstellen </a>
+                    <a class="footer__text__small" href="/nl/about"> Over Togather </a>
+                    <a class="footer__text__small" href="/nl/contact"> Contact </a>
+                </div>
+            </div>
+            <div class="column language-column">
+                <button class="language-button" onclick="openLanguageModal()"> Selecteer Taal: nl </button>
+
+<div id="languageModal" class="modal">
+    <div class="modal-content">
+        <a class="modal__close-button" onclick="closeLanguageModal()">×</a>
+        <p style="color: black; text-align: center;">Selecteer Taal:</p>
+        <div id="languageList" style="position: relative;">
+            <a href="/instructions.html" >English</a>
+            <a href="/pt/instructions.html" >Português</a>
+            <a href="/nl/instructions.html"  selected >Nederlands</a>
+            <a href="/el/instructions.html" >ελληνικά</a>
+            <a href="/es/instructions.html" >Español</a>
+        </div>        
+    </div>
+</div>
+
+<script>
+
+    window.onclick = (event) => {
+        const modal = document.getElementById("languageModal");
+        if (event.target == modal)
+            closeLanguageModal()
+    }
+    
+    const openLanguageModal = () => document.getElementById("languageModal").style.display = "block";
+
+    const closeLanguageModal = () => document.getElementById("languageModal").style.display = "none";
+
+</script>
+            </div>
+        </div>
+        <div class="footer__logo__container">
+            <div class="footer__logo__row">
+                <div style="margin: auto; margin-right: 20px;"><a href="https://enablingongoingness.com/"><img src="/assets/images/Ongoingness-logo.svg" height="30"  alt="Enabling Ongoingness Project Logo"></a></div>
+                <div style="margin: auto 0;"><a href="https://www.kylemontague.co.uk/#team"><img src="/assets/images/iDi_logo_extended_white.svg" height="30" alt="Inclusive Design & Innovation (IDI) research group Logo"></a></div>
+                <div style="margin: auto; margin-left: 20px;"><a href="https://www.northumbria.ac.uk/"><img height="30" src="/assets/images/unn_logo_white.png" alt="Northumbria University Logo"></a></div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script>
+
+// Opera 8.0+
+//var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+
+// Firefox 1.0+
+//var isFirefox = typeof InstallTrigger !== 'undefined';
+
+// Safari 3.0+ "[object HTMLElementConstructor]" 
+//var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
+
+// Internet Explorer 6-11
+//var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+// Edge 20+
+//var isEdge = !isIE && !!window.StyleMedia;
+
+// Chrome 1 - 79
+//var isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
+
+// Edge (based on chromium) detection
+//var isEdgeChromium = isChrome && (navigator.userAgent.indexOf("Edg") != -1);
+
+// Blink engine detection
+/*
+var isBlink = (isChrome || isOpera) && !!window.CSS;
+
+console.log('Detecting browsers:');
+console.log('isFirefox: ' + isFirefox);
+console.log('isChrome: ' + isChrome);
+console.log('isSafari: ' + isSafari);
+console.log('isOpera: ' + isOpera);
+console.log('isIE: ' + isIE);
+console.log('isEdge: ' + isEdge);
+console.log('isEdgeChromium: ' + isEdgeChromium);
+console.log('isBlink: ' + isBlink);
+*/
+
+var isIE = /*@cc_on!@*/false || !!document.documentMode;
+if(isIE) {
+    window.location = "/nl/iesupport";
+}
+            
+</script>
+
+    <script>
+    
+
+
+        // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+        let vh = window.innerHeight * 0.01;
+        // Then we set the value in the --vh custom property to the root of the document
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+        // We listen to the resize event
+        window.addEventListener('resize', () => {
+            // We execute the same script as before
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        });
+    
+    </script>
+
+    <script>
+        /*
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", function() {
+                navigator.serviceWorker
+                .register("/serviceWorker.js")
+                .then(res => console.log("service worker registered"))
+                .catch(err => console.log("service worker not registered", err));
+            });
+        }
+        */
+    </script>
+</body>
+</html>

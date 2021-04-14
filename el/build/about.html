@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="title" content="Togather">
+<meta name="description" content="Gather in stories when being together is not possible">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://togather.me/">
+<meta property="og:title" content="Togather">
+<meta property="og:description" content="Gather in stories when being together is not possible">
+<meta property="og:image" content="https://togather.me/assets/images/meta.png">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://togather.me/">
+<meta property="twitter:title" content="Togather">
+<meta property="twitter:description" content="Gather in stories when being together is not possible">
+<meta property="twitter:image" content="https://togather.me/assets/images/meta.png">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#7663a8">
+<meta name="msapplication-TileColor" content="#7663a8">
+<meta name="theme-color" content="#ffffff">
+
+    <script src="https://cdn.usefathom.com/script.js" site="TBJOLBOD" included-domains="togather.me" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="/assets/css/home.css" rel="stylesheet" type="text/css">
+    <link href= " /assets/css/en.css" rel="stylesheet" type="text/css">
+    
+    <title>Togather</title>
+</head>
+<body>
+    <header id='header'>
+    <div class="header__top">
+        <span class="header__top__text">About</span>
+        <span class="header__right">
+            <button class="header__hamburguer" aria-label="Open Navigation Overlay" onclick="openNav()" tabindex="0">
+                <div class="hamburguer-line"></div>
+                <div class="hamburguer-line"></div>
+                <div class="hamburguer-line"></div>
+            </button>
+        </span>
+    </div>
+    <div class="header__bottom"></div>
+    <nav id="myNav" class="overlay">
+        <button class="close-button" aria-label="Close Navigation Overlay" onclick="closeNav()">&times;</button>
+        <div id="myNavContent" class="overlay-content">
+          <a id="home-a" href="/">Home</a>
+          <a id="topic-a" href="/topics">Get a topic</a>
+          <a id="explained-a" href="/explained">Introduction</a>
+          <a id="instructions-a" href="/instructions">Instructions</a>
+          <a id="diary-a" href="/diary">Assemble Booklet</a>
+          <a id="about-a" href="/about">About</a>
+          <a id="contact-a" href="/contact">Contact Us</a>
+        </div>
+    </nav>
+    <script>
+
+        const overlayContent = document.getElementById('myNavContent'); 
+
+        overlayContent.style.minWidth = `${document.body.offsetWidth}px`;
+        window.addEventListener('resize', (e) => overlayContent.style.minWidth = `${document.body.offsetWidth}px`);
+
+        const splittedPageUrl = '/about.html'.split(/[\/.]+/);
+        switch(splittedPageUrl[1]) {
+            case '':
+                document.getElementById('home-a').style.textDecoration = 'underline';
+                break;
+            
+            case 'topics':
+            document.getElementById('topic-a').style.textDecoration = 'underline';
+                break;
+        
+            case 'explained':
+                document.getElementById('explained-a').style.textDecoration = 'underline';
+                break;
+        
+            case 'instructions':
+                document.getElementById('instructions-a').style.textDecoration = 'underline';
+                break;
+     
+            case 'diary':
+                ocument.getElementById('diary-a').style.textDecoration = 'underline';
+                break;
+        
+            case 'about':
+                document.getElementById('about-a').style.textDecoration = 'underline';
+                break;
+                
+            
+            case 'contact':
+                document.getElementById('contact-a').style.textDecoration = 'underline';
+                break;
+        }
+        
+
+        // Will hold previously focused element
+        let focusedElementBeforeOverlay;
+
+        // Find the modal and its overlay
+        let overlay = document.getElementById("myNav");
+
+        const openNav = () => {
+            document.getElementById("myNav").style.visibility = 'visible'
+            document.getElementById("myNav").style.width = "100%";
+            
+            // Save current focus
+            focusedElementBeforeOverlay = document.activeElement;
+
+            const trapTabKey = (e) => {
+                // Check for TAB key press
+                if (e.keyCode === 9) {
+                    // SHIFT + TAB
+                    if (e.shiftKey) {
+                        if (document.activeElement === firstTabStop) {
+                            e.preventDefault();
+                            lastTabStop.focus();
+                        }
+                    // TAB
+                    } else {
+                        if (document.activeElement === lastTabStop) {
+                            e.preventDefault();
+                            firstTabStop.focus();
+                        }
+                    }
+                }
+                // ESCAPE
+                if (e.keyCode === 27) {
+                    console.log('clise');
+                    closeNav();
+                }
+            }
+            // Listen for and trap the keyboard
+            overlay.addEventListener('keydown', trapTabKey);
+
+            // Listen for indicators to close the modal
+           // modalOverlay.addEventListener('click', closeModal);
+
+            // Find all focusable children
+            var focusableElementsString = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
+            var focusableElements = overlay.querySelectorAll(focusableElementsString);
+            // Convert NodeList to Array
+            focusableElements = Array.prototype.slice.call(focusableElements);
+
+            var firstTabStop = focusableElements[0];
+            var lastTabStop = focusableElements[focusableElements.length - 1];
+
+            // Focus first child
+            firstTabStop.focus();
+        }
+        
+        const closeNav = () => {
+            focusedElementBeforeOverlay.focus();
+            document.getElementById("myNav").style.width = "0%";
+            document.getElementById("myNav").style.visibility = 'hidden';
+        }
+        </script>
+</header>
+    <main class="static-page-content">
+    <h2 id="t0" class="page-start"> How it began </h2>
+    <p id="t1">The idea for Togather was born at the early stages of the COVID-19 lockdown in the UK. We saw an article on the Dutch news where a family kept a booklet for their relative in the Intensive Care Unit (ICU) and gave this to her when she was discharged from the hospital. They wrote down what happened to her while she was in the ICU, but also happened in the world outside, weather forecasts, some news items, things the family had done. We thought this was really nice, and we wanted to make this available for people going through similar experiences.</p>
+    <p id="t2">As we realise that going through these trying times, where families and friends get separated, it can leave you feeling powerless. We hope that through getting together as group to engage with these topics and activities provides a space to draw strength from each other and find some light. A space where even though life going on seems weird, you can make shared memories together, with your loved one at the centre of it all. We want to help you to support your family/friends/community to gather in stories when being together is not possible.</p>
+    <h2 id="t9">Your Privacy</h2>
+    <p id="t3">Simply put. We have designed Togather to keep your messages and media private. All of your chat messages and media files stay on your device and never get shared or stored by Togather (or anyone else).</p>
+    <p id="t4">The only data we capture is through the anonymous site analytics and through our optional feedback form at the end of assembling your booklet. We are a team of researchers (details below), that would love to hear about your experiences with ToGather (as well as any suggestions for how to improve it). This is completely voluntary and in no way affects your access to or usage of the ToGather website. To support this feedback and get some insight into how people use ToGather we log which topics are shared – that’s it. We do not record any user data or information that can trace back to anyone. To give you an idea of what data we capture we have created an example of a log for one day, click here to see it.</p>
+    <h2 id="t5">The people behind Togather</h2>
+    <p id="t6">We are a team of design researchers from Newcastle University and Northumbria University based in Newcastle Upon-Tyne in the United Kingdom.</p>
+    <div class="about__people-table">
+        <div class="about__people-card">
+            <div class="about__people-card__image">
+                <figure style="margin: 0;">
+                    <img src="/assets/images/luis_profile.png" width="83" height="83" alt="Luis' Profile Photograph">
+                </figure>
+            </div>
+            <div>
+                <div class="about__people-card__name">Luís Carvalho</div>
+                <div class="about__people-card__position">Researcher</div>
+            </div>
+        </div>
+        <div class="about__people-card">
+            <div class="about__people-card__image">
+                <figure style="margin: 0;">
+                    <img src="/assets/images/linnea_profile.png" width="83" height="83" alt="Linnea's Profile Photograph">
+                </figure>
+            </div>
+            <div>
+                <div class="about__people-card__name">Linnea Groot</div>
+                <div class="about__people-card__position">Researcher</div>
+            </div>
+        </div>
+        <div class="about__people-card">
+            <div class="about__people-card__image">
+                <figure style="margin: 0;">
+                    <img src="/assets/images/kyle_profile.png" width="83" height="83" alt="Kyle's Profile Photograph">
+                </figure>
+            </div>
+            <div>
+                <div class="about__people-card__name">Kyle Montague</div>
+                <div class="about__people-card__position">Associate Professor</div>
+            </div>
+        </div>
+        <div class="about__people-card">
+            <div class="about__people-card__image">
+                <figure style="margin: 0;">
+                    <img src="/assets/images/jayne_profile.png" width="83" height="83" alt="Jayne's Profile Photograph">
+                </figure>
+            </div>
+            <div>
+                <div class="about__people-card__name">Jayne Wallace</div>
+                <div class="about__people-card__position">Professor</div>
+            </div>
+        </div>
+        <div class="about__people-card">
+            <div class="about__people-card__image">
+                <figure style="margin: 0;">
+                    <img src="/assets/images/josh_profile.png" width="83" height="83" alt="Josh's Profile Photograph">
+                </figure>
+            </div>
+            <div>
+                <div class="about__people-card__name">Josh South</div>
+                <div class="about__people-card__position">Researcher</div>
+            </div>
+        </div>
+    </div>
+    <p id="t10">We are part of the research project called Enabling Ongoingness (www.enablingongoingness.com) which explores how we can give new meaning to relationships in the context of end-of life and  bereavement. A large part of this is exploring how people curate the essence of a relationship in media, stories, objects and rituals in everyday life. During the COVID-19 pandemic we were faced with a new global shared experience of fear of loss and grief. It is unlike anything that many of us have experienced before, and has undoubtedly  changed our lives in many ways. Through ToGather we hope that we can help you capture your community bonds in a time where this is not as easy as it was before. If you have any experiences with ToGather that you would like to share with us do not hesitate to reach out. You can either send us a message over e-mail (kyle.montague@northumbria.ac.uk) or fill out our feedback form.</p>
+    <h2 id="t7">Togather</h2>
+    <p id="t8">Togather is an online service that aims to bring families and friends together through sharing stories for a loved one. It is built using existing services WhatsApp and GitHub, to make it widely available and free of charge for everyone. We will provided you with daily topics and activities for your family and friends to message about and turn your group conversations into a book or booklet to gift, keep and revisit.</p>
+</main>
+
+
+
+
+    <footer>
+    <div class="footer__upper-container">
+        <button class="footer__contact-button" onclick="location.href='/contact'">Contact Us</button>
+        <div class="footer__border"></div>
+    </div>
+    <div class="footer__lower-container">
+        <div class="footer__logo-container">
+            <img class="footer__logo" src="/assets/images/TOGATHER_LOGO_reverse.png" width="80" alt="Togather Logo">
+            <h3 class="footer__logo__title">Togather</h3>
+        </div>
+        <div class="row" style="height: 120px; margin-bottom: 35px;">
+            <div id="sitemap" class="column">
+                <div class="footer__links-container">
+                    <a class="footer__text__small" href="/"> Home </a>
+                    <a class="footer__text__small" href="/topics"> Get a topic </a>
+                    <a class="footer__text__small" href="/explained"> Introduction </a>
+                    <a class="footer__text__small" href="/instructions"> Instructions </a>
+                    <a class="footer__text__small" href="/diary"> Assemble Booklet </a>
+                    <a class="footer__text__small" href="/about"> About </a>
+                    <a class="footer__text__small" href="/contact"> Contact Us </a>
+                </div>
+            </div>
+            <div class="column language-column">
+                <button class="language-button" onclick="openLanguageModal()"> Select Language: en </button>
+
+<div id="languageModal" class="modal">
+    <div class="modal-content">
+        <a class="modal__close-button" onclick="closeLanguageModal()">×</a>
+        <p style="color: black; text-align: center;">Select Language:</p>
+        <div id="languageList" style="position: relative;">
+            <a href="/about.html"  selected >English</a>
+            <a href="/pt/about.html" >Português</a>
+            <a href="/nl/about.html" >Nederlands</a>
+            <a href="/el/about.html" >ελληνικά</a>
+            <a href="/es/about.html" >Español</a>
+        </div>        
+    </div>
+</div>
+
+<script>
+
+    window.onclick = (event) => {
+        const modal = document.getElementById("languageModal");
+        if (event.target == modal)
+            closeLanguageModal()
+    }
+    
+    const openLanguageModal = () => document.getElementById("languageModal").style.display = "block";
+
+    const closeLanguageModal = () => document.getElementById("languageModal").style.display = "none";
+
+</script>
+            </div>
+        </div>
+        <div class="footer__logo__container">
+            <div class="footer__logo__row">
+                <div style="margin: auto; margin-right: 20px;"><a href="https://enablingongoingness.com/"><img src="/assets/images/Ongoingness-logo.svg" height="30"  alt="Enabling Ongoingness Project Logo"></a></div>
+                <div style="margin: auto 0;"><a href="https://www.kylemontague.co.uk/#team"><img src="/assets/images/iDi_logo_extended_white.svg" height="30" alt="Inclusive Design & Innovation (IDI) research group Logo"></a></div>
+                <div style="margin: auto; margin-left: 20px;"><a href="https://www.northumbria.ac.uk/"><img height="30" src="/assets/images/unn_logo_white.png" alt="Northumbria University Logo"></a></div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script>
+
+// Opera 8.0+
+//var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+
+// Firefox 1.0+
+//var isFirefox = typeof InstallTrigger !== 'undefined';
+
+// Safari 3.0+ "[object HTMLElementConstructor]" 
+//var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
+
+// Internet Explorer 6-11
+//var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+// Edge 20+
+//var isEdge = !isIE && !!window.StyleMedia;
+
+// Chrome 1 - 79
+//var isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
+
+// Edge (based on chromium) detection
+//var isEdgeChromium = isChrome && (navigator.userAgent.indexOf("Edg") != -1);
+
+// Blink engine detection
+/*
+var isBlink = (isChrome || isOpera) && !!window.CSS;
+
+console.log('Detecting browsers:');
+console.log('isFirefox: ' + isFirefox);
+console.log('isChrome: ' + isChrome);
+console.log('isSafari: ' + isSafari);
+console.log('isOpera: ' + isOpera);
+console.log('isIE: ' + isIE);
+console.log('isEdge: ' + isEdge);
+console.log('isEdgeChromium: ' + isEdgeChromium);
+console.log('isBlink: ' + isBlink);
+*/
+
+var isIE = /*@cc_on!@*/false || !!document.documentMode;
+if(isIE) {
+    window.location = "/iesupport";
+}
+            
+</script>
+
+    <script>
+    
+
+
+        // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+        let vh = window.innerHeight * 0.01;
+        // Then we set the value in the --vh custom property to the root of the document
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+        // We listen to the resize event
+        window.addEventListener('resize', () => {
+            // We execute the same script as before
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        });
+    
+    </script>
+
+    <script>
+        /*
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", function() {
+                navigator.serviceWorker
+                .register("/serviceWorker.js")
+                .then(res => console.log("service worker registered"))
+                .catch(err => console.log("service worker not registered", err));
+            });
+        }
+        */
+    </script>
+</body>
+</html>

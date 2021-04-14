@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="title" content="Togather">
+<meta name="description" content="Reúnanse en historias cuando no sea ​​posible estar juntos">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://togather.me/">
+<meta property="og:title" content="Togather">
+<meta property="og:description" content="Reúnanse en historias cuando no sea ​​posible estar juntos">
+<meta property="og:image" content="https://togather.me/assets/images/meta.png">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://togather.me/">
+<meta property="twitter:title" content="Togather">
+<meta property="twitter:description" content="Reúnanse en historias cuando no sea ​​posible estar juntos">
+<meta property="twitter:image" content="https://togather.me/assets/images/meta.png">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#7663a8">
+<meta name="msapplication-TileColor" content="#7663a8">
+<meta name="theme-color" content="#ffffff">
+
+    <script src="https://cdn.usefathom.com/script.js" site="TBJOLBOD" included-domains="togather.me" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="/es/assets/css/home.css" rel="stylesheet" type="text/css">
+    <link href= " /es/assets/css/es.css" rel="stylesheet" type="text/css">
+    
+    <title>Togather</title>
+</head>
+<body>
+    <header id='header'>
+    <div class="header__top">
+        <span class="header__top__text">Introducción</span>
+        <span class="header__right">
+            <button class="header__hamburguer" aria-label="Open Navigation Overlay" onclick="openNav()" tabindex="0">
+                <div class="hamburguer-line"></div>
+                <div class="hamburguer-line"></div>
+                <div class="hamburguer-line"></div>
+            </button>
+        </span>
+    </div>
+    <div class="header__bottom"></div>
+    <nav id="myNav" class="overlay">
+        <button class="close-button" aria-label="Close Navigation Overlay" onclick="closeNav()">&times;</button>
+        <div id="myNavContent" class="overlay-content">
+          <a id="home-a" href="/es/">Inicio</a>
+          <a id="topic-a" href="/es/topics">Obtén un tema</a>
+          <a id="explained-a" href="/es/explained">Introducción</a>
+          <a id="instructions-a" href="/es/instructions">Instrucciones</a>
+          <a id="diary-a" href="/es/diary">Ensamblar folleto</a>
+          <a id="about-a" href="/es/about">Acerca de</a>
+          <a id="contact-a" href="/es/contact">Contacto con nosotros</a>
+        </div>
+    </nav>
+    <script>
+
+        const overlayContent = document.getElementById('myNavContent'); 
+
+        overlayContent.style.minWidth = `${document.body.offsetWidth}px`;
+        window.addEventListener('resize', (e) => overlayContent.style.minWidth = `${document.body.offsetWidth}px`);
+
+        const splittedPageUrl = '/explained.html'.split(/[\/.]+/);
+        switch(splittedPageUrl[1]) {
+            case '':
+                document.getElementById('home-a').style.textDecoration = 'underline';
+                break;
+            
+            case 'topics':
+            document.getElementById('topic-a').style.textDecoration = 'underline';
+                break;
+        
+            case 'explained':
+                document.getElementById('explained-a').style.textDecoration = 'underline';
+                break;
+        
+            case 'instructions':
+                document.getElementById('instructions-a').style.textDecoration = 'underline';
+                break;
+     
+            case 'diary':
+                ocument.getElementById('diary-a').style.textDecoration = 'underline';
+                break;
+        
+            case 'about':
+                document.getElementById('about-a').style.textDecoration = 'underline';
+                break;
+                
+            
+            case 'contact':
+                document.getElementById('contact-a').style.textDecoration = 'underline';
+                break;
+        }
+        
+
+        // Will hold previously focused element
+        let focusedElementBeforeOverlay;
+
+        // Find the modal and its overlay
+        let overlay = document.getElementById("myNav");
+
+        const openNav = () => {
+            document.getElementById("myNav").style.visibility = 'visible'
+            document.getElementById("myNav").style.width = "100%";
+            
+            // Save current focus
+            focusedElementBeforeOverlay = document.activeElement;
+
+            const trapTabKey = (e) => {
+                // Check for TAB key press
+                if (e.keyCode === 9) {
+                    // SHIFT + TAB
+                    if (e.shiftKey) {
+                        if (document.activeElement === firstTabStop) {
+                            e.preventDefault();
+                            lastTabStop.focus();
+                        }
+                    // TAB
+                    } else {
+                        if (document.activeElement === lastTabStop) {
+                            e.preventDefault();
+                            firstTabStop.focus();
+                        }
+                    }
+                }
+                // ESCAPE
+                if (e.keyCode === 27) {
+                    console.log('clise');
+                    closeNav();
+                }
+            }
+            // Listen for and trap the keyboard
+            overlay.addEventListener('keydown', trapTabKey);
+
+            // Listen for indicators to close the modal
+           // modalOverlay.addEventListener('click', closeModal);
+
+            // Find all focusable children
+            var focusableElementsString = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
+            var focusableElements = overlay.querySelectorAll(focusableElementsString);
+            // Convert NodeList to Array
+            focusableElements = Array.prototype.slice.call(focusableElements);
+
+            var firstTabStop = focusableElements[0];
+            var lastTabStop = focusableElements[focusableElements.length - 1];
+
+            // Focus first child
+            firstTabStop.focus();
+        }
+        
+        const closeNav = () => {
+            focusedElementBeforeOverlay.focus();
+            document.getElementById("myNav").style.width = "0%";
+            document.getElementById("myNav").style.visibility = 'hidden';
+        }
+        </script>
+</header>
+    <main class="static-page-content" style="padding: 0;">
+
+    <h3 id="t1" class="main-padding" style="margin-top: 0;"> Togather facilita la creación de un folleto en WhatsApp durante el tiempo que pasan separados para sus seres queridos. </h3>
+
+    <div class="video-container" style="margin-top: 30px"> 
+        <iframe width="1425" height="560" src="https://www.youtube.com/embed/BUJLK6aTBkQ" autoplay="1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <div class="row main-padding-left">
+        <div class="column">
+            <div id="t2" class="column__text left">
+                Reúna a un grupo de amigos y familiares en WhatsApp
+            </div>
+        </div>
+        <div class="image-column">
+            <figure class="group-image" style="margin: 0;">
+                <img src="/assets/images/whatsapp-chat–3.png" width="1" height="1" alt="menú de participantes del grupo de WhatsApp">
+            </figure>        
+        </div>
+    </div>
+    <div class="row main-padding-right">
+        <div class="image-column">
+            <figure class="challenge-image" style="margin: 0;">
+                <img src="/assets/images/screen_share_challenge.png" width="1" height="1" alt="página de este sitio web con un tema">
+            </figure>        
+        </div>
+        <div class="column">
+            <div id="t3" class="column__text right">
+                Obtén temas nostálgicos, creativos, divertidos o desafiantes para compartir con tu grupo
+            </div>
+        </div>
+    </div>
+    <div class="row main-padding-left">
+        <div class="column">
+            <div id="t4" class="column__text left">
+                Crea, captura, escribe, fotografía y comparte con tu grupo.
+            </div>
+        </div>
+        <div style="width: 75%; height: 100%;">
+            <figure class="chat-image" style="margin: 0">
+                <img src="/assets/images/whatsapp-chat–1.png" width="1" height="1" alt="Chat de un grupo de WhatsApp">
+            </figure>          
+        </div>
+    </div>
+
+    <div id="t5" class="text-box page-middle" style="text-align: center;">
+        Regrese todos los días para buscar otro tema nuevo para compartir con su grupo.
+    </div>
+
+    <div id="t10" class="text-box page-middle" style="text-align: center;">
+        Togather lo ayudará a crear un folleto personalizado desde su chat grupal de WhatsApp para compartir con su ser querido, sin necesidad de diseñador o habilidades técnicas.
+    </div>
+
+    <div>
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+                <img src="/assets/images/Diary_mock-up_1.png" style="width:100%" alt="Portada del folleto">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="/assets/images/Diary_mock-up_2.png" style="width:100%" alt="Folleto Página 1">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="/assets/images/Diary_mock-up_3.png" style="width:100%" alt="Folleto página 2">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="/assets/images/Diary_mock-up_4.png" style="width:100%" alt="Folleto Página 3">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="/assets/images/Diary_mock-up_5.png" style="width:100%" alt="Folleto página 4">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="/assets/images/Diary_mock-up_6.png" style="width:100%" alt="Página 5 del folleto">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="/assets/images/Diary_mock-up_7.png" style="width:100%"alt="Folleto, página 6">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="/assets/images/Diary_mock-up_8.png" style="width:100%" alt="Folleto Página 7">
+            </div>
+
+            <div class="intro__dots">
+                <span class="dot"></span> 
+                <span class="dot"></span> 
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span> 
+                <span class="dot"></span> 
+                <span class="dot"></span>
+                <span class="dot"></span> 
+            </div>
+        </div>
+    </div>
+    <div id="t6" class="text-box page-middle">
+        Para empezar a crear un grupo en Whatsapp con todas las personas que quieran contribuir a este folleto. Hágales saber a todos de qué se trata este grupo. Puede utilizar nuestro ejemplo: 
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0px 27px 50px;">
+        <button id="home-topic-button" class="primary" onclick="location.href='/es/instructions'">
+            Más información sobre Togather
+        </button>
+    </div>
+
+
+    <div id="gs1" class="group-start-message">
+    “Have you seen Togather (<span><a href=https://youtu.be/BUJLK6aTBkQ>https://youtu.be/BUJLK6aTBkQ</a></span>)? It’s a website that will let us convert our WhatsApp messages into a booklet. It would be great if we could make one for [INSERT NAME]. As an opening it would be nice to start with a personal greeting and a picture. Then we can start sharing messages about the topics from Togather or topics we think of ourselves. We can select which messages will go into the booklet in the end, so speak freely ;)“
+    <button id="gs2" class="primary" onclick="openModal()" style="margin: 20px auto;">
+        Share message
+    </button>
+</div>
+<div id="nameModal" class="modal">
+    <div class="modal-content">
+        <a class="modal__close-button" onclick="closeModal()">×</a>
+        <p id="gs4">Please, write the name to who the booklet is for:</p>
+        <input id="name" class="modal__input-name" type="text">
+        <button class="primary" onclick="shareMessage()" style="margin-top: 20px;">
+            Share message
+        </button>
+    </div>
+</div>
+
+<script>
+
+    window.onclick = (event) => {
+        const modal = document.getElementById("nameModal");
+      if (event.target == modal)
+        closeModal()
+    }
+    
+    const openModal = () => {
+        document.getElementById("nameModal").style.display = "block";
+        document.getElementById("name").focus();
+    }
+    
+    const closeModal = () => {
+        document.getElementById("nameModal").style.display = "none";
+    }
+    
+    const shareMessage = () => {
+
+        try {
+            window.fathom.trackGoal('81PEBYZD', 0);
+        } catch(e) {
+            console.log("Fathom disabled!")
+        }
+
+        let name = document.getElementById('name').value;
+        name = name.trim();
+    
+        const text = `Have you seen Togather (https://youtu.be/BUJLK6aTBkQ)? It’s a website that will let us convert our WhatsApp messages into a booklet. It would be great if we could make one for ${name}. As an opening it would be nice to start with a personal greeting and a picture. Then we can start sharing messages about the topics from Togather or topics we think of ourselves. We can select which messages will go into the booklet in the end, so speak freely ;)`;
+    
+        const link = (navigator.userAgent.match(/Android/i) 
+                    || navigator.userAgent.match(/webOS/i) 
+                    || navigator.userAgent.match(/iPhone/i)  
+                    || navigator.userAgent.match(/iPad/i)  
+                    || navigator.userAgent.match(/iPod/i) 
+                    || navigator.userAgent.match(/BlackBerry/i) 
+                    || navigator.userAgent.match(/Windows Phone/i)) ? 
+                    `https://api.whatsapp.com/send?text=${encodeURI(text)}`:
+                    `https://web.whatsapp.com/send?text=${encodeURI(text)}`;
+    
+        closeModal();
+        document.getElementById('name').value = '';
+        window.open(link, '_blank');
+    }
+    
+    </script>
+</main>
+
+<script>
+    var slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";  
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {slideIndex = 1}    
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex-1].style.display = "block";  
+        dots[slideIndex-1].className += " active";
+        setTimeout(showSlides, 5000); 
+    }
+</script>
+    <footer>
+    <div class="footer__upper-container">
+        <button class="footer__contact-button" onclick="location.href='/es/contact'">Contacto con nosotros</button>
+        <div class="footer__border"></div>
+    </div>
+    <div class="footer__lower-container">
+        <div class="footer__logo-container">
+            <img class="footer__logo" src="/assets/images/TOGATHER_LOGO_reverse.png" width="80" alt="Togather Logo">
+            <h3 class="footer__logo__title">Togather</h3>
+        </div>
+        <div class="row" style="height: 120px; margin-bottom: 35px;">
+            <div id="sitemap" class="column">
+                <div class="footer__links-container">
+                    <a class="footer__text__small" href="/es/"> Inicio </a>
+                    <a class="footer__text__small" href="/es/topics"> Obtén un tema </a>
+                    <a class="footer__text__small" href="/es/explained"> Introducción </a>
+                    <a class="footer__text__small" href="/es/instructions"> Instrucciones </a>
+                    <a class="footer__text__small" href="/es/diary"> Ensamblar folleto </a>
+                    <a class="footer__text__small" href="/es/about"> Acerca de </a>
+                    <a class="footer__text__small" href="/es/contact"> Contacto con nosotros </a>
+                </div>
+            </div>
+            <div class="column language-column">
+                <button class="language-button" onclick="openLanguageModal()"> Seleccionar idioma: es </button>
+
+<div id="languageModal" class="modal">
+    <div class="modal-content">
+        <a class="modal__close-button" onclick="closeLanguageModal()">×</a>
+        <p style="color: black; text-align: center;">Seleccionar idioma:</p>
+        <div id="languageList" style="position: relative;">
+            <a href="/explained.html" >English</a>
+            <a href="/pt/explained.html" >Português</a>
+            <a href="/nl/explained.html" >Nederlands</a>
+            <a href="/el/explained.html" >ελληνικά</a>
+            <a href="/es/explained.html"  selected >Español</a>
+        </div>        
+    </div>
+</div>
+
+<script>
+
+    window.onclick = (event) => {
+        const modal = document.getElementById("languageModal");
+        if (event.target == modal)
+            closeLanguageModal()
+    }
+    
+    const openLanguageModal = () => document.getElementById("languageModal").style.display = "block";
+
+    const closeLanguageModal = () => document.getElementById("languageModal").style.display = "none";
+
+</script>
+            </div>
+        </div>
+        <div class="footer__logo__container">
+            <div class="footer__logo__row">
+                <div style="margin: auto; margin-right: 20px;"><a href="https://enablingongoingness.com/"><img src="/assets/images/Ongoingness-logo.svg" height="30"  alt="Enabling Ongoingness Project Logo"></a></div>
+                <div style="margin: auto 0;"><a href="https://www.kylemontague.co.uk/#team"><img src="/assets/images/iDi_logo_extended_white.svg" height="30" alt="Inclusive Design & Innovation (IDI) research group Logo"></a></div>
+                <div style="margin: auto; margin-left: 20px;"><a href="https://www.northumbria.ac.uk/"><img height="30" src="/assets/images/unn_logo_white.png" alt="Northumbria University Logo"></a></div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script>
+
+// Opera 8.0+
+//var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+
+// Firefox 1.0+
+//var isFirefox = typeof InstallTrigger !== 'undefined';
+
+// Safari 3.0+ "[object HTMLElementConstructor]" 
+//var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
+
+// Internet Explorer 6-11
+//var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+// Edge 20+
+//var isEdge = !isIE && !!window.StyleMedia;
+
+// Chrome 1 - 79
+//var isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
+
+// Edge (based on chromium) detection
+//var isEdgeChromium = isChrome && (navigator.userAgent.indexOf("Edg") != -1);
+
+// Blink engine detection
+/*
+var isBlink = (isChrome || isOpera) && !!window.CSS;
+
+console.log('Detecting browsers:');
+console.log('isFirefox: ' + isFirefox);
+console.log('isChrome: ' + isChrome);
+console.log('isSafari: ' + isSafari);
+console.log('isOpera: ' + isOpera);
+console.log('isIE: ' + isIE);
+console.log('isEdge: ' + isEdge);
+console.log('isEdgeChromium: ' + isEdgeChromium);
+console.log('isBlink: ' + isBlink);
+*/
+
+var isIE = /*@cc_on!@*/false || !!document.documentMode;
+if(isIE) {
+    window.location = "/es/iesupport";
+}
+            
+</script>
+
+    <script>
+    
+
+
+        // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+        let vh = window.innerHeight * 0.01;
+        // Then we set the value in the --vh custom property to the root of the document
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+        // We listen to the resize event
+        window.addEventListener('resize', () => {
+            // We execute the same script as before
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        });
+    
+    </script>
+
+    <script>
+        /*
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", function() {
+                navigator.serviceWorker
+                .register("/serviceWorker.js")
+                .then(res => console.log("service worker registered"))
+                .catch(err => console.log("service worker not registered", err));
+            });
+        }
+        */
+    </script>
+</body>
+</html>
