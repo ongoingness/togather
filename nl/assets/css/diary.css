@@ -140,7 +140,7 @@ body, textarea, button, input, select, pre {
 }
 
 .chat__list__background {
-    background-image: url("/nl/assets/images/background_pattern_chat.svg");
+    background-image: url("/togather/nl/assets/images/background_pattern_chat.svg");
     background-repeat: repeat-y;
     background-size: 150%;
 }
@@ -514,7 +514,7 @@ body, textarea, button, input, select, pre {
 .lower-page {
     display: flex;
     flex-direction: column;
-    background-image: url("/nl/assets/images/background_yellow.png");
+    background-image: url("/togather/nl/assets/images/background_yellow.png");
     background-repeat: repeat-y;
     background-size: 300%;
     overflow-y: auto;
