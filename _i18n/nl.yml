@@ -213,7 +213,7 @@ diary:
 
     s1: 'Bedankt voor het gebruik van Togather! Als je vrienden of familie hebt die Togather misschien ook leuk vinden, deel de website dan met hen via deze link. '
     s2: 'Nee bedankt'
-    S3: 'Heb je Togather gezien (https://togather.me/explained)? Het is een website waarmee je berichten van een WhatsApp groepschat kunt omzetten in een boekje. Ik heb er net een boekje mee gemaakt en ik dacht dat je het misschien ook leuk zou vinden. '
+    S3: 'Heb je Togather gezien (https://ongoingness.github.io/togather/explained)? Het is een website waarmee je berichten van een WhatsApp groepschat kunt omzetten in een boekje. Ik heb er net een boekje mee gemaakt en ik dacht dat je het misschien ook leuk zou vinden. '
 
 templates:
     c1: Voor
