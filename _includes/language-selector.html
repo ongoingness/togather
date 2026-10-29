@@ -5,11 +5,11 @@
         <a class="modal__close-button" onclick="closeLanguageModal()">×</a>
         <p style="color: black; text-align: center;">{% t footer.f1 %}</p>
         <div id="languageList" style="position: relative;">
-            <a href="{{ page.url }}" {% if site.lang == "en" %} selected {% endif %}>{% t global.english %}</a>
-            <a href="/pt{{ page.url }}" {% if site.lang == "pt" %} selected {% endif %}>{% t global.portugues %}</a>
-            <a href="/nl{{ page.url }}" {% if site.lang == "nl" %} selected {% endif %}>{% t global.nederlands %}</a>
-            <a href="/el{{ page.url }}" {% if site.lang == "el" %} selected {% endif %}>{% t global.greek %}</a>
-            <a href="/es{{ page.url }}" {% if site.lang == "es" %} selected {% endif %}>{% t global.spanish %}</a>
+            <a href="{{ site.baseurl_root }}{{ page.url }}" {% if site.lang == "en" %} selected {% endif %}>{% t global.english %}</a>
+            <a href="{{ site.baseurl_root }}/pt{{ page.url }}" {% if site.lang == "pt" %} selected {% endif %}>{% t global.portugues %}</a>
+            <a href="{{ site.baseurl_root }}/nl{{ page.url }}" {% if site.lang == "nl" %} selected {% endif %}>{% t global.nederlands %}</a>
+            <a href="{{ site.baseurl_root }}/el{{ page.url }}" {% if site.lang == "el" %} selected {% endif %}>{% t global.greek %}</a>
+            <a href="{{ site.baseurl_root }}/es{{ page.url }}" {% if site.lang == "es" %} selected {% endif %}>{% t global.spanish %}</a>
         </div>        
     </div>
 </div>

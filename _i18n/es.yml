@@ -212,7 +212,7 @@ diary:
 
     s1: '¡Gracias por usar Togather! Si tiene amigos o familiares a los que también les podría gustar Togather, comparta el sitio web con ellos a través de estos enlaces.'
     s2: '¡No, gracias!'
-    s3: '¿Has visto a Togather (https://togather.me/explained)? Es un sitio web que le permitirá convertir mensajes de un chat grupal de WhatsApp en un folleto. Acabo de hacer un folleto con él y pensé que a usted también le podría gustar.'
+    s3: '¿Has visto a Togather (https://ongoingness.github.io/togather/explained)? Es un sitio web que le permitirá convertir mensajes de un chat grupal de WhatsApp en un folleto. Acabo de hacer un folleto con él y pensé que a usted también le podría gustar.'
 
 templates:
 

@@ -1,7 +1,7 @@
 {
     "name": "Togather",
     "short_name": "Togather",
-    "start_url": "togather.me",
+    "start_url": "/togather/",
     "display": "fullscreen",
     "icons": [
         {
