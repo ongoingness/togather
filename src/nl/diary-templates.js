@@ -1,0 +1,673 @@
+import { fitImage, videoFrame } from "../shared/media.js";
+import { jsPDF as jsPDF } from "jspdf";
+
+
+
+/**
+ * 
+ * @author Luis Carvalho
+ */
+const DiaryTemplates = () => {
+
+
+
+    /**
+     * Generates a pdf given the diary data.
+     * @param {object} diary data from the diary 
+     * @param {number} topicLimit limits of topics to be rendered into the pdf. -1 if no limit.
+     * @returns {Promise<jsPDF>} the pdf document.
+     */
+    const generatePDF = async(diary, topicLimit = -1) => {
+
+        let doc = new jsPDF();
+        doc = coverPages(doc, diary, true);
+
+        for(let i = 0; i <= ( (topicLimit != -1 && topicLimit < diary.topics.length) ? topicLimit : diary.topics.length-1); i++) {
+            doc = topicPage(doc, diary.topics[i]);
+            doc = await messagePages(doc, diary.topics[i].selectedMessages);
+        }
+    
+        return doc;
+    }
+
+    /**
+     * Generates the preview of the diary without images.
+     * @param {jsPdf} diary data from the diary 
+     * @param {number} topicLimit limits of topics to be rendered into the pdf. -1 if no limit.
+     * @returns {Promise<jsPDF>} the pdf document for preview.
+     */
+    const generatePreview = async(diary, topicLimit = -1) => {
+
+        let doc = new jsPDF();
+        doc = coverPages(doc, diary, true);
+
+        for(let i = 0; i <= ( (topicLimit != -1 && topicLimit < diary.topics.length) ? topicLimit : diary.topics.length-1); i++) {
+            doc = topicPage(doc, diary.topics[i]);
+            doc = await messagePages(doc, diary.topics[i].selectedMessages, true);
+        }
+    
+        return doc;
+
+    }
+
+    /**
+     * Generated the cover pages of the diary.
+     * @param {jsPdf} doc the pdf document. 
+     * @param {object} data content to be added to the pdf.
+     * @param {boolean} firstPage true if it is the first page of the pdf.
+     * @returns {jsPDF} pdf document with the new pages.
+     */
+    const coverPages = (doc, data, firstPage = false) => {
+
+        if(!firstPage)
+            doc.addPage('a4', 'portrait');
+
+        const nameSplit = data.who.split(" ");
+
+        const lineCharLimit = 19;
+        let lineLength = 1;
+
+        const lines = ['', ''];
+        let fullname = '';
+        let currentLine = 0;
+
+        if(data.title != undefined && data.title != "") {
+           
+            const titleSplit = data.title.split(" ");
+            for(let i = 0; i < titleSplit.length && currentLine < 2; i++) {
+                if(lineLength + titleSplit[i].length > lineCharLimit) {
+                    currentLine += 1;
+                    lineLength = 0;
+                }
+
+                if(currentLine < 2) {
+                    lines[currentLine] += `${titleSplit[i]} `;
+                    lineLength += titleSplit[i].length;
+                }
+            }
+
+            let lineLengthName = 0;
+            let currentLineName = 0
+            for(let i = 0; i < nameSplit.length; i++) {
+                if(lineLengthName + nameSplit[i].length > lineCharLimit) {
+                    currentLineName  += 1;
+                    lineLengthName = 0;
+                }
+
+                if(currentLine < 2) {
+                    fullname += `${nameSplit[i]} `;
+                }
+            }
+
+        } else { 
+            const forS = 'Voor';
+            lineLength = forS.length + 1;
+            lines[0] += `${forS} `;
+            for(let i = 0; i < nameSplit.length && currentLine < 2; i++) {
+                if(lineLength + nameSplit[i].length > lineCharLimit) {
+                    currentLine += 1;
+                    lineLength = 0;
+                }
+
+                if(currentLine < 2) {
+                    lines[currentLine] += `${nameSplit[i]} `;
+                    lineLength += nameSplit[i].length;
+                    fullname += `${nameSplit[i]} `;
+                }
+            }
+        }
+        for(let i = 0; i < lines.length; i++)
+            lines[i] = lines[i].trim();
+
+        fullname = fullname.trim();
+        
+        let headerHeight = 27.174;
+        if(lines[1].length > 0)
+            headerHeight = (headerHeight * 2) - 8;
+
+        doc.setDrawColor(0);
+        doc.setFillColor(0, 121, 125);
+        doc.rect(0, 33.826, 210, headerHeight, 'F'); 
+        
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(42);
+        doc.setFont('RobotoCondensed-Regular', 'normal');
+        doc.text(`${lines[0]}`.toUpperCase(), 105, 54, 'center');
+
+        if(lines[1].length > 0)
+            doc.text(`${lines[1]}`.toUpperCase(), 105, 74, 'center');
+
+        doc.setTextColor(0, 121, 125);
+        doc.setFontSize(30);
+        doc.setFont('Oswald-ExtraLight');
+        doc.text('TOGATHER', 105, 250, 'center');
+
+        doc.addPage('a4', 'portrait');
+
+        doc.setTextColor(0, 0, 0);
+        doc.setFontSize(20);
+        doc.setFont('OpenSans', 'bolditalic');
+        doc.text(`Beste ${fullname}`, 105, 40, 'center');
+
+        doc.setTextColor(0, 0, 0);
+        doc.setFontSize(20);
+        doc.setFont('OpenSans', 'bolditalic');
+        doc.text('Dit boekje is een verzameling van berichten van:', 105, 80, 'center');
+
+        doc.setTextColor(0, 0, 0);
+        doc.setFontSize(16);
+        doc.setFont('OpenSans', 'normal');
+        let i = 0;
+        let userY = 100;
+        for(const [hash, user] of Object.entries(data.users)) {
+            if(user.visible) {
+                doc.text(`${user.name}`, i % 2 === 0 ? 70 : 140, userY, 'center');
+                if(i%2 === 1) userY += 10;
+                i++;
+            }
+        }
+
+        doc.setTextColor(0, 0, 0);
+        doc.setFontSize(20);
+        doc.setFont('OpenSans', 'bolditalic');
+        doc.text('Zij hebben jullie tijd apart vast gelegd tijdens:', 105, 237, 'center');
+
+        doc.setTextColor(0, 0, 0);
+        doc.setFontSize(16);
+        doc.setFont('OpenSans', 'normal');
+        const startDate = new Date(data.startDate);
+        const startDay = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(startDate);
+        const startMonth = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(startDate);
+        const startYear = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(startDate);
+        const endDate = new Date(data.endDate);
+        const endDay = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(endDate);
+        const endMonth = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(endDate);
+        const endYear = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(endDate);
+        doc.text(`${startDay}/${startMonth}/${startYear} - ${endDay}/${endMonth}/${endYear}`, 105, 257, 'center');
+
+        return doc;
+    }
+
+    /**
+     * Generates a topic page.
+     * @param {jsPDF} doc the pdf document. 
+     * @param {object} data content to be added to the pdf.
+     * @param {boolean} firstPage true if it is the first page of the pdf.
+     * @returns {jsPDF} pdf document with the new pages.
+     */
+    const topicPage = (doc, data, firstPage = false) => {
+
+        if(!firstPage)
+            doc.addPage('a4', 'portrait');
+
+        doc.setDrawColor(0);
+        doc.setFillColor(data.color);
+        doc.rect(0, 33.826, 210, 27.174, 'F'); 
+        
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(42);
+        doc.setFont(/*'Oswald-Regular'*/'RobotoCondensed-Regular', 'normal');
+
+        const date = new Date(data.timestamp);
+        const day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(date)
+        const month = new Intl.DateTimeFormat('nl', { month: 'long' }).format(date)
+        const year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(date)
+        doc.text((data.part === 0 ? `${day} ${month} ${year}` : `${day} ${month} ${year} - Deel ${data.part}`).toUpperCase(), 45, 54);
+ 
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('Oswald-ExtraLight', 'normal');
+        doc.setFontSize(40);
+                
+        doc.setFontSize(18);
+        doc.setFont('OpenSans', 'italic');
+        doc.text(data.text, 42, 100, {maxWidth: 126});
+
+        return doc;
+    }
+
+    /**
+     * Generates the message pages.
+     * @param {jsPdf} doc pdf document. 
+     * @param {[Message]} messages list of messages to be rendered. 
+     * @param {boolean} preview true if in preview mode, does not show images.
+     * @returns {Promise<jsPDF>} the pdf with new the pages.
+     */
+    const messagePages = async(doc, messages, preview = false) => {
+
+        const topMargin = 11;
+        const bottomMargin = 286;
+        const leftColumnLeftMargin = 53;
+        const rightColumnLeftMargin = 148.875;
+        const lineLength = 87.77;
+        const lineHeight = 5;
+
+        const leftColumnContentMargin = 4.838;
+        const rightColumnContentMargin = 117.23;
+
+        let yLeft = topMargin;
+        let yRight = topMargin;
+
+        let yHeaderLeft = yLeft;
+        let yHeaderRight = yRight;
+
+        const addMessage = async (doc, data, column) => {
+
+            let createdPage = false;
+
+            let expectedSize = column === 'l' ? yLeft : yRight;
+            expectedSize +=  11 + 7;
+
+            if(expectedSize > bottomMargin && !createdPage) {
+                doc = newPage(doc);
+                createdPage = true;
+            }
+
+            let splittedLines = [];
+            for(let i = 0; i < data.text.length; i++) {
+                const splittedLinesTemp = doc.splitTextToSize(data.text[i], lineLength).filter(line => line != '');
+                expectedSize += splittedLinesTemp.length * lineHeight;
+                if(i === 0 && expectedSize > bottomMargin && !createdPage) {
+                    doc = newPage(doc);
+                    createdPage = true;
+                }
+                splittedLines = splittedLines.concat(splittedLinesTemp);
+            }
+
+            if(!createdPage && splittedLines.length == 0) {
+                let mediaSizes = await getMediaSizes(data.files);
+                if(mediaSizes.length > 0) {
+                    expectedSize += mediaSizes[0].h;
+                    if(expectedSize > bottomMargin) {
+                        doc = newPage(doc);
+                        createdPage = true;
+                    }
+                }
+            }
+
+            doc.setDrawColor(0);
+            doc.setFillColor(data.color);
+            doc.rect(column === 'l' ? 5 : 99.25, column === 'l' ? yLeft : yRight, 106, 11, 'F');
+            
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(18);
+            doc.setFont('RobotoCondensed-Regular', 'normal');
+            doc.text(`${data.user}`.toUpperCase(),
+                      column === 'l' ? leftColumnLeftMargin : rightColumnLeftMargin, 
+                      (column === 'l' ? yLeft : yRight) + 7.5,
+                      'center'
+            );
+        
+            if(column === 'l') {
+                yHeaderLeft = yLeft + 11; 
+                yLeft += 11 + 7;
+            } else {
+                yHeaderRight = yRight + 11; 
+                yRight += 11 + 7;
+            }
+        
+            doc.setTextColor(0, 0, 0);
+            doc.setFontSize(12);
+            doc.setFont('OpenSans', 'normal');
+
+            for(let line of splittedLines) {
+
+                if((column === 'l' && yLeft + lineHeight > bottomMargin) || (column === 'r' && yRight + lineHeight > bottomMargin))
+                    doc = newPage(doc);
+
+                doc.text(line, column === 'l' ? leftColumnContentMargin :  rightColumnContentMargin, column === 'l' ? yLeft : yRight, {maxWidth: lineLength});
+                if(column === 'l') 
+                    yLeft += lineHeight;
+                else 
+                    yRight += lineHeight;
+
+            }
+
+            if(!preview)
+                doc = await addMedia(doc, data.files, column);
+
+            return doc;
+        
+        }
+
+        const getMediaSizes = async (files) => {
+
+            const sizes = [];
+
+            for(let media of files) {
+            
+                if(media.type.includes('image')) {
+                    sizes.push(await fitDimensions2(media.data));
+                } else if (media.type.includes('video')) {
+                    const frame = await getFrameFromVideo(media);
+                    sizes.push(await fitDimensions2(frame.data));
+                }
+            
+            }
+
+            return sizes;
+        }
+
+        /**
+         * Adds media files to the pdf.
+         * @param {jsPdf} doc pdf document.
+         * @param {object} files files to be added to the page 
+         * @param {string} side side of the page to be added, l - left, r - right.
+         * @returns {Promise<jsPDF>} pdf document with the media added.
+         */
+        const addMedia = async(doc, files, side) => {
+
+            for(let media of files) {
+
+                if(media.type.includes('image')) {
+                    
+                    const {w,h} = await fitDimensions2(media.data);
+                    if((side === 'l' ? yLeft : yRight) + h > bottomMargin) doc = newPage(doc);
+                    doc.addImage(media.data, undefined, side === 'l' ? leftColumnContentMargin : rightColumnContentMargin, side === 'l' ? yLeft : yRight, w, h);
+                    if(side === 'l') yLeft += h; else yRight += h;
+
+                } else if (media.type.includes('video')) {
+     
+                    const frame = await getFrameFromVideo(media, 0.1)//await getFilmRollFromVideoAsync(media, 3,3);               
+                    const {w,h} = await fitDimensions2(frame.data);
+                    if((side === 'l' ? yLeft : yRight) + h > bottomMargin) doc = newPage(doc);
+                    doc.addImage(frame.data, 'PNG', side === 'l' ? leftColumnContentMargin : rightColumnContentMargin, side === 'l' ? yLeft : yRight, w, h);
+                    if(side === 'l') yLeft += h; else yRight += h;
+                     
+                }
+
+            }
+            return doc;
+        }
+        
+        /**
+         * Finds the dimensions of a media file, in a given line width, while perserving the ratio.
+         * @param {obeject} media 
+         * @param {number} lineWidth length of the text line. 
+         * @returns {MediaDimensions} the dimensions of media file in pixels.
+         */
+        const fitDimensions = (media, lineWidth = lineLength) => {
+
+            let img = new Image();
+            img.src = media;
+
+            let mmWidth = Math.floor(img.width * 0.264583);
+            let mmHeight =  Math.floor(img.height * 0.264583);
+
+            if(mmWidth > lineWidth) {
+                const ratio = lineWidth / mmWidth;
+                mmWidth = lineWidth;
+                mmHeight *= ratio; 
+            }
+
+            return {w: mmWidth, h: mmHeight};
+        }
+
+        /**
+         * Finds the dimensions of a media file, in a given line width, while perserving the ratio.
+         * @param {obeject} media 
+         * @param {number} lineWidth length of the text line. 
+         * @returns {Promise<MediaDimensions>} the dimensions of media file in pixels.
+         */
+        const fitDimensions2 = (media, maxWidth = lineLength) => fitImage(media, maxWidth);
+
+        const getFrameFromVideo = (media, time) => videoFrame(media, time ?? 0.1);
+
+        const getFramesAsync = async(media, columns, rows) => {
+
+            const video = document.createElement('video');
+            video.style.display = 'none';
+            const source = document.createElement('source');
+            source.src = media.data;
+            video.appendChild(source);
+            document.body.append(video);
+
+            return new Promise ((resolve, reject) => {
+
+                video.oncanplay = async(e) => {
+                    const framePromises = [];
+                    const sliceLength = video.duration / (columns * rows);
+
+                    for(let i = 0.01 ; i < video.duration; i += sliceLength) {
+                        framePromises.push(getFrameFromVideo(media, i));
+                    }
+                    const result = await Promise.all(framePromises);
+                    video.remove();
+                    console.timeEnd('frameAsync');
+                    resolve(result);
+                }
+            });
+   
+        }
+
+        /**
+         * Creates a a image containing frames from a video.
+         * @param {object} media video data. 
+         * @param {number} columns number of columns of the grid.
+         * @param {number} rows number of row of the grid.
+         * @returns {Promise<string>} image containing all the frames in a grid.
+         */
+        const getFilmRollFromVideo = async(media, columns, rows) => {
+            
+            console.time('roll');
+
+            const video = document.createElement('video');
+            video.style.display = 'none';
+            const source = document.createElement('source');
+            source.src = media.data;
+            video.appendChild(source);
+            document.body.append(video);
+
+            const canvas = document.createElement('canvas');
+            canvas.id = 'film-roll-canvas';
+            canvas.style.display = 'none';
+            document.body.append(canvas);
+
+            return new Promise ((resolve, reject) => {
+
+                video.oncanplay = async(e) => {
+
+                    const sliceLength = video.duration / (columns * rows);
+
+                    let x = 0;
+                    let y = 0;
+
+                    let index = 0;
+
+                    for(let i = 0.01 ; i < video.duration; i += sliceLength) {
+                       const frame = await getFrameFromVideo(media, i);
+
+                        if(i === 0.01) {
+                            canvas.width = frame.w * columns;
+                            canvas.height = frame.h * rows;
+                        }
+
+                        const img = new Image;
+                        const loadImage = new Promise( (resolve, reject) => {
+                            img.onerror = () => reject(new Error('Invalid image'));
+                img.onload = () => {
+                                canvas.getContext("2d").drawImage(img, x, y, frame.w, frame.h);
+                                if(index != 0 && (index + 1) % columns === 0) {
+                                    x = 0;
+                                    y += frame.h;
+                                } else {
+                                    x += frame.w;
+                                }
+                                index++;
+                                resolve(true);
+                            };
+                        });
+                        img.src = frame.data;
+                        await loadImage;
+                    }
+                    const imageDataUrl = canvas.toDataURL();
+                    canvas.remove();
+                    video.remove();
+                    console.timeEnd('roll');
+                    resolve(imageDataUrl);
+          
+                }
+
+            });
+        }
+
+        /**
+         * Creates a a image containing frames from a video.
+         * @param {object} media video data. 
+         * @param {number} columns number of columns of the grid.
+         * @param {number} rows number of row of the grid.
+         * @returns {Promise<string>} image containing all the frames in a grid.
+         */
+        const getFilmRollFromVideoAsync = async(media, columns, rows) => {
+        
+            console.time('rollAsync');
+
+            const canvas = document.createElement('canvas');
+            canvas.id = 'film-roll-canvas';
+            canvas.style.display = 'none';
+            document.body.append(canvas);
+
+            const frames = await getFramesAsync(media, columns, rows);
+        
+            if(frames.length === 0)
+                return undefined;
+
+            canvas.width = frames[0].w * columns;
+            canvas.height = frames[0].h * rows;
+
+            let x = 0;
+            let y = 0;
+            const img = new Image;
+            const loadImage = (i) => new Promise( (resolve, reject) => {
+                img.onerror = () => reject(new Error('Invalid image'));
+                img.onload = () => {
+                    canvas.getContext("2d").drawImage(img, x, y, frames[i].w, frames[i].h);
+                    if(i != 0 && (i + 1) % columns === 0) {
+                        x = 0;
+                        y += frames[i].h;
+                    } else {
+                        x += frames[i].w;
+                    }
+                    resolve(true);
+                };
+            });
+
+            for(let i = 0 ; i < frames.length; i++) {
+                img.src = frames[i].data;
+                await loadImage(i);
+            }
+            
+            const imageDataUrl = canvas.toDataURL();
+            canvas.remove();
+            console.timeEnd('rollAsync');
+            return imageDataUrl;
+        }
+
+        const newPage = (doc) => {
+            doc.addPage('a4', 'portrait');
+            yLeft = 11;
+            yRight = 11;
+            yHeaderLeft = yLeft;
+            yHeaderRight = yRight;
+
+            doc.setFillColor(0, 0, 0);
+            for(let y = 0.0; y < 297.529; y+=5)
+                doc.ellipse(105, y, 0.8, 0.8, 'F');
+            return doc
+        }
+        doc = newPage(doc);
+    
+
+        let lastElemPositon = '';
+
+        for(let message of messages) {
+
+            if(yLeft >= bottomMargin || yRight  >= bottomMargin ) {
+                doc = newPage(doc);
+            }
+
+            if(lastElemPositon === '') {
+                doc = await addMessage(doc, message, 'l');
+                lastElemPositon = 'l';
+            } else if(lastElemPositon === 'l') {
+
+                if(yRight > yLeft) {
+                    yLeft += 15;
+                    doc = await addMessage(doc, message, 'l');
+                    lastElemPositon = 'l';
+                } else {
+                    
+                    if(yRight < yHeaderLeft + 15)
+                        yRight = yHeaderLeft + 15;
+                    else
+                        yRight += 15;
+                
+                    doc = await addMessage(doc, message, 'r');
+                    lastElemPositon = 'r';
+
+                }
+
+            } else if (lastElemPositon === 'r') {
+
+                if(yLeft > yRight) {
+                    yRight += 15;
+                    doc = await addMessage(doc, message, 'r');
+                    lastElemPositon = 'r';
+                } else {
+
+                    if(yLeft < yHeaderRight + 15)
+                        yLeft = yHeaderRight + 15;
+                    else
+                        yLeft += 15;
+                    
+                    doc = await addMessage(doc, message, 'l');
+                    lastElemPositon = 'l';
+                }
+
+            }
+
+        }
+
+        return doc;
+    }
+ 
+    /*
+    const getSpotifyCode = async(link) => {
+
+        const result = RegExp('https:\/\/open.spotify.com\/track\/([^\?]*)\?').exec(link);
+        if(result != undefined) {
+            const musicCode = result[1];
+            const url = `https://scannables.scdn.co/uri/plain/png/000000/white/640/spotify:track:7CH99b2i1TXS5P8UUyWtnM${musicCode}`;
+
+            let response = await fetch(url);
+            let blob = await response.blob();
+  
+            const getImageFromBlob = (blob) => {
+
+                var reader = new FileReader();
+                reader.readAsDataURL(blob); 
+
+                return new Promise((resolve, reject) => {
+
+                    reader.onloadend = () => resolve(reader.result);
+                    
+                });
+            }
+            const r = getImageFromBlob(blob);
+            return r;
+        }
+    
+        return null;
+        
+    }*/
+
+    let previewURL;
+    const getDataUriStringPdf = doc => {
+        if (previewURL) URL.revokeObjectURL(previewURL);
+        previewURL = URL.createObjectURL(doc.output('blob'));
+        return previewURL;
+    };
+    const releasePreview = () => { if (previewURL) URL.revokeObjectURL(previewURL); previewURL = undefined; };
+    const downloadPdf = (doc, filename) => doc.save(filename);
+    return { generatePDF, generatePreview, getDataUriStringPdf, releasePreview, downloadPdf };
+};
+export default DiaryTemplates;

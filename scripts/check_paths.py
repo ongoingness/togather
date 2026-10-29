@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """Check the published static files at their GitHub Pages project URL."""
 import re
+import sys
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urljoin, urlsplit
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else Path(__file__).resolve().parents[1]
 BASE = 'https://ongoingness.github.io/togather/'
 errors = set()
 checked = 0
@@ -44,9 +45,9 @@ def published(directory):
 
 pages = 0
 for source in published(ROOT):
-    if source.suffix not in ('.html', '.css', '.js', '.webmanifest', '.xml'):
+    if source.suffix not in ('.html', '.css', '.js', '.webmanifest', '.xml', '.mjs'):
         continue
-    if source.suffix == '.js' and source.name != 'bundle.js':
+    if source.suffix == '.js' and source.name != 'bundle.js' and 'dist' not in ROOT.parts:
         continue
     text = source.read_text()
     if source.suffix == '.html':

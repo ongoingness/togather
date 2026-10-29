@@ -1,18 +1,5 @@
-const staticTogather = "togather-v1";
-const assets = [];
-
-self.addEventListener("install", installEvent => {
-  installEvent.waitUntil(
-    caches.open(staticTogather).then(cache => {
-      cache.addAll(assets);
-    })
-  );
-});
-
-self.addEventListener("fetch", fetchEvent => {
-  fetchEvent.respondWith(
-    caches.match(fetchEvent.request).then(res => {
-      return res || fetch(fetchEvent.request);
-    })
-  );
+// The previous worker cached no assets. Remove it without touching other projects' caches.
+self.addEventListener('install', () => self.skipWaiting());
+self.addEventListener('activate', event => {
+  event.waitUntil(Promise.all([caches.delete('togather-v1'), self.registration.unregister()]));
 });
